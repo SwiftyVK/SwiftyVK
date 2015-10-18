@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9052" systemVersion="15B22c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9040"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="_SwiftyVK_" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Back-iOS.png" translatesAutoresizingMaskIntoConstraints="NO" id="IqI-ri-5ig">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <animations/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QE8-nE-Wxk">
+                                <rect key="frame" x="231" y="195" width="139" height="210"/>
+                                <subviews>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yix-Dv-nXN">
+                                        <rect key="frame" x="0.0" y="0.0" width="139" height="30"/>
+                                        <animations/>
+                                        <state key="normal" title="Log in"/>
+                                        <connections>
+                                            <action selector="buttonDown:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j8a-qz-N5o"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2mB-oy-1Ya">
+                                        <rect key="frame" x="0.0" y="30" width="139" height="30"/>
+                                        <animations/>
+                                        <state key="normal" title="Log out"/>
+                                        <connections>
+                                            <action selector="buttonDown:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CuC-VV-XS4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ts-fo-28A">
+                                        <rect key="frame" x="0.0" y="60" width="139" height="30"/>
+                                        <animations/>
+                                        <state key="normal" title="Capthca"/>
+                                        <connections>
+                                            <action selector="buttonDown:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pKM-Jr-XkU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0F-8Z-tVI">
+                                        <rect key="frame" x="0.0" y="90" width="139" height="30"/>
+                                        <animations/>
+                                        <state key="normal" title="Validation"/>
+                                        <connections>
+                                            <action selector="buttonDown:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8jC-E4-OOS"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Kh-8o-KUN">
+                                        <rect key="frame" x="0.0" y="120" width="139" height="30"/>
+                                        <animations/>
+                                        <state key="normal" title="users.get"/>
+                                        <connections>
+                                            <action selector="buttonDown:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kt2-TF-5Rm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vli-Na-e0N">
+                                        <rect key="frame" x="0.0" y="150" width="139" height="30"/>
+                                        <animations/>
+                                        <state key="normal" title="friends.get"/>
+                                        <connections>
+                                            <action selector="buttonDown:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UV3-iA-C6l"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kUH-eh-OBo">
+                                        <rect key="frame" x="0.0" y="180" width="139" height="30"/>
+                                        <animations/>
+                                        <state key="normal" title="upload photo to wall"/>
+                                        <connections>
+                                            <action selector="buttonDown:" destination="BYZ-38-t0r" eventType="touchUpInside" id="49L-AM-sy9"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <animations/>
+                            </stackView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" red="0.36470588235294116" green="0.43529411764705883" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="QE8-nE-Wxk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1CW-pi-Zy4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IqI-ri-5ig" secondAttribute="trailing" constant="-20" id="Fyw-5J-tHs"/>
+                            <constraint firstItem="IqI-ri-5ig" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Wfx-kC-CZX"/>
+                            <constraint firstItem="IqI-ri-5ig" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="dGE-oR-6hv"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="IqI-ri-5ig" secondAttribute="bottom" id="g3X-T9-KgA"/>
+                            <constraint firstItem="QE8-nE-Wxk" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="wxR-8N-OwZ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="268" y="385"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Back-iOS.png" width="744" height="1392"/>
+    </resources>
+</document>
