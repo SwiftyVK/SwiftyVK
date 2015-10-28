@@ -1,6 +1,6 @@
 extension VK {
   ///Application scope
-  public enum  Scope : Int, CustomStringConvertible {
+  public enum  Scope : Int {
     case notify        = 1
     case friends       = 2
     case photos        = 4

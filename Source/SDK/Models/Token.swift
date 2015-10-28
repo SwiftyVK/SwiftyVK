@@ -139,7 +139,7 @@ internal class Token: NSObject, NSCoding {
       do {
         try manager.removeItemAtPath(filePath)
       }
-      catch _ as NSError {}
+      catch _ {}
     }
     NSKeyedArchiver.archiveRootObject(self, toFile: filePath)
     Log([.token], "Save token to file: \(filePath)")
@@ -163,7 +163,7 @@ internal class Token: NSObject, NSCoding {
         do {
           try manager.removeItemAtPath(filePath)
         }
-        catch _ as NSError {}
+        catch _ {}
       }
     }
     
