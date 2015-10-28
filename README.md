@@ -29,13 +29,13 @@ On this page:
 
 ##**Integration**
 ###Manually
-1. Just drag **SwiftyVK.framework** or include the whole **SwiftyVK.xcodeproj** to the your project
-2. Link SwiftyVK.framework to your application in **Target preferences -> General -> Embedded binaries**.
+1. Just drag **SwiftyVK.framework** or include the whole **SwiftyVK.xcodeproj** to project
+2. Link SwiftyVK.framework to application in **Target preferences -> General -> Embedded binaries**.
 
 
 
 ###CocoaPods
-You can use Cocoapods to install **SwiftyVK** by adding it to your **Podfile**:
+You can use Cocoapods to install **SwiftyVK** by adding it to **Podfile**:
 
 ```ruby
 platform :ios, '8.0'
@@ -49,7 +49,7 @@ end
 ##**Getting started**
 
 ### App Transport Security
-For **iOS 9+** and **OSX 10.11+** you need change "App Transport Security" settings on your target **info.plist** file.
+For **iOS 9+** and **OSX 10.11+** you need change "App Transport Security" settings on **info.plist** target file.
 
 
 ```HTML
@@ -72,12 +72,12 @@ For **iOS 9+** and **OSX 10.11+** you need change "App Transport Security" setti
 
 ###Import and implementation
 
-Import **SviftyVK** to your Swift file:
+Import **SviftyVK** to Swift file:
 ```swift
 import SwiftyVK
 ```
 
-Implement `VKDelegate` protocol and **all its functions** in your custom class. For example:
+Implement `VKDelegate` protocol and **all its functions** in custom class. For example:
 
 ```swift
 class YourClass: Superclass, VKDelegate {
@@ -88,21 +88,21 @@ class YourClass: Superclass, VKDelegate {
 	}
 
 	func vkDidAutorize() {
-		//Called when the user did login. 
+		//Called when the user is log in. 
 		//Here you can start to send requests to the API.
 	}
 
 	func vkDidUnautorize() {
-		//Called when the user did logout.
+		//Called when user is log out.
 	}
 
 	func vkAutorizationFailed(error: VK.Error) {
-		//Called when SwiftyVK did failed autorization, to let the application know that something went wrong.
+		//Called when SwiftyVK could not authorize. To let the application know that something went wrong.
 	}
 
 	func vkTokenPath() -> (useUserDefaults: Bool, alternativePath: String) {
 		//Called when SwiftyVK need know where a token is located.
-		return //bool value that indicates whether to save token to user defaults or not, and alternative save path
+		return //bool value that indicates whether save token to NSUserDefaults or not, and alternative save path.
 	}
 
 	func vkWillPresentView() -> UIViewController {
@@ -123,14 +123,14 @@ class YourClass: Superclass, VKDelegate {
 ###**Initialization**
 
 1. [Create new standalone application](https://vk.com/editapp?act=create) and get `application ID`
-2. Init **SwiftyVK** with your `application ID` and `VKDelegate` object:
+2. Init **SwiftyVK** with `application ID` and `VKDelegate` object:
 
 ```swift
 VK.start(appID: applicationID, delegate: VKDelegate)
 ```
 
 ###User authorization
-* Implement `vkWillAutorize()` function in your `VKDelegate` and return [application  permissions](https://vk.com/dev/permissions).
+* Implement `vkWillAutorize()` function in `VKDelegate` and return [application  permissions](https://vk.com/dev/permissions).
 * Just call:
 
 
@@ -160,7 +160,7 @@ let req = VK.API.Users.get([VK.Arg.userId : "1"]).send(
 
 ```
 ###Custom requests
-You may also sent special requests, such as:
+You may also send special requests, such as:
 
 * Request with custom method path:
 ```swift
