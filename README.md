@@ -1,4 +1,4 @@
-#**SviftyVK**
+#**SwiftyVK**
 
 SwiftyVK makes it easy to interact with social network "VKontakte" API for iOS and OSX.
 
