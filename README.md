@@ -1,4 +1,4 @@
-#**SviftyVK**
+#**SwiftyVK**
 
 SwiftyVK makes it easy to interact with social network "VKontakte" API for iOS and OSX.
 
@@ -9,7 +9,6 @@ On this page:
 	* [Manually](#manually)
 	* [CocoaPods](#cocoapods)
 * [Getting started](#getting-started)
-	* [App Transport Security (iOS 9+/OSX 10.11+)](#app-transport-security)
 	* [Import and implementation](#import-and-implementation)
 	* [Initialization](#initialization)
 * [API Requests](#api-requests)
@@ -38,38 +37,14 @@ On this page:
 You can use Cocoapods to install **SwiftyVK** by adding it to **Podfile**:
 
 ```ruby
-platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-pod 'SwiftyVK', '~> 1.0.0'
+pod 'SwiftyVK'
 end
 ```
 
 ##**Getting started**
-
-### App Transport Security
-For **iOS 9+** and **OSX 10.11+** you need change "App Transport Security" settings on **info.plist** target file.
-
-
-```HTML
-<key>NSAppTransportSecurity</key>
-<dict>
-    <key>NSExceptionDomains</key>
-    <dict>
-        <key>vk.com</key>
-        <dict>
-            <key>NSExceptionRequiresForwardSecrecy</key>
-            <false/>
-            <key>NSIncludesSubdomains</key>
-            <true/>
-            <key>NSExceptionAllowsInsecureHTTPLoads</key>
-            <true/>
-        </dict>
-    </dict>
-</dict>
-```
-
 ###Import and implementation
 
 Import **SviftyVK** to Swift file:

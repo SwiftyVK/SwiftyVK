@@ -72,6 +72,7 @@ public class Request : CustomStringConvertible {
     }
     
     params["v"] = VK.defaults.apiVersion
+    params["https"] = "1";
     
     if let lang = language {
       params["lang"] = lang
