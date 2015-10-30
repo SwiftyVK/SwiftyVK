@@ -40,7 +40,7 @@ You can use Cocoapods to install **SwiftyVK** by adding it to **Podfile**:
 use_frameworks!
 
 target 'MyApp' do
-pod 'SwiftyVK'
+pod 'SwiftyVK', :git => 'https://github.com/WE-St0r/SwiftyVK.git'
 end
 ```
 
