@@ -12,10 +12,6 @@
 		<data>
 		23LFWlXogblAKdrRo+qK/DSWwwI=
 		</data>
-		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/MacOS/SwiftyVKResources-OSX</key>
-		<data>
-		Bk0PhQn+xGk+NEneX0E6XlfI44M=
-		</data>
 		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/Base.lproj/CaptchaView-OSX.nib</key>
 		<dict>
 			<key>hash</key>
@@ -30,6 +26,42 @@
 			<key>hash</key>
 			<data>
 			yhkW7Z8LXbhA0XNJTgJsY69rV+c=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/be.lproj/CaptchaView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+Gw8wvTNGUtiI7QaUE2ygVtUQ6A=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/be.lproj/WebView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			01BvUE4WUHQyDTGiVhE9mN/jvjw=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/de.lproj/CaptchaView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			zk2Ldpy4f1WSf5NV0sSfZDqzn9o=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/de.lproj/WebView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			FT4axqrwfW36SecMTVcz9AVvSb0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -52,6 +84,60 @@
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/es.lproj/CaptchaView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			avfZUUF6Ug0Vf5pzOHtV11fEbFo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/es.lproj/WebView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			MTBj+dHiL+6fuO3NSDcX7v7bv8E=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/fi.lproj/CaptchaView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			a46OtLjBLaXbOzfi8FQTnITyCo0=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/fi.lproj/WebView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			uJqJUfOCfuS7FgajW0gKJlFaYlM=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/it.lproj/CaptchaView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			1ag2uJWp8o51XB5jV1sUzmWmdNo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/it.lproj/WebView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			vhjq7aFFvaB7Yxt1+TcAh1CUGuA=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/ru.lproj/CaptchaView-OSX.strings</key>
 		<dict>
 			<key>hash</key>
@@ -70,9 +156,39 @@
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/uk.lproj/CaptchaView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yDZHBEjymFw4fBrpaOWdMOX4ryo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/uk.lproj/WebView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			t5bcepV4CA5gYfW9Fgefwl4JvaE=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/_CodeSignature/CodeDirectory</key>
+		<data>
+		84NXw9T8o2wQwRIMb1U0ZFK3+pU=
+		</data>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/_CodeSignature/CodeRequirements</key>
+		<data>
+		OnX22wWFKRSOFN1+obRynMCeyXM=
+		</data>
 		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/_CodeSignature/CodeResources</key>
 		<data>
-		VWvl5+dGBJD4tpo/6kqp6x6dkzo=
+		NBA62WBJqXjRj3AsEgbbAirDuiE=
+		</data>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/_CodeSignature/CodeSignature</key>
+		<data>
+		2jmj7l5rSw0yVb/vlWAYkK/YBwk=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -87,7 +203,7 @@
 		</data>
 		<key>Modules/SwiftyVK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		/EP31AdDjDeUGcv/Dpfuy0dJ6Uo=
+		5yXJVPwFcgy0nC93zrR5n54eFkQ=
 		</data>
 		<key>Modules/SwiftyVK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
@@ -105,10 +221,6 @@
 		<data>
 		23LFWlXogblAKdrRo+qK/DSWwwI=
 		</data>
-		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/MacOS/SwiftyVKResources-OSX</key>
-		<data>
-		Bk0PhQn+xGk+NEneX0E6XlfI44M=
-		</data>
 		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/Base.lproj/CaptchaView-OSX.nib</key>
 		<dict>
 			<key>hash</key>
@@ -123,6 +235,42 @@
 			<key>hash</key>
 			<data>
 			yhkW7Z8LXbhA0XNJTgJsY69rV+c=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/be.lproj/CaptchaView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+Gw8wvTNGUtiI7QaUE2ygVtUQ6A=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/be.lproj/WebView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			01BvUE4WUHQyDTGiVhE9mN/jvjw=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/de.lproj/CaptchaView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			zk2Ldpy4f1WSf5NV0sSfZDqzn9o=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/de.lproj/WebView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			FT4axqrwfW36SecMTVcz9AVvSb0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -145,6 +293,60 @@
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/es.lproj/CaptchaView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			avfZUUF6Ug0Vf5pzOHtV11fEbFo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/es.lproj/WebView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			MTBj+dHiL+6fuO3NSDcX7v7bv8E=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/fi.lproj/CaptchaView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			a46OtLjBLaXbOzfi8FQTnITyCo0=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/fi.lproj/WebView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			uJqJUfOCfuS7FgajW0gKJlFaYlM=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/it.lproj/CaptchaView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			1ag2uJWp8o51XB5jV1sUzmWmdNo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/it.lproj/WebView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			vhjq7aFFvaB7Yxt1+TcAh1CUGuA=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/ru.lproj/CaptchaView-OSX.strings</key>
 		<dict>
 			<key>hash</key>
@@ -163,9 +365,39 @@
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/uk.lproj/CaptchaView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yDZHBEjymFw4fBrpaOWdMOX4ryo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/uk.lproj/WebView-OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			t5bcepV4CA5gYfW9Fgefwl4JvaE=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/_CodeSignature/CodeDirectory</key>
+		<data>
+		84NXw9T8o2wQwRIMb1U0ZFK3+pU=
+		</data>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/_CodeSignature/CodeRequirements</key>
+		<data>
+		OnX22wWFKRSOFN1+obRynMCeyXM=
+		</data>
 		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/_CodeSignature/CodeResources</key>
 		<data>
-		VWvl5+dGBJD4tpo/6kqp6x6dkzo=
+		NBA62WBJqXjRj3AsEgbbAirDuiE=
+		</data>
+		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/_CodeSignature/CodeSignature</key>
+		<data>
+		2jmj7l5rSw0yVb/vlWAYkK/YBwk=
 		</data>
 	</dict>
 	<key>rules</key>

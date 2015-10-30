@@ -10,7 +10,7 @@ import Foundation
 ///Delegate to the SwiftyVK
 public protocol VKDelegate {
   /**Called when SwiftyVK need autorization permissions
-  - returns: permissions as VK.Scope type*/
+   - returns: permissions as VK.Scope type*/
   func vkWillAutorize() -> [VK.Scope]
   ///Called when SwiftyVK did autorize and receive token
   func vkDidAutorize()
@@ -19,7 +19,7 @@ public protocol VKDelegate {
   ///Called when SwiftyVK did failed autorization
   func vkAutorizationFailed(_: VK.Error)
   /**Called when SwiftyVK need know where a token is located
-  - returns: Bool value that indicates whether to save token to user defaults or not, and alternative save path*/
+   - returns: Bool value that indicates whether to save token to user defaults or not, and alternative save path*/
   func vkTokenPath() -> (useUserDefaults: Bool, alternativePath: String)
   #if os(iOS)
   /**Called when need to display a view from SwiftyVK
@@ -27,10 +27,10 @@ public protocol VKDelegate {
   func vkWillPresentView() -> UIViewController
   #elseif os(OSX)
   /**Called when need to display a window from SwiftyVK
-  - returns: Bool value that indicates whether to display the window as modal or not, and parent window for modal presentation.*/
+   - returns: Bool value that indicates whether to display the window as modal or not, and parent window for modal presentation.*/
   func vkWillPresentWindow() -> (isSheet: Bool, inWindow: NSWindow?)
   #endif
-} 
+}
 //
 //
 //
@@ -50,20 +50,20 @@ public struct VK {
   internal static var delegate : VKDelegate!
   internal static var appID : String!
   /**
-  Initialize library with identifier and application delegate
-  - parameter appID: application ID
-  - parameter delegate: Delegate corresponding protocol VKDelegate
-  */
+   Initialize library with identifier and application delegate
+   - parameter appID: application ID
+   - parameter delegate: Delegate corresponding protocol VKDelegate
+   */
   public static func start(appID id: String, delegate owner: VKDelegate) {
     delegate = owner
     appID    = id
     Log([.all], "SwiftyVK did INIT")
   }
   /**
-  Getting authenticate token.
-  * If the token is already stored in the file, then the authentication takes place in the background
-  * If not, shows a pop-up notification with authorization request
-  */
+   Getting authenticate token.
+   * If the token is already stored in the file, then the authentication takes place in the background
+   * If not, shows a pop-up notification with authorization request
+   */
   public static func autorize() {
     autorize(nil);
   }
@@ -124,17 +124,17 @@ extension VK_Defaults {
     public static var language : String? {
       get {
         if useSystemLanguage {
-          let syslemLang = NSLocale.preferredLanguages()[0] as String
-          
-          if supportedLanguages.contains(syslemLang) {
-            return syslemLang
-          }
-          else if syslemLang == "uk" {
+          let syslemLang = NSBundle.preferredLocalizationsFromArray(supportedLanguages).first
+      
+          if syslemLang == "uk" {
             return "ua"
           }
+  
+          return syslemLang
         }
         return self.privateLanguage
       }
+      
       set {
         self.privateLanguage = newValue
         useSystemLanguage = false
@@ -144,7 +144,7 @@ extension VK_Defaults {
     internal static let successBlock : VK.SuccessBlock = {response in}
     internal static let errorBlock : VK.ErrorBlock = {error in}
     internal static let progressBlock : VK.ProgressBlock = {Int in}
-    internal static let supportedLanguages = ["ru", "en", "ua", "es", "fi", "de", "it"]
+    internal static let supportedLanguages = ["ru", "uk", "be", "en", "es", "fi", "de", "it"]
     internal static var useSystemLanguage = true
     private static var privateLanguage : String?
   }
