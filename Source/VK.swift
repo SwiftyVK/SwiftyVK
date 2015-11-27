@@ -118,7 +118,7 @@ private typealias VK_Defaults = VK
 extension VK_Defaults {
   public struct defaults {
     //Returns used VK API version
-    public static let apiVersion = "5.37"
+    public static let apiVersion = "5.40"
     //Returns used VK SDK version
     public static let sdkVersion = "1.3.1"
     ///Log options to trace API work
