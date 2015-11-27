@@ -3,7 +3,7 @@ import Foundation
 
 
 internal var sharedCaptchaIsRun = false
-internal var sharedCatchaAnswer : [String : String]?
+internal var sharedCaptchaAnswer : [String : String]?
 
 
 
@@ -73,10 +73,10 @@ public class Request : CustomStringConvertible {
       params["access_token"] = token
     }
     
-    if sharedCatchaAnswer != nil {
-      params["captcha_sid"] = sharedCatchaAnswer!["captcha_sid"]
-      params["captcha_key"] = sharedCatchaAnswer!["captcha_key"]
-      sharedCatchaAnswer = nil
+    if sharedCaptchaAnswer != nil {
+      params["captcha_sid"] = sharedCaptchaAnswer!["captcha_sid"]
+      params["captcha_key"] = sharedCaptchaAnswer!["captcha_key"]
+      sharedCaptchaAnswer = nil
     }
     
     params["v"] = VK.defaults.apiVersion

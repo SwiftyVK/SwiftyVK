@@ -84,7 +84,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
   
   private func endEditing(text: String) {
     textField.delegate = nil
-    sharedCatchaAnswer = ["captcha_sid" : sid!, "captcha_key": text]
+    sharedCaptchaAnswer = ["captcha_sid" : sid!, "captcha_key": text]
   }
 }
 //
