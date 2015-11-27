@@ -389,7 +389,7 @@
 		A2527E5B1BD139E200F65412 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0720;
 				TargetAttributes = {
 					A2527E671BD13A3B00F65412 = {
 						CreatedOnToolsVersion = 7.1;
@@ -637,8 +637,10 @@
 		A2527E5F1BD139E200F65412 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};

@@ -23,11 +23,11 @@ public protocol VKDelegate {
   func vkTokenPath() -> (useUserDefaults: Bool, alternativePath: String)
   #if os(iOS)
   /**Called when need to display a view from SwiftyVK
-  - returns: UIViewController that should present autorization view controller*/
+   - returns: UIViewController that should present autorization view controller*/
   func vkWillPresentView() -> UIViewController
   #elseif os(OSX)
   /**Called when need to display a window from SwiftyVK
-   - returns: Bool value that indicates whether to display the window as modal or not, and parent window for modal presentation.*/
+  - returns: Bool value that indicates whether to display the window as modal or not, and parent window for modal presentation.*/
   func vkWillPresentWindow() -> (isSheet: Bool, inWindow: NSWindow?)
   #endif
 }
@@ -47,8 +47,19 @@ Library to connect to the social network "VKontakte"
 * For user authentication you must call autorize()
 */
 public struct VK {
-  internal static var delegate : VKDelegate!
-  internal static var appID : String!
+  internal static var delegate : VKDelegate! {
+    set{delegateInstance = newValue}
+    get{assert(VK.state != .Unknown, "At first initialize VK with start() method")
+      return delegateInstance}
+  }
+  public private(set) static var appID : String! {
+    set{appIDInstance = newValue}
+    get{assert(VK.state != .Unknown, "At first initialize VK with start() method")
+      return appIDInstance}
+  }
+  private static var delegateInstance : VKDelegate?
+  private static var appIDInstance : String?
+  
   /**
    Initialize library with identifier and application delegate
    - parameter appID: application ID
@@ -57,7 +68,11 @@ public struct VK {
   public static func start(appID id: String, delegate owner: VKDelegate) {
     delegate = owner
     appID    = id
-    Log([.all], "SwiftyVK did INIT")
+    Log([.all], "SwiftyVK INIT")
+  }
+  
+  private static var started : Bool {
+    return VK.delegateInstance != nil && VK.appIDInstance != nil
   }
   /**
    Getting authenticate token.
@@ -65,32 +80,27 @@ public struct VK {
    * If not, shows a pop-up notification with authorization request
    */
   public static func autorize() {
-    autorize(nil);
+    Authorizator.autorize(nil);
   }
   
   
   
-  internal static func autorize(request: Request?) {
-    assert(delegate != nil && appID != nil , "At first initialize VK with start() method")
-    
-    if let _ = Token.loadToken() {
-      if let request = request {
-        request.reSend()
-      }
-      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {VK.delegate.vkDidAutorize()}
-    }
-    else if let request = request {
-      WebController.autorizeWithRequest(request)
-    }
-    else {
-      WebController.autorize(true)
-    }
+  #if os(iOS)
+  @available(iOS 9.0, *)
+  public static func processURL(url: NSURL, options: [String: AnyObject]) {
+    Authorizator.recieveTokenURL(url, fromApp: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String);
   }
+  
+  
+  @available(iOS, introduced=4.2, deprecated=9.0, message="Please use url:options:")
+  public static func processURL_old(url: NSURL, sourceApplication app: String?) {
+    Authorizator.recieveTokenURL(url, fromApp: app);
+  }
+  #endif
   
   
   
   public static func logOut() {
-    delegate.vkDidUnautorize()
     Token.remove()
   }
 }
@@ -109,6 +119,8 @@ extension VK_Defaults {
   public struct defaults {
     //Returns used VK API version
     public static let apiVersion = "5.37"
+    //Returns used VK SDK version
+    public static let sdkVersion = "1.3.1"
     ///Log options to trace API work
     public static var logOptions : [LogOption] = []
     ///Requests timeout
@@ -121,18 +133,22 @@ extension VK_Defaults {
     public static var sendAsynchronous : Bool = true
     ///Maximum number of requests per second
     public static var maxRequestsPerSec : Int = 3
+    #if os (iOS)
+    //If false, allows only oAuth autorization
+    public static var vkAppAutorization = true
+    #endif
     public static var language : String? {
       get {
-        if useSystemLanguage {
-          let syslemLang = NSBundle.preferredLocalizationsFromArray(supportedLanguages).first
+      if useSystemLanguage {
+      let syslemLang = NSBundle.preferredLocalizationsFromArray(supportedLanguages).first
       
-          if syslemLang == "uk" {
-            return "ua"
-          }
-  
-          return syslemLang
-        }
-        return self.privateLanguage
+      if syslemLang == "uk" {
+      return "ua"
+      }
+      
+      return syslemLang
+      }
+      return self.privateLanguage
       }
       
       set {
@@ -141,12 +157,43 @@ extension VK_Defaults {
       }
     }
     internal static var sleepTime : NSTimeInterval {return NSTimeInterval(1/Double(maxRequestsPerSec))}
-    internal static let successBlock : VK.SuccessBlock = {response in}
+    internal static let successBlock : VK.SuccessBlock = {success in}
     internal static let errorBlock : VK.ErrorBlock = {error in}
-    internal static let progressBlock : VK.ProgressBlock = {Int in}
+    internal static let progressBlock : VK.ProgressBlock = {int in}
     internal static let supportedLanguages = ["ru", "uk", "be", "en", "es", "fi", "de", "it"]
     internal static var useSystemLanguage = true
     private static var privateLanguage : String?
+  }
+}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+public typealias VK_States = VK
+extension VK_States {
+  public enum States {
+    case Unknown
+    case Started
+    case inAutorization
+    case Authorized
+  }
+  
+  public static var state : States {
+    guard VK.started else {
+      return .Unknown
+    }
+    guard Token.exist else {
+      return .Started
+    }
+    return .Authorized
   }
 }
 //

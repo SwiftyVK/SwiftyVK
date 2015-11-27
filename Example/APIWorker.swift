@@ -95,14 +95,11 @@ class APIWorker {
   class func uploadPhoto() {
     let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("testImage", ofType: "jpg")!)!
     let media = Media(imageData: data, type: .JPG)
-        
-    VK.API.Upload.Photo.toWall(media: media,
-      userId: "4680178",
-      groupId: nil,
-      isAsynchronous: true,
-      progressBlock: { (done, total) -> () in print("SwiftyVK: uploadPhoto progress: \(done) of \(total))")},
-      successBlock: {response in print("SwiftyVK: uploadPhoto success \n \(response)")},
-      errorBlock: {error in print("SwiftyVK: uploadPhoto fail \n \(error)")}
-    )
+    
+    let req = VK.API.Upload.Photo.toWall(media: media, userId: "4680178", groupId: nil)
+    req.progressBlock = { (done, total) -> () in print("SwiftyVK: uploadPhoto progress: \(done) of \(total))")}
+    req.successBlock = {response in print("SwiftyVK: uploadPhoto success \n \(response)")}
+    req.errorBlock = {error in print("SwiftyVK: uploadPhoto fail \n \(error)")}
+    req.send()
   }
 }

@@ -3,18 +3,34 @@ import SwiftyVK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, VKDelegate {
-
+  
   
   var window: UIWindow?
-
+  
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     VK.start(appID: APIWorker.appID, delegate: self)
     return true
   }
   
+  
+  func applicationDidEnterBackground(application: UIApplication) {
+    application.beginBackgroundTaskWithExpirationHandler { () -> Void in
+      for _ in 1...100 {
+        print("!!!")
+        NSThread.sleepForTimeInterval(1)
+      }
+    }
+  }
+  
+  
+  func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+    VK.processURL(url, options: options)
+    return true
+  }
+  
   func vkAutorizationFailed(error: VK.Error) {
-    print("SwiftyVK: Autorization error \n \(error)")
+    print("Autorization failed with error: \n\(error)")
   }
   
   func vkWillAutorize() -> [VK.Scope] {

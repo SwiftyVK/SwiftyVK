@@ -11,7 +11,6 @@ internal var sharedCatchaAnswer : [String : String]?
 public class Request : CustomStringConvertible {
   public var timeout = VK.defaults.timeOut
   public var isAsynchronous = VK.defaults.sendAsynchronous
-  public var successBlock = VK.defaults.successBlock
   public var errorBlock = VK.defaults.errorBlock
   public var progressBlock = VK.defaults.progressBlock
   ///Maximum number of attempts to send, after which execution priryvaetsya and an error is returned
@@ -19,20 +18,24 @@ public class Request : CustomStringConvertible {
   ///Whether to allow automatic processing of some API error
   public var catchErrors = VK.defaults.catchErrors
   internal var method = ""
-  internal var isAPI = false
+  internal private(set) var isAPI = false
   internal var attempts = 0
   internal var isCanSend : Bool {return attempts < maxAttempts || maxAttempts == 0}
-  private var customURL : String?
+  internal var swappedRequest : Request?
+  internal var customURL : String?
+  internal private(set) var isCancelled = false
+  private var _successBlock = VK.defaults.successBlock
   private var privateLanguage = VK.defaults.language
   private var useSystemLanguage = VK.defaults.useSystemLanguage
   private var HTTPMethod = "GET"
   private var media : [Media]?
   private var parameters = [String : String]()
-  
-  internal var URLRequest : NSURLRequest {
-    let req = NSURLFabric.get(url: customURL, HTTPMethod: HTTPMethod, method: method, params: allParameters, media: media)
-    req.timeoutInterval = NSTimeInterval(self.timeout)
-    return req
+  public var successBlock : VK.SuccessBlock {
+    get{return _successBlock}
+    set{
+      if swappedRequest != nil {swappedRequest?.successBlock = newValue}
+      else {_successBlock = newValue}
+    }
   }
   public var language : String? {
     get {
@@ -53,11 +56,16 @@ public class Request : CustomStringConvertible {
       useSystemLanguage = false
     }
   }
+  internal var URLRequest : NSURLRequest {
+    let req = NSURLFabric.get(url: customURL, HTTPMethod: HTTPMethod, method: method, params: allParameters, media: media)
+    req.timeoutInterval = NSTimeInterval(self.timeout)
+    return req
+  }
   internal lazy var response : Response = {
     let result = Response()
     result.request = self
     return result
-    }()
+  }()
   private var allParameters : [String : String] {
     var params = parameters
     
@@ -115,7 +123,7 @@ public class Request : CustomStringConvertible {
   ///Add new parameters to request
   public func addParameters(agrDict: [VK.Arg : String]?) {
     for (argName, argValue) in agrDict! {
-      Log([.request, .parameters], "Add parameter \(argName.rawValue)=\(argValue) in \(self)")
+      Log([.request, .reqParameters], "Add parameter \(argName.rawValue)=\(argValue) to request \(self)")
       self.parameters[argName.rawValue] = argValue
     }
   }
@@ -134,6 +142,7 @@ public class Request : CustomStringConvertible {
   ///Just send
   public func send() {
     attempts = 0
+    isCancelled = false
     reSend()
   }
   
@@ -167,6 +176,12 @@ public class Request : CustomStringConvertible {
   
   
   
+  public func cancel() {
+    isCancelled = true
+  }
+  
+  
+  
   private func argToString(agrDict: [VK.Arg : String]?) -> [String : String] {
     var strDict = [String : String]()
     
@@ -174,7 +189,7 @@ public class Request : CustomStringConvertible {
     
     for (argName, argValue) in agrDict! {
       strDict[argName.rawValue] = argValue
-      Log([.request], "Add parameter \(argName.rawValue)=\(argValue) in \(self)")
+      Log([.request, .reqParameters], "Parse parameter \(argName.rawValue)=\(argValue) in \(self) to string")
     }
     return strDict
   }

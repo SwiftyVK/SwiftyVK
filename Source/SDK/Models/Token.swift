@@ -2,11 +2,13 @@ import Foundation
 
 
 
-private var privateSelf : Token!
+private var tokenInstance : Token!
 
 
 
 internal class Token: NSObject, NSCoding {
+  
+  internal private(set) static var revoke = true
   
   private var token       : String
   private var expires     : Int
@@ -18,9 +20,8 @@ internal class Token: NSObject, NSCoding {
   
   
   
-
   init(urlString: String) {
-    let parameters = Token.parseToken(urlString)
+    let parameters = Token.parse(urlString)
     
     token       = parameters["access_token"]!
     expires     = 0 + Int(NSDate().timeIntervalSince1970)
@@ -28,28 +29,36 @@ internal class Token: NSObject, NSCoding {
     isOffline   = (parameters["expires_in"]?.isEmpty == false && (Int(parameters["expires_in"]!) == 0) || parameters["expires_in"] == nil)
     
     super.init()
-    privateSelf = self
+    tokenInstance = self
+    Token.revoke = true
     Log([.token, .life], "\(self): \(token) INIT")
-    saveToken()
+    save()
+    Token.notifyExist()
   }
   
   
-
+  
   class func get() -> String? {
     Log([.token], "Receiving token")
     
-    if privateSelf != nil && self.isExpired() == false {
-      return privateSelf.token
+    if tokenInstance != nil && self.isExpired() == false {
+      return tokenInstance.token
     }
-    else if let _ = loadToken() where self.isExpired() == false {
-      return privateSelf.token
+    else if let _ = _load() where self.isExpired() == false {
+      return tokenInstance.token
     }
     return nil
   }
   
-
   
-  private class func parseToken (request: String) -> Dictionary<String, String> {
+  
+  class var exist : Bool {
+    return tokenInstance != nil
+  }
+  
+  
+  
+  private class func parse(request: String) -> Dictionary<String, String> {
     let cleanRequest  = request.componentsSeparatedByString("#")[1]
     let preParameters = cleanRequest.componentsSeparatedByString("&")
     var parameters    = Dictionary<String, String>()
@@ -62,31 +71,33 @@ internal class Token: NSObject, NSCoding {
     return parameters
   }
   
-
+  
   
   private class func isExpired() -> Bool {
-    let token = privateSelf
-    
-    if !token.isOffline && token.expires < Int(NSDate().timeIntervalSince1970) {
-      Token.remove()
-      WebController.autorize(false)
+    if tokenInstance == nil {
       return true
     }
-    else {return false}
+    else if tokenInstance.isOffline == false && tokenInstance.expires < Int(NSDate().timeIntervalSince1970) {
+      revoke = false
+      Token.remove()
+      return true
+    }
+    return false
   }
   
   
   
-  class func loadToken() -> Token? {
+  private class func _load() -> Token? {
     let parameters  = VK.delegate.vkTokenPath()
     let useDefaults = parameters.useUserDefaults
     let filePath    = parameters.alternativePath
-    if useDefaults {privateSelf = self.loadFromDefaults()}
-    else           {privateSelf = self.loadFromFile(filePath)}
-    return privateSelf
+    if useDefaults {tokenInstance = self.loadFromDefaults()}
+    else           {tokenInstance = self.loadFromFile(filePath)}
+    Token.notifyExist()
+    return tokenInstance
   }
   
-
+  
   
   private class func loadFromDefaults() -> Token? {
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -114,7 +125,7 @@ internal class Token: NSObject, NSCoding {
   
   
   
-  func saveToken() {
+  func save() {
     let parameters  = VK.delegate.vkTokenPath()
     let useDefaults = parameters.useUserDefaults
     let filePath    = parameters.alternativePath
@@ -122,7 +133,7 @@ internal class Token: NSObject, NSCoding {
     else           {saveToFile(filePath)}
   }
   
-
+  
   
   private func saveToDefaults() {
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -131,7 +142,7 @@ internal class Token: NSObject, NSCoding {
     Log([.token], "Save token to NSUserDefaults")
   }
   
-
+  
   
   private func saveToFile(filePath : String) {
     let manager = NSFileManager.defaultManager()
@@ -148,7 +159,7 @@ internal class Token: NSObject, NSCoding {
   
   
   class func remove() {
-    
+    Token.notifyNotExist()
     let parameters  = VK.delegate.vkTokenPath()
     let useDefaults = parameters.useUserDefaults
     let filePath    = parameters.alternativePath
@@ -167,8 +178,23 @@ internal class Token: NSObject, NSCoding {
       }
     }
     
-    if privateSelf != nil {privateSelf = nil}
+    if tokenInstance != nil {tokenInstance = nil}
     Log([.token], "Token did remove")
+  }
+  
+  
+  
+  private class func notifyExist() {
+    if VK.state != .Authorized {
+      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {VK.delegate.vkDidAutorize()}
+    }
+  }
+  
+  
+  private class func notifyNotExist() {
+    if VK.state == .Authorized {
+      VK.delegate.vkDidUnautorize()
+    }
   }
   
   

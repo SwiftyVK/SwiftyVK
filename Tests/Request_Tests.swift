@@ -1,11 +1,3 @@
-//
-//  VKTests.swift
-//  VKTests
-//
-//  Created by Алексей Кудрявцев on 18.04.15.
-//  Copyright (c) 2015 Алексей Кудрявцев. All rights reserved.
-//
-
 import XCTest
 @testable import SwiftyVK
 

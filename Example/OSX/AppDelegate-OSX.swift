@@ -12,9 +12,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, VKDelegate {
     VK.start(appID: APIWorker.appID, delegate: self)
   }
 
-  func applicationWillTerminate(aNotification: NSNotification) {}
-  
-  func vkAutorizationFailed(_: VK.Error) {}
+
+  func vkAutorizationFailed(error: VK.Error) {
+    print("Autorization failed with error: \n\(error)")
+  }
 
   func vkWillAutorize() -> [VK.Scope] {
     return APIWorker.scope

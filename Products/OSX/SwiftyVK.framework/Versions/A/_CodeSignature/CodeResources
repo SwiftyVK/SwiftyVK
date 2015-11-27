@@ -6,11 +6,11 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		76FH/4r4kvZOpzQ9T+w6Q6juvLw=
+		65xA462biqQHN2G8OjxX2hTVTMU=
 		</data>
 		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Info.plist</key>
 		<data>
-		23LFWlXogblAKdrRo+qK/DSWwwI=
+		sHnZFYpFc1Ukn10l1yvw7eK8m9Y=
 		</data>
 		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/Base.lproj/CaptchaView-OSX.nib</key>
 		<dict>
@@ -176,7 +176,7 @@
 		</dict>
 		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/_CodeSignature/CodeDirectory</key>
 		<data>
-		84NXw9T8o2wQwRIMb1U0ZFK3+pU=
+		7AyjQ/F0rIGzimYDKvgn5mWnhOo=
 		</data>
 		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/_CodeSignature/CodeRequirements</key>
 		<data>
@@ -195,7 +195,7 @@
 	<dict>
 		<key>Headers/SwiftyVK-Swift.h</key>
 		<data>
-		0QSMZf7cmnEQOBnwfnL46/UC2TE=
+		Qm0cn94HJ+h/kYSujBACKV4Jlro=
 		</data>
 		<key>Headers/SwiftyVK.h</key>
 		<data>
@@ -203,11 +203,11 @@
 		</data>
 		<key>Modules/SwiftyVK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		5yXJVPwFcgy0nC93zrR5n54eFkQ=
+		w7p5a2peTj32DpIcY1laeIM/7OM=
 		</data>
 		<key>Modules/SwiftyVK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		Cxp0nLLrwdIoCEzzh8dD50ZWs+E=
+		moHsawmYGZsiZqp+NX1WpBUKuPM=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -215,11 +215,11 @@
 		</data>
 		<key>Resources/Info.plist</key>
 		<data>
-		76FH/4r4kvZOpzQ9T+w6Q6juvLw=
+		65xA462biqQHN2G8OjxX2hTVTMU=
 		</data>
 		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Info.plist</key>
 		<data>
-		23LFWlXogblAKdrRo+qK/DSWwwI=
+		sHnZFYpFc1Ukn10l1yvw7eK8m9Y=
 		</data>
 		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/Resources/Base.lproj/CaptchaView-OSX.nib</key>
 		<dict>
@@ -385,7 +385,7 @@
 		</dict>
 		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/_CodeSignature/CodeDirectory</key>
 		<data>
-		84NXw9T8o2wQwRIMb1U0ZFK3+pU=
+		7AyjQ/F0rIGzimYDKvgn5mWnhOo=
 		</data>
 		<key>Resources/SwiftyVKResources-OSX.bundle/Contents/_CodeSignature/CodeRequirements</key>
 		<data>

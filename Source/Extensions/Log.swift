@@ -3,12 +3,18 @@ import Foundation
 
 
 internal let printQueue = dispatch_queue_create("VK.Log", DISPATCH_QUEUE_SERIAL)
-
+private let cal = NSCalendar.currentCalendar()
+private let form : NSDateFormatter = {
+  let f = NSDateFormatter()
+  f.dateStyle = .ShortStyle
+  f.timeStyle = .MediumStyle
+  return f
+}();
 
 /**
-Log options to trace API work
-*/
-public enum LogOption {
+ Log options to trace API work
+ */
+public enum LogOption : String {
   case all
   case thread
   case APIBlock
@@ -17,21 +23,21 @@ public enum LogOption {
   case life
   case upload
   case token
-  case createHTTP
   case connection
   case views
   case request
-  case parameters
-  case urlReq
+  case reqParameters
+  case urlReqCreation
+  case httpCreation
   case longPool
 }
 
 
 /**
-Log API work
-- parameter options Work type
-- parameter object  Any
-*/
+ Log API work
+ - parameter options Work type
+ - parameter object  Any
+ */
 internal func Log<T>(options: [LogOption], _ object : T) {
   var containsAllOptions = false
   
@@ -43,8 +49,9 @@ internal func Log<T>(options: [LogOption], _ object : T) {
   }
   
   if containsAllOptions == true || VK.defaults.logOptions.contains(LogOption.all) {
-    let thread = "\(NSDate()) Log in thread: \(NSThread.currentThread()))"
-    printSync("\n\(thread)\n -> \(object)\n")
+    let options = options.map({(opt: LogOption) -> String in return opt.rawValue}).joinWithSeparator(", ")
+    let thread = "name: \(NSThread.currentThread().name != "" ? NSThread.currentThread().name! : "-") num: \(NSThread.currentThread().valueForKeyPath("private.seqNum")!)"
+    printSync("⏳\(form.stringFromDate(NSDate()))🚦\(thread)📌\(options)\n   \(object)\n👾")
   }
 }
 

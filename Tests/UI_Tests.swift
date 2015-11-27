@@ -1,11 +1,3 @@
-//
-//  VKTests.swift
-//  VKTests
-//
-//  Created by Алексей Кудрявцев on 18.04.15.
-//  Copyright (c) 2015 Алексей Кудрявцев. All rights reserved.
-//
-
 import XCTest
 @testable import SwiftyVK
 
@@ -85,6 +77,49 @@ class UI_Tests: XCTestCase {
     print(">>> USER ACTION IS REQUIRED! Please switch to the test application and autorize. This test will wait no longer than 60 seconds.")
     
     waitForExpectationsWithTimeout(60, handler: { error in
+      XCTAssertNil(error, "Timeout error")
+    })
+  }
+  
+  
+  
+  func test_logout_and_sending() {
+    let readyExpectation = expectationWithDescription("ready")
+    var reqCount = 0
+    
+    for n in 1...3 {
+      printSync("Sending \(n) request")
+      VK.API.Messages.getDialogs(nil).send(
+        {response in
+          printSync("success \(n) request")
+          reqCount++
+          reqCount == 3 ? readyExpectation.fulfill() : ()
+        },
+        {error in
+          printSync("error \(n) request")
+          reqCount++
+          reqCount == 3 ? readyExpectation.fulfill() : ()
+        }
+      )
+    }
+    
+    VK.logOut()
+    print(">>> USER ACTION IS REQUIRED! Please switch to the test application and autorize. This test will wait no longer than 60 seconds.")
+    
+    waitForExpectationsWithTimeout(60, handler: { error in
+      
+      if error == nil {
+        let req = VK.API.Messages.getDialogs(nil)
+        req.catchErrors = false
+        req.isAsynchronous = false
+        req.send(
+          {response in},
+          {error in
+            XCTFail("Autorization failed")
+          }
+        )
+      }
+      
       XCTAssertNil(error, "Timeout error")
     })
   }

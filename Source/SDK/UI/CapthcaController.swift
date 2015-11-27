@@ -179,7 +179,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
       self.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
       self.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
       self.parentView?.presentViewController(self, animated: true, completion: nil)
-      self.imageView?.layer.cornerRadius = 5
+      self.imageView?.layer.cornerRadius = 15
       self.imageView?.layer.masksToBounds = true
       self.imageView?.image = UIImage(data: data)
     }

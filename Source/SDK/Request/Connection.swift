@@ -28,13 +28,8 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
     
     request.response.error = nil
     
-    do {
-      request.response.create(try NSURLConnection.sendSynchronousRequest(request.URLRequest, returningResponse: nil))
-    }
-    catch let error as NSError {
-      request.response.error = VK.Error(ns: error, req: nil)
-    }
-    
+    do {request.response.create(try NSURLConnection.sendSynchronousRequest(request.URLRequest, returningResponse: nil))}
+    catch let error as NSError {request.response.error = VK.Error(ns: error, req: nil)}
     handleResponse(request.response)
   }
   
@@ -56,6 +51,9 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
       
       if request.isAPI {
         NSThread.sleepForTimeInterval(VK.defaults.sleepTime)
+        if request.isAsynchronous == true {
+          dispatch_semaphore_wait(self.responseWaitSemaphore, DISPATCH_TIME_FOREVER)
+        }
         Log([.APIBlock], "API unlocked")
       }
     })
@@ -77,6 +75,8 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   
   private class func handleResponse(response: Response) {
+    guard response.request?.isCancelled == false else {return}
+    
     if let error = response.error {
       if response.request!.catchErrors {
         response.error?.`catch`()
@@ -87,13 +87,17 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
       }
       else {
         response.request?.isAPI == true ? Log([LogOption.thread], "Executing error block") : ()
-        response.request?.errorBlock(error: error)
+        response.request?.isAPI == true && response.request?.isAsynchronous == false
+          ? response.request?.errorBlock(error: error)
+          : dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {response.request?.errorBlock(error: error)}
         response.request?.isAPI == true ? Log([LogOption.thread], "Executing error block is complete") : ()
       }
     }
     else if let responseValue = response.success {
       response.request?.isAPI == true ? Log([LogOption.thread], "Executing success block") : ()
-      response.request?.successBlock(response: responseValue)
+      response.request?.isAPI == true && response.request?.isAsynchronous == false
+        ? response.request?.successBlock(response: responseValue)
+        : dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {response.request?.successBlock(response: responseValue)}
       response.request?.isAPI == true ? Log([LogOption.thread], "Executing success block is complete") : ()
     }
     

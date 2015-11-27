@@ -14,11 +14,11 @@ private var longPollQueue = dispatch_queue_create("VKLongPollQueue", DISPATCH_QU
 private typealias VK_LongPool = VK
 extension VK_LongPool {
   /**
-  Long pool client. More - https://vk.com/dev/using_longpoll
-  * To start and stop the server, use the start() and stop() functions
-  * To check the activity of the client, use the isActive property
-  * To subscribe to notifications, use NSNotificationCenter using the names of VK.LP.notifications
-  */
+   Long pool client. More - https://vk.com/dev/using_longpoll
+   * To start and stop the server, use the start() and stop() functions
+   * To check the activity of the client, use the isActive property
+   * To subscribe to notifications, use NSNotificationCenter using the names of VK.LP.notifications
+   */
   public class LP {
     public private(set) static var isActive : Bool = false
     private static var instance : VK.LP!
@@ -34,26 +34,36 @@ extension VK_LongPool {
     
     ///Starting receiving updates from the long pool server
     public class func start() {
-      dispatch_async(longPollQueue, {
-        if VK.LP.instance == nil {
-          VK.LP.instance = LP()
-        }
-        
-        if self.isActive == false {
-          self.isActive = true
-          VK.LP.instance?.keyIsExpired = true
-          VK.LP.instance?.getServer()
-        }
-        Log([.longPool], "longPool: stared")
-
-      })
+      if VK.state == .Authorized {
+        dispatch_async(longPollQueue, {
+          if VK.LP.instance == nil {
+            VK.LP.instance = LP()
+          }
+          
+          if self.isActive == false {
+            self.isActive = true
+            VK.LP.instance?.keyIsExpired = true
+            VK.LP.instance?.getServer()
+          }
+          Log([.longPool], "longPool: stared")
+          
+        })
+      }
     }
     
     
     
-    ///Stopping receiving updates from the long pool server
-    public class func stop() {
+    ///Pause receiving updates from the long pool server
+    public class func pause() {
       isActive = false
+    }
+    
+    
+    
+    ///Stopping and removing long pool client
+    public class func stop() {
+      pause()
+      instance = nil
     }
     
     
@@ -118,7 +128,7 @@ extension VK_LongPool {
           
           req.errorBlock = {(error: VK.Error) in
             Log([.longPool], "longPool: received error")
-
+            
             self.observer.connectionLost()
             NSThread.sleepForTimeInterval(10)
             self.update()
@@ -318,7 +328,7 @@ internal class LPObserver : NSObject {
   func connectionLost() {
     if VK.LP.instance.connected == true {
       VK.LP.instance.connected = false
-      Log([.longPool], "longPool connection did lost")
+      Log([.longPool], "longPool: connection lost")
       NSNotificationCenter.defaultCenter().postNotificationName(VK.LP.notifications.connectinDidLost, object: nil)
     }
   }
@@ -328,7 +338,7 @@ internal class LPObserver : NSObject {
   func connectionRestore() {
     if VK.LP.isActive == true && VK.LP.instance.connected == false {
       VK.LP.instance.connected = true
-      Log([.longPool], "longPool connection restored")
+      Log([.longPool], "longPool: connection restored")
       NSNotificationCenter.defaultCenter().postNotificationName(VK.LP.notifications.connectinDidRestore, object: nil)
     }
   }

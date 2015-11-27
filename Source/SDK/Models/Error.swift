@@ -79,7 +79,7 @@ public class _VKError : ErrorType, CustomStringConvertible {
     switch code {
     case 5:
       request?.attempts--
-      VK.autorize(request)
+      Authorizator.autorize(request)
     case 6, 9, 10:
       usleep(500000)
       request?.reSend()

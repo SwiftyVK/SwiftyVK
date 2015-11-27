@@ -31,7 +31,7 @@ internal struct NSURLFabric {
   
   
   private static func withURL(url : String) -> NSMutableURLRequest {
-    Log([.urlReq], "Create URL requst with url \(url)")
+    Log([.urlReqCreation], "Create URL requst with url \(url)")
     let req = NSMutableURLRequest(URL: NSURL(string: "")!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
     req.URL = NSURL(string: url)
     req.HTTPMethod = "GET"
@@ -41,7 +41,7 @@ internal struct NSURLFabric {
   
   
   private static func withAPI(APIMethod: String, HTTPMethod: String, paramDictAsAnyObject: AnyObject) -> NSMutableURLRequest {
-    Log([.urlReq], "Create URL requst with method \(APIMethod)")
+    Log([.urlReqCreation], "Create URL requst with method \(APIMethod)")
     let req = NSMutableURLRequest(URL: NSURL(string: "")!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
     req.URL = NSURL(string: methodUrl + APIMethod + "?" + argToString(paramDictAsAnyObject as? [String : String]))
     req.HTTPMethod = HTTPMethod
@@ -51,7 +51,7 @@ internal struct NSURLFabric {
   
   
   private static func withFiles(media: [Media], url: String) -> NSMutableURLRequest {
-    Log([.urlReq], "Create URL requst with files \(media)")
+    Log([.urlReqCreation], "Create URL requst with files \(media)")
     let req = NSMutableURLRequest(URL: NSURL(string: "")!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
     req.URL = NSURL(string: url)
     req.HTTPMethod = "POST"
@@ -59,10 +59,10 @@ internal struct NSURLFabric {
     req.addValue("8bit", forHTTPHeaderField: "Content-Transfer-Encoding")
     req.setValue("multipart/form-data;  boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
     let body = NSMutableData()
-    Log([.createHTTP], "Create HTTP body")
+    Log([.httpCreation], "Create HTTP body")
     
     for (index, file) in media.enumerate() {
-      Log([.createHTTP], "Add file \(index) to HTTP body")
+      Log([.httpCreation], "Add file \(index) to HTTP body")
       let name : String
       
       switch file.mediaType {
@@ -80,7 +80,7 @@ internal struct NSURLFabric {
     body.appendData("\r\n--\(boundary)--\r".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!)
     
     req.HTTPBody = body
-    Log([.createHTTP], "Create HTTP is completed")
+    Log([.httpCreation], "Create HTTP is completed")
     return req
   }
   

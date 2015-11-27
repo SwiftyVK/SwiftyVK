@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A20FF11A1BEB6BB5009FBE3D /* Authorizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */; };
+		A20FF11C1BEB7DC8009FBE3D /* Authorizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */; };
 		A2527E3B1BD1356C00F65412 /* CaptchaView-OSX.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E1A1BD1343F00F65412 /* CaptchaView-OSX.xib */; };
 		A2527E3C1BD1356C00F65412 /* WebView-OSX.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E251BD1343F00F65412 /* WebView-OSX.xib */; };
 		A2527E3D1BD1357000F65412 /* CaptchaView-iOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E181BD1343F00F65412 /* CaptchaView-iOS.xib */; };
@@ -54,9 +56,7 @@
 		A2EB6EE31BD18389008E7D86 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8C1BD12FD200F65412 /* Response.swift */; };
 		A2EB6EE41BD18389008E7D86 /* CapthcaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8E1BD12FD200F65412 /* CapthcaController.swift */; };
 		A2EB6EE51BD18389008E7D86 /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8F1BD12FD200F65412 /* WebController.swift */; };
-		A2EB6EE61BD18389008E7D86 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7A1BD12FD200F65412 /* Array.swift */; };
 		A2EB6EE71BD18389008E7D86 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7B1BD12FD200F65412 /* Log.swift */; };
-		A2EB6EE81BD18389008E7D86 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7D1BD12FD200F65412 /* String.swift */; };
 		A2EB6EE91BD18389008E7D86 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7E1BD12FD200F65412 /* SwiftyJSON.swift */; };
 		A2EB6EEA1BD18394008E7D86 /* VK.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D911BD12FD200F65412 /* VK.swift */; };
 		A2EB6EEB1BD18394008E7D86 /* LongPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7F1BD12FD200F65412 /* LongPool.swift */; };
@@ -99,10 +99,8 @@
 		A2EB6F101BD18395008E7D86 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8C1BD12FD200F65412 /* Response.swift */; };
 		A2EB6F111BD18395008E7D86 /* CapthcaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8E1BD12FD200F65412 /* CapthcaController.swift */; };
 		A2EB6F121BD18395008E7D86 /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8F1BD12FD200F65412 /* WebController.swift */; };
-		A2EB6F131BD18395008E7D86 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7A1BD12FD200F65412 /* Array.swift */; };
 		A2EB6F141BD18395008E7D86 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7B1BD12FD200F65412 /* Log.swift */; };
 		A2EB6F151BD18395008E7D86 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7C1BD12FD200F65412 /* Reachability.swift */; };
-		A2EB6F161BD18395008E7D86 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7D1BD12FD200F65412 /* String.swift */; };
 		A2EB6F171BD18395008E7D86 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7E1BD12FD200F65412 /* SwiftyJSON.swift */; };
 		A2EB6F181BD183A4008E7D86 /* SwiftyVK.h in Headers */ = {isa = PBXBuildFile; fileRef = A2527D901BD12FD200F65412 /* SwiftyVK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A2EB6F191BD183A5008E7D86 /* SwiftyVK.h in Headers */ = {isa = PBXBuildFile; fileRef = A2527D901BD12FD200F65412 /* SwiftyVK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -173,6 +171,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorizator.swift; sourceTree = "<group>"; };
 		A234A40A1BE34F6800856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/CaptchaView-OSX.strings"; sourceTree = "<group>"; };
 		A234A40B1BE34F6800856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A234A40C1BE34F6900856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/CaptchaView-iOS.strings"; sourceTree = "<group>"; };
@@ -220,10 +219,8 @@
 		A2527D761BD12FD200F65412 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A2527D771BD12FD200F65412 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		A2527D781BD12FD200F65412 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
-		A2527D7A1BD12FD200F65412 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		A2527D7B1BD12FD200F65412 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		A2527D7C1BD12FD200F65412 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		A2527D7D1BD12FD200F65412 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		A2527D7E1BD12FD200F65412 /* SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		A2527D7F1BD12FD200F65412 /* LongPool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPool.swift; sourceTree = "<group>"; };
 		A2527D821BD12FD200F65412 /* Arg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arg.swift; sourceTree = "<group>"; };
@@ -285,6 +282,7 @@
 				A2527D901BD12FD200F65412 /* SwiftyVK.h */,
 				A2527D911BD12FD200F65412 /* VK.swift */,
 				A2527D7F1BD12FD200F65412 /* LongPool.swift */,
+				A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */,
 				A2527D801BD12FD200F65412 /* SDK */,
 				A2527D5D1BD12FD200F65412 /* API */,
 				A2527D791BD12FD200F65412 /* Extensions */,
@@ -329,10 +327,8 @@
 		A2527D791BD12FD200F65412 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A2527D7A1BD12FD200F65412 /* Array.swift */,
 				A2527D7B1BD12FD200F65412 /* Log.swift */,
 				A2527D7C1BD12FD200F65412 /* Reachability.swift */,
-				A2527D7D1BD12FD200F65412 /* String.swift */,
 				A2527D7E1BD12FD200F65412 /* SwiftyJSON.swift */,
 			);
 			path = Extensions;
@@ -507,7 +503,7 @@
 		A2527D261BD1123E00F65412 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0720;
 				TargetAttributes = {
 					A2527D4A1BD1130D00F65412 = {
 						CreatedOnToolsVersion = 7.1;
@@ -622,6 +618,7 @@
 				A2EB6F091BD18395008E7D86 /* Media.swift in Sources */,
 				A2EB6F0A1BD18395008E7D86 /* Resources.swift in Sources */,
 				A2EB6F0B1BD18395008E7D86 /* Scope.swift in Sources */,
+				A20FF11A1BEB6BB5009FBE3D /* Authorizator.swift in Sources */,
 				A2EB6F0C1BD18395008E7D86 /* Token.swift in Sources */,
 				A2EB6F0D1BD18395008E7D86 /* Connection.swift in Sources */,
 				A2EB6F0E1BD18395008E7D86 /* NSURLFabric.swift in Sources */,
@@ -629,10 +626,8 @@
 				A2EB6F101BD18395008E7D86 /* Response.swift in Sources */,
 				A2EB6F111BD18395008E7D86 /* CapthcaController.swift in Sources */,
 				A2EB6F121BD18395008E7D86 /* WebController.swift in Sources */,
-				A2EB6F131BD18395008E7D86 /* Array.swift in Sources */,
 				A2EB6F141BD18395008E7D86 /* Log.swift in Sources */,
 				A2EB6F151BD18395008E7D86 /* Reachability.swift in Sources */,
-				A2EB6F161BD18395008E7D86 /* String.swift in Sources */,
 				A2EB6F171BD18395008E7D86 /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -669,6 +664,7 @@
 				A2EB6ED61BD18389008E7D86 /* User.swift in Sources */,
 				A2EB6ED71BD18389008E7D86 /* Utils.swift in Sources */,
 				A2EB6ED81BD18389008E7D86 /* Video.swift in Sources */,
+				A20FF11C1BEB7DC8009FBE3D /* Authorizator.swift in Sources */,
 				A2EB6ED91BD18389008E7D86 /* Wall.swift in Sources */,
 				A2EB6EDA1BD18389008E7D86 /* Arg.swift in Sources */,
 				A2EB6EDB1BD18389008E7D86 /* Error.swift in Sources */,
@@ -682,9 +678,7 @@
 				A2EB6EE31BD18389008E7D86 /* Response.swift in Sources */,
 				A2EB6EE41BD18389008E7D86 /* CapthcaController.swift in Sources */,
 				A2EB6EE51BD18389008E7D86 /* WebController.swift in Sources */,
-				A2EB6EE61BD18389008E7D86 /* Array.swift in Sources */,
 				A2EB6EE71BD18389008E7D86 /* Log.swift in Sources */,
-				A2EB6EE81BD18389008E7D86 /* String.swift in Sources */,
 				A2EB6EE91BD18389008E7D86 /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -771,8 +765,10 @@
 		A2527D2A1BD1123E00F65412 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};

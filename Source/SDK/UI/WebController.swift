@@ -1,10 +1,12 @@
 import WebKit
 #if os(OSX)
   import Cocoa
+  let isMac = true
   class _WebControllerPrototype : NSWindowController, WebFrameLoadDelegate {}
 #endif
 #if os(iOS)
   import UIKit
+  let isMac = false
   class _WebControllerPrototype : UIViewController, UIWebViewDelegate {}
 #endif
 
@@ -12,9 +14,9 @@ import WebKit
 
 
 internal let vkSheetQueue = dispatch_queue_create("com.VK.sheetQueue", DISPATCH_QUEUE_SERIAL)
-internal let autorizeUrl = "https://oauth.vk.com/authorize?"
-internal let redirectUrl = "https://oauth.vk.com/blank.html"
+private let autorizeUrl = "https://oauth.vk.com/authorize?"
 private let WebViewName = Resources.withSuffix("WebView")
+private weak var activeWebController : WebController?
 
 
 
@@ -25,45 +27,17 @@ class WebController : _WebControllerPrototype {
   @IBOutlet private weak var webView : WebView?
   @IBOutlet private weak var activity: NSProgressIndicator!
   private var parentWindow : NSWindow?
-  let isMac = true
   #endif
   #if os(iOS)
   @IBOutlet private weak var webView : UIWebView?
   @IBOutlet private weak var activity : UIActivityIndicatorView!
   private var parentView : UIViewController?
-  private let isMac = false
   #endif
   private let waitUser = dispatch_semaphore_create(0)
   private var isExpand = false
   private var fails = 0
   private var urlRequest : NSURLRequest?
   private weak var request : Request?
-  
-  
-  
-  class func autorize(revoke: Bool) {
-    let startBlock = {
-      if Token.get() == nil {
-        let url = getUrl(permissions: VK.delegate.vkWillAutorize(), revoke: revoke)
-        self.start(url: url, request: nil)
-      }
-    }
-    
-    NSThread.isMainThread()
-      ? dispatch_async(vkSheetQueue, startBlock)
-      : dispatch_sync(vkSheetQueue, startBlock)
-  }
-  
-  
-  class func autorizeWithRequest(request: Request) {
-    dispatch_sync(vkSheetQueue, {
-      if Token.get() == nil {
-        let url = getUrl(permissions: VK.delegate.vkWillAutorize(), revoke: true)
-        self.start(url: url, request: request)
-        request.isAsynchronous ? request.reSend() : request.sendInCurrentThread()
-      }
-    })
-  }
   
   
   
@@ -76,56 +50,57 @@ class WebController : _WebControllerPrototype {
   
   
   
-  
-  private class func start(url url: String, request: Request?) {
+  internal class func start(url url: String, request: Request?) {
     let params          = getParamsForPlatform()
     let controller      = params.controller
     controller.request  = request
     controller.showWithUrl(url, isSheet: params.isSheet)
     Log([.views], "WebController wait user actions")
+    activeWebController = controller
     dispatch_semaphore_wait(controller.waitUser, DISPATCH_TIME_FOREVER)
   }
   
   
   
-  private class func getUrl(permissions permissions : [VK.Scope], revoke: Bool) -> String {
-    let intPermissions = VK.Scope.toInt(permissions)
-    let url =  "\(autorizeUrl)client_id=\(VK.appID)&scope=\(intPermissions)&redirect_uri=\(redirectUrl)&display=mobile&v\(VK.defaults.apiVersion)&response_type=token&revoke=\(revoke ? 1:0)"
-    
-    return url
+  internal class func cancel() {
+    activeWebController?.hide()
   }
   
   
   
   private func handleResponse(urlString : String) {
-    if urlString.contains("access_token=") {
+    if urlString.containsString("access_token=") {
       _ = Token(urlString: urlString)
-      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
-        VK.delegate.vkDidAutorize()
-      }
       self.hide()
     }
-    else if urlString.contains("access_denied") || urlString.contains("fail=1") {
-      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
-        var err : VK.Error
-        err = urlString.contains("access_denied")
-          ? VK.Error(domain: "VKSDKDomain", code: 2, desc: "User deny autentification", userInfo: nil, req: self.request)
-          : VK.Error(domain: "VKSDKDomain", code: 3, desc: "Fail user validation", userInfo: nil, req: self.request)
-        VK.delegate.vkAutorizationFailed(err)
-      }
-      request?.attempts = request!.maxAttempts
+    else if urlString.containsString("access_denied") {
       hide()
     }
-    else if isMac && !isExpand && urlString.contains(autorizeUrl) || urlString.contains("act=security_check") {
+    else if urlString.containsString("fail=1") {
+      failValidation()
+    }
+    else if isMac && !isExpand && urlString.containsString(autorizeUrl) || urlString.containsString("act=security_check") {
       expand()
     }
     else {
-      //webView!.goBack()
+      webView!.goBack()
     }
   }
   
   
   
+  private func failValidation() {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+      let err = VK.Error(domain: "VKSDKDomain", code: 3, desc: "Fail user validation", userInfo: nil, req: self.request)
+      self.request?.errorBlock(error: err)
+      VK.delegate.vkAutorizationFailed(err)
+    }
+    request?.attempts = request!.maxAttempts
+    hide()
+  }
+  
+
+
   private func didFail(sender: AnyObject, didFailLoadWithError error: NSError?) {
     if fails <= 3 {
       fails++
@@ -138,7 +113,8 @@ class WebController : _WebControllerPrototype {
       })
       hide()
     }
-  }}
+  }
+}
 //
 //
 //
@@ -212,7 +188,7 @@ class WebController : _WebControllerPrototype {
       NSThread.sleepForTimeInterval(1)
       isExpand = true
       NSApplication.sharedApplication().activateIgnoringOtherApps(true)
-      let newHeight  = CGFloat(self.webView!.stringByEvaluatingJavaScriptFromString("document.height").floatValue()!)
+      let newHeight = CGFloat((self.webView!.stringByEvaluatingJavaScriptFromString("document.height") as NSString).floatValue)
       
       if let parent = parentWindow {
         self.window!.setFrame(NSMakeRect(
@@ -306,7 +282,7 @@ class WebController : _WebControllerPrototype {
         self.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
         self.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
         self.parentView?.presentViewController(self, animated: true, completion: nil)
-        self.webView?.layer.cornerRadius = 5
+        self.webView?.layer.cornerRadius = 15
         self.webView?.layer.masksToBounds = true
         self.urlRequest = NSURLRequest(URL: NSURL(string: url)!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 3)
         self.webView?.loadRequest(self.urlRequest!)
