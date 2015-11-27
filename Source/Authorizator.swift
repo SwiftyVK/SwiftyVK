@@ -106,8 +106,7 @@ internal struct Authorizator {
     
     
     internal static var canAutorizeWithVkApp : Bool {
-      return VK.defaults.vkAppAutorization == true
-        && UIApplication.sharedApplication().canOpenURL(NSURL(string: appAuthorizeUrl)!)
+      return UIApplication.sharedApplication().canOpenURL(NSURL(string: appAuthorizeUrl)!)
         && UIApplication.sharedApplication().canOpenURL(NSURL(string: "vk\(VK.appID)://")!)
     }
     

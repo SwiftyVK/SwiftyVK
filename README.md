@@ -6,16 +6,18 @@ On this page:
 
 * [Requirements](#requirements)
 * [Integration](#integration)
-	* [Manually](#manually)
-	* [CocoaPods](#cocoapods)
+* [Manually](#manually)
+* [CocoaPods](#cocoapods)
 * [Getting started](#getting-started)
-	* [Import and implementation](#import-and-implementation)
-	* [Initialization](#initialization)
+* [Import and implementation](#import-and-implementation)
+* [Initialization](#initialization)
+* [User authorization](#user-authorization)
+* [Authorization with VK App](#authorization-with-vk-app)
 * [API Requests](#api-requests)
-	* [Syntax](#syntax)
-	* [Custom requests](#custom-requests)
-	* [Request properties](#request-properties)
-	* [Default properties](#default-properties)
+* [Syntax](#syntax)
+* [Custom requests](#custom-requests)
+* [Request properties](#request-properties)
+* [Default properties](#default-properties)
 * [Parsing response](#parsing-response)
 * [Error handling](#error-handling)
 * [Upload files](#upload-files)
@@ -57,40 +59,40 @@ Implement `VKDelegate` protocol and **all its functions** in custom class. For e
 ```swift
 class YourClass: Superclass, VKDelegate {
 
-	func vkWillAutorize() -> [VK.Scope] {
-		//Called when SwiftyVK need autorization permissions.
-		return //an array of application permissions
-	}
+func vkWillAutorize() -> [VK.Scope] {
+//Called when SwiftyVK need autorization permissions.
+return //an array of application permissions
+}
 
-	func vkDidAutorize() {
-		//Called when the user is log in. 
-		//Here you can start to send requests to the API.
-	}
+func vkDidAutorize() {
+//Called when the user is log in. 
+//Here you can start to send requests to the API.
+}
 
-	func vkDidUnautorize() {
-		//Called when user is log out.
-	}
+func vkDidUnautorize() {
+//Called when user is log out.
+}
 
-	func vkAutorizationFailed(error: VK.Error) {
-		//Called when SwiftyVK could not authorize. To let the application know that something went wrong.
-	}
+func vkAutorizationFailed(error: VK.Error) {
+//Called when SwiftyVK could not authorize. To let the application know that something went wrong.
+}
 
-	func vkTokenPath() -> (useUserDefaults: Bool, alternativePath: String) {
-		//Called when SwiftyVK need know where a token is located.
-		return //bool value that indicates whether save token to NSUserDefaults or not, and alternative save path.
-	}
+func vkTokenPath() -> (useUserDefaults: Bool, alternativePath: String) {
+//Called when SwiftyVK need know where a token is located.
+return //bool value that indicates whether save token to NSUserDefaults or not, and alternative save path.
+}
 
-	func vkWillPresentView() -> UIViewController {
-		//Only for iOS!
-		//Called when need to display a view from SwiftyVK.
-		return //UIViewController that should present autorization view controller
-	}
+func vkWillPresentView() -> UIViewController {
+//Only for iOS!
+//Called when need to display a view from SwiftyVK.
+return //UIViewController that should present autorization view controller
+}
 
-	func vkWillPresentWindow() -> (isSheet: Bool, inWindow: NSWindow?) {
-		//Only for OSX!
-		//Called when need to display a window from SwiftyVK.
-		return //bool value that indicates whether to display the window as modal or not, and parent window for modal presentation
-	}
+func vkWillPresentWindow() -> (isSheet: Bool, inWindow: NSWindow?) {
+//Only for OSX!
+//Called when need to display a window from SwiftyVK.
+return //bool value that indicates whether to display the window as modal or not, and parent window for modal presentation
+}
 }
 ``` 
 *See full implementation in Example project*
@@ -104,7 +106,7 @@ class YourClass: Superclass, VKDelegate {
 VK.start(appID: applicationID, delegate: VKDelegate)
 ```
 
-###User authorization
+###**User authorization**
 * Implement `vkWillAutorize()` function in `VKDelegate` and return [application  permissions](https://vk.com/dev/permissions).
 * Just call:
 
@@ -113,6 +115,31 @@ VK.start(appID: applicationID, delegate: VKDelegate)
 VK.autorize()
 ```
 * And user will see authorization dialog.
+
+
+###**Authorization with VK App**
+For authorization with official VK application for iOS, you need:
+
+*1. In Xcode -> Target -> Info*
+
+* Add new URL Type with URL identifier `vk$YOUR_APP_ID$` (e.g. vk1234567890)
+* Add app schemas to Info.plist file:
+```html
+<key>LSApplicationQueriesSchemes</key>
+<array>
+<string>vkauthorize</string>
+<string>vk$YOUR_APP_ID$</string>
+</array>
+```
+*2. In https://vk.com/apps?act=manage -> Edit App -> Settings*
+
+* Set `App Bundle ID for iOS` to your `App Bundle` in Xcode -> Target -> Bundle Identifier (e.g. com.developer.applicationName)
+
+*3. Test it!*
+
+
+***If user deny authorization with VK App, SwiftyVK show standart authorization WebView in your app.***
+
 
 ##**API Requests**
 ###Syntax
@@ -129,8 +156,8 @@ req.send()
 Or a bit shorter:
 ```swift
 let req = VK.API.Users.get([VK.Arg.userId : "1"]).send(
-	{response in print(response)}, 
-	{error in print(error)}
+{response in print(response)}, 
+{error in print(error)}
 )
 
 ```
@@ -182,11 +209,11 @@ Responses to requests come in the form of text in [JSON](https://en.wikipedia.or
 In our request example about the syntax that will return the response:
 ```JSON
 [
-	{
-		"id" : 1,
-		"first_name" : "Pavel",
-		"last_name" : "Durov"
-	}
+{
+"id" : 1,
+"first_name" : "Pavel",
+"last_name" : "Durov"
+}
 ]
 ```
 
@@ -219,12 +246,12 @@ let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("image",
 let media = Media(imageData: data, type: .JPG)
 //Upload image to wall        
 VK.API.Upload.Photo.toWall(media: media,
-	userId: "1",
-	groupId: nil,
-	isAsynchronous: true,
-	progressBlock: { (done, total) -> () in print("upload \(done) of \(total))")},
-	successBlock: {response in print(response)},
-	errorBlock: {error in print(error)}
+userId: "1",
+groupId: nil,
+isAsynchronous: true,
+progressBlock: { (done, total) -> () in print("upload \(done) of \(total))")},
+successBlock: {response in print(response)},
+errorBlock: {error in print(error)}
 )
 ```
 

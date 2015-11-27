@@ -133,10 +133,7 @@ extension VK_Defaults {
     public static var sendAsynchronous : Bool = true
     ///Maximum number of requests per second
     public static var maxRequestsPerSec : Int = 3
-    #if os (iOS)
-    //If false, allows only oAuth autorization
-    public static var vkAppAutorization = true
-    #endif
+
     public static var language : String? {
       get {
       if useSystemLanguage {
