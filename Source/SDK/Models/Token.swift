@@ -2,7 +2,16 @@ import Foundation
 
 
 
-private var tokenInstance : Token!
+private var tokenInstance : Token! {
+  willSet {
+    if newValue != nil {
+      Token.notifyExist()
+    }
+    else {
+      Token.notifyNotExist()
+    }
+  }
+}
 
 
 
@@ -33,7 +42,6 @@ internal class Token: NSObject, NSCoding {
     Token.revoke = true
     Log([.token, .life], "\(self): \(token) INIT")
     save()
-    Token.notifyExist()
   }
   
   
@@ -93,7 +101,6 @@ internal class Token: NSObject, NSCoding {
     let filePath    = parameters.alternativePath
     if useDefaults {tokenInstance = self.loadFromDefaults()}
     else           {tokenInstance = self.loadFromFile(filePath)}
-    Token.notifyExist()
     return tokenInstance
   }
   
@@ -159,7 +166,6 @@ internal class Token: NSObject, NSCoding {
   
   
   class func remove() {
-    Token.notifyNotExist()
     let parameters  = VK.delegate.vkTokenPath()
     let useDefaults = parameters.useUserDefaults
     let filePath    = parameters.alternativePath
@@ -171,9 +177,7 @@ internal class Token: NSObject, NSCoding {
     if !useDefaults {
       let manager = NSFileManager.defaultManager()
       if manager.fileExistsAtPath(filePath) {
-        do {
-          try manager.removeItemAtPath(filePath)
-        }
+        do {try manager.removeItemAtPath(filePath)}
         catch _ {}
       }
     }
@@ -186,7 +190,10 @@ internal class Token: NSObject, NSCoding {
   
   private class func notifyExist() {
     if VK.state != .Authorized {
-      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {VK.delegate.vkDidAutorize()}
+      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        NSThread.sleepForTimeInterval(0.1)
+        VK.delegate.vkDidAutorize()
+      }
     }
   }
   

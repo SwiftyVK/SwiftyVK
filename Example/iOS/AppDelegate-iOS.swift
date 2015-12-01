@@ -13,17 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKDelegate {
     return true
   }
   
-  
-  func applicationDidEnterBackground(application: UIApplication) {
-    application.beginBackgroundTaskWithExpirationHandler { () -> Void in
-      for _ in 1...100 {
-        print("!!!")
-        NSThread.sleepForTimeInterval(1)
-      }
-    }
-  }
-  
-  
   func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
     VK.processURL(url, options: options)
     return true
@@ -37,7 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKDelegate {
     return APIWorker.scope
   }
   
-  func vkDidAutorize() {}
+  func vkDidAutorize() {
+  print("vkDidAutorize")
+  }
   
   func vkDidUnautorize() {}
   

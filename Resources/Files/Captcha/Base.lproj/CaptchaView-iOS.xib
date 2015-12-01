@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9052" systemVersion="15B22c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C47a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9040"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -29,7 +29,6 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rIQ-X4-w7B">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="100"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="B9X-Rn-WM3"/>
                                             <constraint firstAttribute="height" constant="100" id="UNp-h2-Dcn"/>
@@ -60,13 +59,11 @@
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" highlighted="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter code from the image" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Ip-NS-jpV">
                                         <rect key="frame" x="0.0" y="110" width="250" height="30"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.94525331439393934" green="0.94525331439393934" blue="0.94525331439393934" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="rIQ-X4-w7B" secondAttribute="trailing" id="04S-uk-I20"/>
                                     <constraint firstAttribute="trailing" secondItem="1Ip-NS-jpV" secondAttribute="trailing" id="2Fm-xT-LWH"/>
@@ -78,7 +75,6 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <animations/>
                         <constraints>
                             <constraint firstItem="LgM-FU-1xP" firstAttribute="centerY" secondItem="g1O-vU-68J" secondAttribute="centerY" multiplier="0.4" id="3zB-kC-j9E"/>
                             <constraint firstItem="LgM-FU-1xP" firstAttribute="centerY" secondItem="g1O-vU-68J" secondAttribute="centerY" multiplier="0.5" id="6Rb-16-iU6"/>
@@ -96,11 +92,9 @@
                             </mask>
                         </variation>
                     </view>
-                    <animations/>
                     <blurEffect style="light"/>
                 </visualEffectView>
             </subviews>
-            <animations/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="gq2-4U-z33" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="D6O-EL-ZLT"/>

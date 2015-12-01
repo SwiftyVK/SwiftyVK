@@ -12,7 +12,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, VKDelegate {
     VK.start(appID: APIWorker.appID, delegate: self)
   }
 
-
   func vkAutorizationFailed(error: VK.Error) {
     print("Autorization failed with error: \n\(error)")
   }
