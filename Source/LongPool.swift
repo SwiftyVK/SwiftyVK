@@ -326,7 +326,7 @@ internal class LPObserver : NSObject {
   
   
   func connectionLost() {
-    if VK.LP.instance.connected == true {
+    if VK.LP.instance?.connected == true {
       VK.LP.instance.connected = false
       Log([.longPool], "longPool: connection lost")
       NSNotificationCenter.defaultCenter().postNotificationName(VK.LP.notifications.connectinDidLost, object: nil)
