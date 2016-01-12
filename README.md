@@ -6,20 +6,21 @@ On this page:
 
 * [Requirements](#requirements)
 * [Integration](#integration)
-* [Manually](#manually)
-* [CocoaPods](#cocoapods)
+  * [Manually](#manually)
+  * [CocoaPods](#cocoapods)
+  * [Carthage](#carthage)
 * [Getting started](#getting-started)
 * [Import and implementation](#import-and-implementation)
 * [Initialization](#initialization)
 * [User authorization](#user-authorization)
-* [Authorization with VK App](#authorization-with-vk-app)
+  * [Authorization with VK App](#authorization-with-vk-app)
 * [API Requests](#api-requests)
-* [Syntax](#syntax)
-* [Custom requests](#custom-requests)
-* [Request properties](#request-properties)
-* [Default properties](#default-properties)
-* [Parsing response](#parsing-response)
-* [Error handling](#error-handling)
+  * [Syntax](#syntax)
+  * [Custom requests](#custom-requests)
+  * [Request properties](#request-properties)
+  * [Default properties](#default-properties)
+  * [Parsing response](#parsing-response)
+  * [Error handling](#error-handling)
 * [Upload files](#upload-files)
 * [Longpoll](#longpoll)
 
@@ -44,6 +45,12 @@ use_frameworks!
 target 'MyApp' do
 pod 'SwiftyVK', :git => 'https://github.com/WE-St0r/SwiftyVK.git'
 end
+```
+
+###Carthage
+You can use [Carthage](https://github.com/Carthage/Carthage) to install `SwiftyVK` by adding it to `Cartfile`:
+```
+github "WE-St0r/SwiftyVK"
 ```
 
 ##**Getting started**
