@@ -135,7 +135,14 @@ For authorization with official VK application for iOS, you need:
 
 * Set `App Bundle ID for iOS` to your `App Bundle` in Xcode -> Target -> Bundle Identifier (e.g. com.developer.applicationName)
 
-*3. Test it!*
+*3. Add this code to appDelegate*
+```swift
+func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+  VK.processURL(url, options: options)
+  return true
+}
+  ```
+*4. Test it!*
 
 
 ***If user deny authorization with VK App, SwiftyVK show standart authorization WebView in your app.***
