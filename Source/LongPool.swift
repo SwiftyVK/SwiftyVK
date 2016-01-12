@@ -21,7 +21,7 @@ extension VK_LongPool {
    */
   public class LP {
     public private(set) static var isActive : Bool = false
-    private static var instance : VK.LP!
+    private static var instance : VK.LP?
     private var observer : LPObserver
     private var lpKey = String()
     private var keyIsExpired = false
@@ -327,7 +327,7 @@ internal class LPObserver : NSObject {
   
   func connectionLost() {
     if VK.LP.instance?.connected == true {
-      VK.LP.instance.connected = false
+      VK.LP.instance?.connected = false
       Log([.longPool], "longPool: connection lost")
       NSNotificationCenter.defaultCenter().postNotificationName(VK.LP.notifications.connectinDidLost, object: nil)
     }
@@ -336,8 +336,8 @@ internal class LPObserver : NSObject {
   
   
   func connectionRestore() {
-    if VK.LP.isActive == true && VK.LP.instance.connected == false {
-      VK.LP.instance.connected = true
+    if VK.LP.isActive == true && VK.LP.instance?.connected == false {
+      VK.LP.instance?.connected = true
       Log([.longPool], "longPool: connection restored")
       NSNotificationCenter.defaultCenter().postNotificationName(VK.LP.notifications.connectinDidRestore, object: nil)
     }
