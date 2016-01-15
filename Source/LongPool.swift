@@ -8,7 +8,8 @@ import Foundation
 
 
 
-private var longPollQueue = dispatch_queue_create("VKLongPollQueue", DISPATCH_QUEUE_SERIAL)
+private var lpQueue = dispatch_queue_create("VKLongPollQueue", DISPATCH_QUEUE_SERIAL)
+
 
 
 private typealias VK_LongPool = VK
@@ -28,14 +29,14 @@ extension VK_LongPool {
     private var server = String()
     private var ts = String()
     private var connected = true
-    private var lpSemaphore = dispatch_semaphore_create(1)
+    private var restorable = false
     
     
     
     ///Starting receiving updates from the long pool server
     public class func start() {
       if VK.state == .Authorized {
-        dispatch_async(longPollQueue, {
+        dispatch_async(lpQueue) {
           if VK.LP.instance == nil {
             VK.LP.instance = LP()
           }
@@ -44,26 +45,21 @@ extension VK_LongPool {
             self.isActive = true
             VK.LP.instance?.keyIsExpired = true
             VK.LP.instance?.getServer()
+            instance?.restorable = true
           }
           Log([.longPool], "longPool: stared")
-          
-        })
+        }
       }
     }
     
     
     
     ///Pause receiving updates from the long pool server
-    public class func pause() {
-      isActive = false
-    }
-    
-    
-    
-    ///Stopping and removing long pool client
     public class func stop() {
-      pause()
-      instance = nil
+      dispatch_async(lpQueue) {
+        instance?.restorable = false
+        isActive = false
+      }
     }
     
     
@@ -102,42 +98,44 @@ extension VK_LongPool {
     
     
     internal func update() {
-      if VK.LP.isActive {
-        dispatch_async(longPollQueue, {
-          dispatch_semaphore_wait(self.lpSemaphore, DISPATCH_TIME_FOREVER)
+      if LP.isActive {
+        dispatch_async(lpQueue) {
           
           let req = Request(url: "https://\(self.server)?act=a_check&key=\(self.lpKey)&ts=\(self.ts)&wait=25&mode=106")
           req.catchErrors = false
           req.timeout = 30
           req.maxAttempts = 1
+          req.isAsynchronous = false
           req.successBlock = {(response : JSON) in
-            Log([.longPool], "longPool: received response")
-            
-            if response["failed"].int > 0 {
-              self.keyIsExpired = true
-              self.getServer()
+            if LP.isActive {
+              Log([.longPool], "longPool: received response")
+              
+              if response["failed"].int > 0 {
+                self.keyIsExpired = true
+                self.getServer()
+              }
+              else {
+                self.ts = response["ts"].stringValue
+                self.parse(response["updates"].arrayValue)
+                self.observer.connectionRestore()
+                self.update()
+              }
             }
-            else {
-              self.ts = response["ts"].stringValue
-              self.parse(response["updates"].arrayValue)
-              self.observer.connectionRestore()
-              self.update()
-            }
-            dispatch_semaphore_signal(self.lpSemaphore)
           }
           
           req.errorBlock = {(error: VK.Error) in
-            Log([.longPool], "longPool: received error")
-            
-            self.observer.connectionLost()
-            NSThread.sleepForTimeInterval(10)
-            self.update()
-            dispatch_semaphore_signal(self.lpSemaphore)
+            if LP.isActive {
+              Log([.longPool], "longPool: received error")
+              
+              self.observer.connectionLost()
+              NSThread.sleepForTimeInterval(10)
+              self.update()
+            }
           }
           
           Log([.longPool], "longPool: send")
           req.send()
-        })
+        }
       }
     }
     
@@ -247,7 +245,7 @@ extension VK_LongPool {
       ///List of all updates
       public static let typeAll = "VKLPNotificationTypeAll"
       ///The connection was lost
-      public static let connectinDidLost = "VKLPNotificationConnectinDidRestore"
+      public static let connectinDidLost = "VKLPNotificationConnectinDidLost"
       ///The connection was connected again
       public static let connectinDidRestore = "VKLPNotificationConnectinDidRestore"
     }
@@ -313,19 +311,24 @@ internal class LPObserver : NSObject {
   
   
   func connectionRestoreForce() {
-    VK.LP.start()
-    connectionRestore()
+    dispatch_async(lpQueue) {
+      VK.LP.isActive = true
+      self.connectionRestore()
+    }
   }
   
   
   func connectionLostForce() {
-    VK.LP.stop()
-    connectionLost()
+    dispatch_async(lpQueue) {
+      VK.LP.isActive = false
+      self.connectionLost()
+    }
   }
   
   
   
-  func connectionLost() {
+  private func connectionLost() {
+    
     if VK.LP.instance?.connected == true {
       VK.LP.instance?.connected = false
       Log([.longPool], "longPool: connection lost")
@@ -335,8 +338,9 @@ internal class LPObserver : NSObject {
   
   
   
-  func connectionRestore() {
-    if VK.LP.isActive == true && VK.LP.instance?.connected == false {
+  private func connectionRestore() {
+    
+    if VK.LP.instance?.connected == false && VK.LP.instance?.restorable == true {
       VK.LP.instance?.connected = true
       Log([.longPool], "longPool: connection restored")
       NSNotificationCenter.defaultCenter().postNotificationName(VK.LP.notifications.connectinDidRestore, object: nil)

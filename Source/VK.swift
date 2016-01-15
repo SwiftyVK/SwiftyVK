@@ -101,6 +101,7 @@ public struct VK {
   
   
   public static func logOut() {
+    LP.stop()
     Token.remove()
   }
 }
