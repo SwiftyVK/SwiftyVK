@@ -79,8 +79,8 @@ class WebController : _WebControllerPrototype {
     else if urlString.containsString("fail=1") {
       failValidation()
     }
-    else if isMac && !isExpand && urlString.containsString(autorizeUrl) || urlString.containsString("act=security_check") {
-      expand()
+    else if urlString.containsString(autorizeUrl) || urlString.containsString("act=security_check") || urlString.containsString("https://m.vk.com/login?") {
+      isMac && !isExpand ? expand() : ()
     }
     else {
       webView!.goBack()

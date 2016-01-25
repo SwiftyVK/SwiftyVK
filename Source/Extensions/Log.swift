@@ -30,6 +30,7 @@ public enum LogOption : String {
   case urlReqCreation
   case httpCreation
   case longPool
+  case noDebug
 }
 
 
@@ -48,11 +49,13 @@ internal func Log<T>(options: [LogOption], _ object : T) {
     }
   }
   
-  if containsAllOptions == true || VK.defaults.logOptions.contains(LogOption.all) {
-    let options = options.map({(opt: LogOption) -> String in return opt.rawValue}).joinWithSeparator(", ")
-    let thread = "name: \(NSThread.currentThread().name != "" ? NSThread.currentThread().name! : "-") num: \(NSThread.currentThread().valueForKeyPath("private.seqNum")!)"
-    printSync("⏳\(form.stringFromDate(NSDate()))🚦\(thread)📌\(options)\n   \(object)\n👾")
-  }
+  guard containsAllOptions == true || VK.defaults.logOptions.contains(LogOption.all) else {return}
+  
+  let options = options.map({(opt: LogOption) -> String in return opt.rawValue}).joinWithSeparator(", ")
+  let thread = "name: \(NSThread.currentThread().name != "" ? NSThread.currentThread().name! : "-") num: \(NSThread.currentThread().valueForKeyPath("private.seqNum")!)"
+  VK.defaults.logOptions.contains(LogOption.noDebug)
+    ? printSync(object)
+    : printSync("⏳\(form.stringFromDate(NSDate()))🚦\(thread)📌\(options)\n   \(object)\n👾")
 }
 
 

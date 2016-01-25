@@ -282,5 +282,33 @@ extension _VKAPI {
     public static func getNewTags(parameters: [VK.Arg : String]?) -> Request {
       return Request(method: "photos.getNewTags", parameters: parameters)
     }
+    
+    
+    
+    ///More - https://vk.com/dev/photos.getMarketAlbumUploadServer
+    public static func getMarketAlbumUploadServer(parameters: [VK.Arg : String]?) -> Request {
+      return Request(method: "photos.getMarketAlbumUploadServer", parameters: parameters)
+    }
+    
+    
+    
+    ///More - https://vk.com/dev/photos.saveMarketPhoto
+    public static func saveMarketPhoto(parameters: [VK.Arg : String]?) -> Request {
+      return Request(method: "photos.saveMarketPhoto", parameters: parameters)
+    }
+    
+    
+    
+    ///More - https://vk.com/dev/photos.saveMarketAlbumPhoto
+    public static func saveMarketAlbumPhoto(parameters: [VK.Arg : String]?) -> Request {
+      return Request(method: "photos.saveMarketAlbumPhoto", parameters: parameters)
+    }
+    
+    
+    
+    ///More - https://vk.com/dev/photos.getMarketUploadServer
+    public static func getMarketUploadServer(parameters: [VK.Arg : String]?) -> Request {
+      return Request(method: "photos.getMarketUploadServer", parameters: parameters)
+    }
   }
 }

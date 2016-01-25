@@ -197,6 +197,27 @@ extension _VKAPI {
     public static func reportComment(parameters: [VK.Arg : String]?) -> Request {
       return Request(method: "video.reportComment", parameters: parameters)
     }
+    
+    
+    
+    ///Returns video catalog
+    public static func getCatalog(parameters: [VK.Arg : String]?) -> Request {
+      return Request(method: "video.getCatalog", parameters: parameters)
+    }
+    
+    
+    
+    ///Returns video catalog block
+    public static func getCatalogSection(parameters: [VK.Arg : String]?) -> Request {
+      return Request(method: "video.getCatalogSection", parameters: parameters)
+    }
+    
+    
+    
+    ///Hide video catalog section
+    public static func hideCatalogSection(parameters: [VK.Arg : String]?) -> Request {
+      return Request(method: "video.hideCatalogSection", parameters: parameters)
+    }
   }
 }
 

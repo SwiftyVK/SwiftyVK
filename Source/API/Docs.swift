@@ -50,5 +50,11 @@ extension _VKAPI {
     public static func add(parameters: [VK.Arg : String]?) -> Request {
       return Request(method: "docs.add", parameters: parameters)
     }
+    
+    
+    ///returns result of search in documents. More - https://vk.com/dev/docs.search 
+    public static func search(parameters: [VK.Arg : String]?) -> Request {
+      return Request(method: "docs.search", parameters: parameters)
+    }
   }
 }
