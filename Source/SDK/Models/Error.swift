@@ -10,12 +10,7 @@ public class _VKError : ErrorType, CustomStringConvertible {
   ///The reference to a request to the API, in which the error occurred
   public var request : Request?
   public var description : String {
-    var result = "VK Error\r"
-    result += "request: \(request != nil ? request : nil)\r"
-    result += "code: \(code)\r"
-    result += "description: \(desc)\r"
-    userInfo != nil ? result += "userInfo: \(NSDictionary(dictionary: userInfo!))" : ()
-    return result
+    return "VK.Error \(domain)_(\(code)): \(desc)"
   }
   
   
@@ -26,6 +21,10 @@ public class _VKError : ErrorType, CustomStringConvertible {
     self.desc = ns.localizedDescription
     self.userInfo = ns.userInfo
     self.request = req
+    
+    if let request = request {
+      VK.Log.put(request, "Init error of error and request \(self)")
+    }
   }
   
   
@@ -36,6 +35,10 @@ public class _VKError : ErrorType, CustomStringConvertible {
     self.desc = desc
     self.userInfo = userInfo
     self.request = req
+    
+    if let request = request {
+      VK.Log.put(request, "Init custom error \(self)")
+    }
   }
   
   
@@ -58,12 +61,16 @@ public class _VKError : ErrorType, CustomStringConvertible {
     }
     
     userInfo = info
+    
+    VK.Log.put(request, "Init error of JSON \(self)")
   }
   
   
   
   public func `catch`() {
-    Log([.error], "Catch: \(self)")
+    if let request = request {
+      VK.Log.put(request, "Catch error \(self)")
+    }
     
     switch self.domain {
     case "APIError":
@@ -78,11 +85,12 @@ public class _VKError : ErrorType, CustomStringConvertible {
   private func catchAPIDomain() {
     switch code {
     case 5:
+      request?.authFails++
       request?.attempts--
       Authorizator.autorize(request)
     case 6, 9, 10:
-      usleep(500000)
-      request?.reSend()
+      Connection.needLimit = true
+      finaly()
     case 14:
       if !sharedCaptchaIsRun {
         request?.attempts--
@@ -102,14 +110,15 @@ public class _VKError : ErrorType, CustomStringConvertible {
   
   
   public func finaly() {
-    if let realRequest = request {
-      realRequest.reSend() == false
-        ? {
-          realRequest.isAPI ? Log([LogOption.error], "Executing error block") : ()
-          realRequest.errorBlock(error: self)
-          realRequest.isAPI ? Log([LogOption.error], "Executing error block is complete") : ()
-          }()
-        : ()
+    if let request = request {
+      request.reSend()
+    }
+  }
+  
+  
+  deinit {
+    if let request = request {
+      request.isAPI ? VK.Log.put(request, "DEINIT \(self)") : ()
     }
   }
 }

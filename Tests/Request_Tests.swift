@@ -2,30 +2,36 @@ import XCTest
 @testable import SwiftyVK
 
 
-class Requests_Tests: XCTestCase {
+class Requests_Tests: VKTestCase {
 
   
   
   func test_send_few_asynchronious_requests() {
     let readyExpectation = expectationWithDescription("ready")
     var reqCount = 0
+    printSync(nextRequestId)
+    let dict = NSMutableDictionary()
     
     for n in 1...10 {
       let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
       req.isAsynchronous = true
+      dict[req.id] = "FAIL"
       printSync("Sending \(n) request")
       req.send(
         {response in
+          dict[req.id] = "Success"
           printSync("success \(n) request")
           reqCount++
-          reqCount == 10 ? readyExpectation.fulfill() : ()
+          reqCount >= 10 ? readyExpectation.fulfill() : ()
         },
         {error in
+          dict[req.id] = "Error"
           XCTFail("Error \(n) request \(error)")
       })
     }
     
-    waitForExpectationsWithTimeout(60, handler: { error in
+    waitForExpectationsWithTimeout(30, handler: { error in
+      printSync(dict)
       XCTAssertNil(error, "Timeout error")
     })
   }
@@ -55,11 +61,11 @@ class Requests_Tests: XCTestCase {
         })
         
         reqIsDone == false ? XCTFail("Request \(n) is not synchronious") : ()
-        n == 10 ? readyExpectation.fulfill() : ()
+        n >= 10 ? readyExpectation.fulfill() : ()
       }
     }
     
-    waitForExpectationsWithTimeout(60, handler: { error in
+    waitForExpectationsWithTimeout(30, handler: { error in
       XCTAssertNil(error, "Timeout error")
     })
   }
@@ -84,7 +90,7 @@ class Requests_Tests: XCTestCase {
             reqCount++
             isDone = true
             printSync("success \(n) request")
-            reqCount == 10 ? readyExpectation.fulfill() : ()
+            reqCount >= 10 ? readyExpectation.fulfill() : ()
           },
           {error in
             XCTFail("Error \(n) request \(error)")
@@ -97,7 +103,7 @@ class Requests_Tests: XCTestCase {
     }
     
     
-    waitForExpectationsWithTimeout(60, handler: { error in
+    waitForExpectationsWithTimeout(30, handler: { error in
       XCTAssertNil(error, "Timeout error")
     })
   }
@@ -120,7 +126,7 @@ class Requests_Tests: XCTestCase {
     })
     
     
-    waitForExpectationsWithTimeout(60, handler: { error in
+    waitForExpectationsWithTimeout(30, handler: { error in
       XCTAssertNil(error, "Timeout error")
     })
   }

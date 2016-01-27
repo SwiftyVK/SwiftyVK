@@ -2,7 +2,7 @@ import Foundation
 
 
 
-public struct Media {
+public struct Media : CustomStringConvertible {
   
   enum MediaType {
     case image
@@ -39,6 +39,12 @@ public struct Media {
     }
   }
   
+  
+  public var description: String {
+    get {
+    return "VK.Media with type \(type)"
+    }
+  }
   
   
   public init(imageData: NSData, type: ImageType) {

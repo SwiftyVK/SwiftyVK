@@ -55,7 +55,7 @@ class WebController : _WebControllerPrototype {
     let controller      = params.controller
     controller.request  = request
     controller.showWithUrl(url, isSheet: params.isSheet)
-    Log([.views], "WebController wait user actions")
+    VK.Log.put("Global", "WebController wait user actions")
     activeWebController = controller
     dispatch_semaphore_wait(controller.waitUser, DISPATCH_TIME_FOREVER)
   }
@@ -148,7 +148,7 @@ class WebController : _WebControllerPrototype {
     
     
     override func windowDidLoad() {
-      Log([.views], "\(self) INIT")
+      VK.Log.put("Global", "\(self) INIT")
       webView!.frameLoadDelegate  = self
       
       if #available(OSX 10.10, *) {
@@ -263,7 +263,7 @@ class WebController : _WebControllerPrototype {
     
     
     override func viewDidLoad() {
-      Log([.views], "\(self) INIT")
+      VK.Log.put([.views], "\(self) INIT")
       webView!.delegate = self
       super.viewDidLoad()
     }

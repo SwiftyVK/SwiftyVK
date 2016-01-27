@@ -13,7 +13,6 @@ extension _VKAPI {
         groupId : String?,
         caption: String,
         location: CLLocationCoordinate2D?) -> Request {
-          Log([.upload], "Upload photo to album: \(albumId)")
           
           var _media = [Media]()
           
@@ -31,17 +30,17 @@ extension _VKAPI {
             longitude = String(lon)
           }
           
-          let req3 = VK.API.Photos.save(nil)
-          Log([.upload], "Get uploading server...")
           let req1 = VK.API.Photos.getUploadServer([VK.Arg.albumId : albumId, VK.Arg.groupId : localGroupId])
+          let req2 = Request(url: "", media: _media)
+          let req3 = VK.API.Photos.save(nil)
+          
+          VK.Log.put(req1, "Prepare upload photo to album: \(albumId)")
           req1.successBlock = {(response1: JSON) in
-            Log([.upload], "Upload...")
-            let req2 = Request(url: response1["upload_url"].stringValue, media: _media)
+            req2.customURL = response1["upload_url"].stringValue
             req2.isAsynchronous = req1.isAsynchronous
             req2.progressBlock = req1.progressBlock
             req2.errorBlock = req1.errorBlock
             req2.successBlock = {(response2: JSON) in
-              Log([.upload], "Save...")
               req3.addParameters([
                 VK.Arg.albumId : albumId,
                 VK.Arg.groupId : localGroupId,
@@ -55,8 +54,10 @@ extension _VKAPI {
               )
               req3.isAsynchronous = req1.isAsynchronous
               req3.errorBlock = req1.errorBlock
+              VK.Log.put(req1, "Save with request \(req3.id)")
               req3.send()
             }
+            VK.Log.put(req1, "Upload with request \(req2.id)")
             req2.send()
           }
           req1.progressBlock = VK.defaults.progressBlock
@@ -76,23 +77,21 @@ extension _VKAPI {
           
           if userId != nil {
             localUserId = userId!
-            Log([.upload], "Upload photo to user wall: \(userId!)")
           }
           else if groupId != nil {
             localGroupId = groupId!
-            Log([.upload], "Upload photo to community wall: \(groupId!)")
           }
-          Log([.upload], "Get upload server")
-          let req3 = VK.API.Photos.saveWallPhoto(nil)
           let req1 = VK.API.Photos.getWallUploadServer([VK.Arg.groupId : localGroupId])
+          let req2 = Request(url: "", media: [media])
+          let req3 = VK.API.Photos.saveWallPhoto(nil)
+          
+          VK.Log.put(req1, "Prepare upload photo to wall")
           req1.successBlock = {response1 in
-            Log([.upload], "Upload...")
-            let req2 = Request(url: response1["upload_url"].stringValue, media: [media])
+            req2.customURL = response1["upload_url"].stringValue
             req2.isAsynchronous = req1.isAsynchronous
             req2.progressBlock = req1.progressBlock
             req2.errorBlock = req1.errorBlock
             req2.successBlock = {response2 in
-              Log([.upload], "Save...")
               req3.addParameters([
                 VK.Arg.userId : localUserId,
                 VK.Arg.groupId : localGroupId,
@@ -103,8 +102,10 @@ extension _VKAPI {
               )
               req3.isAsynchronous = req1.isAsynchronous
               req3.errorBlock = req1.errorBlock
+              VK.Log.put(req1, "Save with request \(req3.id)")
               req3.send()
             }
+            VK.Log.put(req1, "Upload with request \(req2.id)")
             req2.send()
           }
           req1.progressBlock = VK.defaults.progressBlock
@@ -117,16 +118,16 @@ extension _VKAPI {
       ///Upload photo to message
       public static func toMessage(
         media media: Media) -> Request {
-          Log([.upload], "Get upload server...")
-          let req3 = VK.API.Photos.saveMessagesPhoto(nil)
           let req1 = VK.API.Photos.getMessagesUploadServer(nil)
+          let req2 = Request(url: "", media: [media])
+          let req3 = VK.API.Photos.saveMessagesPhoto(nil)
+          
+          VK.Log.put(req1, "Prepare upload photo to message")
           req1.successBlock = {(response1: JSON) in
-            Log([.upload], "Upload...")
-            let req2 = Request(url: response1["upload_url"].stringValue, media: [media])
+            req2.customURL = response1["upload_url"].stringValue
             req2.isAsynchronous = req1.isAsynchronous
             req2.progressBlock = req1.progressBlock
             req2.successBlock = {(response2: JSON) in
-              Log([.upload], "Save...")
               req3.addParameters([
                 VK.Arg.photo : response2["photo"].stringValue,
                 VK.Arg.server : response2["server"].stringValue,
@@ -135,8 +136,10 @@ extension _VKAPI {
               )
               req3.isAsynchronous = req1.isAsynchronous
               req3.errorBlock = req1.errorBlock
+              VK.Log.put(req1, "Save with request \(req3.id)")
               req3.send()
             }
+            VK.Log.put(req1, "Upload with request \(req2.id)")
             req2.send()
           }
           req1.progressBlock = VK.defaults.progressBlock
@@ -152,17 +155,17 @@ extension _VKAPI {
       media media: Media,
       artist : String?,
       title: String?) -> Request {
-        Log([.upload], "Get upload server...")
-        let req3 = VK.API.Audio.save(nil)
         let req1 = VK.API.Audio.getUploadServer(nil)
+        let req2 = Request(url: "", media: [media])
+        let req3 = VK.API.Audio.save(nil)
+        
+        VK.Log.put(req1, "Prepare upload audio")
         req1.successBlock = {(response1: JSON) in
-          Log([.upload], "Upload...")
-          let req2 = Request(url: response1["upload_url"].stringValue, media: [media])
+          req2.customURL = response1["upload_url"].stringValue
           req2.isAsynchronous = req1.isAsynchronous
           req2.progressBlock = req1.progressBlock
           req2.errorBlock = req1.errorBlock
           req2.successBlock = {(response2: JSON) in
-            Log([.upload], "Save...")
             req3.addParameters([
               VK.Arg.audio : response2["audio"].stringValue,
               VK.Arg.server : response2["server"].stringValue,
@@ -173,8 +176,10 @@ extension _VKAPI {
             )
             req3.isAsynchronous = req1.isAsynchronous
             req3.errorBlock = req1.errorBlock
+            VK.Log.put(req1, "Save with request \(req3.id)")
             req3.send()
           }
+          VK.Log.put(req1, "Upload with request \(req2.id)")
           req2.send()
         }
         req1.progressBlock = VK.defaults.progressBlock
@@ -196,8 +201,9 @@ extension _VKAPI {
       isWallPost : Bool,
       isRepeat : Bool) -> Request? {
         if let media = media where link == nil {
+          let req1 = VK.API.Video.save(nil)
           let req2 = Request(url: "", media: [media])
-          let req1 = VK.API.Video.save([
+          req1.addParameters([
             VK.Arg.link : (link != nil) ? link! : "",
             VK.Arg.name : name,
             VK.Arg.description : description,
@@ -243,17 +249,17 @@ extension _VKAPI {
       groupId : String?,
       title : String?,
       tags : String?) -> Request {
-        Log([.upload], "Get upload server...")
-        let req3 = VK.API.Docs.save(nil)
         let req1 = VK.API.Docs.getUploadServer([VK.Arg.groupId : (groupId != nil) ? groupId! : ""])
+        let req2 = Request(url: "", media: [media])
+        let req3 = VK.API.Docs.save(nil)
+        
+        VK.Log.put(req1, "Prepare upload document")
         req1.successBlock = {(response1: JSON) in
-          Log([.upload], "Upload...")
-          let req2 = Request(url: response1["upload_url"].stringValue, media: [media])
+          req2.customURL = response1["upload_url"].stringValue
           req2.isAsynchronous = req1.isAsynchronous
           req2.progressBlock = req1.progressBlock
           req2.errorBlock = req1.errorBlock
           req2.successBlock = {(response2: JSON) in
-            Log([.upload], "Save...")
              req3.addParameters([
               VK.Arg.file : (response2["file"].stringValue),
               VK.Arg.title : (title != nil) ? title! : "",
@@ -262,8 +268,10 @@ extension _VKAPI {
             )
             req3.isAsynchronous = req1.isAsynchronous
             req3.errorBlock = req1.errorBlock
+            VK.Log.put(req1, "Save with request \(req3.id)")
             req3.send()
           }
+          VK.Log.put(req1, "Upload with request \(req2.id)")
           req2.send()
         }
         req1.progressBlock = VK.defaults.progressBlock

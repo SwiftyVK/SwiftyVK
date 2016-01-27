@@ -75,7 +75,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
   
   
   private func didLoad() {
-    Log([.views], "\(self) did load window")
+    VK.Log.put("Global", "\(self) did load window")
     textField.delegate = self
     textField.becomeFirstResponder()
   }

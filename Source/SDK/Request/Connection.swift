@@ -3,12 +3,15 @@ import Foundation
 
 
 private let requestsQueue = dispatch_queue_create("com.VK.requestsQueue", DISPATCH_QUEUE_SERIAL)
+private let responseQueue = dispatch_queue_create("com.VK.responseQueue", DISPATCH_QUEUE_SERIAL)
 private let loopsQueue = dispatch_queue_create("com.VK.loopsQueue", DISPATCH_QUEUE_CONCURRENT)
-
+private var actualRequestId : Int?
 
 
 internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate {
+  internal static var needLimit = false
   private var request : Request!
+  var connection : NSURLConnection?
   private lazy var reqData = NSMutableData()
   private lazy var responseWaitSemaphore = dispatch_semaphore_create(0)
   
@@ -16,18 +19,18 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   
   internal class func sendInCurrentThread(request: Request) {
-    Log([.connection], "Send request: \(self) in parents thread")
+    VK.Log.put(request, "Send in parents thread")
     
     if request.isAPI {
+      waitAPI(request)
       dispatch_async(requestsQueue, {
-        Log([.APIBlock], "API locked")
+        Connection.lockAPI(request)
         NSThread.sleepForTimeInterval(VK.defaults.sleepTime)
-        Log([.APIBlock], "API unlocked")
+        Connection.unlockAPI(request)
       })
     }
     
-    request.response.error = nil
-    
+    VK.Log.put(request, "Send in current thread")
     do {request.response.create(try NSURLConnection.sendSynchronousRequest(request.URLRequest, returningResponse: nil))}
     catch let error as NSError {request.response.error = VK.Error(ns: error, req: nil)}
     handleResponse(request.response)
@@ -35,34 +38,74 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   
   
+  private class func waitAPI(request: Request) {
+    guard request.isAPI, let actualRequestId = actualRequestId where request.id != actualRequestId else {return}
+    VK.Log.put(request, "Wait API for request with id \(actualRequestId)")
+  }
+  
+  
+  
+  private class func lockAPI(request: Request) {
+    guard request.isAPI else {return}
+    actualRequestId = request.id
+    VK.Log.put(request, "Lock API")
+  }
+  
+  
+  
+  private class func unlockAPI(request: Request) {
+    guard request.isAPI else {return}
+    VK.Log.put(request, "Unlock API")
+    actualRequestId = nil
+  }
+  
+  
+  private class func limitIfNeeded(request: Request) {
+    guard request.isAPI && needLimit == true else {return}
+    needLimit = false
+    VK.Log.put(request, "Limit requests count per second")
+    NSThread.sleepForTimeInterval(1)
+  }
+  
+  
+  
   
   init?(request: Request) {
     assert(!(!request.isAsynchronous && NSThread.isMainThread() && request.catchErrors), "\n\nWe turned off the ability to send synchronous requests with catchErrors on the main thread, as it may cause a lot of non-obvious, subtle bugs. \nPlease send synchronous requests with catchErrors from other threads, or use catchErrors = false (not recommend). \nThank you for your understanding and good luck in the use SwiftyVK.\n\n")
+    VK.Log.put(request, "INIT connection")
     
     self.request = request
     super.init()
+    Connection.waitAPI(request)
     dispatch_async(request.isAPI ? requestsQueue : loopsQueue, {
-      request.isAPI ? Log([.APIBlock], "API locked") : ()
+      Connection.lockAPI(request)
+      Connection.limitIfNeeded(request)
       
       dispatch_async(loopsQueue, {
-        _ = NSURLConnection(request: request.URLRequest, delegate: self, startImmediately: true)
-        NSRunLoop.currentRunLoop().runUntilDate(NSDate(timeIntervalSinceNow: NSTimeInterval(Double(request.timeout)*1.5)))
+        let type = (request.isAsynchronous ? "asynchronously" : "synchronously")
+        VK.Log.put(request, "Send \(type) \(request.attempts) of \(request.maxAttempts) times")
+        self.connection = NSURLConnection(request: request.URLRequest, delegate: self, startImmediately: true)
+        NSRunLoop.currentRunLoop().runUntilDate(NSDate(timeIntervalSinceNow: NSTimeInterval(Double(request.timeout+10))))
       })
       
       if request.isAPI {
         NSThread.sleepForTimeInterval(VK.defaults.sleepTime)
-        if request.isAsynchronous == true {
-          dispatch_semaphore_wait(self.responseWaitSemaphore, DISPATCH_TIME_FOREVER)
-        }
-        Log([.APIBlock], "API unlocked")
+        request.isAsynchronous == true ? self.waitResponse() : ()
+        Connection.unlockAPI(request)
       }
     })
     
     if request.isAsynchronous == false {
-      Log([LogOption.thread], "Waiting for synchronous response")
-      dispatch_semaphore_wait(responseWaitSemaphore, DISPATCH_TIME_FOREVER)
-      Log([LogOption.thread], "Waiting for synchronous response complete")
+      VK.Log.put(request, "Wait to synchronous response")
+      self.waitResponse()
+      VK.Log.put(request, "Synchronous response is recieved")
     }
+  }
+  
+  
+  
+  private func waitResponse() {
+    dispatch_semaphore_wait(responseWaitSemaphore, DISPATCH_TIME_FOREVER)
   }
   
   
@@ -75,48 +118,74 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   
   private class func handleResponse(response: Response) {
-    guard response.request?.isCancelled == false else {return}
+    guard let request = response.request else {
+      assertionFailure("REQUEST IS NULL :(")
+      return
+    }
+    guard request.cancelled == false else {return}
     
     if let error = response.error {
-      if response.request!.catchErrors {
+      if request.catchErrors {
         response.error?.`catch`()
       }
-      else if response.request?.isCanSend == true {
-        response.error = nil
-        response.request?.reSend()
+      else if request.canSend == true {
+        request.reSend()
       }
       else {
-        response.request?.isAPI == true ? Log([LogOption.thread], "Executing error block") : ()
-        response.request?.isAPI == true && response.request?.isAsynchronous == false
-          ? response.request?.errorBlock(error: error)
-          : dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {response.request?.errorBlock(error: error)}
-        response.request?.isAPI == true ? Log([LogOption.thread], "Executing error block is complete") : ()
+        request.isAPI == true && request.isAsynchronous == false
+          ? executeError(request, error)
+          : dispatch_async(responseQueue) {executeError(request, error)}
       }
     }
-    else if let responseValue = response.success {
-      response.request?.isAPI == true ? Log([LogOption.thread], "Executing success block") : ()
-      response.request?.isAPI == true && response.request?.isAsynchronous == false
-        ? response.request?.successBlock(response: responseValue)
-        : dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {response.request?.successBlock(response: responseValue)}
-      response.request?.isAPI == true ? Log([LogOption.thread], "Executing success block is complete") : ()
+    else if let success = response.success {
+      request.isAPI == true && request.isAsynchronous == false
+        ? executeSuccess(request, success)
+        : dispatch_async(responseQueue) {executeSuccess(request, success)}
+    }
+  }
+  
+  
+  
+  private class func executeError(request: Request, _ error: VK.Error) {
+    guard request.errorBlockIsSet else {
+      VK.Log.put(request, "Error block is not set")
+      return
     }
     
-    response.error = nil
-    response.success = nil
+    VK.Log.put(request, "Executing error block")
+    request.errorBlock(error: error)
+    request.response.success = nil
+    request.response.error = nil
+    VK.Log.put(request, "Error block is executed")
+  }
+  
+  
+  
+  
+  private class func executeSuccess(request: Request, _ success: JSON) {
+    guard request.successBlockIsSet else {
+      VK.Log.put(request, "Success block is not set")
+      return
+    }
+    
+    VK.Log.put(request, "Executing success block")
+    request.successBlock(response: success)
+    request.response.success = nil
+    request.response.error = nil
+    VK.Log.put(request, "Success block is executed")
   }
   
   
   
   //MARK: - NSURLConnectionDataDelegate
   func connection(connection: NSURLConnection, didReceiveData data: NSData) {
-    Log([.connection], "Received \(data.length) bytes")
     reqData.appendData(data)
+    VK.Log.put(request, "Connection received \(data.length) bytes. Total \(reqData.length) bytes")
   }
   
   
   
   func connectionDidFinishLoading(connection: NSURLConnection) {
-    Log([.connection], "Downloading is complete. Received \(reqData.length) bytes")
     request.response.create(reqData)
     finishConnection()
   }
@@ -124,8 +193,9 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   
   func connection(connection: NSURLConnection, didFailWithError error: NSError)  {
-    Log([.connection], "Connection failed with error: \n\(error)")
-    request.response.error = VK.Error(ns: error, req: request!)
+    let error = VK.Error(ns: error, req: request!)
+    VK.Log.put(request, "Connection failed with error: \(error)")
+    request.response.error = error
     finishConnection()
   }
   
@@ -133,10 +203,15 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   func connection(connection: NSURLConnection, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) {
     dispatch_async(dispatch_get_main_queue(), {
-      Log([.upload], "Uploding file: \(totalBytesWritten) of \(totalBytesExpectedToWrite) bytes")
-      Log([.thread], "Executing progress block")
+      VK.Log.put(self.request, "Uploding file: \(totalBytesWritten) of \(totalBytesExpectedToWrite) bytes")
+      VK.Log.put(self.request, "Executing progress block")
       self.request!.progressBlock(done: totalBytesWritten, total: totalBytesExpectedToWrite)
-      Log([.thread], "Executing progress block is complete")
+      VK.Log.put(self.request, "progress block is executed")
     })
+  }
+  
+  
+  deinit {
+    VK.Log.put(self.request, "DEINIT connection")
   }
 }

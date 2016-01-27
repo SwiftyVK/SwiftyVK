@@ -37,7 +37,7 @@ extension VK_LongPool {
         keyIsExpired = true
         getServer()
         observer = LPObserver()
-        Log([.longPool], "longPool: stared")
+        VK.Log.put("LongPool", "Stared")
       }
     }
     
@@ -48,7 +48,7 @@ extension VK_LongPool {
       dispatch_async(lpQueue) {
         observer = nil
         isActive = false
-        Log([.longPool], "longPool: stopped")
+        VK.Log.put("LongPool", "Stopped")
       }
     }
     
@@ -60,7 +60,7 @@ extension VK_LongPool {
       req.maxAttempts = 1
       
       req.successBlock = {(response: JSON) in
-        Log([.longPool], "longPool: get server")
+        VK.Log.put("LongPool", "get server with request \(req.id)")
         lpKey = response["key"].stringValue
         server = response["server"].stringValue
         ts = response["ts"].stringValue
@@ -69,10 +69,11 @@ extension VK_LongPool {
       }
       
       req.errorBlock = {(error: VK.Error) in
-        Log([.longPool], "LongPool: Error get server")
+        VK.Log.put("LongPool", "Error get server with request \(req.id)")
         NSThread.sleepForTimeInterval(10)
         getServer()
       }
+      VK.Log.put("LongPool", "Getting server with request \(req.id)")
       req.send()
     }
     
@@ -94,7 +95,7 @@ extension VK_LongPool {
         req.maxAttempts = 1
         req.isAsynchronous = false
         req.successBlock = {(response : JSON) in
-          Log([.longPool], "longPool: received response")
+          VK.Log.put("LongPool", "Received response with request \(req.id)")
           
           ts = response["ts"].stringValue
           parse(response["updates"].array)
@@ -106,14 +107,14 @@ extension VK_LongPool {
         }
         
         req.errorBlock = {(error: VK.Error) in
-          Log([.longPool], "longPool: received error")
+          VK.Log.put("LongPool", "Received error with request \(req.id)")
           
           observer?.connectionLost()
           NSThread.sleepForTimeInterval(10)
           update()
         }
         
-        Log([.longPool], "longPool: send")
+        VK.Log.put("LongPool", "Send with request \(req.id)")
         req.send()
       }
     }
@@ -266,7 +267,7 @@ internal class LPObserver : NSObject {
   internal override init() {
     super.init()
     
-    Log([.longPool], "longPool: init observer")
+    VK.Log.put("LongPool", "Init observer")
     
     #if os(OSX)
       NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: "connectionLostForce", name:NSWorkspaceScreensDidSleepNotification, object: nil)
@@ -316,7 +317,7 @@ internal class LPObserver : NSObject {
     
     if connected == true {
       connected = false
-      Log([.longPool], "longPool: connection lost")
+      VK.Log.put("LongPool", "Connection lost")
       NSNotificationCenter.defaultCenter().postNotificationName(VK.LP.notifications.connectinDidLost, object: nil)
     }
   }
@@ -327,13 +328,13 @@ internal class LPObserver : NSObject {
     
     if connected == false {
       connected = true
-      Log([.longPool], "longPool: connection restored")
+      VK.Log.put("LongPool", "Connection restored")
       NSNotificationCenter.defaultCenter().postNotificationName(VK.LP.notifications.connectinDidRestore, object: nil)
     }
   }
   
   
   deinit {
-    Log([.longPool], "longPool: deinit observer")
+    VK.Log.put("LongPool", "Deinit observer")
   }
 }

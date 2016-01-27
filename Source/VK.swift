@@ -68,7 +68,7 @@ public struct VK {
   public static func start(appID id: String, delegate owner: VKDelegate) {
     delegate = owner
     appID    = id
-    Log([.all], "SwiftyVK INIT")
+    VK.Log.put("Global", "SwiftyVK INIT")
   }
   
   private static var started : Bool {
@@ -122,8 +122,6 @@ extension VK_Defaults {
     public static let apiVersion = "5.44"
     //Returns used VK SDK version
     public static let sdkVersion = "1.3.1"
-    ///Log options to trace API work
-    public static var logOptions : [LogOption] = []
     ///Requests timeout
     public static var timeOut : Int = 10
     ///Maximum number of attempts to send requests
@@ -134,6 +132,8 @@ extension VK_Defaults {
     public static var sendAsynchronous : Bool = true
     ///Maximum number of requests per second
     public static var maxRequestsPerSec : Int = 3
+    ///Allows print log messages to console
+    public static var allowLogToConsole : Bool = false
 
     public static var language : String? {
       get {

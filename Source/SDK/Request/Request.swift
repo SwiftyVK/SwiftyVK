@@ -4,50 +4,66 @@ import Foundation
 
 internal var sharedCaptchaIsRun = false
 internal var sharedCaptchaAnswer : [String : String]?
-
+internal var nextRequestId = 0
 
 
 ///Request to VK API
 public class Request : CustomStringConvertible {
+  internal let id = ++nextRequestId
   public var timeout = VK.defaults.timeOut
   public var isAsynchronous = VK.defaults.sendAsynchronous
-  public var errorBlock = VK.defaults.errorBlock
-  public var progressBlock = VK.defaults.progressBlock
   ///Maximum number of attempts to send, after which execution priryvaetsya and an error is returned
   public var maxAttempts = VK.defaults.maxAttempts
   ///Whether to allow automatic processing of some API error
   public var catchErrors = VK.defaults.catchErrors
+  ///Log for this request life time
+  public internal(set) var log = [String]()
+  ///Allows print log messages to console
+  public var allowLogToConsole : Bool = VK.defaults.allowLogToConsole
   internal var method = ""
   internal private(set) var isAPI = false
   internal var attempts = 0
-  internal var isCanSend : Bool {return attempts < maxAttempts || maxAttempts == 0}
-  internal var swappedRequest : Request?
-  internal var customURL : String?
-  internal private(set) var isCancelled = false
-  private var _successBlock = VK.defaults.successBlock
-  private var privateLanguage = VK.defaults.language
+  internal var authFails = 0
+  internal var canSend : Bool {return attempts < maxAttempts || maxAttempts == 0}
+  internal var swappedRequest : Request? = nil
+  internal var customURL : String? = nil
+  public private(set) var cancelled = false
   private var useSystemLanguage = VK.defaults.useSystemLanguage
   private var HTTPMethod = "GET"
   private var media : [Media]?
   private var parameters = [String : String]()
   public var successBlock : VK.SuccessBlock {
-    get{return _successBlock}
+    get{return privateSuccessBlock}
     set{
       if swappedRequest != nil {swappedRequest?.successBlock = newValue}
-      else {_successBlock = newValue}
+      else {privateSuccessBlock = newValue}
     }
   }
+  private var privateSuccessBlock = VK.defaults.successBlock {
+    didSet {
+      successBlockIsSet = true
+      VK.Log.put(self, "Set new success block")
+    }
+  }
+  public var errorBlock = VK.defaults.errorBlock {
+    didSet {
+      errorBlockIsSet = true
+      VK.Log.put(self, "Set new error block")
+    }
+  }
+  internal private(set) var successBlockIsSet = false
+  internal private(set) var errorBlockIsSet = false
+  public var progressBlock = VK.defaults.progressBlock
   public var language : String? {
     get {
       if useSystemLanguage {
-        let syslemLang = NSLocale.preferredLanguages()[0] as String
+        let syslemLang = NSBundle.preferredLocalizationsFromArray(VK.defaults.supportedLanguages).first
         
-        if VK.defaults.supportedLanguages.contains(syslemLang) {
-          return syslemLang
-        }
-        else if syslemLang == "uk" {
+        if syslemLang == "uk" {
           return "ua"
         }
+        
+        return syslemLang
       }
       return self.privateLanguage
     }
@@ -56,9 +72,11 @@ public class Request : CustomStringConvertible {
       useSystemLanguage = false
     }
   }
+  private var privateLanguage = VK.defaults.language
   internal var URLRequest : NSURLRequest {
     let req = NSURLFabric.get(url: customURL, HTTPMethod: HTTPMethod, method: method, params: allParameters, media: media)
     req.timeoutInterval = NSTimeInterval(self.timeout)
+    VK.Log.put(self, "Create url: \(req.URL!.absoluteString) with timeout: \(timeout)")
     return req
   }
   internal lazy var response : Response = {
@@ -95,8 +113,8 @@ public class Request : CustomStringConvertible {
   
   
   internal init(url: String) {
+    VK.Log.put(self, "INIT with custom url: \(url)")
     self.customURL = url
-    Log([.life], "\(self) INIT")
   }
   
   
@@ -105,7 +123,7 @@ public class Request : CustomStringConvertible {
     self.isAPI               = true
     self.method              = method
     self.parameters          = argToString(parameters)
-    Log([.life], "\(self) INIT")
+    VK.Log.put(self, "INIT with method name: \(method) and parameters: \(self.parameters)")
   }
   
   
@@ -115,7 +133,7 @@ public class Request : CustomStringConvertible {
     self.HTTPMethod          = "POST"
     self.customURL           = url
     self.media               = media
-    Log([.life], "\(self) INIT")
+    VK.Log.put(self, "INIT with media files: \(media)")
   }
   
   
@@ -123,7 +141,7 @@ public class Request : CustomStringConvertible {
   ///Add new parameters to request
   public func addParameters(agrDict: [VK.Arg : String]?) {
     for (argName, argValue) in agrDict! {
-      Log([.request, .reqParameters], "Add parameter \(argName.rawValue)=\(argValue) to request \(self)")
+      VK.Log.put(self, "Add parameter: \(argName.rawValue)=\(argValue)")
       self.parameters[argName.rawValue] = argValue
     }
   }
@@ -142,22 +160,24 @@ public class Request : CustomStringConvertible {
   ///Just send
   public func send() {
     attempts = 0
-    isCancelled = false
+    cancelled = false
     reSend()
   }
   
   
   
   internal func reSend() -> Bool {
-    if isCanSend {
-      attempts++
-      let type = (self.isAsynchronous ? "asynchronous" : "synchronous")
-      Log([.request], "Sending \(type) request \(self)")
+    if canSend {
+      let type = (self.isAsynchronous ? "asynchronously" : "synchronously")
+      VK.Log.put(self, "Prepare to send \(type) \(++attempts) of \(maxAttempts) times")
       response.error = nil
+      response.success = nil
       _ = Connection(request: self)
       return true
     }
     else {
+      VK.Log.put(self, "Can no longer send! \(attempts) of \(maxAttempts) times")
+      notCanSend()
       return false
     }
   }
@@ -165,19 +185,33 @@ public class Request : CustomStringConvertible {
   
   
   internal func sendInCurrentThread() -> Bool {
-    if isCanSend {
+    if canSend {
+      VK.Log.put(self, "Prepare to send in current thread")
+      response.error = nil
+      response.success = nil
       Connection.sendInCurrentThread(self)
       return true
     }
     else {
+      VK.Log.put(self, "Can no longer send in current thread! \(attempts) of \(maxAttempts) times")
+      notCanSend()
       return false
     }
   }
   
   
   
+  private func notCanSend() {
+    VK.Log.put(self, "Executing error block")
+    errorBlock(error: response.error!)
+    VK.Log.put(self, "Error block is executed")
+  }
+  
+  
+  
   public func cancel() {
-    isCancelled = true
+    cancelled = true
+    VK.Log.put(self, "Cancel")
   }
   
   
@@ -189,7 +223,6 @@ public class Request : CustomStringConvertible {
     
     for (argName, argValue) in agrDict! {
       strDict[argName.rawValue] = argValue
-      Log([.request, .reqParameters], "Parse parameter \(argName.rawValue)=\(argValue) in \(self) to string")
     }
     return strDict
   }
@@ -197,13 +230,13 @@ public class Request : CustomStringConvertible {
   
   
   init() {
-    Log([LogOption.life], "\(self) INIT")
+    VK.Log.put(self, "INIT request")
   }
   
   
   
   deinit {
-    Log([LogOption.life], "\(self) DEINIT")
+    VK.Log.put(self, "DEINIT request")
   }
 }
 

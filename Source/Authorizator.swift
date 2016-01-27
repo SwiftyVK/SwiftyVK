@@ -27,13 +27,12 @@ internal struct Authorizator {
   
   
   internal static func autorize(request: Request?) {
-    if let _ = Token.get() {
-      if let request = request {
-        request.reSend()
+    if let request = request {
+      if request.authFails >= 3 || Token.get() == nil {
+          autorizeWithRequest(request)
       }
-    }
-    else if let request = request {
-      autorizeWithRequest(request)
+      
+      request.reSend()
     }
     else {
       autorize()

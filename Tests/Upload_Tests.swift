@@ -2,7 +2,7 @@ import XCTest
 @testable import SwiftyVK
 
 
-class Upload_Tests: XCTestCase {
+class Upload_Tests: VKTestCase {
   
   
   
@@ -22,6 +22,7 @@ class Upload_Tests: XCTestCase {
     }
     req.errorBlock = {error in
       XCTFail("Error request \(error)")
+      readyExpectation.fulfill()
     }
     req.progressBlock = {done, total in print ("upload \(done) in \(total)")}
     req.send()
@@ -52,6 +53,7 @@ class Upload_Tests: XCTestCase {
     }
     req.errorBlock = {error in
       XCTFail("Error request \(error)")
+      readyExpectation.fulfill()
     }
     req.progressBlock = {done, total in print ("upload \(done) in \(total)")}
     req.send()

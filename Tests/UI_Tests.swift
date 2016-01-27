@@ -2,7 +2,7 @@ import XCTest
 @testable import SwiftyVK
 
 
-class UI_Tests: XCTestCase {
+class UI_Tests: VKTestCase {
   
   
   
@@ -93,12 +93,12 @@ class UI_Tests: XCTestCase {
         {response in
           printSync("success \(n) request")
           reqCount++
-          reqCount == 3 ? readyExpectation.fulfill() : ()
+          reqCount >= 3 ? readyExpectation.fulfill() : ()
         },
         {error in
           printSync("error \(n) request")
           reqCount++
-          reqCount == 3 ? readyExpectation.fulfill() : ()
+          reqCount >= 3 ? readyExpectation.fulfill() : ()
         }
       )
     }

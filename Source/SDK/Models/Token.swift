@@ -40,14 +40,14 @@ internal class Token: NSObject, NSCoding {
     super.init()
     tokenInstance = self
     Token.revoke = true
-    Log([.token, .life], "\(self): \(token) INIT")
+    VK.Log.put("Token", "INIT \(self)")
     save()
   }
   
   
   
   class func get() -> String? {
-    Log([.token], "Receiving token")
+    VK.Log.put("Token", "Getting")
     
     if tokenInstance != nil && self.isExpired() == false {
       return tokenInstance.token
@@ -75,7 +75,7 @@ internal class Token: NSObject, NSCoding {
       let keyValueArray = keyValueString.componentsSeparatedByString("=")
       parameters[keyValueArray[0]] = keyValueArray[1]
     }
-    Log([.token], "Receiving token from parameters: \(parameters)")
+    VK.Log.put("Token", "Parse from parameters: \(parameters)")
     return parameters
   }
   
@@ -86,6 +86,7 @@ internal class Token: NSObject, NSCoding {
       return true
     }
     else if tokenInstance.isOffline == false && tokenInstance.expires < Int(NSDate().timeIntervalSince1970) {
+      VK.Log.put("Token", "Expired")
       revoke = false
       Token.remove()
       return true
@@ -111,10 +112,10 @@ internal class Token: NSObject, NSCoding {
     if !(defaults.objectForKey("Token") != nil) {return nil}
     let object: AnyObject! = NSKeyedUnarchiver.unarchiveObjectWithData(defaults.objectForKey("Token") as! NSData)
     if object == nil {
-      Log([.token], "Load token from NSUSerDefaults failed")
+      VK.Log.put("Token", "Load from NSUSerDefaults failed")
       return nil
     }
-    Log([.token], "Token did load from NSUserDefaults")
+    VK.Log.put("Token", "Loaded from NSUserDefaults")
     return object as? Token
   }
   
@@ -122,11 +123,11 @@ internal class Token: NSObject, NSCoding {
   private class func loadFromFile(filePath : String) -> Token? {
     let manager = NSFileManager.defaultManager()
     if !manager.fileExistsAtPath(filePath) {
-      Log([.token], "Load token from file \(filePath) failed")
+      VK.Log.put("Token", "Loaded from file \(filePath) failed")
       return nil
     }
     let token = (NSKeyedUnarchiver.unarchiveObjectWithFile(filePath)) as? Token
-    Log([.token], "Token did load from file: \(filePath)")
+    VK.Log.put("Token", "Loaded from file: \(filePath)")
     return token
   }
   
@@ -146,7 +147,7 @@ internal class Token: NSObject, NSCoding {
     let defaults = NSUserDefaults.standardUserDefaults()
     defaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(self), forKey: "Token")
     defaults.synchronize()
-    Log([.token], "Save token to NSUserDefaults")
+    VK.Log.put("Token", "Saved to NSUserDefaults")
   }
   
   
@@ -160,7 +161,7 @@ internal class Token: NSObject, NSCoding {
       catch _ {}
     }
     NSKeyedArchiver.archiveRootObject(self, toFile: filePath)
-    Log([.token], "Save token to file: \(filePath)")
+    VK.Log.put("Token", "Saved to file: \(filePath)")
   }
   
   
@@ -183,7 +184,7 @@ internal class Token: NSObject, NSCoding {
     }
     
     if tokenInstance != nil {tokenInstance = nil}
-    Log([.token], "Token did remove")
+    VK.Log.put("Token", "Remove")
   }
   
   
@@ -206,7 +207,7 @@ internal class Token: NSObject, NSCoding {
   
   
   
-  deinit {Log([.token], "\(self) DEINIT")}
+  deinit {VK.Log.put("Token", "DEINIT \(self)")}
   
   
   
