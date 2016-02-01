@@ -32,7 +32,7 @@ internal struct Authorizator {
         ? autorizeWithRequest(request)
         : {_ = request.trySend()}()
     }
-    else {
+    else if Token.get() == nil {
       autorize()
     }
   }
