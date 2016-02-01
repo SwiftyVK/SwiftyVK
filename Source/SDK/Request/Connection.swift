@@ -2,25 +2,24 @@
 
 
 
-private let requestsQueue = dispatch_queue_create("com.VK.requestsQueue", DISPATCH_QUEUE_SERIAL)
-private let loopsQueue = dispatch_queue_create("com.VK.loopsQueue", DISPATCH_QUEUE_CONCURRENT)
+private let apiQueue = dispatch_queue_create("com.VK.requestsQueue", DISPATCH_QUEUE_SERIAL)
+private let notApiQueue = dispatch_queue_create("com.VK.loopsQueue", DISPATCH_QUEUE_CONCURRENT)
+private let delegateQueue = NSOperationQueue()
 private var actualRequestId : Int?
 
 
 internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate {
   internal static var needLimit = false
   private var request : Request!
-  var connection : NSURLConnection?
   private lazy var reqData = NSMutableData()
   private lazy var responseWaitSemaphore = dispatch_semaphore_create(0)
+  private lazy var timeoutOperation = NSBlockOperation()
   
   
-  
-  
-  internal class func tryInCurrentThread(request: Request) {    
+  internal class func tryInCurrentThread(request: Request) {
     if request.isAPI {
       waitAPI(request)
-      dispatch_async(requestsQueue, {
+      dispatch_async(apiQueue, {
         Connection.lockAPI(request)
         NSThread.sleepForTimeInterval(VK.defaults.sleepTime)
         Connection.unlockAPI(request)
@@ -74,17 +73,17 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
     self.request = request
     super.init()
     Connection.waitAPI(request)
-    dispatch_async(request.isAPI ? requestsQueue : loopsQueue, {
+    dispatch_async(request.isAPI ? apiQueue : notApiQueue, {
       Connection.lockAPI(request)
       Connection.limitIfNeeded(request)
       
-      dispatch_async(loopsQueue, {
-        let type = (request.isAsynchronous ? "asynchronously" : "synchronously")
-        VK.Log.put(request, "Send \(type) \(request.attempts) of \(request.maxAttempts) times")
-        self.connection = NSURLConnection(request: request.URLRequest, delegate: self, startImmediately: true)
-        NSRunLoop.currentRunLoop().runUntilDate(NSDate(timeIntervalSinceNow: NSTimeInterval(Double(request.timeout+10))))
-      })
-      
+      let type = (request.isAsynchronous ? "asynchronously" : "synchronously")
+      VK.Log.put(request, "Send \(type) \(request.attempts) of \(request.maxAttempts) times")
+      let connection = NSURLConnection(request: request.URLRequest, delegate: self, startImmediately: false)
+      connection?.setDelegateQueue(delegateQueue)
+      connection?.start()
+      self.addTimeout()
+
       if request.isAPI {
         NSThread.sleepForTimeInterval(VK.defaults.sleepTime)
         request.isAsynchronous == true ? self.waitResponse() : ()
@@ -101,6 +100,21 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   
   
+  private func addTimeout() {
+    self.timeoutOperation = NSBlockOperation() {
+      NSThread.sleepForTimeInterval(Double(self.request.timeout)+1)
+      if self.timeoutOperation.cancelled == false {
+        let error = VK.Error(domain: "APIDomain", code: 7, desc: "Connection timeout", userInfo: nil, req: self.request)
+        VK.Log.put(self.request, "Connection time out")
+        self.request.response.setError(error)
+        self.finishConnection()
+      }
+    }
+    delegateQueue.addOperation(self.timeoutOperation)
+  }
+  
+  
+  
   private func waitResponse() {
     dispatch_semaphore_wait(responseWaitSemaphore, DISPATCH_TIME_FOREVER)
   }
@@ -108,6 +122,7 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   
   private func finishConnection() {
+    timeoutOperation.cancel()
     request.response.execute()
     dispatch_semaphore_signal(responseWaitSemaphore)
   }

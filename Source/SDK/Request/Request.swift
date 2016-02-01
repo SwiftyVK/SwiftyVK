@@ -107,6 +107,8 @@ public class Request : CustomStringConvertible {
   public var description : String {
     get {return "Request: \(method) parameters: \(parameters), attempts: \(maxAttempts)"}
   }
+  internal var answered = false
+
   
   
   
@@ -159,6 +161,7 @@ public class Request : CustomStringConvertible {
   public func send() {
     attempts = 0
     cancelled = false
+    answered = false
     trySend()
   }
   

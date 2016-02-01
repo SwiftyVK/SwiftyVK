@@ -103,8 +103,9 @@ internal class Response {
   
   
   internal func executeSuccess() {
-    guard let request = request where request.cancelled == false else {return}
-
+    guard let request = request where request.cancelled == false && request.answered == false else {return}
+    request.answered = true
+    
     guard request.successBlockIsSet else {
       VK.Log.put(request, "Success block is not set")
       return
