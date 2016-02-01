@@ -2,132 +2,195 @@ import XCTest
 @testable import SwiftyVK
 
 
-class Requests_Tests: VKTestCase {
+class Sending_Tests: VKTestCase {
 
   
   
-  func test_send_few_asynchronious_requests() {
-    let readyExpectation = expectationWithDescription("ready")
-    var reqCount = 0
-    printSync(nextRequestId)
-    let dict = NSMutableDictionary()
-    
-    for n in 1...10 {
-      let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
-      req.isAsynchronous = true
-      dict[req.id] = "FAIL"
-      printSync("Sending \(n) request")
-      req.send(
-        {response in
-          dict[req.id] = "Success"
-          printSync("success \(n) request")
-          reqCount++
-          reqCount >= 10 ? readyExpectation.fulfill() : ()
-        },
-        {error in
-          dict[req.id] = "Error"
-          XCTFail("Error \(n) request \(error)")
-      })
-    }
-    
-    waitForExpectationsWithTimeout(30, handler: { error in
-      printSync(dict)
-      XCTAssertNil(error, "Timeout error")
-    })
-  }
-  
-  
-  
-  func test_send_few_synchronious_requests() {
-    //VK.defaults.logOptions = [.thread]
-    
+  func test_synchronious() {
     let readyExpectation = expectationWithDescription("ready")
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
       for n in 1...10 {
-        var reqIsDone = false
-        let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
+        let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
         req.isAsynchronous = false
-        printSync("Sending \(n) request")
+        var executed = false
         
         req.send(
           {response in
-            reqIsDone = true
-            printSync("success \(n) request")
+            executed = true
           },
           {error in
-            reqIsDone = true
-            XCTFail("Error \(n) request \(error)")
+            executed = true
+            XCTFail("Unexpected error in \(n) request: \(error)")
+            readyExpectation.fulfill()
         })
         
-        reqIsDone == false ? XCTFail("Request \(n) is not synchronious") : ()
-        n >= 10 ? readyExpectation.fulfill() : ()
+        if !executed {XCTFail("Request \(n) is not synchronious")}
+        if n >= 10 {readyExpectation.fulfill()}
       }
     }
     
-    waitForExpectationsWithTimeout(30, handler: { error in
-      XCTAssertNil(error, "Timeout error")
-    })
+    waitForExpectationsWithTimeout(5) {_ in}
   }
   
   
   
-  func test_send_few_random_requests() {
+  func test_asynchronious() {
     let readyExpectation = expectationWithDescription("ready")
-    var reqCount = 0
+    var exeCount = 0
+    
+    for n in 1...10 {
+      let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
+      req.isAsynchronous = true
+      req.send(
+        {response in
+          exeCount += 1
+          exeCount >= 10 ? readyExpectation.fulfill() : ()
+        },
+        {error in
+          XCTFail("Unexpected error in \(n) request: \(error)")
+          readyExpectation.fulfill()
+      })
+    }
+    
+    waitForExpectationsWithTimeout(5) {_ in}
+  }
+  
+  
+  
+  func test_random() {
+    let readyExpectation = expectationWithDescription("ready")
+    var exeCount = 0
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
       for n in 1...10 {
-        let isAsynchronous = !(n % 3 == 0)
-        let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
-        req.isAsynchronous = isAsynchronous
-        var isDone = false
-        
-        printSync("Sending \(n) request")
+        let asynchronously = !(n % 3 == 0)
+        let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
+        req.isAsynchronous = asynchronously
+        var executed = false
         
         req.send(
           {response in
-            reqCount++
-            isDone = true
-            printSync("success \(n) request")
-            reqCount >= 10 ? readyExpectation.fulfill() : ()
+            exeCount += 1
+            executed = true
+            exeCount >= 10 ? readyExpectation.fulfill() : ()
           },
           {error in
-            XCTFail("Error \(n) request \(error)")
+            XCTFail("Unexpected error in \(n) request: \(error)")
         })
         
-        if isAsynchronous == false && isDone == false {
+        if !asynchronously && !executed {
           XCTFail("Request \(n) is not synchronious")
+          readyExpectation.fulfill()
         }
       }
     }
     
-    
-    waitForExpectationsWithTimeout(30, handler: { error in
-      XCTAssertNil(error, "Timeout error")
-    })
+    waitForExpectationsWithTimeout(5) {_ in}
   }
   
   
   
+  func test_many() {
+    let readyExpectation = self.expectationWithDescription("ready")
+    let backup = VK.defaults.maxRequestsPerSec
+    VK.defaults.maxRequestsPerSec = 100
+    let requests = NSMutableDictionary()
+    var executed = 0
+    
+    for n in 1...VK.defaults.maxRequestsPerSec {
+      let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
+      requests[req.id] = "~"
+      req.isAsynchronous = true
+      
+      req.send(
+        {response in
+          requests[req.id] = "+"
+          executed += 1
+          executed >= VK.defaults.maxRequestsPerSec ? readyExpectation.fulfill() : ()
+        },
+        {error in
+          requests[req.id] = "-"
+          executed += 1
+          executed >= VK.defaults.maxRequestsPerSec ? readyExpectation.fulfill() : ()
+      })
+    }
+    
+    self.waitForExpectationsWithTimeout(60) {_ in
+      VK.defaults.maxRequestsPerSec = backup
+      let results = self.getResults(requests)
+      printSync(results.statistic)
+      if results.error.count > results.all.count/50 {
+        XCTFail("Too many errors")
+      }
+    }
+  }
   
-  func test_offline_send() {
+  
+  
+  /**
+  To use this test you need:
+   Disable internet ->
+   Run test ->
+   Enable internet.
+  */
+  func test_infinite() {
     let readyExpectation = expectationWithDescription("ready")
     
     let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
     req.maxAttempts = 0
     req.send(
       {response in
-        printSync("Suсcess")
         readyExpectation.fulfill()
       },
       {error in
-        XCTFail("Error \(error)")
+        XCTFail("Unexpected error in request: \(error)")
+        readyExpectation.fulfill()
     })
     
+    waitForExpectationsWithTimeout(5) {_ in}
+  }
+  
+  
+  
+  func test_errorblock() {
+    let readyExpectation = expectationWithDescription("ready")
     
-    waitForExpectationsWithTimeout(30, handler: { error in
-      XCTAssertNil(error, "Timeout error")
+    let req = VK.API.Messages.getHistory()
+    req.send(
+      {response in
+        XCTFail("Unexpected succes in request: \(response)")
+        readyExpectation.fulfill()
+      },
+      {error in
+        readyExpectation.fulfill()
     })
+    
+    waitForExpectationsWithTimeout(5) {_ in}
+  }
+  
+  
+  
+  func test_performance() {
+    self.measureBlock() {
+      let readyExpectation = self.expectationWithDescription("ready")
+      var executed = 0
+      
+      for n in 1...VK.defaults.maxRequestsPerSec {
+        let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
+        req.isAsynchronous = true
+        req.send(
+          {response in
+            executed += 1
+            executed == VK.defaults.maxRequestsPerSec ? readyExpectation.fulfill() : ()
+          },
+          {error in
+            executed += 1
+            executed == VK.defaults.maxRequestsPerSec ? readyExpectation.fulfill() : ()
+        })
+      }
+      
+      self.waitForExpectationsWithTimeout(10) {_ in}
+    }
   }
 }

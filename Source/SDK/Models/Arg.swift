@@ -1,6 +1,6 @@
 extension VK {
-///Parameters for methods VK API
-public enum Arg : String, Hashable {
+  ///Parameters for methods VK API
+  public enum Arg : String, Hashable {
     case userIDs = "user_ids"
     case fields
     case nameCase = "name_case"
@@ -276,13 +276,16 @@ public enum Arg : String, Hashable {
     case captchaSid = "captcha_sid"
     case captchaKey = "captcha_key"
     case screenName = "screen_name"
-  case appIDs = "app_ids"
-  
+    case appIDs = "app_ids"
+    case mainPhoto = "main_photo"
+    case cropData = "crop_data"
+    case cropHash = "crop_hash"
+    
     
     public var hashValue : Int {
-        return self.rawValue.hashValue
+      return self.rawValue.hashValue
     }
-}
+  }
 }
 
 public func == (lhs: VK.Arg, rhs: VK.Arg) -> Bool {

@@ -32,7 +32,9 @@ extension VK_LongPool {
     ///Starting receiving updates from the long pool server
     public static func start() {
       dispatch_async(lpQueue) {
-        guard VK.state == .Authorized && !isActive else {return}
+        guard VK.state == .Authorized && !isActive else {
+          VK.Log.put("LongPool", "User is not authorized or LongPool is active yet")
+          return}
         isActive = true
         keyIsExpired = true
         getServer()
@@ -190,7 +192,7 @@ extension VK_LongPool {
       !updates62.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type62, object: JSONWrapper(updates62)) : ()
       !updates70.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type70, object: JSONWrapper(updates70)) : ()
       !updates80.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type80, object: JSONWrapper(updates80)) : ()
-      !all.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName("VKLPAll", object: JSONWrapper(all)) : ()
+      !all.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.typeAll, object: JSONWrapper(all)) : ()
     }
     
     

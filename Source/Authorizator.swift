@@ -28,11 +28,9 @@ internal struct Authorizator {
   
   internal static func autorize(request: Request?) {
     if let request = request {
-      if request.authFails >= 3 || Token.get() == nil {
-          autorizeWithRequest(request)
-      }
-      
-      request.reSend()
+      request.authFails >= 3 || Token.get() == nil
+        ? autorizeWithRequest(request)
+        : {_ = request.trySend()}()
     }
     else {
       autorize()
@@ -64,7 +62,7 @@ internal struct Authorizator {
     }
     
     if VK.state == .Authorized {
-      request?.isAsynchronous == true ? request?.reSend() : request?.sendInCurrentThread()
+      request?.isAsynchronous == true ? request?.trySend() : request?.tryInCurrentThread()
     }
     else {
       let err = VK.Error(domain: "VKSDKDomain", code: 2, desc: "User deny authorization", userInfo: nil, req: request)

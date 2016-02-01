@@ -6,252 +6,310 @@ class Upload_Tests: VKTestCase {
   
   
   
-  func test_upload_photo_to_message() {
+  func test_photo_to_message() {
     guard let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("testImage", ofType: "jpg")!) else {
       XCTFail("Image path is empty")
       return
     }
     
     let readyExpectation = expectationWithDescription("ready")
-    let req = VK.API.Upload.Photo.toMessage(media: Media(imageData: data, type: .JPG))
+    var progressIsExecuted = false
+    
+    let req = VK.API.Upload.Photo.toMessage(Media(imageData: data, type: .JPG))
     req.isAsynchronous = true
     req.progressBlock = {done, total in}
     req.successBlock = {response in
-      printSync("success request \(response)")
+      XCTAssertNotNil(response[0,"id"].int)
       readyExpectation.fulfill()
     }
     req.errorBlock = {error in
-      XCTFail("Error request \(error)")
+      XCTFail("Unexpected error in request: \(error)")
       readyExpectation.fulfill()
     }
-    req.progressBlock = {done, total in print ("upload \(done) in \(total)")}
+    req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
     
-    waitForExpectationsWithTimeout(60, handler: { error in
-      XCTAssertNil(error, "Timeout error")
-    })
+    waitForExpectationsWithTimeout(60) {_ in
+      XCTAssertTrue(progressIsExecuted)
+    }
   }
   
   
   
-  func test_upload_photo_to_wall() {
+  func test_photo_to_group_wall() {
     guard let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("testImage", ofType: "jpg")!) else {
       XCTFail("Image path is empty")
       return
     }
     
     let readyExpectation = expectationWithDescription("ready")
-    let req = VK.API.Upload.Photo.toWall(
-      media: Media(imageData: data, type: .JPG),
-      userId: nil,
+    var progressIsExecuted = false
+    
+    
+    let req = VK.API.Upload.Photo.toWall.toGroup(
+      Media(imageData: data, type: .JPG),
       groupId: "60479154")
     req.isAsynchronous = true
     req.progressBlock = {done, total in}
     req.successBlock = {response in
-      printSync("success request \(response)")
+      XCTAssertNotNil(response[0,"id"].int)
       readyExpectation.fulfill()
     }
     req.errorBlock = {error in
-      XCTFail("Error request \(error)")
+      XCTFail("Unexpected error in request: \(error)")
       readyExpectation.fulfill()
     }
-    req.progressBlock = {done, total in print ("upload \(done) in \(total)")}
+    req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
     
-    waitForExpectationsWithTimeout(60, handler: { error in
-      XCTAssertNil(error, "Timeout error")
-    })
+    waitForExpectationsWithTimeout(60) {_ in
+      XCTAssertTrue(progressIsExecuted)
+    }
   }
   
   
   
-  func test_upload_photo_to_album() {
+  func test_photo_to_album() {
     guard let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("testImage", ofType: "jpg")!) else {
       XCTFail("Image path is empty")
       return
     }
     
     let readyExpectation = expectationWithDescription("ready")
+    var progressIsExecuted = false
+
     let req = VK.API.Upload.Photo.toAlbum(
-      media: [Media(imageData: data, type: .JPG)],
+      [Media(imageData: data, type: .JPG)],
       albumId: "181808365",
       groupId: "60479154",
-      caption: "test",
-      location: nil)
+      caption: "test")
     req.successBlock = {response in
-      print(req)
+      XCTAssertNotNil(response[0,"id"].int)
       let deleteReq = VK.API.Photos.delete([VK.Arg.photoId : response[0]["id"].stringValue])
       deleteReq.isAsynchronous = true
       deleteReq.send()
-      printSync("success request \(response)")
       readyExpectation.fulfill()
     }
     req.errorBlock = {error in
-      XCTFail("Error request \(error)")
+      XCTFail("Unexpected error in request: \(error)")
       readyExpectation.fulfill()
     }
-    req.progressBlock = {done, total in print ("upload \(done) in \(total)")}
+    req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
     
-    waitForExpectationsWithTimeout(60, handler: { error in
-      XCTAssertNil(error, "Timeout error")
-    })
+    waitForExpectationsWithTimeout(60) {_ in
+      XCTAssertTrue(progressIsExecuted)
+    }
   }
   
   
   
-  func test_upload_audio() {
+  func test_photo_to_market() {
+    guard let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("testImage", ofType: "jpg")!) else {
+      XCTFail("Image path is empty")
+      return
+    }
+    
+    let readyExpectation = expectationWithDescription("ready")
+    var progressIsExecuted = false
+    
+    let req = VK.API.Upload.Photo.toMarket(
+      Media(imageData: data, type: .JPG),
+      groupId: "98197515"
+    )
+    req.successBlock = {response in
+      XCTAssertNotNil(response[0,"id"].int)
+      readyExpectation.fulfill()
+    }
+    req.errorBlock = {error in
+      XCTFail("Unexpected error in request: \(error)")
+      readyExpectation.fulfill()
+    }
+    req.progressBlock = {done, total in progressIsExecuted = true}
+    req.send()
+    
+    waitForExpectationsWithTimeout(60) {_ in
+      XCTAssertTrue(progressIsExecuted)
+    }
+  }
+  
+  
+  
+//  func test_photo_to_market_album() {
+//    guard let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("testImage", ofType: "jpg")!) else {
+//      XCTFail("Image path is empty")
+//      return
+//    }
+//    
+//    let readyExpectation = expectationWithDescription("ready")
+//    var progressIsExecuted = false
+//
+//    let req = VK.API.Upload.Photo.toMarketAlbum(
+//      Media(imageData: data, type: .JPG),
+//      groupId: "98197515"
+//    )
+//    req.successBlock = {response in
+//      XCTAssertNotNil(response["id"].int)
+//      readyExpectation.fulfill()
+//    }
+//    req.errorBlock = {error in
+//      XCTFail("Unexpected error in request: \(error)")
+//      readyExpectation.fulfill()
+//    }
+//    req.progressBlock = {done, total in progressIsExecuted = true}
+//    req.send()
+//    
+//    waitForExpectationsWithTimeout(60) {_ in
+//      XCTAssertTrue(progressIsExecuted)
+//    }
+//  }
+  
+  
+  
+  func test_audio() {
     guard let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("testAudio", ofType: "mp3")!) else {
       XCTFail("Audio path is empty")
       return
     }
     
     let readyExpectation = expectationWithDescription("ready")
-    let req = VK.API.Upload.audio(
-      media: Media(audioData: data),
-      artist: nil,
-      title: nil)
+    var progressIsExecuted = false
+
+    let req = VK.API.Upload.audio(Media(audioData: data))
     req.isAsynchronous = true
     req.progressBlock = {done, total in}
     req.successBlock = {response in
+      XCTAssertNotNil(response["id"].int)
       let deleteReq = VK.API.Audio.delete([
         VK.Arg.audioId : response["id"].stringValue,
         VK.Arg.ownerId : response["owner_id"].stringValue
         ])
       deleteReq.isAsynchronous = false
       deleteReq.send()
-      printSync("success request \(response)")
       readyExpectation.fulfill()
     }
     req.errorBlock = {error in
-      XCTFail("Error request \(error)")
+      XCTFail("Unexpected error in request: \(error)")
       readyExpectation.fulfill()
     }
-    req.progressBlock = {done, total in print ("upload \(done) in \(total)")}
+    req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
     
-    waitForExpectationsWithTimeout(60, handler: { error in
-      XCTAssertNil(error, "Timeout error")
-    })
+    waitForExpectationsWithTimeout(60) {_ in
+      XCTAssertTrue(progressIsExecuted)
+    }
   }
   
   
-  func test_upload_video_from_file() {
+  
+  func test_video_file() {
     guard let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("testVideo", ofType: "mp4")!) else {
       XCTFail("Video path is empty")
       return
     }
     
     let readyExpectation = expectationWithDescription("ready")
-    let req = VK.API.Upload.video(
-      media: Media(videoData: data),
-      link: nil,
+    var progressIsExecuted = false
+
+    let req = VK.API.Upload.Video.fromFile(
+      Media(videoData: data),
       name: "test video",
       description: "test",
-      groupId: nil,
-      albumId: nil,
       isPrivate: true,
       isWallPost: false,
-      isRepeat: false)!
+      isRepeat: false)
     req.isAsynchronous = true
     req.progressBlock = {done, total in}
     req.successBlock = {response in
+      XCTAssertNotNil(response["video_id"].int)
       let deleteReq = VK.API.Audio.delete([
-        VK.Arg.audioId : response["id"].stringValue,
+        VK.Arg.audioId : response["video_id"].stringValue,
         VK.Arg.ownerId : response["owner_id"].stringValue
         ])
       deleteReq.isAsynchronous = false
       deleteReq.send()
-      printSync("success request \(response)")
       readyExpectation.fulfill()
     }
     req.errorBlock = {error in
-      XCTFail("Error request \(error)")
+      XCTFail("Unexpected error in request: \(error)")
       readyExpectation.fulfill()
     }
-    req.progressBlock = {done, total in print ("upload \(done) in \(total)")}
+    req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
     
-    waitForExpectationsWithTimeout(60, handler: { error in
-      XCTAssertNil(error, "Timeout error")
-    })
+    waitForExpectationsWithTimeout(60) {_ in
+      XCTAssertTrue(progressIsExecuted)
+    }
   }
   
   
   
   
-  func test_upload_video_from_link() {
+  func test_video_link() {
     let readyExpectation = expectationWithDescription("ready")
-    let req = VK.API.Upload.video(
-      media: nil,
-      link: "http://www.youtube.com/watch?v=w7VD1681jV8",
+
+    let req = VK.API.Upload.Video.fromUrl(
+      "http://www.youtube.com/watch?v=w7VD1681jV8",
       name: "test video",
       description: "test",
-      groupId: nil,
-      albumId: nil,
       isPrivate: true,
       isWallPost: false,
-      isRepeat: false)!
+      isRepeat: false)
     req.isAsynchronous = true
-    req.progressBlock = {done, total in}
     req.successBlock = {response in
+      XCTAssertNotNil(response["video_id"].int)
       let deleteReq = VK.API.Audio.delete([
-        VK.Arg.audioId : response["id"].stringValue,
+        VK.Arg.audioId : response["video_id"].stringValue,
         VK.Arg.ownerId : response["owner_id"].stringValue
         ])
       deleteReq.isAsynchronous = false
       deleteReq.send()
-      printSync("success request \(response)")
       readyExpectation.fulfill()
     }
     req.errorBlock = {error in
-      XCTFail("Error request \(error)")
+      XCTFail("Unexpected error in request: \(error)")
       readyExpectation.fulfill()
     }
-    req.progressBlock = {done, total in print ("upload \(done) in \(total)")}
     req.send()
     
-    waitForExpectationsWithTimeout(60, handler: { error in
-      XCTAssertNil(error, "Timeout error")
-    })
+    waitForExpectationsWithTimeout(60) {_ in
+    }
   }
   
   
   
   
-  func test_upload_document() {
+  func test_document() {
     guard let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("testDoc", ofType: "rtf")!) else {
       XCTFail("Document path is empty")
       return
     }
     
     let readyExpectation = expectationWithDescription("ready")
-    let req = VK.API.Upload.document(
-      media: Media(documentData: data, type: "rtf"),
-      groupId: nil,
-      title: "test",
-      tags: nil)
+    var progressIsExecuted = false
+    
+    let req = VK.API.Upload.document(Media(documentData: data, type: "rtf"))
     req.isAsynchronous = true
     req.progressBlock = {done, total in}
     req.successBlock = {response in
+      XCTAssertNotNil(response[0,"id"].int)
       let deleteReq = VK.API.Audio.delete([
         VK.Arg.audioId : response["id"].stringValue,
         VK.Arg.ownerId : response["owner_id"].stringValue
         ])
       deleteReq.isAsynchronous = false
       deleteReq.send()
-      printSync("success request \(response)")
       readyExpectation.fulfill()
     }
     req.errorBlock = {error in
-      XCTFail("Error request \(error)")
+      XCTFail("Unexpected error in request: \(error)")
       readyExpectation.fulfill()
     }
-    req.progressBlock = {done, total in print ("upload \(done) in \(total)")}
+    req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
     
-    waitForExpectationsWithTimeout(60, handler: { error in
-      XCTAssertNil(error, "Timeout error")
-    })
+    waitForExpectationsWithTimeout(60) {_ in
+      XCTAssertTrue(progressIsExecuted)
+    }
   }
 }

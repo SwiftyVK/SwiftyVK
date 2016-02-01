@@ -2,22 +2,31 @@ import Foundation
 
 
 
+private let responseQueue = dispatch_queue_create("com.VK.responseQueue", DISPATCH_QUEUE_SERIAL)
+
+
+
 internal class Response {
-  weak var request : Request?
-  var error : VK.Error? {
+  internal weak var request : Request?
+  internal private(set) var error : VK.Error? {
     didSet {success != nil ? success = nil : ()}
   }
-  var success : JSON? {
+  internal private(set) var success : JSON? {
     didSet {error != nil ? error = nil : ()}
   }
   
   
+  internal func setError(newError: VK.Error) {
+    error = newError
+  }
   
-  func create(data: NSData?) {
+  
+  
+  internal func create(data: NSData?) {
     if data != nil {
       var err : NSError?
       var json = JSON(data: data!, error: &err)
-            
+
       if err != nil {
         error = VK.Error(ns: err!, req: request!)
       }
@@ -41,5 +50,79 @@ internal class Response {
       VK.Log.put(request!, "Fail parse response data")
       error = VK.Error(domain: "VKSDKDomain", code: 4, desc: "Fail parse response data", userInfo: nil, req: request)
     }
+  }
+  
+  
+  
+  internal func execute() {
+    guard let request = request where request.cancelled == false else {return}
+    
+    if let error = error {
+      if request.catchErrors {
+        error.`catch`()
+      }
+      else if request.canSend == true {
+        request.trySend()
+      }
+      else {
+        request.isAPI == true && request.isAsynchronous == false
+          ? executeError()
+          : dispatch_async(responseQueue) {self.executeError()}
+      }
+    }
+    else if let _ = success {
+      request.isAPI == true && request.isAsynchronous == false
+        ? executeSuccess()
+        : dispatch_async(responseQueue) {self.executeSuccess()}
+    }
+    else {
+      VK.Log.put(request, "Response data is not set")
+    }
+  }
+  
+  
+  
+  internal func executeError() {
+    guard let request = request where request.cancelled == false else {return}
+
+    guard request.errorBlockIsSet else {
+      VK.Log.put(request, "Error block is not set")
+      return
+    }
+    guard let error = error else {
+      VK.Log.put(request, "Error is not set")
+      return
+    }
+    
+    VK.Log.put(request, "Executing error block")
+    request.errorBlock(error: error)
+    clean()
+    VK.Log.put(request, "Error block is executed")
+  }
+  
+  
+  
+  internal func executeSuccess() {
+    guard let request = request where request.cancelled == false else {return}
+
+    guard request.successBlockIsSet else {
+      VK.Log.put(request, "Success block is not set")
+      return
+    }
+    guard let success = success else {
+      VK.Log.put(request, "Success is not set")
+      return
+    }
+    
+    VK.Log.put(request, "Executing success block")
+    request.successBlock(response: success)
+    clean()
+    VK.Log.put(request, "Success block is executed")
+  }
+  
+  
+  internal func clean() {
+    self.success = nil
+    self.error = nil
   }
 }

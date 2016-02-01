@@ -3,11 +3,9 @@ import Foundation
 internal let printQueue = dispatch_queue_create("VK.Print", DISPATCH_QUEUE_SERIAL)
 private let logQueue = dispatch_queue_create("VK.Log", DISPATCH_QUEUE_SERIAL)
 
-private let cal = NSCalendar.currentCalendar()
 private let form : NSDateFormatter = {
   let f = NSDateFormatter()
-  f.dateStyle = .ShortStyle
-  f.timeStyle = .MediumStyle
+  f.dateFormat = NSDateFormatter.dateFormatFromTemplate("d.M HH:mm:ss", options: 0, locale: NSLocale.currentLocale())
   return f
 }();
 
@@ -25,8 +23,8 @@ extension VK {
     
     internal static func put(req: Request, _ message: String) {
       dispatch_sync(logQueue) {
-        
-        req.log.append(message)
+        let date = form.stringFromDate(NSDate())
+        req.log.append("\(date): \(message)")
         let key = String("Req \(req.id)")
         
         if dictionary.count >= 100 {
@@ -36,7 +34,7 @@ extension VK {
         
         _put(key, message, false)
         req.allowLogToConsole == true
-          ? printSync("\(key): \(message)")
+          ? printSync("\(date): \(key) ~ \(message)")
           : ()
       }
     }
@@ -51,6 +49,8 @@ extension VK {
     
     
     private static func _put(key: String, _ message: String, _ printToConsole: Bool) {
+      let date = form.stringFromDate(NSDate())
+      
       if dictionary[key] == nil {
         array.append(key)
         dictionary[key] = NSMutableArray()
@@ -60,11 +60,11 @@ extension VK {
         if dict.count >= 100 {
           dict.removeObjectAtIndex(0)
         }
-        dict.addObject(message)
+        dict.addObject("\(date): \(message)")
       }
       
       printToConsole == true
-        ? printSync("\(key): \(message)")
+        ? printSync("\(date): \(key) ~ \(message)")
         : ()
     }
     
@@ -79,32 +79,6 @@ extension VK {
     }
   }
 }
-
-
-
-/**
- Log API work
- - parameter options Work type
- - parameter object  Any
- */
- //internal func VK.Log.put(options: [LogOption], key: String, _ message: String) {
- //  var containOption = false
- //
- //  for option in options {
- //    if VK.defaults.logOptions.contains(LogOption.all) == true || VK.defaults.logOptions.contains(option) == true {
- //      containOption = true
- //      break
- //    }
- //  }
- //
- //  guard containOption == true || VK.defaults.logOptions.contains(LogOption.all) else {return}
- //
- //  let options = options.map({(opt: LogOption) -> String in return opt.rawValue}).joinWithSeparator(", ")
- //  let thread = "name: \(NSThread.currentThread().name != "" ? NSThread.currentThread().name! : "-") num: \(NSThread.currentThread().valueForKeyPath("private.seqNum")!)"
- //  VK.defaults.logOptions.contains(LogOption.noDebug)
- //    ? printSync(message)
- //    : printSync("⏳\(form.stringFromDate(NSDate()))🚦\(thread)📌\(options)\n   \(message)\n👾")
- //}
  
  
  

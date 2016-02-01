@@ -5,11 +5,15 @@ import Foundation
 internal var sharedCaptchaIsRun = false
 internal var sharedCaptchaAnswer : [String : String]?
 internal var nextRequestId = 0
+private func getNextRequestId() -> Int {
+  nextRequestId += 1
+  return nextRequestId
+}
 
 
 ///Request to VK API
 public class Request : CustomStringConvertible {
-  internal let id = ++nextRequestId
+  internal let id : Int = getNextRequestId()
   public var timeout = VK.defaults.timeOut
   public var isAsynchronous = VK.defaults.sendAsynchronous
   ///Maximum number of attempts to send, after which execution priryvaetsya and an error is returned
@@ -28,7 +32,7 @@ public class Request : CustomStringConvertible {
   internal var swappedRequest : Request? = nil
   internal var customURL : String? = nil
   public private(set) var cancelled = false
-  private var useSystemLanguage = VK.defaults.useSystemLanguage
+  private var useDefaultLanguage = VK.defaults.useSystemLanguage
   private var HTTPMethod = "GET"
   private var media : [Media]?
   private var parameters = [String : String]()
@@ -56,20 +60,14 @@ public class Request : CustomStringConvertible {
   public var progressBlock = VK.defaults.progressBlock
   public var language : String? {
     get {
-      if useSystemLanguage {
-        let syslemLang = NSBundle.preferredLocalizationsFromArray(VK.defaults.supportedLanguages).first
-        
-        if syslemLang == "uk" {
-          return "ua"
-        }
-        
-        return syslemLang
-      }
-      return self.privateLanguage
+      return useDefaultLanguage
+      ? VK.defaults.language
+      : privateLanguage
     }
     set {
+      guard newValue == nil || VK.defaults.supportedLanguages.contains(newValue!) else {return}
       self.privateLanguage = newValue
-      useSystemLanguage = false
+      useDefaultLanguage = (newValue == nil)
     }
   }
   private var privateLanguage = VK.defaults.language
@@ -119,7 +117,7 @@ public class Request : CustomStringConvertible {
   
   
   
-  internal init(method: String, parameters: [VK.Arg : String]?) {
+  internal init(method: String, parameters: [VK.Arg : String] = [:]) {
     self.isAPI               = true
     self.method              = method
     self.parameters          = argToString(parameters)
@@ -161,50 +159,42 @@ public class Request : CustomStringConvertible {
   public func send() {
     attempts = 0
     cancelled = false
-    reSend()
+    trySend()
   }
   
   
   
-  internal func reSend() -> Bool {
+  internal func trySend() -> Bool {
     if canSend {
+      attempts += 1
       let type = (self.isAsynchronous ? "asynchronously" : "synchronously")
-      VK.Log.put(self, "Prepare to send \(type) \(++attempts) of \(maxAttempts) times")
-      response.error = nil
-      response.success = nil
+      VK.Log.put(self, "Prepare to send \(type) \(attempts) of \(maxAttempts) times")
+      response.clean()
       _ = Connection(request: self)
       return true
     }
     else {
       VK.Log.put(self, "Can no longer send! \(attempts) of \(maxAttempts) times")
-      notCanSend()
+      response.executeError()
       return false
     }
   }
   
   
   
-  internal func sendInCurrentThread() -> Bool {
+  internal func tryInCurrentThread() -> Bool {
     if canSend {
-      VK.Log.put(self, "Prepare to send in current thread")
-      response.error = nil
-      response.success = nil
-      Connection.sendInCurrentThread(self)
+      attempts += 1
+      VK.Log.put(self, "Prepare to send \(attempts) of \(maxAttempts) times in current thread")
+      response.clean()
+      Connection.tryInCurrentThread(self)
       return true
     }
     else {
       VK.Log.put(self, "Can no longer send in current thread! \(attempts) of \(maxAttempts) times")
-      notCanSend()
+      response.executeError()
       return false
     }
-  }
-  
-  
-  
-  private func notCanSend() {
-    VK.Log.put(self, "Executing error block")
-    errorBlock(error: response.error!)
-    VK.Log.put(self, "Error block is executed")
   }
   
   

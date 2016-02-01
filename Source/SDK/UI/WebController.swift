@@ -34,29 +34,30 @@ class WebController : _WebControllerPrototype {
   private var parentView : UIViewController?
   #endif
   private let waitUser = dispatch_semaphore_create(0)
-  private var isExpand = false
   private var fails = 0
   private var urlRequest : NSURLRequest?
   private weak var request : Request?
-  
+  private var isValidation = false
   
   
   class func validate(request: Request, validationUrl: String) {
+    
     dispatch_sync(vkSheetQueue, {
-      self.start(url: validationUrl, request: request)
-      request.isAsynchronous ? request.reSend() : request.sendInCurrentThread()
+      self.start(url: validationUrl, request: request, isValidation: true)
+      request.isAsynchronous ? request.trySend() : request.tryInCurrentThread()
     })
   }
   
   
   
-  internal class func start(url url: String, request: Request?) {
-    let params          = getParamsForPlatform()
-    let controller      = params.controller
-    controller.request  = request
+  internal class func start(url url: String, request: Request?, isValidation : Bool = false) {
+    let params              = getParamsForPlatform()
+    let controller          = params.controller
+    controller.request      = request
     controller.showWithUrl(url, isSheet: params.isSheet)
+    activeWebController     = controller
+    controller.isValidation = isValidation
     VK.Log.put("Global", "WebController wait user actions")
-    activeWebController = controller
     dispatch_semaphore_wait(controller.waitUser, DISPATCH_TIME_FOREVER)
   }
   
@@ -80,7 +81,7 @@ class WebController : _WebControllerPrototype {
       failValidation()
     }
     else if urlString.containsString(autorizeUrl) || urlString.containsString("act=security_check") || urlString.containsString("https://m.vk.com/login?") {
-      isMac && !isExpand ? expand() : ()
+      expand()
     }
     else {
       webView!.goBack()
@@ -99,18 +100,16 @@ class WebController : _WebControllerPrototype {
     hide()
   }
   
-
-
+  
+  
   private func didFail(sender: AnyObject, didFailLoadWithError error: NSError?) {
     if fails <= 3 {
-      fails++
+      fails += 1
       loadReq(self.urlRequest!)
     }
     else {
       fails = 0
-      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
-        VK.delegate.vkAutorizationFailed(VK.Error(ns: error!, req: nil))
-      })
+      isValidation ? failValidation() : ()
       hide()
     }
   }
@@ -185,13 +184,14 @@ class WebController : _WebControllerPrototype {
     
     
     private func expand() {
-      NSThread.sleepForTimeInterval(1)
-      isExpand = true
       NSApplication.sharedApplication().activateIgnoringOtherApps(true)
-      let newHeight = CGFloat((self.webView!.stringByEvaluatingJavaScriptFromString("document.height") as NSString).floatValue)
+      let newHeight = min(
+        CGFloat((webView!.stringByEvaluatingJavaScriptFromString("document.height") as NSString).floatValue),
+        450
+      )
       
       if let parent = parentWindow {
-        self.window!.setFrame(NSMakeRect(
+        window!.setFrame(NSMakeRect(
           (parent.frame.origin.x + ((parent.frame.width - 500) / 2)),
           parent.frame.origin.y + (parent.frame.height - (newHeight + 54) - 22),
           500,
@@ -199,9 +199,9 @@ class WebController : _WebControllerPrototype {
           display: true, animate: true)
       }
       else {
-        self.window!.setFrame(NSMakeRect(
-          self.window!.frame.origin.x - self.window!.frame.size.width/2,
-          self.window!.frame.origin.y - self.window!.frame.size.height,
+        window!.setFrame(NSMakeRect(
+          window!.frame.origin.x - window!.frame.size.width/2,
+          window!.frame.origin.y - window!.frame.size.height,
           500,
           newHeight + 54),
           display: true, animate: true)
@@ -263,7 +263,7 @@ class WebController : _WebControllerPrototype {
     
     
     override func viewDidLoad() {
-      VK.Log.put([.views], "\(self) INIT")
+      VK.Log.put("Global", "\(self) INIT")
       webView!.delegate = self
       super.viewDidLoad()
     }

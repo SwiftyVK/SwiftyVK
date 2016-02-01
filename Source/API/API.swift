@@ -17,7 +17,7 @@ public struct _VKAPI {
   - parameter parameters: method parameters
   - returns: Request
   */
-  public static func remote(method method: String, parameters: [VK.Arg : String]?) -> Request {
+  public static func remote(method method: String, parameters: [VK.Arg : String] = [:]) -> Request {
     return Request(method: "execute.\(method)", parameters: parameters)
   }
   
@@ -29,7 +29,7 @@ public struct _VKAPI {
   - parameter parameters: method parameters
   - returns: Request
   */
-  public static func custom(method method: String, parameters: [VK.Arg : String]?) -> Request {
+  public static func custom(method method: String, parameters: [VK.Arg : String] = [:]) -> Request {
     return Request(method: method, parameters: parameters)
   }
 }

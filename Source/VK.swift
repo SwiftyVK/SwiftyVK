@@ -68,6 +68,7 @@ public struct VK {
   public static func start(appID id: String, delegate owner: VKDelegate) {
     delegate = owner
     appID    = id
+    Token.get()
     VK.Log.put("Global", "SwiftyVK INIT")
   }
   
@@ -150,8 +151,9 @@ extension VK_Defaults {
       }
       
       set {
+        guard newValue == nil || supportedLanguages.contains(newValue!) else {return}
         self.privateLanguage = newValue
-        useSystemLanguage = false
+        useSystemLanguage = (newValue == nil)
       }
     }
     internal static var sleepTime : NSTimeInterval {return NSTimeInterval(1/Double(maxRequestsPerSec))}

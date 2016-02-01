@@ -5,7 +5,7 @@ import SwiftyVK
 class APIWorker {
   
   static let appID = "4994842"
-  static let scope = [VK.Scope.messages,.offline,.friends,.wall,.photos,.audio,.video,.docs]
+  static let scope = [VK.Scope.messages,.offline,.friends,.wall,.photos,.audio,.video,.docs,.market]
   
   
   
@@ -48,7 +48,7 @@ class APIWorker {
   
   
   class func capthca() {
-    let req = VK.API.custom(method: "captcha.force", parameters: nil)
+    let req = VK.API.custom(method: "captcha.force")
     req.successBlock = {response in print("SwiftyVK: Captha success \n \(response)")}
     req.errorBlock = {error in print("SwiftyVK: Captha fail \n \(error)")}
     req.send()
@@ -57,7 +57,7 @@ class APIWorker {
   
   
   class func validation() {
-    let req = VK.API.custom(method: "account.testValidation", parameters: nil)
+    let req = VK.API.custom(method: "account.testValidation")
     req.successBlock = {response in print("SwiftyVK: Captha success \n \(response)")}
     req.errorBlock = {error in print("SwiftyVK: Captha fail \n \(error)")}
     req.send()
@@ -95,8 +95,7 @@ class APIWorker {
   class func uploadPhoto() {
     let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("testImage", ofType: "jpg")!)!
     let media = Media(imageData: data, type: .JPG)
-    
-    let req = VK.API.Upload.Photo.toWall(media: media, userId: "4680178", groupId: nil)
+    let req = VK.API.Upload.Photo.toWall.toUser(media, userId: "4680178")
     req.progressBlock = { (done, total) -> () in print("SwiftyVK: uploadPhoto progress: \(done) of \(total))")}
     req.successBlock = {response in print("SwiftyVK: uploadPhoto success \n \(response)")}
     req.errorBlock = {error in print("SwiftyVK: uploadPhoto fail \n \(error)")}

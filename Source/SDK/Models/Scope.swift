@@ -20,7 +20,7 @@ extension VK {
     case stats         = 1048576
     case ads           = 32768
     case offline       = 65536
-    
+    case market        = 134217728
     
     
     public var description: String {return Scope.toString([self])}
@@ -39,26 +39,27 @@ extension VK {
       var array = [Scope]()
       
       permissions.byteSwapped
-      if (permissions & 1) == 1               {array.append(Scope.notify)}
-      if (permissions & 2) == 2               {array.append(Scope.friends)}
-      if (permissions & 4) == 4               {array.append(Scope.photos)}
-      if (permissions & 8) == 8               {array.append(Scope.audio)}
-      if (permissions & 16) == 16             {array.append(Scope.video)}
-      if (permissions & 131072) == 131072     {array.append(Scope.docs)}
-      if (permissions & 2048) == 2048         {array.append(Scope.notes)}
-      if (permissions & 128) == 128           {array.append(Scope.pages)}
-      if (permissions & 1024) == 1024         {array.append(Scope.status)}
-      if (permissions & 32) == 32             {array.append(Scope.offers)}
-      if (permissions & 64) == 64             {array.append(Scope.questions)}
-      if (permissions & 8192) == 8192         {array.append(Scope.wall)}
-      if (permissions & 262144) == 262144     {array.append(Scope.groups)}
-      if (permissions & 4096) == 4096         {array.append(Scope.messages)}
-      if (permissions & 4194304) == 4194304   {array.append(Scope.email)}
-      if (permissions & 524288) == 524288     {array.append(Scope.notifications)}
-      if (permissions & 1048576) == 1048576   {array.append(Scope.stats)}
-      if (permissions & 32768) == 32768       {array.append(Scope.ads)}
-      if (permissions & 65536) == 65536       {array.append(Scope.offline)}
-      
+      if (permissions & 1) == 1                 {array.append(Scope.notify)}
+      if (permissions & 2) == 2                 {array.append(Scope.friends)}
+      if (permissions & 4) == 4                 {array.append(Scope.photos)}
+      if (permissions & 8) == 8                 {array.append(Scope.audio)}
+      if (permissions & 16) == 16               {array.append(Scope.video)}
+      if (permissions & 131072) == 131072       {array.append(Scope.docs)}
+      if (permissions & 2048) == 2048           {array.append(Scope.notes)}
+      if (permissions & 128) == 128             {array.append(Scope.pages)}
+      if (permissions & 1024) == 1024           {array.append(Scope.status)}
+      if (permissions & 32) == 32               {array.append(Scope.offers)}
+      if (permissions & 64) == 64               {array.append(Scope.questions)}
+      if (permissions & 8192) == 8192           {array.append(Scope.wall)}
+      if (permissions & 262144) == 262144       {array.append(Scope.groups)}
+      if (permissions & 4096) == 4096           {array.append(Scope.messages)}
+      if (permissions & 4194304) == 4194304     {array.append(Scope.email)}
+      if (permissions & 524288) == 524288       {array.append(Scope.notifications)}
+      if (permissions & 1048576) == 1048576     {array.append(Scope.stats)}
+      if (permissions & 32768) == 32768         {array.append(Scope.ads)}
+      if (permissions & 65536) == 65536         {array.append(Scope.offline)}
+      if (permissions & 134217728) == 134217728 {array.append(Scope.market)}
+    
       return array
     }
     

@@ -85,22 +85,22 @@ public class _VKError : ErrorType, CustomStringConvertible {
   private func catchAPIDomain() {
     switch code {
     case 5:
-      request?.authFails++
-      request?.attempts--
+      request?.authFails += 1
+      request?.attempts -= 1
       Authorizator.autorize(request)
     case 6, 9, 10:
       Connection.needLimit = true
       finaly()
     case 14:
       if !sharedCaptchaIsRun {
-        request?.attempts--
+        request?.attempts -= 1
         СaptchaController.start(
           sid: userInfo!["captcha_sid"] as! String,
           imageUrl: userInfo!["captcha_img"] as! String,
           request: request!)
       }
     case 17:
-      request?.attempts--
+      request?.attempts -= 1
       WebController.validate(request!, validationUrl: userInfo!["redirect_uri"] as! String)
     default:
       finaly()
@@ -111,7 +111,7 @@ public class _VKError : ErrorType, CustomStringConvertible {
   
   public func finaly() {
     if let request = request {
-      request.reSend()
+      request.trySend()
     }
   }
   

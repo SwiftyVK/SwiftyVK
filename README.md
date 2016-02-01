@@ -66,40 +66,40 @@ Implement `VKDelegate` protocol and **all its functions** in custom class. For e
 ```swift
 class YourClass: Superclass, VKDelegate {
 
-func vkWillAutorize() -> [VK.Scope] {
-//Called when SwiftyVK need autorization permissions.
-return //an array of application permissions
-}
+  func vkWillAutorize() -> [VK.Scope] {
+    //Called when SwiftyVK need autorization permissions.
+    return //an array of application permissions
+  }
 
-func vkDidAutorize() {
-//Called when the user is log in. 
-//Here you can start to send requests to the API.
-}
+  func vkDidAutorize() {
+    //Called when the user is log in. 
+    //Here you can start to send requests to the API.
+  }
 
-func vkDidUnautorize() {
-//Called when user is log out.
-}
+  func vkDidUnautorize() {
+    //Called when user is log out.
+  }
 
-func vkAutorizationFailed(error: VK.Error) {
-//Called when SwiftyVK could not authorize. To let the application know that something went wrong.
-}
+  func vkAutorizationFailed(error: VK.Error) {
+    //Called when SwiftyVK could not authorize. To let the application know that something went wrong.
+  }
 
-func vkTokenPath() -> (useUserDefaults: Bool, alternativePath: String) {
-//Called when SwiftyVK need know where a token is located.
-return //bool value that indicates whether save token to NSUserDefaults or not, and alternative save path.
-}
+  func vkTokenPath() -> (useUserDefaults: Bool, alternativePath: String) {
+    //Called when SwiftyVK need know where a token is located.
+    return //bool value that indicates whether save token to NSUserDefaults or not, and alternative save path.
+  }
 
-func vkWillPresentView() -> UIViewController {
-//Only for iOS!
-//Called when need to display a view from SwiftyVK.
-return //UIViewController that should present autorization view controller
-}
+  func vkWillPresentView() -> UIViewController {
+    //Only for iOS!
+    //Called when need to display a view from SwiftyVK.
+    return //UIViewController that should present autorization view controller
+  }
 
-func vkWillPresentWindow() -> (isSheet: Bool, inWindow: NSWindow?) {
-//Only for OSX!
-//Called when need to display a window from SwiftyVK.
-return //bool value that indicates whether to display the window as modal or not, and parent window for modal presentation
-}
+  func vkWillPresentWindow() -> (isSheet: Bool, inWindow: NSWindow?) {
+    //Only for OSX!
+    //Called when need to display a window from SwiftyVK.
+    return //bool value that indicates whether to display the window as modal or not, and parent window for modal presentation
+  }
 }
 ``` 
 *See full implementation in Example project*
@@ -133,10 +133,10 @@ For authorization with official VK application for iOS, you need:
 * Add app schemas to Info.plist file:
 ```html
 <key>LSApplicationQueriesSchemes</key>
-<array>
-<string>vkauthorize</string>
-<string>vk$YOUR_APP_ID$</string>
-</array>
+  <array>
+    <string>vkauthorize</string>
+    <string>vk$YOUR_APP_ID$</string>
+  </array>
 ```
 *2. In https://vk.com/apps?act=manage -> Edit App -> Settings*
 
@@ -162,16 +162,16 @@ The call requests is as follows **VK.methodGrop.methodName**.
 For example, send request with parameters and response processing:
 ```swift
 let req = VK.API.Users.get([VK.Arg.userId : "1"])
-req.successBlock = {response in print(response)}
-req.errorBlock = {error in print(error)}
+  req.successBlock = {response in print(response)}
+  req.errorBlock = {error in print(error)}
 req.send()
 ```
 
 Or a bit shorter:
 ```swift
 let req = VK.API.Users.get([VK.Arg.userId : "1"]).send(
-{response in print(response)}, 
-{error in print(error)}
+  {response in print(response)}, 
+  {error in print(error)}
 )
 
 ```
@@ -188,7 +188,7 @@ VK.API.execute("return \"Hello World\"")
 ```
 * Remote execute stored application code:
 ```swift
-VK.API.remote(method: "YourRemoteMethodName", parameters: nil)
+VK.API.remote(method: "YourRemoteMethodName")
 ```
 ###Request properties
 
@@ -211,7 +211,7 @@ In addition to the settings of each individual request, you can set global setti
 
 Property | Default | Description
 :------------- | ------------- | :-------------
-`apiVersion`| >5.37 | Returns used VK API version
+`apiVersion`| >5.44 | Returns used VK API version
 `maxRequestsPerSec` | 3 | The maximum number of requests that can be sent per second. Here you can [read more](https://vk.com/dev/api_requests) in the section "Limitations and recommendations".
 `logOptions` | [ ] | Parameter is used to debug and trace work SwiftyVK. My little crutch :)
 
@@ -223,19 +223,19 @@ Responses to requests come in the form of text in [JSON](https://en.wikipedia.or
 In our request example about the syntax that will return the response:
 ```JSON
 [
-{
-"id" : 1,
-"first_name" : "Pavel",
-"last_name" : "Durov"
-}
+  {
+    "id" : 1,
+    "first_name" : "Pavel",
+    "last_name" : "Durov"
+  }
 ]
 ```
 
 It contains an array of users which we have access to 3 fields. Suppose that we want to get all user data into separate variable. We can do this:
 ```swift
-var id = response["0, id"].intValue //1
-var firstName = response["0, first_name"].stringValue //Pavel
-var lastName = response["0, last_name"].stringValue //Durov
+  var id = response["0, id"].intValue //1
+  var firstName = response["0, first_name"].stringValue //Pavel
+  var lastName = response["0, last_name"].stringValue //Durov
 ```
 And that's all You need. If You want to learn more, check out the [SwiftyJSON documentation](https://github.com/SwiftyJSON/SwiftyJSON).
 
@@ -260,12 +260,11 @@ let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("image",
 let media = Media(imageData: data, type: .JPG)
 //Upload image to wall        
 VK.API.Upload.Photo.toWall(media: media,
-userId: "1",
-groupId: nil,
-isAsynchronous: true,
-progressBlock: { (done, total) -> () in print("upload \(done) of \(total))")},
-successBlock: {response in print(response)},
-errorBlock: {error in print(error)}
+  userId: "1",
+  isAsynchronous: true,
+  progressBlock: { (done, total) -> () in print("upload \(done) of \(total))")},
+  successBlock: {response in print(response)},
+  errorBlock: {error in print(error)}
 )
 ```
 

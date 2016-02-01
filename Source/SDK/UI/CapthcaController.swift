@@ -33,19 +33,24 @@ internal class СaptchaController: _СaptchaControllerPrototype {
   
   
   class func start(sid sid: String, imageUrl: String, request: Request) {
-    dispatch_sync(vkSheetQueue, {
+    var canContinue = false
+    
+    dispatch_sync(vkSheetQueue) {
       let captcha          = getCapthcaForPlatform()
       sharedCaptchaIsRun   = true
       captcha.sid          = sid
-      captcha.imageUrl     = imageUrl.stringByReplacingOccurrencesOfString("http://", withString: "https://")
+      captcha.imageUrl     = imageUrl
       captcha.request      = request
-      let isContinue       = captcha.sendAndWait()
+      canContinue          = captcha.sendAndWait()
       sharedCaptchaIsRun   = false
-      
-      isContinue
-        ? request.isAsynchronous ? request.reSend() : request.sendInCurrentThread()
-        : false
-    })
+    }
+    
+    if canContinue {
+      request.isAsynchronous ? request.trySend() : request.tryInCurrentThread()
+    }
+    else {
+      request.errorBlock(error: VK.Error(domain: "VKSDKDomain", code: 5, desc: "Capthca loading error", userInfo: nil, req: request))
+    }
   }
   
   
@@ -55,8 +60,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     var data: NSData?
     
     do {data = try NSURLConnection.sendSynchronousRequest(req, returningResponse: nil)}
-    catch let error as NSError {
-      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {VK.Error(ns: error, req: nil).finaly()})
+    catch _ {
       return false
     }
     
@@ -67,7 +71,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     #if os(iOS)
       //NSThread.sleepForTimeInterval(0.5)
     #endif
-  
+    
     dispatch_semaphore_wait(waitAnswer, DISPATCH_TIME_FOREVER)
     return true
   }
@@ -191,10 +195,10 @@ internal class СaptchaController: _СaptchaControllerPrototype {
       didLoad()
     }
     
-    
+
     
     override func viewDidDisappear(animated: Bool) {
-    super.viewDidDisappear(animated)
+      super.viewDidDisappear(animated)
       dispatch_semaphore_signal(waitAnswer)
     }
     

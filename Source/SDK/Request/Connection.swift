@@ -1,9 +1,8 @@
-import Foundation
+//import Foundation
 
 
 
 private let requestsQueue = dispatch_queue_create("com.VK.requestsQueue", DISPATCH_QUEUE_SERIAL)
-private let responseQueue = dispatch_queue_create("com.VK.responseQueue", DISPATCH_QUEUE_SERIAL)
 private let loopsQueue = dispatch_queue_create("com.VK.loopsQueue", DISPATCH_QUEUE_CONCURRENT)
 private var actualRequestId : Int?
 
@@ -18,9 +17,7 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   
   
-  internal class func sendInCurrentThread(request: Request) {
-    VK.Log.put(request, "Send in parents thread")
-    
+  internal class func tryInCurrentThread(request: Request) {    
     if request.isAPI {
       waitAPI(request)
       dispatch_async(requestsQueue, {
@@ -32,8 +29,8 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
     
     VK.Log.put(request, "Send in current thread")
     do {request.response.create(try NSURLConnection.sendSynchronousRequest(request.URLRequest, returningResponse: nil))}
-    catch let error as NSError {request.response.error = VK.Error(ns: error, req: nil)}
-    handleResponse(request.response)
+    catch let error as NSError {request.response.setError(VK.Error(ns: error, req: nil))}
+    request.response.execute()
   }
   
   
@@ -111,68 +108,8 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   
   private func finishConnection() {
-    Connection.handleResponse(request!.response)
+    request.response.execute()
     dispatch_semaphore_signal(responseWaitSemaphore)
-  }
-  
-  
-  
-  private class func handleResponse(response: Response) {
-    guard let request = response.request else {
-      assertionFailure("REQUEST IS NULL :(")
-      return
-    }
-    guard request.cancelled == false else {return}
-    
-    if let error = response.error {
-      if request.catchErrors {
-        response.error?.`catch`()
-      }
-      else if request.canSend == true {
-        request.reSend()
-      }
-      else {
-        request.isAPI == true && request.isAsynchronous == false
-          ? executeError(request, error)
-          : dispatch_async(responseQueue) {executeError(request, error)}
-      }
-    }
-    else if let success = response.success {
-      request.isAPI == true && request.isAsynchronous == false
-        ? executeSuccess(request, success)
-        : dispatch_async(responseQueue) {executeSuccess(request, success)}
-    }
-  }
-  
-  
-  
-  private class func executeError(request: Request, _ error: VK.Error) {
-    guard request.errorBlockIsSet else {
-      VK.Log.put(request, "Error block is not set")
-      return
-    }
-    
-    VK.Log.put(request, "Executing error block")
-    request.errorBlock(error: error)
-    request.response.success = nil
-    request.response.error = nil
-    VK.Log.put(request, "Error block is executed")
-  }
-  
-  
-  
-  
-  private class func executeSuccess(request: Request, _ success: JSON) {
-    guard request.successBlockIsSet else {
-      VK.Log.put(request, "Success block is not set")
-      return
-    }
-    
-    VK.Log.put(request, "Executing success block")
-    request.successBlock(response: success)
-    request.response.success = nil
-    request.response.error = nil
-    VK.Log.put(request, "Success block is executed")
   }
   
   
@@ -195,7 +132,7 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   func connection(connection: NSURLConnection, didFailWithError error: NSError)  {
     let error = VK.Error(ns: error, req: request!)
     VK.Log.put(request, "Connection failed with error: \(error)")
-    request.response.error = error
+    request.response.setError(error)
     finishConnection()
   }
   
