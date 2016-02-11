@@ -109,7 +109,7 @@ public class Reachability: NSObject {
         let address: Int64 = 0xA9FE0000
         localWifiAddress.sin_addr.s_addr = in_addr_t(address.bigEndian)
 
-        let ref = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, UnsafePointer())
+        let ref = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, UnsafePointer(nil))
   
         return Reachability(reachabilityRef: ref!)
     }
