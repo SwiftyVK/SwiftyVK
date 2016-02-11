@@ -2,7 +2,7 @@ import Foundation
 
 
 
-private let responseQueue = dispatch_queue_create("com.VK.responseQueue", DISPATCH_QUEUE_SERIAL)
+private let responseQueue = dispatch_queue_create("com.VK.responseQueue", DISPATCH_QUEUE_CONCURRENT)
 
 
 
@@ -26,7 +26,7 @@ internal class Response {
     if data != nil {
       var err : NSError?
       var json = JSON(data: data!, error: &err)
-
+      
       if err != nil {
         error = VK.Error(ns: err!, req: request!)
       }
@@ -84,7 +84,7 @@ internal class Response {
   
   internal func executeError() {
     guard let request = request where request.cancelled == false else {return}
-
+    
     guard request.errorBlockIsSet else {
       VK.Log.put(request, "Error block is not set")
       return
@@ -103,8 +103,7 @@ internal class Response {
   
   
   internal func executeSuccess() {
-    guard let request = request where request.cancelled == false && request.answered == false else {return}
-    request.answered = true
+    guard let request = request where request.cancelled == false else {return}
     
     guard request.successBlockIsSet else {
       VK.Log.put(request, "Success block is not set")

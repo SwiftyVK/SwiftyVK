@@ -11,9 +11,16 @@ private func getNextRequestId() -> Int {
 }
 
 
+
+public func ==(lhs: Request, rhs: Request) -> Bool {
+  return lhs.id == rhs.id && lhs.method == rhs.method && lhs.parameters == rhs.parameters
+}
+
+
+
 ///Request to VK API
-public class Request : CustomStringConvertible {
-  internal let id : Int = getNextRequestId()
+public class Request : CustomStringConvertible, Equatable {
+  public private(set) var id : Int = getNextRequestId()
   public var timeout = VK.defaults.timeOut
   public var isAsynchronous = VK.defaults.sendAsynchronous
   ///Maximum number of attempts to send, after which execution priryvaetsya and an error is returned
@@ -45,14 +52,14 @@ public class Request : CustomStringConvertible {
   }
   private var privateSuccessBlock = VK.defaults.successBlock {
     didSet {
-      successBlockIsSet = true
-      VK.Log.put(self, "Set new success block")
+    successBlockIsSet = true
+    VK.Log.put(self, "Set new success block")
     }
   }
   public var errorBlock = VK.defaults.errorBlock {
     didSet {
-      errorBlockIsSet = true
-      VK.Log.put(self, "Set new error block")
+    errorBlockIsSet = true
+    VK.Log.put(self, "Set new error block")
     }
   }
   internal private(set) var successBlockIsSet = false
@@ -61,8 +68,8 @@ public class Request : CustomStringConvertible {
   public var language : String? {
     get {
       return useDefaultLanguage
-      ? VK.defaults.language
-      : privateLanguage
+        ? VK.defaults.language
+        : privateLanguage
     }
     set {
       guard newValue == nil || VK.defaults.supportedLanguages.contains(newValue!) else {return}
@@ -105,10 +112,8 @@ public class Request : CustomStringConvertible {
     return params
   }
   public var description : String {
-    get {return "Request: \(method) parameters: \(parameters), attempts: \(maxAttempts)"}
+    get {return "Request \(id): \(method)\(parameters), attempts: \(maxAttempts)"}
   }
-  internal var answered = false
-
   
   
   
@@ -129,7 +134,10 @@ public class Request : CustomStringConvertible {
   
   
   internal init(url: String, media: [Media]) {
-    self.maxAttempts         = 10
+    var length = Double(0)
+    media.forEach({length += Double($0.data.length)})
+
+    self.timeout             = Int(length*0.0001)
     self.HTTPMethod          = "POST"
     self.customURL           = url
     self.media               = media
@@ -161,7 +169,6 @@ public class Request : CustomStringConvertible {
   public func send() {
     attempts = 0
     cancelled = false
-    answered = false
     trySend()
   }
   
@@ -224,12 +231,6 @@ public class Request : CustomStringConvertible {
   
   init() {
     VK.Log.put(self, "INIT request")
-  }
-  
-  
-  
-  deinit {
-    VK.Log.put(self, "DEINIT request")
   }
 }
 

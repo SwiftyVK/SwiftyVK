@@ -1,6 +1,7 @@
 import CoreLocation
 
 
+
 extension _VKAPI {
   //Metods to upload mediafiles
   public struct Upload {
@@ -146,38 +147,38 @@ extension _VKAPI {
       
       
       ///Upload photo to market album
-//      public static func toMarketAlbum(media: Media, groupId: String) -> Request {
-//        let req1 = VK.API.Photos.getMarketAlbumUploadServer([VK.Arg.groupId: groupId,])
-//        let req2 = Request(url: "", media: [media])
-//        let req3 = VK.API.Photos.saveMarketAlbumPhoto(nil)
-//        
-//        VK.Log.put(req1, "Prepare upload photo to market album")
-//        req1.successBlock = {(response1: JSON) in
-//          printSync(response1)
-//          req2.customURL = response1["upload_url"].stringValue
-//          req2.isAsynchronous = req1.isAsynchronous
-//          req2.progressBlock = req1.progressBlock
-//          req2.successBlock = {(response2: JSON) in
-//            printSync(response2)
-//            req3.addParameters([
-//              VK.Arg.groupId: groupId,
-//              VK.Arg.photo : response2["photo"].stringValue,
-//              VK.Arg.server : response2["server"].stringValue,
-//              VK.Arg.hash : response2["hash"].stringValue,
-//              ]
-//            )
-//            req3.isAsynchronous = req1.isAsynchronous
-//            req3.errorBlock = req1.errorBlock
-//            VK.Log.put(req1, "Save with request \(req3.id)")
-//            req3.send()
-//          }
-//          VK.Log.put(req1, "Upload with request \(req2.id)")
-//          req2.send()
-//        }
-//        req1.progressBlock = VK.defaults.progressBlock
-//        req1.swappedRequest = req3
-//        return req1
-//      }
+      public static func toMarketAlbum(media: Media, groupId: String) -> Request {
+        let req1 = VK.API.Photos.getMarketAlbumUploadServer([VK.Arg.groupId: groupId,])
+        let req2 = Request(url: "", media: [media])
+        let req3 = VK.API.Photos.saveMarketAlbumPhoto()
+        
+        VK.Log.put(req1, "Prepare upload photo to market album")
+        req1.successBlock = {(response1: JSON) in
+          printSync(response1)
+          req2.customURL = response1["upload_url"].stringValue
+          req2.isAsynchronous = req1.isAsynchronous
+          req2.progressBlock = req1.progressBlock
+          req2.successBlock = {(response2: JSON) in
+            printSync(response2)
+            req3.addParameters([
+              VK.Arg.groupId: groupId,
+              VK.Arg.photo : response2["photo"].stringValue,
+              VK.Arg.server : response2["server"].stringValue,
+              VK.Arg.hash : response2["hash"].stringValue,
+              ]
+            )
+            req3.isAsynchronous = req1.isAsynchronous
+            req3.errorBlock = req1.errorBlock
+            VK.Log.put(req1, "Save with request \(req3.id)")
+            req3.send()
+          }
+          VK.Log.put(req1, "Upload with request \(req2.id)")
+          req2.send()
+        }
+        req1.progressBlock = VK.defaults.progressBlock
+        req1.swappedRequest = req3
+        return req1
+      }
       
       
       

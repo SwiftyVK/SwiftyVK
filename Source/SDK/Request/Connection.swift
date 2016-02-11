@@ -4,7 +4,7 @@
 
 private let apiQueue = dispatch_queue_create("com.VK.requestsQueue", DISPATCH_QUEUE_SERIAL)
 private let notApiQueue = dispatch_queue_create("com.VK.loopsQueue", DISPATCH_QUEUE_CONCURRENT)
-private let delegateQueue = NSOperationQueue()
+
 private var actualRequestId : Int?
 
 
@@ -14,6 +14,11 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   private lazy var reqData = NSMutableData()
   private lazy var responseWaitSemaphore = dispatch_semaphore_create(0)
   private lazy var timeoutOperation = NSBlockOperation()
+  private let delegateQueue = NSOperationQueue()
+  private let timeoutQueue = NSOperationQueue()
+  private var canFinish = true
+  private let finishQueue = dispatch_queue_create("com.VK.finishQueue", DISPATCH_QUEUE_SERIAL)
+  
   
   
   internal class func tryInCurrentThread(request: Request) {
@@ -73,17 +78,21 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
     self.request = request
     super.init()
     Connection.waitAPI(request)
+    
     dispatch_async(request.isAPI ? apiQueue : notApiQueue, {
+      guard !request.cancelled else {return}
+      
+      VK.Log.putToRequestsQueue(request)
       Connection.lockAPI(request)
       Connection.limitIfNeeded(request)
       
+      let connection = NSURLConnection(request: request.URLRequest, delegate: self, startImmediately: false)
+      connection?.setDelegateQueue(self.delegateQueue)
+      connection?.start()
       let type = (request.isAsynchronous ? "asynchronously" : "synchronously")
       VK.Log.put(request, "Send \(type) \(request.attempts) of \(request.maxAttempts) times")
-      let connection = NSURLConnection(request: request.URLRequest, delegate: self, startImmediately: false)
-      connection?.setDelegateQueue(delegateQueue)
-      connection?.start()
       self.addTimeout()
-
+      
       if request.isAPI {
         NSThread.sleepForTimeInterval(VK.defaults.sleepTime)
         request.isAsynchronous == true ? self.waitResponse() : ()
@@ -92,9 +101,7 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
     })
     
     if request.isAsynchronous == false {
-      VK.Log.put(request, "Wait to synchronous response")
       self.waitResponse()
-      VK.Log.put(request, "Synchronous response is recieved")
     }
   }
   
@@ -102,7 +109,7 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   private func addTimeout() {
     self.timeoutOperation = NSBlockOperation() {
-      NSThread.sleepForTimeInterval(Double(self.request.timeout)+1)
+      NSThread.sleepForTimeInterval(Double(self.request.timeout+1))
       if self.timeoutOperation.cancelled == false {
         let error = VK.Error(domain: "APIDomain", code: 7, desc: "Connection timeout", userInfo: nil, req: self.request)
         VK.Log.put(self.request, "Connection time out")
@@ -110,21 +117,29 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
         self.finishConnection()
       }
     }
-    delegateQueue.addOperation(self.timeoutOperation)
+    timeoutQueue.addOperation(self.timeoutOperation)
   }
   
   
   
   private func waitResponse() {
+    let type = (request.isAsynchronous ? "asynchronous" : "synchronous")
+    VK.Log.put(request, "Wait to \(type) response")
     dispatch_semaphore_wait(responseWaitSemaphore, DISPATCH_TIME_FOREVER)
+    VK.Log.put(request, "\(type) response is recieved")
+    VK.Log.removeFromRequestsQueue(request)
   }
   
   
   
   private func finishConnection() {
-    timeoutOperation.cancel()
-    request.response.execute()
-    dispatch_semaphore_signal(responseWaitSemaphore)
+    dispatch_sync(finishQueue) {
+      guard self.canFinish else {return}
+      self.canFinish = false
+      self.timeoutOperation.cancel()
+      self.request.response.execute()
+      dispatch_semaphore_signal(self.responseWaitSemaphore)
+    }
   }
   
   
@@ -154,12 +169,8 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   
   func connection(connection: NSURLConnection, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) {
-    dispatch_async(dispatch_get_main_queue(), {
-      VK.Log.put(self.request, "Uploding file: \(totalBytesWritten) of \(totalBytesExpectedToWrite) bytes")
-      VK.Log.put(self.request, "Executing progress block")
-      self.request!.progressBlock(done: totalBytesWritten, total: totalBytesExpectedToWrite)
-      VK.Log.put(self.request, "progress block is executed")
-    })
+    VK.Log.put(request, "Uploding file: \(totalBytesWritten) of \(totalBytesExpectedToWrite) bytes")
+    request!.progressBlock(done: totalBytesWritten, total: totalBytesExpectedToWrite)
   }
   
   

@@ -27,7 +27,7 @@ public protocol VKDelegate {
   func vkWillPresentView() -> UIViewController
   #elseif os(OSX)
   /**Called when need to display a window from SwiftyVK
-  - returns: Bool value that indicates whether to display the window as modal or not, and parent window for modal presentation.*/
+   - returns: Bool value that indicates whether to display the window as modal or not, and parent window for modal presentation.*/
   func vkWillPresentWindow() -> (isSheet: Bool, inWindow: NSWindow?)
   #endif
 }
@@ -42,20 +42,20 @@ public protocol VKDelegate {
 //
 //
 /**
-Library to connect to the social network "VKontakte"
-* To use, you must call start() specifying the application ID and a delegate
-* For user authentication you must call autorize()
-*/
+ Library to connect to the social network "VKontakte"
+ * To use, you must call start() specifying the application ID and a delegate
+ * For user authentication you must call autorize()
+ */
 public struct VK {
   internal static var delegate : VKDelegate! {
     set{delegateInstance = newValue}
     get{assert(VK.state != .Unknown, "At first initialize VK with start() method")
-      return delegateInstance}
+    return delegateInstance}
   }
   public private(set) static var appID : String! {
     set{appIDInstance = newValue}
     get{assert(VK.state != .Unknown, "At first initialize VK with start() method")
-      return appIDInstance}
+    return appIDInstance}
   }
   private static var delegateInstance : VKDelegate?
   private static var appIDInstance : String?
@@ -89,13 +89,13 @@ public struct VK {
   #if os(iOS)
   @available(iOS 9.0, *)
   public static func processURL(url: NSURL, options: [String: AnyObject]) {
-    Authorizator.recieveTokenURL(url, fromApp: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String);
+  Authorizator.recieveTokenURL(url, fromApp: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String);
   }
   
   
   @available(iOS, introduced=4.2, deprecated=9.0, message="Please use url:options:")
   public static func processURL_old(url: NSURL, sourceApplication app: String?) {
-    Authorizator.recieveTokenURL(url, fromApp: app);
+  Authorizator.recieveTokenURL(url, fromApp: app);
   }
   #endif
   
@@ -120,7 +120,7 @@ private typealias VK_Defaults = VK
 extension VK_Defaults {
   public struct defaults {
     //Returns used VK API version
-    public static let apiVersion = "5.44"
+    public static let apiVersion = "5.45"
     //Returns used VK SDK version
     public static let sdkVersion = "1.3.1"
     ///Requests timeout
@@ -135,7 +135,7 @@ extension VK_Defaults {
     public static var maxRequestsPerSec : Int = 3
     ///Allows print log messages to console
     public static var allowLogToConsole : Bool = false
-
+    
     public static var language : String? {
       get {
       if useSystemLanguage {

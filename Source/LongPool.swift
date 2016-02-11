@@ -300,7 +300,6 @@ internal class LPObserver : NSObject {
   func connectionRestoreForce() {
     dispatch_async(lpQueue) {
       VK.LP.isActive = true
-      //      self.connectionRestore()
       VK.LP.update()
     }
   }

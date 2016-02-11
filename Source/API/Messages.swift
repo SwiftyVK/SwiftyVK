@@ -169,5 +169,12 @@ extension _VKAPI {
     public static func deleteChatPhoto(parameters: [VK.Arg : String] = [:]) -> Request {
       return Request(method: "messages.deleteChatPhoto", parameters: parameters)
     }
+    
+    
+    
+    ///Returns dialog attachments. More - https://vk.com/dev/messages.getHistoryAttachments
+    public static func getHistoryAttachments(parameters: [VK.Arg : String] = [:]) -> Request {
+      return Request(method: "messages.getHistoryAttachments", parameters: parameters)
+    }
   }
 }

@@ -2,9 +2,8 @@ import XCTest
 @testable import SwiftyVK
 
 
+
 class Upload_Tests: VKTestCase {
-  
-  
   
   func test_photo_to_message() {
     guard let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("testImage", ofType: "jpg")!) else {
@@ -171,7 +170,7 @@ class Upload_Tests: VKTestCase {
       XCTFail("Audio path is empty")
       return
     }
-    
+        
     let readyExpectation = expectationWithDescription("ready")
     var progressIsExecuted = false
 
