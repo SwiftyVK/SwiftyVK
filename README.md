@@ -1,4 +1,4 @@
-#**SwiftyVK**
+# SwiftyVK [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/WE-St0r/SwiftyVK/master/LICENSE) [![Platform](https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat)](http://cocoadocs.org/docsets/SwiftyVK) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftyVK.svg?style=flat)](https://cocoapods.org/pods/SwiftyVK) [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg)](https://github.com/WE-St0r/SwiftyVK) [![Swift 2.2](https://img.shields.io/badge/VK_API-5.45-blue.svg?style=flat)](https://vk.com/dev/versions) [![Swift 2.2](https://img.shields.io/badge/Swift-2.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
 
 SwiftyVK makes it easy to interact with social network "VKontakte" API for iOS and OSX.
 
@@ -213,8 +213,6 @@ Property | Default | Description
 :------------- | ------------- | :-------------
 `apiVersion`| >5.44 | Returns used VK API version
 `maxRequestsPerSec` | 3 | The maximum number of requests that can be sent per second. Here you can [read more](https://vk.com/dev/api_requests) in the section "Limitations and recommendations".
-`logOptions` | [ ] | Parameter is used to debug and trace work SwiftyVK. My little crutch :)
-
 
 ##**Parsing response**
 
