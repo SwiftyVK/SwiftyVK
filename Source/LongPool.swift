@@ -272,8 +272,8 @@ internal class LPObserver : NSObject {
     VK.Log.put("LongPool", "Init observer")
     
     #if os(OSX)
-      NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: "connectionLostForce", name:NSWorkspaceScreensDidSleepNotification, object: nil)
-      NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: "connectionRestoreForce", name:NSWorkspaceScreensDidWakeNotification, object: nil)
+      NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: #selector(LPObserver.connectionLostForce), name:NSWorkspaceScreensDidSleepNotification, object: nil)
+      NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: #selector(LPObserver.connectionRestoreForce), name:NSWorkspaceScreensDidWakeNotification, object: nil)
     #endif
     
     #if os(iOS)
