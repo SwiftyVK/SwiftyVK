@@ -20,11 +20,11 @@ class UI_Tests: VKTestCase {
       var executed = false
       
       req.send(
-        {response in
+        success: {response in
           executed = true
           readyExpectation.fulfill()
         },
-        {error in
+        error: {error in
           XCTFail("Unexpected error in request")
       })
       if executed == false {
@@ -47,10 +47,10 @@ class UI_Tests: VKTestCase {
     VK.logOut()
     
     VK.API.Messages.getDialogs().send(
-      {response in
+      success: {response in
         readyExpectation.fulfill()
       },
-      {error in
+      error: {error in
         XCTFail("Unexpected error in request")
         readyExpectation.fulfill()
     })
@@ -71,11 +71,11 @@ class UI_Tests: VKTestCase {
     
     for n in 1...3 {
       VK.API.Messages.getDialogs().send(
-        {response in
+        success: {response in
           executed += 1
           executed >= 3 ? readyExpectation.fulfill() : ()
         },
-        {error in
+        error: {error in
           XCTFail("Unexpected error in \(n) request: \(error)")
           readyExpectation.fulfill()
         }
@@ -101,11 +101,11 @@ class UI_Tests: VKTestCase {
       var executed = false
       
       req.send(
-        {response in
+        success: {response in
           executed = true
           readyExpectation.fulfill()
         },
-        {error in
+        error: {error in
           XCTFail("Request failed")
           readyExpectation.fulfill()
       })
@@ -128,10 +128,10 @@ class UI_Tests: VKTestCase {
     req.isAsynchronous = true
     
     req.send(
-      {response in
+      success: {response in
         readyExpectation.fulfill()
       },
-      {error in
+      error: {error in
         XCTFail("Unexpected error in request")
         readyExpectation.fulfill()
     })

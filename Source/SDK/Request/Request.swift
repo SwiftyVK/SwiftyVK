@@ -18,6 +18,13 @@ public func ==(lhs: Request, rhs: Request) -> Bool {
 
 
 
+///HTTP prtocol methods. See - https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods
+public enum HTTPMethods : String {
+  case GET; case POST
+}
+
+
+
 ///Request to VK API
 public class Request : CustomStringConvertible, Equatable {
   public private(set) var id : Int = getNextRequestId()
@@ -27,6 +34,8 @@ public class Request : CustomStringConvertible, Equatable {
   public var maxAttempts = VK.defaults.maxAttempts
   ///Whether to allow automatic processing of some API error
   public var catchErrors = VK.defaults.catchErrors
+  ///HTTP prtocol dending method. See - https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods
+  public var httpMethod = HTTPMethods.GET
   ///Log for this request life time
   public internal(set) var log = [String]()
   ///Allows print log messages to console
@@ -40,7 +49,6 @@ public class Request : CustomStringConvertible, Equatable {
   internal var customURL : String? = nil
   public private(set) var cancelled = false
   private var useDefaultLanguage = VK.defaults.useSystemLanguage
-  private var HTTPMethod = "GET"
   private var media : [Media]?
   private var parameters = [String : String]()
   public var successBlock : VK.SuccessBlock {
@@ -79,7 +87,7 @@ public class Request : CustomStringConvertible, Equatable {
   }
   private var privateLanguage = VK.defaults.language
   internal var URLRequest : NSURLRequest {
-    let req = NSURLFabric.get(url: customURL, HTTPMethod: HTTPMethod, method: method, params: allParameters, media: media)
+    let req = NSURLFabric.get(url: customURL, httpMethod: httpMethod, method: method, params: allParameters, media: media)
     req.timeoutInterval = NSTimeInterval(self.timeout)
     VK.Log.put(self, "Create url: \(req.URL!.absoluteString) with timeout: \(timeout)")
     return req
@@ -137,8 +145,8 @@ public class Request : CustomStringConvertible, Equatable {
     var length = Double(0)
     media.forEach({length += Double($0.data.length)})
 
+    self.httpMethod          = .POST
     self.timeout             = Int(length*0.0001)
-    self.HTTPMethod          = "POST"
     self.customURL           = url
     self.media               = media
     VK.Log.put(self, "INIT with media files: \(media)")
@@ -156,17 +164,16 @@ public class Request : CustomStringConvertible, Equatable {
   
   
   
-  ///Send with blocks
-  public func send(_successBlock: VK.SuccessBlock,_ _errorBlock:  VK.ErrorBlock) {
-    self.successBlock = _successBlock
-    self.errorBlock = _errorBlock
-    self.send()
-  }
-  
-  
-  
-  ///Just send
-  public func send() {
+  ///Sending request. All parameters are optional
+  public func send(
+    method httpMethod: HTTPMethods? = nil,
+    success successBlock: VK.SuccessBlock? = nil,
+    error errorBlock:  VK.ErrorBlock? = nil) {
+    
+    httpMethod != nil   ? self.httpMethod = httpMethod!     : ()
+    successBlock != nil ? self.successBlock = successBlock! : ()
+    errorBlock != nil   ? self.errorBlock = errorBlock!     : ()
+    
     attempts = 0
     cancelled = false
     trySend()
