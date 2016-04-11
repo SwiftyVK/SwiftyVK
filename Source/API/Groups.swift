@@ -177,6 +177,20 @@ extension _VKAPI {
     public static func approveRequest(parameters: [VK.Arg : String] = [:]) -> Request {
       return Request(method: "groups.approveRequest", parameters: parameters)
     }
+    
+    
+    
+    ///Returns list of groups of selected category. More - https://vk.com/dev/groups.getCatalog
+    public static func getCatalog(parameters: [VK.Arg : String] = [:]) -> Request {
+      return Request(method: "groups.getCatalog", parameters: parameters)
+    }
+    
+    
+    
+    ///Returns list of categories of selected group. More - https://vk.com/dev/groups.getCatalogInfo
+    public static func getCatalogInfo(parameters: [VK.Arg : String] = [:]) -> Request {
+      return Request(method: "groups.getCatalogInfo", parameters: parameters)
+    }
   }
 }
 

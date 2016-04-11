@@ -15,6 +15,8 @@
 		A2527E3C1BD1356C00F65412 /* WebView-OSX.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E251BD1343F00F65412 /* WebView-OSX.xib */; };
 		A2527E3D1BD1357000F65412 /* CaptchaView-iOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E181BD1343F00F65412 /* CaptchaView-iOS.xib */; };
 		A2527E3E1BD1357000F65412 /* WebView-iOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E231BD1343F00F65412 /* WebView-iOS.xib */; };
+		A2967E741CBBC4A700B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
+		A2967E751CBBC51600B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
 		A2A0879C1C5E082F0042EA06 /* SwiftyVK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */; };
 		A2EB6EB71BD182E3008E7D86 /* SwiftyVKResources-OSX.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */; };
 		A2EB6EB91BD18343008E7D86 /* SwiftyVKResources-iOS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2527D551BD1134500F65412 /* SwiftyVKResources-iOS.bundle */; };
@@ -252,6 +254,7 @@
 		A2527E381BD134F000F65412 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = "ru.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A2527E581BD138E500F65412 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		A2527E591BD138E500F65412 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A2967E731CBBC4A700B7D48F /* Gifts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gifts.swift; sourceTree = "<group>"; };
 		A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -324,6 +327,7 @@
 				A2527D761BD12FD200F65412 /* Utils.swift */,
 				A2527D771BD12FD200F65412 /* Video.swift */,
 				A2527D781BD12FD200F65412 /* Wall.swift */,
+				A2967E731CBBC4A700B7D48F /* Gifts.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -610,6 +614,7 @@
 				A2EB6EFC1BD18394008E7D86 /* Places.swift in Sources */,
 				A2EB6EFD1BD18394008E7D86 /* Polls.swift in Sources */,
 				A2EB6EFE1BD18394008E7D86 /* Search.swift in Sources */,
+				A2967E751CBBC51600B7D48F /* Gifts.swift in Sources */,
 				A2EB6EFF1BD18394008E7D86 /* Stats.swift in Sources */,
 				A2EB6F001BD18394008E7D86 /* Status.swift in Sources */,
 				A2EB6F011BD18394008E7D86 /* Storage.swift in Sources */,
@@ -663,6 +668,7 @@
 				A2EB6ECF1BD18389008E7D86 /* Places.swift in Sources */,
 				A2EB6ED01BD18389008E7D86 /* Polls.swift in Sources */,
 				A2EB6ED11BD18389008E7D86 /* Search.swift in Sources */,
+				A2967E741CBBC4A700B7D48F /* Gifts.swift in Sources */,
 				A2EB6ED21BD18389008E7D86 /* Stats.swift in Sources */,
 				A2EB6ED31BD18389008E7D86 /* Status.swift in Sources */,
 				A2EB6ED41BD18389008E7D86 /* Storage.swift in Sources */,

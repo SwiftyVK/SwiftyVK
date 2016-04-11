@@ -56,5 +56,12 @@ extension _VKAPI {
     public static func search(parameters: [VK.Arg : String] = [:]) -> Request {
       return Request(method: "docs.search", parameters: parameters)
     }
+    
+    
+    
+    ///Edit a document. More - https://vk.com/dev/docs.edit
+    public static func edit(parameters: [VK.Arg : String] = [:]) -> Request {
+      return Request(method: "docs.edit", parameters: parameters)
+    }
   }
 }

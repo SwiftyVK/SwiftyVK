@@ -115,6 +115,7 @@ extension VK {
     case photosList = "photos_list"
     case caption
     case accessKey = "access_key"
+    case access
     case targetAlbumId = "target_album_id"
     case albumId = "album_id"
     case before
@@ -280,7 +281,36 @@ extension VK {
     case mainPhoto = "main_photo"
     case cropData = "crop_data"
     case cropHash = "crop_hash"
-    
+    case website
+    case subject
+    case email
+    case rss
+    case eventStartDate = "event_start_date"
+    case eventFinishDate = "event_finish_date"
+    case eventGroupId = "event_group_id"
+    case publicCategory = "public_category"
+    case publicSubcategory = "public_subcategory"
+    case publicDate = "public_date"
+    case wall
+    case topics
+    case video
+    case links
+    case events
+    case wiki
+    case messages
+    case ageLimits = "age_limits"
+    case market
+    case marketComments = "market_comments"
+    case marketCountry = "market_country"
+    case marketCity = "market_city"
+    case marketCurrency = "market_currency"
+    case marketContact = "market_contact"
+    case marketWiki = "market_wiki"
+    case obsceneFilter = "obscene_filter"
+    case obsceneStopwords = "obscene_stopwords"
+    case obsceneWords = "obscene_words"
+    case subcategories
+    case randomId = "random_id"
     
     public var hashValue : Int {
       return self.rawValue.hashValue

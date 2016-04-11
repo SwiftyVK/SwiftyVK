@@ -78,5 +78,12 @@ extension _VKAPI {
     public static func removeLink(parameters: [VK.Arg : String] = [:]) -> Request {
       return Request(method: "fave.removeLink", parameters: parameters)
     }
+    
+    
+    
+    ///Remove link to the bookmarks. More - https://vk.com/dev/fave.getMarketItems
+    public static func getMarketItems(parameters: [VK.Arg : String] = [:]) -> Request {
+      return Request(method: "fave.getMarketItems", parameters: parameters)
+    }
   }
 }
