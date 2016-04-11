@@ -22,20 +22,21 @@ internal class Token: NSObject, NSCoding {
   private var token       : String
   private var expires     : Int
   private var isOffline   = false
+  private var parameters  : Dictionary<String, String>
   
   override var description : String {
-    return "Token \(token) valid to \(NSDate(timeIntervalSince1970: NSTimeInterval(expires)))"
+    return "Token with parameters: \(parameters))"
   }
   
   
   
   init(urlString: String) {
     let parameters = Token.parse(urlString)
-    
     token       = parameters["access_token"]!
     expires     = 0 + Int(NSDate().timeIntervalSince1970)
     if parameters["expires_in"] != nil {expires += Int(parameters["expires_in"]!)!}
     isOffline   = (parameters["expires_in"]?.isEmpty == false && (Int(parameters["expires_in"]!) == 0) || parameters["expires_in"] == nil)
+    self.parameters = parameters
     
     super.init()
     tokenInstance = self
@@ -193,7 +194,7 @@ internal class Token: NSObject, NSCoding {
     if VK.state != .Authorized {
       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
         NSThread.sleepForTimeInterval(0.1)
-        VK.delegate.vkDidAutorize()
+        VK.delegate.vkDidAutorize(tokenInstance.parameters)
       }
     }
   }
@@ -213,6 +214,7 @@ internal class Token: NSObject, NSCoding {
   
   //MARK: - NSCoding protocol
   func encodeWithCoder(aCoder: NSCoder) {
+    aCoder.encodeObject(parameters,  forKey: "parameters")
     aCoder.encodeObject(token,       forKey: "token")
     aCoder.encodeInteger(expires,    forKey: "expires")
     aCoder.encodeBool(isOffline,     forKey: "isOffline")
@@ -223,6 +225,14 @@ internal class Token: NSObject, NSCoding {
     token         = aDecoder.decodeObjectForKey("token") as! String
     expires       = aDecoder.decodeIntegerForKey("expires")
     isOffline     = aDecoder.decodeBoolForKey("isOffline")
+    
+    if let parameters = aDecoder.decodeObjectForKey("parameters") as? Dictionary<String, String> {
+      self.parameters = parameters
+    }
+    else {
+      self.parameters = [:]
+    }
+
   }
 }
 

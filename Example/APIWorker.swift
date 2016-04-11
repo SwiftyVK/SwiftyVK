@@ -5,7 +5,7 @@ import SwiftyVK
 class APIWorker {
   
   static let appID = "4994842"
-  static let scope = [VK.Scope.messages,.offline,.friends,.wall,.photos,.audio,.video,.docs,.market]
+  static let scope = [VK.Scope.messages,.offline,.friends,.wall,.photos,.audio,.video,.docs,.market,.email]
   
   
   

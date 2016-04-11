@@ -20,7 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, VKDelegate {
     return APIWorker.scope
   }
   
-  func vkDidAutorize() {}
+  func vkDidAutorize(parameters: Dictionary<String, String>) {}
   
   func vkDidUnautorize() {}
   

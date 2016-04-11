@@ -26,8 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKDelegate {
     return APIWorker.scope
   }
   
-  func vkDidAutorize() {
-  print("vkDidAutorize")
+  func vkDidAutorize(parameters: Dictionary<String, String>) {
   }
   
   func vkDidUnautorize() {}
