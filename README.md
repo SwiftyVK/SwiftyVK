@@ -37,7 +37,7 @@ On this page:
 
 
 ###CocoaPods
-You can use Cocoapods to install **SwiftyVK** by adding it to **Podfile**:
+You can use CocoaPods to install **SwiftyVK** by adding it to **Podfile**:
 
 ```ruby
 use_frameworks!
