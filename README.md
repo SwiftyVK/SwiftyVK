@@ -6,21 +6,21 @@ On this page:
 
 * [Requirements](#requirements)
 * [Integration](#integration)
-  * [Manually](#manually)
-  * [CocoaPods](#cocoapods)
-  * [Carthage](#carthage)
+* [Manually](#manually)
+* [CocoaPods](#cocoapods)
+* [Carthage](#carthage)
 * [Getting started](#getting-started)
 * [Import and implementation](#import-and-implementation)
 * [Initialization](#initialization)
 * [User authorization](#user-authorization)
-  * [Authorization with VK App](#authorization-with-vk-app)
+* [Authorization with VK App](#authorization-with-vk-app)
 * [API Requests](#api-requests)
-  * [Syntax](#syntax)
-  * [Custom requests](#custom-requests)
-  * [Request properties](#request-properties)
-  * [Default properties](#default-properties)
-  * [Parsing response](#parsing-response)
-  * [Error handling](#error-handling)
+* [Syntax](#syntax)
+* [Custom requests](#custom-requests)
+* [Request properties](#request-properties)
+* [Default properties](#default-properties)
+* [Parsing response](#parsing-response)
+* [Error handling](#error-handling)
 * [Upload files](#upload-files)
 * [Longpoll](#longpoll)
 
@@ -66,40 +66,40 @@ Implement `VKDelegate` protocol and **all its functions** in custom class. For e
 ```swift
 class YourClass: Superclass, VKDelegate {
 
-  func vkWillAutorize() -> [VK.Scope] {
-    //Called when SwiftyVK need autorization permissions.
-    return //an array of application permissions
-  }
+func vkWillAutorize() -> [VK.Scope] {
+//Called when SwiftyVK need autorization permissions.
+return //an array of application permissions
+}
 
-  func vkDidAutorize(parameters: Dictionary<String, String>) {}
-    //Called when the user is log in. 
-    //Here you can start to send requests to the API.
-  }
+func vkDidAutorize(parameters: Dictionary<String, String>) {}
+//Called when the user is log in. 
+//Here you can start to send requests to the API.
+}
 
-  func vkDidUnautorize() {
-    //Called when user is log out.
-  }
+func vkDidUnautorize() {
+//Called when user is log out.
+}
 
-  func vkAutorizationFailed(error: VK.Error) {
-    //Called when SwiftyVK could not authorize. To let the application know that something went wrong.
-  }
+func vkAutorizationFailed(error: VK.Error) {
+//Called when SwiftyVK could not authorize. To let the application know that something went wrong.
+}
 
-  func vkTokenPath() -> (useUserDefaults: Bool, alternativePath: String) {
-    //Called when SwiftyVK need know where a token is located.
-    return //bool value that indicates whether save token to NSUserDefaults or not, and alternative save path.
-  }
+func vkTokenPath() -> (useUserDefaults: Bool, alternativePath: String) {
+//Called when SwiftyVK need know where a token is located.
+return //bool value that indicates whether save token to NSUserDefaults or not, and alternative save path.
+}
 
-  func vkWillPresentView() -> UIViewController {
-    //Only for iOS!
-    //Called when need to display a view from SwiftyVK.
-    return //UIViewController that should present autorization view controller
-  }
+func vkWillPresentView() -> UIViewController {
+//Only for iOS!
+//Called when need to display a view from SwiftyVK.
+return //UIViewController that should present autorization view controller
+}
 
-  func vkWillPresentWindow() -> (isSheet: Bool, inWindow: NSWindow?) {
-    //Only for OSX!
-    //Called when need to display a window from SwiftyVK.
-    return //bool value that indicates whether to display the window as modal or not, and parent window for modal presentation
-  }
+func vkWillPresentWindow() -> (isSheet: Bool, inWindow: NSWindow?) {
+//Only for OSX!
+//Called when need to display a window from SwiftyVK.
+return //bool value that indicates whether to display the window as modal or not, and parent window for modal presentation
+}
 }
 ``` 
 *See full implementation in Example project*
@@ -133,10 +133,10 @@ For authorization with official VK application for iOS, you need:
 * Add app schemas to Info.plist file:
 ```html
 <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>vkauthorize</string>
-    <string>vk$YOUR_APP_ID$</string>
-  </array>
+<array>
+<string>vkauthorize</string>
+<string>vk$YOUR_APP_ID$</string>
+</array>
 ```
 *2. In https://vk.com/apps?act=manage -> Edit App -> Settings*
 
@@ -145,10 +145,10 @@ For authorization with official VK application for iOS, you need:
 *3. Add this code to appDelegate*
 ```swift
 func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-  VK.processURL(url, options: options)
-  return true
+VK.processURL(url, options: options)
+return true
 }
-  ```
+```
 *4. Test it!*
 
 
@@ -162,16 +162,18 @@ The call requests is as follows **VK.methodGrop.methodName**.
 For example, send request with parameters and response processing:
 ```swift
 let req = VK.API.Users.get([VK.Arg.userId : "1"])
-  req.successBlock = {response in print(response)}
-  req.errorBlock = {error in print(error)}
+req.httpMethod = .Get
+req.successBlock = {response in print(response)}
+req.errorBlock = {error in print(error)}
 req.send()
 ```
 
 Or a bit shorter:
 ```swift
 let req = VK.API.Users.get([VK.Arg.userId : "1"]).send(
-  {response in print(response)}, 
-  {error in print(error)}
+method: .Get
+success: {response in print(response)}, 
+error: {error in print(error)}
 )
 
 ```
@@ -196,14 +198,18 @@ The requests have several properties that control their behavior. Their names sp
 
 Property | Default | Description
 :------------- | ------------- | :-------------
+`id`| 1... | Automatically generated id.
+`httpMethod`| .GET | HTTP protocol method.
 `successBlock`| empty | This code block will be executed when the response to the request.
 `errorBlock` | empty | This code block will be executed, if during execution of the response fails.
 `progressBlock` | empty | This code block is executed when the file is loaded. It is called every time the server sent the next part of the file.
 `isAsynchronous` | true | Specifies whether the control returns after sending the request immediately or only after receiving the response. By default the requests are asynchronous and control returns immediately. Sometimes you may need to send synchronous requests, **but it is not necessary to do this in the main thread!**.
 `maxAttempts` | 3 | The number of times can be resend the request automatically, if during its execution the error occurred. **0 == infinity attempts**.
 `timeout` | 10 | How long in seconds a request will wait for a response from the server. If the wait is longer this value, the generated request error.
+`canselled`| false | If user cancell request it will true
 `catchErrors` | true | Whether to attempt **SwiftyVK** to handle some query errors automatically. Among these errors include the required authentication, captcha, exceeding the limit of requests per second.
 `language` | system | The language, which will return response fields.
+`log`| [String] | Request sending log.
 
 ###Default properties
 
@@ -221,19 +227,19 @@ Responses to requests come in the form of text in [JSON](https://en.wikipedia.or
 In our request example about the syntax that will return the response:
 ```JSON
 [
-  {
-    "id" : 1,
-    "first_name" : "Pavel",
-    "last_name" : "Durov"
-  }
+{
+"id" : 1,
+"first_name" : "Pavel",
+"last_name" : "Durov"
+}
 ]
 ```
 
 It contains an array of users which we have access to 3 fields. Suppose that we want to get all user data into separate variable. We can do this:
 ```swift
-  var id = response["0, id"].intValue //1
-  var firstName = response["0, first_name"].stringValue //Pavel
-  var lastName = response["0, last_name"].stringValue //Durov
+var id = response["0, id"].intValue //1
+var firstName = response["0, first_name"].stringValue //Pavel
+var lastName = response["0, last_name"].stringValue //Durov
 ```
 And that's all You need. If You want to learn more, check out the [SwiftyJSON documentation](https://github.com/SwiftyJSON/SwiftyJSON).
 
@@ -258,11 +264,11 @@ let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("image",
 let media = Media(imageData: data, type: .JPG)
 //Upload image to wall        
 VK.API.Upload.Photo.toWall(media: media,
-  userId: "1",
-  isAsynchronous: true,
-  progressBlock: { (done, total) -> () in print("upload \(done) of \(total))")},
-  successBlock: {response in print(response)},
-  errorBlock: {error in print(error)}
+userId: "1",
+isAsynchronous: true,
+progressBlock: { (done, total) -> () in print("upload \(done) of \(total))")},
+successBlock: {response in print(response)},
+errorBlock: {error in print(error)}
 )
 ```
 

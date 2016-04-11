@@ -2,12 +2,18 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:LICENSE">
+   </FileRef>
+   <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <FileRef
+      location = "group:SwiftyVK.podspec">
+   </FileRef>
+   <FileRef
       location = "group:SwiftyVK.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Example/Example.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:SwiftyVK.podspec">
    </FileRef>
 </Workspace>
