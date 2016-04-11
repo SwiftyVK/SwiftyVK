@@ -272,15 +272,15 @@ internal class LPObserver : NSObject {
     VK.Log.put("LongPool", "Init observer")
     
     #if os(OSX)
-      NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: "connectionLostForce", name:NSWorkspaceScreensDidSleepNotification, object: nil)
-      NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: "connectionRestoreForce", name:NSWorkspaceScreensDidWakeNotification, object: nil)
+      NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: #selector(connectionLostForce), name:NSWorkspaceScreensDidSleepNotification, object: nil)
+      NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: #selector(connectionRestoreForce), name:NSWorkspaceScreensDidWakeNotification, object: nil)
     #endif
     
     #if os(iOS)
       let reachability = Reachability.reachabilityForInternetConnection()
-      NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: ReachabilityChangedNotification, object: nil)
-      NSNotificationCenter.defaultCenter().addObserver(self, selector: "connectionLostForce", name: UIApplicationWillResignActiveNotification, object: nil)
-      NSNotificationCenter.defaultCenter().addObserver(self, selector: "connectionRestoreForce", name:UIApplicationDidBecomeActiveNotification, object: nil)
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reachabilityChanged), name: ReachabilityChangedNotification, object: nil)
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(connectionLostForce), name: UIApplicationWillResignActiveNotification, object: nil)
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(connectionRestoreForce), name:UIApplicationDidBecomeActiveNotification, object: nil)
       reachability.startNotifier()
     #endif
   }
@@ -288,16 +288,16 @@ internal class LPObserver : NSObject {
   
   
   #if os(iOS)
-  func reachabilityChanged(note: NSNotification) {
-  let reachability = note.object as! Reachability
-  reachability.isReachable() ? connectionRestore() : connectionLost()
+  @objc private func reachabilityChanged(note: NSNotification) {
+    let reachability = note.object as! Reachability
+    reachability.isReachable() ? connectionRestore() : connectionLost()
   }
   #endif
   
   
   
   
-  func connectionRestoreForce() {
+  @objc private func connectionRestoreForce() {
     dispatch_async(lpQueue) {
       VK.LP.isActive = true
       VK.LP.update()
@@ -305,7 +305,7 @@ internal class LPObserver : NSObject {
   }
   
   
-  func connectionLostForce() {
+  @objc private func connectionLostForce() {
     dispatch_async(lpQueue) {
       VK.LP.isActive = false
       self.connectionLost()
