@@ -525,7 +525,6 @@
 					};
 					A2EB6EA71BD180E9008E7D86 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 842SSJ357W;
 					};
 				};
 			};

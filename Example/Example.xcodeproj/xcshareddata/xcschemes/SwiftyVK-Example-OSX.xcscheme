@@ -43,16 +43,6 @@
                </Test>
             </SkippedTests>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A22737361CF476360042868A"
-               BuildableName = "SwiftyVK-Tests-OSX-UI.xctest"
-               BlueprintName = "SwiftyVK-Tests-OSX-UI"
-               ReferencedContainer = "container:Example.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
