@@ -43,7 +43,7 @@ class VKDelegateImpl : VKDelegate {
   
   #if os(iOS)
   func vkWillPresentView() -> UIViewController {
-    return (self.window as? UIWindow).rootViewController!
+    return (self.window as! UIWindow).rootViewController!
   }
   #endif
 }
