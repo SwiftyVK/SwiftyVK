@@ -403,11 +403,9 @@
 				TargetAttributes = {
 					A2527E671BD13A3B00F65412 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 842SSJ357W;
 					};
 					A2527E791BD13A5300F65412 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 842SSJ357W;
 					};
 					A2EB712C1BD27639008E7D86 = {
 						CreatedOnToolsVersion = 7.1;
@@ -778,6 +776,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -828,6 +827,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
