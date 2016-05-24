@@ -9,6 +9,7 @@ class VKTestCase : XCTestCase {
   override func setUp() {
 //    VK.defaults.allowLogToConsole = true
     VK.Log.purge()
+    _ = Token.init(token: "0f4a54c466611afbd49a48d966a2ec10f490384133fddc2241e9d559308ddd1cf3ae4316b47bc7e5d0317")
     super.setUp()
   }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A227371D1CF462F60042868A /* VKDelegateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227371C1CF462F60042868A /* VKDelegateImpl.swift */; };
+		A22737201CF466100042868A /* VKDelegateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227371C1CF462F60042868A /* VKDelegateImpl.swift */; };
 		A234A4031BE29DAD00856CA5 /* Misc_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A234A4021BE29DAD00856CA5 /* Misc_Tests.swift */; };
 		A234A4041BE29DAD00856CA5 /* Misc_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A234A4021BE29DAD00856CA5 /* Misc_Tests.swift */; };
 		A24D10971C574D29008263B0 /* VKTestsCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24D10921C574A99008263B0 /* VKTestsCase.swift */; };
@@ -32,10 +34,8 @@
 		A2EB70791BD269AB008E7D86 /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70711BD2699E008E7D86 /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A2EB707C1BD269B1008E7D86 /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70731BD2699E008E7D86 /* SwiftyVK.framework */; };
 		A2EB707D1BD269B1008E7D86 /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70731BD2699E008E7D86 /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A2EB71451BD27840008E7D86 /* UI_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71251BD275E5008E7D86 /* UI_Tests.swift */; };
 		A2EB71461BD27840008E7D86 /* Request_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71261BD275E5008E7D86 /* Request_Tests.swift */; };
 		A2EB71471BD27840008E7D86 /* Upload_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71271BD275E5008E7D86 /* Upload_Tests.swift */; };
-		A2EB71481BD27841008E7D86 /* UI_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71251BD275E5008E7D86 /* UI_Tests.swift */; };
 		A2EB71491BD27841008E7D86 /* Request_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71261BD275E5008E7D86 /* Request_Tests.swift */; };
 		A2EB714A1BD27841008E7D86 /* Upload_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71271BD275E5008E7D86 /* Upload_Tests.swift */; };
 		A2EB714B1BD27948008E7D86 /* testAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F2D1BD1857D008E7D86 /* testAudio.mp3 */; };
@@ -143,6 +143,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A227371C1CF462F60042868A /* VKDelegateImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKDelegateImpl.swift; sourceTree = "<group>"; };
+		A22737351CF476280042868A /* SwiftyVK-Tests-iOS copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SwiftyVK-Tests-iOS copy-Info.plist"; path = "/Users/WE-St0r/Documents/Development/VK/SwiftyVK/Example/SwiftyVK-Tests-iOS copy-Info.plist"; sourceTree = "<absolute>"; };
+		A22737491CF476360042868A /* SwiftyVK-Tests-OSX copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SwiftyVK-Tests-OSX copy-Info.plist"; path = "/Users/WE-St0r/Documents/Development/VK/SwiftyVK/Example/SwiftyVK-Tests-OSX copy-Info.plist"; sourceTree = "<absolute>"; };
 		A234A4021BE29DAD00856CA5 /* Misc_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Misc_Tests.swift; sourceTree = "<group>"; };
 		A234A41C1BE354A200856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		A234A41D1BE354A200856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
@@ -243,12 +246,15 @@
 		A2527E5A1BD139E200F65412 = {
 			isa = PBXGroup;
 			children = (
+				A227371C1CF462F60042868A /* VKDelegateImpl.swift */,
 				A2527EBC1BD13F7E00F65412 /* APIWorker.swift */,
 				A2527E6B1BD13A3B00F65412 /* AppDelegate-OSX.swift */,
 				A2527E7C1BD13A5300F65412 /* AppDelegate-iOS.swift */,
 				A25221041BD17B450047C638 /* Resources */,
 				A2EB71221BD275A0008E7D86 /* Tests */,
 				A2527E691BD13A3B00F65412 /* Products */,
+				A22737351CF476280042868A /* SwiftyVK-Tests-iOS copy-Info.plist */,
+				A22737491CF476360042868A /* SwiftyVK-Tests-OSX copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -397,6 +403,7 @@
 				TargetAttributes = {
 					A2527E671BD13A3B00F65412 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 842SSJ357W;
 					};
 					A2527E791BD13A5300F65412 = {
 						CreatedOnToolsVersion = 7.1;
@@ -529,6 +536,7 @@
 			files = (
 				A2527EBD1BD13F7E00F65412 /* APIWorker.swift in Sources */,
 				A2527E6C1BD13A3B00F65412 /* AppDelegate-OSX.swift in Sources */,
+				A227371D1CF462F60042868A /* VKDelegateImpl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,6 +545,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2527E7F1BD13A5300F65412 /* ViewController.swift in Sources */,
+				A22737201CF466100042868A /* VKDelegateImpl.swift in Sources */,
 				A2527EBE1BD13F7E00F65412 /* APIWorker.swift in Sources */,
 				A2527E7D1BD13A5300F65412 /* AppDelegate-iOS.swift in Sources */,
 			);
@@ -547,7 +556,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2EB71471BD27840008E7D86 /* Upload_Tests.swift in Sources */,
-				A2EB71451BD27840008E7D86 /* UI_Tests.swift in Sources */,
 				A234A4031BE29DAD00856CA5 /* Misc_Tests.swift in Sources */,
 				A24D10971C574D29008263B0 /* VKTestsCase.swift in Sources */,
 				A2EB71461BD27840008E7D86 /* Request_Tests.swift in Sources */,
@@ -559,7 +567,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2EB714A1BD27841008E7D86 /* Upload_Tests.swift in Sources */,
-				A2EB71481BD27841008E7D86 /* UI_Tests.swift in Sources */,
 				A234A4041BE29DAD00856CA5 /* Misc_Tests.swift in Sources */,
 				A24D10981C574D2A008263B0 /* VKTestsCase.swift in Sources */,
 				A2EB71491BD27841008E7D86 /* Request_Tests.swift in Sources */,
@@ -675,7 +682,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -703,6 +711,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-Example-OSX";
 				PRODUCT_NAME = "~SwiftyVK~";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -725,7 +734,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -746,6 +756,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-Example-OSX";
 				PRODUCT_NAME = "~SwiftyVK~";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 			};
 			name = Release;

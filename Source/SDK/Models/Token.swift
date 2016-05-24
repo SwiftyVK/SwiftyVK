@@ -47,6 +47,21 @@ internal class Token: NSObject, NSCoding {
   
   
   
+  
+  init(token: String, expires : Int = 0, parameters: Dictionary<String, String> = [:]) {
+    self.token = token
+    self.expires = expires
+    self.parameters = parameters
+    
+    super.init()
+    tokenInstance = self
+    Token.revoke = true
+    VK.Log.put("Token", "INIT \(self)")
+    save()
+  }
+  
+  
+  
   class func get() -> String? {
     VK.Log.put("Token", "Getting")
     
@@ -194,7 +209,9 @@ internal class Token: NSObject, NSCoding {
     if VK.state != .Authorized {
       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
         NSThread.sleepForTimeInterval(0.1)
-        VK.delegate.vkDidAutorize(tokenInstance.parameters)
+        if tokenInstance != nil {
+          VK.delegate.vkDidAutorize(tokenInstance.parameters)
+        }
       }
     }
   }

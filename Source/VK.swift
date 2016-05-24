@@ -120,7 +120,7 @@ private typealias VK_Defaults = VK
 extension VK_Defaults {
   public struct defaults {
     //Returns used VK API version
-    public static let apiVersion = "5.50"
+    public static let apiVersion = "5.52"
     //Returns used VK SDK version
     public static let sdkVersion = "1.3.1"
     ///Requests timeout

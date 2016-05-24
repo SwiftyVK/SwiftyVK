@@ -690,7 +690,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="Hwa-rH-63Z">
-                                <rect key="frame" x="32" y="123" width="86" height="32"/>
+                                <rect key="frame" x="33" y="123" width="86" height="32"/>
                                 <buttonCell key="cell" type="push" title="Log out" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4Yc-l8-bAz">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -730,7 +730,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="fng-lN-v0H">
-                                <rect key="frame" x="22" y="19" width="106" height="32"/>
+                                <rect key="frame" x="23" y="19" width="106" height="32"/>
                                 <buttonCell key="cell" type="push" title="friends.get" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qvn-ko-tP2">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>

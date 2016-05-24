@@ -108,7 +108,7 @@ class Upload_Tests: VKTestCase {
       XCTFail("Image path is empty")
       return
     }
-    
+
     let readyExpectation = expectationWithDescription("ready")
     var progressIsExecuted = false
     
