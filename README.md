@@ -31,7 +31,7 @@ On this page:
 
 ##**Integration**
 ###Manually
-1. Just drag **SwiftyVK.framework** or include the whole **SwiftyVK.xcodeproj** to project
+1. Just drag **SwiftyVK.framework** (you may need to compile it for the required platform) or include the whole **SwiftyVK.xcodeproj** to project
 2. Link SwiftyVK.framework to application in **Target preferences -> General -> Embedded binaries**.
 
 
