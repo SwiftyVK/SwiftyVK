@@ -137,7 +137,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
       didLoad()
       
       if #available(OSX 10.10, *) {
-        window?.styleMask |= NSFullSizeContentViewWindowMask
+        window?.styleMask.unionInPlace(NSFullSizeContentViewWindowMask)
         window?.titleVisibility = .Hidden
         window?.titlebarAppearsTransparent = true
       }

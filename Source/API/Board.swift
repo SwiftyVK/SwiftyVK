@@ -26,7 +26,7 @@ extension _VKAPI {
     
     
     ///Adds a comment on a topic on a community's discussion board. More - https://vk.com/dev/board.addComment
-    public static func addComment(parameters: [VK.Arg : String] = [:]) -> Request {
+    public static func createComment(parameters: [VK.Arg : String] = [:]) -> Request {
       return Request(method: "board.addComment", parameters: parameters)
     }
     

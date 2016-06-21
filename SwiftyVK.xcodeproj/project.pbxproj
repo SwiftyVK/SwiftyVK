@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A20FF11A1BEB6BB5009FBE3D /* Authorizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */; };
 		A20FF11C1BEB7DC8009FBE3D /* Authorizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */; };
+		A22B84FB1D180BE1007F9D82 /* SwiftyVK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = A22B84FA1D180BE1007F9D82 /* SwiftyVK.podspec */; };
 		A24D108F1C56A49E008263B0 /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24D108E1C56A49E008263B0 /* Market.swift */; };
 		A24D10901C56A49E008263B0 /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24D108E1C56A49E008263B0 /* Market.swift */; };
 		A2527E3B1BD1356C00F65412 /* CaptchaView-OSX.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E1A1BD1343F00F65412 /* CaptchaView-OSX.xib */; };
@@ -176,6 +177,7 @@
 
 /* Begin PBXFileReference section */
 		A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorizator.swift; sourceTree = "<group>"; };
+		A22B84FA1D180BE1007F9D82 /* SwiftyVK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SwiftyVK.podspec; sourceTree = "<group>"; };
 		A234A40A1BE34F6800856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/CaptchaView-OSX.strings"; sourceTree = "<group>"; };
 		A234A40B1BE34F6800856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A234A40C1BE34F6900856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/CaptchaView-iOS.strings"; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 		A2527D251BD1123E00F65412 = {
 			isa = PBXGroup;
 			children = (
+				A22B84FA1D180BE1007F9D82 /* SwiftyVK.podspec */,
 				A2527E581BD138E500F65412 /* LICENSE */,
 				A2527E591BD138E500F65412 /* README.md */,
 				A2527D5C1BD12FD200F65412 /* Source */,
@@ -511,20 +514,26 @@
 		A2527D261BD1123E00F65412 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				TargetAttributes = {
 					A2527D4A1BD1130D00F65412 = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0800;
 					};
 					A2527D541BD1134500F65412 = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0800;
 					};
 					A2EB6E9A1BD180DD008E7D86 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = 842SSJ357W;
+						LastSwiftMigration = 0800;
 					};
 					A2EB6EA71BD180E9008E7D86 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 842SSJ357W;
+						DevelopmentTeamName = "Алексей Кудрявцев (Personal Team)";
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -582,6 +591,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2EB6EB71BD182E3008E7D86 /* SwiftyVKResources-OSX.bundle in Resources */,
+				A22B84FB1D180BE1007F9D82 /* SwiftyVK.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,7 +787,23 @@
 		A2527D2A1BD1123E00F65412 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
@@ -787,6 +813,22 @@
 		A2527D2B1BD1123E00F65412 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 			};
@@ -838,6 +880,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -881,6 +924,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
@@ -931,6 +975,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -974,6 +1019,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
@@ -1030,6 +1076,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1080,6 +1127,8 @@
 				PRODUCT_NAME = SwiftyVK;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1142,6 +1191,7 @@
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1194,6 +1244,8 @@
 				PRODUCT_NAME = SwiftyVK;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};

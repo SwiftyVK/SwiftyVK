@@ -151,7 +151,7 @@ class WebController : _WebControllerPrototype {
       webView!.frameLoadDelegate  = self
       
       if #available(OSX 10.10, *) {
-        window?.styleMask |= NSFullSizeContentViewWindowMask
+        window?.styleMask.unionInPlace(NSFullSizeContentViewWindowMask)
         window?.titleVisibility = .Hidden
         window?.titlebarAppearsTransparent = true
         window?.setFrame(
@@ -228,7 +228,7 @@ class WebController : _WebControllerPrototype {
     
     //MARK: frameLoadDelegate protocol
     func webView(sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
-      handleResponse(frame.dataSource!.response.URL!.absoluteString)
+      handleResponse(frame.dataSource!.response.URL!.absoluteString!)
     }
     
     
@@ -311,7 +311,7 @@ class WebController : _WebControllerPrototype {
     //MARK: UIWebViewDelegate protocol
     func webViewDidFinishLoad(webView: UIWebView) {
       activity.stopAnimating()
-      handleResponse(webView.request!.URL!.absoluteString)
+      handleResponse(webView.request!.URL!.absoluteString!)
     }
     
     

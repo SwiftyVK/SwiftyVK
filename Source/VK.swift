@@ -122,7 +122,7 @@ extension VK_Defaults {
     //Returns used VK API version
     public static let apiVersion = "5.52"
     //Returns used VK SDK version
-    public static let sdkVersion = "1.3.1"
+    public static let sdkVersion = "1.3.17"
     ///Requests timeout
     public static var timeOut : Int = 10
     ///Maximum number of attempts to send requests

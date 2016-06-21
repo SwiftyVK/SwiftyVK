@@ -277,11 +277,11 @@ internal class LPObserver : NSObject {
     #endif
     
     #if os(iOS)
-      let reachability = Reachability.reachabilityForInternetConnection()
+      let reachability = try! Reachability.reachabilityForInternetConnection()
       NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reachabilityChanged), name: ReachabilityChangedNotification, object: nil)
       NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(connectionLostForce), name: UIApplicationWillResignActiveNotification, object: nil)
       NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(connectionRestoreForce), name:UIApplicationDidBecomeActiveNotification, object: nil)
-      reachability.startNotifier()
+      try! reachability.startNotifier()
     #endif
   }
   

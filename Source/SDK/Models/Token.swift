@@ -47,21 +47,6 @@ internal class Token: NSObject, NSCoding {
   
   
   
-  
-  init(token: String, expires : Int = 0, parameters: Dictionary<String, String> = [:]) {
-    self.token = token
-    self.expires = expires
-    self.parameters = parameters
-    
-    super.init()
-    tokenInstance = self
-    Token.revoke = true
-    VK.Log.put("Token", "INIT \(self)")
-    save()
-  }
-  
-  
-  
   class func get() -> String? {
     VK.Log.put("Token", "Getting")
     

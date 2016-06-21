@@ -13,7 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   
   @IBAction func click(sender: AnyObject) {
-    APIWorker.action(sender.tag())
+    APIWorker.action(sender.tag)
   }
 }
 

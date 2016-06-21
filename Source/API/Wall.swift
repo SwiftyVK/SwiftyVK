@@ -89,7 +89,7 @@ extension _VKAPI {
     
     
     ///Adds a comment to a post on a user wall or community wall. More - https://vk.com/dev/wall.addComment
-    public static func addComment(parameters: [VK.Arg : String] = [:]) -> Request {
+    public static func createComment(parameters: [VK.Arg : String] = [:]) -> Request {
       return Request(method: "wall.addComment", parameters: parameters)
     }
     

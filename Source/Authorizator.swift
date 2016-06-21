@@ -21,7 +21,7 @@ internal struct Authorizator {
     let _mode = isMac ? "mobile" : "ios"
     let _redir = canAutorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
     
-    return  "client_id=\(VK.appID)&scope=\(_perm)&display=\(_mode)&v\(VK.defaults.apiVersion)&sdk_version=1.2.2=\(VK.defaults.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
+    return  "client_id=\(VK.appID)&scope=\(_perm)&display=\(_mode)&v\(VK.defaults.apiVersion)&sdk_version=\(VK.defaults.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
   }
   
   
@@ -119,8 +119,8 @@ internal struct Authorizator {
     
     internal static func recieveTokenURL(url: NSURL, fromApp app: String?) {
       if (app == "com.vk.vkclient" || app == "com.vk.vkhd" || url.scheme == "vk\(VK.appID)") {
-        if url.absoluteString.containsString("access_token=") {
-          _ = Token(urlString: url.absoluteString)
+        if url.absoluteString!.containsString("access_token=") {
+          _ = Token(urlString: url.absoluteString!)
           WebController.cancel()
         }
       }
