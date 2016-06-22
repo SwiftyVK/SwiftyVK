@@ -33,7 +33,7 @@ internal class Token: NSObject, NSCoding {
   init(urlString: String) {
     let parameters = Token.parse(urlString)
     token       = parameters["access_token"]!
-    expires     = 0 + Int(NSDate().timeIntervalSince1970)
+    expires     = 0 + Int(Date().timeIntervalSince1970)
     if parameters["expires_in"] != nil {expires += Int(parameters["expires_in"]!)!}
     isOffline   = (parameters["expires_in"]?.isEmpty == false && (Int(parameters["expires_in"]!) == 0) || parameters["expires_in"] == nil)
     self.parameters = parameters
@@ -67,13 +67,13 @@ internal class Token: NSObject, NSCoding {
   
   
   
-  private class func parse(request: String) -> Dictionary<String, String> {
-    let cleanRequest  = request.componentsSeparatedByString("#")[1]
-    let preParameters = cleanRequest.componentsSeparatedByString("&")
+  private class func parse(_ request: String) -> Dictionary<String, String> {
+    let cleanRequest  = request.components(separatedBy: "#")[1]
+    let preParameters = cleanRequest.components(separatedBy: "&")
     var parameters    = Dictionary<String, String>()
     
     for keyValueString in preParameters {
-      let keyValueArray = keyValueString.componentsSeparatedByString("=")
+      let keyValueArray = keyValueString.components(separatedBy: "=")
       parameters[keyValueArray[0]] = keyValueArray[1]
     }
     VK.Log.put("Token", "Parse from parameters: \(parameters)")
@@ -86,7 +86,7 @@ internal class Token: NSObject, NSCoding {
     if tokenInstance == nil {
       return true
     }
-    else if tokenInstance.isOffline == false && tokenInstance.expires < Int(NSDate().timeIntervalSince1970) {
+    else if tokenInstance.isOffline == false && tokenInstance.expires < Int(Date().timeIntervalSince1970) {
       VK.Log.put("Token", "Expired")
       revoke = false
       Token.remove()
@@ -109,9 +109,9 @@ internal class Token: NSObject, NSCoding {
   
   
   private class func loadFromDefaults() -> Token? {
-    let defaults = NSUserDefaults.standardUserDefaults()
-    if !(defaults.objectForKey("Token") != nil) {return nil}
-    let object: AnyObject! = NSKeyedUnarchiver.unarchiveObjectWithData(defaults.objectForKey("Token") as! NSData)
+    let defaults = UserDefaults.standard()
+    if !(defaults.object(forKey: "Token") != nil) {return nil}
+    let object: AnyObject! = NSKeyedUnarchiver.unarchiveObject(with: defaults.object(forKey: "Token") as! Data)
     if object == nil {
       VK.Log.put("Token", "Load from NSUSerDefaults failed")
       return nil
@@ -121,13 +121,13 @@ internal class Token: NSObject, NSCoding {
   }
   
   ///Загрузка из файла
-  private class func loadFromFile(filePath : String) -> Token? {
-    let manager = NSFileManager.defaultManager()
-    if !manager.fileExistsAtPath(filePath) {
+  private class func loadFromFile(_ filePath : String) -> Token? {
+    let manager = FileManager.default()
+    if !manager.fileExists(atPath: filePath) {
       VK.Log.put("Token", "Loaded from file \(filePath) failed")
       return nil
     }
-    let token = (NSKeyedUnarchiver.unarchiveObjectWithFile(filePath)) as? Token
+    let token = (NSKeyedUnarchiver.unarchiveObject(withFile: filePath)) as? Token
     VK.Log.put("Token", "Loaded from file: \(filePath)")
     return token
   }
@@ -145,19 +145,19 @@ internal class Token: NSObject, NSCoding {
   
   
   private func saveToDefaults() {
-    let defaults = NSUserDefaults.standardUserDefaults()
-    defaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(self), forKey: "Token")
+    let defaults = UserDefaults.standard()
+    defaults.set(NSKeyedArchiver.archivedData(withRootObject: self), forKey: "Token")
     defaults.synchronize()
     VK.Log.put("Token", "Saved to NSUserDefaults")
   }
   
   
   
-  private func saveToFile(filePath : String) {
-    let manager = NSFileManager.defaultManager()
-    if manager.fileExistsAtPath(filePath) {
+  private func saveToFile(_ filePath : String) {
+    let manager = FileManager.default()
+    if manager.fileExists(atPath: filePath) {
       do {
-        try manager.removeItemAtPath(filePath)
+        try manager.removeItem(atPath: filePath)
       }
       catch _ {}
     }
@@ -172,14 +172,14 @@ internal class Token: NSObject, NSCoding {
     let useDefaults = parameters.useUserDefaults
     let filePath    = parameters.alternativePath
     
-    let defaults = NSUserDefaults.standardUserDefaults()
-    if defaults.objectForKey("Token") != nil {defaults.removeObjectForKey("Token")}
+    let defaults = UserDefaults.standard()
+    if defaults.object(forKey: "Token") != nil {defaults.removeObject(forKey: "Token")}
     defaults.synchronize()
     
     if !useDefaults {
-      let manager = NSFileManager.defaultManager()
-      if manager.fileExistsAtPath(filePath) {
-        do {try manager.removeItemAtPath(filePath)}
+      let manager = FileManager.default()
+      if manager.fileExists(atPath: filePath) {
+        do {try manager.removeItem(atPath: filePath)}
         catch _ {}
       }
     }
@@ -191,9 +191,9 @@ internal class Token: NSObject, NSCoding {
   
   
   private class func notifyExist() {
-    if VK.state != .Authorized {
-      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-        NSThread.sleepForTimeInterval(0.1)
+    if VK.state != .authorized {
+      DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosDefault).async {
+        Thread.sleep(forTimeInterval: 0.1)
         if tokenInstance != nil {
           VK.delegate.vkDidAutorize(tokenInstance.parameters)
         }
@@ -203,7 +203,7 @@ internal class Token: NSObject, NSCoding {
   
   
   private class func notifyNotExist() {
-    if VK.state == .Authorized {
+    if VK.state == .authorized {
       VK.delegate.vkDidUnautorize()
     }
   }
@@ -215,20 +215,20 @@ internal class Token: NSObject, NSCoding {
   
   
   //MARK: - NSCoding protocol
-  func encodeWithCoder(aCoder: NSCoder) {
-    aCoder.encodeObject(parameters,  forKey: "parameters")
-    aCoder.encodeObject(token,       forKey: "token")
-    aCoder.encodeInteger(expires,    forKey: "expires")
-    aCoder.encodeBool(isOffline,     forKey: "isOffline")
+  func encode(with aCoder: NSCoder) {
+    aCoder.encode(parameters,  forKey: "parameters")
+    aCoder.encode(token,       forKey: "token")
+    aCoder.encode(expires,    forKey: "expires")
+    aCoder.encode(isOffline,     forKey: "isOffline")
   }
   
   
   required init?(coder aDecoder: NSCoder) {
-    token         = aDecoder.decodeObjectForKey("token") as! String
-    expires       = aDecoder.decodeIntegerForKey("expires")
-    isOffline     = aDecoder.decodeBoolForKey("isOffline")
+    token         = aDecoder.decodeObject(forKey: "token") as! String
+    expires       = aDecoder.decodeInteger(forKey: "expires")
+    isOffline     = aDecoder.decodeBool(forKey: "isOffline")
     
-    if let parameters = aDecoder.decodeObjectForKey("parameters") as? Dictionary<String, String> {
+    if let parameters = aDecoder.decodeObject(forKey: "parameters") as? Dictionary<String, String> {
       self.parameters = parameters
     }
     else {

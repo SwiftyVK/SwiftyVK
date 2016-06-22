@@ -21,12 +21,12 @@ internal struct Authorizator {
     let _mode = isMac ? "mobile" : "ios"
     let _redir = canAutorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
     
-    return  "client_id=\(VK.appID)&scope=\(_perm)&display=\(_mode)&v\(VK.defaults.apiVersion)&sdk_version=\(VK.defaults.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
+    return  "client_id=\(VK.appID!)&scope=\(_perm)&display=\(_mode)&v\(VK.defaults.apiVersion)&sdk_version=\(VK.defaults.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
   }
   
   
   
-  internal static func autorize(request: Request?) {
+  internal static func autorize(_ request: Request?) {
     if let request = request {
       request.authFails >= 3 || Token.get() == nil
         ? autorizeWithRequest(request)
@@ -40,20 +40,20 @@ internal struct Authorizator {
   
   
   private static func autorize() {
-    NSThread.isMainThread()
-      ? dispatch_async(vkSheetQueue, {start(nil)})
-      : dispatch_sync(vkSheetQueue, {start(nil)})
+    Thread.isMainThread()
+      ? vkSheetQueue.async(execute: {start(nil)})
+      : vkSheetQueue.sync(execute: {start(nil)})
   }
   
   
   
-  private static func autorizeWithRequest(request: Request) {
-    dispatch_sync(vkSheetQueue, {start(request)})
+  private static func autorizeWithRequest(_ request: Request) {
+    vkSheetQueue.sync(execute: {start(request)})
   }
   
   
   
-  private static func start(request: Request?) {
+  private static func start(_ request: Request?) {
     if canAutorizeWithVkApp {
       startWithApp(request)
     }
@@ -61,14 +61,14 @@ internal struct Authorizator {
       startWithWeb(request)
     }
     
-    if VK.state == .Authorized {
+    if VK.state == .authorized {
       request?.isAsynchronous == true ? request?.trySend() : request?.tryInCurrentThread()
     }
     else {
       let err = VK.Error(domain: "VKSDKDomain", code: 2, desc: "User deny authorization", userInfo: nil, req: request)
       request?.attempts = request!.maxAttempts
       request?.errorBlock(error: err)
-      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+      DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosBackground).async {
         VK.delegate.vkAutorizationFailed(err)
       }
     }
@@ -76,7 +76,7 @@ internal struct Authorizator {
   
   
   
-  private static func startWithWeb(request: Request?) {
+  private static func startWithWeb(_ request: Request?) {
     WebController.start(url: webAuthorizeUrl+paramsUrl, request: nil)
   }
 }
@@ -142,7 +142,7 @@ internal struct Authorizator {
   private typealias OSXAuthorizator = Authorizator
   extension OSXAuthorizator {
     internal static var canAutorizeWithVkApp : Bool {return false}
-    private static func startWithApp(request: Request?) {}
+    private static func startWithApp(_ request: Request?) {}
     internal static func dropRequest() {}
   }
 #endif

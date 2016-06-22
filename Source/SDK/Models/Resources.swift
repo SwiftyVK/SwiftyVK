@@ -21,22 +21,22 @@ internal struct Resources {
   }()
   
   
-  internal static let bundle : NSBundle = {
+  internal static let bundle : Bundle = {
     let name = "SwiftyVKResources" + pathSuffix
     let ext = "bundle"
     
-    if let path = NSBundle.mainBundle().pathForResource(name, ofType: ext) {
-      return NSBundle(path:path)!
+    if let path = Bundle.main().pathForResource(name, ofType: ext) {
+      return Bundle(path:path)!
     }
-    else if let path = NSBundle(forClass:object_getClass(ResourceTestClass())).pathForResource(name, ofType: ext) {
-      return NSBundle(path:path)!
+    else if let path = Bundle(for:object_getClass(ResourceTestClass())).pathForResource(name, ofType: ext) {
+      return Bundle(path:path)!
     }
     
-    return NSBundle.mainBundle()
+    return Bundle.main()
   }()
   
 
-  internal static func withSuffix(name : String) -> String {
+  internal static func withSuffix(_ name : String) -> String {
     return name + pathSuffix
   }
 }

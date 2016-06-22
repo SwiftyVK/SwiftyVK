@@ -22,7 +22,7 @@ public struct Media : CustomStringConvertible {
   
   
   
-  let data : NSData
+  let data : Data
   let mediaType : MediaType
   var imageType : ImageType = .JPG
   var documentType : String = "untitled"
@@ -47,7 +47,7 @@ public struct Media : CustomStringConvertible {
   }
   
   
-  public init(imageData: NSData, type: ImageType) {
+  public init(imageData: Data, type: ImageType) {
     mediaType = .image
     imageType = type
     data = imageData
@@ -55,21 +55,21 @@ public struct Media : CustomStringConvertible {
   
   
   
-  public init(audioData: NSData) {
+  public init(audioData: Data) {
     mediaType = .audio
     data = audioData
   }
   
   
   
-  public init(videoData: NSData) {
+  public init(videoData: Data) {
     mediaType = .video
     data = videoData
   }
   
   
   
-  public init(documentData: NSData, type: String) {
+  public init(documentData: Data, type: String) {
     mediaType = .document
     documentType = type
     data = documentData

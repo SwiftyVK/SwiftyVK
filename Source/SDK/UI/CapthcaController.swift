@@ -28,14 +28,14 @@ internal class СaptchaController: _СaptchaControllerPrototype {
   private var imageUrl        : String?
   private var sid             : String?
   private var request         : Request?
-  private let waitAnswer = dispatch_semaphore_create(0)
+  private let waitAnswer = DispatchSemaphore(value: 0)
   
   
   
-  class func start(sid sid: String, imageUrl: String, request: Request) {
+  class func start(sid: String, imageUrl: String, request: Request) {
     var canContinue = false
     
-    dispatch_sync(vkSheetQueue) {
+    vkSheetQueue.sync {
       let captcha          = getCapthcaForPlatform()
       sharedCaptchaIsRun   = true
       captcha.sid          = sid
@@ -56,15 +56,15 @@ internal class СaptchaController: _СaptchaControllerPrototype {
   
   
   private func sendAndWait() -> Bool {
-    let req = NSURLRequest(URL: NSURL(string: self.imageUrl!)!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 5)
-    var data: NSData?
+    let req = URLRequest(url: URL(string: self.imageUrl!)!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 5)
+    var data: Data?
     
-    do {data = try NSURLConnection.sendSynchronousRequest(req, returningResponse: nil)}
+    do {data = try NSURLConnection.sendSynchronousRequest(req, returning: nil)}
     catch _ {
       return false
     }
     
-    dispatch_sync(dispatch_get_main_queue(), {
+    DispatchQueue.main.sync(execute: {
       self.load(data!)
     })
     
@@ -72,7 +72,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
       //NSThread.sleepForTimeInterval(0.5)
     #endif
     
-    dispatch_semaphore_wait(waitAnswer, DISPATCH_TIME_FOREVER)
+    waitAnswer.wait(timeout: DispatchTime.distantFuture)
     return true
   }
   
@@ -86,7 +86,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
   
   
   
-  private func endEditing(text: String) {
+  private func endEditing(_ text: String) {
     textField.delegate = nil
     sharedCaptchaAnswer = ["captcha_sid" : sid!, "captcha_key": text]
   }
@@ -111,8 +111,8 @@ internal class СaptchaController: _СaptchaControllerPrototype {
       let params           = VK.delegate.vkWillPresentWindow()
       let captcha          = СaptchaController()
       
-      dispatch_sync(dispatch_get_main_queue()) {
-        NSNib(nibNamed:  CaptchaViewName, bundle: Resources.bundle)?.instantiateWithOwner(captcha, topLevelObjects: nil)
+      DispatchQueue.main.sync {
+        NSNib(nibNamed:  CaptchaViewName, bundle: Resources.bundle)?.instantiate(withOwner: captcha, topLevelObjects: nil)
         captcha.windowDidLoad()
       }
       
@@ -122,8 +122,8 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     
     
     
-    private func load(data: NSData) {
-      NSApplication.sharedApplication().activateIgnoringOtherApps(true)
+    private func load(_ data: Data) {
+      NSApplication.shared().activateIgnoringOtherApps(true)
       
       parentWindow != nil
         ? self.parentWindow?.beginSheet(self.window!, completionHandler: nil)
@@ -137,21 +137,21 @@ internal class СaptchaController: _СaptchaControllerPrototype {
       didLoad()
       
       if #available(OSX 10.10, *) {
-        window?.styleMask.unionInPlace(NSFullSizeContentViewWindowMask)
-        window?.titleVisibility = .Hidden
+        window?.styleMask.formUnion(NSFullSizeContentViewWindowMask)
+        window?.titleVisibility = .hidden
         window?.titlebarAppearsTransparent = true
       }
     }
     
     
     
-    override func controlTextDidEndEditing(obj: NSNotification) {
+    override func controlTextDidEndEditing(_ obj: Notification) {
       if window != nil {
         parentWindow?.endSheet(window!)
         window?.orderOut(parentWindow)
       }
       endEditing(textField.stringValue)
-      dispatch_semaphore_signal(waitAnswer)
+      waitAnswer.signal()
     }
   }
 #endif

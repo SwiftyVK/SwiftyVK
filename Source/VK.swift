@@ -13,7 +13,7 @@ public protocol VKDelegate {
    - returns: permissions as VK.Scope type*/
   func vkWillAutorize() -> [VK.Scope]
   ///Called when SwiftyVK did autorize and receive token
-  func vkDidAutorize(parameters: Dictionary<String, String>)
+  func vkDidAutorize(_ parameters: Dictionary<String, String>)
   ///Called when SwiftyVK did unautorize and remove token
   func vkDidUnautorize()
   ///Called when SwiftyVK did failed autorization
@@ -49,12 +49,12 @@ public protocol VKDelegate {
 public struct VK {
   internal static var delegate : VKDelegate! {
     set{delegateInstance = newValue}
-    get{assert(VK.state != .Unknown, "At first initialize VK with start() method")
+    get{assert(VK.state != .unknown, "At first initialize VK with start() method")
     return delegateInstance}
   }
   public private(set) static var appID : String! {
     set{appIDInstance = newValue}
-    get{assert(VK.state != .Unknown, "At first initialize VK with start() method")
+    get{assert(VK.state != .unknown, "At first initialize VK with start() method")
     return appIDInstance}
   }
   private static var delegateInstance : VKDelegate?
@@ -93,7 +93,7 @@ public struct VK {
   }
   
   
-  @available(iOS, introduced=4.2, deprecated=9.0, message="Please use url:options:")
+  @available(iOS, introduced:4.2, deprecated:9.0, message:"Please use url:options:")
   public static func processURL_old(url: NSURL, sourceApplication app: String?) {
   Authorizator.recieveTokenURL(url, fromApp: app);
   }
@@ -139,7 +139,7 @@ extension VK_Defaults {
     public static var language : String? {
       get {
       if useSystemLanguage {
-      let syslemLang = NSBundle.preferredLocalizationsFromArray(supportedLanguages).first
+      let syslemLang = Bundle.preferredLocalizations(from: supportedLanguages).first
       
       if syslemLang == "uk" {
       return "ua"
@@ -156,7 +156,7 @@ extension VK_Defaults {
         useSystemLanguage = (newValue == nil)
       }
     }
-    internal static var sleepTime : NSTimeInterval {return NSTimeInterval(1/Double(maxRequestsPerSec))}
+    internal static var sleepTime : TimeInterval {return TimeInterval(1/Double(maxRequestsPerSec))}
     internal static let successBlock : VK.SuccessBlock = {success in}
     internal static let errorBlock : VK.ErrorBlock = {error in}
     internal static let progressBlock : VK.ProgressBlock = {int in}
@@ -180,20 +180,20 @@ extension VK_Defaults {
 public typealias VK_States = VK
 extension VK_States {
   public enum States {
-    case Unknown
-    case Started
+    case unknown
+    case started
     case inAutorization
-    case Authorized
+    case authorized
   }
   
   public static var state : States {
     guard VK.started else {
-      return .Unknown
+      return .unknown
     }
     guard Token.exist else {
-      return .Started
+      return .started
     }
-    return .Authorized
+    return .authorized
   }
 }
 //

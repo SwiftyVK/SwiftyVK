@@ -9,7 +9,7 @@ extension _VKAPI {
     public struct Photo {
       ///Upload photo to user album
       public static func toAlbum(
-        media: [Media],
+        _ media: [Media],
         albumId : String,
         groupId : String = "",
         caption: String = "",
@@ -61,7 +61,7 @@ extension _VKAPI {
       
       
       ///Upload photo to message
-      public static func toMessage(media: Media) -> Request {
+      public static func toMessage(_ media: Media) -> Request {
         
         let req1 = VK.API.Photos.getMessagesUploadServer()
         let req2 = Request(url: "", media: [media])
@@ -96,7 +96,7 @@ extension _VKAPI {
       
       ///Upload photo to market
       public static func toMarket(
-        media: Media,
+        _ media: Media,
         groupId: String,
         mainPhoto: Bool = false,
         cropX: String = "",
@@ -147,7 +147,7 @@ extension _VKAPI {
       
       
       ///Upload photo to market album
-      public static func toMarketAlbum(media: Media, groupId: String) -> Request {
+      public static func toMarketAlbum(_ media: Media, groupId: String) -> Request {
         let req1 = VK.API.Photos.getMarketAlbumUploadServer([VK.Arg.groupId: groupId,])
         let req2 = Request(url: "", media: [media])
         let req3 = VK.API.Photos.saveMarketAlbumPhoto()
@@ -185,21 +185,21 @@ extension _VKAPI {
       ///Upload photo to user or group wall
       public struct toWall {
         ///Upload photo to user wall
-        public static func toUser(media: Media, userId : String) -> Request {
+        public static func toUser(_ media: Media, userId : String) -> Request {
           return pToWall(media, userId: userId)
         }
         
         
         
         ///Upload photo to group wall
-        public static func toGroup(media: Media, groupId : String) -> Request {
+        public static func toGroup(_ media: Media, groupId : String) -> Request {
           return pToWall(media, groupId: groupId)
         }
         
         
         
         ///Upload photo to user or group wall
-        private static func pToWall(media: Media, userId : String = "", groupId : String = "") -> Request {
+        private static func pToWall(_ media: Media, userId : String = "", groupId : String = "") -> Request {
           
           let req1 = VK.API.Photos.getWallUploadServer([VK.Arg.groupId : groupId])
           let req2 = Request(url: "", media: [media])
@@ -241,7 +241,7 @@ extension _VKAPI {
     public struct Video {
       ///Upload local video file
       public static func fromFile(
-        media: Media,
+        _ media: Media,
         name: String = "No name",
         description : String = "",
         groupId : String = "",
@@ -281,7 +281,7 @@ extension _VKAPI {
       
       ///Upload local video from external resource
       public static func fromUrl(
-        url : String,
+        _ url : String,
         name: String = "No name",
         description : String = "",
         groupId : String = "",
@@ -309,7 +309,7 @@ extension _VKAPI {
     
     
     ///Upload audio
-    public static func audio(media: Media, artist : String = "", title: String = "") -> Request {
+    public static func audio(_ media: Media, artist : String = "", title: String = "") -> Request {
       let req1 = VK.API.Audio.getUploadServer()
       let req2 = Request(url: "", media: [media])
       let req3 = VK.API.Audio.save()
@@ -346,7 +346,7 @@ extension _VKAPI {
     
     ///Upload document
     public static func document(
-      media: Media,
+      _ media: Media,
       groupId : String = "",
       title : String = "",
       tags : String = "") -> Request {

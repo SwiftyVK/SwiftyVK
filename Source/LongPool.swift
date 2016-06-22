@@ -8,7 +8,7 @@ import Foundation
 
 
 
-private var lpQueue = dispatch_queue_create("VKLongPollQueue", DISPATCH_QUEUE_SERIAL)
+private var lpQueue = DispatchQueue(label: "VKLongPollQueue", attributes: DispatchQueueAttributes.serial)
 
 
 
@@ -31,8 +31,8 @@ extension VK_LongPool {
     
     ///Starting receiving updates from the long pool server
     public static func start() {
-      dispatch_async(lpQueue) {
-        guard VK.state == .Authorized && !isActive else {
+      lpQueue.async {
+        guard VK.state == .authorized && !isActive else {
           VK.Log.put("LongPool", "User is not authorized or LongPool is active yet")
           return}
         isActive = true
@@ -47,7 +47,7 @@ extension VK_LongPool {
     
     ///Pause receiving updates from the long pool server
     public static func stop() {
-      dispatch_async(lpQueue) {
+      lpQueue.async {
         observer = nil
         isActive = false
         VK.Log.put("LongPool", "Stopped")
@@ -72,7 +72,7 @@ extension VK_LongPool {
       
       req.errorBlock = {(error: VK.Error) in
         VK.Log.put("LongPool", "Error get server with request \(req.id)")
-        NSThread.sleepForTimeInterval(10)
+        Thread.sleep(forTimeInterval: 10)
         getServer()
       }
       VK.Log.put("LongPool", "Getting server with request \(req.id)")
@@ -82,7 +82,7 @@ extension VK_LongPool {
     
     
     private static func update() {
-      dispatch_async(lpQueue) {
+      lpQueue.async {
         guard isActive else {return}
         
         guard !keyIsExpired && !server.isEmpty && !lpKey.isEmpty && !ts.isEmpty else {
@@ -112,7 +112,7 @@ extension VK_LongPool {
           VK.Log.put("LongPool", "Received error with request \(req.id)")
           
           observer?.connectionLost()
-          NSThread.sleepForTimeInterval(10)
+          Thread.sleep(forTimeInterval: 10)
           update()
         }
         
@@ -123,7 +123,7 @@ extension VK_LongPool {
     
     
     
-    private static func parse(updates: [JSON]?) {
+    private static func parse(_ updates: [JSON]?) {
       guard let updates = updates else {return}
       
       var all = [JSON]()
@@ -178,21 +178,21 @@ extension VK_LongPool {
         }
       }
       
-      !updates0.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type0, object: JSONWrapper(updates0)) : ()
-      !updates1.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type1, object: JSONWrapper(updates1)) : ()
-      !updates2.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type2, object: JSONWrapper(updates2)) : ()
-      !updates3.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type3, object: JSONWrapper(updates3)) : ()
-      !updates4.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type4, object: JSONWrapper(updates4)) : ()
-      !updates6.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type6, object: JSONWrapper(updates6)) : ()
-      !updates7.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type7, object: JSONWrapper(updates7)) : ()
-      !updates8.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type8, object: JSONWrapper(updates8)) : ()
-      !updates9.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type9, object: JSONWrapper(updates9)) : ()
-      !updates51.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type51, object: JSONWrapper(updates51)) : ()
-      !updates61.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type61, object: JSONWrapper(updates61)) : ()
-      !updates62.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type62, object: JSONWrapper(updates62)) : ()
-      !updates70.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type70, object: JSONWrapper(updates70)) : ()
-      !updates80.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.type80, object: JSONWrapper(updates80)) : ()
-      !all.isEmpty ? NSNotificationCenter.defaultCenter().postNotificationName(notifications.typeAll, object: JSONWrapper(all)) : ()
+      !updates0.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type0), object: JSONWrapper(updates0)) : ()
+      !updates1.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type1), object: JSONWrapper(updates1)) : ()
+      !updates2.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type2), object: JSONWrapper(updates2)) : ()
+      !updates3.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type3), object: JSONWrapper(updates3)) : ()
+      !updates4.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type4), object: JSONWrapper(updates4)) : ()
+      !updates6.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type6), object: JSONWrapper(updates6)) : ()
+      !updates7.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type7), object: JSONWrapper(updates7)) : ()
+      !updates8.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type8), object: JSONWrapper(updates8)) : ()
+      !updates9.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type9), object: JSONWrapper(updates9)) : ()
+      !updates51.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type51), object: JSONWrapper(updates51)) : ()
+      !updates61.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type61), object: JSONWrapper(updates61)) : ()
+      !updates62.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type62), object: JSONWrapper(updates62)) : ()
+      !updates70.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type70), object: JSONWrapper(updates70)) : ()
+      !updates80.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type80), object: JSONWrapper(updates80)) : ()
+      !all.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.typeAll), object: JSONWrapper(all)) : ()
     }
     
     
@@ -272,8 +272,8 @@ internal class LPObserver : NSObject {
     VK.Log.put("LongPool", "Init observer")
     
     #if os(OSX)
-      NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: #selector(connectionLostForce), name:NSWorkspaceScreensDidSleepNotification, object: nil)
-      NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: #selector(connectionRestoreForce), name:NSWorkspaceScreensDidWakeNotification, object: nil)
+      NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(connectionLostForce), name:NSNotification.Name.NSWorkspaceScreensDidSleep, object: nil)
+      NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(connectionRestoreForce), name:NSNotification.Name.NSWorkspaceScreensDidWake, object: nil)
     #endif
     
     #if os(iOS)
@@ -298,7 +298,7 @@ internal class LPObserver : NSObject {
   
   
   @objc private func connectionRestoreForce() {
-    dispatch_async(lpQueue) {
+    lpQueue.async {
       VK.LP.isActive = true
       VK.LP.update()
     }
@@ -306,7 +306,7 @@ internal class LPObserver : NSObject {
   
   
   @objc private func connectionLostForce() {
-    dispatch_async(lpQueue) {
+    lpQueue.async {
       VK.LP.isActive = false
       self.connectionLost()
     }
@@ -319,7 +319,7 @@ internal class LPObserver : NSObject {
     if connected == true {
       connected = false
       VK.Log.put("LongPool", "Connection lost")
-      NSNotificationCenter.defaultCenter().postNotificationName(VK.LP.notifications.connectinDidLost, object: nil)
+      NotificationCenter.default().post(name: Notification.Name(rawValue: VK.LP.notifications.connectinDidLost), object: nil)
     }
   }
   
@@ -330,7 +330,7 @@ internal class LPObserver : NSObject {
     if connected == false {
       connected = true
       VK.Log.put("LongPool", "Connection restored")
-      NSNotificationCenter.defaultCenter().postNotificationName(VK.LP.notifications.connectinDidRestore, object: nil)
+      NotificationCenter.default().post(name: Notification.Name(rawValue: VK.LP.notifications.connectinDidRestore), object: nil)
     }
   }
   

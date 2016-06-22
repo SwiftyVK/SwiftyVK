@@ -15,11 +15,12 @@ class VKDelegateImpl : VKDelegate {
   let window : AnyObject
   
   init(window_: AnyObject) {
+//    VK.defaults.allowLogToConsole = true
     window = window_
     VK.start(appID: appID, delegate: self)
   }
   
-  func vkAutorizationFailed(error: VK.Error) {
+  func vkAutorizationFailed(_ error: VK.Error) {
     print("Autorization failed with error: \n\(error)")
   }
   
@@ -27,7 +28,7 @@ class VKDelegateImpl : VKDelegate {
     return scope
   }
   
-  func vkDidAutorize(parameters: Dictionary<String, String>) {}
+  func vkDidAutorize(_ parameters: Dictionary<String, String>) {}
   
   func vkDidUnautorize() {}
   

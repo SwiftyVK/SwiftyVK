@@ -4,7 +4,7 @@ import SwiftyVK
 
 class APIWorker {  
   
-  class func action(tag: Int) {
+  class func action(_ tag: Int) {
     switch tag {
     case 1:
       autorize()
@@ -88,7 +88,7 @@ class APIWorker {
   
   
   class func uploadPhoto() {
-    let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("testImage", ofType: "jpg")!)!
+    let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main().pathForResource("testImage", ofType: "jpg")!))
     let media = Media(imageData: data, type: .JPG)
     let req = VK.API.Upload.Photo.toWall.toUser(media, userId: "4680178")
     req.progressBlock = { (done, total) -> () in print("SwiftyVK: uploadPhoto progress: \(done) of \(total))")}

@@ -86,11 +86,11 @@ public class Request : CustomStringConvertible, Equatable {
     }
   }
   private var privateLanguage = VK.defaults.language
-  internal var URLRequest : NSURLRequest {
+  internal var urlRequest : Foundation.URLRequest {
     let req = NSURLFabric.get(url: customURL, httpMethod: httpMethod, method: method, params: allParameters, media: media)
-    req.timeoutInterval = NSTimeInterval(self.timeout)
-    VK.Log.put(self, "Create url: \(req.URL!.absoluteString) with timeout: \(timeout)")
-    return req
+    req.timeoutInterval = TimeInterval(self.timeout)
+    VK.Log.put(self, "Create url: \(req.url!.absoluteString) with timeout: \(timeout)")
+    return req as URLRequest
   }
   internal lazy var response : Response = {
     let result = Response()
@@ -143,7 +143,7 @@ public class Request : CustomStringConvertible, Equatable {
   
   internal init(url: String, media: [Media]) {
     var length = Double(0)
-    media.forEach({length += Double($0.data.length)})
+    media.forEach({length += Double($0.data.count)})
 
     self.httpMethod          = .POST
     self.timeout             = Int(length*0.0001)
@@ -155,7 +155,7 @@ public class Request : CustomStringConvertible, Equatable {
   
   
   ///Add new parameters to request
-  public func addParameters(agrDict: [VK.Arg : String]?) {
+  public func addParameters(_ agrDict: [VK.Arg : String]?) {
     for (argName, argValue) in agrDict! {
       VK.Log.put(self, "Add parameter: \(argName.rawValue)=\(argValue)")
       self.parameters[argName.rawValue] = argValue
@@ -223,7 +223,7 @@ public class Request : CustomStringConvertible, Equatable {
   
   
   
-  private func argToString(agrDict: [VK.Arg : String]?) -> [String : String] {
+  private func argToString(_ agrDict: [VK.Arg : String]?) -> [String : String] {
     var strDict = [String : String]()
     
     guard agrDict != nil else {return [:]}

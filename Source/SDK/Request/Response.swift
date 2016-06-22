@@ -2,7 +2,7 @@ import Foundation
 
 
 
-private let responseQueue = dispatch_queue_create("com.VK.responseQueue", DISPATCH_QUEUE_CONCURRENT)
+private let responseQueue = DispatchQueue(label: "com.VK.responseQueue", attributes: DispatchQueueAttributes.concurrent)
 
 
 
@@ -16,27 +16,27 @@ internal class Response {
   }
   
   
-  internal func setError(newError: VK.Error) {
+  internal func setError(_ newError: VK.Error) {
     error = newError
   }
   
   
   
-  internal func create(data: NSData?) {
+  internal func create(_ data: Data?) {
     if data != nil {
-      var err : NSError?
-      var json = JSON(data: data!, error: &err)
+      var err : NSErrorPointer?
+      var json = JSON(data: data!, error: err)
       
-      if err != nil {
-        error = VK.Error(ns: err!, req: request!)
+      if let err = err??.pointee {
+        error = VK.Error(ns: err, req: request!)
       }
         
-      else if json["response"].count > 0 {
+      else if json["response"].exists() {
         VK.Log.put(request!, "Parse response data to success")
         success = json["response"]
       }
         
-      else if json["error"].count > 0 {
+      else if json["error"].exists() {
         VK.Log.put(request!, "Parse response data to error:")
         error = VK.Error(json: json["error"], request: request!)
       }
@@ -67,13 +67,13 @@ internal class Response {
       else {
         request.isAPI == true && request.isAsynchronous == false
           ? executeError()
-          : dispatch_async(responseQueue) {self.executeError()}
+          : responseQueue.async {self.executeError()}
       }
     }
     else if let _ = success {
       request.isAPI == true && request.isAsynchronous == false
         ? executeSuccess()
-        : dispatch_async(responseQueue) {self.executeSuccess()}
+        : responseQueue.async {self.executeSuccess()}
     }
     else {
       VK.Log.put(request, "Response data is not set")

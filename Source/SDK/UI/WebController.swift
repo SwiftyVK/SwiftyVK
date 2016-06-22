@@ -13,7 +13,7 @@ import WebKit
 
 
 
-internal let vkSheetQueue = dispatch_queue_create("com.VK.sheetQueue", DISPATCH_QUEUE_SERIAL)
+internal let vkSheetQueue = DispatchQueue(label: "com.VK.sheetQueue", attributes: DispatchQueueAttributes.serial)
 private let autorizeUrl = "https://oauth.vk.com/authorize?"
 private let WebViewName = Resources.withSuffix("WebView")
 private weak var activeWebController : WebController?
@@ -33,16 +33,16 @@ class WebController : _WebControllerPrototype {
   @IBOutlet private weak var activity : UIActivityIndicatorView!
   private var parentView : UIViewController?
   #endif
-  private let waitUser = dispatch_semaphore_create(0)
+  private let waitUser = DispatchSemaphore(value: 0)
   private var fails = 0
-  private var urlRequest : NSURLRequest?
+  private var urlRequest : URLRequest?
   private weak var request : Request?
   private var isValidation = false
   
   
-  class func validate(request: Request, validationUrl: String) {
+  class func validate(_ request: Request, validationUrl: String) {
     
-    dispatch_sync(vkSheetQueue, {
+    vkSheetQueue.sync(execute: {
       self.start(url: validationUrl, request: request, isValidation: true)
       request.isAsynchronous ? request.trySend() : request.tryInCurrentThread()
     })
@@ -50,7 +50,7 @@ class WebController : _WebControllerPrototype {
   
   
   
-  internal class func start(url url: String, request: Request?, isValidation : Bool = false) {
+  internal class func start(url: String, request: Request?, isValidation : Bool = false) {
     let params              = getParamsForPlatform()
     let controller          = params.controller
     controller.request      = request
@@ -58,7 +58,7 @@ class WebController : _WebControllerPrototype {
     activeWebController     = controller
     controller.isValidation = isValidation
     VK.Log.put("Global", "WebController wait user actions")
-    dispatch_semaphore_wait(controller.waitUser, DISPATCH_TIME_FOREVER)
+    controller.waitUser.wait(timeout: DispatchTime.distantFuture)
   }
   
   
@@ -69,18 +69,18 @@ class WebController : _WebControllerPrototype {
   
   
   
-  private func handleResponse(urlString : String) {
-    if urlString.containsString("access_token=") {
+  private func handleResponse(_ urlString : String) {
+    if urlString.contains("access_token=") {
       _ = Token(urlString: urlString)
       self.hide()
     }
-    else if urlString.containsString("access_denied") {
+    else if urlString.contains("access_denied") {
       hide()
     }
-    else if urlString.containsString("fail=1") {
+    else if urlString.contains("fail=1") {
       failValidation()
     }
-    else if urlString.containsString(autorizeUrl) || urlString.containsString("act=security_check") || urlString.containsString("https://m.vk.com/login?") {
+    else if urlString.contains(autorizeUrl) || urlString.contains("act=security_check") || urlString.contains("https://m.vk.com/login?") {
       expand()
     }
     else {
@@ -91,7 +91,7 @@ class WebController : _WebControllerPrototype {
   
   
   private func failValidation() {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+    DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosBackground).async {
       let err = VK.Error(domain: "VKSDKDomain", code: 3, desc: "Fail user validation", userInfo: nil, req: self.request)
       self.request?.errorBlock(error: err)
       VK.delegate.vkAutorizationFailed(err)
@@ -102,7 +102,7 @@ class WebController : _WebControllerPrototype {
   
   
   
-  private func didFail(sender: AnyObject, didFailLoadWithError error: NSError?) {
+  private func didFail(_ sender: AnyObject, didFailLoadWithError error: NSError?) {
     if fails <= 3 {
       fails += 1
       loadReq(self.urlRequest!)
@@ -134,8 +134,8 @@ class WebController : _WebControllerPrototype {
       let params              = VK.delegate.vkWillPresentWindow()
       let controller          = WebController()
       
-      dispatch_sync(dispatch_get_main_queue()) {
-        NSNib(nibNamed: WebViewName, bundle: Resources.bundle)?.instantiateWithOwner(controller, topLevelObjects: nil)
+      DispatchQueue.main.sync {
+        NSNib(nibNamed: WebViewName, bundle: Resources.bundle)?.instantiate(withOwner: controller, topLevelObjects: nil)
         controller.windowDidLoad()
       }
       
@@ -151,8 +151,8 @@ class WebController : _WebControllerPrototype {
       webView!.frameLoadDelegate  = self
       
       if #available(OSX 10.10, *) {
-        window?.styleMask.unionInPlace(NSFullSizeContentViewWindowMask)
-        window?.titleVisibility = .Hidden
+        window?.styleMask.formUnion(NSFullSizeContentViewWindowMask)
+        window?.titleVisibility = .hidden
         window?.titlebarAppearsTransparent = true
         window?.setFrame(
           NSRect(
@@ -169,24 +169,24 @@ class WebController : _WebControllerPrototype {
     
     
     
-    private func showWithUrl(url: String, isSheet: Bool) {
-      dispatch_sync(dispatch_get_main_queue(), {
+    private func showWithUrl(_ url: String, isSheet: Bool) {
+      DispatchQueue.main.sync(execute: {
         isSheet
           ? self.parentWindow?.beginSheet(self.window!, completionHandler: nil)
           : self.showWindow(self)
         self.activity.startAnimation(self)
-        self.urlRequest = NSURLRequest(URL: NSURL(string: url)!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 3)
+        self.urlRequest = URLRequest(url: URL(string: url)!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 3)
         self.webView!.setMaintainsBackForwardList(true)
-        self.webView!.mainFrame.loadRequest(self.urlRequest!)
+        self.webView!.mainFrame.load(self.urlRequest!)
       })
     }
     
     
     
     private func expand() {
-      NSApplication.sharedApplication().activateIgnoringOtherApps(true)
+      NSApplication.shared().activateIgnoringOtherApps(true)
       let newHeight = min(
-        CGFloat((webView!.stringByEvaluatingJavaScriptFromString("document.height") as NSString).floatValue),
+        CGFloat((webView!.stringByEvaluatingJavaScript(from: "document.height") as NSString).floatValue),
         450
       )
       
@@ -210,8 +210,8 @@ class WebController : _WebControllerPrototype {
     
     
     
-    private func loadReq(req: NSURLRequest) {
-      self.webView!.mainFrame.loadRequest(self.urlRequest!)
+    private func loadReq(_ req: URLRequest) {
+      self.webView!.mainFrame.load(self.urlRequest!)
     }
     
     
@@ -222,18 +222,18 @@ class WebController : _WebControllerPrototype {
         self.window!.orderOut(parent)
       }
       self.webView!.frameLoadDelegate = nil
-      dispatch_semaphore_signal(waitUser)
+      waitUser.signal()
     }
     
     
     //MARK: frameLoadDelegate protocol
-    func webView(sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
-      handleResponse(frame.dataSource!.response.URL!.absoluteString!)
+    func webView(_ sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
+      handleResponse(frame.dataSource!.response.url!.absoluteString!)
     }
     
     
     
-    func webView(sender: WebView!, didFailLoadWithError error: NSError!, forFrame frame: WebFrame!) {
+    func webView(_ sender: WebView!, didFailLoadWithError error: NSError!, forFrame frame: WebFrame!) {
       didFail(sender, didFailLoadWithError: error)
     }
   }

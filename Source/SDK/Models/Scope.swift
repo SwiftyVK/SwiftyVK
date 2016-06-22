@@ -27,7 +27,7 @@ extension VK {
 
     
     
-   public static func toInt(permissions : [Scope]) -> Int {
+   public static func toInt(_ permissions : [Scope]) -> Int {
       var finishPerm = Int()
       for perm in permissions {finishPerm += perm.rawValue}
       return finishPerm
@@ -35,7 +35,7 @@ extension VK {
     
     
     
-   public static func fromInt(permissions : Int) -> [Scope] {
+   public static func fromInt(_ permissions : Int) -> [Scope] {
       var array = [Scope]()
       
       permissions.byteSwapped
@@ -65,7 +65,7 @@ extension VK {
     
     
     
-    public static func toString(permissions: [Scope]) -> String {
+    public static func toString(_ permissions: [Scope]) -> String {
       var string = String()
       
       for permission in permissions {
@@ -97,28 +97,28 @@ extension VK {
     
     
     
-    public static func fromString(permissions: String) -> [Scope] {
+    public static func fromString(_ permissions: String) -> [Scope] {
       var array = [Scope]()
       
-      if permissions.containsString("notify") {array.append(Scope.notify)}
-      if permissions.containsString("friends") {array.append(Scope.friends)}
-      if permissions.containsString("photos") {array.append(Scope.photos)}
-      if permissions.containsString("audio") {array.append(Scope.audio)}
-      if permissions.containsString("video") {array.append(Scope.video)}
-      if permissions.containsString("docs") {array.append(Scope.docs)}
-      if permissions.containsString("notes") {array.append(Scope.notes)}
-      if permissions.containsString("pages") {array.append(Scope.pages)}
-      if permissions.containsString("status") {array.append(Scope.status)}
-      if permissions.containsString("questions") {array.append(Scope.questions)}
-      if permissions.containsString("wall") {array.append(Scope.wall)}
-      if permissions.containsString("groups") {array.append(Scope.groups)}
-      if permissions.containsString("messages") {array.append(Scope.messages)}
-      if permissions.containsString("email") {array.append(Scope.email)}
-      if permissions.containsString("notifications") {array.append(Scope.notifications)}
-      if permissions.containsString("stats") {array.append(Scope.stats)}
-      if permissions.containsString("ads") {array.append(Scope.ads)}
-      if permissions.containsString("notify") {array.append(Scope.notify)}
-      if permissions.containsString("offers") {array.append(Scope.offers)}
+      if permissions.contains("notify") {array.append(Scope.notify)}
+      if permissions.contains("friends") {array.append(Scope.friends)}
+      if permissions.contains("photos") {array.append(Scope.photos)}
+      if permissions.contains("audio") {array.append(Scope.audio)}
+      if permissions.contains("video") {array.append(Scope.video)}
+      if permissions.contains("docs") {array.append(Scope.docs)}
+      if permissions.contains("notes") {array.append(Scope.notes)}
+      if permissions.contains("pages") {array.append(Scope.pages)}
+      if permissions.contains("status") {array.append(Scope.status)}
+      if permissions.contains("questions") {array.append(Scope.questions)}
+      if permissions.contains("wall") {array.append(Scope.wall)}
+      if permissions.contains("groups") {array.append(Scope.groups)}
+      if permissions.contains("messages") {array.append(Scope.messages)}
+      if permissions.contains("email") {array.append(Scope.email)}
+      if permissions.contains("notifications") {array.append(Scope.notifications)}
+      if permissions.contains("stats") {array.append(Scope.stats)}
+      if permissions.contains("ads") {array.append(Scope.ads)}
+      if permissions.contains("notify") {array.append(Scope.notify)}
+      if permissions.contains("offers") {array.append(Scope.offers)}
       
       return array
     }

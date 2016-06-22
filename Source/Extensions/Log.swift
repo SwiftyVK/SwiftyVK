@@ -1,11 +1,11 @@
 import Foundation
 
-internal let printQueue = dispatch_queue_create("VK.Print", DISPATCH_QUEUE_SERIAL)
-private let logQueue = dispatch_queue_create("VK.Log", DISPATCH_QUEUE_SERIAL)
+internal let printQueue = DispatchQueue(label: "VK.Print", attributes: DispatchQueueAttributes.serial)
+private let logQueue = DispatchQueue(label: "VK.Log", attributes: DispatchQueueAttributes.serial)
 
-private let form : NSDateFormatter = {
-  let f = NSDateFormatter()
-  f.dateFormat = NSDateFormatter.dateFormatFromTemplate("d.M HH:mm:ss", options: 0, locale: NSLocale.currentLocale())
+private let form : DateFormatter = {
+  let f = DateFormatter()
+  f.dateFormat = DateFormatter.dateFormat(fromTemplate: "d.M HH:mm:ss", options: 0, locale: Locale.current())
   return f
 }();
 
@@ -36,31 +36,31 @@ extension VK {
     
     
     
-    public static func putToRequestsQueue(request: Request) {
-      dispatch_async(logQueue) {
-        requestsQueue.addObject(request)
+    public static func putToRequestsQueue(_ request: Request) {
+      logQueue.async {
+        requestsQueue.add(request)
       }
     }
     
     
     
-    public static func removeFromRequestsQueue(request: Request) {
-      dispatch_async(logQueue) {
-        requestsQueue.removeObject(request)
+    public static func removeFromRequestsQueue(_ request: Request) {
+      logQueue.async {
+        requestsQueue.remove(request)
       }
     }
     
     
     
-    internal static func put(req: Request, _ message: String) {
-      dispatch_async(logQueue) {
-        let date = form.stringFromDate(NSDate())
+    internal static func put(_ req: Request, _ message: String) {
+      logQueue.async {
+        let date = form.string(from: Date())
         req.log.append("\(date): \(message)")
         let key = String("Req \(req.id)")
         
         if dictionary.count >= 100 {
           let keyToRemove = array.removeFirst()
-          dictionary.removeObjectForKey(keyToRemove)
+          dictionary.removeObject(forKey: keyToRemove)
         }
         
         _put(key, message, false)
@@ -71,16 +71,16 @@ extension VK {
     }
     
     
-    internal static func put(key: String, _ message: String) {
-      dispatch_async(logQueue) {
+    internal static func put(_ key: String, _ message: String) {
+      logQueue.async {
         _put(key, message, VK.defaults.allowLogToConsole)
       }
     }
     
     
     
-    private static func _put(key: String, _ message: String, _ printToConsole: Bool) {
-      let date = form.stringFromDate(NSDate())
+    private static func _put(_ key: String, _ message: String, _ printToConsole: Bool) {
+      let date = form.string(from: Date())
       
       if dictionary[key] == nil {
         array.append(key)
@@ -89,9 +89,9 @@ extension VK {
       
       if let dict = dictionary[key] as? NSMutableArray {
         if dict.count >= 100 {
-          dict.removeObjectAtIndex(0)
+          dict.removeObject(at: 0)
         }
-        dict.addObject("\(date): \(message)")
+        dict.add("\(date): \(message)")
       }
       
       if all.count > 100 {
@@ -108,7 +108,7 @@ extension VK {
     
     
     public static func purge() {
-      dispatch_async(logQueue) {
+      logQueue.async {
         array = [String]()
         dictionary = NSMutableDictionary()
         nextRequestId = 0
@@ -120,16 +120,16 @@ extension VK {
 
 
 /**Print to console synchronously*/
-internal func printSync(some : Any) {
-  dispatch_sync(printQueue) {
+internal func printSync(_ some : Any) {
+  printQueue.sync {
     print(some)
   }
 }
 
 
 
-internal func printAsync(some : Any) {
-  dispatch_async(printQueue) {
+internal func printAsync(_ some : Any) {
+  printQueue.async {
     printSync(some)
   }
 }

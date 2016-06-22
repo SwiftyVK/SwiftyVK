@@ -12,7 +12,7 @@ internal struct NSURLFabric {
   
   
   
-  internal static func get(url url: String?, httpMethod: HTTPMethods, method: String, params: [String : String], media: [Media]?) -> NSMutableURLRequest {
+  internal static func get(url: String?, httpMethod: HTTPMethods, method: String, params: [String : String], media: [Media]?) -> NSMutableURLRequest {
     let result : NSMutableURLRequest!
     
     if let media = media {
@@ -30,29 +30,29 @@ internal struct NSURLFabric {
   
   
   
-  private static func withURL(url: String) -> NSMutableURLRequest {
-    let req = NSMutableURLRequest(URL: NSURL(string: "")!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
-    req.HTTPMethod = "GET"
-    req.URL = NSURL(string: url)
+  private static func withURL(_ url: String) -> NSMutableURLRequest {
+    let req = NSMutableURLRequest(url: URL(string: "")!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+    req.httpMethod = "GET"
+    req.url = URL(string: url)
     return req
   }
   
   
   
-  private static func withAPI(APIMethod: String, httpMethod: HTTPMethods, paramDictAsAnyObject: AnyObject) -> NSMutableURLRequest {
+  private static func withAPI(_ APIMethod: String, httpMethod: HTTPMethods, paramDictAsAnyObject: AnyObject) -> NSMutableURLRequest {
     let params = argToString(paramDictAsAnyObject as? [String : String])
     
-    let req = NSMutableURLRequest(URL: NSURL(string: "")!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
-    req.HTTPMethod = httpMethod.rawValue
+    let req = NSMutableURLRequest(url: URL(string: "")!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+    req.httpMethod = httpMethod.rawValue
 
     if httpMethod == .GET {
-      req.URL = NSURL(string: methodUrl + APIMethod + "?" + params)
+      req.url = URL(string: methodUrl + APIMethod + "?" + params)
     }
     else {
-      req.URL = NSURL(string: methodUrl + APIMethod)
-      let charset = String(CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)))
+      req.url = URL(string: methodUrl + APIMethod)
+      let charset = String(CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(String.Encoding.utf8.rawValue)))
       req.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
-      req.HTTPBody = params.dataUsingEncoding(NSUTF8StringEncoding)
+      req.httpBody = params.data(using: String.Encoding.utf8)
     }
     
     return req
@@ -60,16 +60,16 @@ internal struct NSURLFabric {
   
   
   
-  private static func withFiles(media: [Media], url: String) -> NSMutableURLRequest {
-    let req = NSMutableURLRequest(URL: NSURL(string: "")!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
-    req.HTTPMethod = "POST"
-    req.URL = NSURL(string: url)
+  private static func withFiles(_ media: [Media], url: String) -> NSMutableURLRequest {
+    let req = NSMutableURLRequest(url: URL(string: "")!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+    req.httpMethod = "POST"
+    req.url = URL(string: url)
     req.addValue("", forHTTPHeaderField: "Accept-Language")
     req.addValue("8bit", forHTTPHeaderField: "Content-Transfer-Encoding")
     req.setValue("multipart/form-data;  boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
     let body = NSMutableData()
     
-    for (index, file) in media.enumerate() {
+    for (index, file) in media.enumerated() {
       let name : String
       
       switch file.mediaType {
@@ -81,25 +81,25 @@ internal struct NSURLFabric {
         name = "file\(index)"
       }
       
-      body.appendData("\r\n--\(boundary)\r\nContent-Disposition: form-data; name=\"\(name)\"; filename=\"file.\(file.type)\"\r\nContent-Type: document/other\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!)
-      body.appendData(file.data)
+      body.append("\r\n--\(boundary)\r\nContent-Disposition: form-data; name=\"\(name)\"; filename=\"file.\(file.type)\"\r\nContent-Type: document/other\r\n\r\n".data(using: String.Encoding.utf8, allowLossyConversion: false)!)
+      body.append(file.data as Data)
     }
-    body.appendData("\r\n--\(boundary)--\r".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!)
+    body.append("\r\n--\(boundary)--\r".data(using: String.Encoding.utf8, allowLossyConversion: false)!)
     
-    req.HTTPBody = body
+    req.httpBody = body as Data
     return req
   }
   
   
   
-  private static func argToString(argDict: [String : String]?) -> String {
+  private static func argToString(_ argDict: [String : String]?) -> String {
     let paramArray = NSMutableArray()
     
     if argDict == nil {return String()}
     
     for (argName, agrValue) in argDict! {
-      paramArray.addObject("\(argName)=\(agrValue)")
+      paramArray.add("\(argName)=\(agrValue)")
     }
-    return paramArray.componentsJoinedByString("&").stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+    return paramArray.componentsJoined(by: "&").addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
   }
 }
