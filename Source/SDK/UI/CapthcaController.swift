@@ -72,7 +72,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
       //NSThread.sleepForTimeInterval(0.5)
     #endif
     
-    waitAnswer.wait(timeout: DispatchTime.distantFuture)
+    _ = waitAnswer.wait(timeout: DispatchTime.distantFuture)
     return true
   }
   
@@ -125,7 +125,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     private func load(_ data: Data) {
       NSApplication.shared().activateIgnoringOtherApps(true)
       
-      parentWindow != nil
+      _ = parentWindow != nil
         ? self.parentWindow?.beginSheet(self.window!, completionHandler: nil)
         : self.showWindow(self)
       self.imageView.image = NSImage(data: data)
@@ -136,11 +136,9 @@ internal class СaptchaController: _СaptchaControllerPrototype {
       super.windowDidLoad()
       didLoad()
       
-      if #available(OSX 10.10, *) {
-        window?.styleMask.formUnion(NSFullSizeContentViewWindowMask)
-        window?.titleVisibility = .hidden
-        window?.titlebarAppearsTransparent = true
-      }
+      window?.styleMask.formUnion(NSFullSizeContentViewWindowMask)
+      window?.titleVisibility = .hidden
+      window?.titlebarAppearsTransparent = true
     }
     
     
@@ -179,13 +177,13 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     
     
     
-    private func load(data: NSData) {
-      self.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
-      self.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-      self.parentView?.presentViewController(self, animated: true, completion: nil)
+    private func load(_ data: NSData) {
+      self.modalPresentationStyle = .overFullScreen
+      self.modalTransitionStyle = .crossDissolve
+      self.parentView?.present(self, animated: true, completion: nil)
       self.imageView?.layer.cornerRadius = 15
       self.imageView?.layer.masksToBounds = true
-      self.imageView?.image = UIImage(data: data)
+      self.imageView?.image = UIImage(data: data as Data)
     }
     
     
@@ -196,16 +194,16 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     }
     
 
-    
-    override func viewDidDisappear(animated: Bool) {
+  
+    override func viewDidDisappear(_ animated: Bool) {
       super.viewDidDisappear(animated)
-      dispatch_semaphore_signal(waitAnswer)
+      waitAnswer.signal()
     }
     
     
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-      self.parentView?.dismissViewControllerAnimated(true, completion: nil)
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+      self.parentView?.dismiss(animated: true, completion: nil)
       endEditing(textField.text!)
       return true
     }

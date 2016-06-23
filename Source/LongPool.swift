@@ -102,8 +102,8 @@ extension VK_LongPool {
           ts = response["ts"].stringValue
           parse(response["updates"].array)
           
-          (response["failed"].int > 0)
-            ? keyIsExpired = true
+          _ = (response["failed"].int > 0)
+            ? (keyIsExpired = true)
             : observer?.connectionRestore()
           update()
         }
@@ -278,9 +278,9 @@ internal class LPObserver : NSObject {
     
     #if os(iOS)
       let reachability = try! Reachability.reachabilityForInternetConnection()
-      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reachabilityChanged), name: ReachabilityChangedNotification, object: nil)
-      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(connectionLostForce), name: UIApplicationWillResignActiveNotification, object: nil)
-      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(connectionRestoreForce), name:UIApplicationDidBecomeActiveNotification, object: nil)
+      NotificationCenter.default().addObserver(self, selector: #selector(reachabilityChanged), name: ReachabilityChangedNotification, object: nil)
+      NotificationCenter.default().addObserver(self, selector: #selector(connectionLostForce), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+      NotificationCenter.default().addObserver(self, selector: #selector(connectionRestoreForce), name:NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
       try! reachability.startNotifier()
     #endif
   }

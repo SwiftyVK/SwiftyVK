@@ -181,36 +181,32 @@ public class Request : CustomStringConvertible, Equatable {
   
   
   
-  internal func trySend() -> Bool {
+  internal func trySend() {
     if canSend {
       attempts += 1
       let type = (self.isAsynchronous ? "asynchronously" : "synchronously")
       VK.Log.put(self, "Prepare to send \(type) \(attempts) of \(maxAttempts) times")
       response.clean()
       _ = Connection(request: self)
-      return true
     }
     else {
       VK.Log.put(self, "Can no longer send! \(attempts) of \(maxAttempts) times")
       response.executeError()
-      return false
     }
   }
   
   
   
-  internal func tryInCurrentThread() -> Bool {
+  internal func tryInCurrentThread() {
     if canSend {
       attempts += 1
       VK.Log.put(self, "Prepare to send \(attempts) of \(maxAttempts) times in current thread")
       response.clean()
       Connection.tryInCurrentThread(self)
-      return true
     }
     else {
       VK.Log.put(self, "Can no longer send in current thread! \(attempts) of \(maxAttempts) times")
       response.executeError()
-      return false
     }
   }
   

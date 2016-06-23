@@ -58,7 +58,7 @@ class WebController : _WebControllerPrototype {
     activeWebController     = controller
     controller.isValidation = isValidation
     VK.Log.put("Global", "WebController wait user actions")
-    controller.waitUser.wait(timeout: DispatchTime.distantFuture)
+    _ = controller.waitUser.wait(timeout: DispatchTime.distantFuture)
   }
   
   
@@ -150,7 +150,6 @@ class WebController : _WebControllerPrototype {
       VK.Log.put("Global", "\(self) INIT")
       webView!.frameLoadDelegate  = self
       
-      if #available(OSX 10.10, *) {
         window?.styleMask.formUnion(NSFullSizeContentViewWindowMask)
         window?.titleVisibility = .hidden
         window?.titlebarAppearsTransparent = true
@@ -162,7 +161,6 @@ class WebController : _WebControllerPrototype {
             height: window!.frame.size.height - 20
           ), display: true
         )
-      }
       
       super.windowDidLoad()
     }
@@ -171,7 +169,7 @@ class WebController : _WebControllerPrototype {
     
     private func showWithUrl(_ url: String, isSheet: Bool) {
       DispatchQueue.main.sync(execute: {
-        isSheet
+        _ = isSheet
           ? self.parentWindow?.beginSheet(self.window!, completionHandler: nil)
           : self.showWindow(self)
         self.activity.startAnimation(self)
@@ -270,28 +268,28 @@ class WebController : _WebControllerPrototype {
     
     
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
       super.viewDidDisappear(animated)
-      dispatch_semaphore_signal(waitUser)
+      waitUser.signal()
     }
     
     
     
-    private func showWithUrl(url: String, isSheet: Bool) {
-      dispatch_sync(dispatch_get_main_queue(), {
-        self.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
-        self.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-        self.parentView?.presentViewController(self, animated: true, completion: nil)
+    private func showWithUrl(_ url: String, isSheet: Bool) {
+      DispatchQueue.main.sync() {
+        self.modalPresentationStyle = .overFullScreen
+        self.modalTransitionStyle = .crossDissolve
+        self.parentView?.present(self, animated: true, completion: nil)
         self.webView?.layer.cornerRadius = 15
         self.webView?.layer.masksToBounds = true
-        self.urlRequest = NSURLRequest(URL: NSURL(string: url)!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 3)
+        self.urlRequest = URLRequest(url: URL(string: url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 3)
         self.webView?.loadRequest(self.urlRequest!)
-      })
+      }
     }
     
     
     
-    private func loadReq(req: NSURLRequest) {
+    private func loadReq(_ req: NSURLRequest) {
       webView!.loadRequest(self.urlRequest!)
     }
     
@@ -302,21 +300,21 @@ class WebController : _WebControllerPrototype {
     
     
     private func hide() {
-      self.parentView?.dismissViewControllerAnimated(true, completion: nil)
+      self.parentView?.dismiss(animated: true, completion: nil)
       self.webView!.delegate = nil
     }
     
     
     
     //MARK: UIWebViewDelegate protocol
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
       activity.stopAnimating()
-      handleResponse(webView.request!.URL!.absoluteString!)
+      handleResponse(webView.request!.url!.absoluteString!)
     }
     
     
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+    func webView(_ webView: UIWebView, didFailLoadWithError error: NSError?) {
       self.didFail(webView, didFailLoadWithError: error)
     }
   }

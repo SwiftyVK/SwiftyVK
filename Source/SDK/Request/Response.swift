@@ -24,10 +24,11 @@ internal class Response {
   
   internal func create(_ data: Data?) {
     if data != nil {
-      var err : NSErrorPointer?
+      var err : NSErrorPointer
+      err = nil
       var json = JSON(data: data!, error: err)
       
-      if let err = err??.pointee {
+      if let err = err?.pointee {
         error = VK.Error(ns: err, req: request!)
       }
         

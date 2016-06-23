@@ -62,7 +62,7 @@ internal struct Authorizator {
     }
     
     if VK.state == .authorized {
-      request?.isAsynchronous == true ? request?.trySend() : request?.tryInCurrentThread()
+      _ = request?.isAsynchronous == true ? request?.trySend() : request?.tryInCurrentThread()
     }
     else {
       let err = VK.Error(domain: "VKSDKDomain", code: 2, desc: "User deny authorization", userInfo: nil, req: request)
@@ -103,15 +103,15 @@ internal struct Authorizator {
     
     
     internal static var canAutorizeWithVkApp : Bool {
-      return UIApplication.sharedApplication().canOpenURL(NSURL(string: appAuthorizeUrl)!)
-        && UIApplication.sharedApplication().canOpenURL(NSURL(string: "vk\(VK.appID)://")!)
+      return UIApplication.shared().canOpenURL(URL(string: appAuthorizeUrl)!)
+        && UIApplication.shared().canOpenURL(URL(string: "vk\(VK.appID)://")!)
     }
     
     
     
-    private static func startWithApp(request: Request?) {
-      UIApplication.sharedApplication().openURL(NSURL(string: appAuthorizeUrl+paramsUrl)!)
-      NSThread.sleepForTimeInterval(1)
+    private static func startWithApp(_ request: Request?) {
+      UIApplication.shared().openURL(URL(string: appAuthorizeUrl+paramsUrl)!)
+      Thread.sleep(forTimeInterval: 1)
       startWithWeb(request)
     }
     
@@ -119,7 +119,7 @@ internal struct Authorizator {
     
     internal static func recieveTokenURL(url: NSURL, fromApp app: String?) {
       if (app == "com.vk.vkclient" || app == "com.vk.vkhd" || url.scheme == "vk\(VK.appID)") {
-        if url.absoluteString!.containsString("access_token=") {
+        if url.absoluteString!.contains("access_token=") {
           _ = Token(urlString: url.absoluteString!)
           WebController.cancel()
         }

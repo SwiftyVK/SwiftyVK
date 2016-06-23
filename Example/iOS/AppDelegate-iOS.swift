@@ -8,18 +8,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   
   
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     _ = VKDelegateImpl(window_: window!)
     return true
   }
   
-  func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-    VK.processURL(url, options: options)
+  func application(_ app: UIApplication, open url: URL, options: [String : AnyObject]) -> Bool {
+    VK.processURL(url: url, options: options)
     return true
   }
 
   
-  @IBAction func buttonDown(sender: AnyObject) {
+  @IBAction func buttonDown(_ sender: AnyObject) {
     APIWorker.action(sender.tag)
   }
 }

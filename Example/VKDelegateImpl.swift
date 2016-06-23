@@ -15,7 +15,7 @@ class VKDelegateImpl : VKDelegate {
   let window : AnyObject
   
   init(window_: AnyObject) {
-//    VK.defaults.allowLogToConsole = true
+    VK.defaults.allowLogToConsole = true
     window = window_
     VK.start(appID: appID, delegate: self)
   }

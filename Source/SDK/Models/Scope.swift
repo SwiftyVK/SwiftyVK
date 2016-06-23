@@ -38,7 +38,6 @@ extension VK {
    public static func fromInt(_ permissions : Int) -> [Scope] {
       var array = [Scope]()
       
-      permissions.byteSwapped
       if (permissions & 1) == 1                 {array.append(Scope.notify)}
       if (permissions & 2) == 2                 {array.append(Scope.friends)}
       if (permissions & 4) == 4                 {array.append(Scope.photos)}

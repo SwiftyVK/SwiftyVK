@@ -68,7 +68,7 @@ public struct VK {
   public static func start(appID id: String, delegate owner: VKDelegate) {
     delegate = owner
     appID    = id
-    Token.get()
+    _ = Token.get()
     VK.Log.put("Global", "SwiftyVK INIT")
   }
   
@@ -89,13 +89,13 @@ public struct VK {
   #if os(iOS)
   @available(iOS 9.0, *)
   public static func processURL(url: NSURL, options: [String: AnyObject]) {
-  Authorizator.recieveTokenURL(url, fromApp: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String);
+  Authorizator.recieveTokenURL(url: url, fromApp: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String);
   }
   
   
   @available(iOS, introduced:4.2, deprecated:9.0, message:"Please use url:options:")
   public static func processURL_old(url: NSURL, sourceApplication app: String?) {
-  Authorizator.recieveTokenURL(url, fromApp: app);
+  Authorizator.recieveTokenURL(url: url, fromApp: app);
   }
   #endif
   

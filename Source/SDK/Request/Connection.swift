@@ -129,7 +129,7 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   private func waitResponse() {
     let type = (request.isAsynchronous ? "asynchronous" : "synchronous")
     VK.Log.put(request, "Wait to \(type) response")
-    responseWaiter.wait(timeout: DispatchTime.distantFuture)
+    _ = responseWaiter.wait(timeout: DispatchTime.distantFuture)
     VK.Log.put(request, "\(type) response is recieved")
     VK.Log.removeFromRequestsQueue(request)
   }
