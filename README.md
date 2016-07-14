@@ -37,7 +37,7 @@ On this page:
 
 
 ###CocoaPods
-You can use [CocoaPods](https://github.com/CocoaPods/CocoaPods) to install `SwiftyVK` by adding it to `Cartfile`:
+You can use [CocoaPods](https://github.com/CocoaPods/CocoaPods) to install `SwiftyVK` by adding it to `Podfile`:
 
 ```ruby
 use_frameworks!
