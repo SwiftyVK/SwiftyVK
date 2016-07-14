@@ -47,12 +47,12 @@ public protocol VKDelegate {
  * For user authentication you must call autorize()
  */
 public struct VK {
-  internal static var delegate : VKDelegate! {
+  internal static var delegate : VKDelegate? {
     set{delegateInstance = newValue}
     get{assert(VK.state != .unknown, "At first initialize VK with start() method")
     return delegateInstance}
   }
-  public private(set) static var appID : String! {
+  public private(set) static var appID : String? {
     set{appIDInstance = newValue}
     get{assert(VK.state != .unknown, "At first initialize VK with start() method")
     return appIDInstance}

@@ -6,7 +6,7 @@ import XCTest
 class Upload_Tests: VKTestCase {
   
   func test_photo_to_message() {
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main().pathForResource("testImage", ofType: "jpg")!)) else {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testImage", ofType: "jpg")!)) else {
       XCTFail("Image path is empty")
       return
     }
@@ -36,7 +36,7 @@ class Upload_Tests: VKTestCase {
   
   
   func test_photo_to_group_wall() {
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main().pathForResource("testImage", ofType: "jpg")!)) else {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testImage", ofType: "jpg")!)) else {
       XCTFail("Image path is empty")
       return
     }
@@ -69,7 +69,7 @@ class Upload_Tests: VKTestCase {
   
   
   func test_photo_to_album() {
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main().pathForResource("testImage", ofType: "jpg")!)) else {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testImage", ofType: "jpg")!)) else {
       XCTFail("Image path is empty")
       return
     }
@@ -104,7 +104,7 @@ class Upload_Tests: VKTestCase {
   
   
   func test_photo_to_market() {
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main().pathForResource("testImage", ofType: "jpg")!)) else {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testImage", ofType: "jpg")!)) else {
       XCTFail("Image path is empty")
       return
     }
@@ -134,40 +134,40 @@ class Upload_Tests: VKTestCase {
   
   
   
-//  func test_photo_to_market_album() {
-//    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main().pathForResource("testImage", ofType: "jpg")!)) else {
-//      XCTFail("Image path is empty")
-//      return
-//    }
-//    
-//    let readyExpectation = expectation(withDescription: "ready")
-//    var progressIsExecuted = false
-//
-//    let req = VK.API.Upload.Photo.toMarketAlbum(
-//      Media(imageData: data, type: .JPG),
-//      groupId: "98197515"
-//    )
-//    req.successBlock = {response in
-//      print(response)
-//      XCTAssertNotNil(response["gid"].int)
-//      readyExpectation.fulfill()
-//    }
-//    req.errorBlock = {error in
-//      XCTFail("Unexpected error in request: \(error)")
-//      readyExpectation.fulfill()
-//    }
-//    req.progressBlock = {done, total in progressIsExecuted = true}
-//    req.send()
-//    
-//    waitForExpectations(withTimeout: reqTimeout*10) {_ in
-//      XCTAssertTrue(progressIsExecuted)
-//    }
-//  }
+  func test_photo_to_market_album() {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testImage", ofType: "jpg")!)) else {
+      XCTFail("Image path is empty")
+      return
+    }
+    
+    let readyExpectation = expectation(withDescription: "ready")
+    var progressIsExecuted = false
+
+    let req = VK.API.Upload.Photo.toMarketAlbum(
+      Media(imageData: data, type: .JPG),
+      groupId: "98197515"
+    )
+    req.successBlock = {response in
+      print(response)
+      XCTAssertNotNil(response["gid"].int)
+      readyExpectation.fulfill()
+    }
+    req.errorBlock = {error in
+      XCTFail("Unexpected error in request: \(error)")
+      readyExpectation.fulfill()
+    }
+    req.progressBlock = {done, total in progressIsExecuted = true}
+    req.send()
+    
+    waitForExpectations(withTimeout: reqTimeout*10) {_ in
+      XCTAssertTrue(progressIsExecuted)
+    }
+  }
   
   
   
   func test_audio() {
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main().pathForResource("testAudio", ofType: "mp3")!)) else {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testAudio", ofType: "mp3")!)) else {
       XCTFail("Audio path is empty")
       return
     }
@@ -203,7 +203,7 @@ class Upload_Tests: VKTestCase {
   
   
   func test_video_file() {
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main().pathForResource("testVideo", ofType: "mp4")!)) else {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testVideo", ofType: "mp4")!)) else {
       XCTFail("Video path is empty")
       return
     }
@@ -280,7 +280,7 @@ class Upload_Tests: VKTestCase {
   
   
   func test_document() {
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main().pathForResource("testDoc", ofType: "rtf")!)) else {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testDoc", ofType: "rtf")!)) else {
       XCTFail("Document path is empty")
       return
     }

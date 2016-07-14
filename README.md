@@ -37,7 +37,7 @@ On this page:
 
 
 ###CocoaPods
-You can use CocoaPods to install **SwiftyVK** by adding it to **Podfile**:
+You can use [CocoaPods](https://github.com/CocoaPods/CocoaPods) to install `SwiftyVK` by adding it to `Podfile`:
 
 ```ruby
 use_frameworks!
@@ -129,6 +129,7 @@ For authorization with official VK application for iOS, you need:
 
 *1. In Xcode -> Target -> Info*
 
+* Add new URL Type with URL identifier `vkauthorize`
 * Add new URL Type with URL identifier `vk$YOUR_APP_ID$` (e.g. vk1234567890)
 * Add app schemas to Info.plist file:
 ```html
@@ -237,9 +238,9 @@ In our request example about the syntax that will return the response:
 
 It contains an array of users which we have access to 3 fields. Suppose that we want to get all user data into separate variable. We can do this:
 ```swift
-var id = response["0, id"].intValue //1
-var firstName = response["0, first_name"].stringValue //Pavel
-var lastName = response["0, last_name"].stringValue //Durov
+var id = response[0,"id"].intValue //1
+var firstName = response[0,"first_name"].stringValue //Pavel
+var lastName = response[0,"last_name"].stringValue //Durov
 ```
 And that's all You need. If You want to learn more, check out the [SwiftyJSON documentation](https://github.com/SwiftyJSON/SwiftyJSON).
 
@@ -263,10 +264,11 @@ let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("image",
 //Crete media object to upload
 let media = Media(imageData: data, type: .JPG)
 //Upload image to wall        
-VK.API.Upload.Photo.toWall(media: media,
+VK.API.Upload.Photo.toWall(
+  media,
   userId: "1",
   isAsynchronous: true,
-  progressBlock: { (done, total) -> () in print("upload \(done) of \(total))")},
+  progressBlock: {done, total in print("upload \(done) of \(total))")},
   successBlock: {response in print(response)},
   errorBlock: {error in print(error)}
 )
@@ -293,5 +295,5 @@ And notifications types in `VK.LP.notifications` whose codes correspond to the [
 To subscribe to the notification you just need to use standard observer:
 
 ```swift
-NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UPDATE), name: VK.LP.notifications.type4, object: nil)
+NotificationCenter.default.addObserver(self, selector: #selector(UPDATE), name: VK.LP.notifications.type4, object: nil)
 ```

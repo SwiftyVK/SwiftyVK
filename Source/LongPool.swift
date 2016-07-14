@@ -178,21 +178,21 @@ extension VK_LongPool {
         }
       }
       
-      !updates0.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type0), object: JSONWrapper(updates0)) : ()
-      !updates1.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type1), object: JSONWrapper(updates1)) : ()
-      !updates2.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type2), object: JSONWrapper(updates2)) : ()
-      !updates3.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type3), object: JSONWrapper(updates3)) : ()
-      !updates4.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type4), object: JSONWrapper(updates4)) : ()
-      !updates6.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type6), object: JSONWrapper(updates6)) : ()
-      !updates7.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type7), object: JSONWrapper(updates7)) : ()
-      !updates8.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type8), object: JSONWrapper(updates8)) : ()
-      !updates9.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type9), object: JSONWrapper(updates9)) : ()
-      !updates51.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type51), object: JSONWrapper(updates51)) : ()
-      !updates61.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type61), object: JSONWrapper(updates61)) : ()
-      !updates62.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type62), object: JSONWrapper(updates62)) : ()
-      !updates70.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type70), object: JSONWrapper(updates70)) : ()
-      !updates80.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.type80), object: JSONWrapper(updates80)) : ()
-      !all.isEmpty ? NotificationCenter.default().post(name: Notification.Name(rawValue: notifications.typeAll), object: JSONWrapper(all)) : ()
+      !updates0.isEmpty ? NotificationCenter.default.post(name: Notification.Name(rawValue: notifications.type0), object: JSONWrapper(updates0)) : ()
+      !updates1.isEmpty ? NotificationCenter.default.post(name: Notification.Name(rawValue: notifications.type1), object: JSONWrapper(updates1)) : ()
+      !updates2.isEmpty ? NotificationCenter.default.post(name: Notification.Name(rawValue: notifications.type2), object: JSONWrapper(updates2)) : ()
+      !updates3.isEmpty ? NotificationCenter.default.post(name: Notification.Name(rawValue: notifications.type3), object: JSONWrapper(updates3)) : ()
+      !updates4.isEmpty ? NotificationCenter.default.post(name: Notification.Name(rawValue: notifications.type4), object: JSONWrapper(updates4)) : ()
+      !updates6.isEmpty ? NotificationCenter.default.post(name: Notification.Name(rawValue: notifications.type6), object: JSONWrapper(updates6)) : ()
+      !updates7.isEmpty ? NotificationCenter.default.post(name: Notification.Name(rawValue: notifications.type7), object: JSONWrapper(updates7)) : ()
+      !updates8.isEmpty ? NotificationCenter.default.post(name: Notification.Name(rawValue: notifications.type8), object: JSONWrapper(updates8)) : ()
+      !updates9.isEmpty ? NotificationCenter.default.post(name: Notification.Name(rawValue: notifications.type9), object: JSONWrapper(updates9)) : ()
+      !updates51.isEmpty ? NotificationCenter.default.post(name: Notification.Name(rawValue: notifications.type51), object: JSONWrapper(updates51)) : ()
+      !updates61.isEmpty ? NotificationCenter.default.post(name: Notification.Name(rawValue: notifications.type61), object: JSONWrapper(updates61)) : ()
+      !updates62.isEmpty ? NotificationCenter.default.post(name: Notification.Name(rawValue: notifications.type62), object: JSONWrapper(updates62)) : ()
+      !updates70.isEmpty ? NotificationCenter.default.post(name: Notification.Name(rawValue: notifications.type70), object: JSONWrapper(updates70)) : ()
+      !updates80.isEmpty ? NotificationCenter.default.post(name: Notification.Name(rawValue: notifications.type80), object: JSONWrapper(updates80)) : ()
+      !all.isEmpty ? NotificationCenter.default.post(name: Notification.Name(rawValue: notifications.typeAll), object: JSONWrapper(all)) : ()
     }
     
     
@@ -278,9 +278,9 @@ internal class LPObserver : NSObject {
     
     #if os(iOS)
       let reachability = try! Reachability.reachabilityForInternetConnection()
-      NotificationCenter.default().addObserver(self, selector: #selector(reachabilityChanged), name: ReachabilityChangedNotification, object: nil)
-      NotificationCenter.default().addObserver(self, selector: #selector(connectionLostForce), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
-      NotificationCenter.default().addObserver(self, selector: #selector(connectionRestoreForce), name:NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged), name: ReachabilityChangedNotification, object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(connectionLostForce), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(connectionRestoreForce), name:NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
       try! reachability.startNotifier()
     #endif
   }
@@ -319,7 +319,7 @@ internal class LPObserver : NSObject {
     if connected == true {
       connected = false
       VK.Log.put("LongPool", "Connection lost")
-      NotificationCenter.default().post(name: Notification.Name(rawValue: VK.LP.notifications.connectinDidLost), object: nil)
+      NotificationCenter.default.post(name: Notification.Name(rawValue: VK.LP.notifications.connectinDidLost), object: nil)
     }
   }
   
@@ -330,7 +330,7 @@ internal class LPObserver : NSObject {
     if connected == false {
       connected = true
       VK.Log.put("LongPool", "Connection restored")
-      NotificationCenter.default().post(name: Notification.Name(rawValue: VK.LP.notifications.connectinDidRestore), object: nil)
+      NotificationCenter.default.post(name: Notification.Name(rawValue: VK.LP.notifications.connectinDidRestore), object: nil)
     }
   }
   

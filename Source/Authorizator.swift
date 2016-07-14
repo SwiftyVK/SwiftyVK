@@ -17,7 +17,7 @@ internal struct Authorizator {
   
   
   private static var paramsUrl : String {
-    let _perm = VK.Scope.toInt(VK.delegate.vkWillAutorize())
+    let _perm = VK.Scope.toInt(VK.delegate!.vkWillAutorize())
     let _mode = isMac ? "mobile" : "ios"
     let _redir = canAutorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
     
@@ -40,9 +40,9 @@ internal struct Authorizator {
   
   
   private static func autorize() {
-    Thread.isMainThread()
-      ? vkSheetQueue.async(execute: {start(nil)})
-      : vkSheetQueue.sync(execute: {start(nil)})
+    Thread.isMainThread
+      ? vkSheetQueue.async {start(nil)}
+      : vkSheetQueue.sync {start(nil)}
   }
   
   
@@ -69,7 +69,7 @@ internal struct Authorizator {
       request?.attempts = request!.maxAttempts
       request?.errorBlock(error: err)
       DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosBackground).async {
-        VK.delegate.vkAutorizationFailed(err)
+        VK.delegate?.vkAutorizationFailed(err)
       }
     }
   }
@@ -104,7 +104,7 @@ internal struct Authorizator {
     
     internal static var canAutorizeWithVkApp : Bool {
       return UIApplication.shared().canOpenURL(URL(string: appAuthorizeUrl)!)
-        && UIApplication.shared().canOpenURL(URL(string: "vk\(VK.appID)://")!)
+        && UIApplication.shared().canOpenURL(URL(string: "vk\(VK.appID!)://")!)
     }
     
     

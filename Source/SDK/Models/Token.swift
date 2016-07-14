@@ -98,7 +98,7 @@ internal class Token: NSObject, NSCoding {
   
   
   private class func _load() -> Token? {
-    let parameters  = VK.delegate.vkTokenPath()
+    let parameters  = VK.delegate!.vkTokenPath()
     let useDefaults = parameters.useUserDefaults
     let filePath    = parameters.alternativePath
     if useDefaults {tokenInstance = self.loadFromDefaults()}
@@ -109,7 +109,7 @@ internal class Token: NSObject, NSCoding {
   
   
   private class func loadFromDefaults() -> Token? {
-    let defaults = UserDefaults.standard()
+    let defaults = UserDefaults.standard
     if !(defaults.object(forKey: "Token") != nil) {return nil}
     let object: AnyObject! = NSKeyedUnarchiver.unarchiveObject(with: defaults.object(forKey: "Token") as! Data)
     if object == nil {
@@ -122,7 +122,7 @@ internal class Token: NSObject, NSCoding {
   
   ///Загрузка из файла
   private class func loadFromFile(_ filePath : String) -> Token? {
-    let manager = FileManager.default()
+    let manager = FileManager.default
     if !manager.fileExists(atPath: filePath) {
       VK.Log.put("Token", "Loaded from file \(filePath) failed")
       return nil
@@ -135,7 +135,7 @@ internal class Token: NSObject, NSCoding {
   
   
   func save() {
-    let parameters  = VK.delegate.vkTokenPath()
+    let parameters  = VK.delegate!.vkTokenPath()
     let useDefaults = parameters.useUserDefaults
     let filePath    = parameters.alternativePath
     if useDefaults {saveToDefaults()}
@@ -145,7 +145,7 @@ internal class Token: NSObject, NSCoding {
   
   
   private func saveToDefaults() {
-    let defaults = UserDefaults.standard()
+    let defaults = UserDefaults.standard
     defaults.set(NSKeyedArchiver.archivedData(withRootObject: self), forKey: "Token")
     defaults.synchronize()
     VK.Log.put("Token", "Saved to NSUserDefaults")
@@ -154,7 +154,7 @@ internal class Token: NSObject, NSCoding {
   
   
   private func saveToFile(_ filePath : String) {
-    let manager = FileManager.default()
+    let manager = FileManager.default
     if manager.fileExists(atPath: filePath) {
       do {
         try manager.removeItem(atPath: filePath)
@@ -168,16 +168,16 @@ internal class Token: NSObject, NSCoding {
   
   
   class func remove() {
-    let parameters  = VK.delegate.vkTokenPath()
+    let parameters  = VK.delegate!.vkTokenPath()
     let useDefaults = parameters.useUserDefaults
     let filePath    = parameters.alternativePath
     
-    let defaults = UserDefaults.standard()
+    let defaults = UserDefaults.standard
     if defaults.object(forKey: "Token") != nil {defaults.removeObject(forKey: "Token")}
     defaults.synchronize()
     
     if !useDefaults {
-      let manager = FileManager.default()
+      let manager = FileManager.default
       if manager.fileExists(atPath: filePath) {
         do {try manager.removeItem(atPath: filePath)}
         catch _ {}
@@ -195,7 +195,7 @@ internal class Token: NSObject, NSCoding {
       DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosDefault).async {
         Thread.sleep(forTimeInterval: 0.1)
         if tokenInstance != nil {
-          VK.delegate.vkDidAutorize(tokenInstance.parameters)
+          VK.delegate!.vkDidAutorize(tokenInstance.parameters)
         }
       }
     }
@@ -204,7 +204,7 @@ internal class Token: NSObject, NSCoding {
   
   private class func notifyNotExist() {
     if VK.state == .authorized {
-      VK.delegate.vkDidUnautorize()
+      VK.delegate!.vkDidUnautorize()
     }
   }
   

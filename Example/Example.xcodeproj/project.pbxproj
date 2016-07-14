@@ -22,6 +22,9 @@
 		A2527EBD1BD13F7E00F65412 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527EBC1BD13F7E00F65412 /* APIWorker.swift */; };
 		A2527EBE1BD13F7E00F65412 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527EBC1BD13F7E00F65412 /* APIWorker.swift */; };
 		A2527EC31BD13FB600F65412 /* Back-iOS.png in Resources */ = {isa = PBXBuildFile; fileRef = A2527EC11BD13FB600F65412 /* Back-iOS.png */; };
+		A2DBE4221D3662BF0007AFBD /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70711BD2699E008E7D86 /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A2DBE4271D3663110007AFBD /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70731BD2699E008E7D86 /* SwiftyVK.framework */; };
+		A2DBE4281D3663110007AFBD /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70731BD2699E008E7D86 /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A2EB6F331BD1857D008E7D86 /* testAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F2D1BD1857D008E7D86 /* testAudio.mp3 */; };
 		A2EB6F341BD1857D008E7D86 /* testAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F2D1BD1857D008E7D86 /* testAudio.mp3 */; };
 		A2EB6F351BD1857D008E7D86 /* testDoc.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F2E1BD1857D008E7D86 /* testDoc.rtf */; };
@@ -31,9 +34,6 @@
 		A2EB6F391BD1857D008E7D86 /* testVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F301BD1857D008E7D86 /* testVideo.mp4 */; };
 		A2EB6F3A1BD1857D008E7D86 /* testVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F301BD1857D008E7D86 /* testVideo.mp4 */; };
 		A2EB70781BD269AB008E7D86 /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70711BD2699E008E7D86 /* SwiftyVK.framework */; };
-		A2EB70791BD269AB008E7D86 /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70711BD2699E008E7D86 /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A2EB707C1BD269B1008E7D86 /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70731BD2699E008E7D86 /* SwiftyVK.framework */; };
-		A2EB707D1BD269B1008E7D86 /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70731BD2699E008E7D86 /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A2EB71461BD27840008E7D86 /* Request_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71261BD275E5008E7D86 /* Request_Tests.swift */; };
 		A2EB71471BD27840008E7D86 /* Upload_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71271BD275E5008E7D86 /* Upload_Tests.swift */; };
 		A2EB71491BD27841008E7D86 /* Request_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71261BD275E5008E7D86 /* Request_Tests.swift */; };
@@ -49,6 +49,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A2DBE4291D3663110007AFBD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2EB70691BD2699E008E7D86 /* SwiftyVK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A2EB6E9A1BD180DD008E7D86;
+			remoteInfo = "SwiftyVK-iOS";
+		};
 		A2EB70701BD2699E008E7D86 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A2EB70691BD2699E008E7D86 /* SwiftyVK.xcodeproj */;
@@ -84,13 +91,6 @@
 			remoteGlobalIDString = A2EB6EA71BD180E9008E7D86;
 			remoteInfo = "SwiftyVK-OSX";
 		};
-		A2EB707E1BD269B1008E7D86 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A2EB70691BD2699E008E7D86 /* SwiftyVK.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = A2EB6E9A1BD180DD008E7D86;
-			remoteInfo = "SwiftyVK-iOS";
-		};
 		A2EB71321BD27639008E7D86 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A2527E5B1BD139E200F65412 /* Project object */;
@@ -108,24 +108,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A2EB6F261BD184DB008E7D86 /* Embed Frameworks */ = {
+		A2DBE42B1D3663110007AFBD /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A2EB707D1BD269B1008E7D86 /* SwiftyVK.framework in Embed Frameworks */,
+				A2DBE4281D3663110007AFBD /* SwiftyVK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A2EB705F1BD2693D008E7D86 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A2EB70791BD269AB008E7D86 /* SwiftyVK.framework in Embed Frameworks */,
+				A2DBE4221D3662BF0007AFBD /* SwiftyVK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,7 +206,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2EB707C1BD269B1008E7D86 /* SwiftyVK.framework in Frameworks */,
+				A2DBE4271D3663110007AFBD /* SwiftyVK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,13 +344,13 @@
 				A2527E761BD13A5300F65412 /* Sources */,
 				A2527E771BD13A5300F65412 /* Frameworks */,
 				A2527E781BD13A5300F65412 /* Resources */,
-				A2EB6F261BD184DB008E7D86 /* Embed Frameworks */,
 				A2EB71D11BD3B994008E7D86 /* Embed Watch Content */,
+				A2DBE42B1D3663110007AFBD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A2EB707F1BD269B1008E7D86 /* PBXTargetDependency */,
+				A2DBE42A1D3663110007AFBD /* PBXTargetDependency */,
 			);
 			name = "SwiftyVK-Example-iOS";
 			productName = "SwiftyVK-Example-iOS";
@@ -582,15 +582,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A2DBE42A1D3663110007AFBD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SwiftyVK-iOS";
+			targetProxy = A2DBE4291D3663110007AFBD /* PBXContainerItemProxy */;
+		};
 		A2EB707B1BD269AB008E7D86 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "SwiftyVK-OSX";
 			targetProxy = A2EB707A1BD269AB008E7D86 /* PBXContainerItemProxy */;
-		};
-		A2EB707F1BD269B1008E7D86 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "SwiftyVK-iOS";
-			targetProxy = A2EB707E1BD269B1008E7D86 /* PBXContainerItemProxy */;
 		};
 		A2EB71331BD27639008E7D86 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -843,7 +843,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-Example-iOS-orig";
+				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-Example-iOS-";
 				PRODUCT_NAME = "~SwiftyVK~";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -888,7 +888,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-Example-iOS-orig";
+				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-Example-iOS-";
 				PRODUCT_NAME = "~SwiftyVK~";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

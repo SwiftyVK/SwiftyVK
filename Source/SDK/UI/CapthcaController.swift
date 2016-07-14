@@ -171,7 +171,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     
     private class func getCapthcaForPlatform() -> СaptchaController {
       let captcha          = СaptchaController(nibName:CaptchaViewName, bundle: Resources.bundle)
-      captcha.parentView   = VK.delegate.vkWillPresentView()
+      captcha.parentView   = VK.delegate?.vkWillPresentView()
       return captcha
     }
     

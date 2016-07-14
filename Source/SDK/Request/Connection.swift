@@ -72,7 +72,7 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   
   init?(request: Request) {
-    assert(!(!request.isAsynchronous && Thread.isMainThread() && request.catchErrors), "\n\nWe turned off the ability to send synchronous requests with catchErrors on the main thread, as it may cause a lot of non-obvious, subtle bugs. \nPlease send synchronous requests with catchErrors from other threads, or use catchErrors = false (not recommend). \nThank you for your understanding and good luck in the use SwiftyVK.\n\n")
+    assert(!(!request.isAsynchronous && Thread.isMainThread && request.catchErrors), "\n\nWe turned off the ability to send synchronous requests with catchErrors on the main thread, as it may cause a lot of non-obvious, subtle bugs. \nPlease send synchronous requests with catchErrors from other threads, or use catchErrors = false (not recommend). \nThank you for your understanding and good luck in the use SwiftyVK.\n\n")
     VK.Log.put(request, "INIT connection")
     
     self.request = request

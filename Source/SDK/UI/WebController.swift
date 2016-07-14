@@ -94,7 +94,7 @@ class WebController : _WebControllerPrototype {
     DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosBackground).async {
       let err = VK.Error(domain: "VKSDKDomain", code: 3, desc: "Fail user validation", userInfo: nil, req: self.request)
       self.request?.errorBlock(error: err)
-      VK.delegate.vkAutorizationFailed(err)
+      VK.delegate?.vkAutorizationFailed(err)
     }
     request?.attempts = request!.maxAttempts
     hide()
@@ -254,7 +254,7 @@ class WebController : _WebControllerPrototype {
     
     private class func getParamsForPlatform() -> (controller: WebController, isSheet: Bool) {
       let controller        = WebController(nibName: WebViewName, bundle: Resources.bundle)
-      controller.parentView = VK.delegate.vkWillPresentView()
+      controller.parentView = VK.delegate?.vkWillPresentView()
       return (controller, false)
     }
     

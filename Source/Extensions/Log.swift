@@ -5,7 +5,7 @@ private let logQueue = DispatchQueue(label: "VK.Log", attributes: DispatchQueueA
 
 private let form : DateFormatter = {
   let f = DateFormatter()
-  f.dateFormat = DateFormatter.dateFormat(fromTemplate: "d.M HH:mm:ss", options: 0, locale: Locale.current())
+  f.dateFormat = DateFormatter.dateFormat(fromTemplate: "d.M HH:mm:ss", options: 0, locale: Locale.current)
   return f
 }();
 
