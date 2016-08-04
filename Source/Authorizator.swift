@@ -17,29 +17,29 @@ internal struct Authorizator {
   
   
   private static var paramsUrl : String {
-    let _perm = VK.Scope.toInt(VK.delegate!.vkWillAutorize())
+    let _perm = VK.Scope.toInt(VK.delegate!.vkWillauthorize())
     let _mode = isMac ? "mobile" : "ios"
-    let _redir = canAutorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
+    let _redir = canauthorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
     
     return  "client_id=\(VK.appID!)&scope=\(_perm)&display=\(_mode)&v\(VK.defaults.apiVersion)&sdk_version=\(VK.defaults.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
   }
   
   
   
-  internal static func autorize(_ request: Request?) {
+  internal static func authorize(_ request: Request?) {
     if let request = request {
       request.authFails >= 3 || Token.get() == nil
-        ? autorizeWithRequest(request)
+        ? authorizeWithRequest(request)
         : {_ = request.trySend()}()
     }
     else if Token.get() == nil {
-      autorize()
+      authorize()
     }
   }
   
   
   
-  private static func autorize() {
+  private static func authorize() {
     Thread.isMainThread
       ? vkSheetQueue.async {start(nil)}
       : vkSheetQueue.sync {start(nil)}
@@ -47,14 +47,14 @@ internal struct Authorizator {
   
   
   
-  private static func autorizeWithRequest(_ request: Request) {
+  private static func authorizeWithRequest(_ request: Request) {
     vkSheetQueue.sync(execute: {start(request)})
   }
   
   
   
   private static func start(_ request: Request?) {
-    if canAutorizeWithVkApp {
+    if canauthorizeWithVkApp {
       startWithApp(request)
     }
     else {
@@ -102,7 +102,7 @@ internal struct Authorizator {
     
     
     
-    internal static var canAutorizeWithVkApp : Bool {
+    internal static var canauthorizeWithVkApp : Bool {
       return UIApplication.shared.canOpenURL(URL(string: appAuthorizeUrl)!)
         && UIApplication.shared.canOpenURL(URL(string: "vk\(VK.appID!)://")!)
     }
@@ -141,7 +141,7 @@ internal struct Authorizator {
 #if os(OSX)
   private typealias OSXAuthorizator = Authorizator
   extension OSXAuthorizator {
-    internal static var canAutorizeWithVkApp : Bool {return false}
+    internal static var canauthorizeWithVkApp : Bool {return false}
     private static func startWithApp(_ request: Request?) {}
     internal static func dropRequest() {}
   }

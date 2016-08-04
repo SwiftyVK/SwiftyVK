@@ -29,7 +29,7 @@ internal class Response {
       var json = JSON(data: data!, error: err)
       
       if let err = err?.pointee {
-        error = VK.Error(ns: err, req: request!)
+        error = VK.Error(err: err, req: request!)
       }
         
       else if json["response"].exists() {
@@ -56,7 +56,7 @@ internal class Response {
   
   
   internal func execute() {
-    guard let request = request where request.cancelled == false else {return}
+    guard let request = request, request.cancelled == false else {return}
     
     if let error = error {
       if request.catchErrors {
@@ -84,7 +84,7 @@ internal class Response {
   
   
   internal func executeError() {
-    guard let request = request where request.cancelled == false else {return}
+    guard let request = request, request.cancelled == false else {return}
     
     guard request.errorBlockIsSet else {
       VK.Log.put(request, "Error block is not set")
@@ -104,7 +104,7 @@ internal class Response {
   
   
   internal func executeSuccess() {
-    guard let request = request where request.cancelled == false else {return}
+    guard let request = request, request.cancelled == false else {return}
     
     guard request.successBlockIsSet else {
       VK.Log.put(request, "Success block is not set")

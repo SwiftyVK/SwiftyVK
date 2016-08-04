@@ -136,7 +136,7 @@ class Sending_Tests: VKTestCase {
       })
     }
     
-    waitForExpectations(timeout: reqTimeout) {_ in}
+    waitForExpectations(timeout: reqTimeout*10) {_ in}
   }
   
   
@@ -169,7 +169,7 @@ class Sending_Tests: VKTestCase {
       }
     }
     
-    waitForExpectations(timeout: reqTimeout) {_ in}
+    waitForExpectations(timeout: reqTimeout*10) {_ in}
   }
   
   
@@ -230,7 +230,7 @@ class Sending_Tests: VKTestCase {
         })
       }
       
-      self.waitForExpectations(timeout: self.reqTimeout*4) {_ in}
+      self.waitForExpectations(timeout: self.reqTimeout*Double(VK.defaults.maxRequestsPerSec)) {_ in}
     }
   }
 }

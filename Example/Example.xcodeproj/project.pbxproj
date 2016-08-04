@@ -22,6 +22,8 @@
 		A2527EBD1BD13F7E00F65412 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527EBC1BD13F7E00F65412 /* APIWorker.swift */; };
 		A2527EBE1BD13F7E00F65412 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527EBC1BD13F7E00F65412 /* APIWorker.swift */; };
 		A2527EC31BD13FB600F65412 /* Back-iOS.png in Resources */ = {isa = PBXBuildFile; fileRef = A2527EC11BD13FB600F65412 /* Back-iOS.png */; };
+		A2ACF04F1D53A61900438BB2 /* UI_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71251BD275E5008E7D86 /* UI_Tests.swift */; };
+		A2ACF0521D53A61900438BB2 /* UI_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71251BD275E5008E7D86 /* UI_Tests.swift */; };
 		A2DBE4221D3662BF0007AFBD /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70711BD2699E008E7D86 /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A2DBE4271D3663110007AFBD /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70731BD2699E008E7D86 /* SwiftyVK.framework */; };
 		A2DBE4281D3663110007AFBD /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70731BD2699E008E7D86 /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -564,6 +566,7 @@
 				A2EB71471BD27840008E7D86 /* Upload_Tests.swift in Sources */,
 				A234A4031BE29DAD00856CA5 /* Misc_Tests.swift in Sources */,
 				A24D10971C574D29008263B0 /* VKTestsCase.swift in Sources */,
+				A2ACF04F1D53A61900438BB2 /* UI_Tests.swift in Sources */,
 				A2EB71461BD27840008E7D86 /* Request_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -575,6 +578,7 @@
 				A2EB714A1BD27841008E7D86 /* Upload_Tests.swift in Sources */,
 				A234A4041BE29DAD00856CA5 /* Misc_Tests.swift in Sources */,
 				A24D10981C574D2A008263B0 /* VKTestsCase.swift in Sources */,
+				A2ACF0521D53A61900438BB2 /* UI_Tests.swift in Sources */,
 				A2EB71491BD27841008E7D86 /* Request_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

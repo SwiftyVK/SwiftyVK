@@ -36,7 +36,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     var canContinue = false
     
     vkSheetQueue.sync {
-      let captcha          = getCapthcaForPlatform()
+      let captcha          = getCaptchaForPlatform()
       sharedCaptchaIsRun   = true
       captcha.sid          = sid
       captcha.imageUrl     = imageUrl
@@ -49,7 +49,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
       request.isAsynchronous ? request.trySend() : request.tryInCurrentThread()
     }
     else {
-      request.errorBlock(error: VK.Error(domain: "VKSDKDomain", code: 5, desc: "Capthca loading error", userInfo: nil, req: request))
+      request.errorBlock(error: VK.Error(domain: "VKSDKDomain", code: 5, desc: "Captcha loading error", userInfo: nil, req: request))
     }
   }
   
@@ -107,7 +107,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     
     
     
-    private class func getCapthcaForPlatform() -> СaptchaController {
+    private class func getCaptchaForPlatform() -> СaptchaController {
       let params           = VK.delegate?.vkWillPresentWindow()
       let captcha          = СaptchaController()
       
@@ -169,7 +169,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     
     
     
-    private class func getCapthcaForPlatform() -> СaptchaController {
+    private class func getCaptchaForPlatform() -> СaptchaController {
       let captcha          = СaptchaController(nibName:CaptchaViewName, bundle: Resources.bundle)
       captcha.parentView   = VK.delegate?.vkWillPresentView()
       return captcha

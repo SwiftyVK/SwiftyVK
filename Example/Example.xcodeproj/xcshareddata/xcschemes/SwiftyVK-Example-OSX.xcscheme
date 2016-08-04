@@ -37,6 +37,14 @@
                BlueprintName = "SwiftyVK-Tests-OSX"
                ReferencedContainer = "container:Example.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "Upload_Tests/test_photo_to_market_album()">
+               </Test>
+               <Test
+                  Identifier = "VKTestCase">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

@@ -11,10 +11,10 @@ class UI_Tests: VKTestCase {
   
   
   func test_login_synchroniously() {
-    let readyExpectation = expectationWithDescription("ready")
+    let readyExpectation = expectation(description: "ready")
     VK.logOut()
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+    DispatchQueue.global(qos: .background).async {
       let req = VK.API.Messages.getDialogs()
       req.isAsynchronous = false
       var executed = false
@@ -33,17 +33,17 @@ class UI_Tests: VKTestCase {
       }
     }
     
-    print(">>> USER ACTION IS REQUIRED! Please switch to the test application and autorize. This test will wait no longer than \(delay) seconds.")
+    print(">>> USER ACTION IS REQUIRED! Please switch to the test application and authorize. This test will wait no longer than \(delay) seconds.")
     
-    waitForExpectationsWithTimeout(delay) {_ in
-      XCTAssertEqual(VK.state, VK.States.Authorized, "Not autorized")
+    waitForExpectations(timeout: delay) {_ in
+      XCTAssertEqual(VK.state, VK.States.authorized, "Not authorized")
     }
   }
   
   
   
   func test_login_asynchroniously() {
-    let readyExpectation = expectationWithDescription("ready")
+    let readyExpectation = expectation(description: "ready")
     VK.logOut()
     
     VK.API.Messages.getDialogs().send(
@@ -55,10 +55,10 @@ class UI_Tests: VKTestCase {
         readyExpectation.fulfill()
     })
     
-    print(">>> USER ACTION IS REQUIRED! Please switch to the test application and autorize. This test will wait no longer than \(delay) seconds.")
+    print(">>> USER ACTION IS REQUIRED! Please switch to the test application and authorize. This test will wait no longer than \(delay) seconds.")
     
-    waitForExpectationsWithTimeout(delay) {_ in
-      XCTAssertEqual(VK.state, VK.States.Authorized, "Not autorized")
+    waitForExpectations(timeout: delay) {_ in
+      XCTAssertEqual(VK.state, VK.States.authorized, "Not authorized")
     }
   }
   
@@ -66,7 +66,7 @@ class UI_Tests: VKTestCase {
   
   
   func test_autologin() {
-    let readyExpectation = expectationWithDescription("ready")
+    let readyExpectation = expectation(description: "ready")
     var executed = 0
     
     for n in 1...3 {
@@ -83,19 +83,19 @@ class UI_Tests: VKTestCase {
     }
     
     VK.logOut()
-    print(">>> USER ACTION IS REQUIRED! Please switch to the test application and autorize. This test will wait no longer than \(delay) seconds.")
+    print(">>> USER ACTION IS REQUIRED! Please switch to the test application and authorize. This test will wait no longer than \(delay) seconds.")
     
-    waitForExpectationsWithTimeout(delay) {error in
-      XCTAssertEqual(VK.state, VK.States.Authorized, "Not autorized")
+    waitForExpectations(timeout: delay) {error in
+      XCTAssertEqual(VK.state, VK.States.authorized, "Not authorized")
     }
   }
   
   
   
   func test_captcha_synchroniously() {
-    let readyExpectation = expectationWithDescription("ready")
+    let readyExpectation = expectation(description: "ready")
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+    DispatchQueue.global(qos: .background).async {
       let req = VK.API.custom(method: "captcha.force")
       req.isAsynchronous = false
       var executed = false
@@ -114,15 +114,15 @@ class UI_Tests: VKTestCase {
       }
     }
     
-    print(">>> USER ACTION IS REQUIRED! Please switch to the test application and autorize. This test will wait no longer than \(delay) seconds.")
+    print(">>> USER ACTION IS REQUIRED! Please switch to the test application and authorize. This test will wait no longer than \(delay) seconds.")
     
-    waitForExpectationsWithTimeout(delay) {_ in}
+    waitForExpectations(timeout: delay) {_ in}
   }
   
   
   
   func test_captcha_asynchroniously() {
-    let readyExpectation = expectationWithDescription("ready")
+    let readyExpectation = expectation(description: "ready")
     
     let req = VK.API.custom(method: "captcha.force")
     req.isAsynchronous = true
@@ -136,8 +136,8 @@ class UI_Tests: VKTestCase {
         readyExpectation.fulfill()
     })
     
-    print(">>> USER ACTION IS REQUIRED! Please switch to the test application and autorize. This test will wait no longer than \(delay) seconds.")
+    print(">>> USER ACTION IS REQUIRED! Please switch to the test application and authorize. This test will wait no longer than \(delay) seconds.")
     
-    waitForExpectationsWithTimeout(delay) {_ in}
+    waitForExpectations(timeout: delay) {_ in}
   }
 }

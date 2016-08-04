@@ -11,11 +11,11 @@ import Foundation
 public protocol VKDelegate {
   /**Called when SwiftyVK need autorization permissions
    - returns: permissions as VK.Scope type*/
-  func vkWillAutorize() -> [VK.Scope]
-  ///Called when SwiftyVK did autorize and receive token
-  func vkDidAutorize(_ parameters: Dictionary<String, String>)
-  ///Called when SwiftyVK did unautorize and remove token
-  func vkDidUnautorize()
+  func vkWillauthorize() -> [VK.Scope]
+  ///Called when SwiftyVK did authorize and receive token
+  func vkDidauthorize(_ parameters: Dictionary<String, String>)
+  ///Called when SwiftyVK did unauthorize and remove token
+  func vkDidUnauthorize()
   ///Called when SwiftyVK did failed autorization
   func vkAutorizationFailed(_: VK.Error)
   /**Called when SwiftyVK need know where a token is located
@@ -44,7 +44,7 @@ public protocol VKDelegate {
 /**
  Library to connect to the social network "VKontakte"
  * To use, you must call start() specifying the application ID and a delegate
- * For user authentication you must call autorize()
+ * For user authentication you must call authorize()
  */
 public struct VK {
   internal static var delegate : VKDelegate? {
@@ -80,8 +80,8 @@ public struct VK {
    * If the token is already stored in the file, then the authentication takes place in the background
    * If not, shows a pop-up notification with authorization request
    */
-  public static func autorize() {
-    Authorizator.autorize(nil);
+  public static func authorize() {
+    Authorizator.authorize(nil);
   }
   
   
@@ -120,7 +120,7 @@ private typealias VK_Defaults = VK
 extension VK_Defaults {
   public struct defaults {
     //Returns used VK API version
-    public static let apiVersion = "5.52"
+    public static var apiVersion = "5.53"
     //Returns used VK SDK version
     public static let sdkVersion = "1.3.17"
     ///Requests timeout

@@ -15,11 +15,11 @@ public class _VKError : Error, CustomStringConvertible {
   
   
   
-  public init(ns: NSError, req: Request?) {
-    self.domain = ns.domain
-    self.code = ns.code
-    self.desc = ns.localizedDescription
-    self.userInfo = ns.userInfo
+  public init(err: NSError, req: Request?) {
+    self.domain = err.domain
+    self.code = err.code
+    self.desc = err.localizedDescription
+    self.userInfo = err.userInfo
     self.request = req
     
     if let request = request {
@@ -87,7 +87,7 @@ public class _VKError : Error, CustomStringConvertible {
     case 5:
       request?.authFails += 1
       request?.attempts -= 1
-      Authorizator.autorize(request)
+      Authorizator.authorize(request)
     case 6, 9, 10:
       Connection.needLimit = true
       finaly()

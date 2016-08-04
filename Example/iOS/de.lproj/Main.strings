@@ -5,8 +5,8 @@
 /* Class = "UIButton"; normalTitle = "users.get"; ObjectID = "4Kh-8o-KUN"; */
 "4Kh-8o-KUN.normalTitle" = "users.get";
 
-/* Class = "UIButton"; normalTitle = "Capthca"; ObjectID = "6Ts-fo-28A"; */
-"6Ts-fo-28A.normalTitle" = "Capthca";
+/* Class = "UIButton"; normalTitle = "Captcha"; ObjectID = "6Ts-fo-28A"; */
+"6Ts-fo-28A.normalTitle" = "Captcha";
 
 /* Class = "UIButton"; normalTitle = "upload photo to wall"; ObjectID = "kUH-eh-OBo"; */
 "kUH-eh-OBo.normalTitle" = "upload photo to wall";

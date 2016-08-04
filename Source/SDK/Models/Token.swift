@@ -53,7 +53,7 @@ internal class Token: NSObject, NSCoding {
     if tokenInstance != nil && self.isExpired() == false {
       return tokenInstance.token
     }
-    else if let _ = _load() where self.isExpired() == false {
+    else if let _ = _load(), self.isExpired() == false {
       return tokenInstance.token
     }
     return nil
@@ -195,7 +195,7 @@ internal class Token: NSObject, NSCoding {
       DispatchQueue.global(qos: .default).async {
         Thread.sleep(forTimeInterval: 0.1)
         if tokenInstance != nil {
-          VK.delegate!.vkDidAutorize(tokenInstance.parameters)
+          VK.delegate!.vkDidauthorize(tokenInstance.parameters)
         }
       }
     }
@@ -204,7 +204,7 @@ internal class Token: NSObject, NSCoding {
   
   private class func notifyNotExist() {
     if VK.state == .authorized {
-      VK.delegate!.vkDidUnautorize()
+      VK.delegate!.vkDidUnauthorize()
     }
   }
   

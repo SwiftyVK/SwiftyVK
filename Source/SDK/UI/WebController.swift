@@ -14,7 +14,7 @@ import WebKit
 
 
 internal let vkSheetQueue = DispatchQueue(label: "com.VK.sheetQueue")
-private let autorizeUrl = "https://oauth.vk.com/authorize?"
+private let authorizeUrl = "https://oauth.vk.com/authorize?"
 private let WebViewName = Resources.withSuffix("WebView")
 private weak var activeWebController : WebController?
 
@@ -80,7 +80,7 @@ class WebController : _WebControllerPrototype {
     else if urlString.contains("fail=1") {
       failValidation()
     }
-    else if urlString.contains(autorizeUrl) || urlString.contains("act=security_check") || urlString.contains("https://m.vk.com/login?") {
+    else if urlString.contains(authorizeUrl) || urlString.contains("act=security_check") || urlString.contains("https://m.vk.com/login?") {
       expand()
     }
     else {

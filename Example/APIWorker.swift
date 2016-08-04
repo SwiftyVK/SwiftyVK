@@ -7,11 +7,11 @@ class APIWorker {
   class func action(_ tag: Int) {
     switch tag {
     case 1:
-      autorize()
+      authorize()
     case 2:
       logout()
     case 3:
-      capthca()
+      captcha()
     case 4:
       usersGet()
     case 5:
@@ -26,11 +26,12 @@ class APIWorker {
   }
   
   
-  class func autorize() {
+  
+  class func authorize() {
     VK.logOut()
     print("SwiftyVK: LogOut")
-    VK.autorize()
-    print("SwiftyVK: Autorize")
+    VK.authorize()
+    print("SwiftyVK: authorize")
   }
   
   
@@ -42,10 +43,10 @@ class APIWorker {
   
   
   
-  class func capthca() {
+  class func captcha() {
     let req = VK.API.custom(method: "captcha.force")
-    req.successBlock = {response in print("SwiftyVK: Captha success \n \(response)")}
-    req.errorBlock = {error in print("SwiftyVK: Captha fail \n \(error)")}
+    req.successBlock = {response in print("SwiftyVK: Captcha success \n \(response)")}
+    req.errorBlock = {error in print("SwiftyVK: Captcha fail \n \(error)")}
     req.send()
   }
   
@@ -53,8 +54,8 @@ class APIWorker {
   
   class func validation() {
     let req = VK.API.custom(method: "account.testValidation")
-    req.successBlock = {response in print("SwiftyVK: Captha success \n \(response)")}
-    req.errorBlock = {error in print("SwiftyVK: Captha fail \n \(error)")}
+    req.successBlock = {response in print("SwiftyVK: Captcha success \n \(response)")}
+    req.errorBlock = {error in print("SwiftyVK: Captcha fail \n \(error)")}
     req.send()
   }
   

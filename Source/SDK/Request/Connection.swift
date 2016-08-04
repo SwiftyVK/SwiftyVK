@@ -33,14 +33,14 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
     
     VK.Log.put(request, "Send in current thread")
     do {request.response.create(try NSURLConnection.sendSynchronousRequest(request.urlRequest, returning: nil))}
-    catch let error as NSError {request.response.setError(VK.Error(ns: error, req: nil))}
+    catch let error as NSError {request.response.setError(VK.Error(err: error, req: nil))}
     request.response.execute()
   }
   
   
   
   private class func waitAPI(_ request: Request) {
-    guard request.isAPI, let actualRequestId = actualRequestId where request.id != actualRequestId else {return}
+    guard request.isAPI, let actualRequestId = actualRequestId, request.id != actualRequestId else {return}
     VK.Log.put(request, "Wait API for request with id \(actualRequestId)")
   }
   
@@ -164,8 +164,8 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   
   
-  func connection(_ connection: NSURLConnection, didFailWithError error: NSError)  {
-    let error = VK.Error(ns: error, req: request!)
+  func connection(_ connection: NSURLConnection, didFailWithError error: Error) {
+    let error = VK.Error(err: error, req: request!)
     VK.Log.put(request, "Connection failed with error: \(error)")
     request.response.setError(error)
     finishConnection()

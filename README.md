@@ -1,4 +1,4 @@
-# SwiftyVK [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/WE-St0r/SwiftyVK/master/LICENSE) [![Platform](https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat)](http://cocoadocs.org/docsets/SwiftyVK) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftyVK.svg?style=flat)](https://cocoapods.org/pods/SwiftyVK) [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg)](https://github.com/WE-St0r/SwiftyVK) [![VK API](https://img.shields.io/badge/VK_API-5.52-blue.svg?style=flat)](https://vk.com/dev/versions) [![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
+# SwiftyVK [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/WE-St0r/SwiftyVK/master/LICENSE) [![Platform](https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat)](http://cocoadocs.org/docsets/SwiftyVK) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftyVK.svg?style=flat)](https://cocoapods.org/pods/SwiftyVK) [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg)](https://github.com/WE-St0r/SwiftyVK) [![VK API](https://img.shields.io/badge/VK_API-5.53-blue.svg?style=flat)](https://vk.com/dev/versions) [![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 
 SwiftyVK makes it easy to interact with social network "VKontakte" API for iOS and OSX.
 
@@ -6,26 +6,26 @@ On this page:
 
 * [Requirements](#requirements)
 * [Integration](#integration)
-* [Manually](#manually)
-* [CocoaPods](#cocoapods)
-* [Carthage](#carthage)
+  * [Manually](#manually)
+  * [CocoaPods](#cocoapods)
+  * [Carthage](#carthage)
 * [Getting started](#getting-started)
-* [Import and implementation](#import-and-implementation)
-* [Initialization](#initialization)
-* [User authorization](#user-authorization)
-* [Authorization with VK App](#authorization-with-vk-app)
+  * [Import and implementation](#import-and-implementation)
+  * [Initialization](#initialization)
+  * [User authorization](#user-authorization)
+  * [Authorization with VK App](#authorization-with-vk-app)
 * [API Requests](#api-requests)
-* [Syntax](#syntax)
-* [Custom requests](#custom-requests)
-* [Request properties](#request-properties)
-* [Default properties](#default-properties)
+  * [Syntax](#syntax)
+  * [Custom requests](#custom-requests)
+  * [Request properties](#request-properties)
+  * [Default properties](#default-properties)
 * [Parsing response](#parsing-response)
 * [Error handling](#error-handling)
 * [Upload files](#upload-files)
 * [Longpoll](#longpoll)
 
 ##**Requirements**
-* Swift 2.0+
+* Swift 3.0+
 * iOS 8.0+ / OSX 10.10+
 * Xcode 8.0+
 
@@ -66,17 +66,17 @@ Implement `VKDelegate` protocol and **all its functions** in custom class. For e
 ```swift
 class YourClass: Superclass, VKDelegate {
 
-  func vkWillAutorize() -> [VK.Scope] {
+  func vkWillauthorize() -> [VK.Scope] {
     //Called when SwiftyVK need autorization permissions.
     return //an array of application permissions
   }
 
-  func vkDidAutorize(parameters: Dictionary<String, String>) {}
+  func vkDidauthorize(parameters: Dictionary<String, String>) {}
     //Called when the user is log in. 
     //Here you can start to send requests to the API.
   }
 
-  func vkDidUnautorize() {
+  func vkDidUnauthorize() {
     //Called when user is log out.
   }
 
@@ -114,12 +114,12 @@ VK.start(appID: applicationID, delegate: VKDelegate)
 ```
 
 ###**User authorization**
-* Implement `vkWillAutorize()` function in `VKDelegate` and return [application  permissions](https://vk.com/dev/permissions).
+* Implement `vkWillauthorize()` function in `VKDelegate` and return [application  permissions](https://vk.com/dev/permissions).
 * Just call:
 
 
 ```swift
-VK.autorize()
+VK.authorize()
 ```
 * And user will see authorization dialog.
 
