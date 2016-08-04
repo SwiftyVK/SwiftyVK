@@ -108,7 +108,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     
     
     private class func getCapthcaForPlatform() -> СaptchaController {
-      let params           = VK.delegate.vkWillPresentWindow()
+      let params           = VK.delegate?.vkWillPresentWindow()
       let captcha          = СaptchaController()
       
       DispatchQueue.main.sync {
@@ -116,7 +116,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
         captcha.windowDidLoad()
       }
       
-      captcha.parentWindow = (params.isSheet ? params.inWindow : nil)
+      captcha.parentWindow = ((params?.isSheet)! ? params?.inWindow : nil)
       return captcha
     }
     

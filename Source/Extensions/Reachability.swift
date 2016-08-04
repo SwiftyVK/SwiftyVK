@@ -26,7 +26,7 @@
 import SystemConfiguration
 import Foundation
 
-public enum ReachabilityError: ErrorProtocol {
+public enum ReachabilityError: Error {
   case FailedToCreateWithAddress(sockaddr_in)
   case FailedToCreateWithHostname(String)
   case UnableToSetCallback
@@ -39,6 +39,7 @@ public let ReachabilityChangedNotification = "ReachabilityChangedNotification" a
 func callback(reachability:SCNetworkReachability, flags: SCNetworkReachabilityFlags, info: UnsafeMutablePointer<Void>?) {
   
   guard let info = info else { return }
+  
   let reachability = Unmanaged<Reachability>.fromOpaque(info).takeUnretainedValue()
   
   DispatchQueue.main.async {
@@ -101,7 +102,7 @@ public class Reachability: NSObject {
   public convenience init(hostname: String) throws {
     
     guard let nodename = (hostname as NSString).utf8String,
-      ref = SCNetworkReachabilityCreateWithName(nil, nodename) else { throw ReachabilityError.FailedToCreateWithHostname(hostname) }
+      let ref = SCNetworkReachabilityCreateWithName(nil, nodename) else { throw ReachabilityError.FailedToCreateWithHostname(hostname) }
     
     self.init(reachabilityRef: ref)
   }
@@ -139,7 +140,7 @@ public class Reachability: NSObject {
   // MARK: - *** Notifier methods ***
   public func startNotifier() throws {
     
-    guard let reachabilityRef = reachabilityRef where !notifierRunning else { return }
+    guard let reachabilityRef = reachabilityRef, !notifierRunning else { return }
     
     var context = SCNetworkReachabilityContext(version: 0, info: nil, retain: nil, release: nil, copyDescription: nil)
     context.info = UnsafeMutablePointer<Void>(Unmanaged<Reachability>.passUnretained(self).toOpaque())
@@ -215,7 +216,7 @@ public class Reachability: NSObject {
   private var notifierRunning = false
   private var reachabilityRef: SCNetworkReachability?
   
-  private let reachabilitySerialQueue = DispatchQueue(label: "uk.co.ashleymills.reachability", attributes: .serial, target: nil)
+  private let reachabilitySerialQueue = DispatchQueue(label: "uk.co.ashleymills.reachability")
   
   private func reachabilityChanged(flags:SCNetworkReachabilityFlags) {
     

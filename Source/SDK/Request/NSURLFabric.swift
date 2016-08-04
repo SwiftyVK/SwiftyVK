@@ -31,7 +31,9 @@ internal struct NSURLFabric {
   
   
   private static func withURL(_ url: String) -> NSMutableURLRequest {
-    let req = NSMutableURLRequest(url: URL(string: "")!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+    let emptyUrl = URL(string: methodUrl)!
+
+    let req = NSMutableURLRequest(url: emptyUrl, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
     req.httpMethod = "GET"
     req.url = URL(string: url)
     return req
@@ -41,8 +43,9 @@ internal struct NSURLFabric {
   
   private static func withAPI(_ APIMethod: String, httpMethod: HTTPMethods, paramDictAsAnyObject: AnyObject) -> NSMutableURLRequest {
     let params = argToString(paramDictAsAnyObject as? [String : String])
+    let emptyUrl = URL(string: methodUrl)!
     
-    let req = NSMutableURLRequest(url: URL(string: "")!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+    let req = NSMutableURLRequest(url: emptyUrl, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
     req.httpMethod = httpMethod.rawValue
 
     if httpMethod == .GET {
@@ -61,7 +64,9 @@ internal struct NSURLFabric {
   
   
   private static func withFiles(_ media: [Media], url: String) -> NSMutableURLRequest {
-    let req = NSMutableURLRequest(url: URL(string: "")!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+    let emptyUrl = URL(string: methodUrl)!
+
+    let req = NSMutableURLRequest(url: emptyUrl, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
     req.httpMethod = "POST"
     req.url = URL(string: url)
     req.addValue("", forHTTPHeaderField: "Accept-Language")

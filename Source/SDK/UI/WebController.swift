@@ -13,7 +13,7 @@ import WebKit
 
 
 
-internal let vkSheetQueue = DispatchQueue(label: "com.VK.sheetQueue", attributes: DispatchQueueAttributes.serial)
+internal let vkSheetQueue = DispatchQueue(label: "com.VK.sheetQueue")
 private let autorizeUrl = "https://oauth.vk.com/authorize?"
 private let WebViewName = Resources.withSuffix("WebView")
 private weak var activeWebController : WebController?
@@ -91,7 +91,7 @@ class WebController : _WebControllerPrototype {
   
   
   private func failValidation() {
-    DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosBackground).async {
+    DispatchQueue.global(qos: .background).async {
       let err = VK.Error(domain: "VKSDKDomain", code: 3, desc: "Fail user validation", userInfo: nil, req: self.request)
       self.request?.errorBlock(error: err)
       VK.delegate?.vkAutorizationFailed(err)
@@ -131,7 +131,7 @@ class WebController : _WebControllerPrototype {
     
     
     private class func getParamsForPlatform() -> (controller: WebController, isSheet: Bool) {
-      let params              = VK.delegate.vkWillPresentWindow()
+      let params              = VK.delegate?.vkWillPresentWindow()
       let controller          = WebController()
       
       DispatchQueue.main.sync {
@@ -139,8 +139,8 @@ class WebController : _WebControllerPrototype {
         controller.windowDidLoad()
       }
       
-      controller.parentWindow = (params.isSheet ? params.inWindow : nil)
-      return (controller, params.isSheet)
+      controller.parentWindow = ((params?.isSheet)! ? params?.inWindow : nil)
+      return (controller, params!.isSheet)
       
     }
     
@@ -226,7 +226,7 @@ class WebController : _WebControllerPrototype {
     
     //MARK: frameLoadDelegate protocol
     func webView(_ sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
-      handleResponse(frame.dataSource!.response.url!.absoluteString!)
+      handleResponse(frame.dataSource!.response.url!.absoluteString)
     }
     
     
@@ -309,7 +309,7 @@ class WebController : _WebControllerPrototype {
     //MARK: UIWebViewDelegate protocol
     func webViewDidFinishLoad(_ webView: UIWebView) {
       activity.stopAnimating()
-      handleResponse(webView.request!.url!.absoluteString!)
+      handleResponse(webView.request!.url!.absoluteString)
     }
     
     

@@ -192,7 +192,7 @@ internal class Token: NSObject, NSCoding {
   
   private class func notifyExist() {
     if VK.state != .authorized {
-      DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosDefault).async {
+      DispatchQueue.global(qos: .default).async {
         Thread.sleep(forTimeInterval: 0.1)
         if tokenInstance != nil {
           VK.delegate!.vkDidAutorize(tokenInstance.parameters)

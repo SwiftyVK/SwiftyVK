@@ -6,12 +6,12 @@ import XCTest
 class Upload_Tests: VKTestCase {
   
   func test_photo_to_message() {
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testImage", ofType: "jpg")!)) else {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "testImage", ofType: "jpg")!)) else {
       XCTFail("Image path is empty")
       return
     }
     
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
     var progressIsExecuted = false
     
     let req = VK.API.Upload.Photo.toMessage(Media(imageData: data, type: .JPG))
@@ -28,7 +28,7 @@ class Upload_Tests: VKTestCase {
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
     
-    waitForExpectations(withTimeout: reqTimeout*10) {_ in
+    waitForExpectations(timeout: reqTimeout*10) {_ in
       XCTAssertTrue(progressIsExecuted)
     }
   }
@@ -36,12 +36,12 @@ class Upload_Tests: VKTestCase {
   
   
   func test_photo_to_group_wall() {
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testImage", ofType: "jpg")!)) else {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource:"testImage", ofType: "jpg")!)) else {
       XCTFail("Image path is empty")
       return
     }
     
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
     var progressIsExecuted = false
     
     
@@ -61,7 +61,7 @@ class Upload_Tests: VKTestCase {
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
     
-    waitForExpectations(withTimeout: reqTimeout*10) {_ in
+    waitForExpectations(timeout: reqTimeout*10) {_ in
       XCTAssertTrue(progressIsExecuted)
     }
   }
@@ -69,12 +69,12 @@ class Upload_Tests: VKTestCase {
   
   
   func test_photo_to_album() {
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testImage", ofType: "jpg")!)) else {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource:"testImage", ofType: "jpg")!)) else {
       XCTFail("Image path is empty")
       return
     }
     
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
     var progressIsExecuted = false
 
     let req = VK.API.Upload.Photo.toAlbum(
@@ -96,7 +96,7 @@ class Upload_Tests: VKTestCase {
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
     
-    waitForExpectations(withTimeout: reqTimeout*10) {_ in
+    waitForExpectations(timeout: reqTimeout*10) {_ in
       XCTAssertTrue(progressIsExecuted)
     }
   }
@@ -104,12 +104,12 @@ class Upload_Tests: VKTestCase {
   
   
   func test_photo_to_market() {
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testImage", ofType: "jpg")!)) else {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource:"testImage", ofType: "jpg")!)) else {
       XCTFail("Image path is empty")
       return
     }
 
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
     var progressIsExecuted = false
     
     let req = VK.API.Upload.Photo.toMarket(
@@ -127,7 +127,7 @@ class Upload_Tests: VKTestCase {
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
     
-    waitForExpectations(withTimeout: reqTimeout*10) {_ in
+    waitForExpectations(timeout: reqTimeout*10) {_ in
       XCTAssertTrue(progressIsExecuted)
     }
   }
@@ -135,12 +135,12 @@ class Upload_Tests: VKTestCase {
   
   
   func test_photo_to_market_album() {
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testImage", ofType: "jpg")!)) else {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource:"testImage", ofType: "jpg")!)) else {
       XCTFail("Image path is empty")
       return
     }
     
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
     var progressIsExecuted = false
 
     let req = VK.API.Upload.Photo.toMarketAlbum(
@@ -159,7 +159,7 @@ class Upload_Tests: VKTestCase {
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
     
-    waitForExpectations(withTimeout: reqTimeout*10) {_ in
+    waitForExpectations(timeout: reqTimeout*10) {_ in
       XCTAssertTrue(progressIsExecuted)
     }
   }
@@ -167,12 +167,12 @@ class Upload_Tests: VKTestCase {
   
   
   func test_audio() {
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testAudio", ofType: "mp3")!)) else {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource:"testAudio", ofType: "mp3")!)) else {
       XCTFail("Audio path is empty")
       return
     }
         
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
     var progressIsExecuted = false
 
     let req = VK.API.Upload.audio(Media(audioData: data))
@@ -195,7 +195,7 @@ class Upload_Tests: VKTestCase {
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
     
-    waitForExpectations(withTimeout: reqTimeout*10) {_ in
+    waitForExpectations(timeout: reqTimeout*10) {_ in
       XCTAssertTrue(progressIsExecuted)
     }
   }
@@ -203,12 +203,12 @@ class Upload_Tests: VKTestCase {
   
   
   func test_video_file() {
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testVideo", ofType: "mp4")!)) else {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource:"testVideo", ofType: "mp4")!)) else {
       XCTFail("Video path is empty")
       return
     }
     
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
     var progressIsExecuted = false
 
     let req = VK.API.Upload.Video.fromFile(
@@ -237,7 +237,7 @@ class Upload_Tests: VKTestCase {
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
     
-    waitForExpectations(withTimeout: reqTimeout*10) {_ in
+    waitForExpectations(timeout: reqTimeout*10) {_ in
       XCTAssertTrue(progressIsExecuted)
     }
   }
@@ -246,7 +246,7 @@ class Upload_Tests: VKTestCase {
   
   
   func test_video_link() {
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
 
     let req = VK.API.Upload.Video.fromUrl(
       "http://www.youtube.com/watch?v=w7VD1681jV8",
@@ -272,7 +272,7 @@ class Upload_Tests: VKTestCase {
     }
     req.send()
     
-    waitForExpectations(withTimeout: reqTimeout*10) {_ in
+    waitForExpectations(timeout: reqTimeout*10) {_ in
     }
   }
   
@@ -280,12 +280,12 @@ class Upload_Tests: VKTestCase {
   
   
   func test_document() {
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testDoc", ofType: "rtf")!)) else {
+    guard let data = try? Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource:"testDoc", ofType: "rtf")!)) else {
       XCTFail("Document path is empty")
       return
     }
     
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
     var progressIsExecuted = false
     
     let req = VK.API.Upload.document(Media(documentData: data, type: "rtf"))
@@ -308,7 +308,7 @@ class Upload_Tests: VKTestCase {
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
     
-    waitForExpectations(withTimeout: reqTimeout*10) {_ in
+    waitForExpectations(timeout: reqTimeout*10) {_ in
       XCTAssertTrue(progressIsExecuted)
     }
   }

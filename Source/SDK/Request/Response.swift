@@ -2,7 +2,7 @@ import Foundation
 
 
 
-private let responseQueue = DispatchQueue(label: "com.VK.responseQueue", attributes: DispatchQueueAttributes.concurrent)
+private let responseQueue = DispatchQueue(label: "com.VK.responseQueue", attributes: .concurrent)
 
 
 

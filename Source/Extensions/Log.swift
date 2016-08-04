@@ -1,7 +1,7 @@
 import Foundation
 
-internal let printQueue = DispatchQueue(label: "VK.Print", attributes: DispatchQueueAttributes.serial)
-private let logQueue = DispatchQueue(label: "VK.Log", attributes: DispatchQueueAttributes.serial)
+internal let printQueue = DispatchQueue(label: "VK.Print")
+private let logQueue = DispatchQueue(label: "VK.Log")
 
 private let form : DateFormatter = {
   let f = DateFormatter()

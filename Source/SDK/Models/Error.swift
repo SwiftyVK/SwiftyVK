@@ -2,7 +2,7 @@ import Foundation
 
 
 
-public class _VKError : ErrorProtocol, CustomStringConvertible {
+public class _VKError : Error, CustomStringConvertible {
   public var domain : String
   public var code: Int
   public var desc : String

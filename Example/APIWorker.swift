@@ -86,7 +86,7 @@ class APIWorker {
   
   
   class func uploadPhoto() {
-    let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.pathForResource("testImage", ofType: "jpg")!))
+    let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "testImage", ofType: "jpg")!))
     let media = Media(imageData: data, type: .JPG)
     let req = VK.API.Upload.Photo.toWall.toUser(media, userId: "4680178")
     req.progressBlock = { (done, total) -> () in print("SwiftyVK: uploadPhoto progress: \(done) of \(total))")}

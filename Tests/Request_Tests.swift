@@ -7,7 +7,7 @@ class Sending_Tests: VKTestCase {
   
   
   func test_A_get_method() {
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
     
       let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
       req.isAsynchronous = true
@@ -21,13 +21,13 @@ class Sending_Tests: VKTestCase {
           readyExpectation.fulfill()
       })
     
-      waitForExpectations(withTimeout: reqTimeout) {_ in}
+      waitForExpectations(timeout: reqTimeout) {_ in}
   }
   
   
   
   func test_A_post_method() {
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
     
     let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
     req.isAsynchronous = true
@@ -41,7 +41,7 @@ class Sending_Tests: VKTestCase {
         readyExpectation.fulfill()
     })
     
-    waitForExpectations(withTimeout: reqTimeout) {_ in}
+    waitForExpectations(timeout: reqTimeout) {_ in}
   }
   
   
@@ -53,7 +53,7 @@ class Sending_Tests: VKTestCase {
    Enable internet.
    */
   func test_A_infinite() {
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
     
     let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
     req.maxAttempts = 0
@@ -66,13 +66,13 @@ class Sending_Tests: VKTestCase {
         readyExpectation.fulfill()
     })
     
-    waitForExpectations(withTimeout: reqTimeout) {_ in}
+    waitForExpectations(timeout: reqTimeout) {_ in}
   }
   
   
   
   func test_A_errorblock() {
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
     
     let req = VK.API.Messages.getHistory()
     req.send(
@@ -84,15 +84,15 @@ class Sending_Tests: VKTestCase {
         readyExpectation.fulfill()
     })
     
-    waitForExpectations(withTimeout: reqTimeout) {_ in}
+    waitForExpectations(timeout: reqTimeout) {_ in}
   }
   
   
   
   func test_B_synchronious() {
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
     
-    DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosBackground).async {
+    DispatchQueue.global(qos: .background).async {
       for n in 1...10 {
         let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
         req.isAsynchronous = false
@@ -113,13 +113,13 @@ class Sending_Tests: VKTestCase {
       }
     }
     
-    waitForExpectations(withTimeout: reqTimeout) {_ in}
+    waitForExpectations(timeout: reqTimeout) {_ in}
   }
   
   
   
   func test_B_asynchronious() {
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
     var exeCount = 0
     
     for n in 1...10 {
@@ -136,16 +136,16 @@ class Sending_Tests: VKTestCase {
       })
     }
     
-    waitForExpectations(withTimeout: reqTimeout) {_ in}
+    waitForExpectations(timeout: reqTimeout) {_ in}
   }
   
   
   
   func test_C_random() {
-    let readyExpectation = expectation(withDescription: "ready")
+    let readyExpectation = expectation(description: "ready")
     var exeCount = 0
     
-    DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosBackground).async {
+    DispatchQueue.global(qos: .background).async {
       for n in 1...10 {
         let asynchronously = !(n % 3 == 0)
         let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
@@ -169,13 +169,13 @@ class Sending_Tests: VKTestCase {
       }
     }
     
-    waitForExpectations(withTimeout: reqTimeout) {_ in}
+    waitForExpectations(timeout: reqTimeout) {_ in}
   }
   
   
   
   func test_C_many() {
-    let readyExpectation = self.expectation(withDescription: "ready")
+    let readyExpectation = self.expectation(description: "ready")
     let backup = VK.defaults.maxRequestsPerSec
     VK.defaults.maxRequestsPerSec = 100
     let requests = NSMutableDictionary()
@@ -199,7 +199,7 @@ class Sending_Tests: VKTestCase {
       })
     }
     
-    self.waitForExpectations(withTimeout: reqTimeout*10) {_ in
+    self.waitForExpectations(timeout: reqTimeout*10) {_ in
       VK.defaults.maxRequestsPerSec = backup
       let results = self.getResults(requests)
       printSync(results.statistic)
@@ -213,7 +213,7 @@ class Sending_Tests: VKTestCase {
   
   func test_C_performance() {
     self.measure() {
-      let readyExpectation = self.expectation(withDescription: "ready")
+      let readyExpectation = self.expectation(description: "ready")
       var executed = 0
       
       for n in 1...VK.defaults.maxRequestsPerSec {
@@ -230,7 +230,7 @@ class Sending_Tests: VKTestCase {
         })
       }
       
-      self.waitForExpectations(withTimeout: self.reqTimeout*4) {_ in}
+      self.waitForExpectations(timeout: self.reqTimeout*4) {_ in}
     }
   }
 }

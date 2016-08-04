@@ -8,7 +8,7 @@ import Foundation
 
 
 
-private var lpQueue = DispatchQueue(label: "VKLongPollQueue", attributes: DispatchQueueAttributes.serial)
+private var lpQueue = DispatchQueue(label: "VKLongPollQueue")
 
 
 

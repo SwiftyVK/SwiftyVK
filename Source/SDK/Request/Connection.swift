@@ -2,7 +2,7 @@
 
 
 
-private let apiQueue = DispatchQueue(label: "com.VK.requestsQueue", attributes: .serial)
+private let apiQueue = DispatchQueue(label: "com.VK.requestsQueue")
 private let notApiQueue = DispatchQueue(label: "com.VK.loopsQueue", attributes: .concurrent)
 
 private var actualRequestId : Int?
@@ -17,7 +17,7 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   private let delegateQueue = OperationQueue()
   private let timeoutQueue = OperationQueue()
   private var canFinish = true
-  private let finishQueue = DispatchQueue(label: "com.VK.finishQueue", attributes: DispatchQueueAttributes.serial)
+  private let finishQueue = DispatchQueue(label: "com.VK.finishQueue")
   
   
   

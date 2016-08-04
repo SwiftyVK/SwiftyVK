@@ -68,7 +68,7 @@ internal struct Authorizator {
       let err = VK.Error(domain: "VKSDKDomain", code: 2, desc: "User deny authorization", userInfo: nil, req: request)
       request?.attempts = request!.maxAttempts
       request?.errorBlock(error: err)
-      DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosBackground).async {
+      DispatchQueue.global(qos: .background).async {
         VK.delegate?.vkAutorizationFailed(err)
       }
     }
@@ -103,14 +103,14 @@ internal struct Authorizator {
     
     
     internal static var canAutorizeWithVkApp : Bool {
-      return UIApplication.shared().canOpenURL(URL(string: appAuthorizeUrl)!)
-        && UIApplication.shared().canOpenURL(URL(string: "vk\(VK.appID!)://")!)
+      return UIApplication.shared.canOpenURL(URL(string: appAuthorizeUrl)!)
+        && UIApplication.shared.canOpenURL(URL(string: "vk\(VK.appID!)://")!)
     }
     
     
     
     private static func startWithApp(_ request: Request?) {
-      UIApplication.shared().openURL(URL(string: appAuthorizeUrl+paramsUrl)!)
+      UIApplication.shared.openURL(URL(string: appAuthorizeUrl+paramsUrl)!)
       Thread.sleep(forTimeInterval: 1)
       startWithWeb(request)
     }
