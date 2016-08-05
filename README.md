@@ -6,23 +6,23 @@ On this page:
 
 * [Requirements](#requirements)
 * [Integration](#integration)
-* [Manually](#manually)
-* [CocoaPods](#cocoapods)
-* [Carthage](#carthage)
+  * [Manually](#manually)
+  * [CocoaPods](#cocoapods)
+  * [Carthage](#carthage)
 * [Getting started](#getting-started)
-* [Import and implementation](#import-and-implementation)
-* [Initialization](#initialization)
-* [User authorization](#user-authorization)
-* [Authorization with VK App](#authorization-with-vk-app)
+  * [Import and implementation](#import-and-implementation)
+  * [Initialization](#initialization)
+  * [User authorization](#user-authorization)
+  * [Authorization with VK App](#authorization-with-vk-app)
 * [API Requests](#api-requests)
-* [Syntax](#syntax)
-* [Custom requests](#custom-requests)
-* [Request properties](#request-properties)
-* [Default properties](#default-properties)
-* [Parsing response](#parsing-response)
-* [Error handling](#error-handling)
-* [Upload files](#upload-files)
-* [Longpoll](#longpoll)
+  * [Syntax](#syntax)
+  * [Custom requests](#custom-requests)
+  * [Request properties](#request-properties)
+  * [Default properties](#default-properties)
+  * [Parsing response](#parsing-response)
+  * [Error handling](#error-handling)
+  * [Upload files](#upload-files)
+  * [Longpoll](#longpoll)
 
 ##**Requirements**
 * Swift 2.0+
@@ -31,13 +31,13 @@ On this page:
 
 ##**Integration**
 ###Manually
-1. Just drag **SwiftyVK.framework** or include the whole **SwiftyVK.xcodeproj** to project
+1. Just drag **SwiftyVK.framework** (you may need to compile it for the required platform) or include the whole **SwiftyVK.xcodeproj** to project
 2. Link SwiftyVK.framework to application in **Target preferences -> General -> Embedded binaries**.
 
 
 
 ###CocoaPods
-You can use CocoaPods to install **SwiftyVK** by adding it to **Podfile**:
+You can use [CocoaPods](https://github.com/CocoaPods/CocoaPods) to install `SwiftyVK` by adding it to `Podfile`:
 
 ```ruby
 use_frameworks!
@@ -129,6 +129,7 @@ For authorization with official VK application for iOS, you need:
 
 *1. In Xcode -> Target -> Info*
 
+* Add new URL Type with URL identifier `vkauthorize`
 * Add new URL Type with URL identifier `vk$YOUR_APP_ID$` (e.g. vk1234567890)
 * Add app schemas to Info.plist file:
 ```html
