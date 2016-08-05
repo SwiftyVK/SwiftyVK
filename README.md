@@ -129,8 +129,7 @@ For authorization with official VK application for iOS, you need:
 
 *1. In Xcode -> Target -> Info*
 
-* Add new URL Type with URL identifier `vkauthorize`
-* Add new URL Type with URL identifier `vk$YOUR_APP_ID$` (e.g. vk1234567890)
+* Add new URL Type with URL identifier to **URL Types** `vk$YOUR_APP_ID$` (e.g. vk1234567890)
 * Add app schemas to Info.plist file:
 ```html
 <key>LSApplicationQueriesSchemes</key>
