@@ -75,6 +75,7 @@ class APIWorker {
   
   
   class func friendsGet() {
+    VK.state
     let req = VK.API.Friends.get([
       .count : "1",
       .fields : "city,domain"

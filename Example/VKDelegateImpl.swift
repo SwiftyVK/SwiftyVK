@@ -36,7 +36,7 @@ class VKDelegateImpl : VKDelegate {
   
   
   
-  func vkDidauthorize(_ parameters: Dictionary<String, String>) {}
+  func vkDidAuthorize(_ parameters: Dictionary<String, String>) {}
   
   
   

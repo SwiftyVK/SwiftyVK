@@ -71,7 +71,7 @@ class YourClass: Superclass, VKDelegate {
     return //an array of application permissions
   }
 
-  func vkDidauthorize(parameters: Dictionary<String, String>) {}
+  func vkDidAuthorize(parameters: Dictionary<String, String>) {}
     //Called when the user is log in. 
     //Here you can start to send requests to the API.
   }

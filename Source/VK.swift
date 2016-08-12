@@ -13,7 +13,7 @@ public protocol VKDelegate {
    - returns: permissions as VK.Scope type*/
   func vkWillauthorize() -> [VK.Scope]
   ///Called when SwiftyVK did authorize and receive token
-  func vkDidauthorize(_ parameters: Dictionary<String, String>)
+  func vkDidAuthorize(_ parameters: Dictionary<String, String>)
   ///Called when SwiftyVK did unauthorize and remove token
   func vkDidUnauthorize()
   ///Called when SwiftyVK did failed autorization

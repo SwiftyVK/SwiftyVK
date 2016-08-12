@@ -195,7 +195,7 @@ internal class Token: NSObject, NSCoding {
       DispatchQueue.global(qos: .default).async {
         Thread.sleep(forTimeInterval: 0.1)
         if tokenInstance != nil {
-          VK.delegate!.vkDidauthorize(tokenInstance.parameters)
+          VK.delegate!.vkDidAuthorize(tokenInstance.parameters)
         }
       }
     }
