@@ -111,7 +111,7 @@ internal class Token: NSObject, NSCoding {
   private class func loadFromDefaults() -> Token? {
     let defaults = UserDefaults.standard
     if !(defaults.object(forKey: "Token") != nil) {return nil}
-    let object: AnyObject! = NSKeyedUnarchiver.unarchiveObject(with: defaults.object(forKey: "Token") as! Data)
+    let object: Any! = NSKeyedUnarchiver.unarchiveObject(with: defaults.object(forKey: "Token") as! Data)
     if object == nil {
       VK.Log.put("Token", "Load from NSUSerDefaults failed")
       return nil
@@ -190,7 +190,7 @@ internal class Token: NSObject, NSCoding {
   
   
   
-  private class func notifyExist() {
+  fileprivate class func notifyExist() {
     if VK.state != .authorized {
       DispatchQueue.global(qos: .default).async {
         Thread.sleep(forTimeInterval: 0.1)
@@ -202,7 +202,7 @@ internal class Token: NSObject, NSCoding {
   }
   
   
-  private class func notifyNotExist() {
+  fileprivate class func notifyNotExist() {
     if VK.state == .authorized {
       VK.delegate!.vkDidUnauthorize()
     }

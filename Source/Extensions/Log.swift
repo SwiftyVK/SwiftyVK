@@ -56,7 +56,7 @@ extension VK {
       logQueue.async {
         let date = form.string(from: Date())
         req.log.append("\(date): \(message)")
-        let key = String("Req \(req.id)")
+        let key = String("Req \(req.id)")!
         
         if dictionary.count >= 100 {
           let keyToRemove = array.removeFirst()

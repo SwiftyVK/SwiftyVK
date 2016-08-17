@@ -50,7 +50,7 @@ public class Request : CustomStringConvertible, Equatable {
   public private(set) var cancelled = false
   private var useDefaultLanguage = VK.defaults.useSystemLanguage
   private var media : [Media]?
-  private var parameters = [String : String]()
+  fileprivate var parameters = [String : String]()
   public var successBlock : VK.SuccessBlock {
     get{return privateSuccessBlock}
     set{

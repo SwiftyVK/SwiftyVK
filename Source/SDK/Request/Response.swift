@@ -96,7 +96,7 @@ internal class Response {
     }
     
     VK.Log.put(request, "Executing error block")
-    request.errorBlock(error: error)
+    request.errorBlock(error)
     clean()
     VK.Log.put(request, "Error block is executed")
   }
@@ -116,7 +116,7 @@ internal class Response {
     }
     
     VK.Log.put(request, "Executing success block")
-    request.successBlock(response: success)
+    request.successBlock(success)
     clean()
     VK.Log.put(request, "Success block is executed")
   }

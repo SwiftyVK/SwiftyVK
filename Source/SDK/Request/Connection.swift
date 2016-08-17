@@ -165,7 +165,7 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   
   func connection(_ connection: NSURLConnection, didFailWithError error: Error) {
-    let error = VK.Error(err: error, req: request!)
+    let error = VK.Error(err: error as NSError, req: request!)
     VK.Log.put(request, "Connection failed with error: \(error)")
     request.response.setError(error)
     finishConnection()
@@ -175,7 +175,7 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   func connection(_ connection: NSURLConnection, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) {
     VK.Log.put(request, "Uploding file: \(totalBytesWritten) of \(totalBytesExpectedToWrite) bytes")
-    request!.progressBlock(done: totalBytesWritten, total: totalBytesExpectedToWrite)
+    request!.progressBlock(totalBytesWritten, totalBytesExpectedToWrite)
   }
   
   

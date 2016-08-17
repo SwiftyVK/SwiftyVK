@@ -72,7 +72,7 @@ public struct VK {
     VK.Log.put("Global", "SwiftyVK INIT")
   }
   
-  private static var started : Bool {
+  fileprivate static var started : Bool {
     return VK.delegateInstance != nil && VK.appIDInstance != nil
   }
   /**
@@ -88,13 +88,13 @@ public struct VK {
   
   #if os(iOS)
   @available(iOS 9.0, *)
-  public static func processURL(url: NSURL, options: [String: AnyObject]) {
-  Authorizator.recieveTokenURL(url: url, fromApp: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String);
+  public static func processURL(url: URL, options: [AnyHashable: Any]) {
+  Authorizator.recieveTokenURL(url: url, fromApp: options[UIApplicationOpenURLOptionsKey.sourceApplication.rawValue] as? String);
   }
   
   
   @available(iOS, introduced:4.2, deprecated:9.0, message:"Please use url:options:")
-  public static func processURL_old(url: NSURL, sourceApplication app: String?) {
+  public static func processURL_old(url: URL, sourceApplication app: String?) {
   Authorizator.recieveTokenURL(url: url, fromApp: app);
   }
   #endif
@@ -211,7 +211,7 @@ extension VK_Extensions {
   ///Access to the API methods
   public typealias API = _VKAPI
   public typealias Error = _VKError
-  public typealias SuccessBlock = (response: JSON) -> Void
-  public typealias ErrorBlock = (error: VK.Error) -> Void
-  public typealias ProgressBlock = (done: Int, total: Int) -> Void
+  public typealias SuccessBlock = (_ response: JSON) -> Void
+  public typealias ErrorBlock = (_ error: VK.Error) -> Void
+  public typealias ProgressBlock = (_ done: Int, _ total: Int) -> Void
 }

@@ -6,7 +6,7 @@ public class _VKError : Error, CustomStringConvertible {
   public var domain : String
   public var code: Int
   public var desc : String
-  public var userInfo : [NSObject: AnyObject]?
+  public var userInfo : [AnyHashable: Any]?
   ///The reference to a request to the API, in which the error occurred
   public var request : Request?
   public var description : String {
@@ -48,7 +48,7 @@ public class _VKError : Error, CustomStringConvertible {
     domain = "APIError"
     code = json["error_code"].intValue
     desc = json["error_msg"].stringValue
-    var info = [NSObject : AnyObject]()
+    var info = [AnyHashable : Any]()
     
     for param in json["request_params"].arrayValue {
       info[param["key"].stringValue] = param["value"].stringValue

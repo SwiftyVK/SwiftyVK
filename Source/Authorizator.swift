@@ -16,7 +16,7 @@ internal struct Authorizator {
   
   
   
-  private static var paramsUrl : String {
+  fileprivate static var paramsUrl : String {
     let _perm = VK.Scope.toInt(VK.delegate!.vkWillauthorize())
     let _mode = isMac ? "mobile" : "ios"
     let _redir = canauthorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
@@ -67,7 +67,7 @@ internal struct Authorizator {
     else {
       let err = VK.Error(domain: "VKSDKDomain", code: 2, desc: "User deny authorization", userInfo: nil, req: request)
       request?.attempts = request!.maxAttempts
-      request?.errorBlock(error: err)
+      request?.errorBlock(err)
       DispatchQueue.global(qos: .background).async {
         VK.delegate?.vkAutorizationFailed(err)
       }
@@ -76,7 +76,7 @@ internal struct Authorizator {
   
   
   
-  private static func startWithWeb(_ request: Request?) {
+  fileprivate static func startWithWeb(_ request: Request?) {
     WebController.start(url: webAuthorizeUrl+paramsUrl, request: nil)
   }
 }
@@ -109,7 +109,7 @@ internal struct Authorizator {
     
     
     
-    private static func startWithApp(_ request: Request?) {
+    fileprivate static func startWithApp(_ request: Request?) {
       UIApplication.shared.openURL(URL(string: appAuthorizeUrl+paramsUrl)!)
       Thread.sleep(forTimeInterval: 1)
       startWithWeb(request)
@@ -117,10 +117,10 @@ internal struct Authorizator {
     
     
     
-    internal static func recieveTokenURL(url: NSURL, fromApp app: String?) {
+    internal static func recieveTokenURL(url: URL, fromApp app: String?) {
       if (app == "com.vk.vkclient" || app == "com.vk.vkhd" || url.scheme == "vk\(VK.appID)") {
-        if url.absoluteString!.contains("access_token=") {
-          _ = Token(urlString: url.absoluteString!)
+        if url.absoluteString.contains("access_token=") {
+          _ = Token(urlString: url.absoluteString)
           WebController.cancel()
         }
       }
@@ -142,7 +142,7 @@ internal struct Authorizator {
   private typealias OSXAuthorizator = Authorizator
   extension OSXAuthorizator {
     internal static var canauthorizeWithVkApp : Bool {return false}
-    private static func startWithApp(_ request: Request?) {}
+    fileprivate static func startWithApp(_ request: Request?) {}
     internal static func dropRequest() {}
   }
 #endif

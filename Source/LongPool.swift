@@ -21,7 +21,7 @@ extension VK_LongPool {
    * To subscribe to notifications, use NSNotificationCenter using the names of VK.LP.notifications
    */
   public struct LP {
-    public private(set) static var isActive : Bool = false
+    public fileprivate(set) static var isActive : Bool = false
     private static var observer : LPObserver?
     private static var lpKey = String()
     private static var keyIsExpired = false
@@ -81,7 +81,7 @@ extension VK_LongPool {
     
     
     
-    private static func update() {
+    fileprivate static func update() {
       lpQueue.async {
         guard isActive else {return}
         
@@ -102,7 +102,7 @@ extension VK_LongPool {
           ts = response["ts"].stringValue
           parse(response["updates"].array)
           
-          _ = (response["failed"].int > 0)
+          _ = (response["failed"].intValue > 0)
             ? (keyIsExpired = true)
             : observer?.connectionRestore()
           update()
@@ -277,11 +277,11 @@ internal class LPObserver : NSObject {
     #endif
     
     #if os(iOS)
-      let reachability = try! Reachability.reachabilityForInternetConnection()
+      let reachability = Reachability()
       NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged), name: ReachabilityChangedNotification, object: nil)
       NotificationCenter.default.addObserver(self, selector: #selector(connectionLostForce), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
       NotificationCenter.default.addObserver(self, selector: #selector(connectionRestoreForce), name:NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-      try! reachability.startNotifier()
+      try! reachability?.startNotifier()
     #endif
   }
   
@@ -290,7 +290,7 @@ internal class LPObserver : NSObject {
   #if os(iOS)
   @objc private func reachabilityChanged(note: NSNotification) {
     let reachability = note.object as! Reachability
-    reachability.isReachable() ? connectionRestore() : connectionLost()
+    reachability.isReachable ? connectionRestore() : connectionLost()
   }
   #endif
   
@@ -314,7 +314,7 @@ internal class LPObserver : NSObject {
   
   
   
-  private func connectionLost() {
+  fileprivate func connectionLost() {
     
     if connected == true {
       connected = false
@@ -325,7 +325,7 @@ internal class LPObserver : NSObject {
   
   
   
-  private func connectionRestore() {
+  fileprivate func connectionRestore() {
     
     if connected == false {
       connected = true

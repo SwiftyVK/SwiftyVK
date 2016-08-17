@@ -24,18 +24,18 @@ private weak var activeWebController : WebController?
 //MARK: - BASE
 class WebController : _WebControllerPrototype {
   #if os(OSX)
-  @IBOutlet private weak var webView : WebView?
-  @IBOutlet private weak var activity: NSProgressIndicator!
-  private var parentWindow : NSWindow?
+  @IBOutlet fileprivate weak var webView : WebView?
+  @IBOutlet fileprivate weak var activity: NSProgressIndicator!
+  fileprivate var parentWindow : NSWindow?
   #endif
   #if os(iOS)
-  @IBOutlet private weak var webView : UIWebView?
-  @IBOutlet private weak var activity : UIActivityIndicatorView!
-  private var parentView : UIViewController?
+  @IBOutlet fileprivate weak var webView : UIWebView?
+  @IBOutlet fileprivate weak var activity : UIActivityIndicatorView!
+  fileprivate var parentView : UIViewController?
   #endif
-  private let waitUser = DispatchSemaphore(value: 0)
+  fileprivate let waitUser = DispatchSemaphore(value: 0)
   private var fails = 0
-  private var urlRequest : URLRequest?
+  fileprivate var urlRequest : URLRequest?
   private weak var request : Request?
   private var isValidation = false
   
@@ -69,7 +69,7 @@ class WebController : _WebControllerPrototype {
   
   
   
-  private func handleResponse(_ urlString : String) {
+  fileprivate func handleResponse(_ urlString : String) {
     if urlString.contains("access_token=") {
       _ = Token(urlString: urlString)
       self.hide()
@@ -93,7 +93,7 @@ class WebController : _WebControllerPrototype {
   private func failValidation() {
     DispatchQueue.global(qos: .background).async {
       let err = VK.Error(domain: "VKSDKDomain", code: 3, desc: "Fail user validation", userInfo: nil, req: self.request)
-      self.request?.errorBlock(error: err)
+      self.request?.errorBlock(err)
       VK.delegate?.vkAutorizationFailed(err)
     }
     request?.attempts = request!.maxAttempts
@@ -102,10 +102,10 @@ class WebController : _WebControllerPrototype {
   
   
   
-  private func didFail(_ sender: AnyObject, didFailLoadWithError error: NSError?) {
+  fileprivate func didFail(_ sender: AnyObject, didFailLoadWithError error: NSError?) {
     if fails <= 3 {
       fails += 1
-      loadReq(self.urlRequest!)
+      loadReq()
     }
     else {
       fails = 0
@@ -130,7 +130,7 @@ class WebController : _WebControllerPrototype {
     
     
     
-    private class func getParamsForPlatform() -> (controller: WebController, isSheet: Bool) {
+    fileprivate class func getParamsForPlatform() -> (controller: WebController, isSheet: Bool) {
       let params              = VK.delegate?.vkWillPresentWindow()
       let controller          = WebController()
       
@@ -167,7 +167,7 @@ class WebController : _WebControllerPrototype {
     
     
     
-    private func showWithUrl(_ url: String, isSheet: Bool) {
+    fileprivate func showWithUrl(_ url: String, isSheet: Bool) {
       DispatchQueue.main.sync(execute: {
         _ = isSheet
           ? self.parentWindow?.beginSheet(self.window!, completionHandler: nil)
@@ -181,8 +181,8 @@ class WebController : _WebControllerPrototype {
     
     
     
-    private func expand() {
-      NSApplication.shared().activateIgnoringOtherApps(true)
+    fileprivate func expand() {
+      NSApplication.shared().activate(ignoringOtherApps: true)
       let newHeight = min(
         CGFloat((webView!.stringByEvaluatingJavaScript(from: "document.height") as NSString).floatValue),
         450
@@ -208,13 +208,13 @@ class WebController : _WebControllerPrototype {
     
     
     
-    private func loadReq(_ req: URLRequest) {
+    fileprivate func loadReq() {
       self.webView!.mainFrame.load(self.urlRequest!)
     }
     
     
     
-    private func hide() {
+    fileprivate func hide() {
       if let parent = parentWindow {
         parent.endSheet(self.window!)
         self.window!.orderOut(parent)
@@ -252,7 +252,7 @@ class WebController : _WebControllerPrototype {
     
     
     
-    private class func getParamsForPlatform() -> (controller: WebController, isSheet: Bool) {
+    fileprivate class func getParamsForPlatform() -> (controller: WebController, isSheet: Bool) {
       let controller        = WebController(nibName: WebViewName, bundle: Resources.bundle)
       controller.parentView = VK.delegate?.vkWillPresentView()
       return (controller, false)
@@ -275,7 +275,7 @@ class WebController : _WebControllerPrototype {
     
     
     
-    private func showWithUrl(_ url: String, isSheet: Bool) {
+    fileprivate func showWithUrl(_ url: String, isSheet: Bool) {
       DispatchQueue.main.sync() {
         self.modalPresentationStyle = .overFullScreen
         self.modalTransitionStyle = .crossDissolve
@@ -289,17 +289,17 @@ class WebController : _WebControllerPrototype {
     
     
     
-    private func loadReq(_ req: NSURLRequest) {
+    fileprivate func loadReq() {
       webView!.loadRequest(self.urlRequest!)
     }
     
     
     
-    private func expand() {}
+    fileprivate func expand() {}
     
     
     
-    private func hide() {
+    fileprivate func hide() {
       self.parentView?.dismiss(animated: true, completion: nil)
       self.webView!.delegate = nil
     }

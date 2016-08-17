@@ -22,7 +22,7 @@ class VKTestCase : XCTestCase {
   
   
   
-  func getResults(_ dict: NSMutableDictionary) -> (all: [AnyObject], unused: [AnyObject], success: [AnyObject], error: [AnyObject], statistic: String) {
+  func getResults(_ dict: NSMutableDictionary) -> (all: [Any], unused: [Any], success: [Any], error: [Any], statistic: String) {
     let all = dict.map({(index, value) in index})
     let unused = dict.filter({$1 as? String == "~"}).map({(index, value) in index})
     let success = dict.filter({$1 as? String == "+"}).map({(index, value) in index})

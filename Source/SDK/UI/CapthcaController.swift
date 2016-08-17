@@ -16,19 +16,19 @@ private let CaptchaViewName = Resources.withSuffix("CaptchaView")
 //MARK: - BASE
 internal class СaptchaController: _СaptchaControllerPrototype {
   #if os(OSX)
-  @IBOutlet private weak var imageView: NSImageView!
-  @IBOutlet private weak var textField: NSTextField!
-  private var parentWindow    : NSWindow?
+  @IBOutlet fileprivate weak var imageView: NSImageView!
+  @IBOutlet fileprivate weak var textField: NSTextField!
+  fileprivate var parentWindow    : NSWindow?
   #endif
   #if os(iOS)
-  @IBOutlet private weak var imageView: UIImageView!
-  @IBOutlet private weak var textField: UITextField!
-  private var parentView    : UIViewController?
+  @IBOutlet fileprivate weak var imageView: UIImageView!
+  @IBOutlet fileprivate weak var textField: UITextField!
+  fileprivate var parentView    : UIViewController?
   #endif
   private var imageUrl        : String?
   private var sid             : String?
   private var request         : Request?
-  private let waitAnswer = DispatchSemaphore(value: 0)
+  fileprivate let waitAnswer = DispatchSemaphore(value: 0)
   
   
   
@@ -49,7 +49,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
       request.isAsynchronous ? request.trySend() : request.tryInCurrentThread()
     }
     else {
-      request.errorBlock(error: VK.Error(domain: "VKSDKDomain", code: 5, desc: "Captcha loading error", userInfo: nil, req: request))
+      request.errorBlock(VK.Error(domain: "VKSDKDomain", code: 5, desc: "Captcha loading error", userInfo: nil, req: request))
     }
   }
   
@@ -57,7 +57,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
   
   private func sendAndWait() -> Bool {
     let req = URLRequest(url: URL(string: self.imageUrl!)!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 5)
-    var data: Data?
+    var data: Data
     
     do {data = try NSURLConnection.sendSynchronousRequest(req, returning: nil)}
     catch _ {
@@ -65,12 +65,8 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     }
     
     DispatchQueue.main.sync(execute: {
-      self.load(data!)
+      self.load(data)
     })
-    
-    #if os(iOS)
-      //NSThread.sleepForTimeInterval(0.5)
-    #endif
     
     _ = waitAnswer.wait(timeout: DispatchTime.distantFuture)
     return true
@@ -78,7 +74,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
   
   
   
-  private func didLoad() {
+  fileprivate func didLoad() {
     VK.Log.put("Global", "\(self) did load window")
     textField.delegate = self
     textField.becomeFirstResponder()
@@ -86,7 +82,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
   
   
   
-  private func endEditing(_ text: String) {
+  fileprivate func endEditing(_ text: String) {
     textField.delegate = nil
     sharedCaptchaAnswer = ["captcha_sid" : sid!, "captcha_key": text]
   }
@@ -107,7 +103,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     
     
     
-    private class func getCaptchaForPlatform() -> СaptchaController {
+    fileprivate class func getCaptchaForPlatform() -> СaptchaController {
       let params           = VK.delegate?.vkWillPresentWindow()
       let captcha          = СaptchaController()
       
@@ -122,8 +118,8 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     
     
     
-    private func load(_ data: Data) {
-      NSApplication.shared().activateIgnoringOtherApps(true)
+    fileprivate func load(_ data: Data) {
+      NSApplication.shared().activate(ignoringOtherApps: true)
       
       _ = parentWindow != nil
         ? self.parentWindow?.beginSheet(self.window!, completionHandler: nil)
@@ -169,7 +165,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     
     
     
-    private class func getCaptchaForPlatform() -> СaptchaController {
+    fileprivate class func getCaptchaForPlatform() -> СaptchaController {
       let captcha          = СaptchaController(nibName:CaptchaViewName, bundle: Resources.bundle)
       captcha.parentView   = VK.delegate?.vkWillPresentView()
       return captcha
@@ -177,7 +173,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     
     
     
-    private func load(_ data: NSData) {
+    fileprivate func load(_ data: Data) {
       self.modalPresentationStyle = .overFullScreen
       self.modalTransitionStyle = .crossDissolve
       self.parentView?.present(self, animated: true, completion: nil)
