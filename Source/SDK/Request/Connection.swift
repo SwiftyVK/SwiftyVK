@@ -13,7 +13,7 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   private var request : Request!
   private lazy var reqData = NSMutableData()
   private lazy var responseWaitSemaphore = dispatch_semaphore_create(0)
-  private lazy var timeoutOperation = NSBlockOperation()
+  private lazy var timeoutOperation : NSBlockOperation? = NSBlockOperation()
   private let delegateQueue = NSOperationQueue()
   private let timeoutQueue = NSOperationQueue()
   private var canFinish = true
@@ -108,16 +108,18 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
   
   
   private func addTimeout() {
-    self.timeoutOperation = NSBlockOperation() {
+    let op = NSBlockOperation() {
       NSThread.sleepForTimeInterval(Double(self.request.timeout+1))
-      if self.timeoutOperation.cancelled == false {
+      if self.timeoutOperation?.cancelled == false {
         let error = VK.Error(domain: "APIDomain", code: 7, desc: "Connection timeout", userInfo: nil, req: self.request)
         VK.Log.put(self.request, "Connection time out")
         self.request.response.setError(error)
         self.finishConnection()
       }
     }
-    timeoutQueue.addOperation(self.timeoutOperation)
+    
+    self.timeoutOperation = op
+    timeoutQueue.addOperation(op)
   }
   
   
@@ -136,7 +138,8 @@ internal class Connection : NSObject, NSURLConnectionDataDelegate, NSURLConnecti
     dispatch_sync(finishQueue) {
       guard self.canFinish else {return}
       self.canFinish = false
-      self.timeoutOperation.cancel()
+      self.timeoutOperation?.cancel()
+      self.timeoutOperation = nil
       self.request.response.execute()
       dispatch_semaphore_signal(self.responseWaitSemaphore)
     }
