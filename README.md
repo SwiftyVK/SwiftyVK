@@ -84,9 +84,9 @@ class YourClass: Superclass, VKDelegate {
    //Called when SwiftyVK could not authorize. To let the application know that something went wrong.
   }
 
-  func vkShouldUseTokenPath() -> (useUserDefaults: Bool, alternativePath: String) {
+  func vkShouldUseTokenPath() -> String? {
     //Called when SwiftyVK need know where a token is located.
-    return //bool value that indicates whether save token to NSUserDefaults or not, and alternative save path.
+    return //Path to save/read token or nil if should save token to UserDefaults
   }
 
   func vkWillPresentView() -> UIViewController {
@@ -95,10 +95,10 @@ class YourClass: Superclass, VKDelegate {
     return //UIViewController that should present autorization view controller
   }
 
-  func vkWillPresentView() -> (isSheet: Bool, inWindow: NSWindow?) {
+  func vkWillPresentView() -> NSWindow? {
     //Only for OSX!
     //Called when need to display a window from SwiftyVK.
-    return //bool value that indicates whether to display the window as modal or not, and parent window for modal presentation
+    return //Parent window for modal view or nil if view should present in separate window
   }
 }
 ``` 
@@ -119,10 +119,16 @@ VK.start(appID: applicationID, delegate: VKDelegate)
 
 
 ```swift
-VK.authorize()
+VK.logIn()
 ```
-* And user will see authorization dialog.
+* And user will see authorization dialog. 
 
+After this, you will check VK state:
+```swift
+VK.state // will be unknown, configured, authorization, authorized
+```
+
+And if state == authorized, send your requests to API (:
 
 ###**Authorization with VK App**
 For authorization with official VK application for iOS, you need:
@@ -172,8 +178,8 @@ Or a bit shorter:
 ```swift
 let req = VK.API.Users.get([VK.Arg.userId : "1"]).send(
   method: .Get
-  success: {response in print(response)}, 
-  error: {error in print(error)}
+  onSuccess: {response in print(response)}, 
+  onError: {error in print(error)}
 )
 
 ```
@@ -206,7 +212,7 @@ Property | Default | Description
 `asynchronous` | true | Specifies whether the control returns after sending the request immediately or only after receiving the response. By default the requests are asynchronous and control returns immediately. Sometimes you may need to send synchronous requests, **but it is not necessary to do this in the main thread!**.
 `maxAttempts` | 3 | The number of times can be resend the request automatically, if during its execution the error occurred. **0 == infinity attempts**.
 `timeout` | 10 | How long in seconds a request will wait for a response from the server. If the wait is longer this value, the generated request error.
-`canselled`| false | If user cancell request it will true
+`cancelled`| false | If user cancell request it will true
 `catchErrors` | true | Whether to attempt **SwiftyVK** to handle some query errors automatically. Among these errors include the required authentication, captcha, exceeding the limit of requests per second.
 `language` | system | The language, which will return response fields.
 `log`| [String] | Request sending log.
@@ -263,13 +269,11 @@ let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("image",
 //Crete media object to upload
 let media = Media(imageData: data, type: .JPG)
 //Upload image to wall        
-VK.API.Upload.Photo.toWall(
-  media,
-  userId: "1",
-  asynchronous: true,
-  progressBlock: {done, total in print("upload \(done) of \(total))")},
-  successBlock: {response in print(response)},
-  errorBlock: {error in print(error)}
+let req = VK.API.Upload.Photo.toWall.toUser(media, userId: "1234567890")
+req.progressBlock = {done, total in print("SwiftyVK: uploadPhoto progress: \(done) of \(total))")}
+req.successBlock = {response in print("SwiftyVK: uploadPhoto success \n \(response)")}
+req.errorBlock = {error in print("SwiftyVK: uploadPhoto fail \n \(error)")}
+req.send()
 )
 ```
 
@@ -285,7 +289,7 @@ If you want to use Longpoll to receive updates, **SwiftyVK** allows you to easil
 
 ```swift
 VK.LP.start() //Start updating
-VK.LP.isActive //Longpoll status
+VK.LP.active //Longpoll status
 VK.LP.stop() //Stop updating
 ```
 
