@@ -21,7 +21,7 @@ extension VK_LongPool {
    * To subscribe to notifications, use NSNotificationCenter using the names of VK.LP.notifications
    */
   public struct LP {
-    public fileprivate(set) static var isActive : Bool = false
+    public fileprivate(set) static var active : Bool = false
     private static var observer : LPObserver?
     private static var lpKey = String()
     private static var keyIsExpired = false
@@ -32,10 +32,10 @@ extension VK_LongPool {
     ///Starting receiving updates from the long pool server
     public static func start() {
       lpQueue.async {
-        guard VK.state == .authorized && !isActive else {
+        guard VK.state == .authorized && !active else {
           VK.Log.put("LongPool", "User is not authorized or LongPool is active yet")
           return}
-        isActive = true
+        active = true
         keyIsExpired = true
         getServer()
         observer = LPObserver()
@@ -49,7 +49,7 @@ extension VK_LongPool {
     public static func stop() {
       lpQueue.async {
         observer = nil
-        isActive = false
+        active = false
         VK.Log.put("LongPool", "Stopped")
       }
     }
@@ -83,7 +83,7 @@ extension VK_LongPool {
     
     fileprivate static func update() {
       lpQueue.async {
-        guard isActive else {return}
+        guard active else {return}
         
         guard !keyIsExpired && !server.isEmpty && !lpKey.isEmpty && !ts.isEmpty else {
           observer?.connectionLost()
@@ -299,7 +299,7 @@ internal final class LPObserver : NSObject {
   
   @objc private func connectionRestoreForce() {
     lpQueue.async {
-      VK.LP.isActive = true
+      VK.LP.active = true
       VK.LP.update()
     }
   }
@@ -307,7 +307,7 @@ internal final class LPObserver : NSObject {
   
   @objc private func connectionLostForce() {
     lpQueue.async {
-      VK.LP.isActive = false
+      VK.LP.active = false
       self.connectionLost()
     }
   }
