@@ -22,7 +22,7 @@ private weak var activeWebController : WebController?
 
 
 //MARK: - BASE
-class WebController : _WebControllerPrototype {
+internal final class WebController : _WebControllerPrototype {
   #if os(OSX)
   @IBOutlet fileprivate weak var webView : WebView?
   @IBOutlet fileprivate weak var activity: NSProgressIndicator!
@@ -44,7 +44,7 @@ class WebController : _WebControllerPrototype {
     
     vkSheetQueue.sync(execute: {
       self.start(url: validationUrl, request: request, isValidation: true)
-      request.isAsynchronous ? request.trySend() : request.tryInCurrentThread()
+      request.asynchronous ? request.trySend() : request.tryInCurrentThread()
     })
   }
   
@@ -94,7 +94,7 @@ class WebController : _WebControllerPrototype {
     DispatchQueue.global(qos: .background).async {
       let err = VK.Error(domain: "VKSDKDomain", code: 3, desc: "Fail user validation", userInfo: nil, req: self.request)
       self.request?.errorBlock(err)
-      VK.delegate?.vkAutorizationFailed(err)
+      VK.delegate?.vkAutorizationFailedWith(error: err)
     }
     request?.attempts = request!.maxAttempts
     hide()
@@ -131,16 +131,16 @@ class WebController : _WebControllerPrototype {
     
     
     fileprivate class func getParamsForPlatform() -> (controller: WebController, isSheet: Bool) {
-      let params              = VK.delegate?.vkWillPresentWindow()
       let controller          = WebController()
+        controller.parentWindow = VK.delegate?.vkWillPresentView()
+
       
       DispatchQueue.main.sync {
         NSNib(nibNamed: WebViewName, bundle: Resources.bundle)?.instantiate(withOwner: controller, topLevelObjects: nil)
         controller.windowDidLoad()
       }
       
-      controller.parentWindow = ((params?.isSheet)! ? params?.inWindow : nil)
-      return (controller, params!.isSheet)
+      return (controller, controller.parentWindow != nil)
       
     }
     

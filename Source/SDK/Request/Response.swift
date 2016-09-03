@@ -6,7 +6,7 @@ private let responseQueue = DispatchQueue(label: "com.VK.responseQueue", attribu
 
 
 
-internal class Response {
+internal final class Response {
   internal weak var request : Request?
   internal private(set) var error : VK.Error? {
     didSet {success != nil ? success = nil : ()}
@@ -66,13 +66,13 @@ internal class Response {
         request.trySend()
       }
       else {
-        request.isAPI == true && request.isAsynchronous == false
+        request.isAPI == true && request.asynchronous == false
           ? executeError()
           : responseQueue.async {self.executeError()}
       }
     }
     else if let _ = success {
-      request.isAPI == true && request.isAsynchronous == false
+      request.isAPI == true && request.asynchronous == false
         ? executeSuccess()
         : responseQueue.async {self.executeSuccess()}
     }

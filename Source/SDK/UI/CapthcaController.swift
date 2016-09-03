@@ -14,7 +14,7 @@ private let CaptchaViewName = Resources.withSuffix("CaptchaView")
 
 
 //MARK: - BASE
-internal class СaptchaController: _СaptchaControllerPrototype {
+internal final class СaptchaController: _СaptchaControllerPrototype {
   #if os(OSX)
   @IBOutlet fileprivate weak var imageView: NSImageView!
   @IBOutlet fileprivate weak var textField: NSTextField!
@@ -46,7 +46,7 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     }
     
     if canContinue {
-      request.isAsynchronous ? request.trySend() : request.tryInCurrentThread()
+      request.asynchronous ? request.trySend() : request.tryInCurrentThread()
     }
     else {
       request.errorBlock(VK.Error(domain: "VKSDKDomain", code: 5, desc: "Captcha loading error", userInfo: nil, req: request))
@@ -104,15 +104,14 @@ internal class СaptchaController: _СaptchaControllerPrototype {
     
     
     fileprivate class func getCaptchaForPlatform() -> СaptchaController {
-      let params           = VK.delegate?.vkWillPresentWindow()
       let captcha          = СaptchaController()
-      
+        captcha.parentWindow = VK.delegate?.vkWillPresentView()
+
       DispatchQueue.main.sync {
         NSNib(nibNamed:  CaptchaViewName, bundle: Resources.bundle)?.instantiate(withOwner: captcha, topLevelObjects: nil)
         captcha.windowDidLoad()
       }
       
-      captcha.parentWindow = ((params?.isSheet)! ? params?.inWindow : nil)
       return captcha
     }
     

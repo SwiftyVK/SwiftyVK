@@ -27,7 +27,7 @@ extension _VKAPI {
         VK.Log.put(req1, "Prepare upload photo to album: \(albumId)")
         req1.successBlock = {(response1: JSON) in
           req2.customURL = response1["upload_url"].stringValue
-          req2.isAsynchronous = req1.isAsynchronous
+          req2.asynchronous = req1.asynchronous
           req2.progressBlock = req1.progressBlock
           req2.errorBlock = req1.errorBlock
           req2.successBlock = {(response2: JSON) in
@@ -45,7 +45,7 @@ extension _VKAPI {
                 VK.Arg.longitude : String(lon)
                 ])
             }
-            req3.isAsynchronous = req1.isAsynchronous
+            req3.asynchronous = req1.asynchronous
             req3.errorBlock = req1.errorBlock
             VK.Log.put(req1, "Save with request \(req3.id)")
             req3.send()
@@ -70,7 +70,7 @@ extension _VKAPI {
         VK.Log.put(req1, "Prepare upload photo to message")
         req1.successBlock = {(response1: JSON) in
           req2.customURL = response1["upload_url"].stringValue
-          req2.isAsynchronous = req1.isAsynchronous
+          req2.asynchronous = req1.asynchronous
           req2.progressBlock = req1.progressBlock
           req2.successBlock = {(response2: JSON) in
             req3.addParameters([
@@ -79,7 +79,7 @@ extension _VKAPI {
               VK.Arg.hash : response2["hash"].stringValue
               ]
             )
-            req3.isAsynchronous = req1.isAsynchronous
+            req3.asynchronous = req1.asynchronous
             req3.errorBlock = req1.errorBlock
             VK.Log.put(req1, "Save with request \(req3.id)")
             req3.send()
@@ -119,7 +119,7 @@ extension _VKAPI {
         VK.Log.put(req1, "Prepare upload photo to market")
         req1.successBlock = {(response1: JSON) in
           req2.customURL = response1["upload_url"].stringValue
-          req2.isAsynchronous = req1.isAsynchronous
+          req2.asynchronous = req1.asynchronous
           req2.progressBlock = req1.progressBlock
           req2.successBlock = {(response2: JSON) in
             req3.addParameters([
@@ -131,7 +131,7 @@ extension _VKAPI {
               VK.Arg.cropHash: response2["crop_hash"].stringValue
               ]
             )
-            req3.isAsynchronous = req1.isAsynchronous
+            req3.asynchronous = req1.asynchronous
             req3.errorBlock = req1.errorBlock
             VK.Log.put(req1, "Save with request \(req3.id)")
             req3.send()
@@ -156,7 +156,7 @@ extension _VKAPI {
         req1.successBlock = {(response1: JSON) in
           printSync(response1)
           req2.customURL = response1["upload_url"].stringValue
-          req2.isAsynchronous = req1.isAsynchronous
+          req2.asynchronous = req1.asynchronous
           req2.progressBlock = req1.progressBlock
           req2.successBlock = {(response2: JSON) in
             printSync(response2)
@@ -167,7 +167,7 @@ extension _VKAPI {
               VK.Arg.hash : response2["hash"].stringValue,
               ]
             )
-            req3.isAsynchronous = req1.isAsynchronous
+            req3.asynchronous = req1.asynchronous
             req3.errorBlock = req1.errorBlock
             VK.Log.put(req1, "Save with request \(req3.id)")
             req3.send()
@@ -208,7 +208,7 @@ extension _VKAPI {
           VK.Log.put(req1, "Prepare upload photo to wall")
           req1.successBlock = {response1 in
             req2.customURL = response1["upload_url"].stringValue
-            req2.isAsynchronous = req1.isAsynchronous
+            req2.asynchronous = req1.asynchronous
             req2.progressBlock = req1.progressBlock
             req2.errorBlock = req1.errorBlock
             req2.successBlock = {response2 in
@@ -220,7 +220,7 @@ extension _VKAPI {
                 VK.Arg.hash : response2["hash"].stringValue,
                 ]
               )
-              req3.isAsynchronous = req1.isAsynchronous
+              req3.asynchronous = req1.asynchronous
               req3.errorBlock = req1.errorBlock
               VK.Log.put(req1, "Save with request \(req3.id)")
               req3.send()
@@ -267,7 +267,7 @@ extension _VKAPI {
         )
         req1.successBlock = {(response1: JSON) in
           req2.customURL = response1["upload_url"].stringValue
-          req2.isAsynchronous = req1.isAsynchronous
+          req2.asynchronous = req1.asynchronous
           req2.progressBlock = req1.progressBlock
           req2.errorBlock = req1.errorBlock
           req2.send()
@@ -317,7 +317,7 @@ extension _VKAPI {
       VK.Log.put(req1, "Prepare upload audio")
       req1.successBlock = {(response1: JSON) in
         req2.customURL = response1["upload_url"].stringValue
-        req2.isAsynchronous = req1.isAsynchronous
+        req2.asynchronous = req1.asynchronous
         req2.progressBlock = req1.progressBlock
         req2.errorBlock = req1.errorBlock
         req2.successBlock = {(response2: JSON) in
@@ -329,7 +329,7 @@ extension _VKAPI {
             VK.Arg.title : title,
             ]
           )
-          req3.isAsynchronous = req1.isAsynchronous
+          req3.asynchronous = req1.asynchronous
           req3.errorBlock = req1.errorBlock
           VK.Log.put(req1, "Save with request \(req3.id)")
           req3.send()
@@ -357,7 +357,7 @@ extension _VKAPI {
       VK.Log.put(req1, "Prepare upload document")
       req1.successBlock = {(response1: JSON) in
         req2.customURL = response1["upload_url"].stringValue
-        req2.isAsynchronous = req1.isAsynchronous
+        req2.asynchronous = req1.asynchronous
         req2.progressBlock = req1.progressBlock
         req2.errorBlock = req1.errorBlock
         req2.successBlock = {(response2: JSON) in
@@ -367,7 +367,7 @@ extension _VKAPI {
             VK.Arg.tags : tags,
             ]
           )
-          req3.isAsynchronous = req1.isAsynchronous
+          req3.asynchronous = req1.asynchronous
           req3.errorBlock = req1.errorBlock
           VK.Log.put(req1, "Save with request \(req3.id)")
           req3.send()

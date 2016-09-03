@@ -17,7 +17,7 @@ internal struct Authorizator {
   
   
   fileprivate static var paramsUrl : String {
-    let _perm = VK.Scope.toInt(VK.delegate!.vkWillauthorize())
+    let _perm = VK.Scope.toInt(VK.delegate!.vkWillAuthorize())
     let _mode = isMac ? "mobile" : "ios"
     let _redir = canauthorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
     
@@ -62,14 +62,14 @@ internal struct Authorizator {
     }
     
     if VK.state == .authorized {
-      _ = request?.isAsynchronous == true ? request?.trySend() : request?.tryInCurrentThread()
+      _ = request?.asynchronous == true ? request?.trySend() : request?.tryInCurrentThread()
     }
     else {
       let err = VK.Error(domain: "VKSDKDomain", code: 2, desc: "User deny authorization", userInfo: nil, req: request)
       request?.attempts = request!.maxAttempts
       request?.errorBlock(err)
       DispatchQueue.global(qos: .background).async {
-        VK.delegate?.vkAutorizationFailed(err)
+        VK.delegate?.vkAutorizationFailedWith(error: err)
       }
     }
   }

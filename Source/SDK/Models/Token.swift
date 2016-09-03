@@ -98,11 +98,9 @@ internal class Token: NSObject, NSCoding {
   
   
   private class func _load() -> Token? {
-    let parameters  = VK.delegate!.vkTokenPath()
-    let useDefaults = parameters.useUserDefaults
-    let filePath    = parameters.alternativePath
-    if useDefaults {tokenInstance = self.loadFromDefaults()}
-    else           {tokenInstance = self.loadFromFile(filePath)}
+    let path  = VK.delegate!.vkShouldUseTokenPath()
+    if let path = path  {tokenInstance = self.loadFromFile(path)}
+    else                {tokenInstance = self.loadFromDefaults()}
     return tokenInstance
   }
   
@@ -135,11 +133,9 @@ internal class Token: NSObject, NSCoding {
   
   
   func save() {
-    let parameters  = VK.delegate!.vkTokenPath()
-    let useDefaults = parameters.useUserDefaults
-    let filePath    = parameters.alternativePath
-    if useDefaults {saveToDefaults()}
-    else           {saveToFile(filePath)}
+    let path  = VK.delegate!.vkShouldUseTokenPath()
+    if let path = path  {saveToFile(path)}
+    else                {saveToDefaults()}
   }
   
   
@@ -168,20 +164,19 @@ internal class Token: NSObject, NSCoding {
   
   
   class func remove() {
-    let parameters  = VK.delegate!.vkTokenPath()
-    let useDefaults = parameters.useUserDefaults
-    let filePath    = parameters.alternativePath
+    let path  = VK.delegate!.vkShouldUseTokenPath()
     
-    let defaults = UserDefaults.standard
-    if defaults.object(forKey: "Token") != nil {defaults.removeObject(forKey: "Token")}
-    defaults.synchronize()
-    
-    if !useDefaults {
+    if let path = path {
       let manager = FileManager.default
-      if manager.fileExists(atPath: filePath) {
-        do {try manager.removeItem(atPath: filePath)}
+      if manager.fileExists(atPath: path) {
+        do {try manager.removeItem(atPath: path)}
         catch _ {}
       }
+    }
+    else {
+        let defaults = UserDefaults.standard
+        if defaults.object(forKey: "Token") != nil {defaults.removeObject(forKey: "Token")}
+        defaults.synchronize()
     }
     
     if tokenInstance != nil {tokenInstance = nil}
@@ -195,7 +190,7 @@ internal class Token: NSObject, NSCoding {
       DispatchQueue.global(qos: .default).async {
         Thread.sleep(forTimeInterval: 0.1)
         if tokenInstance != nil {
-          VK.delegate!.vkDidAuthorize(tokenInstance.parameters)
+          VK.delegate!.vkDidAuthorizeWith(parameters: tokenInstance.parameters)
         }
       }
     }

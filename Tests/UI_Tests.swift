@@ -16,7 +16,7 @@ class UI_Tests: VKTestCase {
     
     DispatchQueue.global(qos: .background).async {
       let req = VK.API.Messages.getDialogs()
-      req.isAsynchronous = false
+      req.asynchronous = false
       var executed = false
       
       req.send(
@@ -97,7 +97,7 @@ class UI_Tests: VKTestCase {
     
     DispatchQueue.global(qos: .background).async {
       let req = VK.API.custom(method: "captcha.force")
-      req.isAsynchronous = false
+      req.asynchronous = false
       var executed = false
       
       req.send(
@@ -125,7 +125,7 @@ class UI_Tests: VKTestCase {
     let readyExpectation = expectation(description: "ready")
     
     let req = VK.API.custom(method: "captcha.force")
-    req.isAsynchronous = true
+    req.asynchronous = true
     
     req.send(
       success: {response in

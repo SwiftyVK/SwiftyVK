@@ -10,7 +10,7 @@ class Sending_Tests: VKTestCase {
     let readyExpectation = expectation(description: "ready")
     
       let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
-      req.isAsynchronous = true
+      req.asynchronous = true
       req.send(
         method: .GET,
         success: {response in
@@ -30,7 +30,7 @@ class Sending_Tests: VKTestCase {
     let readyExpectation = expectation(description: "ready")
     
     let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
-    req.isAsynchronous = true
+    req.asynchronous = true
     req.send(
       method: .POST,
       success: {response in
@@ -95,7 +95,7 @@ class Sending_Tests: VKTestCase {
     DispatchQueue.global(qos: .background).async {
       for n in 1...10 {
         let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
-        req.isAsynchronous = false
+        req.asynchronous = false
         var executed = false
         
         req.send(
@@ -124,7 +124,7 @@ class Sending_Tests: VKTestCase {
     
     for n in 1...10 {
       let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
-      req.isAsynchronous = true
+      req.asynchronous = true
       req.send(
         success: {response in
           exeCount += 1
@@ -149,7 +149,7 @@ class Sending_Tests: VKTestCase {
       for n in 1...10 {
         let asynchronously = !(n % 3 == 0)
         let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
-        req.isAsynchronous = asynchronously
+        req.asynchronous = asynchronously
         var executed = false
         
         req.send(
@@ -184,7 +184,7 @@ class Sending_Tests: VKTestCase {
     for n in 1...VK.defaults.maxRequestsPerSec {
       let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
       requests[req.id] = "~"
-      req.isAsynchronous = true
+      req.asynchronous = true
       
       req.send(
         success: {response in
@@ -218,7 +218,7 @@ class Sending_Tests: VKTestCase {
       
       for n in 1...VK.defaults.maxRequestsPerSec {
         let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
-        req.isAsynchronous = true
+        req.asynchronous = true
         req.send(
           success: {response in
             executed += 1

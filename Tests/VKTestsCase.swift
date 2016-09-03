@@ -8,7 +8,7 @@ class VKTestCase : XCTestCase {
   let reqTimeout = 5.0
   
   override func setUp() {
-//    VK.defaults.allowLogToConsole = true
+//    VK.defaults.logToConsole = true
     VK.Log.purge()
     super.setUp()
   }

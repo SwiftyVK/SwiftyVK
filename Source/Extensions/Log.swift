@@ -64,7 +64,7 @@ extension VK {
         }
         
         _put(key, message, false)
-        req.allowLogToConsole == true
+        req.logToConsole == true
           ? printSync("\(date): \(key) ~ \(message)")
           : ()
       }
@@ -73,7 +73,7 @@ extension VK {
     
     internal static func put(_ key: String, _ message: String) {
       logQueue.async {
-        _put(key, message, VK.defaults.allowLogToConsole)
+        _put(key, message, VK.defaults.logToConsole)
       }
     }
     

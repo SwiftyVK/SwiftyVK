@@ -66,12 +66,12 @@ Implement `VKDelegate` protocol and **all its functions** in custom class. For e
 ```swift
 class YourClass: Superclass, VKDelegate {
 
-  func vkWillauthorize() -> [VK.Scope] {
+  func vkWillAuthorize() -> [VK.Scope] {
     //Called when SwiftyVK need autorization permissions.
     return //an array of application permissions
   }
 
-  func vkDidAuthorize(parameters: Dictionary<String, String>) {}
+  func vkDidAuthorizeWith(parameters: Dictionary<String, String>) {}
     //Called when the user is log in. 
     //Here you can start to send requests to the API.
   }
@@ -80,11 +80,11 @@ class YourClass: Superclass, VKDelegate {
     //Called when user is log out.
   }
 
-  func vkAutorizationFailed(error: VK.Error) {
+  func vkAutorizationFailedWith(error: VK.Error) {
    //Called when SwiftyVK could not authorize. To let the application know that something went wrong.
   }
 
-  func vkTokenPath() -> (useUserDefaults: Bool, alternativePath: String) {
+  func vkShouldUseTokenPath() -> (useUserDefaults: Bool, alternativePath: String) {
     //Called when SwiftyVK need know where a token is located.
     return //bool value that indicates whether save token to NSUserDefaults or not, and alternative save path.
   }
@@ -95,7 +95,7 @@ class YourClass: Superclass, VKDelegate {
     return //UIViewController that should present autorization view controller
   }
 
-  func vkWillPresentWindow() -> (isSheet: Bool, inWindow: NSWindow?) {
+  func vkWillPresentView() -> (isSheet: Bool, inWindow: NSWindow?) {
     //Only for OSX!
     //Called when need to display a window from SwiftyVK.
     return //bool value that indicates whether to display the window as modal or not, and parent window for modal presentation
@@ -114,7 +114,7 @@ VK.start(appID: applicationID, delegate: VKDelegate)
 ```
 
 ###**User authorization**
-* Implement `vkWillauthorize()` function in `VKDelegate` and return [application  permissions](https://vk.com/dev/permissions).
+* Implement `vkWillAuthorize()` function in `VKDelegate` and return [application  permissions](https://vk.com/dev/permissions).
 * Just call:
 
 
@@ -203,7 +203,7 @@ Property | Default | Description
 `successBlock`| empty | This code block will be executed when the response to the request.
 `errorBlock` | empty | This code block will be executed, if during execution of the response fails.
 `progressBlock` | empty | This code block is executed when the file is loaded. It is called every time the server sent the next part of the file.
-`isAsynchronous` | true | Specifies whether the control returns after sending the request immediately or only after receiving the response. By default the requests are asynchronous and control returns immediately. Sometimes you may need to send synchronous requests, **but it is not necessary to do this in the main thread!**.
+`asynchronous` | true | Specifies whether the control returns after sending the request immediately or only after receiving the response. By default the requests are asynchronous and control returns immediately. Sometimes you may need to send synchronous requests, **but it is not necessary to do this in the main thread!**.
 `maxAttempts` | 3 | The number of times can be resend the request automatically, if during its execution the error occurred. **0 == infinity attempts**.
 `timeout` | 10 | How long in seconds a request will wait for a response from the server. If the wait is longer this value, the generated request error.
 `canselled`| false | If user cancell request it will true
@@ -266,7 +266,7 @@ let media = Media(imageData: data, type: .JPG)
 VK.API.Upload.Photo.toWall(
   media,
   userId: "1",
-  isAsynchronous: true,
+  asynchronous: true,
   progressBlock: {done, total in print("upload \(done) of \(total))")},
   successBlock: {response in print(response)},
   errorBlock: {error in print(error)}

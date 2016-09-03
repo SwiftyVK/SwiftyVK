@@ -95,7 +95,7 @@ extension VK_LongPool {
         req.catchErrors = false
         req.timeout = 30
         req.maxAttempts = 1
-        req.isAsynchronous = false
+        req.asynchronous = false
         req.successBlock = {(response : JSON) in
           VK.Log.put("LongPool", "Received response with request \(req.id)")
           
@@ -246,7 +246,7 @@ extension VK_LongPool {
 //
 //
 ///The wrapper for a variety of objects such as JSON to be compatible with NSObject. Access to the property is via an unwrap array
-public class JSONWrapper {
+public final class JSONWrapper {
   public let unwrap : [JSON]
   
   public init(_ value: [JSON]) {
@@ -263,7 +263,7 @@ public class JSONWrapper {
 //
 //
 //
-internal class LPObserver : NSObject {
+internal final class LPObserver : NSObject {
   private var connected = true
   
   internal override init() {
