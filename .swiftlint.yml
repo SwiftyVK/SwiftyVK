@@ -1,0 +1,13 @@
+disabled_rules:
+  - variable_name
+  - trailing_whitespace
+  - todo
+  - line_length
+  - file_length
+  - function_body_length
+  - type_body_length
+  - cyclomatic_complexity
+  - type_name
+  - valid_docs
+  - nesting
+  - statement_position

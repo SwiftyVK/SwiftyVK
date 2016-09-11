@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A20878511D8578F70076BB5E /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A208784E1D8578ED0076BB5E /* SwiftyVK.framework */; };
+		A20878521D8578F70076BB5E /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A208784E1D8578ED0076BB5E /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A20878551D8579020076BB5E /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20878541D8579020076BB5E /* SwiftyVK.framework */; };
+		A20878561D8579020076BB5E /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A20878541D8579020076BB5E /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A227371D1CF462F60042868A /* VKDelegateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227371C1CF462F60042868A /* VKDelegateImpl.swift */; };
 		A22737201CF466100042868A /* VKDelegateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227371C1CF462F60042868A /* VKDelegateImpl.swift */; };
 		A234A4031BE29DAD00856CA5 /* Misc_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A234A4021BE29DAD00856CA5 /* Misc_Tests.swift */; };
@@ -24,9 +28,6 @@
 		A2527EC31BD13FB600F65412 /* Back-iOS.png in Resources */ = {isa = PBXBuildFile; fileRef = A2527EC11BD13FB600F65412 /* Back-iOS.png */; };
 		A2ACF04F1D53A61900438BB2 /* UI_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71251BD275E5008E7D86 /* UI_Tests.swift */; };
 		A2ACF0521D53A61900438BB2 /* UI_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71251BD275E5008E7D86 /* UI_Tests.swift */; };
-		A2DBE4221D3662BF0007AFBD /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70711BD2699E008E7D86 /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A2DBE4271D3663110007AFBD /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70731BD2699E008E7D86 /* SwiftyVK.framework */; };
-		A2DBE4281D3663110007AFBD /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70731BD2699E008E7D86 /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A2EB6F331BD1857D008E7D86 /* testAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F2D1BD1857D008E7D86 /* testAudio.mp3 */; };
 		A2EB6F341BD1857D008E7D86 /* testAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F2D1BD1857D008E7D86 /* testAudio.mp3 */; };
 		A2EB6F351BD1857D008E7D86 /* testDoc.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F2E1BD1857D008E7D86 /* testDoc.rtf */; };
@@ -35,7 +36,6 @@
 		A2EB6F381BD1857D008E7D86 /* testImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F2F1BD1857D008E7D86 /* testImage.jpg */; };
 		A2EB6F391BD1857D008E7D86 /* testVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F301BD1857D008E7D86 /* testVideo.mp4 */; };
 		A2EB6F3A1BD1857D008E7D86 /* testVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F301BD1857D008E7D86 /* testVideo.mp4 */; };
-		A2EB70781BD269AB008E7D86 /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB70711BD2699E008E7D86 /* SwiftyVK.framework */; };
 		A2EB71461BD27840008E7D86 /* Request_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71261BD275E5008E7D86 /* Request_Tests.swift */; };
 		A2EB71471BD27840008E7D86 /* Upload_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71271BD275E5008E7D86 /* Upload_Tests.swift */; };
 		A2EB71491BD27841008E7D86 /* Request_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71261BD275E5008E7D86 /* Request_Tests.swift */; };
@@ -86,13 +86,6 @@
 			remoteGlobalIDString = A2527D551BD1134500F65412;
 			remoteInfo = "SwiftyVKResources-iOS";
 		};
-		A2EB707A1BD269AB008E7D86 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A2EB70691BD2699E008E7D86 /* SwiftyVK.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = A2EB6EA71BD180E9008E7D86;
-			remoteInfo = "SwiftyVK-OSX";
-		};
 		A2EB71321BD27639008E7D86 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A2527E5B1BD139E200F65412 /* Project object */;
@@ -110,24 +103,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		A20878531D8578F80076BB5E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A20878521D8578F70076BB5E /* SwiftyVK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A2DBE42B1D3663110007AFBD /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A2DBE4281D3663110007AFBD /* SwiftyVK.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A2EB705F1BD2693D008E7D86 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				A2DBE4221D3662BF0007AFBD /* SwiftyVK.framework in Embed Frameworks */,
+				A20878561D8579020076BB5E /* SwiftyVK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,6 +138,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A208784E1D8578ED0076BB5E /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A20878541D8579020076BB5E /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A227371C1CF462F60042868A /* VKDelegateImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKDelegateImpl.swift; sourceTree = "<group>"; };
 		A22737351CF476280042868A /* SwiftyVK-Tests-iOS copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SwiftyVK-Tests-iOS copy-Info.plist"; path = "/Users/WE-St0r/Documents/Development/VK/SwiftyVK/Example/SwiftyVK-Tests-iOS copy-Info.plist"; sourceTree = "<absolute>"; };
 		A22737491CF476360042868A /* SwiftyVK-Tests-OSX copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SwiftyVK-Tests-OSX copy-Info.plist"; path = "/Users/WE-St0r/Documents/Development/VK/SwiftyVK/Example/SwiftyVK-Tests-OSX copy-Info.plist"; sourceTree = "<absolute>"; };
@@ -200,7 +195,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2EB70781BD269AB008E7D86 /* SwiftyVK.framework in Frameworks */,
+				A20878511D8578F70076BB5E /* SwiftyVK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,7 +203,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2DBE4271D3663110007AFBD /* SwiftyVK.framework in Frameworks */,
+				A20878551D8579020076BB5E /* SwiftyVK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +243,8 @@
 		A2527E5A1BD139E200F65412 = {
 			isa = PBXGroup;
 			children = (
+				A20878541D8579020076BB5E /* SwiftyVK.framework */,
+				A208784E1D8578ED0076BB5E /* SwiftyVK.framework */,
 				A227371C1CF462F60042868A /* VKDelegateImpl.swift */,
 				A2527EBC1BD13F7E00F65412 /* APIWorker.swift */,
 				A2527E6B1BD13A3B00F65412 /* AppDelegate-OSX.swift */,
@@ -327,12 +324,11 @@
 				A2527E641BD13A3B00F65412 /* Sources */,
 				A2527E651BD13A3B00F65412 /* Frameworks */,
 				A2527E661BD13A3B00F65412 /* Resources */,
-				A2EB705F1BD2693D008E7D86 /* Embed Frameworks */,
+				A20878531D8578F80076BB5E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A2EB707B1BD269AB008E7D86 /* PBXTargetDependency */,
 			);
 			name = "SwiftyVK-Example-OSX";
 			productName = "SwiftyVK-Example-OSX";
@@ -591,11 +587,6 @@
 			name = "SwiftyVK-iOS";
 			targetProxy = A2DBE4291D3663110007AFBD /* PBXContainerItemProxy */;
 		};
-		A2EB707B1BD269AB008E7D86 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "SwiftyVK-OSX";
-			targetProxy = A2EB707A1BD269AB008E7D86 /* PBXContainerItemProxy */;
-		};
 		A2EB71331BD27639008E7D86 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A2527E671BD13A3B00F65412 /* SwiftyVK-Example-OSX */;
@@ -710,7 +701,6 @@
 		A2527E741BD13A3B00F65412 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -762,7 +752,6 @@
 		A2527E751BD13A3B00F65412 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
