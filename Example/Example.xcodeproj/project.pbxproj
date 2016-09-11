@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A20878511D8578F70076BB5E /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A208784E1D8578ED0076BB5E /* SwiftyVK.framework */; };
-		A20878521D8578F70076BB5E /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A208784E1D8578ED0076BB5E /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A20878551D8579020076BB5E /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20878541D8579020076BB5E /* SwiftyVK.framework */; };
-		A20878561D8579020076BB5E /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A20878541D8579020076BB5E /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		402B4BB08DEAC2B8C9213B0D /* Pods_SwiftyVK_Tests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2A8C134DE235F92331DDE3F /* Pods_SwiftyVK_Tests_iOS.framework */; };
+		8CCCA3749A6231E57572C350 /* Pods_SwiftyVK_Tests_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FFF690921511709F8F31AA0 /* Pods_SwiftyVK_Tests_OSX.framework */; };
+		A2087A5D1D8580A90076BB5E /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2087A561D8580940076BB5E /* SwiftyVK.framework */; };
+		A2087A5E1D8580A90076BB5E /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2087A561D8580940076BB5E /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A2087A611D8580B00076BB5E /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2087A581D8580940076BB5E /* SwiftyVK.framework */; };
+		A2087A621D8580B00076BB5E /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2087A581D8580940076BB5E /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A227371D1CF462F60042868A /* VKDelegateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227371C1CF462F60042868A /* VKDelegateImpl.swift */; };
 		A22737201CF466100042868A /* VKDelegateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227371C1CF462F60042868A /* VKDelegateImpl.swift */; };
 		A234A4031BE29DAD00856CA5 /* Misc_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A234A4021BE29DAD00856CA5 /* Misc_Tests.swift */; };
@@ -51,37 +53,30 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A2DBE4291D3663110007AFBD /* PBXContainerItemProxy */ = {
+		A2087A551D8580940076BB5E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A2EB70691BD2699E008E7D86 /* SwiftyVK.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = A2EB6E9A1BD180DD008E7D86;
-			remoteInfo = "SwiftyVK-iOS";
-		};
-		A2EB70701BD2699E008E7D86 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A2EB70691BD2699E008E7D86 /* SwiftyVK.xcodeproj */;
+			containerPortal = A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = A2EB6EA81BD180E9008E7D86;
 			remoteInfo = "SwiftyVK-OSX";
 		};
-		A2EB70721BD2699E008E7D86 /* PBXContainerItemProxy */ = {
+		A2087A571D8580940076BB5E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A2EB70691BD2699E008E7D86 /* SwiftyVK.xcodeproj */;
+			containerPortal = A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = A2EB6E9B1BD180DD008E7D86;
 			remoteInfo = "SwiftyVK-iOS";
 		};
-		A2EB70741BD2699E008E7D86 /* PBXContainerItemProxy */ = {
+		A2087A591D8580940076BB5E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A2EB70691BD2699E008E7D86 /* SwiftyVK.xcodeproj */;
+			containerPortal = A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = A2527D4B1BD1130D00F65412;
 			remoteInfo = "SwiftyVKResources-OSX";
 		};
-		A2EB70761BD2699E008E7D86 /* PBXContainerItemProxy */ = {
+		A2087A5B1D8580940076BB5E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A2EB70691BD2699E008E7D86 /* SwiftyVK.xcodeproj */;
+			containerPortal = A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = A2527D551BD1134500F65412;
 			remoteInfo = "SwiftyVKResources-iOS";
@@ -103,24 +98,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A20878531D8578F80076BB5E /* Embed Frameworks */ = {
+		A2087A3A1D85803F0076BB5E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A20878521D8578F70076BB5E /* SwiftyVK.framework in Embed Frameworks */,
+				A2087A5E1D8580A90076BB5E /* SwiftyVK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A2DBE42B1D3663110007AFBD /* Embed Frameworks */ = {
+		A2087A451D85805D0076BB5E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A20878561D8579020076BB5E /* SwiftyVK.framework in Embed Frameworks */,
+				A2087A621D8580B00076BB5E /* SwiftyVK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,8 +133,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A208784E1D8578ED0076BB5E /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A20878541D8579020076BB5E /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		108A83A7B6FD339110B64169 /* Pods-SwiftyVK-Tests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyVK-Tests-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyVK-Tests-iOS/Pods-SwiftyVK-Tests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		525EDB6BC3A6FDD1E22AC7F6 /* Pods-SwiftyVK-Example-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyVK-Example-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyVK-Example-OSX/Pods-SwiftyVK-Example-OSX.release.xcconfig"; sourceTree = "<group>"; };
+		62E75E8B340944879FE1EA4A /* Pods_SwiftyVK_Example_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyVK_Example_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FFF690921511709F8F31AA0 /* Pods_SwiftyVK_Tests_OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyVK_Tests_OSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C4B7E0B4D0BA7900F93763D /* Pods-SwiftyVK-Tests-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyVK-Tests-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyVK-Tests-OSX/Pods-SwiftyVK-Tests-OSX.release.xcconfig"; sourceTree = "<group>"; };
+		98EA010062BBEA6C8221FC26 /* Pods_SwiftyVK_Example_OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyVK_Example_OSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyVK.xcodeproj; path = Library/SwiftyVK.xcodeproj; sourceTree = "<group>"; };
 		A227371C1CF462F60042868A /* VKDelegateImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKDelegateImpl.swift; sourceTree = "<group>"; };
 		A22737351CF476280042868A /* SwiftyVK-Tests-iOS copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SwiftyVK-Tests-iOS copy-Info.plist"; path = "/Users/WE-St0r/Documents/Development/VK/SwiftyVK/Example/SwiftyVK-Tests-iOS copy-Info.plist"; sourceTree = "<absolute>"; };
 		A22737491CF476360042868A /* SwiftyVK-Tests-OSX copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SwiftyVK-Tests-OSX copy-Info.plist"; path = "/Users/WE-St0r/Documents/Development/VK/SwiftyVK/Example/SwiftyVK-Tests-OSX copy-Info.plist"; sourceTree = "<absolute>"; };
@@ -182,12 +182,17 @@
 		A2EB6F3B1BD186F9008E7D86 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		A2EB6F3C1BD186F9008E7D86 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		A2EB6F3D1BD186F9008E7D86 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		A2EB70691BD2699E008E7D86 /* SwiftyVK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SwiftyVK.xcodeproj; sourceTree = "<group>"; };
 		A2EB71251BD275E5008E7D86 /* UI_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI_Tests.swift; sourceTree = "<group>"; };
 		A2EB71261BD275E5008E7D86 /* Request_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request_Tests.swift; sourceTree = "<group>"; };
 		A2EB71271BD275E5008E7D86 /* Upload_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload_Tests.swift; sourceTree = "<group>"; };
 		A2EB712D1BD27639008E7D86 /* SwiftyVK-Tests-OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftyVK-Tests-OSX.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2EB713B1BD27652008E7D86 /* SwiftyVK-Tests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftyVK-Tests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A715F29A2171ACD8C98F5491 /* Pods-SwiftyVK-Tests-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyVK-Tests-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyVK-Tests-OSX/Pods-SwiftyVK-Tests-OSX.debug.xcconfig"; sourceTree = "<group>"; };
+		ACCB6D7C84886F1195523BDF /* Pods-SwiftyVK-Example-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyVK-Example-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyVK-Example-OSX/Pods-SwiftyVK-Example-OSX.debug.xcconfig"; sourceTree = "<group>"; };
+		C400620EA4916F5CFD8CF944 /* Pods-SwiftyVK-Tests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyVK-Tests-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyVK-Tests-iOS/Pods-SwiftyVK-Tests-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		EA56778DAD5481E508D534A3 /* Pods-SwiftyVK-Example-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyVK-Example-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyVK-Example-iOS/Pods-SwiftyVK-Example-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		EDBC0F37EC55DD22AAAE9E0B /* Pods-SwiftyVK-Example-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyVK-Example-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyVK-Example-iOS/Pods-SwiftyVK-Example-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		F2A8C134DE235F92331DDE3F /* Pods_SwiftyVK_Tests_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyVK_Tests_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,7 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A20878511D8578F70076BB5E /* SwiftyVK.framework in Frameworks */,
+				A2087A5D1D8580A90076BB5E /* SwiftyVK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,7 +208,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A20878551D8579020076BB5E /* SwiftyVK.framework in Frameworks */,
+				A2087A611D8580B00076BB5E /* SwiftyVK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +216,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CCCA3749A6231E57572C350 /* Pods_SwiftyVK_Tests_OSX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,16 +224,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				402B4BB08DEAC2B8C9213B0D /* Pods_SwiftyVK_Tests_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A2087A4F1D8580940076BB5E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A2087A561D8580940076BB5E /* SwiftyVK.framework */,
+				A2087A581D8580940076BB5E /* SwiftyVK.framework */,
+				A2087A5A1D8580940076BB5E /* SwiftyVKResources-OSX.bundle */,
+				A2087A5C1D8580940076BB5E /* SwiftyVKResources-iOS.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A25221041BD17B450047C638 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A2EB70691BD2699E008E7D86 /* SwiftyVK.xcodeproj */,
+				A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */,
 				A2527EC11BD13FB600F65412 /* Back-iOS.png */,
 				A2EB6F2D1BD1857D008E7D86 /* testAudio.mp3 */,
 				A2EB6F2E1BD1857D008E7D86 /* testDoc.rtf */,
@@ -243,8 +261,6 @@
 		A2527E5A1BD139E200F65412 = {
 			isa = PBXGroup;
 			children = (
-				A20878541D8579020076BB5E /* SwiftyVK.framework */,
-				A208784E1D8578ED0076BB5E /* SwiftyVK.framework */,
 				A227371C1CF462F60042868A /* VKDelegateImpl.swift */,
 				A2527EBC1BD13F7E00F65412 /* APIWorker.swift */,
 				A2527E6B1BD13A3B00F65412 /* AppDelegate-OSX.swift */,
@@ -254,6 +270,8 @@
 				A2527E691BD13A3B00F65412 /* Products */,
 				A22737351CF476280042868A /* SwiftyVK-Tests-iOS copy-Info.plist */,
 				A22737491CF476360042868A /* SwiftyVK-Tests-OSX copy-Info.plist */,
+				FA1867D524507D82A44957A7 /* Pods */,
+				E97CA8BDB75FF89A0814272D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -290,17 +308,6 @@
 			path = Example/iOS;
 			sourceTree = "<group>";
 		};
-		A2EB706A1BD2699E008E7D86 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A2EB70711BD2699E008E7D86 /* SwiftyVK.framework */,
-				A2EB70731BD2699E008E7D86 /* SwiftyVK.framework */,
-				A2EB70751BD2699E008E7D86 /* SwiftyVKResources-OSX.bundle */,
-				A2EB70771BD2699E008E7D86 /* SwiftyVKResources-iOS.bundle */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		A2EB71221BD275A0008E7D86 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +321,32 @@
 			path = ../Tests;
 			sourceTree = "<group>";
 		};
+		E97CA8BDB75FF89A0814272D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				98EA010062BBEA6C8221FC26 /* Pods_SwiftyVK_Example_OSX.framework */,
+				62E75E8B340944879FE1EA4A /* Pods_SwiftyVK_Example_iOS.framework */,
+				6FFF690921511709F8F31AA0 /* Pods_SwiftyVK_Tests_OSX.framework */,
+				F2A8C134DE235F92331DDE3F /* Pods_SwiftyVK_Tests_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA1867D524507D82A44957A7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ACCB6D7C84886F1195523BDF /* Pods-SwiftyVK-Example-OSX.debug.xcconfig */,
+				525EDB6BC3A6FDD1E22AC7F6 /* Pods-SwiftyVK-Example-OSX.release.xcconfig */,
+				EA56778DAD5481E508D534A3 /* Pods-SwiftyVK-Example-iOS.debug.xcconfig */,
+				EDBC0F37EC55DD22AAAE9E0B /* Pods-SwiftyVK-Example-iOS.release.xcconfig */,
+				A715F29A2171ACD8C98F5491 /* Pods-SwiftyVK-Tests-OSX.debug.xcconfig */,
+				7C4B7E0B4D0BA7900F93763D /* Pods-SwiftyVK-Tests-OSX.release.xcconfig */,
+				108A83A7B6FD339110B64169 /* Pods-SwiftyVK-Tests-iOS.debug.xcconfig */,
+				C400620EA4916F5CFD8CF944 /* Pods-SwiftyVK-Tests-iOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -324,7 +357,7 @@
 				A2527E641BD13A3B00F65412 /* Sources */,
 				A2527E651BD13A3B00F65412 /* Frameworks */,
 				A2527E661BD13A3B00F65412 /* Resources */,
-				A20878531D8578F80076BB5E /* Embed Frameworks */,
+				A2087A3A1D85803F0076BB5E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -343,12 +376,11 @@
 				A2527E771BD13A5300F65412 /* Frameworks */,
 				A2527E781BD13A5300F65412 /* Resources */,
 				A2EB71D11BD3B994008E7D86 /* Embed Watch Content */,
-				A2DBE42B1D3663110007AFBD /* Embed Frameworks */,
+				A2087A451D85805D0076BB5E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A2DBE42A1D3663110007AFBD /* PBXTargetDependency */,
 			);
 			name = "SwiftyVK-Example-iOS";
 			productName = "SwiftyVK-Example-iOS";
@@ -359,9 +391,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A2EB71341BD27639008E7D86 /* Build configuration list for PBXNativeTarget "SwiftyVK-Tests-OSX" */;
 			buildPhases = (
+				81BC5C0AC36E1CAA4533A44A /* Check Pods Manifest.lock */,
 				A2EB71291BD27639008E7D86 /* Sources */,
 				A2EB712A1BD27639008E7D86 /* Frameworks */,
 				A2EB712B1BD27639008E7D86 /* Resources */,
+				7F247044889BEEE7E1702949 /* Embed Pods Frameworks */,
+				5177664DAE5ACF7B06EF427B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -377,9 +412,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A2EB71421BD27652008E7D86 /* Build configuration list for PBXNativeTarget "SwiftyVK-Tests-iOS" */;
 			buildPhases = (
+				4AD624AA1F6B2F1E2154657F /* Check Pods Manifest.lock */,
 				A2EB71371BD27652008E7D86 /* Sources */,
 				A2EB71381BD27652008E7D86 /* Frameworks */,
 				A2EB71391BD27652008E7D86 /* Resources */,
+				FF5C5F1AACE8DEE95FAF8BD4 /* Embed Pods Frameworks */,
+				4EF1CAC8B967A3BC83FEF4EC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -437,8 +475,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = A2EB706A1BD2699E008E7D86 /* Products */;
-					ProjectRef = A2EB70691BD2699E008E7D86 /* SwiftyVK.xcodeproj */;
+					ProductGroup = A2087A4F1D8580940076BB5E /* Products */;
+					ProjectRef = A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -452,32 +490,32 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A2EB70711BD2699E008E7D86 /* SwiftyVK.framework */ = {
+		A2087A561D8580940076BB5E /* SwiftyVK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SwiftyVK.framework;
-			remoteRef = A2EB70701BD2699E008E7D86 /* PBXContainerItemProxy */;
+			remoteRef = A2087A551D8580940076BB5E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A2EB70731BD2699E008E7D86 /* SwiftyVK.framework */ = {
+		A2087A581D8580940076BB5E /* SwiftyVK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SwiftyVK.framework;
-			remoteRef = A2EB70721BD2699E008E7D86 /* PBXContainerItemProxy */;
+			remoteRef = A2087A571D8580940076BB5E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A2EB70751BD2699E008E7D86 /* SwiftyVKResources-OSX.bundle */ = {
+		A2087A5A1D8580940076BB5E /* SwiftyVKResources-OSX.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "SwiftyVKResources-OSX.bundle";
-			remoteRef = A2EB70741BD2699E008E7D86 /* PBXContainerItemProxy */;
+			remoteRef = A2087A591D8580940076BB5E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A2EB70771BD2699E008E7D86 /* SwiftyVKResources-iOS.bundle */ = {
+		A2087A5C1D8580940076BB5E /* SwiftyVKResources-iOS.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "SwiftyVKResources-iOS.bundle";
-			remoteRef = A2EB70761BD2699E008E7D86 /* PBXContainerItemProxy */;
+			remoteRef = A2087A5B1D8580940076BB5E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -533,6 +571,99 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4AD624AA1F6B2F1E2154657F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4EF1CAC8B967A3BC83FEF4EC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftyVK-Tests-iOS/Pods-SwiftyVK-Tests-iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5177664DAE5ACF7B06EF427B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftyVK-Tests-OSX/Pods-SwiftyVK-Tests-OSX-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7F247044889BEEE7E1702949 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftyVK-Tests-OSX/Pods-SwiftyVK-Tests-OSX-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		81BC5C0AC36E1CAA4533A44A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FF5C5F1AACE8DEE95FAF8BD4 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftyVK-Tests-iOS/Pods-SwiftyVK-Tests-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A2527E641BD13A3B00F65412 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -582,11 +713,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A2DBE42A1D3663110007AFBD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "SwiftyVK-iOS";
-			targetProxy = A2DBE4291D3663110007AFBD /* PBXContainerItemProxy */;
-		};
 		A2EB71331BD27639008E7D86 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A2527E671BD13A3B00F65412 /* SwiftyVK-Example-OSX */;
@@ -701,6 +827,7 @@
 		A2527E741BD13A3B00F65412 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -752,6 +879,7 @@
 		A2527E751BD13A3B00F65412 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -895,6 +1023,7 @@
 		};
 		A2EB71351BD27639008E7D86 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A715F29A2171ACD8C98F5491 /* Pods-SwiftyVK-Tests-OSX.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -947,6 +1076,7 @@
 		};
 		A2EB71361BD27639008E7D86 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C4B7E0B4D0BA7900F93763D /* Pods-SwiftyVK-Tests-OSX.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -992,6 +1122,7 @@
 		};
 		A2EB71431BD27652008E7D86 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 108A83A7B6FD339110B64169 /* Pods-SwiftyVK-Tests-iOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1043,6 +1174,7 @@
 		};
 		A2EB71441BD27652008E7D86 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C400620EA4916F5CFD8CF944 /* Pods-SwiftyVK-Tests-iOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";

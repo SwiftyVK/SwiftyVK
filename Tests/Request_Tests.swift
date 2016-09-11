@@ -13,10 +13,10 @@ class Sending_Tests: VKTestCase {
       req.asynchronous = true
       req.send(
         method: .GET,
-        success: {response in
+        onSuccess: {response in
           readyExpectation.fulfill()
         },
-        error: {error in
+        onError: {error in
           XCTFail("Unexpected error in GET request: \(error)")
           readyExpectation.fulfill()
       })
@@ -33,10 +33,10 @@ class Sending_Tests: VKTestCase {
     req.asynchronous = true
     req.send(
       method: .POST,
-      success: {response in
+      onSuccess: {response in
         readyExpectation.fulfill()
       },
-      error: {error in
+      onError: {error in
         XCTFail("Unexpected error in GET request: \(error)")
         readyExpectation.fulfill()
     })
@@ -58,10 +58,10 @@ class Sending_Tests: VKTestCase {
     let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
     req.maxAttempts = 0
     req.send(
-      success: {response in
+      onSuccess: {response in
         readyExpectation.fulfill()
       },
-      error: {error in
+      onError: {error in
         XCTFail("Unexpected error in request: \(error)")
         readyExpectation.fulfill()
     })
@@ -76,11 +76,11 @@ class Sending_Tests: VKTestCase {
     
     let req = VK.API.Messages.getHistory()
     req.send(
-      success: {response in
+      onSuccess: {response in
         XCTFail("Unexpected succes in request: \(response)")
         readyExpectation.fulfill()
       },
-      error: {error in
+      onError: {error in
         readyExpectation.fulfill()
     })
     
@@ -99,10 +99,10 @@ class Sending_Tests: VKTestCase {
         var executed = false
         
         req.send(
-          success: {response in
+          onSuccess: {response in
             executed = true
           },
-          error: {error in
+          onError: {error in
             executed = true
             XCTFail("Unexpected error in \(n) request: \(error)")
             readyExpectation.fulfill()
@@ -126,11 +126,11 @@ class Sending_Tests: VKTestCase {
       let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
       req.asynchronous = true
       req.send(
-        success: {response in
+        onSuccess: {response in
           exeCount += 1
           exeCount >= 10 ? readyExpectation.fulfill() : ()
         },
-        error: {error in
+        onError: {error in
           XCTFail("Unexpected error in \(n) request: \(error)")
           readyExpectation.fulfill()
       })
@@ -153,12 +153,12 @@ class Sending_Tests: VKTestCase {
         var executed = false
         
         req.send(
-          success: {response in
+          onSuccess: {response in
             exeCount += 1
             executed = true
             exeCount >= 10 ? readyExpectation.fulfill() : ()
           },
-          error: {error in
+          onError: {error in
             XCTFail("Unexpected error in \(n) request: \(error)")
         })
         
@@ -187,12 +187,12 @@ class Sending_Tests: VKTestCase {
       req.asynchronous = true
       
       req.send(
-        success: {response in
+        onSuccess: {response in
           requests[req.id] = "+"
           executed += 1
           executed >= VK.defaults.maxRequestsPerSec ? readyExpectation.fulfill() : ()
         },
-        error: {error in
+        onError: {error in
           requests[req.id] = "-"
           executed += 1
           executed >= VK.defaults.maxRequestsPerSec ? readyExpectation.fulfill() : ()
@@ -220,11 +220,11 @@ class Sending_Tests: VKTestCase {
         let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
         req.asynchronous = true
         req.send(
-          success: {response in
+          onSuccess: {response in
             executed += 1
             executed == VK.defaults.maxRequestsPerSec ? readyExpectation.fulfill() : ()
           },
-          error: {error in
+          onError: {error in
             executed += 1
             executed == VK.defaults.maxRequestsPerSec ? readyExpectation.fulfill() : ()
         })
