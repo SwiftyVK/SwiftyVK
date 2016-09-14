@@ -52,7 +52,7 @@ extension VK {
     
     
     
-    internal static func put(_ req: Request, _ message: String) {
+    internal static func put(_ req: Request, _ message: String, atNewLine: Bool = false) {
       logQueue.async {
         let date = form.string(from: Date())
         req.log.append("\(date): \(message)")
@@ -65,7 +65,7 @@ extension VK {
         
         _put(key, message, false)
         req.logToConsole == true
-          ? printSync("\(date): \(key) ~ \(message)")
+          ? printSync("\(atNewLine ? "\n" : "")\(date): \(key) ~ \(message)")
           : ()
       }
     }
