@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11185.3" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16A320" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11185.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <objects>
@@ -686,7 +686,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="click:" target="Voe-Tx-rLC" id="R1z-kg-shW"/>
+                                    <action selector="buttonDown:" target="Voe-Tx-rLC" id="IqB-xq-K8a"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="Hwa-rH-63Z">
@@ -696,7 +696,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="click:" target="Voe-Tx-rLC" id="76i-9l-YjV"/>
+                                    <action selector="buttonDown:" target="Voe-Tx-rLC" id="QPr-eQ-6OB"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="tQ1-wQ-KIv">
@@ -706,7 +706,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="click:" target="Voe-Tx-rLC" id="SdM-qX-lSr"/>
+                                    <action selector="buttonDown:" target="Voe-Tx-rLC" id="bNV-BR-ipk"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" tag="7" translatesAutoresizingMaskIntoConstraints="NO" id="UNP-50-eVF">
@@ -716,7 +716,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="click:" target="Voe-Tx-rLC" id="qvZ-Ci-UbU"/>
+                                    <action selector="buttonDown:" target="Voe-Tx-rLC" id="tpk-oS-ff2"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="512-Ei-D4f">
@@ -726,7 +726,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="click:" target="Voe-Tx-rLC" id="i7p-RI-ZjZ"/>
+                                    <action selector="buttonDown:" target="Voe-Tx-rLC" id="y4v-ob-3Wr"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="fng-lN-v0H">
@@ -736,7 +736,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="click:" target="Voe-Tx-rLC" id="kaZ-pV-em1"/>
+                                    <action selector="buttonDown:" target="Voe-Tx-rLC" id="ouk-rf-rBX"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" tag="6" translatesAutoresizingMaskIntoConstraints="NO" id="wbq-sv-Ldc">
@@ -746,7 +746,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="click:" target="Voe-Tx-rLC" id="H5V-3I-s5q"/>
+                                    <action selector="buttonDown:" target="Voe-Tx-rLC" id="SmL-B9-4uT"/>
                                 </connections>
                             </button>
                         </subviews>

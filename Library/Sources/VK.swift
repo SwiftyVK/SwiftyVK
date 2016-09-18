@@ -196,7 +196,7 @@ extension VK_States {
     public enum States {
         case unknown
         case configured
-        case authorization
+//        case authorization
         case authorized
     }
     

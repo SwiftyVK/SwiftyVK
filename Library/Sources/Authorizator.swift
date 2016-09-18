@@ -65,10 +65,10 @@ internal struct Authorizator {
       _ = request?.asynchronous == true ? request?.trySend() : request?.tryInCurrentThread()
     }
     else {
-      let err = VK.Error(domain: "VKSDKDomain", code: 2, desc: "User deny authorization", userInfo: nil, req: request)
+      let err = VK.Error(domain: "SwiftyVKDomain", code: 2, desc: "User deny authorization", userInfo: nil, req: request)
       request?.attempts = request!.maxAttempts
       request?.errorBlock(err)
-      DispatchQueue.global(qos: .background).async {
+      DispatchQueue.global(qos: .default).async {
         VK.delegate?.vkAutorizationFailedWith(error: err)
       }
     }

@@ -257,6 +257,23 @@
 		A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		A2F33E681D8F1DF900856417 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2F33E751D8F202400856417 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
 		A2527D251BD1123E00F65412 = {
 			isa = PBXGroup;
@@ -471,6 +488,7 @@
 				A2EB6E991BD180DD008E7D86 /* Resources */,
 				A2EB71DA1BD3EFFD008E7D86 /* CopyFiles */,
 				A2EB71DE1BD3F033008E7D86 /* CopyFiles */,
+				A2F33E681D8F1DF900856417 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -491,6 +509,7 @@
 				A2EB6EA61BD180E9008E7D86 /* Resources */,
 				A2EB71D71BD3EFCD008E7D86 /* CopyFiles */,
 				A2EB71E01BD3F051008E7D86 /* CopyFiles */,
+				A2F33E751D8F202400856417 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -508,6 +527,7 @@
 		A2527D261BD1123E00F65412 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0800;
 				TargetAttributes = {
 					A2527D4A1BD1130D00F65412 = {

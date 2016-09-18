@@ -39,12 +39,25 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "Upload_Tests">
+               </Test>
+               <Test
                   Identifier = "Upload_Tests/test_photo_to_market_album()">
                </Test>
                <Test
                   Identifier = "VKTestCase">
                </Test>
             </SkippedTests>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A2AA41411D8F06E100C1F6C9"
+               BuildableName = "SwiftyVK-Tests-iOS_NEW.xctest"
+               BlueprintName = "SwiftyVK-Tests-iOS_NEW"
+               ReferencedContainer = "container:Example.xcodeproj">
+            </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>

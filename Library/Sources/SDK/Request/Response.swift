@@ -49,7 +49,7 @@ internal final class Response {
     }
     else {
       VK.Log.put(request!, "Fail parse response data")
-      error = VK.Error(domain: "VKSDKDomain", code: 4, desc: "Fail parse response data", userInfo: nil, req: request)
+      error = VK.Error(domain: "SwiftyVKDomain", code: 4, desc: "Fail parse response data", userInfo: nil, req: request)
     }
   }
   

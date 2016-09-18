@@ -12,7 +12,7 @@ class Upload_Tests: VKTestCase {
       return
     }
     
-    let readyExpectation = expectation(description: "ready")
+    let exp = expectation(description: "ready")
     var progressIsExecuted = false
     
     let req = VK.API.Upload.Photo.toMessage(Media(imageData: data, type: .JPG))
@@ -20,11 +20,11 @@ class Upload_Tests: VKTestCase {
     req.progressBlock = {done, total in}
     req.successBlock = {response in
       XCTAssertNotNil(response[0,"id"].int)
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.errorBlock = {error in
       XCTFail("Unexpected error in request: \(error)")
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
@@ -42,7 +42,7 @@ class Upload_Tests: VKTestCase {
       return
     }
     
-    let readyExpectation = expectation(description: "ready")
+    let exp = expectation(description: "ready")
     var progressIsExecuted = false
     
     
@@ -53,11 +53,11 @@ class Upload_Tests: VKTestCase {
     req.progressBlock = {done, total in}
     req.successBlock = {response in
       XCTAssertNotNil(response[0,"id"].int)
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.errorBlock = {error in
       XCTFail("Unexpected error in request: \(error)")
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
@@ -75,7 +75,7 @@ class Upload_Tests: VKTestCase {
       return
     }
     
-    let readyExpectation = expectation(description: "ready")
+    let exp = expectation(description: "ready")
     var progressIsExecuted = false
 
     let req = VK.API.Upload.Photo.toAlbum(
@@ -88,11 +88,11 @@ class Upload_Tests: VKTestCase {
       let deleteReq = VK.API.Photos.delete([VK.Arg.photoId : response[0]["id"].stringValue])
       deleteReq.asynchronous = true
       deleteReq.send()
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.errorBlock = {error in
       XCTFail("Unexpected error in request: \(error)")
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
@@ -110,7 +110,7 @@ class Upload_Tests: VKTestCase {
       return
     }
 
-    let readyExpectation = expectation(description: "ready")
+    let exp = expectation(description: "ready")
     var progressIsExecuted = false
     
     let req = VK.API.Upload.Photo.toMarket(
@@ -119,11 +119,11 @@ class Upload_Tests: VKTestCase {
     )
     req.successBlock = {response in
       XCTAssertNotNil(response[0,"id"].int)
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.errorBlock = {error in
       XCTFail("Unexpected error in request: \(error)")
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
@@ -141,7 +141,7 @@ class Upload_Tests: VKTestCase {
       return
     }
     
-    let readyExpectation = expectation(description: "ready")
+    let exp = expectation(description: "ready")
     var progressIsExecuted = false
 
     let req = VK.API.Upload.Photo.toMarketAlbum(
@@ -151,11 +151,11 @@ class Upload_Tests: VKTestCase {
     req.successBlock = {response in
       print(response)
       XCTAssertNotNil(response["gid"].int)
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.errorBlock = {error in
       XCTFail("Unexpected error in request: \(error)")
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
@@ -173,7 +173,7 @@ class Upload_Tests: VKTestCase {
       return
     }
         
-    let readyExpectation = expectation(description: "ready")
+    let exp = expectation(description: "ready")
     var progressIsExecuted = false
 
     let req = VK.API.Upload.audio(Media(audioData: data))
@@ -187,11 +187,11 @@ class Upload_Tests: VKTestCase {
         ])
       deleteReq.asynchronous = false
       deleteReq.send()
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.errorBlock = {error in
       XCTFail("Unexpected error in request: \(error)")
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
@@ -209,7 +209,7 @@ class Upload_Tests: VKTestCase {
       return
     }
     
-    let readyExpectation = expectation(description: "ready")
+    let exp = expectation(description: "ready")
     var progressIsExecuted = false
 
     let req = VK.API.Upload.Video.fromFile(
@@ -229,11 +229,11 @@ class Upload_Tests: VKTestCase {
         ])
       deleteReq.asynchronous = false
       deleteReq.send()
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.errorBlock = {error in
       XCTFail("Unexpected error in request: \(error)")
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()
@@ -247,7 +247,7 @@ class Upload_Tests: VKTestCase {
   
   
   func test_video_link() {
-    let readyExpectation = expectation(description: "ready")
+    let exp = expectation(description: "ready")
 
     let req = VK.API.Upload.Video.fromUrl(
       "http://www.youtube.com/watch?v=w7VD1681jV8",
@@ -265,11 +265,11 @@ class Upload_Tests: VKTestCase {
         ])
       deleteReq.asynchronous = false
       deleteReq.send()
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.errorBlock = {error in
       XCTFail("Unexpected error in request: \(error)")
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.send()
     
@@ -286,7 +286,7 @@ class Upload_Tests: VKTestCase {
       return
     }
     
-    let readyExpectation = expectation(description: "ready")
+    let exp = expectation(description: "ready")
     var progressIsExecuted = false
     
     let req = VK.API.Upload.document(Media(documentData: data, type: "rtf"))
@@ -300,11 +300,11 @@ class Upload_Tests: VKTestCase {
         ])
       deleteReq.asynchronous = false
       deleteReq.send()
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.errorBlock = {error in
       XCTFail("Unexpected error in request: \(error)")
-      readyExpectation.fulfill()
+      exp.fulfill()
     }
     req.progressBlock = {done, total in progressIsExecuted = true}
     req.send()

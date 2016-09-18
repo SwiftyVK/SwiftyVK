@@ -39,12 +39,47 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "Login_Tests/test_autologin()">
+               </Test>
+               <Test
+                  Identifier = "UI_Tests/test_autologin()">
+               </Test>
+               <Test
+                  Identifier = "UI_Tests/test_captcha_asynchroniously()">
+               </Test>
+               <Test
+                  Identifier = "UI_Tests/test_captcha_synchroniously()">
+               </Test>
+               <Test
+                  Identifier = "Upload_Tests">
+               </Test>
+               <Test
                   Identifier = "Upload_Tests/test_photo_to_market_album()">
                </Test>
                <Test
                   Identifier = "VKTestCase">
                </Test>
             </SkippedTests>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A2AA41271D8F061B00C1F6C9"
+               BuildableName = "SwiftyVK-Tests-OSX_NEW.xctest"
+               BlueprintName = "SwiftyVK-Tests-OSX_NEW"
+               ReferencedContainer = "container:Example.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A2F33E4A1D8F1CDA00856417"
+               BuildableName = "SwiftyVK-UITests.xctest"
+               BlueprintName = "SwiftyVK-UITests"
+               ReferencedContainer = "container:Example.xcodeproj">
+            </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>

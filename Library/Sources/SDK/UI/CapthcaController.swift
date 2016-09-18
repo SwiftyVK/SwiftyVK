@@ -49,14 +49,14 @@ internal final class СaptchaController: _СaptchaControllerPrototype {
       request.asynchronous ? request.trySend() : request.tryInCurrentThread()
     }
     else {
-      request.errorBlock(VK.Error(domain: "VKSDKDomain", code: 5, desc: "Captcha loading error", userInfo: nil, req: request))
+      request.errorBlock(VK.Error(domain: "SwiftyVKDomain", code: 5, desc: "Captcha loading error", userInfo: nil, req: request))
     }
   }
   
   
   
   private func sendAndWait() -> Bool {
-    let req = URLRequest(url: URL(string: self.imageUrl!)!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 5)
+    let req = URLRequest(url: URL(string: self.imageUrl!)!, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 5)
     var data: Data
     
     do {data = try NSURLConnection.sendSynchronousRequest(req, returning: nil)}

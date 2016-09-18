@@ -6,58 +6,50 @@ class Sending_Tests: VKTestCase {
     
     
     
-    func test_send_get_method() {
-        let readyExpectation = expectation(description: "ready")
+    func test_get_method() {
+        Stubs.apiWith(jsonFile: "success.users.get")
+        let exp = expectation(description: "ready")
         
         let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
         req.asynchronous = true
         
         req.successBlock = {response in
-            if response[0,"id"].int == 1 &&
-                response[0,"first_name"].string == "TEST" &&
-                response[0,"last_name"].string == "USER" {
-                readyExpectation.fulfill()
-            }
-            else {
-                XCTFail("Unexpected response in GET request: \(response)")
-            }
+            XCTAssertEqual(response[0,"id"].int, 1)
+            XCTAssertEqual(response[0,"first_name"].string, "TEST")
+            XCTAssertEqual(response[0,"last_name"].string, "USER")
+            exp.fulfill()
         }
         
         req.errorBlock = {error in
-            XCTFail("Unexpected error in GET request: \(error)")
-            readyExpectation.fulfill()
+            XCTFail("Unexpected error: \(error)")
+            exp.fulfill()
         }
         
-        stubApiWith(jsonFile: "success.users.get")
         req.send()
         waitForExpectations(timeout: reqTimeout) {_ in}
     }
     
     
     
-    func test_send_post_method() {
-        let readyExpectation = expectation(description: "ready")
+    func test_post_method() {
+        Stubs.apiWith(jsonFile: "success.users.get")
+        let exp = expectation(description: "ready")
         
         let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
         req.asynchronous = true
         
         req.successBlock = {response in
-            if response[0,"id"].int == 1 &&
-                response[0,"first_name"].string == "TEST" &&
-                response[0,"last_name"].string == "USER" {
-                readyExpectation.fulfill()
-            }
-            else {
-                XCTFail("Unexpected response in GET request: \(response)")
-            }
+            XCTAssertEqual(response[0,"id"].int, 1)
+            XCTAssertEqual(response[0,"first_name"].string, "TEST")
+            XCTAssertEqual(response[0,"last_name"].string, "USER")
+            exp.fulfill()
         }
         
         req.errorBlock = {error in
-            XCTFail("Unexpected error in GET request: \(error)")
-            readyExpectation.fulfill()
+            XCTFail("Unexpected error: \(error)")
+            exp.fulfill()
         }
         
-        stubApiWith(jsonFile: "success.users.get")
         req.send()
         waitForExpectations(timeout: reqTimeout) {_ in}
     }
@@ -65,27 +57,20 @@ class Sending_Tests: VKTestCase {
     
     
     func test_waiting_for_connection() {
-        let readyExpectation = expectation(description: "ready")
+        Stubs.apiWith(jsonFile: "success.users.get", shouldFails: 10)
+        let exp = expectation(description: "ready")
         
         let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
         req.maxAttempts = 0
         req.successBlock = {response in
-            if response[0,"id"].int == 1 &&
-                response[0,"first_name"].string == "TEST" &&
-                response[0,"last_name"].string == "USER" {
-                readyExpectation.fulfill()
-            }
-            else {
-                XCTFail("Unexpected response in GET request: \(response)")
-            }
+            exp.fulfill()
         }
         
         req.errorBlock = {error in
-            XCTFail("Unexpected error in GET request: \(error)")
-            readyExpectation.fulfill()
+            XCTFail("Unexpected error: \(error)")
+            exp.fulfill()
         }
         
-        stubApiWith(jsonFile: "success.users.get", shouldFails: 10)
         req.send()
         waitForExpectations(timeout: reqTimeout*10) {_ in}
     }
@@ -93,35 +78,33 @@ class Sending_Tests: VKTestCase {
     
     
     func test_executing_error_block() {
-        let readyExpectation = expectation(description: "ready")
+        Stubs.apiWith(jsonFile: "error.missing.parameter", maxCalls: VK.defaults.maxAttempts)
+        let exp = expectation(description: "ready")
+        
         let req = VK.API.Users.get()
         
         req.successBlock = {response in
-            XCTFail("Unexpected succes in request: \(response)")
-            readyExpectation.fulfill()
+            XCTFail("Unexpected response: \(response)")
+            exp.fulfill()
         }
         
         req.errorBlock = {error in
-            if error.domain == "APIError" && error.code == 100 {
-                readyExpectation.fulfill()
-            }
-            else {
-                XCTFail("Unexpected error in request: \(error)")
-            }
+            XCTAssertEqual(error.domain, "APIError")
+            XCTAssertEqual(error.code, 100)
+            exp.fulfill()
         }
         
-        stubApiWith(jsonFile: "error.missing.parameter", maxCalls: req.maxAttempts)
         req.send()
         waitForExpectations(timeout: reqTimeout) {_ in}
     }
     
     
     
-    func test_send_synchroniously() {
-        let readyExpectation = expectation(description: "ready")
-        stubApiWith(jsonFile: "success.users.get", maxCalls: 10)
-
-        DispatchQueue.global(qos: .background).async {
+    func test_synchroniously() {
+        Stubs.apiWith(jsonFile: "success.users.get", maxCalls: 10)
+        let exp = expectation(description: "ready")
+        
+        DispatchQueue.global(qos: .userInitiated).async {
             for n in 1...10 {
                 let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
                 req.asynchronous = false
@@ -133,12 +116,12 @@ class Sending_Tests: VKTestCase {
                     },
                     onError: {error in
                         executed = true
-                        XCTFail("Unexpected error in \(n) request: \(error)")
-                        readyExpectation.fulfill()
+                        XCTFail("\(n) call has unexpected error: \(error)")
+                        exp.fulfill()
                 })
                 
-                if !executed {XCTFail("Request \(n) is not synchronious")}
-                if n == 10 {readyExpectation.fulfill()}
+                XCTAssertTrue(executed, "Request \(n) is not synchronious")
+                n == 10 ? exp.fulfill() : ()
             }
         }
         
@@ -147,9 +130,9 @@ class Sending_Tests: VKTestCase {
     
     
     
-    func test_send_asynchroniously() {
-        let readyExpectation = expectation(description: "ready")
-        stubApiWith(jsonFile: "success.users.get", maxCalls: 10)
+    func test_asynchroniously() {
+        Stubs.apiWith(jsonFile: "success.users.get", maxCalls: 10)
+        let exp = expectation(description: "ready")
         var exeCount = 0
         
         for n in 1...10 {
@@ -158,11 +141,11 @@ class Sending_Tests: VKTestCase {
             req.send(
                 onSuccess: {response in
                     exeCount += 1
-                    exeCount >= 10 ? readyExpectation.fulfill() : ()
+                    exeCount >= 10 ? exp.fulfill() : ()
                 },
                 onError: {error in
-                    XCTFail("Unexpected error in \(n) request: \(error)")
-                    readyExpectation.fulfill()
+                    XCTFail("\(n) call has unexpected error: \(error)")
+                    exp.fulfill()
             })
         }
         
@@ -171,15 +154,15 @@ class Sending_Tests: VKTestCase {
     
     
     
-    func test_send_high_randomly() {
-        let readyExpectation = self.expectation(description: "ready")
+    func test_randomly() {
+        Stubs.apiWith(jsonFile: "success.users.get")
         let backup = VK.defaults.maxRequestsPerSec
         VK.defaults.maxRequestsPerSec = 100
-        stubApiWith(jsonFile: "success.users.get")
+        let exp = self.expectation(description: "ready")
         let requests = NSMutableDictionary()
         var executed = 0
         
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             for n in 1...VK.defaults.maxRequestsPerSec {
                 let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
                 requests[req.id] = "~"
@@ -189,12 +172,12 @@ class Sending_Tests: VKTestCase {
                     onSuccess: {response in
                         requests[req.id] = "+"
                         executed += 1
-                        executed >= VK.defaults.maxRequestsPerSec ? readyExpectation.fulfill() : ()
+                        executed >= VK.defaults.maxRequestsPerSec ? exp.fulfill() : ()
                     },
                     onError: {error in
                         requests[req.id] = "-"
                         executed += 1
-                        executed >= VK.defaults.maxRequestsPerSec ? readyExpectation.fulfill() : ()
+                        executed >= VK.defaults.maxRequestsPerSec ? exp.fulfill() : ()
                 })
             }
         }
@@ -203,32 +186,30 @@ class Sending_Tests: VKTestCase {
             VK.defaults.maxRequestsPerSec = backup
             let results = self.getResults(requests)
             printSync(results.statistic)
-            if results.error.count > results.all.count/50 || !results.unused.isEmpty {
-                XCTFail("Too many errors")
-            }
+            XCTAssertGreaterThan(results.all.count/50, results.error.count, "Too many errors")
+            XCTAssertTrue(results.unused.isEmpty, "\(results.unused.count) requests was not send")
         }
     }
     
     
     
-    func test_send_performance() {
-        stubApiWith(jsonFile: "success.users.get")
-
-        self.measure() {
-            let readyExpectation = self.expectation(description: "ready")
+    func test_performance() {
+        measure() {
+            Stubs.apiWith(jsonFile: "success.users.get")
+            let exp = self.expectation(description: "ready")
             var executed = 0
             
-            for n in 1...VK.defaults.maxRequestsPerSec*3 {
+            for n in 1...VK.defaults.maxRequestsPerSec {
                 let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
                 req.asynchronous = true
                 req.send(
                     onSuccess: {response in
                         executed += 1
-                        executed == VK.defaults.maxRequestsPerSec ? readyExpectation.fulfill() : ()
+                        executed == VK.defaults.maxRequestsPerSec ? exp.fulfill() : ()
                     },
                     onError: {error in
                         executed += 1
-                        executed == VK.defaults.maxRequestsPerSec ? readyExpectation.fulfill() : ()
+                        executed == VK.defaults.maxRequestsPerSec ? exp.fulfill() : ()
                 })
             }
             
