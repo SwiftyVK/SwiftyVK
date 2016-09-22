@@ -9,6 +9,7 @@
 import Foundation
 import XCTest
 import OHHTTPStubs
+@testable import SwiftyVK
 
 
 
@@ -70,7 +71,7 @@ struct Stubs {
             : {_ in true}
         
         let capthchaBlock = needCaptcha
-            ? (containsQueryParams(["captcha_sid" : "1234567890"]))
+            ? (containsQueryParams(["captcha_key" : "1234567890"]))
             : {_ in true}
         
         if needAuth {
@@ -111,6 +112,20 @@ struct Stubs {
     
     
     
+    static func uploadServerWith(jsonFile: String) {
+        
+        guard let filePath = Bundle(for:VKTestCase.self).path(forResource: jsonFile, ofType: "json") else {
+            XCTFail("Can't find the \(jsonFile).json file")
+            return
+        }
+        
+        _ = stub(condition: isScheme("https") && isHost("upload.vk.com")) { _ in
+                return Simulates.success(filePath: filePath, delay: nil)
+        }
+    }
+    
+    
+    
     struct Autorization {
         static func success() {
             authWith(redirect: "https://oauth.vk.com/blank.html#access_token=1234567890&expires_in=0&user_id=0")
@@ -144,6 +159,38 @@ struct Stubs {
     }
     
     
+    struct Captcha {
+        
+        
+        
+        static func success(caller: XCTestCase) {
+            captchaWith(caller: caller, captcha: "1234567890")
+        }
+        
+        
+        
+        static func failed(caller: XCTestCase) {
+            captchaWith(caller: caller, captcha: "")
+        }
+        
+        
+        
+        private static func captchaWith(caller: XCTestCase, captcha: String) {
+            caller.expectation(forNotification: "TestCaptchaDidLoad", object: nil) {notification -> Bool in
+                guard let controller = notification.userInfo?["captcha"] as? СaptchaController else {return false}
+                #if os(OSX)
+                    controller.textField.stringValue = captcha
+                    controller.controlTextDidEndEditing(Notification(name: Notification.Name("")))
+                #endif
+                #if os(iOS)
+                    controller.textField.text = captcha
+                    _ = controller.textFieldShouldReturn(controller.textField)
+                    controller.viewDidDisappear(true)
+                #endif
+                return true
+            }
+        }
+    }
     
     
     private struct Simulates {

@@ -50,6 +50,7 @@ class Login_Tests: VKTestCase {
                     exp.fulfill()
                 },
                 onError: {error in
+                    executed = true
                     XCTFail("Unexpected error: \(error)")
             })
             if executed == false {

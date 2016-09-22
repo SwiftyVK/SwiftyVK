@@ -51,12 +51,6 @@
                   Identifier = "UI_Tests/test_captcha_synchroniously()">
                </Test>
                <Test
-                  Identifier = "Upload_Tests">
-               </Test>
-               <Test
-                  Identifier = "Upload_Tests/test_photo_to_market_album()">
-               </Test>
-               <Test
                   Identifier = "VKTestCase">
                </Test>
             </SkippedTests>
@@ -78,6 +72,16 @@
                BlueprintIdentifier = "A2F33E4A1D8F1CDA00856417"
                BuildableName = "SwiftyVK-UITests.xctest"
                BlueprintName = "SwiftyVK-UITests"
+               ReferencedContainer = "container:Example.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A218DA221D904F1F004FACD0"
+               BuildableName = "UITests.xctest"
+               BlueprintName = "UITests"
                ReferencedContainer = "container:Example.xcodeproj">
             </BuildableReference>
          </TestableReference>

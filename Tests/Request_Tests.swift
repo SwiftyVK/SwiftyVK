@@ -56,6 +56,56 @@ class Sending_Tests: VKTestCase {
     
     
     
+    func test_succes_block_memory_leak() {
+        Stubs.apiWith(jsonFile: "success.users.get")
+        let exp = expectation(description: "ready")
+        
+        var strongObject: NSObject? = NSObject()
+        weak var weakObject: NSObject? = strongObject
+        
+        let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
+        req.asynchronous = true
+        
+        req.successBlock = {response in
+            let _ = strongObject?.description
+            exp.fulfill()
+        }
+        
+        strongObject = nil
+        req.send()
+        
+        waitForExpectations(timeout: reqTimeout) {_ in
+            XCTAssertNil(weakObject, "Test object did not released")
+        }
+    }
+    
+    
+    
+    func test_error_block_memory_leak() {
+        Stubs.apiWith(jsonFile: "error.missing.parameter")
+        let exp = expectation(description: "ready")
+        
+        var strongObject: NSObject? = NSObject()
+        weak var weakObject: NSObject? = strongObject
+        
+        let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
+        req.asynchronous = true
+
+        req.errorBlock = {error in
+            let _ = strongObject?.description
+            exp.fulfill()
+        }
+        
+        strongObject = nil
+        req.send()
+        
+        waitForExpectations(timeout: reqTimeout) {_ in
+            XCTAssertNil(weakObject, "Test object did not released")
+        }
+    }
+    
+    
+    
     func test_waiting_for_connection() {
         Stubs.apiWith(jsonFile: "success.users.get", shouldFails: 10)
         let exp = expectation(description: "ready")

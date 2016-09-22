@@ -9,6 +9,7 @@
 
 private let webAuthorizeUrl = "https://oauth.vk.com/authorize?"
 private let redirectUrl = "https://oauth.vk.com/blank.html"
+private let appAuthorizeUrl = "vkauthorize://authorize?"
 
 
 
@@ -19,7 +20,7 @@ internal struct Authorizator {
   fileprivate static var paramsUrl : String {
     let _perm = VK.Scope.toInt(VK.delegate!.vkWillAuthorize())
     let _mode = isMac ? "mobile" : "ios"
-    let _redir = canauthorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
+    let _redir = canAuthorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
     
     return  "client_id=\(VK.appID!)&scope=\(_perm)&display=\(_mode)&v\(VK.defaults.apiVersion)&sdk_version=\(VK.defaults.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
   }
@@ -54,7 +55,7 @@ internal struct Authorizator {
   
   
   private static func start(_ request: Request?) {
-    if canauthorizeWithVkApp {
+    if canAuthorizeWithVkApp {
       startWithApp(request)
     }
     else {
@@ -92,17 +93,12 @@ internal struct Authorizator {
 //
 //
 #if os(iOS)
-  private let appAuthorizeUrl = "vkauthorize://authorize?"
-  
-  
-  
   private typealias IOSAuthorizator = Authorizator
   extension IOSAuthorizator {
     
     
     
-    
-    internal static var canauthorizeWithVkApp : Bool {
+    internal static var canAuthorizeWithVkApp : Bool {
       return UIApplication.shared.canOpenURL(URL(string: appAuthorizeUrl)!)
         && UIApplication.shared.canOpenURL(URL(string: "vk\(VK.appID!)://")!)
     }
@@ -141,8 +137,7 @@ internal struct Authorizator {
 #if os(OSX)
   private typealias OSXAuthorizator = Authorizator
   extension OSXAuthorizator {
-    internal static var canauthorizeWithVkApp : Bool {return false}
+    internal static var canAuthorizeWithVkApp : Bool {return false}
     fileprivate static func startWithApp(_ request: Request?) {}
-    internal static func dropRequest() {}
   }
 #endif

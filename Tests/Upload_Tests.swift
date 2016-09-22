@@ -12,6 +12,10 @@ class Upload_Tests: VKTestCase {
       return
     }
     
+    
+    Stubs.apiWith(method: "photos.getMessagesUploadServer", jsonFile: "success.getUploadServer")
+    Stubs.uploadServerWith(jsonFile: "success.users.get")
+    
     let exp = expectation(description: "ready")
     var progressIsExecuted = false
     

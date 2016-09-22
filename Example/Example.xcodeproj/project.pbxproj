@@ -44,6 +44,8 @@
 		A2ACF0521D53A61900438BB2 /* Login_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71251BD275E5008E7D86 /* Login_Tests.swift */; };
 		A2BBAD8B1D8EBC0A00F9A94A /* error.need.captcha.json in Resources */ = {isa = PBXBuildFile; fileRef = A2BBAD891D8EBBF300F9A94A /* error.need.captcha.json */; };
 		A2BBAD8C1D8EBC0B00F9A94A /* error.need.captcha.json in Resources */ = {isa = PBXBuildFile; fileRef = A2BBAD891D8EBBF300F9A94A /* error.need.captcha.json */; };
+		A2E993EA1D91A2EA001FF2B1 /* success.getUploadServer.json in Resources */ = {isa = PBXBuildFile; fileRef = A2E993E91D91A2EA001FF2B1 /* success.getUploadServer.json */; };
+		A2E993EB1D91A2EA001FF2B1 /* success.getUploadServer.json in Resources */ = {isa = PBXBuildFile; fileRef = A2E993E91D91A2EA001FF2B1 /* success.getUploadServer.json */; };
 		A2EB6F331BD1857D008E7D86 /* testAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F2D1BD1857D008E7D86 /* testAudio.mp3 */; };
 		A2EB6F341BD1857D008E7D86 /* testAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F2D1BD1857D008E7D86 /* testAudio.mp3 */; };
 		A2EB6F351BD1857D008E7D86 /* testDoc.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F2E1BD1857D008E7D86 /* testDoc.rtf */; };
@@ -183,6 +185,7 @@
 		A29B14DA1D8F25C700997817 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		A2A647E61D8D7F1900B9C2FF /* Captcha_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Captcha_Tests.swift; sourceTree = "<group>"; };
 		A2BBAD891D8EBBF300F9A94A /* error.need.captcha.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = error.need.captcha.json; sourceTree = "<group>"; };
+		A2E993E91D91A2EA001FF2B1 /* success.getUploadServer.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.getUploadServer.json; sourceTree = "<group>"; };
 		A2EB6F2D1BD1857D008E7D86 /* testAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = testAudio.mp3; path = Example/Resources/testAudio.mp3; sourceTree = "<group>"; };
 		A2EB6F2E1BD1857D008E7D86 /* testDoc.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = testDoc.rtf; path = Example/Resources/testDoc.rtf; sourceTree = "<group>"; };
 		A2EB6F2F1BD1857D008E7D86 /* testImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = testImage.jpg; path = Example/Resources/testImage.jpg; sourceTree = "<group>"; };
@@ -250,6 +253,7 @@
 			children = (
 				A225992B1D8B148A008535BE /* Stubs.swift */,
 				A2087A991D8590A00076BB5E /* success.users.get.json */,
+				A2E993E91D91A2EA001FF2B1 /* success.getUploadServer.json */,
 				A2087A9C1D859A1B0076BB5E /* error.missing.parameter.json */,
 				A2087A9F1D85B04D0076BB5E /* error.too.many.requests.json */,
 				A22599201D8B0CDD008535BE /* error.need.authorazation.json */,
@@ -392,7 +396,7 @@
 				A2EB71291BD27639008E7D86 /* Sources */,
 				A2EB712B1BD27639008E7D86 /* Resources */,
 				FCECEC730313D7280C3C511C /* Frameworks */,
-				A29B14DD1D8F263A00997817 /* ShellScript */,
+				A29B14DD1D8F263A00997817 /* Carthage copy-frameworks */,
 			);
 			buildRules = (
 			);
@@ -411,7 +415,7 @@
 				A2EB71371BD27652008E7D86 /* Sources */,
 				A2EB71391BD27652008E7D86 /* Resources */,
 				E0DF8260A48B878089EA80C2 /* Frameworks */,
-				A29B14DC1D8F25E900997817 /* ShellScript */,
+				A29B14DC1D8F25E900997817 /* Carthage copy-frameworks */,
 			);
 			buildRules = (
 			);
@@ -551,6 +555,7 @@
 				A22599261D8B0E05008535BE /* error.need.authorazation.json in Resources */,
 				A2087AA01D85B04D0076BB5E /* error.too.many.requests.json in Resources */,
 				A2087A9D1D859A1B0076BB5E /* error.missing.parameter.json in Resources */,
+				A2E993EA1D91A2EA001FF2B1 /* success.getUploadServer.json in Resources */,
 				A2BBAD8B1D8EBC0A00F9A94A /* error.need.captcha.json in Resources */,
 				A2087A9A1D8590A00076BB5E /* success.users.get.json in Resources */,
 			);
@@ -563,6 +568,7 @@
 				A22599271D8B0E05008535BE /* error.need.authorazation.json in Resources */,
 				A2087AA11D85B04D0076BB5E /* error.too.many.requests.json in Resources */,
 				A2087A9E1D859A1B0076BB5E /* error.missing.parameter.json in Resources */,
+				A2E993EB1D91A2EA001FF2B1 /* success.getUploadServer.json in Resources */,
 				A2BBAD8C1D8EBC0B00F9A94A /* error.need.captcha.json in Resources */,
 				A2087A9B1D8590A00076BB5E /* success.users.get.json in Resources */,
 			);
@@ -571,7 +577,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A29B14DC1D8F25E900997817 /* ShellScript */ = {
+		A29B14DC1D8F25E900997817 /* Carthage copy-frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -579,13 +585,14 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/OHHTTPStubs.framework",
 			);
+			name = "Carthage copy-frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export BUILT_PRODUCTS_DIR=$TARGET_BUILD_DIR\n/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
-		A29B14DD1D8F263A00997817 /* ShellScript */ = {
+		A29B14DD1D8F263A00997817 /* Carthage copy-frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -593,11 +600,12 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/OHHTTPStubs.framework",
 			);
+			name = "Carthage copy-frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export BUILT_PRODUCTS_DIR=$TARGET_BUILD_DIR\n/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
