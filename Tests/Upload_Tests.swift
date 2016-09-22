@@ -1,6 +1,5 @@
 import XCTest
 @testable import SwiftyVK
-import OHHTTPStubs
 
 
 
