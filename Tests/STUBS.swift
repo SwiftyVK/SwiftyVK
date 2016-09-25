@@ -40,8 +40,8 @@ class ReqClock : NSObject {
 
 
 struct Stubs {
-    static var forceEnabled = true
     static var enabled : Bool {return runInCI() || forceEnabled}
+    static let forceEnabled = true
     
     
     static func apiWith(

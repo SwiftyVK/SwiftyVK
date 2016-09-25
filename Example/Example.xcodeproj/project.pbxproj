@@ -76,8 +76,6 @@
 		A2F748571D958CF4009B3F38 /* success.saveDocument.json in Resources */ = {isa = PBXBuildFile; fileRef = A2F748551D958CF4009B3F38 /* success.saveDocument.json */; };
 		A2F748681D959087009B3F38 /* error.missing.parameter.json in Resources */ = {isa = PBXBuildFile; fileRef = A2F748641D959087009B3F38 /* error.missing.parameter.json */; };
 		A2F748691D959087009B3F38 /* error.missing.parameter.json in Resources */ = {isa = PBXBuildFile; fileRef = A2F748641D959087009B3F38 /* error.missing.parameter.json */; };
-		A2F7486A1D959087009B3F38 /* error.need.authorazation.json in Resources */ = {isa = PBXBuildFile; fileRef = A2F748651D959087009B3F38 /* error.need.authorazation.json */; };
-		A2F7486B1D959087009B3F38 /* error.need.authorazation.json in Resources */ = {isa = PBXBuildFile; fileRef = A2F748651D959087009B3F38 /* error.need.authorazation.json */; };
 		A2F7486C1D959087009B3F38 /* error.need.captcha.json in Resources */ = {isa = PBXBuildFile; fileRef = A2F748661D959087009B3F38 /* error.need.captcha.json */; };
 		A2F7486D1D959087009B3F38 /* error.need.captcha.json in Resources */ = {isa = PBXBuildFile; fileRef = A2F748661D959087009B3F38 /* error.need.captcha.json */; };
 		A2F7486E1D959087009B3F38 /* error.too.many.requests.json in Resources */ = {isa = PBXBuildFile; fileRef = A2F748671D959087009B3F38 /* error.too.many.requests.json */; };
@@ -616,7 +614,6 @@
 				A238252E1D9459B20070A085 /* success.savePhoto.json in Resources */,
 				A2F748501D958AAC009B3F38 /* success.uploadVideo.json in Resources */,
 				A2F748681D959087009B3F38 /* error.missing.parameter.json in Resources */,
-				A2F7486A1D959087009B3F38 /* error.need.authorazation.json in Resources */,
 				A2F7486E1D959087009B3F38 /* error.too.many.requests.json in Resources */,
 				A2F7484D1D9589CF009B3F38 /* success.saveAudio.json in Resources */,
 				A2F748561D958CF4009B3F38 /* success.saveDocument.json in Resources */,
@@ -641,7 +638,6 @@
 				A238252F1D9459B30070A085 /* success.savePhoto.json in Resources */,
 				A2F748511D958AAC009B3F38 /* success.uploadVideo.json in Resources */,
 				A2F748691D959087009B3F38 /* error.missing.parameter.json in Resources */,
-				A2F7486B1D959087009B3F38 /* error.need.authorazation.json in Resources */,
 				A2F7486F1D959087009B3F38 /* error.too.many.requests.json in Resources */,
 				A2F7484E1D9589CF009B3F38 /* success.saveAudio.json in Resources */,
 				A2F748571D958CF4009B3F38 /* success.saveDocument.json in Resources */,

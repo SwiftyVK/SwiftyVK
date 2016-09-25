@@ -22,7 +22,7 @@ class Upload_Tests: VKTestCase {
         )
         
         let exp = expectation(description: "ready")
-        var progressExecuted = false || runInCI()
+        var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.Photo.toMessage(Media(imageData: data, type: .JPG))
         req.asynchronous = true
@@ -62,7 +62,7 @@ class Upload_Tests: VKTestCase {
         )
         
         let exp = expectation(description: "ready")
-        var progressExecuted = false || runInCI()
+        var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.Photo.toWall.toGroup(
             Media(imageData: data, type: .JPG),
@@ -77,6 +77,7 @@ class Upload_Tests: VKTestCase {
             XCTFail("Unexpected error in request: \(error)")
             exp.fulfill()
         }
+        req.progressBlock = {_,_ in progressExecuted = true}
         req.send()
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
@@ -104,7 +105,7 @@ class Upload_Tests: VKTestCase {
         )
         
         let exp = expectation(description: "ready")
-        var progressExecuted = false || runInCI()
+        var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.Photo.toAlbum(
             [Media(imageData: data, type: .JPG)],
@@ -115,13 +116,14 @@ class Upload_Tests: VKTestCase {
             XCTAssertNotNil(response[0,"id"].int)
             let deleteReq = VK.API.Photos.delete([VK.Arg.photoId : response[0]["id"].stringValue])
             deleteReq.asynchronous = true
-            runInCI() ? () : deleteReq.send()
+            Stubs.enabled ? () : deleteReq.send()
             exp.fulfill()
         }
         req.errorBlock = {error in
             XCTFail("Unexpected error in request: \(error)")
             exp.fulfill()
         }
+        req.progressBlock = {_,_ in progressExecuted = true}
         req.send()
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
@@ -150,7 +152,7 @@ class Upload_Tests: VKTestCase {
         )
         
         let exp = expectation(description: "ready")
-        var progressExecuted = false || runInCI()
+        var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.Photo.toMarket(
             Media(imageData: data, type: .JPG),
@@ -164,6 +166,7 @@ class Upload_Tests: VKTestCase {
             XCTFail("Unexpected error in request: \(error)")
             exp.fulfill()
         }
+        req.progressBlock = {_,_ in progressExecuted = true}
         req.send()
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
@@ -192,7 +195,7 @@ class Upload_Tests: VKTestCase {
         )
         
         let exp = expectation(description: "ready")
-        var progressExecuted = false || runInCI()
+        var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.Photo.toMarketAlbum(
             Media(imageData: data, type: .JPG),
@@ -206,6 +209,7 @@ class Upload_Tests: VKTestCase {
             XCTFail("Unexpected error in request: \(error)")
             exp.fulfill()
         }
+        req.progressBlock = {_,_ in progressExecuted = true}
         req.send()
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
@@ -233,7 +237,7 @@ class Upload_Tests: VKTestCase {
         )
         
         let exp = expectation(description: "ready")
-        var progressExecuted = false || runInCI()
+        var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.audio(Media(audioData: data))
         req.logToConsole = true
@@ -247,13 +251,14 @@ class Upload_Tests: VKTestCase {
                 VK.Arg.ownerId : response["owner_id"].stringValue
                 ])
             deleteReq.asynchronous = false
-            runInCI() ? () : deleteReq.send()
+            Stubs.enabled ? () : deleteReq.send()
             exp.fulfill()
         }
         req.errorBlock = {error in
             XCTFail("Unexpected error in request: \(error)")
             exp.fulfill()
         }
+        req.progressBlock = {_,_ in progressExecuted = true}
         req.send()
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
@@ -273,7 +278,7 @@ class Upload_Tests: VKTestCase {
         Stubs.uploadServerWith(jsonFile: "success.uploadVideo", dataSize: 3120019)
         
         let exp = expectation(description: "ready")
-        var progressExecuted = false || runInCI()
+        var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.Video.fromFile(
             Media(videoData: data),
@@ -290,13 +295,14 @@ class Upload_Tests: VKTestCase {
                 VK.Arg.ownerId : response["owner_id"].stringValue
                 ])
             deleteReq.asynchronous = false
-            runInCI() ? () : deleteReq.send()
+            Stubs.enabled ? () : deleteReq.send()
             exp.fulfill()
         }
         req.errorBlock = {error in
             XCTFail("Unexpected error in request: \(error)")
             exp.fulfill()
         }
+        req.progressBlock = {_,_ in progressExecuted = true}
         req.send()
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
@@ -311,7 +317,7 @@ class Upload_Tests: VKTestCase {
         Stubs.apiWith(method: "video.save", jsonFile: "success.uploadVideo")
 
         let exp = expectation(description: "ready")
-        var progressExecuted = false || runInCI()
+        var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.Video.fromUrl(
             "http://www.youtube.com/watch?v=w7VD1681jV8",
@@ -328,13 +334,14 @@ class Upload_Tests: VKTestCase {
                 VK.Arg.ownerId : response["owner_id"].stringValue
                 ])
             deleteReq.asynchronous = false
-            runInCI() ? () : deleteReq.send()
+            Stubs.enabled ? () : deleteReq.send()
             exp.fulfill()
         }
         req.errorBlock = {error in
             XCTFail("Unexpected error in request: \(error)")
             exp.fulfill()
         }
+        req.progressBlock = {_,_ in progressExecuted = true}
         req.send()
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
@@ -360,7 +367,7 @@ class Upload_Tests: VKTestCase {
         )
         
         let exp = expectation(description: "ready")
-        var progressExecuted = false || runInCI()
+        var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.document(Media(documentData: data, type: "rtf"))
         req.asynchronous = true
@@ -372,13 +379,14 @@ class Upload_Tests: VKTestCase {
                 VK.Arg.ownerId : response["owner_id"].stringValue
                 ])
             deleteReq.asynchronous = false
-            runInCI() ? () : deleteReq.send()
+            Stubs.enabled ? () : deleteReq.send()
             exp.fulfill()
         }
         req.errorBlock = {error in
             XCTFail("Unexpected error in request: \(error)")
             exp.fulfill()
         }
+        req.progressBlock = {_,_ in progressExecuted = true}
         req.send()
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
