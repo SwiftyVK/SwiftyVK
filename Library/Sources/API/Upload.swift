@@ -36,6 +36,7 @@ extension _VKAPI {
               VK.Arg.groupId : groupId,
               VK.Arg.server : response2["server"].stringValue,
               VK.Arg.photosList : response2["photos_list"].stringValue,
+              VK.Arg.aid : response2["aid"].stringValue,
               VK.Arg.hash : response2["hash"].stringValue,
               VK.Arg.caption : caption
               ])

@@ -116,7 +116,7 @@ internal final class СaptchaController: _СaptchaControllerPrototype {
             captcha.parentWindow = VK.delegate?.vkWillPresentView()
             
             DispatchQueue.main.sync {
-                NSNib(nibNamed:  CaptchaViewName, bundle: Resources.bundle)?.instantiate(withOwner: captcha, topLevelObjects: nil)
+                _ = NSNib(nibNamed: CaptchaViewName, bundle: Resources.bundle)?.instantiate(withOwner: captcha, topLevelObjects: nil)
             }
             
             return captcha

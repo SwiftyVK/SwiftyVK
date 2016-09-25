@@ -7,7 +7,7 @@ class Sending_Tests: VKTestCase {
     
     
     func test_get_method() {
-        Stubs.apiWith(jsonFile: "success.users.get")
+        Stubs.apiWith(params: ["user_ids":"1"], httpMethod: .GET, jsonFile: "success.users.get")
         let exp = expectation(description: "ready")
         
         let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
@@ -15,8 +15,6 @@ class Sending_Tests: VKTestCase {
         
         req.successBlock = {response in
             XCTAssertEqual(response[0,"id"].int, 1)
-            XCTAssertEqual(response[0,"first_name"].string, "TEST")
-            XCTAssertEqual(response[0,"last_name"].string, "USER")
             exp.fulfill()
         }
         
@@ -25,14 +23,14 @@ class Sending_Tests: VKTestCase {
             exp.fulfill()
         }
         
-        req.send()
+        req.send(method: .GET)
         waitForExpectations(timeout: reqTimeout) {_ in}
     }
     
     
     
     func test_post_method() {
-        Stubs.apiWith(jsonFile: "success.users.get")
+        Stubs.apiWith(params: ["user_ids":"1"], httpMethod: .POST, jsonFile: "success.users.get")
         let exp = expectation(description: "ready")
         
         let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
@@ -40,8 +38,6 @@ class Sending_Tests: VKTestCase {
         
         req.successBlock = {response in
             XCTAssertEqual(response[0,"id"].int, 1)
-            XCTAssertEqual(response[0,"first_name"].string, "TEST")
-            XCTAssertEqual(response[0,"last_name"].string, "USER")
             exp.fulfill()
         }
         
@@ -50,7 +46,7 @@ class Sending_Tests: VKTestCase {
             exp.fulfill()
         }
         
-        req.send()
+        req.send(method: .POST)
         waitForExpectations(timeout: reqTimeout) {_ in}
     }
     
@@ -63,7 +59,7 @@ class Sending_Tests: VKTestCase {
         var strongObject: NSObject? = NSObject()
         weak var weakObject: NSObject? = strongObject
         
-        let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
+        let req = VK.API.Users.get([VK.Arg.userIDs : "a"])
         req.asynchronous = true
         
         req.successBlock = {response in
@@ -88,7 +84,7 @@ class Sending_Tests: VKTestCase {
         var strongObject: NSObject? = NSObject()
         weak var weakObject: NSObject? = strongObject
         
-        let req = VK.API.Users.get([VK.Arg.userIDs : "1"])
+        let req = VK.API.Users.get([VK.Arg.userIDs : "a"])
         req.asynchronous = true
 
         req.errorBlock = {error in
@@ -128,10 +124,10 @@ class Sending_Tests: VKTestCase {
     
     
     func test_executing_error_block() {
-        Stubs.apiWith(jsonFile: "error.missing.parameter", maxCalls: VK.defaults.maxAttempts)
+        Stubs.apiWith(method: "groups.isMember", jsonFile: "error.missing.parameter", maxCalls: VK.defaults.maxAttempts)
         let exp = expectation(description: "ready")
         
-        let req = VK.API.Users.get()
+        let req = VK.API.Groups.isMember()
         
         req.successBlock = {response in
             XCTFail("Unexpected response: \(response)")

@@ -311,6 +311,8 @@ extension VK {
     case obsceneWords = "obscene_words"
     case subcategories
     case randomId = "random_id"
+    case aid
+    case gid
     
     public var hashValue : Int {
       return self.rawValue.hashValue

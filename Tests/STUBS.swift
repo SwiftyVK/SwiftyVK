@@ -40,8 +40,14 @@ class ReqClock : NSObject {
 
 
 struct Stubs {
+    static var forceEnabled = false
+    static var enabled : Bool {return runInCI() || forceEnabled}
+    
+    
     static func apiWith(
         method: String = "users.get",
+        params: [String : String?] = [:],
+        httpMethod: HTTPMethods = .GET,
         jsonFile: String,
         maxCalls: Int = Int.max,
         shouldFails: Int = 0,
@@ -49,6 +55,8 @@ struct Stubs {
         needAuth: Bool = false,
         needCaptcha: Bool = false
         ) {
+        guard enabled else {return}
+        
         
         guard let filePath = Bundle(for:VKTestCase.self).path(forResource: jsonFile, ofType: "json") else {
             XCTFail("Can't find the \(jsonFile).json file")
@@ -66,31 +74,56 @@ struct Stubs {
         }
         
         var callCount = 0
-        let authBlock = needAuth
+        
+        let testApiUrl = isScheme("https") && isHost("api.vk.com")
+        let testParams : (URLRequest) -> Bool
+        let testMethod : (URLRequest) -> Bool
+        
+        switch httpMethod {
+        case .GET:
+            testMethod = isMethodGET()
+            testParams = containsQueryParams(params)
+        case .POST:
+            testMethod = isMethodPOST()
+            testParams = {
+                guard !params.isEmpty else {return true}
+                let body = String.init(data: $0.httpBody!, encoding: .utf8)!
+                return params.reduce(true) {return $0 && body.contains("\($1.key)=\($1.value ?? "")")}
+            }
+        }
+        
+        let testAuth = needAuth
             ? (containsQueryParams(["access_token" : "1234567890"]))
             : {_ in true}
         
-        let capthchaBlock = needCaptcha
+        let testCaptcha = needCaptcha
             ? (containsQueryParams(["captcha_key" : "1234567890"]))
             : {_ in true}
         
         if needAuth {
-            _ = stub(condition: isScheme("https") && isHost("api.vk.com") && pathStartsWith("/method/"+method) && !authBlock) {_ in
+            _ = stub(condition: testApiUrl && pathStartsWith("/method/"+method) && !testAuth) {_ in
                 return Simulates.success(filePath: authPath, delay: nil)
             }
         }
         
         if needCaptcha {
-            _ = stub(condition: isScheme("https") && isHost("api.vk.com") && pathStartsWith("/method/"+method) && !capthchaBlock) {_ in
+            _ = stub(condition: testApiUrl && pathStartsWith("/method/"+method) && !testCaptcha) {_ in
                 return Simulates.success(filePath: captchaPath, delay: nil)
             }
             
-            _ = stub(condition: isScheme("https") && isHost("api.vk.com") && pathStartsWith("/captcha.php")) {_ in
+            _ = stub(condition: testApiUrl && pathStartsWith("/captcha.php")) {_ in
                 return OHHTTPStubsResponse(data: captchaData, statusCode: 200, headers: nil)
             }
         }
         
-        _ = stub(condition: isScheme("https") && isHost("api.vk.com") && pathStartsWith("/method/"+method) && authBlock && capthchaBlock) { _ in
+        _ = stub(condition:
+                testMethod &&
+                testApiUrl &&
+                pathStartsWith("/method/"+method) &&
+                testParams &&
+                testAuth &&
+                testCaptcha
+        ) { _ in
             callCount += 1
             ReqClock.count += 1
             
@@ -112,15 +145,25 @@ struct Stubs {
     
     
     
-    static func uploadServerWith(jsonFile: String) {
+    static func uploadServerWith(jsonFile: String, dataSize: Int) {
+        guard enabled else {return}
+        
         
         guard let filePath = Bundle(for:VKTestCase.self).path(forResource: jsonFile, ofType: "json") else {
             XCTFail("Can't find the \(jsonFile).json file")
             return
         }
         
-        _ = stub(condition: isScheme("https") && isHost("upload.vk.com")) { _ in
-                return Simulates.success(filePath: filePath, delay: nil)
+        _ = stub(condition:
+                isScheme("https") &&
+                isHost("upload.vk.com") &&
+                isMethodPOST() &&
+                hasHeaderNamed("Content-Transfer-Encoding", value: "8bit") &&
+                hasHeaderNamed("Content-Type", value: "multipart/form-data;  boundary=(======SwiftyVK======)") &&
+                {$0.httpBody?.count == dataSize}
+            
+        ) { _ in
+            return Simulates.success(filePath: filePath, delay: nil)
         }
     }
     
@@ -146,6 +189,8 @@ struct Stubs {
         
         
         private static func authWith(redirect: String) {
+            guard enabled else {return}
+            
             _ = stub(condition: isScheme("https") && isHost("oauth.vk.com") && pathStartsWith("/authorize")) { _ in
                 return OHHTTPStubsResponse(data: Data(), statusCode: 301, headers: [
                     "Location" : redirect
@@ -176,6 +221,8 @@ struct Stubs {
         
         
         private static func captchaWith(caller: XCTestCase, captcha: String) {
+            guard enabled else {return}
+            
             caller.expectation(forNotification: "TestCaptchaDidLoad", object: nil) {notification -> Bool in
                 guard let controller = notification.userInfo?["captcha"] as? СaptchaController else {return false}
                 #if os(OSX)

@@ -18,12 +18,12 @@ class Captcha_Tests: XCTestCase {
     
     func test_synchroniously() {
         let exp = expectation(description: "ready")
-        Stubs.apiWith(jsonFile: "success.users.get", needCaptcha: true)
+        Stubs.apiWith(method: "captcha.force", jsonFile: "success.users.get", needCaptcha: true)
         Stubs.Autorization.success()
         Stubs.Captcha.success(caller: self)
         
         DispatchQueue.global(qos: .userInitiated).async {
-            let req = VK.API.Users.get()
+            let req = VK.API.custom(method: "captcha.force")
             req.asynchronous = false
             var executed = false
             
@@ -48,11 +48,11 @@ class Captcha_Tests: XCTestCase {
     
     func test_asynchroniously() {
         let exp = expectation(description: "ready")
-        Stubs.apiWith(jsonFile: "success.users.get", needCaptcha: true)
+        Stubs.apiWith(method: "captcha.force", jsonFile: "success.users.get", needCaptcha: true)
         Stubs.Autorization.success()
         Stubs.Captcha.success(caller: self)
         
-        let req = VK.API.Users.get()
+        let req = VK.API.custom(method: "captcha.force")
         req.asynchronous = true
         
         req.send(
