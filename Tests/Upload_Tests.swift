@@ -199,7 +199,6 @@ class Upload_Tests: VKTestCase {
             groupId: "98197515"
         )
         req.successBlock = {response in
-            print(response)
             XCTAssertNotNil(response[0,"id"].int)
             exp.fulfill()
         }
