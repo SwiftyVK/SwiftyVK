@@ -15,8 +15,8 @@
 		A21CD49D1D98143300FF2D88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CD49B1D98143300FF2D88 /* AppDelegate.swift */; };
 		A22599261D8B0E05008535BE /* error.need.authorazation.json in Resources */ = {isa = PBXBuildFile; fileRef = A22599201D8B0CDD008535BE /* error.need.authorazation.json */; };
 		A22599271D8B0E05008535BE /* error.need.authorazation.json in Resources */ = {isa = PBXBuildFile; fileRef = A22599201D8B0CDD008535BE /* error.need.authorazation.json */; };
-		A225992C1D8B148A008535BE /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A225992B1D8B148A008535BE /* Stubs.swift */; };
-		A225992D1D8B148A008535BE /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A225992B1D8B148A008535BE /* Stubs.swift */; };
+		A225992C1D8B148A008535BE /* STUBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A225992B1D8B148A008535BE /* STUBS.swift */; };
+		A225992D1D8B148A008535BE /* STUBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A225992B1D8B148A008535BE /* STUBS.swift */; };
 		A227371D1CF462F60042868A /* VKDelegateExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227371C1CF462F60042868A /* VKDelegateExample.swift */; };
 		A22737201CF466100042868A /* VKDelegateExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227371C1CF462F60042868A /* VKDelegateExample.swift */; };
 		A234A4031BE29DAD00856CA5 /* Misc_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A234A4021BE29DAD00856CA5 /* Misc_Tests.swift */; };
@@ -170,7 +170,7 @@
 		A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyVK.xcodeproj; path = Library/SwiftyVK.xcodeproj; sourceTree = "<group>"; };
 		A21CD49B1D98143300FF2D88 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A22599201D8B0CDD008535BE /* error.need.authorazation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = error.need.authorazation.json; sourceTree = "<group>"; };
-		A225992B1D8B148A008535BE /* Stubs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stubs.swift; sourceTree = "<group>"; };
+		A225992B1D8B148A008535BE /* STUBS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STUBS.swift; sourceTree = "<group>"; };
 		A227371C1CF462F60042868A /* VKDelegateExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKDelegateExample.swift; sourceTree = "<group>"; };
 		A234A4021BE29DAD00856CA5 /* Misc_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Misc_Tests.swift; sourceTree = "<group>"; };
 		A234A41C1BE354A200856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -394,7 +394,7 @@
 		A2EB71221BD275A0008E7D86 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				A225992B1D8B148A008535BE /* Stubs.swift */,
+				A225992B1D8B148A008535BE /* STUBS.swift */,
 				A24D10921C574A99008263B0 /* VKTestsCase.swift */,
 				A2EB71261BD275E5008E7D86 /* Request_Tests.swift */,
 				A2EB71251BD275E5008E7D86 /* Login_Tests.swift */,
@@ -718,7 +718,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2EB71471BD27840008E7D86 /* Upload_Tests.swift in Sources */,
-				A225992C1D8B148A008535BE /* Stubs.swift in Sources */,
+				A225992C1D8B148A008535BE /* STUBS.swift in Sources */,
 				A2A647E71D8D7F1900B9C2FF /* Captcha_Tests.swift in Sources */,
 				A234A4031BE29DAD00856CA5 /* Misc_Tests.swift in Sources */,
 				A24D10971C574D29008263B0 /* VKTestsCase.swift in Sources */,
@@ -732,7 +732,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2EB714A1BD27841008E7D86 /* Upload_Tests.swift in Sources */,
-				A225992D1D8B148A008535BE /* Stubs.swift in Sources */,
+				A225992D1D8B148A008535BE /* STUBS.swift in Sources */,
 				A2A647E81D8D7F1900B9C2FF /* Captcha_Tests.swift in Sources */,
 				A234A4041BE29DAD00856CA5 /* Misc_Tests.swift in Sources */,
 				A24D10981C574D2A008263B0 /* VKTestsCase.swift in Sources */,
