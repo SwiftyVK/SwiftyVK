@@ -40,7 +40,7 @@ class ReqClock : NSObject {
 
 
 struct Stubs {
-    static var forceEnabled = false
+    static var forceEnabled = true
     static var enabled : Bool {return runInCI() || forceEnabled}
     
     
