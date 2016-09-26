@@ -46,8 +46,6 @@
 		A2A647E81D8D7F1900B9C2FF /* Captcha_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A647E61D8D7F1900B9C2FF /* Captcha_Tests.swift */; };
 		A2ACF04F1D53A61900438BB2 /* Login_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71251BD275E5008E7D86 /* Login_Tests.swift */; };
 		A2ACF0521D53A61900438BB2 /* Login_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB71251BD275E5008E7D86 /* Login_Tests.swift */; };
-		A2BBAD8B1D8EBC0A00F9A94A /* error.need.captcha.json in Resources */ = {isa = PBXBuildFile; fileRef = A2BBAD891D8EBBF300F9A94A /* error.need.captcha.json */; };
-		A2BBAD8C1D8EBC0B00F9A94A /* error.need.captcha.json in Resources */ = {isa = PBXBuildFile; fileRef = A2BBAD891D8EBBF300F9A94A /* error.need.captcha.json */; };
 		A2E993EA1D91A2EA001FF2B1 /* success.getUploadServer.json in Resources */ = {isa = PBXBuildFile; fileRef = A2E993E91D91A2EA001FF2B1 /* success.getUploadServer.json */; };
 		A2E993EB1D91A2EA001FF2B1 /* success.getUploadServer.json in Resources */ = {isa = PBXBuildFile; fileRef = A2E993E91D91A2EA001FF2B1 /* success.getUploadServer.json */; };
 		A2EB6F331BD1857D008E7D86 /* testAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2EB6F2D1BD1857D008E7D86 /* testAudio.mp3 */; };
@@ -620,7 +618,6 @@
 				A23825371D94618A0070A085 /* success.uploadMarketPhoto.json in Resources */,
 				A23825311D945A160070A085 /* success.uploadPhoto.json in Resources */,
 				A2E993EA1D91A2EA001FF2B1 /* success.getUploadServer.json in Resources */,
-				A2BBAD8B1D8EBC0A00F9A94A /* error.need.captcha.json in Resources */,
 				A2F7484A1D9588C1009B3F38 /* success.uploadAudio.json in Resources */,
 				A2F748711D9590B4009B3F38 /* success.users.get.json in Resources */,
 				A2F748531D958CA3009B3F38 /* success.uploadDocument.json in Resources */,
@@ -644,7 +641,6 @@
 				A23825381D94618A0070A085 /* success.uploadMarketPhoto.json in Resources */,
 				A23825321D945A160070A085 /* success.uploadPhoto.json in Resources */,
 				A2E993EB1D91A2EA001FF2B1 /* success.getUploadServer.json in Resources */,
-				A2BBAD8C1D8EBC0B00F9A94A /* error.need.captcha.json in Resources */,
 				A2F7484B1D9588C1009B3F38 /* success.uploadAudio.json in Resources */,
 				A2F748721D9590B4009B3F38 /* success.users.get.json in Resources */,
 				A2F748541D958CA3009B3F38 /* success.uploadDocument.json in Resources */,
@@ -873,6 +869,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 842SSJ357W;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -925,6 +922,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 842SSJ357W;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -992,7 +990,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-Example-iOS-";
+				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-Example-iOS";
 				PRODUCT_NAME = "~SwiftyVK~";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1038,7 +1036,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-Example-iOS-";
+				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-Example-iOS";
 				PRODUCT_NAME = "~SwiftyVK~";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

@@ -21,6 +21,8 @@ class VKTestCase : XCTestCase {
         //    printSync(VK.Log.get())
         OHHTTPStubs.removeAllStubs()
         super.tearDown()
+        Thread.sleep(forTimeInterval: 1)
+
     }
     
     
