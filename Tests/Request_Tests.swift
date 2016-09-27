@@ -135,7 +135,7 @@ class Sending_Tests: VKTestCase {
         }
         
         req.errorBlock = {error in
-            XCTAssertEqual(error.domain, "APIError")
+            XCTAssertEqual(error.domain, "APIDomain")
             XCTAssertEqual(error.code, 100)
             exp.fulfill()
         }

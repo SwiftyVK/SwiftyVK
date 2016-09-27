@@ -33,7 +33,7 @@ internal final class Connection : NSObject, NSURLConnectionDataDelegate, NSURLCo
         
         VK.Log.put(request, "Send in current thread")
         do {request.response.create(try NSURLConnection.sendSynchronousRequest(request.urlRequest, returning: nil))}
-        catch let error as NSError {request.response.setError(VKError(err: error, req: nil))}
+        catch let error as NSError {request.response.setError(VKError(error: error, request: nil))}
         request.response.execute()
     }
     
@@ -116,7 +116,7 @@ internal final class Connection : NSObject, NSURLConnectionDataDelegate, NSURLCo
             Thread.sleep(forTimeInterval: Double(self.request.timeout+1))
             
             if self.timeoutOperation?.isCancelled == false {
-                let error = VKError(domain: "APIDomain", code: 7, desc: "Connection timeout", userInfo: nil, req: self.request)
+                let error = VKError(code: 1, desc: "Connection timeout", request: self.request)
                 VK.Log.put(self.request, "Connection time out")
                 self.request.response.setError(error)
                 self.finishConnection()
@@ -169,7 +169,7 @@ internal final class Connection : NSObject, NSURLConnectionDataDelegate, NSURLCo
     
     
     func connection(_ connection: NSURLConnection, didFailWithError error: Error) {
-        let error = VKError(err: error as NSError, req: request!)
+        let error = VKError(error: error as NSError, request: request!)
         VK.Log.put(request, "Connection failed with error: \(error)")
         request.response.setError(error)
         finishConnection()

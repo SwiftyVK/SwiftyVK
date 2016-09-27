@@ -1,16 +1,3 @@
-//
-//  Defaults.swift
-//  SwiftyVK
-//
-//  Created by Алексей Кудрявцев on 27.09.16.
-//
-//
-
-import Foundation
-
-
-
-
 extension VK {
     public struct defaults {
         //Returns used VK API version

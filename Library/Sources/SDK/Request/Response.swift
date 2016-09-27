@@ -29,7 +29,7 @@ internal final class Response {
       var json = JSON(data: data!, error: err)
       
       if let err = err?.pointee {
-        error = VKError(err: err, req: request!)
+        error = VKError(error: err, request: request!)
       }
         
       else if json["response"].exists() {
@@ -49,7 +49,7 @@ internal final class Response {
     }
     else {
       VK.Log.put(request!, "Fail parse response data")
-      error = VKError(domain: "SwiftyVKDomain", code: 4, desc: "Fail parse response data", userInfo: nil, req: request)
+      error = VKError(code: 4, desc: "Fail parse response data", request: request)
     }
   }
   
@@ -60,7 +60,7 @@ internal final class Response {
     
     if let error = error {
       if request.catchErrors {
-        error.`catch`()
+        error.solve()
       }
       else if request.canSend == true {
         request.trySend()

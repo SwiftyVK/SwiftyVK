@@ -49,7 +49,7 @@ internal final class СaptchaController: _СaptchaControllerPrototype {
             request.asynchronous ? request.trySend() : request.tryInCurrentThread()
         }
         else {
-            request.errorBlock(VKError(domain: "SwiftyVKDomain", code: 5, desc: "Captcha loading error", userInfo: nil, req: request))
+            request.errorBlock(VKError(code: 5, desc: "Captcha loading error", request: request))
         }
     }
     

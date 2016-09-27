@@ -137,7 +137,7 @@ class Login_Tests: VKTestCase {
                 exp.fulfill()
             },
             onError: {error in
-                XCTAssertEqual(error.domain, "APIError")
+                XCTAssertEqual(error.domain, "APIDomain")
                 XCTAssertEqual(error.code, 5, "Unexpected error code")
                 exp.fulfill()
             }
