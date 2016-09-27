@@ -8,12 +8,12 @@ import Foundation
 
 
 ///Delegate to the SwiftyVK
-public protocol VKDelegate {
+public protocol VKDelegate: class {
     /**Called when SwiftyVK need autorization permissions
      - returns: permissions as VK.Scope type*/
     func vkWillAuthorize() -> [VK.Scope]
     ///Called when SwiftyVK did authorize and receive token
-    func vkDidAuthorizeWith(parameters: Dictionary<String, String>)
+    func vkDidAuthorizeWith(parameters: [String : String])
     ///Called when SwiftyVK did unauthorize and remove token
     func vkDidUnauthorize()
     ///Called when SwiftyVK did failed autorization
@@ -57,7 +57,7 @@ public struct VK {
         get{assert(VK.state != .unknown, "At first initialize VK with configure() method")
             return appIDInstance}
     }
-    private static var delegateInstance : VKDelegate?
+    private static weak var delegateInstance : VKDelegate?
     private static var appIDInstance : String?
     
     
@@ -130,69 +130,8 @@ public struct VK {
 //
 //
 //
-private typealias VK_Defaults = VK
-extension VK_Defaults {
-    public struct defaults {
-        //Returns used VK API version
-        public static var apiVersion = "5.53"
-        //Returns used VK SDK version
-        public static let sdkVersion = "1.3.17"
-        ///Requests timeout
-        public static var timeOut : Int = 10
-        ///Maximum number of attempts to send requests
-        public static var maxAttempts : Int = 3
-        ///Whether to allow automatic processing of some API error
-        public static var catchErrors : Bool = true
-        //Similarly request sendAsynchronous property
-        public static var sendAsynchronous : Bool = true
-        ///Maximum number of requests per second
-        public static var maxRequestsPerSec : Int = 3
-        ///Allows print log messages to console
-        public static var logToConsole : Bool = false
-        
-        public static var language : String? {
-            get {
-                if useSystemLanguage {
-                    let syslemLang = Bundle.preferredLocalizations(from: supportedLanguages).first
-                    
-                    if syslemLang == "uk" {
-                        return "ua"
-                    }
-                    
-                    return syslemLang
-                }
-                return self.privateLanguage
-            }
-            
-            set {
-                guard newValue == nil || supportedLanguages.contains(newValue!) else {return}
-                self.privateLanguage = newValue
-                useSystemLanguage = (newValue == nil)
-            }
-        }
-        internal static var sleepTime : TimeInterval {return TimeInterval(1/Double(maxRequestsPerSec))}
-        internal static let successBlock : VK.SuccessBlock = {success in}
-        internal static let errorBlock : VK.ErrorBlock = {error in}
-        internal static let progressBlock : VK.ProgressBlock = {int in}
-        internal static let supportedLanguages = ["ru", "uk", "be", "en", "es", "fi", "de", "it"]
-        internal static var useSystemLanguage = true
-        private static var privateLanguage : String?
-    }
-}
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-public typealias VK_States = VK
-extension VK_States {
+//MARK: - States
+extension VK {
     public enum States {
         case unknown
         case configured
@@ -220,8 +159,8 @@ extension VK_States {
 //
 //
 //
-private typealias VK_Extensions = VK
-extension VK_Extensions {
+//MARK: - Extensions
+extension VK {
     ///Access to the API methods
     public typealias API = _VKAPI
     public typealias Error = _VKError

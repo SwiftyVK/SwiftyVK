@@ -2,6 +2,8 @@ import SwiftyVK
 
 
 
+var vkDelegateReference : VKDelegate?
+
 
 #if os(iOS)
     import UIKit
@@ -13,7 +15,7 @@ import SwiftyVK
         var window: UIWindow?
         
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-            _ = VKDelegateExample()
+            vkDelegateReference = VKDelegateExample()
             return true
         }
         
@@ -38,7 +40,7 @@ import SwiftyVK
     final class AppDelegate : NSObject, NSApplicationDelegate {
         
         func applicationDidFinishLaunching(_ aNotification: Notification) {
-            _ = VKDelegateExample()
+            vkDelegateReference = VKDelegateExample()
         }
     }
 #endif

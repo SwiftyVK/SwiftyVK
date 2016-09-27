@@ -15,6 +15,8 @@
 		A2527E3C1BD1356C00F65412 /* WebView-OSX.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E251BD1343F00F65412 /* WebView-OSX.xib */; };
 		A2527E3D1BD1357000F65412 /* CaptchaView-iOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E181BD1343F00F65412 /* CaptchaView-iOS.xib */; };
 		A2527E3E1BD1357000F65412 /* WebView-iOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E231BD1343F00F65412 /* WebView-iOS.xib */; };
+		A25AE9391D9AD57E008C0AA9 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE9381D9AD57E008C0AA9 /* Defaults.swift */; };
+		A25AE93A1D9AD583008C0AA9 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE9381D9AD57E008C0AA9 /* Defaults.swift */; };
 		A2967E741CBBC4A700B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
 		A2967E751CBBC51600B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
 		A2EB6EB71BD182E3008E7D86 /* SwiftyVKResources-OSX.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */; };
@@ -230,6 +232,7 @@
 		A2527E341BD134D900F65412 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = "ru.lproj/CaptchaView-OSX.strings"; sourceTree = "<group>"; };
 		A2527E361BD134EF00F65412 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A2527E381BD134F000F65412 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = "ru.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
+		A25AE9381D9AD57E008C0AA9 /* Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		A2967E731CBBC4A700B7D48F /* Gifts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gifts.swift; sourceTree = "<group>"; };
 		A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,6 +281,7 @@
 			children = (
 				A2527D901BD12FD200F65412 /* SwiftyVK.h */,
 				A2527D911BD12FD200F65412 /* VK.swift */,
+				A25AE9381D9AD57E008C0AA9 /* Defaults.swift */,
 				A2527D7F1BD12FD200F65412 /* LongPool.swift */,
 				A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */,
 				A2527D801BD12FD200F65412 /* SDK */,
@@ -624,6 +628,7 @@
 				A2EB6F071BD18395008E7D86 /* Arg.swift in Sources */,
 				A2EB6F081BD18395008E7D86 /* Error.swift in Sources */,
 				A2EB6F091BD18395008E7D86 /* Media.swift in Sources */,
+				A25AE93A1D9AD583008C0AA9 /* Defaults.swift in Sources */,
 				A2EB6F0A1BD18395008E7D86 /* Resources.swift in Sources */,
 				A2EB6F0B1BD18395008E7D86 /* Scope.swift in Sources */,
 				A20FF11A1BEB6BB5009FBE3D /* Authorizator.swift in Sources */,
@@ -660,6 +665,7 @@
 				A2EB6EC91BD18389008E7D86 /* Messages.swift in Sources */,
 				A2EB6ECA1BD18389008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6ECB1BD18389008E7D86 /* Notes.swift in Sources */,
+				A25AE9391D9AD57E008C0AA9 /* Defaults.swift in Sources */,
 				A2EB6ECC1BD18389008E7D86 /* Notifacations.swift in Sources */,
 				A2EB6ECD1BD18389008E7D86 /* Pages.swift in Sources */,
 				A2EB6ECE1BD18389008E7D86 /* Photos.swift in Sources */,
