@@ -8,7 +8,7 @@ private let responseQueue = DispatchQueue(label: "com.VK.responseQueue", attribu
 
 internal final class Response {
   internal weak var request : Request?
-  internal private(set) var error : VK.Error? {
+  internal private(set) var error : VKError? {
     didSet {success != nil ? success = nil : ()}
   }
   internal private(set) var success : JSON? {
@@ -16,7 +16,7 @@ internal final class Response {
   }
   
   
-  internal func setError(_ newError: VK.Error) {
+  internal func setError(_ newError: VKError) {
     error = newError
   }
   
@@ -29,7 +29,7 @@ internal final class Response {
       var json = JSON(data: data!, error: err)
       
       if let err = err?.pointee {
-        error = VK.Error(err: err, req: request!)
+        error = VKError(err: err, req: request!)
       }
         
       else if json["response"].exists() {
@@ -39,7 +39,7 @@ internal final class Response {
         
       else if json["error"].exists() {
         VK.Log.put(request!, "Parse response data to error:")
-        error = VK.Error(json: json["error"], request: request!)
+        error = VKError(json: json["error"], request: request!)
       }
         
       else {
@@ -49,7 +49,7 @@ internal final class Response {
     }
     else {
       VK.Log.put(request!, "Fail parse response data")
-      error = VK.Error(domain: "SwiftyVKDomain", code: 4, desc: "Fail parse response data", userInfo: nil, req: request)
+      error = VKError(domain: "SwiftyVKDomain", code: 4, desc: "Fail parse response data", userInfo: nil, req: request)
     }
   }
   

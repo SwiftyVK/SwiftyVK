@@ -2,7 +2,7 @@ import Foundation
 
 
 
-public final class _VKError : Error, CustomStringConvertible {
+public final class VKError : Error, CustomStringConvertible {
   public var domain : String
   public var code: Int
   public var desc : String
@@ -10,7 +10,7 @@ public final class _VKError : Error, CustomStringConvertible {
   ///The reference to a request to the API, in which the error occurred
   public var request : Request?
   public var description : String {
-    return "VK.Error \(domain)_(\(code)): \(desc)"
+    return "VKError \(domain)_(\(code)): \(desc)"
   }
   
   

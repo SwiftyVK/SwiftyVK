@@ -92,7 +92,7 @@ internal final class WebController : _WebControllerPrototype {
   
   private func failValidation() {
     DispatchQueue.global(qos: .default).async {
-      let err = VK.Error(domain: "SwiftyVKDomain", code: 3, desc: "Fail user validation", userInfo: nil, req: self.request)
+      let err = VKError(domain: "SwiftyVKDomain", code: 3, desc: "Fail user validation", userInfo: nil, req: self.request)
       self.request?.errorBlock(err)
       VK.delegate?.vkAutorizationFailedWith(error: err)
     }

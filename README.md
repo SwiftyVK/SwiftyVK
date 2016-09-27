@@ -80,7 +80,7 @@ class YourClass: Superclass, VKDelegate {
     //Called when user is log out.
   }
 
-  func vkAutorizationFailedWith(error: VK.Error) {
+  func vkAutorizationFailedWith(error: VKError) {
    //Called when SwiftyVK could not authorize. To let the application know that something went wrong.
   }
 

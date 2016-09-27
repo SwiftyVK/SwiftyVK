@@ -70,7 +70,7 @@ extension VK_LongPool {
         update()
       }
       
-      req.errorBlock = {(error: VK.Error) in
+      req.errorBlock = {(error: VKError) in
         VK.Log.put("LongPool", "Error get server with request \(req.id)")
         Thread.sleep(forTimeInterval: 10)
         getServer()
@@ -108,7 +108,7 @@ extension VK_LongPool {
           update()
         }
         
-        req.errorBlock = {(error: VK.Error) in
+        req.errorBlock = {(error: VKError) in
           VK.Log.put("LongPool", "Received error with request \(req.id)")
           
           observer?.connectionLost()
