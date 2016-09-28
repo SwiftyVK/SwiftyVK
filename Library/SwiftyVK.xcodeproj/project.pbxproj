@@ -17,6 +17,8 @@
 		A2527E3E1BD1357000F65412 /* WebView-iOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E231BD1343F00F65412 /* WebView-iOS.xib */; };
 		A25AE9391D9AD57E008C0AA9 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE9381D9AD57E008C0AA9 /* Defaults.swift */; };
 		A25AE93A1D9AD583008C0AA9 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE9381D9AD57E008C0AA9 /* Defaults.swift */; };
+		A25AE93C1D9AE35D008C0AA9 /* Connection2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE93B1D9AE35D008C0AA9 /* Connection2.swift */; };
+		A25AE93D1D9AE35D008C0AA9 /* Connection2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE93B1D9AE35D008C0AA9 /* Connection2.swift */; };
 		A2967E741CBBC4A700B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
 		A2967E751CBBC51600B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
 		A2EB6EB71BD182E3008E7D86 /* SwiftyVKResources-OSX.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */; };
@@ -233,6 +235,7 @@
 		A2527E361BD134EF00F65412 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A2527E381BD134F000F65412 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = "ru.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A25AE9381D9AD57E008C0AA9 /* Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
+		A25AE93B1D9AE35D008C0AA9 /* Connection2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection2.swift; sourceTree = "<group>"; };
 		A2967E731CBBC4A700B7D48F /* Gifts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gifts.swift; sourceTree = "<group>"; };
 		A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -365,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				A2527D891BD12FD200F65412 /* Connection.swift */,
+				A25AE93B1D9AE35D008C0AA9 /* Connection2.swift */,
 				A2527D8A1BD12FD200F65412 /* NSURLFabric.swift */,
 				A2527D8B1BD12FD200F65412 /* Request.swift */,
 				A2527D8C1BD12FD200F65412 /* Response.swift */,
@@ -611,6 +615,7 @@
 				A2EB6EF71BD18394008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6EF81BD18394008E7D86 /* Notes.swift in Sources */,
 				A2EB6EF91BD18394008E7D86 /* Notifacations.swift in Sources */,
+				A25AE93D1D9AE35D008C0AA9 /* Connection2.swift in Sources */,
 				A2EB6EFA1BD18394008E7D86 /* Pages.swift in Sources */,
 				A2EB6EFB1BD18394008E7D86 /* Photos.swift in Sources */,
 				A2EB6EFC1BD18394008E7D86 /* Places.swift in Sources */,
@@ -680,6 +685,7 @@
 				A2EB6ED61BD18389008E7D86 /* User.swift in Sources */,
 				A2EB6ED71BD18389008E7D86 /* Utils.swift in Sources */,
 				A2EB6ED81BD18389008E7D86 /* Video.swift in Sources */,
+				A25AE93C1D9AE35D008C0AA9 /* Connection2.swift in Sources */,
 				A20FF11C1BEB7DC8009FBE3D /* Authorizator.swift in Sources */,
 				A2EB6ED91BD18389008E7D86 /* Wall.swift in Sources */,
 				A2EB6EDA1BD18389008E7D86 /* Arg.swift in Sources */,
