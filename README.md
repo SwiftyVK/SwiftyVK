@@ -224,7 +224,7 @@ In addition to the settings of each individual request, you can set global setti
 Property | Default | Description
 :------------- | ------------- | :-------------
 `apiVersion`| >5.44 | Returns used VK API version
-`maxRequestsPerSec` | 3 | The maximum number of requests that can be sent per second. Here you can [read more](https://vk.com/dev/api_requests) in the section "Limitations and recommendations".
+`sendLimit` | 3 | The maximum number of requests that can be sent per second. Here you can [read more](https://vk.com/dev/api_requests) in the section "Limitations and recommendations".
 
 ##**Parsing response**
 

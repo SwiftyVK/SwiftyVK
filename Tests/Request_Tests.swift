@@ -202,14 +202,14 @@ class Sending_Tests: VKTestCase {
     
     func test_randomly() {
         Stubs.apiWith(jsonFile: "success.users.get")
-        let backup = VK.defaults.maxRequestsPerSec
-        VK.defaults.maxRequestsPerSec = 100
+        let backup = VK.defaults.sendLimit
+        VK.defaults.sendLimit = 100
         let exp = self.expectation(description: "ready")
         let requests = NSMutableDictionary()
         var executed = 0
         
         DispatchQueue.global(qos: .userInitiated).async {
-            for n in 1...VK.defaults.maxRequestsPerSec {
+            for n in 1...VK.defaults.sendLimit {
                 let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
                 requests[req.id] = "~"
                 req.asynchronous = n%3 != 0
@@ -218,18 +218,18 @@ class Sending_Tests: VKTestCase {
                     onSuccess: {response in
                         requests[req.id] = "+"
                         executed += 1
-                        executed >= VK.defaults.maxRequestsPerSec ? exp.fulfill() : ()
+                        executed >= VK.defaults.sendLimit ? exp.fulfill() : ()
                     },
                     onError: {error in
                         requests[req.id] = "-"
                         executed += 1
-                        executed >= VK.defaults.maxRequestsPerSec ? exp.fulfill() : ()
+                        executed >= VK.defaults.sendLimit ? exp.fulfill() : ()
                 })
             }
         }
         
         self.waitForExpectations(timeout: reqTimeout*20) {_ in
-            VK.defaults.maxRequestsPerSec = backup
+            VK.defaults.sendLimit = backup
             let results = self.getResults(requests)
             printSync(results.statistic)
             XCTAssertGreaterThan(results.all.count/50, results.error.count, "Too many errors")
@@ -245,21 +245,21 @@ class Sending_Tests: VKTestCase {
             let exp = self.expectation(description: "ready")
             var executed = 0
             
-            for n in 1...VK.defaults.maxRequestsPerSec {
+            for n in 1...VK.defaults.sendLimit {
                 let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
                 req.asynchronous = true
                 req.send(
                     onSuccess: {response in
                         executed += 1
-                        executed == VK.defaults.maxRequestsPerSec ? exp.fulfill() : ()
+                        executed == VK.defaults.sendLimit ? exp.fulfill() : ()
                     },
                     onError: {error in
                         executed += 1
-                        executed == VK.defaults.maxRequestsPerSec ? exp.fulfill() : ()
+                        executed == VK.defaults.sendLimit ? exp.fulfill() : ()
                 })
             }
             
-            self.waitForExpectations(timeout: self.reqTimeout*Double(VK.defaults.maxRequestsPerSec)) {_ in}
+            self.waitForExpectations(timeout: self.reqTimeout*Double(VK.defaults.sendLimit)) {_ in}
         }
     }
 }

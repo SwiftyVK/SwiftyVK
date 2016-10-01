@@ -12,8 +12,10 @@ extension VK {
         public static var catchErrors : Bool = true
         //Similarly request sendAsynchronous property
         public static var sendAsynchronous : Bool = true
-        ///Maximum number of requests per second
-        public static var maxRequestsPerSec : Int = 3
+        ///Need limit requests per second or not
+        public static var useSendLimit : Bool = true
+        ///Maximum number of requests send per second
+        public static var sendLimit : Int = 3
         ///Allows print log messages to console
         public static var logToConsole : Bool = false
         
@@ -37,7 +39,7 @@ extension VK {
                 useSystemLanguage = (newValue == nil)
             }
         }
-        internal static var sleepTime : TimeInterval {return TimeInterval(1/Double(maxRequestsPerSec))}
+        internal static var sleepTime : TimeInterval {return TimeInterval(1/Double(sendLimit))}
         internal static let successBlock : VK.SuccessBlock = {success in}
         internal static let errorBlock : VK.ErrorBlock = {error in}
         internal static let progressBlock : VK.ProgressBlock = {int in}

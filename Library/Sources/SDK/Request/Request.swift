@@ -148,7 +148,7 @@ public final class Request : CustomStringConvertible, Equatable {
     
     internal init(url: String, media: [Media]) {
         var length = Double(0)
-        media.forEach({length += Double($0.data.count)})
+        media.forEach {length += Double($0.data.count)}
         
         self.httpMethod          = .POST
         self.timeout             = Int(length*0.0001)
@@ -181,7 +181,8 @@ public final class Request : CustomStringConvertible, Equatable {
         
         attempts = 0
         cancelled = false
-        trySend()
+//        trySend()
+        _ = RequestInstance.createWith(request: self)
     }
     
     
