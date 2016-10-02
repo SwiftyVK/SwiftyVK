@@ -2,7 +2,7 @@ import Foundation
 
 
 
-public struct Media : CustomStringConvertible {
+public struct VKMedia : CustomStringConvertible {
   
   enum MediaType {
     case image

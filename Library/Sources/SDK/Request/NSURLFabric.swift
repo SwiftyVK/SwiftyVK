@@ -12,11 +12,11 @@ internal struct NSURLFabric {
     
     
     
-    internal static func get(url: String?, httpMethod: HTTPMethods, method: String, params: [String : String], media: [Media]?) -> NSMutableURLRequest {
+    internal static func get(url: String?, httpMethod: HTTPMethods, method: String, params: [String : String], VKMedia: [VKMedia]?) -> NSMutableURLRequest {
         let result : NSMutableURLRequest
         
-        if let media = media {
-            result = withFiles(media, url: url!)
+        if let VKMedia = VKMedia {
+            result = withFiles(VKMedia, url: url!)
         }
         else if let URL = url {
             result = withURL(URL)
@@ -63,7 +63,7 @@ internal struct NSURLFabric {
     
     
     
-    private static func withFiles(_ media: [Media], url: String) -> NSMutableURLRequest {
+    private static func withFiles(_ VKMedia: [VKMedia], url: String) -> NSMutableURLRequest {
         let emptyUrl = URL(string: methodUrl)!
         
         let req = NSMutableURLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
@@ -74,7 +74,7 @@ internal struct NSURLFabric {
         req.setValue("multipart/form-data;  boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         let body = NSMutableData()
         
-        for (index, file) in media.enumerated() {
+        for (index, file) in VKMedia.enumerated() {
             let name : String
             
             switch file.mediaType {

@@ -49,7 +49,7 @@ public final class Request : CustomStringConvertible, Equatable {
     internal var customURL : String? = nil
     public private(set) var cancelled = false
     private var useDefaultLanguage = VK.defaults.useSystemLanguage
-    private var media : [Media]?
+    private var VKMedia : [VKMedia]?
     fileprivate var parameters = [String : String]()
     
     public var successBlock : VK.SuccessBlock {
@@ -86,7 +86,7 @@ public final class Request : CustomStringConvertible, Equatable {
     }
     private var privateLanguage = VK.defaults.language
     internal var urlRequest : URLRequest {
-        let req = NSURLFabric.get(url: customURL, httpMethod: httpMethod, method: method, params: allParameters, media: media)
+        let req = NSURLFabric.get(url: customURL, httpMethod: httpMethod, method: method, params: allParameters, VKMedia: VKMedia)
         req.timeoutInterval = TimeInterval(self.timeout)
         VK.Log.put(self, "Create url: \(req.url!.absoluteString) with timeout: \(timeout)")
         return req as URLRequest
@@ -146,15 +146,15 @@ public final class Request : CustomStringConvertible, Equatable {
     
     
     
-    internal init(url: String, media: [Media]) {
+    internal init(url: String, VKMedia: [VKMedia]) {
         var length = Double(0)
-        media.forEach {length += Double($0.data.count)}
+        VKMedia.forEach {length += Double($0.data.count)}
         
         self.httpMethod          = .POST
         self.timeout             = Int(length*0.0001)
         self.customURL           = url
-        self.media               = media
-        VK.Log.put(self, "INIT with media files: \(media)")
+        self.VKMedia               = VKMedia
+        VK.Log.put(self, "INIT with VKMedia files: \(VKMedia)")
     }
     
     

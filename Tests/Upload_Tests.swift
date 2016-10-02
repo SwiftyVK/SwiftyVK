@@ -24,7 +24,7 @@ class Upload_Tests: VKTestCase {
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        let req = VK.API.Upload.Photo.toMessage(Media(imageData: data, type: .JPG))
+        let req = VK.API.Upload.Photo.toMessage(VKMedia(imageData: data, type: .JPG))
         req.asynchronous = true
         req.progressBlock = {done, total in}
         req.successBlock = {response in
@@ -65,7 +65,7 @@ class Upload_Tests: VKTestCase {
         var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.Photo.toWall.toGroup(
-            Media(imageData: data, type: .JPG),
+            VKMedia(imageData: data, type: .JPG),
             groupId: "60479154")
         req.asynchronous = true
         req.progressBlock = {done, total in}
@@ -108,7 +108,7 @@ class Upload_Tests: VKTestCase {
         var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.Photo.toAlbum(
-            [Media(imageData: data, type: .JPG)],
+            [VKMedia(imageData: data, type: .JPG)],
             albumId: "181808365",
             groupId: "60479154",
             caption: "test")
@@ -155,7 +155,7 @@ class Upload_Tests: VKTestCase {
         var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.Photo.toMarket(
-            Media(imageData: data, type: .JPG),
+            VKMedia(imageData: data, type: .JPG),
             groupId: "98197515"
         )
         req.successBlock = {response in
@@ -198,7 +198,7 @@ class Upload_Tests: VKTestCase {
         var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.Photo.toMarketAlbum(
-            Media(imageData: data, type: .JPG),
+            VKMedia(imageData: data, type: .JPG),
             groupId: "98197515"
         )
         req.successBlock = {response in
@@ -239,7 +239,7 @@ class Upload_Tests: VKTestCase {
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        let req = VK.API.Upload.audio(Media(audioData: data))
+        let req = VK.API.Upload.audio(VKMedia(audioData: data))
         req.logToConsole = true
         
         req.asynchronous = true
@@ -281,7 +281,7 @@ class Upload_Tests: VKTestCase {
         var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.Video.fromFile(
-            Media(videoData: data),
+            VKMedia(videoData: data),
             name: "test video",
             description: "test",
             isPrivate: true,
@@ -369,7 +369,7 @@ class Upload_Tests: VKTestCase {
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        let req = VK.API.Upload.document(Media(documentData: data, type: "rtf"))
+        let req = VK.API.Upload.document(VKMedia(documentData: data, type: "rtf"))
         req.asynchronous = true
         req.progressBlock = {done, total in}
         req.successBlock = {response in

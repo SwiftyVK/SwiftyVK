@@ -3,25 +3,25 @@ import CoreLocation
 
 
 extension _VKAPI {
-  //Metods to upload mediafiles
+  //Metods to upload VKMediafiles
   public struct Upload {
     ///Methods to upload photo
     public struct Photo {
       ///Upload photo to user album
       public static func toAlbum(
-        _ media: [Media],
+        _ media: [VKMedia],
         albumId : String,
         groupId : String = "",
         caption: String = "",
         location: CLLocationCoordinate2D? = nil) -> Request {
         
-        var _media = [Media]()
+        var media = [VKMedia]()
         for element in media[0..<min(media.count, 5)] {
-          _media.append(element)
+          media.append(element)
         }
         
         let req1 = VK.API.Photos.getUploadServer([VK.Arg.albumId : albumId, VK.Arg.groupId : groupId])
-        let req2 = Request(url: "", media: _media)
+        let req2 = Request(url: "", VKMedia: media)
         let req3 = VK.API.Photos.save()
         
         VK.Log.put(req1, "Prepare upload photo to album: \(albumId)")
@@ -62,10 +62,10 @@ extension _VKAPI {
       
       
       ///Upload photo to message
-      public static func toMessage(_ media: Media) -> Request {
+      public static func toMessage(_ VKMedia: VKMedia) -> Request {
         
         let req1 = VK.API.Photos.getMessagesUploadServer()
-        let req2 = Request(url: "", media: [media])
+        let req2 = Request(url: "", VKMedia: [VKMedia])
         let req3 = VK.API.Photos.saveMessagesPhoto()
         
         VK.Log.put(req1, "Prepare upload photo to message")
@@ -97,7 +97,7 @@ extension _VKAPI {
       
       ///Upload photo to market
       public static func toMarket(
-        _ media: Media,
+        _ VKMedia: VKMedia,
         groupId: String,
         mainPhoto: Bool = false,
         cropX: String = "",
@@ -114,7 +114,7 @@ extension _VKAPI {
             VK.Arg.cropWidth: cropW
             ])
         }
-        let req2 = Request(url: "", media: [media])
+        let req2 = Request(url: "", VKMedia: [VKMedia])
         let req3 = VK.API.Photos.saveMarketPhoto()
         
         VK.Log.put(req1, "Prepare upload photo to market")
@@ -148,9 +148,9 @@ extension _VKAPI {
       
       
       ///Upload photo to market album
-      public static func toMarketAlbum(_ media: Media, groupId: String) -> Request {
+      public static func toMarketAlbum(_ VKMedia: VKMedia, groupId: String) -> Request {
         let req1 = VK.API.Photos.getMarketAlbumUploadServer([VK.Arg.groupId: groupId,])
-        let req2 = Request(url: "", media: [media])
+        let req2 = Request(url: "", VKMedia: [VKMedia])
         let req3 = VK.API.Photos.saveMarketAlbumPhoto()
         
         VK.Log.put(req1, "Prepare upload photo to market album")
@@ -186,24 +186,24 @@ extension _VKAPI {
       ///Upload photo to user or group wall
       public struct toWall {
         ///Upload photo to user wall
-        public static func toUser(_ media: Media, userId : String) -> Request {
-          return pToWall(media, userId: userId)
+        public static func toUser(_ VKMedia: VKMedia, userId : String) -> Request {
+          return pToWall(VKMedia, userId: userId)
         }
         
         
         
         ///Upload photo to group wall
-        public static func toGroup(_ media: Media, groupId : String) -> Request {
-          return pToWall(media, groupId: groupId)
+        public static func toGroup(_ VKMedia: VKMedia, groupId : String) -> Request {
+          return pToWall(VKMedia, groupId: groupId)
         }
         
         
         
         ///Upload photo to user or group wall
-        private static func pToWall(_ media: Media, userId : String = "", groupId : String = "") -> Request {
+        private static func pToWall(_ VKMedia: VKMedia, userId : String = "", groupId : String = "") -> Request {
           
           let req1 = VK.API.Photos.getWallUploadServer([VK.Arg.groupId : groupId])
-          let req2 = Request(url: "", media: [media])
+          let req2 = Request(url: "", VKMedia: [VKMedia])
           let req3 = VK.API.Photos.saveWallPhoto()
           
           VK.Log.put(req1, "Prepare upload photo to wall")
@@ -242,7 +242,7 @@ extension _VKAPI {
     public struct Video {
       ///Upload local video file
       public static func fromFile(
-        _ media: Media,
+        _ VKMedia: VKMedia,
         name: String = "No name",
         description : String = "",
         groupId : String = "",
@@ -254,7 +254,7 @@ extension _VKAPI {
         ) -> Request {
         
         let req1 = VK.API.Video.save()
-        let req2 = Request(url: "", media: [media])
+        let req2 = Request(url: "", VKMedia: [VKMedia])
         req1.addParameters([
           VK.Arg.link : "",
           VK.Arg.name : name,
@@ -310,9 +310,9 @@ extension _VKAPI {
     
     
     ///Upload audio
-    public static func audio(_ media: Media, artist : String = "", title: String = "") -> Request {
+    public static func audio(_ VKMedia: VKMedia, artist : String = "", title: String = "") -> Request {
       let req1 = VK.API.Audio.getUploadServer()
-      let req2 = Request(url: "", media: [media])
+      let req2 = Request(url: "", VKMedia: [VKMedia])
       let req3 = VK.API.Audio.save()
       
       VK.Log.put(req1, "Prepare upload audio")
@@ -347,12 +347,12 @@ extension _VKAPI {
     
     ///Upload document
     public static func document(
-      _ media: Media,
+      _ VKMedia: VKMedia,
       groupId : String = "",
       title : String = "",
       tags : String = "") -> Request {
       let req1 = VK.API.Docs.getUploadServer([VK.Arg.groupId : groupId])
-      let req2 = Request(url: "", media: [media])
+      let req2 = Request(url: "", VKMedia: [VKMedia])
       let req3 = VK.API.Docs.save()
       
       VK.Log.put(req1, "Prepare upload document")
