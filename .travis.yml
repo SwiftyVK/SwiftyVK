@@ -1,6 +1,21 @@
 language: objective-c
-
 osx_image: xcode8
 xcode_sdk: iphonesimulator10.0
 
-script: 'sh ./.travis.sh'
+env:
+  global:
+  - LC_CTYPE=en_US.UTF-8
+  - LANG=en_US.UTF-8
+  - WORKSPACE=SwiftyVK.xcworkspace
+
+  - MAC_SCHEME="SwiftyVK-Example-OSX"
+
+  - IOS_SCHEME="SwiftyVK-Example-iOS"
+  - IOS_SDK=iphonesimulator10.0
+  - IOS_DESTANATION="OS=10.0,name=iPhone 7"
+
+
+script: 
+  - set -o pipefail
+  - xcodebuild -workspace "$WORKSPACE" -scheme "$IOS_SCHEME" -destination "$IOS_DESTANATION" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" build | xcpretty -c
+  - xcodebuild -workspace "$WORKSPACE" -scheme "$MAC_SCHEME" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_TESTABILITY=YES test | xcpretty -c
