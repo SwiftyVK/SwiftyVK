@@ -164,7 +164,7 @@
 
 /* Begin PBXFileReference section */
 		A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyVK.xcodeproj; path = Library/SwiftyVK.xcodeproj; sourceTree = "<group>"; };
-		A21CD49B1D98143300FF2D88 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A21CD49B1D98143300FF2D88 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A22599201D8B0CDD008535BE /* error.need.authorazation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = error.need.authorazation.json; sourceTree = "<group>"; };
 		A225992B1D8B148A008535BE /* STUBS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STUBS.swift; sourceTree = "<group>"; };
 		A227371C1CF462F60042868A /* VKDelegateExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKDelegateExample.swift; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 		A2527E811BD13A5300F65412 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A2527E861BD13A5300F65412 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2527E881BD13A5300F65412 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A2527EBC1BD13F7E00F65412 /* APIWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIWorker.swift; sourceTree = "<group>"; };
+		A2527EBC1BD13F7E00F65412 /* APIWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = APIWorker.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A2527EC11BD13FB600F65412 /* Back-iOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Back-iOS.png"; path = "Example/Resources/Back-iOS.png"; sourceTree = "<group>"; };
 		A29B14D81D8F258F00997817 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/Mac/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		A29B14DA1D8F25C700997817 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };

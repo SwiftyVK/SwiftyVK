@@ -209,7 +209,6 @@ Property | Default | Description
 `successBlock`| empty | This code block will be executed when the response to the request.
 `errorBlock` | empty | This code block will be executed, if during execution of the response fails.
 `progressBlock` | empty | This code block is executed when the file is loaded. It is called every time the server sent the next part of the file.
-`asynchronous` | true | Specifies whether the control returns after sending the request imVKMediately or only after receiving the response. By default the requests are asynchronous and control returns imVKMediately. Sometimes you may need to send synchronous requests, **but it is not necessary to do this in the main thread!**.
 `maxAttempts` | 3 | The number of times can be resend the request automatically, if during its execution the error occurred. **0 == infinity attempts**.
 `timeout` | 10 | How long in seconds a request will wait for a response from the server. If the wait is longer this value, the generated request error.
 `cancelled`| false | If user cancell request it will true

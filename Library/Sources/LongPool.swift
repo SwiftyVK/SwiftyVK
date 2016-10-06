@@ -33,13 +33,13 @@ extension VK_LongPool {
     public static func start() {
       lpQueue.async {
         guard VK.state == .authorized && !active else {
-          VK.Log.put("LongPool", "User is not authorized or LongPool is active yet")
+          // VK.Log.put("LongPool", "User is not authorized or LongPool is active yet")
           return}
         active = true
         keyIsExpired = true
         getServer()
         observer = LPObserver()
-        VK.Log.put("LongPool", "Stared")
+        // VK.Log.put("LongPool", "Stared")
       }
     }
     
@@ -50,7 +50,7 @@ extension VK_LongPool {
       lpQueue.async {
         observer = nil
         active = false
-        VK.Log.put("LongPool", "Stopped")
+        // VK.Log.put("LongPool", "Stopped")
       }
     }
     
@@ -62,7 +62,7 @@ extension VK_LongPool {
       req.maxAttempts = 1
       
       req.successBlock = {(response: JSON) in
-        VK.Log.put("LongPool", "get server with request \(req.id)")
+        // VK.Log.put("LongPool", "get server with request \(req.id)")
         lpKey = response["key"].stringValue
         server = response["server"].stringValue
         ts = response["ts"].stringValue
@@ -70,12 +70,12 @@ extension VK_LongPool {
         update()
       }
       
-      req.errorBlock = {(error: VKError) in
-        VK.Log.put("LongPool", "Error get server with request \(req.id)")
+      req.errorBlock = {error in
+        // VK.Log.put("LongPool", "Error get server with request \(req.id)")
         Thread.sleep(forTimeInterval: 10)
         getServer()
       }
-      VK.Log.put("LongPool", "Getting server with request \(req.id)")
+      // VK.Log.put("LongPool", "Getting server with request \(req.id)")
       req.send()
     }
     
@@ -95,9 +95,8 @@ extension VK_LongPool {
         req.catchErrors = false
         req.timeout = 30
         req.maxAttempts = 1
-        req.asynchronous = false
         req.successBlock = {(response : JSON) in
-          VK.Log.put("LongPool", "Received response with request \(req.id)")
+          // VK.Log.put("LongPool", "Received response with request \(req.id)")
           
           ts = response["ts"].stringValue
           parse(response["updates"].array)
@@ -108,15 +107,15 @@ extension VK_LongPool {
           update()
         }
         
-        req.errorBlock = {(error: VKError) in
-          VK.Log.put("LongPool", "Received error with request \(req.id)")
+        req.errorBlock = {error in
+          // VK.Log.put("LongPool", "Received error with request \(req.id)")
           
           observer?.connectionLost()
           Thread.sleep(forTimeInterval: 10)
           update()
         }
         
-        VK.Log.put("LongPool", "Send with request \(req.id)")
+        // VK.Log.put("LongPool", "Send with request \(req.id)")
         req.send()
       }
     }
@@ -269,7 +268,7 @@ internal final class LPObserver : NSObject {
   internal override init() {
     super.init()
     
-    VK.Log.put("LongPool", "Init observer")
+    // VK.Log.put("LongPool", "Init observer")
     
     #if os(OSX)
       NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(connectionLostForce), name:NSNotification.Name.NSWorkspaceScreensDidSleep, object: nil)
@@ -318,7 +317,7 @@ internal final class LPObserver : NSObject {
     
     if connected == true {
       connected = false
-      VK.Log.put("LongPool", "Connection lost")
+      // VK.Log.put("LongPool", "Connection lost")
       NotificationCenter.default.post(name: Notification.Name(rawValue: VK.LP.notifications.connectinDidLost), object: nil)
     }
   }
@@ -329,13 +328,13 @@ internal final class LPObserver : NSObject {
     
     if connected == false {
       connected = true
-      VK.Log.put("LongPool", "Connection restored")
+      // VK.Log.put("LongPool", "Connection restored")
       NotificationCenter.default.post(name: Notification.Name(rawValue: VK.LP.notifications.connectinDidRestore), object: nil)
     }
   }
   
   
   deinit {
-    VK.Log.put("LongPool", "Deinit observer")
+    // VK.Log.put("LongPool", "Deinit observer")
   }
 }

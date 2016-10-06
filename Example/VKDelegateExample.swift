@@ -34,7 +34,7 @@ class VKDelegateExample: VKDelegate {
     
     
     
-    func vkAutorizationFailedWith(error: VKError) {
+    func vkAutorizationFailedWith(error: VKAuthError) {
         print("Autorization failed with error: \n\(error)")
         NotificationCenter.default.post(name: Notification.Name(rawValue: "TestVkDidNotAuthorize"), object: nil)
     }

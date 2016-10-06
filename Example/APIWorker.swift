@@ -65,7 +65,6 @@ final class APIWorker {
     let req = VK.API.Users.get([VK.Arg.userId : "1"])
     req.maxAttempts = 1
     req.timeout = 10
-    req.asynchronous = true
     req.catchErrors = true
     req.successBlock = {response in print("SwiftyVK: usersGet success \n \(response)")}
     req.errorBlock = {error in print("SwiftyVK: usersGet fail \n \(error)")}

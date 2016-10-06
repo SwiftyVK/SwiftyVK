@@ -10,7 +10,7 @@ class VKTestCase : XCTestCase {
     
     override func setUp() {
         super.setUp()
-        //    VK.defaults.logToConsole = true
+        VK.defaults.logToConsole = true
         VK.Log.purge()
         _ = ReqClock()
     }

@@ -27,11 +27,11 @@ internal struct Authorizator {
   
   
   
-  internal static func authorize(_ request: Request?) {
+  internal static func authorize(_ request: RequestInstance?) {
     if let request = request {
-      request.authFails >= 3 || Token.get() == nil
+      Token.get() == nil
         ? authorizeWithRequest(request)
-        : {_ = request.trySend()}()
+        : {_ = request.send()}()
     }
     else if Token.get() == nil {
       authorize()
@@ -48,13 +48,13 @@ internal struct Authorizator {
   
   
   
-  private static func authorizeWithRequest(_ request: Request) {
+  private static func authorizeWithRequest(_ request: RequestInstance) {
     vkSheetQueue.sync(execute: {start(request)})
   }
   
   
   
-  private static func start(_ request: Request?) {
+  private static func start(_ request: RequestInstance?) {
     if canAuthorizeWithVkApp {
       startWithApp(request)
     }
@@ -63,21 +63,20 @@ internal struct Authorizator {
     }
     
     if VK.state == .authorized {
-      _ = request?.asynchronous == true ? request?.trySend() : request?.tryInCurrentThread()
+      request?.send()
     }
     else {
-      let err = VKError(code: 2, desc: "User deny authorization", request: request)
-      request?.attempts = request!.maxAttempts
-      request?.errorBlock(err)
+      let error = VKAuthError.deniedFromUser
+      request?.handle(error: error)
       DispatchQueue.global(qos: .default).async {
-        VK.delegate?.vkAutorizationFailedWith(error: err)
+        VK.delegate?.vkAutorizationFailedWith(error: error)
       }
     }
   }
   
   
   
-  fileprivate static func startWithWeb(_ request: Request?) {
+  fileprivate static func startWithWeb(_ request: RequestInstance?) {
     WebController.start(url: webAuthorizeUrl+paramsUrl, request: nil)
   }
 }
@@ -105,7 +104,7 @@ internal struct Authorizator {
     
     
     
-    fileprivate static func startWithApp(_ request: Request?) {
+    fileprivate static func startWithApp(_ request: RequestInstance?) {
       UIApplication.shared.openURL(URL(string: appAuthorizeUrl+paramsUrl)!)
       Thread.sleep(forTimeInterval: 1)
       startWithWeb(request)
@@ -138,6 +137,6 @@ internal struct Authorizator {
   private typealias OSXAuthorizator = Authorizator
   extension OSXAuthorizator {
     internal static var canAuthorizeWithVkApp : Bool {return false}
-    fileprivate static func startWithApp(_ request: Request?) {}
+    fileprivate static func startWithApp(_ request: RequestInstance?) {}
   }
 #endif

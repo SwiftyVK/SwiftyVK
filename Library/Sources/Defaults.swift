@@ -10,8 +10,6 @@ extension VK {
         public static var maxAttempts : Int = 3
         ///Whether to allow automatic processing of some API error
         public static var catchErrors : Bool = true
-        //Similarly request sendAsynchronous property
-        public static var sendAsynchronous : Bool = true
         ///Need limit requests per second or not
         public static var useSendLimit : Bool = true
         ///Maximum number of requests send per second

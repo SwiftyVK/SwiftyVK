@@ -9,11 +9,10 @@ private let session = URLSession(configuration: .default, delegate: nil, delegat
 protocol SendDelegate: class {
     var request: URLRequest {get}
     var isApi: Bool {get}
-    func handle(data: Data)
-    func handle(error: Error)
-    func handle(code: Int)
     func handle(sended: Int64, of: Int64)
     func handle(received: Int64, of: Int64)
+    func handle(data: Data)
+    func handle(error: Error)
 }
 
 
@@ -49,20 +48,26 @@ final class SendOperation : Operation {
     override func main() {
         let semaphore = DispatchSemaphore(value: 0)
         
-        self.task = session.dataTask(with: self.delegate.request) {data, response, error in
+        let completeon : (Data?, URLResponse?, Error?) -> () = {data, response, error in
+            guard !self.isCancelled else {
+                semaphore.signal()
+                return
+            }
+            
             if let data = data {
                 self.delegate.handle(data: data)
             }
             else if let error = error {
                 self.delegate.handle(error: error)
             }
-            else if let responseCode = (response as? HTTPURLResponse)?.statusCode {
-                self.delegate.handle(code: responseCode)
+            else {
+                self.delegate.handle(error: VKRequestError.unexpectedResponse)
             }
             
             semaphore.signal()
         }
         
+        self.task = session.dataTask(with: delegate.request, completionHandler: completeon)
         
         task.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived), options: NSKeyValueObservingOptions.new, context: nil)
         task.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesSent), options: NSKeyValueObservingOptions.new, context: nil)

@@ -193,10 +193,10 @@ internal class Token: NSObject, NSCoding {
     
     //MARK: - NSCoding protocol
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(parameters,  forKey: "parameters")
-        aCoder.encode(token,       forKey: "token")
-        aCoder.encode(expires,    forKey: "expires")
-        aCoder.encode(isOffline,     forKey: "isOffline")
+        aCoder.encode(parameters,   forKey: "parameters")
+        aCoder.encode(token,        forKey: "token")
+        aCoder.encode(expires,      forKey: "expires")
+        aCoder.encode(isOffline,    forKey: "isOffline")
     }
     
     

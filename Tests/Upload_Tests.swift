@@ -25,7 +25,6 @@ class Upload_Tests: VKTestCase {
         var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.Photo.toMessage(VKMedia(imageData: data, type: .JPG))
-        req.asynchronous = true
         req.progressBlock = {done, total in}
         req.successBlock = {response in
             XCTAssertNotNil(response[0,"id"].int)
@@ -67,7 +66,6 @@ class Upload_Tests: VKTestCase {
         let req = VK.API.Upload.Photo.toWall.toGroup(
             VKMedia(imageData: data, type: .JPG),
             groupId: "60479154")
-        req.asynchronous = true
         req.progressBlock = {done, total in}
         req.successBlock = {response in
             XCTAssertNotNil(response[0,"id"].int)
@@ -115,8 +113,7 @@ class Upload_Tests: VKTestCase {
         req.successBlock = {response in
             XCTAssertNotNil(response[0,"id"].int)
             let deleteReq = VK.API.Photos.delete([VK.Arg.photoId : response[0]["id"].stringValue])
-            deleteReq.asynchronous = true
-            Stubs.enabled ? () : deleteReq.send()
+            if !Stubs.enabled {deleteReq.send()}
             exp.fulfill()
         }
         req.errorBlock = {error in
@@ -240,9 +237,7 @@ class Upload_Tests: VKTestCase {
         var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.audio(VKMedia(audioData: data))
-        req.logToConsole = true
         
-        req.asynchronous = true
         req.progressBlock = {done, total in}
         req.successBlock = {response in
             XCTAssertNotNil(response["id"].int)
@@ -250,8 +245,7 @@ class Upload_Tests: VKTestCase {
                 VK.Arg.audioId : response["id"].stringValue,
                 VK.Arg.ownerId : response["owner_id"].stringValue
                 ])
-            deleteReq.asynchronous = false
-            Stubs.enabled ? () : deleteReq.send()
+            if !Stubs.enabled {deleteReq.send()}
             exp.fulfill()
         }
         req.errorBlock = {error in
@@ -287,15 +281,14 @@ class Upload_Tests: VKTestCase {
             isPrivate: true,
             isWallPost: false,
             isRepeat: false)
-        req.asynchronous = true
         req.successBlock = {response in
             XCTAssertNotNil(response["video_id"].int)
             let deleteReq = VK.API.Audio.delete([
                 VK.Arg.audioId : response["video_id"].stringValue,
                 VK.Arg.ownerId : response["owner_id"].stringValue
                 ])
-            deleteReq.asynchronous = false
-            Stubs.enabled ? () : deleteReq.send()
+
+            if !Stubs.enabled {deleteReq.send()}
             exp.fulfill()
         }
         req.errorBlock = {error in
@@ -326,15 +319,15 @@ class Upload_Tests: VKTestCase {
             isPrivate: true,
             isWallPost: false,
             isRepeat: false)
-        req.asynchronous = true
+
         req.successBlock = {response in
             XCTAssertNotNil(response["video_id"].int)
             let deleteReq = VK.API.Audio.delete([
                 VK.Arg.audioId : response["video_id"].stringValue,
                 VK.Arg.ownerId : response["owner_id"].stringValue
                 ])
-            deleteReq.asynchronous = false
-            Stubs.enabled ? () : deleteReq.send()
+
+            if !Stubs.enabled {deleteReq.send()}
             exp.fulfill()
         }
         req.errorBlock = {error in
@@ -370,7 +363,7 @@ class Upload_Tests: VKTestCase {
         var progressExecuted = false || Stubs.enabled
         
         let req = VK.API.Upload.document(VKMedia(documentData: data, type: "rtf"))
-        req.asynchronous = true
+
         req.progressBlock = {done, total in}
         req.successBlock = {response in
             XCTAssertNotNil(response[0,"id"].int)
@@ -378,8 +371,8 @@ class Upload_Tests: VKTestCase {
                 VK.Arg.audioId : response["id"].stringValue,
                 VK.Arg.ownerId : response["owner_id"].stringValue
                 ])
-            deleteReq.asynchronous = false
-            Stubs.enabled ? () : deleteReq.send()
+
+            if !Stubs.enabled {deleteReq.send()}
             exp.fulfill()
         }
         req.errorBlock = {error in

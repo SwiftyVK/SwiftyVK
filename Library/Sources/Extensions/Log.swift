@@ -1,7 +1,7 @@
 import Foundation
 
-internal let printQueue = DispatchQueue(label: "VK.Print")
-private let logQueue = DispatchQueue(label: "VK.Log")
+internal let printQueue = DispatchQueue(label: "SwiftyVK.PrintQueue")
+internal let logQueue = DispatchQueue(label: "SwiftyVK.LogQueue")
 
 private let form : DateFormatter = {
   let f = DateFormatter()
@@ -17,6 +17,16 @@ extension VK {
     private static var all = [String]()
     private static var array = [String]()
     private static var dictionary = NSMutableDictionary()
+    private static var reqId: Int64 = 0
+    
+    
+    
+    internal static func generateRequestId() -> Int64 {
+        return logQueue.sync {
+            reqId += 1
+            return reqId
+        }
+    }
     
     public static func getForKeys() -> NSDictionary {
       return NSDictionary(dictionary: dictionary)
@@ -52,8 +62,8 @@ extension VK {
     
     
     
-    internal static func put(_ req: Request, _ message: String, atNewLine: Bool = false) {
-      logQueue.async {
+    internal static func put(_ req: RequestInstance, _ message: String, atNewLine: Bool = false, sync: Bool = false) {
+      let block = {
         let date = form.string(from: Date())
         req.log.append("\(date): \(message)")
         let key = String("Req \(req.id)")!
@@ -63,11 +73,15 @@ extension VK {
           dictionary.removeObject(forKey: keyToRemove)
         }
         
-        _put(key, message, false)
-        req.logToConsole == true
+        self._put(key, message, false)
+        req.logToConsole
           ? printSync("\(atNewLine ? "\n" : "")\(date): \(key) ~ \(message)")
           : ()
       }
+        
+        sync
+            ? logQueue.sync(execute: block)
+            : logQueue.async(execute: block)
     }
     
     
@@ -111,7 +125,7 @@ extension VK {
       logQueue.async {
         array = [String]()
         dictionary = NSMutableDictionary()
-        nextRequestId = 0
+        reqId = 0
       }
     }
   }

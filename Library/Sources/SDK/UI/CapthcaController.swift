@@ -27,12 +27,12 @@ internal final class СaptchaController: _СaptchaControllerPrototype {
     #endif
     private var imageUrl        : String?
     private var sid             : String?
-    private var request         : Request?
+    private var request         : RequestInstance?
     fileprivate let waitAnswer = DispatchSemaphore(value: 0)
     
     
     
-    class func start(sid: String, imageUrl: String, request: Request) {
+    class func start(sid: String, imageUrl: String, request: RequestInstance) {
         var canContinue = false
         
         vkSheetQueue.sync {
@@ -46,10 +46,10 @@ internal final class СaptchaController: _СaptchaControllerPrototype {
         }
         
         if canContinue {
-            request.asynchronous ? request.trySend() : request.tryInCurrentThread()
+            request.send()
         }
         else {
-            request.errorBlock(VKError(code: 5, desc: "Captcha loading error", request: request))
+            request.handle(error: VKRequestError.captchaFailed)
         }
     }
     
@@ -65,9 +65,9 @@ internal final class СaptchaController: _СaptchaControllerPrototype {
             return false
         }
         
-        DispatchQueue.main.sync(execute: {
+        DispatchQueue.main.sync() {
             self.load(data)
-        })
+        }
         
         _ = waitAnswer.wait(timeout: DispatchTime.distantFuture)
         return true

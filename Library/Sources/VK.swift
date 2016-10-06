@@ -17,7 +17,7 @@ public protocol VKDelegate: class {
     ///Called when SwiftyVK did unauthorize and remove token
     func vkDidUnauthorize()
     ///Called when SwiftyVK did failed autorization
-    func vkAutorizationFailedWith(error: VKError)
+    func vkAutorizationFailedWith(error: VKAuthError)
     /**Called when SwiftyVK need know where a token is located
      - returns: Path to save/read token or nil if should save token to UserDefaults*/
     func vkShouldUseTokenPath() -> String?
@@ -71,7 +71,7 @@ public struct VK {
         delegate = owner
         appID    = id
         _ = Token.get()
-        VK.Log.put("Global", "SwiftyVK INIT")
+         VK.Log.put("Global", "SwiftyVK configured")
     }
     
     
@@ -112,13 +112,6 @@ public struct VK {
         LP.stop()
         Token.remove()
     }
-    
-    
-    
-    @available(*, unavailable, renamed: "configure")
-    public static func start(appID id: String, delegate owner: VKDelegate) {}
-    @available(*, unavailable, renamed: "logIn")
-    public static func authorize() {}
 }
 //
 //
@@ -163,7 +156,7 @@ extension VK {
 extension VK {
     ///Access to the API methods
     public typealias API = _VKAPI
-    public typealias SuccessBlock = (_ response: JSON) -> Void
-    public typealias ErrorBlock = (_ error: VKError) -> Void
-    public typealias ProgressBlock = (_ done: Int, _ total: Int) -> Void
+    public typealias SuccessBlock = (_ response: JSON) -> ()
+    public typealias ErrorBlock = (_ error: Error) -> ()
+    public typealias ProgressBlock = (_ done: Int64, _ total: Int64) -> ()
 }

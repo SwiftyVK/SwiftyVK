@@ -24,7 +24,6 @@ class Captcha_Tests: XCTestCase {
         
         DispatchQueue.global(qos: .userInitiated).async {
             let req = VK.API.custom(method: "captcha.force")
-            req.asynchronous = false
             var executed = false
             
             req.send(
@@ -53,7 +52,6 @@ class Captcha_Tests: XCTestCase {
         Stubs.Captcha.success(caller: self)
         
         let req = VK.API.custom(method: "captcha.force")
-        req.asynchronous = true
         
         req.send(
             onSuccess: {response in
@@ -77,7 +75,6 @@ class Captcha_Tests: XCTestCase {
 //        Stubs.Captcha.failed(caller: self)
 //        
 //        let req = VK.API.Users.get()
-//        req.asynchronous = true
 //        req.maxAttempts = 1
 //        
 //        req.send(

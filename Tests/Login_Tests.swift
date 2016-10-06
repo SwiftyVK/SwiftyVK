@@ -41,7 +41,6 @@ class Login_Tests: VKTestCase {
         
         DispatchQueue.global(qos: .userInitiated).async {
             let req = VK.API.Users.get()
-            req.asynchronous = false
             var executed = false
             
             req.send(
@@ -137,8 +136,7 @@ class Login_Tests: VKTestCase {
                 exp.fulfill()
             },
             onError: {error in
-                XCTAssertEqual(error.domain, "APIDomain")
-                XCTAssertEqual(error.code, 5, "Unexpected error code")
+                XCTAssertEqual((error as? VKAPIError)?._code, 5, "Unexpected error")
                 exp.fulfill()
             }
         )
@@ -166,8 +164,7 @@ class Login_Tests: VKTestCase {
                 exp.fulfill()
             },
             onError: {error in
-                XCTAssertEqual(error.domain, "SwiftyVKDomain")
-                XCTAssertEqual(error.code, 2, "Unexpected error code")
+                XCTAssertEqual(error as? VKAuthError, VKAuthError.deniedFromUser, "Unexpected error")
                 exp.fulfill()
             }
         )
@@ -195,8 +192,7 @@ class Login_Tests: VKTestCase {
                 exp.fulfill()
             },
             onError: {error in
-                XCTAssertEqual(error.domain, "SwiftyVKDomain")
-                XCTAssertEqual(error.code, 2, "Unexpected error code")
+                XCTAssertEqual(error as? VKAuthError, VKAuthError.deniedFromUser, "Unexpected error code")
                 exp.fulfill()
             }
         )

@@ -36,28 +36,28 @@ internal final class WebController : _WebControllerPrototype {
   fileprivate let waitUser = DispatchSemaphore(value: 0)
   private var fails = 0
   fileprivate var urlRequest : URLRequest?
-  private weak var request : Request?
+  private weak var request : RequestInstance?
   private var isValidation = false
   
   
-  class func validate(_ request: Request, validationUrl: String) {
+  class func validate(_ request: RequestInstance, validationUrl: String) {
     
     vkSheetQueue.sync(execute: {
       self.start(url: validationUrl, request: request, isValidation: true)
-      request.asynchronous ? request.trySend() : request.tryInCurrentThread()
+      request.send()
     })
   }
   
   
   
-  internal class func start(url: String, request: Request?, isValidation : Bool = false) {
+  internal class func start(url: String, request: RequestInstance?, isValidation : Bool = false) {
     let params              = getParamsForPlatform()
     let controller          = params.controller
     controller.request      = request
     controller.showWithUrl(url, isSheet: params.isSheet)
     activeWebController     = controller
     controller.isValidation = isValidation
-    VK.Log.put("Global", "WebController wait user actions")
+     VK.Log.put("Global", "WebController wait user actions")
     _ = controller.waitUser.wait(timeout: DispatchTime.distantFuture)
   }
   
@@ -92,11 +92,10 @@ internal final class WebController : _WebControllerPrototype {
   
   private func failValidation() {
     DispatchQueue.global(qos: .default).async {
-      let err = VKError(code: 3, desc: "Fail user validation", request: self.request)
-      self.request?.errorBlock(err)
+      let err = VKAuthError.failingValidation
       VK.delegate?.vkAutorizationFailedWith(error: err)
     }
-    request?.attempts = request!.maxAttempts
+    request?.handle(error: VKAuthError.failingValidation)
     hide()
   }
   
@@ -147,7 +146,7 @@ internal final class WebController : _WebControllerPrototype {
     
     
     override func windowDidLoad() {
-      VK.Log.put("Global", "\(self) INIT")
+       VK.Log.put("Global", "\(self) INIT")
       webView!.frameLoadDelegate  = self
       
         window?.styleMask.formUnion(NSFullSizeContentViewWindowMask)
@@ -261,7 +260,7 @@ internal final class WebController : _WebControllerPrototype {
     
     
     override func viewDidLoad() {
-      VK.Log.put("Global", "\(self) INIT")
+       VK.Log.put("Global", "\(self) INIT")
       webView!.delegate = self
       super.viewDidLoad()
     }

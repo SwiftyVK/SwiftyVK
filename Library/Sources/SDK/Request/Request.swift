@@ -4,17 +4,6 @@ import Foundation
 
 internal var sharedCaptchaIsRun = false
 internal var sharedCaptchaAnswer : [String : String]?
-internal var nextRequestId = 0
-private func getNextRequestId() -> Int {
-    nextRequestId += 1
-    return nextRequestId
-}
-
-
-
-public func ==(lhs: Request, rhs: Request) -> Bool {
-    return lhs.id == rhs.id && lhs.method == rhs.method && lhs.parameters == rhs.parameters
-}
 
 
 
@@ -26,30 +15,22 @@ public enum HTTPMethods : String {
 
 
 ///Request to VK API
-public final class Request : CustomStringConvertible, Equatable {
-    public private(set) var id : Int = getNextRequestId()
+public final class Request {
+    ///Request timeout
     public var timeout = VK.defaults.timeOut
-    public var asynchronous = VK.defaults.sendAsynchronous
     ///Maximum number of attempts to send, after which execution priryvaetsya and an error is returned
     public var maxAttempts = VK.defaults.maxAttempts
     ///Whether to allow automatic processing of some API error
     public var catchErrors = VK.defaults.catchErrors
-    ///HTTP prtocol dending method. See - https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods
-    public var httpMethod = HTTPMethods.GET
-    ///Log for this request life time
-    public internal(set) var log = [String]()
     ///Allows print log messages to console
     public var logToConsole : Bool = VK.defaults.logToConsole
+    ///HTTP prtocol dending method. See - https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods
+    public var httpMethod = HTTPMethods.GET
     internal var method = ""
     internal private(set) var isAPI = false
-    internal var attempts = 0
-    internal var authFails = 0
-    internal var canSend : Bool {return attempts < maxAttempts || maxAttempts == 0}
     internal var swappedRequest : Request? = nil
     internal var customURL : String? = nil
-    public private(set) var cancelled = false
-    private var useDefaultLanguage = VK.defaults.useSystemLanguage
-    private var VKMedia : [VKMedia]?
+    private var media : [VKMedia]?
     fileprivate var parameters = [String : String]()
     
     public var successBlock : VK.SuccessBlock {
@@ -59,43 +40,24 @@ public final class Request : CustomStringConvertible, Equatable {
             else {privateSuccessBlock = newValue}
         }
     }
-    private var privateSuccessBlock = VK.defaults.successBlock {
-        didSet {
-            successBlockIsSet = true
-            VK.Log.put(self, "Set new success block")
-        }
-    }
-    public var errorBlock = VK.defaults.errorBlock {
-        didSet {
-            errorBlockIsSet = true
-            VK.Log.put(self, "Set new error block")
-        }
-    }
-    internal private(set) var successBlockIsSet = false
-    internal private(set) var errorBlockIsSet = false
+    private var privateSuccessBlock = VK.defaults.successBlock
+    public var errorBlock = VK.defaults.errorBlock
     public var progressBlock = VK.defaults.progressBlock
     public var language : String? {
         get {
-            return useDefaultLanguage ? VK.defaults.language : privateLanguage
+            return privateLanguage ?? VK.defaults.language
         }
         set {
-            guard newValue == nil || VK.defaults.supportedLanguages.contains(newValue!) else {return}
+            guard let newValue = newValue, VK.defaults.supportedLanguages.contains(newValue) else {return}
             self.privateLanguage = newValue
-            useDefaultLanguage = (newValue == nil)
         }
     }
-    private var privateLanguage = VK.defaults.language
+    private var privateLanguage : String?
     internal var urlRequest : URLRequest {
-        let req = NSURLFabric.get(url: customURL, httpMethod: httpMethod, method: method, params: allParameters, VKMedia: VKMedia)
+        let req = NSURLFabric.get(url: customURL, httpMethod: httpMethod, method: method, params: allParameters, media: media)
         req.timeoutInterval = TimeInterval(self.timeout)
-        VK.Log.put(self, "Create url: \(req.url!.absoluteString) with timeout: \(timeout)")
         return req as URLRequest
     }
-    internal lazy var response : Response = {
-        let result = Response()
-        result.request = self
-        return result
-    }()
     private var allParameters : [String : String] {
         var params = parameters
         
@@ -118,20 +80,14 @@ public final class Request : CustomStringConvertible, Equatable {
         
         return params
     }
-    public var description : String {
-        get {return "Request \(id): \(method)\(parameters), attempts: \(maxAttempts)"}
-    }
     
     
     
-    internal init() {
-        VK.Log.put(self, "INIT request")
-    }
+    internal init() {}
     
     
     
     internal init(url: String) {
-        VK.Log.put(self, "INIT with custom url: \(url)")
         self.customURL = url
     }
     
@@ -141,20 +97,18 @@ public final class Request : CustomStringConvertible, Equatable {
         self.isAPI               = true
         self.method              = method
         self.parameters          = argToString(parameters)
-        VK.Log.put(self, "INIT with method name: \(method) and parameters: \(self.parameters)")
     }
     
     
     
-    internal init(url: String, VKMedia: [VKMedia]) {
+    internal init(url: String, media: [VKMedia]) {
         var length = Double(0)
-        VKMedia.forEach {length += Double($0.data.count)}
+        media.forEach {length += Double($0.data.count)}
         
         self.httpMethod          = .POST
         self.timeout             = Int(length*0.0001)
         self.customURL           = url
-        self.VKMedia               = VKMedia
-        VK.Log.put(self, "INIT with VKMedia files: \(VKMedia)")
+        self.media             = media
     }
     
     
@@ -162,7 +116,6 @@ public final class Request : CustomStringConvertible, Equatable {
     ///Add new parameters to request
     public func addParameters(_ agrDict: [VK.Arg : String]?) {
         for (argName, argValue) in agrDict! {
-            VK.Log.put(self, "Add parameter: \(argName.rawValue)=\(argValue)")
             self.parameters[argName.rawValue] = argValue
         }
     }
@@ -170,57 +123,16 @@ public final class Request : CustomStringConvertible, Equatable {
     
     
     ///Sending request. All parameters are optional
-    public func send(
+    @discardableResult public func send(
         method httpMethod: HTTPMethods? = nil,
         onSuccess successBlock: VK.SuccessBlock? = nil,
-        onError errorBlock:  VK.ErrorBlock? = nil) {
+        onError errorBlock:  VK.ErrorBlock? = nil) -> RequestPointer {
         
-        httpMethod != nil   ? self.httpMethod = httpMethod!     : ()
-        successBlock != nil ? self.successBlock = successBlock! : ()
-        errorBlock != nil   ? self.errorBlock = errorBlock!     : ()
+        self.httpMethod = httpMethod ?? self.httpMethod
+        self.successBlock = successBlock ?? self.successBlock
+        self.errorBlock = errorBlock ?? self.errorBlock
         
-        attempts = 0
-        cancelled = false
-//        trySend()
-        _ = RequestInstance.createWith(request: self)
-    }
-    
-    
-    
-    internal func trySend() {
-        if canSend {
-            attempts += 1
-            let type = (self.asynchronous ? "asynchronously" : "synchronously")
-            VK.Log.put(self, "Prepare to send \(type) \(attempts) of \(maxAttempts) times", atNewLine: true)
-            response.clean()
-            _ = Connection(request: self)
-        }
-        else {
-            VK.Log.put(self, "Can no longer send! \(attempts) of \(maxAttempts) times")
-            response.executeError()
-        }
-    }
-    
-    
-    
-    internal func tryInCurrentThread() {
-        if canSend {
-            attempts += 1
-            VK.Log.put(self, "Prepare to send \(attempts) of \(maxAttempts) times in current thread", atNewLine: true)
-            response.clean()
-            Connection.tryInCurrentThread(self)
-        }
-        else {
-            VK.Log.put(self, "Can no longer send in current thread! \(attempts) of \(maxAttempts) times")
-            response.executeError()
-        }
-    }
-    
-    
-    
-    public func cancel() {
-        cancelled = true
-        VK.Log.put(self, "Cancel")
+        return RequestInstance.createWith(request: self)
     }
     
     
@@ -235,10 +147,5 @@ public final class Request : CustomStringConvertible, Equatable {
         }
         return strDict
     }
-    
-    
-    
-    @available(*, unavailable, renamed:"asynchronous")
-    public var isAsynchronous = VK.defaults.sendAsynchronous
 }
 
