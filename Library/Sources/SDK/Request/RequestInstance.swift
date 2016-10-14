@@ -100,7 +100,7 @@ extension RequestInstance {
         
         guard sendAttempts < config.maxAttempts else {
             if result.error == nil {
-                result.setError(error: VK.Error.Request.maximumAttemptsExceeded)
+                result.setError(error: ErrorRequest.maximumAttemptsExceeded)
             }
             
             execute(error: result.error!)
@@ -110,7 +110,7 @@ extension RequestInstance {
         
         sendAttempts += 1
         VK.Log.put(self, "send \(sendAttempts) of \(config.maxAttempts) times")
-        currentSend = SendTask.createWith(config: config, delegate: self)
+        currentSend = SendTask.createWith(id: sendAttempts, config: config, delegate: self)
     }
     
     
@@ -185,7 +185,7 @@ extension RequestInstance {
     
     
     fileprivate func catchError(error err: Error) {
-        guard sendAttempts < config.maxAttempts && config.catchErrors == true, let error = err as? VK.Error.API else {
+        guard sendAttempts < config.maxAttempts && config.catchErrors == true, let error = err as? ErrorAPI else {
             execute(error: err)
             return
         }

@@ -38,7 +38,7 @@ internal struct Result: CustomStringConvertible {
             }
                 
             else if json["error"].exists() {
-                error = VK.Error.API(json: json["error"])
+                error = ErrorAPI(json: json["error"])
             }
             else if !json.isEmpty {
                 VK.Log.put(request, "result contained response")
@@ -46,7 +46,7 @@ internal struct Result: CustomStringConvertible {
             }
             else {
                 VK.Log.put(request, "json not contain response or error")
-                error = VK.Error.Request.responseParsingFailed
+                error = ErrorRequest.responseParsingFailed
             }
     }
     

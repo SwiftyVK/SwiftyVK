@@ -24,7 +24,7 @@ class Upload_Tests: VKTestCase {
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        VK.API.Upload.Photo.toMessage(VKMedia(imageData: data, type: .JPG))
+        VK.API.Upload.Photo.toMessage(Media(imageData: data, type: .JPG))
             .send(
                 onSuccess: {response in
                     XCTAssertNotNil(response[0,"id"].int)
@@ -66,7 +66,7 @@ class Upload_Tests: VKTestCase {
         var progressExecuted = false || Stubs.enabled
         
         VK.API.Upload.Photo.toWall.toGroup(
-            VKMedia(imageData: data, type: .JPG),
+            Media(imageData: data, type: .JPG),
             groupId: "60479154")
             .send(
                 onSuccess: {response in
@@ -110,7 +110,7 @@ class Upload_Tests: VKTestCase {
         var progressExecuted = false || Stubs.enabled
         
         VK.API.Upload.Photo.toAlbum(
-            [VKMedia(imageData: data, type: .JPG)],
+            [Media(imageData: data, type: .JPG)],
             albumId: "181808365",
             groupId: "60479154",
             caption: "test")
@@ -158,7 +158,7 @@ class Upload_Tests: VKTestCase {
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        VK.API.Upload.Photo.toMarket(VKMedia(imageData: data, type: .JPG), groupId: "98197515")
+        VK.API.Upload.Photo.toMarket(Media(imageData: data, type: .JPG), groupId: "98197515")
             .send(
                 onSuccess: {response in
                     XCTAssertNotNil(response[0,"id"].int)
@@ -202,7 +202,7 @@ class Upload_Tests: VKTestCase {
         var progressExecuted = false || Stubs.enabled
         
         VK.API.Upload.Photo.toMarketAlbum(
-            VKMedia(imageData: data, type: .JPG),
+            Media(imageData: data, type: .JPG),
             groupId: "98197515"
             )
             .send(
@@ -246,7 +246,7 @@ class Upload_Tests: VKTestCase {
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        VK.API.Upload.audio(VKMedia(audioData: data))
+        VK.API.Upload.audio(Media(audioData: data))
             .send(
                 onSuccess: {response in
                     XCTAssertNotNil(response["id"].int)
@@ -286,7 +286,7 @@ class Upload_Tests: VKTestCase {
         var progressExecuted = false || Stubs.enabled
         
         VK.API.Upload.Video.fromFile(
-            VKMedia(videoData: data),
+            Media(videoData: data),
             name: "test video",
             description: "test",
             isPrivate: true,
@@ -378,7 +378,7 @@ class Upload_Tests: VKTestCase {
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        VK.API.Upload.document(VKMedia(documentData: data, type: "rtf"))
+        VK.API.Upload.document(Media(documentData: data, type: "rtf"))
             .send(
                 onSuccess: {response in
                     XCTAssertNotNil(response[0,"id"].int)

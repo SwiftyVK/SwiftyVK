@@ -265,10 +265,10 @@ But sometimes it so happens that the query is executed when the user is **not au
 ```swift
 //Get data of image
 let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("image", ofType: "jpg")!)!
-//Crete VKMedia object to upload
-let VKMedia = VKMedia(imageData: data, type: .JPG)
+//Crete Media object to upload
+let Media = Media(imageData: data, type: .JPG)
 //Upload image to wall        
-let req = VK.API.Upload.Photo.toWall.toUser(VKMedia, userId: "1234567890")
+let req = VK.API.Upload.Photo.toWall.toUser(Media, userId: "1234567890")
 req.progressBlock = {done, total in print("SwiftyVK: uploadPhoto progress: \(done) of \(total))")}
 req.successBlock = {response in print("SwiftyVK: uploadPhoto success \n \(response)")}
 req.errorBlock = {error in print("SwiftyVK: uploadPhoto fail \n \(error)")}

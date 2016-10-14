@@ -24,7 +24,7 @@ final class SendQueue : OperationQueue {
         
         runLoopQueue.async {
             let timer = Timer(timeInterval: 1, target: self, selector: #selector(self.dropCounter), userInfo: nil, repeats: true)
-            timer.tolerance = 0.1
+            timer.tolerance = 0.05
             RunLoop.current.add(timer, forMode: .defaultRunLoopMode)
             CFRunLoopRun()
         }

@@ -37,10 +37,10 @@ internal final class WebController : _WebControllerPrototype {
     private var fails = 0
     fileprivate var urlRequest : URLRequest?
     private var isValidation = false
-    private static var error: VK.Error.Auth?
+    private static var error: ErrorAuth?
     
     
-    class func validateWith(url: String) -> VK.Error.Auth? {
+    class func validateWith(url: String) -> ErrorAuth? {
         
         return vkSheetQueue.sync() {
             return self.startWith(url: url, isValidation: true)
@@ -49,7 +49,7 @@ internal final class WebController : _WebControllerPrototype {
     
     
     
-    internal class func startWith(url: String, isValidation : Bool = false) -> VK.Error.Auth? {
+    internal class func startWith(url: String, isValidation : Bool = false) -> ErrorAuth? {
         let params              = getParamsForPlatform()
         let controller          = params.controller
         controller.showWithUrl(url, isSheet: params.isSheet)
@@ -74,11 +74,11 @@ internal final class WebController : _WebControllerPrototype {
             self.hide()
         }
         else if urlString.contains("access_denied") {
-            WebController.error = VK.Error.Auth.deniedFromUser
+            WebController.error = ErrorAuth.deniedFromUser
             hide()
         }
         else if urlString.contains("fail=1") {
-            WebController.error = VK.Error.Auth.failingAuthorization
+            WebController.error = ErrorAuth.failingAuthorization
             failValidation()
         }
         else if urlString.contains(authorizeUrl) || urlString.contains("act=security_check") || urlString.contains("https://m.vk.com/login?") {
@@ -93,10 +93,10 @@ internal final class WebController : _WebControllerPrototype {
     
     private func failValidation() {
         DispatchQueue.global(qos: .default).async {
-            let err = VK.Error.Auth.failingValidation
+            let err = ErrorAuth.failingValidation
             VK.delegate?.vkAutorizationFailedWith(error: err)
         }
-        WebController.error = VK.Error.Auth.failingValidation
+        WebController.error = ErrorAuth.failingValidation
         hide()
     }
     

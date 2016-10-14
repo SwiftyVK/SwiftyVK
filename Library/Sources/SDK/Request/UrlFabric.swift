@@ -65,7 +65,7 @@ internal struct UrlFabric {
     
     
     
-    private static func createWith(media: [VKMedia], url: String) -> NSMutableURLRequest {
+    private static func createWith(media: [Media], url: String) -> NSMutableURLRequest {
         let emptyUrl = URL(string: methodUrl)!
         
         let req = NSMutableURLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)

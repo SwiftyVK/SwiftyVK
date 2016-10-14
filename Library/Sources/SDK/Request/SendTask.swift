@@ -10,18 +10,19 @@ final class SendTask : Operation {
     unowned private let delegate: RequestInstance
     private let config: RequestConfig
     private var task: URLSessionTask!
-    private let id = VK.Log.generateTaskId()
+    private let id: Int
+    private let reqId: Int64
     
     
     
     override var description: String {
-        return "send task #\(id)"
+        return "send task #\(delegate.id)-\(id)"
     }
     
     
     
-    static func createWith(config: RequestConfig, delegate: RequestInstance) -> SendTask {
-        let operation = SendTask(config: config, delegate: delegate)
+    static func createWith(id: Int, config: RequestConfig, delegate: RequestInstance) -> SendTask {
+        let operation = SendTask(id: id, config: config, delegate: delegate)
         
         
         if config.api {
@@ -35,7 +36,9 @@ final class SendTask : Operation {
     
     
     
-    private init(config: RequestConfig, delegate: RequestInstance) {
+    private init(id: Int, config: RequestConfig, delegate: RequestInstance) {
+        self.id         = id
+        self.reqId      = delegate.id
         self.config     = config
         self.delegate   = delegate
         super.init()
@@ -61,7 +64,7 @@ final class SendTask : Operation {
                 self.delegate.handle(error: error)
             }
             else {
-                self.delegate.handle(error: VK.Error.Request.unexpectedResponse)
+                self.delegate.handle(error: ErrorRequest.unexpectedResponse)
             }
             
             semaphore.signal()

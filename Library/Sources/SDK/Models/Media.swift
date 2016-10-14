@@ -2,7 +2,7 @@ import Foundation
 
 
 
-public struct VKMedia : CustomStringConvertible {
+public struct Media : CustomStringConvertible {
   
   enum MediaType {
     case image
@@ -42,7 +42,7 @@ public struct VKMedia : CustomStringConvertible {
   
   public var description: String {
     get {
-    return "VK.Media with type \(type)"
+    return "Media with type \(type)"
     }
   }
   

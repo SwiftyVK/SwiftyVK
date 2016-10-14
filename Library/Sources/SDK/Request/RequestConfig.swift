@@ -32,7 +32,7 @@ public struct RequestConfig {
     
     internal let method: String
     internal let customUrl: String
-    internal let media: [VKMedia]
+    internal let media: [Media]
     internal var api: Bool {return !method.isEmpty}
     internal var upload: Bool {return !media.isEmpty && !customUrl.isEmpty && httpMethod == .POST}
 
@@ -56,7 +56,7 @@ public struct RequestConfig {
     
     
     
-    internal init(url: String, media: [VKMedia]) {
+    internal init(url: String, media: [Media]) {
         let dataLength      = TimeInterval(media.reduce(0) {return $0 + $1.data.count})
         self.method         = ""
         self.parameters     = [:]

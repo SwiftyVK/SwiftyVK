@@ -81,7 +81,7 @@ final class APIWorker {
     //FIXME:
     class func uploadPhoto() {
 //        let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "testImage", ofType: "jpg")!))
-//        let media = VKMedia(imageData: data, type: .JPG)
+//        let media = Media(imageData: data, type: .JPG)
 //        VK.API.Upload.Photo.toWall.toUser(media, userId: "4680178").send(
 //            onSuccess: {response in print("SwiftyVK: friendsGet success \n \(response)")},
 //            onError: {error in print("SwiftyVK: friendsGet fail \n \(error)")}

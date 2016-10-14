@@ -73,7 +73,7 @@ class Sending_Tests: VKTestCase {
     
     
     
-    func test_waiting_for_connection() {
+    func test_wait_for_connection() {
         Stubs.apiWith(jsonFile: "success.users.get", shouldFails: 10)
         let exp = expectation(description: "ready")
         
@@ -94,7 +94,7 @@ class Sending_Tests: VKTestCase {
     
     
     
-    func test_executing_error() {
+    func test_execute_error() {
         Stubs.apiWith(method: "groups.isMember", jsonFile: "error.missing.parameter", maxCalls: VK.config.maxAttempts)
         let exp = expectation(description: "ready")
         
@@ -136,7 +136,7 @@ class Sending_Tests: VKTestCase {
     
     
     
-    func test_send_limit() {
+    func test_send_queue_with_limit() {
         Stubs.apiWith(jsonFile: "success.users.get")
         let backup = VK.config.sendLimit
         let needSendCount = 100
@@ -178,7 +178,7 @@ class Sending_Tests: VKTestCase {
             let exp = self.expectation(description: "ready")
             var executed = 0
             
-            for n in 1...VK.config.sendLimit {
+            for n in 1...10 {
                 let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
                 req.send(
                     onSuccess: {response in

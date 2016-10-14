@@ -25,11 +25,11 @@ internal struct Authorizator {
         return  "client_id=\(VK.appID!)&scope=\(_perm)&display=\(_mode)&v\(VK.config.apiVersion)&sdk_version=\(VK.config.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
     }
     
-    private static var error: VK.Error.Auth?
+    private static var error: ErrorAuth?
     
     
     
-    internal static func authorize() -> VK.Error.Auth? {
+    internal static func authorize() -> ErrorAuth? {
         guard Token.get() == nil else {return nil}
         
         Thread.isMainThread
@@ -51,7 +51,7 @@ internal struct Authorizator {
         
         if VK.state != .authorized {
             if error == nil {
-                error = VK.Error.Auth.deniedFromUser
+                error = ErrorAuth.deniedFromUser
             }
             
             DispatchQueue.global(qos: .default).async {
