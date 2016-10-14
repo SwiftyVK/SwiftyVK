@@ -168,7 +168,7 @@ The call requests is as follows **VK.methodGrop.methodName**.
 For example, send request with parameters and response processing:
 ```swift
 let req = VK.API.Users.get([VK.Arg.userId : "1"])
-req.httpMethod = .Get
+req.HttpMethod = .Get
 req.successBlock = {response in print(response)}
 req.errorBlock = {error in print(error)}
 req.send()
@@ -205,7 +205,7 @@ The requests have several properties that control their behavior. Their names sp
 Property | Default | Description
 :------------- | ------------- | :-------------
 `id`| 1... | Automatically generated id.
-`httpMethod`| .GET | HTTP protocol method.
+`HttpMethod`| .GET | HTTP protocol method.
 `successBlock`| empty | This code block will be executed when the response to the request.
 `errorBlock` | empty | This code block will be executed, if during execution of the response fails.
 `progressBlock` | empty | This code block is executed when the file is loaded. It is called every time the server sent the next part of the file.
@@ -218,7 +218,7 @@ Property | Default | Description
 
 ###Default properties
 
-In addition to the settings of each individual request, you can set global settings for **SwiftyVK**. You need to contact structure `VK.defaults`. Some fields completely duplicate the properties of requests and will be assigned to the request when it is initialized, and the other presented only in a global context.
+In addition to the settings of each individual request, you can set global settings for **SwiftyVK**. You need to contact structure `VK.config`. Some fields completely duplicate the properties of requests and will be assigned to the request when it is initialized, and the other presented only in a global context.
 
 Property | Default | Description
 :------------- | ------------- | :-------------

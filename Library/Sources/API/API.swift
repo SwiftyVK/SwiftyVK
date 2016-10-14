@@ -4,8 +4,8 @@ public struct _VKAPI {
   - parameter code: Algorithm code in VKScript — a format similar to JavaSсript or ActionScript and assuming compatibility with ECMAScript.
   - returns: Request
   */
-  public static func execute(_ code: String) -> Request {
-    return Request(method: "execute", parameters: [VK.Arg.code : code])
+  public static func execute(_ code: String) -> RequestConfig {
+    return RequestConfig(method: "execute", parameters: [VK.Arg.code : code])
   }
   
   
@@ -17,8 +17,8 @@ public struct _VKAPI {
   - parameter parameters: method parameters
   - returns: Request
   */
-  public static func remote(method: String, parameters: [VK.Arg : String] = [:]) -> Request {
-    return Request(method: "execute.\(method)", parameters: parameters)
+  public static func remote(method: String, parameters: [VK.Arg : String] = [:]) -> RequestConfig {
+    return RequestConfig(method: "execute.\(method)", parameters: parameters)
   }
   
   
@@ -29,7 +29,7 @@ public struct _VKAPI {
   - parameter parameters: method parameters
   - returns: Request
   */
-  public static func custom(method: String, parameters: [VK.Arg : String] = [:]) -> Request {
-    return Request(method: method, parameters: parameters)
+  public static func custom(method: String, parameters: [VK.Arg : String] = [:]) -> RequestConfig {
+    return RequestConfig(method: method, parameters: parameters)
   }
 }

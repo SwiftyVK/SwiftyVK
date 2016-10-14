@@ -47,7 +47,7 @@ struct Stubs {
     static func apiWith(
         method: String = "users.get",
         params: [String : String?] = [:],
-        httpMethod: HTTPMethods = .GET,
+        httpMethod: HttpMethod = .GET,
         jsonFile: String,
         maxCalls: Int = Int.max,
         shouldFails: Int = 0,

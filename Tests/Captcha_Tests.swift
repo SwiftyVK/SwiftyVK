@@ -16,35 +16,6 @@ class Captcha_Tests: XCTestCase {
     
     
     
-    func test_synchroniously() {
-        let exp = expectation(description: "ready")
-        Stubs.apiWith(method: "captcha.force", jsonFile: "success.users.get", needCaptcha: true)
-        Stubs.Autorization.success()
-        Stubs.Captcha.success(caller: self)
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            let req = VK.API.custom(method: "captcha.force")
-            var executed = false
-            
-            req.send(
-                onSuccess: {response in
-                    executed = true
-                    exp.fulfill()
-                },
-                onError: {error in
-                    XCTFail("Unexpected error: \(error)")
-                    exp.fulfill()
-            })
-            if executed == false {
-                XCTFail("Request is not synchronious")
-            }
-        }
-        
-        waitForExpectations(timeout: delay) {_ in}
-    }
-    
-    
-    
     func test_asynchroniously() {
         let exp = expectation(description: "ready")
         Stubs.apiWith(method: "captcha.force", jsonFile: "success.users.get", needCaptcha: true)

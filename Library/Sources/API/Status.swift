@@ -5,15 +5,15 @@ extension _VKAPI {
     
     
     ///Returns data required to show the status of a user or community. More - https://vk.com/dev/status.get
-    public static func get(_ parameters: [VK.Arg : String] = [:]) -> Request {
-      return Request(method: "status.get", parameters: parameters)
+    public static func get(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
+      return RequestConfig(method: "status.get", parameters: parameters)
     }
     
     
     
     ///Sets a new status for the current user. More - https://vk.com/dev/status.set
-    public static func set(_ parameters: [VK.Arg : String] = [:]) -> Request {
-      return Request(method: "status.set", parameters: parameters)
+    public static func set(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
+      return RequestConfig(method: "status.set", parameters: parameters)
     }
   }
 }

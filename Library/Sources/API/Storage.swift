@@ -5,21 +5,21 @@ extension _VKAPI {
     
     
     ///Returns a value of variable with the name set by key parameter. More - http://vk.com/dev/storage.get
-    public static func get(_ parameters: [VK.Arg : String] = [:]) -> Request {
-      return Request(method: "storage.get", parameters: parameters)
+    public static func get(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
+      return RequestConfig(method: "storage.get", parameters: parameters)
     }
     
     
     ///Saves a value of variable with the name set by key parameter. More - https://vk.com/dev/storage.set
-    public static func set(_ parameters: [VK.Arg : String] = [:]) -> Request {
-      return Request(method: "storage.set", parameters: parameters)
+    public static func set(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
+      return RequestConfig(method: "storage.set", parameters: parameters)
     }
     
     
     
     ///Returns the names of all variables. More - https://vk.com/dev/storage.getKeys
-    public static func getKeys(_ parameters: [VK.Arg : String] = [:]) -> Request {
-      return Request(method: "storage.getKeys", parameters: parameters)
+    public static func getKeys(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
+      return RequestConfig(method: "storage.getKeys", parameters: parameters)
     }
   }
 }

@@ -24,18 +24,20 @@ class Upload_Tests: VKTestCase {
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        let req = VK.API.Upload.Photo.toMessage(VKMedia(imageData: data, type: .JPG))
-        req.progressBlock = {done, total in}
-        req.successBlock = {response in
-            XCTAssertNotNil(response[0,"id"].int)
-            exp.fulfill()
-        }
-        req.errorBlock = {error in
-            XCTFail("Unexpected error in request: \(error)")
-            exp.fulfill()
-        }
-        req.progressBlock = {_,_ in progressExecuted = true}
-        req.send()
+        VK.API.Upload.Photo.toMessage(VKMedia(imageData: data, type: .JPG))
+            .send(
+                onSuccess: {response in
+                    XCTAssertNotNil(response[0,"id"].int)
+                    exp.fulfill()
+                },
+                onError: {error in
+                    XCTFail("Unexpected error in request: \(error)")
+                    exp.fulfill()
+                },
+                onProgress: {_,_ in
+                    progressExecuted = true
+                }
+        )
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
             XCTAssertTrue(progressExecuted)
@@ -63,20 +65,22 @@ class Upload_Tests: VKTestCase {
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        let req = VK.API.Upload.Photo.toWall.toGroup(
+        VK.API.Upload.Photo.toWall.toGroup(
             VKMedia(imageData: data, type: .JPG),
             groupId: "60479154")
-        req.progressBlock = {done, total in}
-        req.successBlock = {response in
-            XCTAssertNotNil(response[0,"id"].int)
-            exp.fulfill()
-        }
-        req.errorBlock = {error in
-            XCTFail("Unexpected error in request: \(error)")
-            exp.fulfill()
-        }
-        req.progressBlock = {_,_ in progressExecuted = true}
-        req.send()
+            .send(
+                onSuccess: {response in
+                    XCTAssertNotNil(response[0,"id"].int)
+                    exp.fulfill()
+                },
+                onError: {error in
+                    XCTFail("Unexpected error in request: \(error)")
+                    exp.fulfill()
+                },
+                onProgress: {_,_ in
+                    progressExecuted = true
+                }
+        )
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
             XCTAssertTrue(progressExecuted)
@@ -105,23 +109,26 @@ class Upload_Tests: VKTestCase {
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        let req = VK.API.Upload.Photo.toAlbum(
+        VK.API.Upload.Photo.toAlbum(
             [VKMedia(imageData: data, type: .JPG)],
             albumId: "181808365",
             groupId: "60479154",
             caption: "test")
-        req.successBlock = {response in
-            XCTAssertNotNil(response[0,"id"].int)
-            let deleteReq = VK.API.Photos.delete([VK.Arg.photoId : response[0]["id"].stringValue])
-            if !Stubs.enabled {deleteReq.send()}
-            exp.fulfill()
-        }
-        req.errorBlock = {error in
-            XCTFail("Unexpected error in request: \(error)")
-            exp.fulfill()
-        }
-        req.progressBlock = {_,_ in progressExecuted = true}
-        req.send()
+            .send(
+                onSuccess: {response in
+                    XCTAssertNotNil(response[0,"id"].int)
+                    let deleteReq = VK.API.Photos.delete([VK.Arg.photoId : response[0]["id"].stringValue])
+                    if !Stubs.enabled {deleteReq.send()}
+                    exp.fulfill()
+                },
+                onError: {error in
+                    XCTFail("Unexpected error in request: \(error)")
+                    exp.fulfill()
+                },
+                onProgress: {_,_ in
+                    progressExecuted = true
+                }
+        )
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
             XCTAssertTrue(progressExecuted)
@@ -151,20 +158,20 @@ class Upload_Tests: VKTestCase {
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        let req = VK.API.Upload.Photo.toMarket(
-            VKMedia(imageData: data, type: .JPG),
-            groupId: "98197515"
+        VK.API.Upload.Photo.toMarket(VKMedia(imageData: data, type: .JPG), groupId: "98197515")
+            .send(
+                onSuccess: {response in
+                    XCTAssertNotNil(response[0,"id"].int)
+                    exp.fulfill()
+                },
+                onError: {error in
+                    XCTFail("Unexpected error in request: \(error)")
+                    exp.fulfill()
+                },
+                onProgress: {_,_ in
+                    progressExecuted = true
+                }
         )
-        req.successBlock = {response in
-            XCTAssertNotNil(response[0,"id"].int)
-            exp.fulfill()
-        }
-        req.errorBlock = {error in
-            XCTFail("Unexpected error in request: \(error)")
-            exp.fulfill()
-        }
-        req.progressBlock = {_,_ in progressExecuted = true}
-        req.send()
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
             XCTAssertTrue(progressExecuted)
@@ -194,20 +201,23 @@ class Upload_Tests: VKTestCase {
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        let req = VK.API.Upload.Photo.toMarketAlbum(
+        VK.API.Upload.Photo.toMarketAlbum(
             VKMedia(imageData: data, type: .JPG),
             groupId: "98197515"
+            )
+            .send(
+                onSuccess: {response in
+                    XCTAssertNotNil(response[0,"id"].int)
+                    exp.fulfill()
+                },
+                onError: {error in
+                    XCTFail("Unexpected error in request: \(error)")
+                    exp.fulfill()
+                },
+                onProgress: {_,_ in
+                    progressExecuted = true
+                }
         )
-        req.successBlock = {response in
-            XCTAssertNotNil(response[0,"id"].int)
-            exp.fulfill()
-        }
-        req.errorBlock = {error in
-            XCTFail("Unexpected error in request: \(error)")
-            exp.fulfill()
-        }
-        req.progressBlock = {_,_ in progressExecuted = true}
-        req.send()
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
             XCTAssertTrue(progressExecuted)
@@ -236,24 +246,25 @@ class Upload_Tests: VKTestCase {
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        let req = VK.API.Upload.audio(VKMedia(audioData: data))
-        
-        req.progressBlock = {done, total in}
-        req.successBlock = {response in
-            XCTAssertNotNil(response["id"].int)
-            let deleteReq = VK.API.Audio.delete([
-                VK.Arg.audioId : response["id"].stringValue,
-                VK.Arg.ownerId : response["owner_id"].stringValue
-                ])
-            if !Stubs.enabled {deleteReq.send()}
-            exp.fulfill()
-        }
-        req.errorBlock = {error in
-            XCTFail("Unexpected error in request: \(error)")
-            exp.fulfill()
-        }
-        req.progressBlock = {_,_ in progressExecuted = true}
-        req.send()
+        VK.API.Upload.audio(VKMedia(audioData: data))
+            .send(
+                onSuccess: {response in
+                    XCTAssertNotNil(response["id"].int)
+                    let deleteReq = VK.API.Audio.delete([
+                        VK.Arg.audioId : response["id"].stringValue,
+                        VK.Arg.ownerId : response["owner_id"].stringValue
+                        ])
+                    if !Stubs.enabled {deleteReq.send()}
+                    exp.fulfill()
+                },
+                onError: {error in
+                    XCTFail("Unexpected error in request: \(error)")
+                    exp.fulfill()
+                },
+                onProgress: {_,_ in
+                    progressExecuted = true
+                }
+        )
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
             XCTAssertTrue(progressExecuted)
@@ -274,29 +285,32 @@ class Upload_Tests: VKTestCase {
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        let req = VK.API.Upload.Video.fromFile(
+        VK.API.Upload.Video.fromFile(
             VKMedia(videoData: data),
             name: "test video",
             description: "test",
             isPrivate: true,
             isWallPost: false,
             isRepeat: false)
-        req.successBlock = {response in
-            XCTAssertNotNil(response["video_id"].int)
-            let deleteReq = VK.API.Audio.delete([
-                VK.Arg.audioId : response["video_id"].stringValue,
-                VK.Arg.ownerId : response["owner_id"].stringValue
-                ])
-
-            if !Stubs.enabled {deleteReq.send()}
-            exp.fulfill()
-        }
-        req.errorBlock = {error in
-            XCTFail("Unexpected error in request: \(error)")
-            exp.fulfill()
-        }
-        req.progressBlock = {_,_ in progressExecuted = true}
-        req.send()
+            .send(
+                onSuccess: {response in
+                    XCTAssertNotNil(response["video_id"].int)
+                    let deleteReq = VK.API.Audio.delete([
+                        VK.Arg.audioId : response["video_id"].stringValue,
+                        VK.Arg.ownerId : response["owner_id"].stringValue
+                        ])
+                    
+                    if !Stubs.enabled {deleteReq.send()}
+                    exp.fulfill()
+                },
+                onError: {error in
+                    XCTFail("Unexpected error in request: \(error)")
+                    exp.fulfill()
+                },
+                onProgress: {_,_ in
+                    progressExecuted = true
+                }
+        )
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
             XCTAssertTrue(progressExecuted)
@@ -308,34 +322,36 @@ class Upload_Tests: VKTestCase {
     
     func test_video_link() {
         Stubs.apiWith(method: "video.save", jsonFile: "success.uploadVideo")
-
+        
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        let req = VK.API.Upload.Video.fromUrl(
+        VK.API.Upload.Video.fromUrl(
             "http://www.youtube.com/watch?v=w7VD1681jV8",
             name: "test video",
             description: "test",
             isPrivate: true,
             isWallPost: false,
             isRepeat: false)
-
-        req.successBlock = {response in
-            XCTAssertNotNil(response["video_id"].int)
-            let deleteReq = VK.API.Audio.delete([
-                VK.Arg.audioId : response["video_id"].stringValue,
-                VK.Arg.ownerId : response["owner_id"].stringValue
-                ])
-
-            if !Stubs.enabled {deleteReq.send()}
-            exp.fulfill()
-        }
-        req.errorBlock = {error in
-            XCTFail("Unexpected error in request: \(error)")
-            exp.fulfill()
-        }
-        req.progressBlock = {_,_ in progressExecuted = true}
-        req.send()
+            .send(
+                onSuccess: {response in
+                    XCTAssertNotNil(response["video_id"].int)
+                    let deleteReq = VK.API.Audio.delete([
+                        VK.Arg.audioId : response["video_id"].stringValue,
+                        VK.Arg.ownerId : response["owner_id"].stringValue
+                        ])
+                    
+                    if !Stubs.enabled {deleteReq.send()}
+                    exp.fulfill()
+                },
+                onError: {error in
+                    XCTFail("Unexpected error in request: \(error)")
+                    exp.fulfill()
+                },
+                onProgress: {_,_ in
+                    progressExecuted = true
+                }
+        )
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
             XCTAssertTrue(progressExecuted)
@@ -362,25 +378,26 @@ class Upload_Tests: VKTestCase {
         let exp = expectation(description: "ready")
         var progressExecuted = false || Stubs.enabled
         
-        let req = VK.API.Upload.document(VKMedia(documentData: data, type: "rtf"))
-
-        req.progressBlock = {done, total in}
-        req.successBlock = {response in
-            XCTAssertNotNil(response[0,"id"].int)
-            let deleteReq = VK.API.Audio.delete([
-                VK.Arg.audioId : response["id"].stringValue,
-                VK.Arg.ownerId : response["owner_id"].stringValue
-                ])
-
-            if !Stubs.enabled {deleteReq.send()}
-            exp.fulfill()
-        }
-        req.errorBlock = {error in
-            XCTFail("Unexpected error in request: \(error)")
-            exp.fulfill()
-        }
-        req.progressBlock = {_,_ in progressExecuted = true}
-        req.send()
+        VK.API.Upload.document(VKMedia(documentData: data, type: "rtf"))
+            .send(
+                onSuccess: {response in
+                    XCTAssertNotNil(response[0,"id"].int)
+                    let deleteReq = VK.API.Audio.delete([
+                        VK.Arg.audioId : response["id"].stringValue,
+                        VK.Arg.ownerId : response["owner_id"].stringValue
+                        ])
+                    
+                    if !Stubs.enabled {deleteReq.send()}
+                    exp.fulfill()
+                },
+                onError: {error in
+                    XCTFail("Unexpected error in request: \(error)")
+                    exp.fulfill()
+                },
+                onProgress: {_,_ in
+                    progressExecuted = true
+                }
+        )
         
         waitForExpectations(timeout: reqTimeout*10) {_ in
             XCTAssertTrue(progressExecuted)

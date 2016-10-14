@@ -21,6 +21,7 @@ internal struct Resources {
   }()
   
   
+    
   internal static let bundle : Bundle = {
     let name = "SwiftyVKResources" + pathSuffix
     let ext = "bundle"
@@ -35,6 +36,7 @@ internal struct Resources {
     return Bundle.main
   }()
   
+    
 
   internal static func withSuffix(_ name : String) -> String {
     return name + pathSuffix

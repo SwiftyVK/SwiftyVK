@@ -10,19 +10,25 @@ class VKTestCase : XCTestCase {
     
     override func setUp() {
         super.setUp()
-        VK.defaults.logToConsole = true
-        VK.Log.purge()
+        VK.config.logToConsole = true
+//        VK.Log.purge()
         _ = ReqClock()
+        
+        if VK.config.logToConsole {
+            printSync("!~~~~~~~~~~!~~~~~~~~~~!~~~~~~~~~~!~~~~~~~~~~!~~~~~~~~~~!\n")
+        }
     }
     
     
     
     override func tearDown() {
-        //    printSync(VK.Log.get())
         OHHTTPStubs.removeAllStubs()
         super.tearDown()
-        Thread.sleep(forTimeInterval: 1)
-
+        
+        if VK.config.logToConsole {
+            printSync("\n!~~~~~~~~~~!~~~~~~~~~~!~~~~~~~~~~!~~~~~~~~~~!~~~~~~~~~~!")
+        }
+        
     }
     
     

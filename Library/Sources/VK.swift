@@ -17,7 +17,7 @@ public protocol VKDelegate: class {
     ///Called when SwiftyVK did unauthorize and remove token
     func vkDidUnauthorize()
     ///Called when SwiftyVK did failed autorization
-    func vkAutorizationFailedWith(error: VKAuthError)
+    func vkAutorizationFailedWith(error: VK.Error.Auth)
     /**Called when SwiftyVK need know where a token is located
      - returns: Path to save/read token or nil if should save token to UserDefaults*/
     func vkShouldUseTokenPath() -> String?
@@ -88,7 +88,7 @@ public struct VK {
      * If not, shows a pop-up notification with authorization request
      */
     public static func logIn() {
-        Authorizator.authorize(nil);
+        _ = Authorizator.authorize();
     }
     
     
@@ -156,7 +156,8 @@ extension VK {
 extension VK {
     ///Access to the API methods
     public typealias API = _VKAPI
+    public typealias Error = _Error
     public typealias SuccessBlock = (_ response: JSON) -> ()
-    public typealias ErrorBlock = (_ error: Error) -> ()
+    public typealias ErrorBlock = (_ error: Swift.Error) -> ()
     public typealias ProgressBlock = (_ done: Int64, _ total: Int64) -> ()
 }

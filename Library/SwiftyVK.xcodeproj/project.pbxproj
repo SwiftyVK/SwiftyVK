@@ -19,10 +19,10 @@
 		A2527E3C1BD1356C00F65412 /* WebView-OSX.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E251BD1343F00F65412 /* WebView-OSX.xib */; };
 		A2527E3D1BD1357000F65412 /* CaptchaView-iOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E181BD1343F00F65412 /* CaptchaView-iOS.xib */; };
 		A2527E3E1BD1357000F65412 /* WebView-iOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E231BD1343F00F65412 /* WebView-iOS.xib */; };
-		A25AE9391D9AD57E008C0AA9 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE9381D9AD57E008C0AA9 /* Defaults.swift */; };
-		A25AE93A1D9AD583008C0AA9 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE9381D9AD57E008C0AA9 /* Defaults.swift */; };
-		A28368EC1D9D742700EEBE2A /* SendOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* SendOperation.swift */; };
-		A28368ED1D9D742D00EEBE2A /* SendOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* SendOperation.swift */; };
+		A25AE9391D9AD57E008C0AA9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE9381D9AD57E008C0AA9 /* Config.swift */; };
+		A25AE93A1D9AD583008C0AA9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE9381D9AD57E008C0AA9 /* Config.swift */; };
+		A28368EC1D9D742700EEBE2A /* SendTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* SendTask.swift */; };
+		A28368ED1D9D742D00EEBE2A /* SendTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* SendTask.swift */; };
 		A28368EF1D9D75DC00EEBE2A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EE1D9D75DC00EEBE2A /* Result.swift */; };
 		A28368F41D9D87EE00EEBE2A /* SendQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368F31D9D87EE00EEBE2A /* SendQueue.swift */; };
 		A28368F51D9D87EE00EEBE2A /* SendQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368F31D9D87EE00EEBE2A /* SendQueue.swift */; };
@@ -65,8 +65,8 @@
 		A2EB6EDD1BD18389008E7D86 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D851BD12FD200F65412 /* Resources.swift */; };
 		A2EB6EDE1BD18389008E7D86 /* Scope.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D861BD12FD200F65412 /* Scope.swift */; };
 		A2EB6EDF1BD18389008E7D86 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D871BD12FD200F65412 /* Token.swift */; };
-		A2EB6EE11BD18389008E7D86 /* NSURLFabric.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8A1BD12FD200F65412 /* NSURLFabric.swift */; };
-		A2EB6EE21BD18389008E7D86 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8B1BD12FD200F65412 /* Request.swift */; };
+		A2EB6EE11BD18389008E7D86 /* UrlFabric.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8A1BD12FD200F65412 /* UrlFabric.swift */; };
+		A2EB6EE21BD18389008E7D86 /* RequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8B1BD12FD200F65412 /* RequestConfig.swift */; };
 		A2EB6EE41BD18389008E7D86 /* CapthcaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8E1BD12FD200F65412 /* CapthcaController.swift */; };
 		A2EB6EE51BD18389008E7D86 /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8F1BD12FD200F65412 /* WebController.swift */; };
 		A2EB6EE71BD18389008E7D86 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7B1BD12FD200F65412 /* Log.swift */; };
@@ -105,8 +105,8 @@
 		A2EB6F0A1BD18395008E7D86 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D851BD12FD200F65412 /* Resources.swift */; };
 		A2EB6F0B1BD18395008E7D86 /* Scope.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D861BD12FD200F65412 /* Scope.swift */; };
 		A2EB6F0C1BD18395008E7D86 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D871BD12FD200F65412 /* Token.swift */; };
-		A2EB6F0E1BD18395008E7D86 /* NSURLFabric.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8A1BD12FD200F65412 /* NSURLFabric.swift */; };
-		A2EB6F0F1BD18395008E7D86 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8B1BD12FD200F65412 /* Request.swift */; };
+		A2EB6F0E1BD18395008E7D86 /* UrlFabric.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8A1BD12FD200F65412 /* UrlFabric.swift */; };
+		A2EB6F0F1BD18395008E7D86 /* RequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8B1BD12FD200F65412 /* RequestConfig.swift */; };
 		A2EB6F111BD18395008E7D86 /* CapthcaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8E1BD12FD200F65412 /* CapthcaController.swift */; };
 		A2EB6F121BD18395008E7D86 /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8F1BD12FD200F65412 /* WebController.swift */; };
 		A2EB6F141BD18395008E7D86 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7B1BD12FD200F65412 /* Log.swift */; };
@@ -218,8 +218,8 @@
 		A2527D851BD12FD200F65412 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		A2527D861BD12FD200F65412 /* Scope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scope.swift; sourceTree = "<group>"; };
 		A2527D871BD12FD200F65412 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Token.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		A2527D8A1BD12FD200F65412 /* NSURLFabric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSURLFabric.swift; sourceTree = "<group>"; };
-		A2527D8B1BD12FD200F65412 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Request.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A2527D8A1BD12FD200F65412 /* UrlFabric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlFabric.swift; sourceTree = "<group>"; };
+		A2527D8B1BD12FD200F65412 /* RequestConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RequestConfig.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A2527D8E1BD12FD200F65412 /* CapthcaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CapthcaController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A2527D8F1BD12FD200F65412 /* WebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = WebController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A2527D901BD12FD200F65412 /* SwiftyVK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyVK.h; sourceTree = "<group>"; };
@@ -234,9 +234,9 @@
 		A2527E341BD134D900F65412 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = "ru.lproj/CaptchaView-OSX.strings"; sourceTree = "<group>"; };
 		A2527E361BD134EF00F65412 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A2527E381BD134F000F65412 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = "ru.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
-		A25AE9381D9AD57E008C0AA9 /* Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
-		A28368EB1D9D742700EEBE2A /* SendOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendOperation.swift; sourceTree = "<group>"; };
-		A28368EE1D9D75DC00EEBE2A /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Result.swift; path = ../Request/Result.swift; sourceTree = "<group>"; };
+		A25AE9381D9AD57E008C0AA9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		A28368EB1D9D742700EEBE2A /* SendTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendTask.swift; sourceTree = "<group>"; };
+		A28368EE1D9D75DC00EEBE2A /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		A28368F31D9D87EE00EEBE2A /* SendQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendQueue.swift; sourceTree = "<group>"; };
 		A2967E731CBBC4A700B7D48F /* Gifts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gifts.swift; sourceTree = "<group>"; };
 		A2D1369A1DA00E9000C487C1 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -287,7 +287,7 @@
 			children = (
 				A2527D901BD12FD200F65412 /* SwiftyVK.h */,
 				A2527D911BD12FD200F65412 /* VK.swift */,
-				A25AE9381D9AD57E008C0AA9 /* Defaults.swift */,
+				A25AE9381D9AD57E008C0AA9 /* Config.swift */,
 				A2527D7F1BD12FD200F65412 /* LongPool.swift */,
 				A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */,
 				A2527D801BD12FD200F65412 /* SDK */,
@@ -359,7 +359,6 @@
 			children = (
 				A2527D821BD12FD200F65412 /* Arg.swift */,
 				A2D1369A1DA00E9000C487C1 /* Errors.swift */,
-				A28368EE1D9D75DC00EEBE2A /* Result.swift */,
 				A2527D841BD12FD200F65412 /* Media.swift */,
 				A2527D861BD12FD200F65412 /* Scope.swift */,
 				A2527D871BD12FD200F65412 /* Token.swift */,
@@ -371,8 +370,12 @@
 		A2527D881BD12FD200F65412 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				A28368EA1D9D719600EEBE2A /* V2 */,
-				A2527D8A1BD12FD200F65412 /* NSURLFabric.swift */,
+				A2527D8B1BD12FD200F65412 /* RequestConfig.swift */,
+				A2066AE91D9C388F0065A4D7 /* RequestInstance.swift */,
+				A28368EB1D9D742700EEBE2A /* SendTask.swift */,
+				A28368F31D9D87EE00EEBE2A /* SendQueue.swift */,
+				A2527D8A1BD12FD200F65412 /* UrlFabric.swift */,
+				A28368EE1D9D75DC00EEBE2A /* Result.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -412,17 +415,6 @@
 				A2527E231BD1343F00F65412 /* WebView-iOS.xib */,
 			);
 			name = iOS;
-			sourceTree = "<group>";
-		};
-		A28368EA1D9D719600EEBE2A /* V2 */ = {
-			isa = PBXGroup;
-			children = (
-				A2527D8B1BD12FD200F65412 /* Request.swift */,
-				A2066AE91D9C388F0065A4D7 /* RequestInstance.swift */,
-				A28368EB1D9D742700EEBE2A /* SendOperation.swift */,
-				A28368F31D9D87EE00EEBE2A /* SendQueue.swift */,
-			);
-			name = V2;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -506,6 +498,7 @@
 				A2EB6EA61BD180E9008E7D86 /* Resources */,
 				A2EB71D71BD3EFCD008E7D86 /* CopyFiles */,
 				A2F33E751D8F202400856417 /* Frameworks */,
+				A23435C01DAE98AB00C81B29 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -606,6 +599,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A23435C01DAE98AB00C81B29 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A2EB6E961BD180DD008E7D86 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -618,7 +627,7 @@
 				A2EB6EEE1BD18394008E7D86 /* Audio.swift in Sources */,
 				A2EB6EEF1BD18394008E7D86 /* Board.swift in Sources */,
 				A2EB6EF01BD18394008E7D86 /* Database.swift in Sources */,
-				A28368ED1D9D742D00EEBE2A /* SendOperation.swift in Sources */,
+				A28368ED1D9D742D00EEBE2A /* SendTask.swift in Sources */,
 				A2EB6EF11BD18394008E7D86 /* Docs.swift in Sources */,
 				A2EB6EF21BD18394008E7D86 /* Fave.swift in Sources */,
 				A2EB6EF31BD18394008E7D86 /* Friends.swift in Sources */,
@@ -647,14 +656,14 @@
 				A2EB6F071BD18395008E7D86 /* Arg.swift in Sources */,
 				A2066AEB1D9C388F0065A4D7 /* RequestInstance.swift in Sources */,
 				A2EB6F091BD18395008E7D86 /* Media.swift in Sources */,
-				A25AE93A1D9AD583008C0AA9 /* Defaults.swift in Sources */,
+				A25AE93A1D9AD583008C0AA9 /* Config.swift in Sources */,
 				A2EB6F0A1BD18395008E7D86 /* Resources.swift in Sources */,
 				A2EB6F0B1BD18395008E7D86 /* Scope.swift in Sources */,
 				A20FF11A1BEB6BB5009FBE3D /* Authorizator.swift in Sources */,
 				A24D10901C56A49E008263B0 /* Market.swift in Sources */,
 				A2EB6F0C1BD18395008E7D86 /* Token.swift in Sources */,
-				A2EB6F0E1BD18395008E7D86 /* NSURLFabric.swift in Sources */,
-				A2EB6F0F1BD18395008E7D86 /* Request.swift in Sources */,
+				A2EB6F0E1BD18395008E7D86 /* UrlFabric.swift in Sources */,
+				A2EB6F0F1BD18395008E7D86 /* RequestConfig.swift in Sources */,
 				A28368F51D9D87EE00EEBE2A /* SendQueue.swift in Sources */,
 				A2EB6F111BD18395008E7D86 /* CapthcaController.swift in Sources */,
 				A2EB6F121BD18395008E7D86 /* WebController.swift in Sources */,
@@ -672,7 +681,7 @@
 				A2EB6EBE1BD18389008E7D86 /* LongPool.swift in Sources */,
 				A2EB6EBF1BD18389008E7D86 /* Account.swift in Sources */,
 				A2EB6EC01BD18389008E7D86 /* API.swift in Sources */,
-				A28368EC1D9D742700EEBE2A /* SendOperation.swift in Sources */,
+				A28368EC1D9D742700EEBE2A /* SendTask.swift in Sources */,
 				A2EB6EC11BD18389008E7D86 /* Audio.swift in Sources */,
 				A2066AEA1D9C388F0065A4D7 /* RequestInstance.swift in Sources */,
 				A2EB6EC21BD18389008E7D86 /* Board.swift in Sources */,
@@ -685,7 +694,7 @@
 				A2EB6EC91BD18389008E7D86 /* Messages.swift in Sources */,
 				A2EB6ECA1BD18389008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6ECB1BD18389008E7D86 /* Notes.swift in Sources */,
-				A25AE9391D9AD57E008C0AA9 /* Defaults.swift in Sources */,
+				A25AE9391D9AD57E008C0AA9 /* Config.swift in Sources */,
 				A2EB6ECC1BD18389008E7D86 /* Notifacations.swift in Sources */,
 				A2EB6ECD1BD18389008E7D86 /* Pages.swift in Sources */,
 				A2EB6ECE1BD18389008E7D86 /* Photos.swift in Sources */,
@@ -709,8 +718,8 @@
 				A2EB6EDE1BD18389008E7D86 /* Scope.swift in Sources */,
 				A28368EF1D9D75DC00EEBE2A /* Result.swift in Sources */,
 				A2EB6EDF1BD18389008E7D86 /* Token.swift in Sources */,
-				A2EB6EE11BD18389008E7D86 /* NSURLFabric.swift in Sources */,
-				A2EB6EE21BD18389008E7D86 /* Request.swift in Sources */,
+				A2EB6EE11BD18389008E7D86 /* UrlFabric.swift in Sources */,
+				A2EB6EE21BD18389008E7D86 /* RequestConfig.swift in Sources */,
 				A28368F41D9D87EE00EEBE2A /* SendQueue.swift in Sources */,
 				A2EB6EE41BD18389008E7D86 /* CapthcaController.swift in Sources */,
 				A2EB6EE51BD18389008E7D86 /* WebController.swift in Sources */,

@@ -6,28 +6,25 @@ private let session = URLSession(configuration: .default, delegate: nil, delegat
 
 
 
-protocol SendDelegate: class {
-    var request: URLRequest {get}
-    var isApi: Bool {get}
-    func handle(sended: Int64, of: Int64)
-    func handle(received: Int64, of: Int64)
-    func handle(data: Data)
-    func handle(error: Error)
-}
-
-
-
-final class SendOperation : Operation {
-    unowned private let delegate: SendDelegate
+final class SendTask : Operation {
+    unowned private let delegate: RequestInstance
+    private let config: RequestConfig
     private var task: URLSessionTask!
+    private let id = VK.Log.generateTaskId()
     
     
     
-    static func createWith(delegate: SendDelegate) -> SendOperation {
-        let operation = SendOperation(delegate: delegate)
+    override var description: String {
+        return "send task #\(id)"
+    }
+    
+    
+    
+    static func createWith(config: RequestConfig, delegate: RequestInstance) -> SendTask {
+        let operation = SendTask(config: config, delegate: delegate)
         
         
-        if delegate.isApi {
+        if config.api {
             SendQueue.queue.addApi(operation)
         }
         else {
@@ -38,8 +35,11 @@ final class SendOperation : Operation {
     
     
     
-    private init(delegate: SendDelegate) {
-        self.delegate = delegate
+    private init(config: RequestConfig, delegate: RequestInstance) {
+        self.config     = config
+        self.delegate   = delegate
+        super.init()
+//        VK.Log.put("Life", "init \(self)")
     }
     
     
@@ -61,13 +61,14 @@ final class SendOperation : Operation {
                 self.delegate.handle(error: error)
             }
             else {
-                self.delegate.handle(error: VKRequestError.unexpectedResponse)
+                self.delegate.handle(error: VK.Error.Request.unexpectedResponse)
             }
             
             semaphore.signal()
         }
         
-        self.task = session.dataTask(with: delegate.request, completionHandler: completeon)
+        let urlRequest = UrlFabric.createWith(config: config)
+        self.task = session.dataTask(with: urlRequest, completionHandler: completeon)
         
         task.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived), options: NSKeyValueObservingOptions.new, context: nil)
         task.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesSent), options: NSKeyValueObservingOptions.new, context: nil)
@@ -95,13 +96,14 @@ final class SendOperation : Operation {
     override func cancel() {
         task.cancel()
         super.cancel()
+        VK.Log.put(delegate, "cancel \(self)")
     }
     
     
     
     deinit {
+//        VK.Log.put("Life", "deinit \(self)")
         task.removeObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived))
         task.removeObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesSent))
-//        print("DEINIT SEND_OPERATION")
     }
 }

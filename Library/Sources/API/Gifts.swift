@@ -5,8 +5,8 @@ extension _VKAPI {
     
     
     ///Returns list of user gifts. More - https://vk.com/dev/gifts.get
-    public static func get(_ parameters: [VK.Arg : String] = [:]) -> Request {
-      return Request(method: "get", parameters: parameters)
+    public static func get(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
+      return RequestConfig(method: "get", parameters: parameters)
     }
   }
 }

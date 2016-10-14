@@ -1,66 +1,83 @@
 import Foundation
 
 
-
-public enum VKAuthError: Int, Error, CustomStringConvertible {
-    case presentingControllerIsNil  = 1
-    case deniedFromUser             = 2
-    case failingValidation          = 3
-    
-    public var description: String {
-        return "RequestError \(rawValue)"
-    }
-}
-
-
-
-public enum VKRequestError : Int, Error, CustomStringConvertible {
-    case unexpectedResponse         = 1
-    case timeoutExpired             = 2
-    case maximumAttemptsExceeded    = 3
-    case responseParsingFailed      = 4
-    case captchaFailed              = 5
-
-    public var description: String {
-        return "AuthError \(rawValue)"
-    }
-}
-
-
-
-public struct VKAPIError : Error, CustomStringConvertible, CustomNSError {
-    public let code: Int
-    public let message: String
-    public let info: [String: Any]
-    
-    
-    init(json: JSON) {
-        code = json["error_code"].intValue
-        message = json["error_msg"].stringValue
-        var info = [String : Any]()
+public struct _Error {
+    public enum Auth: Int, CustomNSError, CustomStringConvertible {
+        case presentingControllerIsNil  = 1
+        case deniedFromUser             = 2
+        case failingValidation          = 3
+        case failingAuthorization       = 4
         
-        for param in json["request_params"].arrayValue {
-            info[param["key"].stringValue] = param["value"].stringValue
+        public static let errorDomain = "SwiftyVK.Error.Auth"
+        public var errorCode: Int {return rawValue}
+        public var errorUserInfo: [String : Any] {return [:]}
+        
+        public var description: String {
+            return String(format: "error %@[%d]: %@", VK.Error.Auth.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
+        }
+    }
+    
+    
+    
+    public enum Request: Int, CustomNSError, CustomStringConvertible {
+        case unexpectedResponse         = 1
+        case timeoutExpired             = 2
+        case maximumAttemptsExceeded    = 3
+        case responseParsingFailed      = 4
+        case captchaFailed              = 5
+        
+        public static let errorDomain = "SwiftyVK.Error.Request"
+        public var errorCode: Int {return rawValue}
+        public var errorUserInfo: [String : Any] {return [:]}
+        
+        public var description: String {
+            return String(format: "error %@[%d]: %@", VK.Error.Request.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
+        }
+    }
+    
+    
+    
+    public struct API: CustomNSError, CustomStringConvertible {
+        public static let errorDomain = "SwiftyVK.Error.API"
+        public private(set) var errorCode: Int = 0
+        public var errorUserInfo = [String : Any]()
+        
+        public var description: String {
+            return String(format: "error %@[%d]: %@", VK.Error.API.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
         }
         
-        for (key, value) in json.dictionaryValue {
-            if key != "request_params" && key != "error_code" && key != "error_msg" {
-                info[key] = value.stringValue
+
+
+        init(json: JSON) {
+            
+            if let message = json["error_msg"].string {
+                errorCode = json["error_code"].intValue
+                errorUserInfo[NSLocalizedDescriptionKey] = message
+            }
+            else if let message = json.string {
+                errorUserInfo[NSLocalizedDescriptionKey] = message
+            }
+            else {
+                errorUserInfo[NSLocalizedDescriptionKey] = "unknown error"
+            }
+            
+            for param in json["request_params"].arrayValue {
+                errorUserInfo[param["key"].stringValue] = param["value"].stringValue
+            }
+            
+            for (key, value) in json.dictionaryValue {
+                if key != "request_params" && key != "error_code" && key != "error_msg" {
+                    errorUserInfo[key] = value.stringValue
+                }
             }
         }
-        
-        info[NSLocalizedDescriptionKey] = message
-        self.info = info
-
     }
-    
-    
-    public static var errorDomain: String {return "VKAPIError"}
-    public var errorCode: Int {return code}
-    public var errorUserInfo: [String : Any] {return info}
-    
-    public var description: String {
-        return "ApiError \(code): \(message)" +
-        "   info: \(info)"
+}
+
+
+
+extension NSError {
+    override open var description: String {
+        return String(format: "error %@[%d]: %@", domain, code, userInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
     }
 }

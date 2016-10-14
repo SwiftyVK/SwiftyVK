@@ -49,7 +49,7 @@ internal final class СaptchaController: _СaptchaControllerPrototype {
             request.send()
         }
         else {
-            request.handle(error: VKRequestError.captchaFailed)
+            request.handle(error: VK.Error.Request.captchaFailed)
         }
     }
     

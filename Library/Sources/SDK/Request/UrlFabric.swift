@@ -8,29 +8,31 @@ private let methodUrl = "https://api.vk.com/method/"
 
 
 ///NSURLRequest fabric
-internal struct NSURLFabric {
+internal struct UrlFabric {
     
     
     
-    internal static func get(url: String?, httpMethod: HTTPMethods, method: String, params: [String : String], media: [VKMedia]?) -> NSMutableURLRequest {
+    internal static func createWith(config: RequestConfig) -> URLRequest {
         let result : NSMutableURLRequest
         
-        if let media = media {
-            result = withFiles(media, url: url!)
+        if config.upload {
+            result = createWith(media: config.media, url: config.customUrl)
         }
-        else if let URL = url {
-            result = withURL(URL)
+        else if config.api {
+            result = craeteWith(apiMethod: config.method, parameters: config.parameters, httpMethod: config.httpMethod)
         }
         else {
-            result = withAPI(method, httpMethod: httpMethod, paramDictAsAnyObject: params as AnyObject)
+            result = createWith(url: config.customUrl)
         }
         
-        return result
+        result.timeoutInterval = config.timeout
+        
+        return result as URLRequest
     }
     
     
     
-    private static func withURL(_ url: String) -> NSMutableURLRequest {
+    private static func createWith(url: String) -> NSMutableURLRequest {
         let emptyUrl = URL(string: methodUrl)!
         
         let req = NSMutableURLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
@@ -41,21 +43,21 @@ internal struct NSURLFabric {
     
     
     
-    private static func withAPI(_ APIMethod: String, httpMethod: HTTPMethods, paramDictAsAnyObject: AnyObject) -> NSMutableURLRequest {
-        let params = argToString(paramDictAsAnyObject as? [String : String])
+    private static func craeteWith(apiMethod: String, parameters: [VK.Arg: String], httpMethod: HttpMethod) -> NSMutableURLRequest {
+        let paramStr = stringFrom(parameters: parameters)
         let emptyUrl = URL(string: methodUrl)!
         
         let req = NSMutableURLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
         req.httpMethod = httpMethod.rawValue
         
         if httpMethod == .GET {
-            req.url = URL(string: methodUrl + APIMethod + "?" + params)
+            req.url = URL(string: methodUrl + apiMethod + "?" + paramStr)
         }
         else {
-            req.url = URL(string: methodUrl + APIMethod)
+            req.url = URL(string: methodUrl + apiMethod)
             let charset = String(CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(String.Encoding.utf8.rawValue)))
             req.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
-            req.httpBody = params.data(using: .utf8)
+            req.httpBody = paramStr.data(using: .utf8)
         }
         
         return req
@@ -63,7 +65,7 @@ internal struct NSURLFabric {
     
     
     
-    private static func withFiles(_ media: [VKMedia], url: String) -> NSMutableURLRequest {
+    private static func createWith(media: [VKMedia], url: String) -> NSMutableURLRequest {
         let emptyUrl = URL(string: methodUrl)!
         
         let req = NSMutableURLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
@@ -86,7 +88,7 @@ internal struct NSURLFabric {
                 name = "file\(index)"
             }
             
-            body.append("\r\n--\(boundary)\r\nContent-Disposition: form-data; name=\"\(name)\"; filename=\"file.\(file.type)\"\r\nContent-Type: document/other\r\n\r\n".data(using: String.Encoding.utf8, allowLossyConversion: false)!)
+            body.append("\r\n--\(boundary)\r\nContent-Disposition: form-data; name=\"\(name)\"; filename=\"file.\(file.type)\"\r\nContent-Type: document/other\r\n\r\n".data(using: .utf8, allowLossyConversion: false)!)
             body.append(file.data as Data)
         }
         body.append("\r\n--\(boundary)--\r".data(using: .utf8, allowLossyConversion: false)!)
@@ -94,17 +96,33 @@ internal struct NSURLFabric {
         req.httpBody = body as Data
         return req
     }
+
     
     
-    
-    private static func argToString(_ argDict: [String : String]?) -> String {
+    private static func stringFrom(parameters: [VK.Arg : String]) -> String {
         let paramArray = NSMutableArray()
         
-        if argDict == nil {return String()}
-        
-        for (argName, agrValue) in argDict! {
-            paramArray.add("\(argName)=\(agrValue)")
+        for (name, value) in parameters {
+            paramArray.add("\(name.rawValue)=\(value)")
         }
+        
+        paramArray.add("v=\(VK.config.apiVersion)")
+        paramArray.add("https=1")
+        
+        if let token = Token.get() {
+            paramArray.add("access_token=\(token)")
+        }
+        
+        if let lang = VK.config.language {
+            paramArray.add("lang=\(lang)")
+        }
+        
+        if sharedCaptchaAnswer != nil {
+            paramArray.add("captcha_sid=\(sharedCaptchaAnswer!["captcha_sid"])")
+            paramArray.add("captcha_key=\(sharedCaptchaAnswer!["captcha_key"])")
+            sharedCaptchaAnswer = nil
+        }
+    
         return paramArray.componentsJoined(by: "&").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     }
 }

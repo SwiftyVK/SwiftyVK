@@ -18,7 +18,8 @@ extension VK {
     private static var array = [String]()
     private static var dictionary = NSMutableDictionary()
     private static var reqId: Int64 = 0
-    
+    private static var taskId: Int64 = 0
+
     
     
     internal static func generateRequestId() -> Int64 {
@@ -27,6 +28,15 @@ extension VK {
             return reqId
         }
     }
+    
+    
+    internal static func generateTaskId() -> Int64 {
+        return logQueue.sync {
+            taskId += 1
+            return taskId
+        }
+    }
+    
     
     public static func getForKeys() -> NSDictionary {
       return NSDictionary(dictionary: dictionary)
@@ -46,23 +56,7 @@ extension VK {
     
     
     
-    public static func putToRequestsQueue(_ request: Request) {
-      logQueue.async {
-        requestsQueue.add(request)
-      }
-    }
-    
-    
-    
-    public static func removeFromRequestsQueue(_ request: Request) {
-      logQueue.async {
-        requestsQueue.remove(request)
-      }
-    }
-    
-    
-    
-    internal static func put(_ req: RequestInstance, _ message: String, atNewLine: Bool = false, sync: Bool = false) {
+    internal static func put(_ req: RequestInstance, _ message: String, atNewLine: Bool = false) {
       let block = {
         let date = form.string(from: Date())
         req.log.append("\(date): \(message)")
@@ -74,20 +68,27 @@ extension VK {
         }
         
         self._put(key, message, false)
-        req.logToConsole
-          ? printSync("\(atNewLine ? "\n" : "")\(date): \(key) ~ \(message)")
-          : ()
+        if req.config.logToConsole {
+            printSync("\(atNewLine ? "\n" : "")\(date): \(key) ~ \(message)")
+        }
       }
         
-        sync
-            ? logQueue.sync(execute: block)
-            : logQueue.async(execute: block)
+      logQueue.async(execute: block)
     }
+    
+    
+    
+    internal static func put(_ reqId: Int64, _ message: String) {
+        logQueue.async {
+            _put("Req \(reqId)", message, VK.config.logToConsole)
+        }
+    }
+    
     
     
     internal static func put(_ key: String, _ message: String) {
       logQueue.async {
-        _put(key, message, VK.defaults.logToConsole)
+        _put(key, message, VK.config.logToConsole)
       }
     }
     
@@ -126,6 +127,7 @@ extension VK {
         array = [String]()
         dictionary = NSMutableDictionary()
         reqId = 0
+        taskId = 0
       }
     }
   }
