@@ -19,10 +19,9 @@ internal struct Authorizator {
   
   fileprivate static var paramsUrl : String {
     let _perm = VK.Scope.toInt(VK.delegate!.vkWillAuthorize())
-    let _mode = isMac ? "mobile" : "ios"
     let _redir = canAuthorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
     
-    return  "client_id=\(VK.appID!)&scope=\(_perm)&display=\(_mode)&v\(VK.defaults.apiVersion)&sdk_version=\(VK.defaults.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
+    return  "client_id=\(VK.appID!)&scope=\(_perm)&display=mobile&v\(VK.defaults.apiVersion)&sdk_version=\(VK.defaults.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
   }
   
   
@@ -107,19 +106,17 @@ internal struct Authorizator {
     
     fileprivate static func startWithApp(_ request: Request?) {
       UIApplication.shared.openURL(URL(string: appAuthorizeUrl+paramsUrl)!)
-      Thread.sleep(forTimeInterval: 1)
+//      Thread.sleep(forTimeInterval: 1)
       startWithWeb(request)
     }
     
     
     
     internal static func recieveTokenURL(url: URL, fromApp app: String?) {
-      if (app == "com.vk.vkclient" || app == "com.vk.vkhd" || url.scheme == "vk\(VK.appID)") {
         if url.absoluteString.contains("access_token=") {
           _ = Token(urlString: url.absoluteString)
-          WebController.cancel()
+            WebController.cancel()
         }
-      }
     }
   }
 #endif
