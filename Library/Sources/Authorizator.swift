@@ -7,8 +7,8 @@
 
 
 
-private let webAuthorizeUrl = "https://oauth.vk.com/authorize?"
 private let redirectUrl = "https://oauth.vk.com/blank.html"
+private let webAuthorizeUrl = "https://oauth.vk.com/authorize?"
 private let appAuthorizeUrl = "vkauthorize://authorize?"
 
 

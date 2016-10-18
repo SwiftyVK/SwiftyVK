@@ -6,7 +6,7 @@ private let session = URLSession(configuration: .default, delegate: nil, delegat
 
 
 
-final class SendTask : Operation {
+internal final class SendTask : Operation {
     unowned private let delegate: RequestInstance
     private let config: RequestConfig
     private var task: URLSessionTask!

@@ -180,7 +180,7 @@ internal class Token: NSObject, NSCoding {
             if defaults.object(forKey: "Token") != nil {defaults.removeObject(forKey: "Token")}
             defaults.synchronize()
         }
-        
+
         if tokenInstance != nil {tokenInstance = nil}
         VK.Log.put("Token", "removed")
     }

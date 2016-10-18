@@ -11,7 +11,7 @@ import Foundation
 public protocol VKDelegate: class {
     /**Called when SwiftyVK need autorization permissions
      - returns: permissions as VK.Scope type*/
-    func vkWillAuthorize() -> [VK.Scope]
+    func vkWillAuthorize() -> Set<VK.Scope>
     ///Called when SwiftyVK did authorize and receive token
     func vkDidAuthorizeWith(parameters: [String : String])
     ///Called when SwiftyVK did unauthorize and remove token

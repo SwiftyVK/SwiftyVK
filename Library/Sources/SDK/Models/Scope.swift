@@ -1,6 +1,6 @@
 extension VK {
   ///Application scope
-  public enum  Scope : Int {
+  public enum Scope : Int {
     case notify        = 1
     case friends       = 2
     case photos        = 4
@@ -27,7 +27,7 @@ extension VK {
 
     
     
-   public static func toInt(_ permissions : [Scope]) -> Int {
+   public static func toInt(_ permissions : Set<Scope>) -> Int {
       var finishPerm = Int()
       for perm in permissions {finishPerm += perm.rawValue}
       return finishPerm
@@ -35,91 +35,91 @@ extension VK {
     
     
     
-   public static func fromInt(_ permissions : Int) -> [Scope] {
-      var array = [Scope]()
+   public static func fromInt(_ permissions : Int) -> Set<Scope> {
+      var result = Set<Scope>()
       
-      if (permissions & 1) == 1                 {array.append(Scope.notify)}
-      if (permissions & 2) == 2                 {array.append(Scope.friends)}
-      if (permissions & 4) == 4                 {array.append(Scope.photos)}
-      if (permissions & 8) == 8                 {array.append(Scope.audio)}
-      if (permissions & 16) == 16               {array.append(Scope.video)}
-      if (permissions & 131072) == 131072       {array.append(Scope.docs)}
-      if (permissions & 2048) == 2048           {array.append(Scope.notes)}
-      if (permissions & 128) == 128             {array.append(Scope.pages)}
-      if (permissions & 1024) == 1024           {array.append(Scope.status)}
-      if (permissions & 32) == 32               {array.append(Scope.offers)}
-      if (permissions & 64) == 64               {array.append(Scope.questions)}
-      if (permissions & 8192) == 8192           {array.append(Scope.wall)}
-      if (permissions & 262144) == 262144       {array.append(Scope.groups)}
-      if (permissions & 4096) == 4096           {array.append(Scope.messages)}
-      if (permissions & 4194304) == 4194304     {array.append(Scope.email)}
-      if (permissions & 524288) == 524288       {array.append(Scope.notifications)}
-      if (permissions & 1048576) == 1048576     {array.append(Scope.stats)}
-      if (permissions & 32768) == 32768         {array.append(Scope.ads)}
-      if (permissions & 65536) == 65536         {array.append(Scope.offline)}
-      if (permissions & 134217728) == 134217728 {array.append(Scope.market)}
+      if (permissions & 1) == 1                 {result.insert(.notify)}
+      if (permissions & 2) == 2                 {result.insert(.friends)}
+      if (permissions & 4) == 4                 {result.insert(.photos)}
+      if (permissions & 8) == 8                 {result.insert(.audio)}
+      if (permissions & 16) == 16               {result.insert(.video)}
+      if (permissions & 131072) == 131072       {result.insert(.docs)}
+      if (permissions & 2048) == 2048           {result.insert(.notes)}
+      if (permissions & 128) == 128             {result.insert(.pages)}
+      if (permissions & 1024) == 1024           {result.insert(.status)}
+      if (permissions & 32) == 32               {result.insert(.offers)}
+      if (permissions & 64) == 64               {result.insert(.questions)}
+      if (permissions & 8192) == 8192           {result.insert(.wall)}
+      if (permissions & 262144) == 262144       {result.insert(.groups)}
+      if (permissions & 4096) == 4096           {result.insert(.messages)}
+      if (permissions & 4194304) == 4194304     {result.insert(.email)}
+      if (permissions & 524288) == 524288       {result.insert(.notifications)}
+      if (permissions & 1048576) == 1048576     {result.insert(.stats)}
+      if (permissions & 32768) == 32768         {result.insert(.ads)}
+      if (permissions & 65536) == 65536         {result.insert(.offline)}
+      if (permissions & 134217728) == 134217728 {result.insert(.market)}
     
-      return array
+      return result
     }
     
     
     
-    public static func toString(_ permissions: [Scope]) -> String {
-      var string = String()
+    public static func toString(_ permissions: Set<Scope>) -> String {
+      var result = String()
       
       for permission in permissions {
         switch permission {
-        case Scope.notify        : string += "notify,"
-        case Scope.friends       : string += "friends,"
-        case Scope.photos        : string += "photos,"
-        case Scope.audio         : string += "audio,"
-        case Scope.video         : string += "video,"
-        case Scope.docs          : string += "docs,"
-        case Scope.pages         : string += "pages,"
-        case Scope.status        : string += "status,"
-        case Scope.offers        : string += "offers,"
-        case Scope.questions     : string += "questions,"
-        case Scope.wall          : string += "wall,"
-        case Scope.groups        : string += "groups,"
-        case Scope.messages      : string += "messages,"
-        case Scope.email         : string += "email,"
-        case Scope.notifications : string += "notifications,"
-        case Scope.stats         : string += "stats,"
-        case Scope.ads           : string += "ads,"
-        case Scope.offline       : string += "offline,"
+        case .notify        : result += "notify,"
+        case .friends       : result += "friends,"
+        case .photos        : result += "photos,"
+        case .audio         : result += "audio,"
+        case .video         : result += "video,"
+        case .docs          : result += "docs,"
+        case .pages         : result += "pages,"
+        case .status        : result += "status,"
+        case .offers        : result += "offers,"
+        case .questions     : result += "questions,"
+        case .wall          : result += "wall,"
+        case .groups        : result += "groups,"
+        case .messages      : result += "messages,"
+        case .email         : result += "email,"
+        case .notifications : result += "notifications,"
+        case .stats         : result += "stats,"
+        case .ads           : result += "ads,"
+        case .offline       : result += "offline,"
         default : break
         }
       }
       
-      return string
+      return result
     }
     
     
     
-    public static func fromString(_ permissions: String) -> [Scope] {
-      var array = [Scope]()
+    public static func fromString(_ permissions: String) -> Set<Scope> {
+      var result = Set<Scope>()
       
-      if permissions.contains("notify") {array.append(Scope.notify)}
-      if permissions.contains("friends") {array.append(Scope.friends)}
-      if permissions.contains("photos") {array.append(Scope.photos)}
-      if permissions.contains("audio") {array.append(Scope.audio)}
-      if permissions.contains("video") {array.append(Scope.video)}
-      if permissions.contains("docs") {array.append(Scope.docs)}
-      if permissions.contains("notes") {array.append(Scope.notes)}
-      if permissions.contains("pages") {array.append(Scope.pages)}
-      if permissions.contains("status") {array.append(Scope.status)}
-      if permissions.contains("questions") {array.append(Scope.questions)}
-      if permissions.contains("wall") {array.append(Scope.wall)}
-      if permissions.contains("groups") {array.append(Scope.groups)}
-      if permissions.contains("messages") {array.append(Scope.messages)}
-      if permissions.contains("email") {array.append(Scope.email)}
-      if permissions.contains("notifications") {array.append(Scope.notifications)}
-      if permissions.contains("stats") {array.append(Scope.stats)}
-      if permissions.contains("ads") {array.append(Scope.ads)}
-      if permissions.contains("notify") {array.append(Scope.notify)}
-      if permissions.contains("offers") {array.append(Scope.offers)}
+      if permissions.contains("notify")         {result.insert(.notify)}
+      if permissions.contains("friends")        {result.insert(.friends)}
+      if permissions.contains("photos")         {result.insert(.photos)}
+      if permissions.contains("audio")          {result.insert(.audio)}
+      if permissions.contains("video")          {result.insert(.video)}
+      if permissions.contains("docs")           {result.insert(.docs)}
+      if permissions.contains("notes")          {result.insert(.notes)}
+      if permissions.contains("pages")          {result.insert(.pages)}
+      if permissions.contains("status")         {result.insert(.status)}
+      if permissions.contains("questions")      {result.insert(.questions)}
+      if permissions.contains("wall")           {result.insert(.wall)}
+      if permissions.contains("groups")         {result.insert(.groups)}
+      if permissions.contains("messages")       {result.insert(.messages)}
+      if permissions.contains("email")          {result.insert(.email)}
+      if permissions.contains("notifications")  {result.insert(.notifications)}
+      if permissions.contains("stats")          {result.insert(.stats)}
+      if permissions.contains("ads")            {result.insert(.ads)}
+      if permissions.contains("notify")         {result.insert(.notify)}
+      if permissions.contains("offers")         {result.insert(.offers)}
       
-      return array
+      return result
     }
   }
 }

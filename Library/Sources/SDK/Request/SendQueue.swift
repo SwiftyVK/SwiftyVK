@@ -2,7 +2,7 @@ import Foundation
 
 
 
-final class SendQueue : OperationQueue {
+internal final class SendQueue : OperationQueue {
     static let queue = SendQueue()
     
     private let addingQueue = DispatchQueue(label: "SwiftyVK.SendQueue")

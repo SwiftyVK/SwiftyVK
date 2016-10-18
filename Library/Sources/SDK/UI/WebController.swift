@@ -175,7 +175,7 @@ internal final class WebController : _WebControllerPrototype {
                     ? self.parentWindow?.beginSheet(self.window!, completionHandler: nil)
                     : self.showWindow(self)
                 self.activity.startAnimation(self)
-                self.urlRequest = URLRequest(url: URL(string: url)!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 3)
+                self.urlRequest = URLRequest(url: URL(string: url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 3)
                 self.webView!.setMaintainsBackForwardList(true)
                 self.webView!.mainFrame.load(self.urlRequest!)
             })

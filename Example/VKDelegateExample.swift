@@ -11,7 +11,7 @@ import SwiftyVK
 
 class VKDelegateExample: VKDelegate {
     let appID = "4994842"
-    let scope = [VK.Scope.messages,.offline,.friends,.wall,.photos,.audio,.video,.docs,.market,.email]
+    let scope: Set<VK.Scope> = [.messages,.offline,.friends,.wall,.photos,.audio,.video,.docs,.market,.email]
     
     
     
@@ -21,7 +21,7 @@ class VKDelegateExample: VKDelegate {
     
     
     
-    func vkWillAuthorize() -> [VK.Scope] {
+    func vkWillAuthorize() -> Set<VK.Scope> {
         return scope
     }
     

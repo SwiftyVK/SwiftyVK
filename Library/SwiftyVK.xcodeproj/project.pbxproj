@@ -11,6 +11,9 @@
 		A2066AEB1D9C388F0065A4D7 /* RequestInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2066AE91D9C388F0065A4D7 /* RequestInstance.swift */; };
 		A20FF11A1BEB6BB5009FBE3D /* Authorizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */; };
 		A20FF11C1BEB7DC8009FBE3D /* Authorizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */; };
+		A236B2B61DB6864F002376C8 /* WebProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B51DB6864F002376C8 /* WebProxy.swift */; };
+		A236B2B71DB6864F002376C8 /* WebProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B51DB6864F002376C8 /* WebProxy.swift */; };
+		A236B2B91DB68E4F002376C8 /* WebController-OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B81DB68E4F002376C8 /* WebController-OSX.swift */; };
 		A24390571DA2BA1D00B9D047 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D1369A1DA00E9000C487C1 /* Errors.swift */; };
 		A24390581DA2C48B00B9D047 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EE1D9D75DC00EEBE2A /* Result.swift */; };
 		A24D108F1C56A49E008263B0 /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24D108E1C56A49E008263B0 /* Market.swift */; };
@@ -179,6 +182,8 @@
 		A234A4191BE34FE000856CA5 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = "be.lproj/CaptchaView-OSX.strings"; sourceTree = "<group>"; };
 		A234A41A1BE34FE000856CA5 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = "be.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A234A41B1BE34FE000856CA5 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = "be.lproj/CaptchaView-iOS.strings"; sourceTree = "<group>"; };
+		A236B2B51DB6864F002376C8 /* WebProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebProxy.swift; sourceTree = "<group>"; };
+		A236B2B81DB68E4F002376C8 /* WebController-OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WebController-OSX.swift"; sourceTree = "<group>"; };
 		A24D108E1C56A49E008263B0 /* Market.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Market.swift; sourceTree = "<group>"; };
 		A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftyVKResources-OSX.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2527D551BD1134500F65412 /* SwiftyVKResources-iOS.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftyVKResources-iOS.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -383,8 +388,10 @@
 		A2527D8D1BD12FD200F65412 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A236B2B51DB6864F002376C8 /* WebProxy.swift */,
 				A2527D8E1BD12FD200F65412 /* CapthcaController.swift */,
 				A2527D8F1BD12FD200F65412 /* WebController.swift */,
+				A236B2B81DB68E4F002376C8 /* WebController-OSX.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -649,6 +656,7 @@
 				A2EB6F001BD18394008E7D86 /* Status.swift in Sources */,
 				A2EB6F011BD18394008E7D86 /* Storage.swift in Sources */,
 				A2EB6F021BD18394008E7D86 /* Upload.swift in Sources */,
+				A236B2B71DB6864F002376C8 /* WebProxy.swift in Sources */,
 				A2EB6F031BD18395008E7D86 /* User.swift in Sources */,
 				A2EB6F041BD18395008E7D86 /* Utils.swift in Sources */,
 				A2EB6F051BD18395008E7D86 /* Video.swift in Sources */,
@@ -694,6 +702,7 @@
 				A2EB6EC91BD18389008E7D86 /* Messages.swift in Sources */,
 				A2EB6ECA1BD18389008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6ECB1BD18389008E7D86 /* Notes.swift in Sources */,
+				A236B2B91DB68E4F002376C8 /* WebController-OSX.swift in Sources */,
 				A25AE9391D9AD57E008C0AA9 /* Config.swift in Sources */,
 				A2EB6ECC1BD18389008E7D86 /* Notifacations.swift in Sources */,
 				A2EB6ECD1BD18389008E7D86 /* Pages.swift in Sources */,
@@ -702,6 +711,7 @@
 				A2EB6ED01BD18389008E7D86 /* Polls.swift in Sources */,
 				A2EB6ED11BD18389008E7D86 /* Search.swift in Sources */,
 				A2967E741CBBC4A700B7D48F /* Gifts.swift in Sources */,
+				A236B2B61DB6864F002376C8 /* WebProxy.swift in Sources */,
 				A2D1369B1DA00E9000C487C1 /* Errors.swift in Sources */,
 				A2EB6ED21BD18389008E7D86 /* Stats.swift in Sources */,
 				A2EB6ED31BD18389008E7D86 /* Status.swift in Sources */,
