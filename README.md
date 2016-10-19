@@ -64,14 +64,14 @@ import SwiftyVK
 Implement `VKDelegate` protocol and **all its functions** in custom class. For example:
 
 ```swift
-class YourClass: Superclass, VKDelegate {
+class NameOfYourClass: VKDelegate {
 
   func vkWillAuthorize() -> [VK.Scope] {
     //Called when SwiftyVK need autorization permissions.
-    return //an array of application permissions
+    return [.offline] //an array of application permissions
   }
 
-  func vkDidAuthorizeWith(parameters: Dictionary<String, String>) {}
+  func vkDidAuthorizeWith(parameters: Dictionary<String, String>) {
     //Called when the user is log in. 
     //Here you can start to send requests to the API.
   }
@@ -86,9 +86,11 @@ class YourClass: Superclass, VKDelegate {
 
   func vkShouldUseTokenPath() -> String? {
     //Called when SwiftyVK need know where a token is located.
-    return //Path to save/read token or nil if should save token to UserDefaults
+    return nil //Path to save/read token or nil if should save token to UserDefaults
   }
 
+  //ONE OF THESE METHODS IS REQUIRED ACCORDING TO YOUR PLATFORM
+  
   func vkWillPresentView() -> UIViewController {
     //Only for iOS!
     //Called when need to display a view from SwiftyVK.
@@ -100,6 +102,8 @@ class YourClass: Superclass, VKDelegate {
     //Called when need to display a window from SwiftyVK.
     return //Parent window for modal view or nil if view should present in separate window
   }
+  
+
 }
 ``` 
 *See full implementation in Example project*
@@ -107,10 +111,10 @@ class YourClass: Superclass, VKDelegate {
 ###**Initialization**
 
 1. [Create new standalone application](https://vk.com/editapp?act=create) and get `application ID`
-2. Init **SwiftyVK** with `application ID` and `VKDelegate` object:
+2. Init **SwiftyVK** with `application ID` string and `VKDelegate` object:
 
 ```swift
-VK.start(appID: applicationID, delegate: VKDelegate)
+VK.configure(appID: applicationID, delegate: VKDelegate)
 ```
 
 ###**User authorization**
@@ -128,21 +132,21 @@ After this, you will check VK state:
 VK.state // will be unknown, configured, authorization, authorized
 ```
 
-And if state == authorized, send your requests to API (:
+And if VK.state == .authorized, send your requests to API (:
 
 ###**Authorization with VK App**
 For authorization with official VK application for iOS, you need:
 
 *1. In Xcode -> Target -> Info*
 
-* Add new URL Type with URL identifier to **URL Types** `vk$YOUR_APP_ID$` (e.g. vk1234567890)
+* Add new URL Type with `vk$YOUR_APP_ID$` (e.g. *vk1234567890*) as URL identifier and URL Schemes
 * Add app schemas to Info.plist file:
 ```html
 <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>vkauthorize</string>
-    <string>vk$YOUR_APP_ID$</string>
-  </array>
+<array>
+ <string>vkauthorize</string>
+ <string>vk$YOUR_APP_ID$</string>
+</array>
 ```
 *2. In https://vk.com/apps?act=manage -> Edit App -> Settings*
 
@@ -150,8 +154,10 @@ For authorization with official VK application for iOS, you need:
 
 *3. Add this code to appDelegate*
 ```swift
-func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-  VK.processURL(url, options: options)
+func application(_ app: UIApplication,
+                              open url: URL,
+                              options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+  VK.processURL(url: url, options: options)
   return true
 }
 ```
@@ -277,7 +283,7 @@ req.send()
 )
 ```
 
-This way you can download all the other supported Vkontakte file types. Can see the implementation of other types of loading in the library tests. 
+This way you can upload all the other file types supported by Vkontakte. Can see the implementation of other types of loading in the library tests. 
 
 Keep in mind that in some cases, such as uploading photos to a message, using this method, you just load the file to the server and get its ID. To send a message with photo, you need to add photo ID to the message.
 
