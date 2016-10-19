@@ -79,6 +79,7 @@
 		A2F7486F1D959087009B3F38 /* error.too.many.requests.json in Resources */ = {isa = PBXBuildFile; fileRef = A2F748671D959087009B3F38 /* error.too.many.requests.json */; };
 		A2F748711D9590B4009B3F38 /* success.users.get.json in Resources */ = {isa = PBXBuildFile; fileRef = A2F748701D9590B4009B3F38 /* success.users.get.json */; };
 		A2F748721D9590B4009B3F38 /* success.users.get.json in Resources */ = {isa = PBXBuildFile; fileRef = A2F748701D9590B4009B3F38 /* success.users.get.json */; };
+		A2FDC4561DB7D6AA00D27640 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CD49B1D98143300FF2D88 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -687,6 +688,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2FDC4561DB7D6AA00D27640 /* AppDelegate.swift in Sources */,
 				A2527EBD1BD13F7E00F65412 /* APIWorker.swift in Sources */,
 				A227371D1CF462F60042868A /* VKDelegateExample.swift in Sources */,
 			);

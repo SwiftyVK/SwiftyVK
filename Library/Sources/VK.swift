@@ -101,7 +101,7 @@ public struct VK {
     
     
     @available(iOS, introduced:4.2, deprecated:9.0, message:"Please use url:options:")
-    public static func processURL_old(url: URL, sourceApplication app: String?) {
+    public static func process(url: URL, sourceApplication app: String?) {
     Authorizator.recieveTokenURL(url: url, fromApp: app);
     }
     #endif
