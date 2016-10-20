@@ -22,7 +22,7 @@ var vkDelegateReference : VKDelegate?
         
         
         func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-            VK.processURL(url: url, options: options)
+            VK.process(url: url, options: options)
             return true
         }
     }

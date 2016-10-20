@@ -95,13 +95,13 @@ public struct VK {
     
     #if os(iOS)
     @available(iOS 9.0, *)
-    public static func processURL(url: URL, options: [AnyHashable: Any]) {
+    public static func process(url: URL, options: [AnyHashable: Any]) {
     Authorizator.recieveTokenURL(url: url, fromApp: options[UIApplicationOpenURLOptionsKey.sourceApplication.rawValue] as? String);
     }
     
     
     @available(iOS, introduced:4.2, deprecated:9.0, message:"Please use url:options:")
-    public static func processURL_old(url: URL, sourceApplication app: String?) {
+    public static func process(url: URL, sourceApplication app: String?) {
     Authorizator.recieveTokenURL(url: url, fromApp: app);
     }
     #endif

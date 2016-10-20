@@ -53,9 +53,8 @@ internal final class WebController_OSX: NSWindowController, WebFrameLoadDelegate
                 ? self.parentWindow?.beginSheet(self.window!, completionHandler: nil)
                 : self.showWindow(self)
             self.activity.startAnimation(self)
-            self.urlRequest = URLRequest(url: URL(string: url)!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 3)
             self.webView!.setMaintainsBackForwardList(true)
-            self.webView!.mainFrame.load(self.urlRequest!)
+            self.webView!.mainFrame.load(URLRequest(url: URL(string: url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 3))
         })
     }
     
