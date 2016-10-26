@@ -182,28 +182,22 @@ internal final class WebController : _WebControllerPrototype {
     
     
     fileprivate func expand() {
-      NSApplication.shared().activate(ignoringOtherApps: true)
-      let newHeight = min(
-        CGFloat((webView!.stringByEvaluatingJavaScript(from: "document.height") as NSString).floatValue),
-        450
-      )
-      
-      if let parent = parentWindow {
-        window!.setFrame(NSMakeRect(
-          (parent.frame.origin.x + ((parent.frame.width - 500) / 2)),
-          parent.frame.origin.y + (parent.frame.height - (newHeight + 54) - 22),
-          500,
-          newHeight + 54),
-          display: true, animate: true)
-      }
-      else {
-        window!.setFrame(NSMakeRect(
-          window!.frame.origin.x - window!.frame.size.width/2,
-          window!.frame.origin.y - window!.frame.size.height,
-          500,
-          newHeight + 54),
-          display: true, animate: true)
-      }
+        NSApplication.shared().activate(ignoringOtherApps: true)
+        let newHeight = CGFloat(350)
+        let newWidth = CGFloat(500)
+        let newX: CGFloat
+        let newY: CGFloat
+        
+        if let parent = parentWindow {
+            newX = (parent.frame.origin.x + ((parent.frame.width - newWidth) / 2))
+            newY = parent.frame.origin.y + (parent.frame.height - newHeight)
+        }
+        else {
+            newX = window!.frame.origin.x - window!.frame.size.width/2
+            newY = window!.frame.origin.y - window!.frame.size.height
+        }
+        
+        window!.setFrame(NSMakeRect(newX, newY, newWidth, newHeight), display: true, animate: true)
     }
     
     
@@ -225,14 +219,14 @@ internal final class WebController : _WebControllerPrototype {
     
     
     //MARK: frameLoadDelegate protocol
-    func webView(_ sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
+    func webView(_ sender: WebView!, didFinishLoadFor frame: WebFrame!) {
       handleResponse(frame.dataSource!.response.url!.absoluteString)
     }
+
     
     
-    
-    func webView(_ sender: WebView!, didFailLoadWithError error: NSError!, forFrame frame: WebFrame!) {
-      didFail(sender, didFailLoadWithError: error)
+    func webView(_ sender: WebView!, didFailLoadWithError error: Error!, for frame: WebFrame!) {
+        didFail(sender, didFailLoadWithError: error as NSError)
     }
   }
 #endif
