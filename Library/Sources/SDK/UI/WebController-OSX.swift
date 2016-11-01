@@ -3,27 +3,33 @@ import WebKit
 
 
 
-internal final class WebController_OSX: NSWindowController, WebFrameLoadDelegate {
+private let WebViewName = Resources.withSuffix("WebView")
+
+
+
+internal final class WebController: NSWindowController, WebFrameLoadDelegate {
     
-    @IBOutlet fileprivate weak var webView : WebView?
-    @IBOutlet fileprivate weak var activity: NSProgressIndicator!
-    fileprivate var parentWindow: NSWindow?
-    fileprivate weak var delegate: WebProxy!
+    @IBOutlet private weak var webView : WebView?
+    @IBOutlet private weak var activity: NSProgressIndicator!
+    private var parentWindow: NSWindow?
+    private weak var delegate: WebPresenter!
+    private var url: String?
     
     
-//    fileprivate class func getParamsForPlatform() -> (controller: WebController, isSheet: Bool) {
-//        let controller          = WebController()
-//        controller.parentWindow = VK.delegate?.vkWillPresentView()
-//        
-//        
-//        DispatchQueue.main.sync {
-//            NSNib(nibNamed: WebViewName, bundle: Resources.bundle)?.instantiate(withOwner: controller, topLevelObjects: nil)
-//            controller.windowDidLoad()
-//        }
-//        
-//        return (controller, controller.parentWindow != nil)
-//        
-//    }
+    
+    class func create(withDelegate delegate: WebPresenter) -> WebController? {
+        
+        return DispatchQueue.main.sync {
+            let controller          = WebController()
+            controller.delegate     = delegate
+            controller.parentWindow = VK.delegate?.vkWillPresentView()
+            
+            NSNib(nibNamed: WebViewName, bundle: Resources.bundle)?.instantiate(withOwner: controller, topLevelObjects: nil)
+            controller.windowDidLoad()
+            
+            return controller
+        }
+    }
     
     
     
@@ -42,25 +48,30 @@ internal final class WebController_OSX: NSWindowController, WebFrameLoadDelegate
             ), display: true
         )
         
+        _ = parentWindow != nil
+            ? self.parentWindow?.beginSheet(self.window!, completionHandler: nil)
+            : self.showWindow(self)
+        self.activity.startAnimation(self)
+        self.webView!.setMaintainsBackForwardList(true)
+        
         super.windowDidLoad()
     }
     
     
     
-    fileprivate func showWithUrl(_ url: String, isSheet: Bool) {
-        DispatchQueue.main.sync(execute: {
-            _ = isSheet
-                ? self.parentWindow?.beginSheet(self.window!, completionHandler: nil)
-                : self.showWindow(self)
-            self.activity.startAnimation(self)
-            self.webView!.setMaintainsBackForwardList(true)
-            self.webView!.mainFrame.load(URLRequest(url: URL(string: url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 3))
-        })
+    func load(url: String) {
+        if self.url == nil {
+            self.url = url
+        }
+        
+        DispatchQueue.main.async {
+            self.webView!.mainFrame.load(URLRequest(url: URL(string: self.url!)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 3))
+        }
     }
     
     
     
-    fileprivate func expand() {
+    func expand() {
         NSApplication.shared().activate(ignoringOtherApps: true)
         let newHeight = CGFloat(350)
         let newWidth = CGFloat(500)
@@ -81,30 +92,36 @@ internal final class WebController_OSX: NSWindowController, WebFrameLoadDelegate
     
     
     
-    fileprivate func load(request: URLRequest) {
-        self.webView!.mainFrame.load(request)
+    func goBack() {
+        DispatchQueue.main.async {
+            self.webView?.goBack()
+        }
     }
     
     
     
-    fileprivate func hide() {
-        if let parent = parentWindow {
-            parent.endSheet(self.window!)
-            self.window!.orderOut(parent)
+    func hide() {
+        DispatchQueue.main.async {
+            
+            if let parent = self.parentWindow {
+                parent.endSheet(self.window!)
+                self.window!.orderOut(parent)
+            }
+            self.webView!.frameLoadDelegate = nil
+            self.delegate?.finish()
         }
-        self.webView!.frameLoadDelegate = nil
     }
     
     
     
     //MARK: frameLoadDelegate protocol
     func webView(_ sender: WebView!, didFinishLoadFor frame: WebFrame!) {
-//        handleResponse(frame.dataSource!.response.url!.absoluteString)
+        delegate?.handleResponse(frame.dataSource!.response.url!.absoluteString)
     }
     
     
     
     func webView(_ sender: WebView!, didFailLoadWithError error: Error!, for frame: WebFrame!) {
-//        didFail(sender, didFailLoadWithError: error)
+        delegate?.handleError(ErrorAuth.failedAuthorization)
     }
 }

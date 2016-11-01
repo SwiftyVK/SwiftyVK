@@ -3,12 +3,12 @@ import Foundation
 
 
 public enum ErrorAuth: Int, CustomNSError, CustomStringConvertible {
-    case presentingControllerIsNil  = 1
+    case nilParentView              = 1
     case deniedFromUser             = 2
-    case failingValidation          = 3
-    case failingAuthorization       = 4
+    case failedValidation           = 3
+    case failedAuthorization        = 4
     
-    public static let errorDomain = "SwiftyErrorAuth"
+    public static let errorDomain = "SwiftyVKErrorAuth"
     public var errorCode: Int {return rawValue}
     public var errorUserInfo: [String : Any] {return [:]}
     
@@ -26,7 +26,7 @@ public enum ErrorRequest: Int, CustomNSError, CustomStringConvertible {
     case responseParsingFailed      = 4
     case captchaFailed              = 5
     
-    public static let errorDomain = "SwiftyErrorRequest"
+    public static let errorDomain = "SwiftyVKErrorRequest"
     public var errorCode: Int {return rawValue}
     public var errorUserInfo: [String : Any] {return [:]}
     
@@ -38,7 +38,7 @@ public enum ErrorRequest: Int, CustomNSError, CustomStringConvertible {
 
 
 public struct ErrorAPI: CustomNSError, CustomStringConvertible {
-    public static let errorDomain = "SwiftyErrorAPI"
+    public static let errorDomain = "SwiftyVKErrorAPI"
     public private(set) var errorCode: Int = 0
     public var errorUserInfo = [String : Any]()
     

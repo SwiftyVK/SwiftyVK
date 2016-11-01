@@ -19,10 +19,9 @@ internal struct Authorizator {
     
     fileprivate static var paramsUrl : String {
         let _perm = VK.Scope.toInt(VK.delegate!.vkWillAuthorize())
-        let _mode = isMac ? "mobile" : "ios"
         let _redir = canAuthorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
         
-        return  "client_id=\(VK.appID!)&scope=\(_perm)&display=\(_mode)&v\(VK.config.apiVersion)&sdk_version=\(VK.config.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
+        return  "client_id=\(VK.appID!)&scope=\(_perm)&display=mobile&v\(VK.config.apiVersion)&sdk_version=\(VK.config.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
     }
     
     private static var error: ErrorAuth?
@@ -33,8 +32,8 @@ internal struct Authorizator {
         guard Token.get() == nil else {return nil}
         
         Thread.isMainThread
-            ? vkSheetQueue.async {start()}
-            : vkSheetQueue.sync {start()}
+            ? sheetQueue.async(execute: start)
+            : sheetQueue.sync(execute: start)
         
         return error
     }
@@ -63,7 +62,7 @@ internal struct Authorizator {
     
     
     fileprivate static func startWithWeb() {
-       error = WebController.startWith(url: webAuthorizeUrl+paramsUrl)
+        error = WebPresenter.start(withUrl: webAuthorizeUrl+paramsUrl)
     }
 }
 //
@@ -101,7 +100,7 @@ internal struct Authorizator {
             if (app == "com.vk.vkclient" || app == "com.vk.vkhd" || url.scheme == "vk\(VK.appID)") {
                 if url.absoluteString.contains("access_token=") {
                     _ = Token(urlString: url.absoluteString)
-                    WebController.cancel()
+                    WebPresenter.cancel()
                 }
             }
         }

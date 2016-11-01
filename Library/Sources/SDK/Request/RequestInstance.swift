@@ -205,7 +205,7 @@ extension RequestInstance {
                 imageUrl: error.errorUserInfo["captcha_img"] as! String,
                 request: self)
         case 17:
-            if let error = WebController.validateWith(url: error.errorUserInfo["redirect_uri"] as! String) {
+            if let error = WebPresenter.start(withUrl: error.errorUserInfo["redirect_uri"] as! String) {
                 handle(error: error)
                 break
             }

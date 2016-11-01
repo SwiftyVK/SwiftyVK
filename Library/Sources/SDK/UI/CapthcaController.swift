@@ -35,7 +35,7 @@ internal final class СaptchaController: _СaptchaControllerPrototype {
     class func start(sid: String, imageUrl: String, request: RequestInstance) {
         var canContinue = false
         
-        vkSheetQueue.sync {
+        sheetQueue.sync {
             let captcha          = getCaptchaForPlatform()
             sharedCaptchaIsRun   = true
             captcha.sid          = sid
