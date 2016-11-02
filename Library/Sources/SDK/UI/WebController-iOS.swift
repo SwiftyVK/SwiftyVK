@@ -47,8 +47,8 @@ internal final class WebController: UIViewController, UIWebViewDelegate {
     
     
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
         delegate?.finish()
+        super.viewDidDisappear(animated)
     }
     
     

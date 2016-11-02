@@ -19,13 +19,16 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
     
     class func create(withDelegate delegate: WebPresenter) -> WebController? {
         
+        let controller          = WebController()
+        controller.delegate     = delegate
+        controller.parentWindow = VK.delegate?.vkWillPresentView()
+        
         return DispatchQueue.main.sync {
-            let controller          = WebController()
-            controller.delegate     = delegate
-            controller.parentWindow = VK.delegate?.vkWillPresentView()
-            
             NSNib(nibNamed: WebViewName, bundle: Resources.bundle)?.instantiate(withOwner: controller, topLevelObjects: nil)
-            controller.windowDidLoad()
+            
+            _ = controller.parentWindow != nil
+                ? controller.parentWindow?.beginSheet(controller.window!, completionHandler: nil)
+                : controller.showWindow(nil)
             
             return controller
         }
@@ -33,7 +36,9 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
     
     
     
-    override func windowDidLoad() {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
         webView!.frameLoadDelegate  = self
         
         window?.styleMask.formUnion(NSFullSizeContentViewWindowMask)
@@ -48,13 +53,8 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
             ), display: true
         )
         
-        _ = parentWindow != nil
-            ? self.parentWindow?.beginSheet(self.window!, completionHandler: nil)
-            : self.showWindow(self)
         self.activity.startAnimation(self)
         self.webView!.setMaintainsBackForwardList(true)
-        
-        super.windowDidLoad()
     }
     
     
@@ -122,6 +122,6 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
     
     
     func webView(_ sender: WebView!, didFailLoadWithError error: Error!, for frame: WebFrame!) {
-        delegate?.handleError(ErrorAuth.failedAuthorization)
+        delegate?.handleError(AuthError.failedAuthorization)
     }
 }

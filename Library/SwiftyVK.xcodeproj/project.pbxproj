@@ -32,6 +32,10 @@
 		A28368F51D9D87EE00EEBE2A /* SendQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368F31D9D87EE00EEBE2A /* SendQueue.swift */; };
 		A2967E741CBBC4A700B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
 		A2967E751CBBC51600B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
+		A2B4ECAC1DCA4F6B009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
+		A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
+		A2B4ECAF1DCA4FA5009435B6 /* CaptchaController-OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAE1DCA4FA5009435B6 /* CaptchaController-OSX.swift */; };
+		A2B4ECB11DCA4FB7009435B6 /* CapthcaController-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECB01DCA4FB7009435B6 /* CapthcaController-iOS.swift */; };
 		A2D1369B1DA00E9000C487C1 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D1369A1DA00E9000C487C1 /* Errors.swift */; };
 		A2EB6EB71BD182E3008E7D86 /* SwiftyVKResources-OSX.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */; };
 		A2EB6EB91BD18343008E7D86 /* SwiftyVKResources-iOS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2527D551BD1134500F65412 /* SwiftyVKResources-iOS.bundle */; };
@@ -71,7 +75,6 @@
 		A2EB6EDF1BD18389008E7D86 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D871BD12FD200F65412 /* Token.swift */; };
 		A2EB6EE11BD18389008E7D86 /* UrlFabric.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8A1BD12FD200F65412 /* UrlFabric.swift */; };
 		A2EB6EE21BD18389008E7D86 /* RequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8B1BD12FD200F65412 /* RequestConfig.swift */; };
-		A2EB6EE41BD18389008E7D86 /* CapthcaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8E1BD12FD200F65412 /* CapthcaController.swift */; };
 		A2EB6EE71BD18389008E7D86 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7B1BD12FD200F65412 /* Log.swift */; };
 		A2EB6EE91BD18389008E7D86 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7E1BD12FD200F65412 /* SwiftyJSON.swift */; };
 		A2EB6EEA1BD18394008E7D86 /* VK.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D911BD12FD200F65412 /* VK.swift */; };
@@ -110,7 +113,6 @@
 		A2EB6F0C1BD18395008E7D86 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D871BD12FD200F65412 /* Token.swift */; };
 		A2EB6F0E1BD18395008E7D86 /* UrlFabric.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8A1BD12FD200F65412 /* UrlFabric.swift */; };
 		A2EB6F0F1BD18395008E7D86 /* RequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8B1BD12FD200F65412 /* RequestConfig.swift */; };
-		A2EB6F111BD18395008E7D86 /* CapthcaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8E1BD12FD200F65412 /* CapthcaController.swift */; };
 		A2EB6F141BD18395008E7D86 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7B1BD12FD200F65412 /* Log.swift */; };
 		A2EB6F151BD18395008E7D86 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7C1BD12FD200F65412 /* Reachability.swift */; };
 		A2EB6F171BD18395008E7D86 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7E1BD12FD200F65412 /* SwiftyJSON.swift */; };
@@ -224,7 +226,6 @@
 		A2527D871BD12FD200F65412 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Token.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A2527D8A1BD12FD200F65412 /* UrlFabric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlFabric.swift; sourceTree = "<group>"; };
 		A2527D8B1BD12FD200F65412 /* RequestConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RequestConfig.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		A2527D8E1BD12FD200F65412 /* CapthcaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CapthcaController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A2527D901BD12FD200F65412 /* SwiftyVK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyVK.h; sourceTree = "<group>"; };
 		A2527D911BD12FD200F65412 /* VK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VK.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A2527E191BD1343F00F65412 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/CaptchaView-iOS.xib"; sourceTree = "<group>"; };
@@ -243,6 +244,9 @@
 		A28368EE1D9D75DC00EEBE2A /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		A28368F31D9D87EE00EEBE2A /* SendQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendQueue.swift; sourceTree = "<group>"; };
 		A2967E731CBBC4A700B7D48F /* Gifts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gifts.swift; sourceTree = "<group>"; };
+		A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapthcaPresenter.swift; sourceTree = "<group>"; };
+		A2B4ECAE1DCA4FA5009435B6 /* CaptchaController-OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CaptchaController-OSX.swift"; sourceTree = "<group>"; };
+		A2B4ECB01DCA4FB7009435B6 /* CapthcaController-iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CapthcaController-iOS.swift"; sourceTree = "<group>"; };
 		A2D1369A1DA00E9000C487C1 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -387,10 +391,8 @@
 		A2527D8D1BD12FD200F65412 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				A2527D8E1BD12FD200F65412 /* CapthcaController.swift */,
-				A236B2B51DB6864F002376C8 /* WebPresenter.swift */,
-				A236B2B81DB68E4F002376C8 /* WebController-OSX.swift */,
-				A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */,
+				A2B4ECAA1DCA4F54009435B6 /* Capthca */,
+				A2B52C0F1DC91DBA000F5BB0 /* Web */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -421,6 +423,26 @@
 				A2527E231BD1343F00F65412 /* WebView-iOS.xib */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		A2B4ECAA1DCA4F54009435B6 /* Capthca */ = {
+			isa = PBXGroup;
+			children = (
+				A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */,
+				A2B4ECAE1DCA4FA5009435B6 /* CaptchaController-OSX.swift */,
+				A2B4ECB01DCA4FB7009435B6 /* CapthcaController-iOS.swift */,
+			);
+			name = Capthca;
+			sourceTree = "<group>";
+		};
+		A2B52C0F1DC91DBA000F5BB0 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				A236B2B51DB6864F002376C8 /* WebPresenter.swift */,
+				A236B2B81DB68E4F002376C8 /* WebController-OSX.swift */,
+				A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */,
+			);
+			name = Web;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -659,6 +681,7 @@
 				A236B2B71DB6864F002376C8 /* WebPresenter.swift in Sources */,
 				A2EB6F031BD18395008E7D86 /* User.swift in Sources */,
 				A2EB6F041BD18395008E7D86 /* Utils.swift in Sources */,
+				A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */,
 				A2EB6F051BD18395008E7D86 /* Video.swift in Sources */,
 				A2EB6F061BD18395008E7D86 /* Wall.swift in Sources */,
 				A2EB6F071BD18395008E7D86 /* Arg.swift in Sources */,
@@ -671,9 +694,9 @@
 				A24D10901C56A49E008263B0 /* Market.swift in Sources */,
 				A2EB6F0C1BD18395008E7D86 /* Token.swift in Sources */,
 				A2EB6F0E1BD18395008E7D86 /* UrlFabric.swift in Sources */,
+				A2B4ECB11DCA4FB7009435B6 /* CapthcaController-iOS.swift in Sources */,
 				A2EB6F0F1BD18395008E7D86 /* RequestConfig.swift in Sources */,
 				A28368F51D9D87EE00EEBE2A /* SendQueue.swift in Sources */,
-				A2EB6F111BD18395008E7D86 /* CapthcaController.swift in Sources */,
 				A2EB6F141BD18395008E7D86 /* Log.swift in Sources */,
 				A2EB6F151BD18395008E7D86 /* Reachability.swift in Sources */,
 				A2EB6F171BD18395008E7D86 /* SwiftyJSON.swift in Sources */,
@@ -689,6 +712,7 @@
 				A2EB6EBF1BD18389008E7D86 /* Account.swift in Sources */,
 				A2EB6EC01BD18389008E7D86 /* API.swift in Sources */,
 				A28368EC1D9D742700EEBE2A /* SendTask.swift in Sources */,
+				A2B4ECAF1DCA4FA5009435B6 /* CaptchaController-OSX.swift in Sources */,
 				A2EB6EC11BD18389008E7D86 /* Audio.swift in Sources */,
 				A2066AEA1D9C388F0065A4D7 /* RequestInstance.swift in Sources */,
 				A2EB6EC21BD18389008E7D86 /* Board.swift in Sources */,
@@ -723,6 +747,7 @@
 				A2EB6ED91BD18389008E7D86 /* Wall.swift in Sources */,
 				A2EB6EDA1BD18389008E7D86 /* Arg.swift in Sources */,
 				A2EB6EDC1BD18389008E7D86 /* Media.swift in Sources */,
+				A2B4ECAC1DCA4F6B009435B6 /* CapthcaPresenter.swift in Sources */,
 				A2EB6EDD1BD18389008E7D86 /* Resources.swift in Sources */,
 				A2EB6EDE1BD18389008E7D86 /* Scope.swift in Sources */,
 				A28368EF1D9D75DC00EEBE2A /* Result.swift in Sources */,
@@ -730,7 +755,6 @@
 				A2EB6EE11BD18389008E7D86 /* UrlFabric.swift in Sources */,
 				A2EB6EE21BD18389008E7D86 /* RequestConfig.swift in Sources */,
 				A28368F41D9D87EE00EEBE2A /* SendQueue.swift in Sources */,
-				A2EB6EE41BD18389008E7D86 /* CapthcaController.swift in Sources */,
 				A2EB6EE71BD18389008E7D86 /* Log.swift in Sources */,
 				A2EB6EE91BD18389008E7D86 /* SwiftyJSON.swift in Sources */,
 				A24D108F1C56A49E008263B0 /* Market.swift in Sources */,

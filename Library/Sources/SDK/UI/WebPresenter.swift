@@ -19,17 +19,17 @@ internal final class WebPresenter {
     private let semaphore = DispatchSemaphore(value: 0)
     private var controller: WebController!
     private var fails = 0
-    private var error: ErrorAuth?
+    private var error: AuthError?
     private weak static var currentController: WebController?
     
     
     
-    class func start(withUrl url: String) -> ErrorAuth? {
+    class func start(withUrl url: String) -> AuthError? {
         
         let presenter = WebPresenter()
         
         guard let controller = WebController.create(withDelegate: presenter) else {
-            return ErrorAuth.nilParentView
+            return AuthError.nilParentView
         }
         
         currentController = controller
@@ -58,7 +58,7 @@ internal final class WebPresenter {
             controller.hide()
         }
         else if urlString.contains("access_denied") || urlString.contains("cancel=1") {
-            error = ErrorAuth.deniedFromUser
+            error = AuthError.deniedFromUser
             controller.hide()
         }
         else if urlString.contains("fail=1") {
@@ -79,7 +79,7 @@ internal final class WebPresenter {
     
     
     
-    func handleError(_ error: ErrorAuth) {
+    func handleError(_ error: AuthError) {
         if fails <= 3 {
             self.error = error
             fails += 1

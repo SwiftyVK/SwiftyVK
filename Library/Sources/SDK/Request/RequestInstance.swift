@@ -100,7 +100,7 @@ extension RequestInstance {
         
         guard sendAttempts < config.maxAttempts else {
             if result.error == nil {
-                result.setError(error: ErrorRequest.maximumAttemptsExceeded)
+                result.setError(error: RequestError.maximumAttemptsExceeded)
             }
             
             execute(error: result.error!)
@@ -185,7 +185,7 @@ extension RequestInstance {
     
     
     fileprivate func catchError(error err: Error) {
-        guard sendAttempts < config.maxAttempts && config.catchErrors == true, let error = err as? ErrorAPI else {
+        guard sendAttempts < config.maxAttempts && config.catchErrors == true, let error = err as? ApiError else {
             execute(error: err)
             return
         }
@@ -198,14 +198,19 @@ extension RequestInstance {
             }
             send()
         case 14:
-            guard !sharedCaptchaIsRun else {return}
-            
-            СaptchaController.start(
+
+            if let error = CaptchaPresenter.present(
                 sid: error.errorUserInfo["captcha_sid"] as! String,
                 imageUrl: error.errorUserInfo["captcha_img"] as! String,
-                request: self)
+                request: self
+                ) {
+                handle(error: error)
+                break
+            }
+            send()
+            
         case 17:
-            if let error = WebPresenter.start(withUrl: error.errorUserInfo["redirect_uri"] as! String) {
+            if let url = error.errorUserInfo["redirect_uri"] as? String, let error = Authorizator.validate(withUrl: url) {
                 handle(error: error)
                 break
             }

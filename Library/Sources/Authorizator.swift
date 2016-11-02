@@ -24,16 +24,34 @@ internal struct Authorizator {
         return  "client_id=\(VK.appID!)&scope=\(_perm)&display=mobile&v\(VK.config.apiVersion)&sdk_version=\(VK.config.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
     }
     
-    private static var error: ErrorAuth?
+    private static var error: AuthError?
     
     
     
-    internal static func authorize() -> ErrorAuth? {
+    internal static func authorize() -> AuthError? {
+        error = nil
+
         guard Token.get() == nil else {return nil}
         
         Thread.isMainThread
             ? sheetQueue.async(execute: start)
             : sheetQueue.sync(execute: start)
+        
+        return error
+    }
+    
+    
+    
+    internal static func validate(withUrl url: String) -> AuthError? {
+        error = nil
+        
+        Thread.isMainThread
+            ? sheetQueue.async {
+                error = WebPresenter.start(withUrl: url)
+                }
+            : sheetQueue.sync {
+                error = WebPresenter.start(withUrl: url)
+        }
         
         return error
     }
@@ -50,7 +68,7 @@ internal struct Authorizator {
         
         if VK.state != .authorized {
             if error == nil {
-                error = ErrorAuth.deniedFromUser
+                error = AuthError.deniedFromUser
             }
             
             DispatchQueue.global(qos: .default).async {

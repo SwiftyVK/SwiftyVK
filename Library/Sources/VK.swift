@@ -17,7 +17,7 @@ public protocol VKDelegate: class {
     ///Called when SwiftyVK did unauthorize and remove token
     func vkDidUnauthorize()
     ///Called when SwiftyVK did failed autorization
-    func vkAutorizationFailedWith(error: ErrorAuth)
+    func vkAutorizationFailedWith(error: AuthError)
     /**Called when SwiftyVK need know where a token is located
      - returns: Path to save/read token or nil if should save token to UserDefaults*/
     func vkShouldUseTokenPath() -> String?

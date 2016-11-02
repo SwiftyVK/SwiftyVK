@@ -64,7 +64,7 @@ internal final class SendTask : Operation {
                 self.delegate.handle(error: error)
             }
             else {
-                self.delegate.handle(error: ErrorRequest.unexpectedResponse)
+                self.delegate.handle(error: RequestError.unexpectedResponse)
             }
             
             semaphore.signal()

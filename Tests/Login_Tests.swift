@@ -69,7 +69,7 @@ class Login_Tests: VKTestCase {
                 exp.fulfill()
             },
             onError: {error in
-                XCTAssertEqual((error as? ErrorAPI)?._code, 5, "Unexpected error")
+                XCTAssertEqual((error as? ApiError)?._code, 5, "Unexpected error")
                 exp.fulfill()
             }
         )
@@ -93,7 +93,7 @@ class Login_Tests: VKTestCase {
                 exp.fulfill()
             },
             onError: {error in
-                XCTAssertEqual(error as? ErrorAuth, .deniedFromUser, "Unexpected error")
+                XCTAssertEqual(error as? AuthError, .deniedFromUser, "Unexpected error")
                 exp.fulfill()
             }
         )
@@ -119,7 +119,7 @@ class Login_Tests: VKTestCase {
                 exp.fulfill()
             },
             onError: {error in
-                XCTAssertEqual(error as? ErrorAuth, .deniedFromUser, "Unexpected error code")
+                XCTAssertEqual(error as? AuthError, .deniedFromUser, "Unexpected error code")
                 exp.fulfill()
             }
         )

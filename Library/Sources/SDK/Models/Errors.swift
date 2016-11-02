@@ -2,48 +2,48 @@ import Foundation
 
 
 
-public enum ErrorAuth: Int, CustomNSError, CustomStringConvertible {
+public enum AuthError: Int, CustomNSError, CustomStringConvertible {
     case nilParentView              = 1
     case deniedFromUser             = 2
     case failedValidation           = 3
     case failedAuthorization        = 4
     
-    public static let errorDomain = "SwiftyVKErrorAuth"
+    public static let errorDomain = "SwiftyVKAuthError"
     public var errorCode: Int {return rawValue}
     public var errorUserInfo: [String : Any] {return [:]}
     
     public var description: String {
-        return String(format: "error %@[%d]: %@", ErrorAuth.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
+        return String(format: "error %@[%d]: %@", AuthError.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
     }
 }
 
 
 
-public enum ErrorRequest: Int, CustomNSError, CustomStringConvertible {
+public enum RequestError: Int, CustomNSError, CustomStringConvertible {
     case unexpectedResponse         = 1
     case timeoutExpired             = 2
     case maximumAttemptsExceeded    = 3
     case responseParsingFailed      = 4
     case captchaFailed              = 5
     
-    public static let errorDomain = "SwiftyVKErrorRequest"
+    public static let errorDomain = "SwiftyVKRequestError"
     public var errorCode: Int {return rawValue}
     public var errorUserInfo: [String : Any] {return [:]}
     
     public var description: String {
-        return String(format: "error %@[%d]: %@", ErrorRequest.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
+        return String(format: "error %@[%d]: %@", RequestError.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
     }
 }
 
 
 
-public struct ErrorAPI: CustomNSError, CustomStringConvertible {
-    public static let errorDomain = "SwiftyVKErrorAPI"
+public struct ApiError: CustomNSError, CustomStringConvertible {
+    public static let errorDomain = "SwiftyVKApiError"
     public private(set) var errorCode: Int = 0
     public var errorUserInfo = [String : Any]()
     
     public var description: String {
-        return String(format: "error %@[%d]: %@", ErrorAPI.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
+        return String(format: "error %@[%d]: %@", ApiError.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
     }
     
     
@@ -72,6 +72,7 @@ public struct ErrorAPI: CustomNSError, CustomStringConvertible {
         }
     }
 }
+
 
 
 extension NSError {
