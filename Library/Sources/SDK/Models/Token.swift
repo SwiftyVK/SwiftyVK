@@ -135,9 +135,10 @@ internal class Token: NSObject, NSCoding {
     
     
     func save() {
-        let path  = VK.delegate!.vkShouldUseTokenPath()
-        if let path = path  {saveToFile(path)}
-        else                {saveToDefaults()}
+        saveToKeychain()
+//        let path  = VK.delegate!.vkShouldUseTokenPath()
+//        if let path = path  {saveToFile(path)}
+//        else                {saveToDefaults()}
     }
     
     
@@ -147,6 +148,27 @@ internal class Token: NSObject, NSCoding {
         defaults.set(NSKeyedArchiver.archivedData(withRootObject: self), forKey: "Token")
         defaults.synchronize()
         VK.Log.put("Token", "saved to NSUserDefaults")
+    }
+    
+    
+    
+    
+    private func saveToKeychain() {
+        
+        guard let data = parameters
+            .reduce("#", {"\($0)\($1.key)=\($1.value)&"})
+            .data(using: .utf8, allowLossyConversion: false)
+            else {return}
+        
+        let keychainQuery = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrService: "SwiftyVK",
+            kSecAttrAccount: VK.appID!,
+            kSecValueData: data
+        ] as NSDictionary as CFDictionary
+        
+        SecItemDelete(keychainQuery)
+        print(SecItemAdd(keychainQuery, nil))
     }
     
     
