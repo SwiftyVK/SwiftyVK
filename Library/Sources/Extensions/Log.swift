@@ -3,11 +3,11 @@ import Foundation
 internal let printQueue = DispatchQueue(label: "SwiftyVK.PrintQueue")
 internal let logQueue = DispatchQueue(label: "SwiftyVK.LogQueue")
 
-private let form : DateFormatter = {
+private let form: DateFormatter = {
   let f = DateFormatter()
   f.dateFormat = DateFormatter.dateFormat(fromTemplate: "d.M HH:mm:ss", options: 0, locale: Locale.current)
   return f
-}();
+}()
 
 
 
@@ -149,4 +149,3 @@ internal func printAsync(_ some : Any) {
     printSync(some)
   }
 }
-

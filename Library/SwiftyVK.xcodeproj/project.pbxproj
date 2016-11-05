@@ -6,6 +6,22 @@
 	objectVersion = 47;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		A21F10B81DCDFCF6003EFDDC /* SwiftyVK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A21F10BB1DCDFCF6003EFDDC /* Build configuration list for PBXAggregateTarget "SwiftyVK" */;
+			buildPhases = (
+				A21F10C01DCDFD1A003EFDDC /* SwiftLint */,
+			);
+			dependencies = (
+				A21F10BF1DCDFD01003EFDDC /* PBXTargetDependency */,
+				A21F10BD1DCDFCFE003EFDDC /* PBXTargetDependency */,
+			);
+			name = SwiftyVK;
+			productName = SwiftyVK;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		A2066AEA1D9C388F0065A4D7 /* RequestInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2066AE91D9C388F0065A4D7 /* RequestInstance.swift */; };
 		A2066AEB1D9C388F0065A4D7 /* RequestInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2066AE91D9C388F0065A4D7 /* RequestInstance.swift */; };
@@ -123,6 +139,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A21F10BC1DCDFCFE003EFDDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2527D261BD1123E00F65412 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A2EB6EA71BD180E9008E7D86;
+			remoteInfo = "SwiftyVK-OSX";
+		};
+		A21F10BE1DCDFD01003EFDDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2527D261BD1123E00F65412 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A2EB6E9A1BD180DD008E7D86;
+			remoteInfo = "SwiftyVK-iOS";
+		};
 		A2EB6EB11BD182C7008E7D86 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A2527D261BD1123E00F65412 /* Project object */;
@@ -526,7 +556,6 @@
 				A2EB6EA61BD180E9008E7D86 /* Resources */,
 				A2EB71D71BD3EFCD008E7D86 /* CopyFiles */,
 				A2F33E751D8F202400856417 /* Frameworks */,
-				A23435C01DAE98AB00C81B29 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -547,6 +576,11 @@
 				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0800;
 				TargetAttributes = {
+					A21F10B81DCDFCF6003EFDDC = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 842SSJ357W;
+						ProvisioningStyle = Automatic;
+					};
 					A2527D4A1BD1130D00F65412 = {
 						CreatedOnToolsVersion = 7.1;
 						LastSwiftMigration = 0800;
@@ -582,6 +616,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				A21F10B81DCDFCF6003EFDDC /* SwiftyVK */,
 				A2EB6EA71BD180E9008E7D86 /* SwiftyVK-OSX */,
 				A2EB6E9A1BD180DD008E7D86 /* SwiftyVK-iOS */,
 				A2527D4A1BD1130D00F65412 /* SwiftyVKResources-OSX */,
@@ -628,18 +663,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A23435C01DAE98AB00C81B29 /* ShellScript */ = {
+		A21F10C01DCDFD1A003EFDDC /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = SwiftLint;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -764,6 +800,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A21F10BD1DCDFCFE003EFDDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A2EB6EA71BD180E9008E7D86 /* SwiftyVK-OSX */;
+			targetProxy = A21F10BC1DCDFCFE003EFDDC /* PBXContainerItemProxy */;
+		};
+		A21F10BF1DCDFD01003EFDDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A2EB6E9A1BD180DD008E7D86 /* SwiftyVK-iOS */;
+			targetProxy = A21F10BE1DCDFD01003EFDDC /* PBXContainerItemProxy */;
+		};
 		A2EB6EB21BD182C7008E7D86 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A2527D4A1BD1130D00F65412 /* SwiftyVKResources-OSX */;
@@ -840,6 +886,22 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A21F10B91DCDFCF6003EFDDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 842SSJ357W;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A21F10BA1DCDFCF6003EFDDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 842SSJ357W;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		A2527D2A1BD1123E00F65412 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1315,6 +1377,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A21F10BB1DCDFCF6003EFDDC /* Build configuration list for PBXAggregateTarget "SwiftyVK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A21F10B91DCDFCF6003EFDDC /* Debug */,
+				A21F10BA1DCDFCF6003EFDDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A2527D291BD1123E00F65412 /* Build configuration list for PBXProject "SwiftyVK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

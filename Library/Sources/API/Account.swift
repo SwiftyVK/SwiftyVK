@@ -81,7 +81,8 @@ extension _VKAPI {
     
     
     
-    ///Returns a list of active ads (offers) which executed by the user will bring him/her respective number of votes to his balance in the application. More - https://vk.com/dev/account.getActiveOffers
+    ///Returns a list of active ads (offers) which executed by the user will bring him/her respective number of votes to his balance in the application. 
+    ///More - https://vk.com/dev/account.getActiveOffers
     public static func getActiveOffers(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
       return RequestConfig(method: "account.getActiveOffers", parameters: parameters)
     }

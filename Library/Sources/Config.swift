@@ -39,6 +39,6 @@ extension VK {
         }
         internal static let supportedLanguages = ["ru", "uk", "be", "en", "es", "fi", "de", "it"]
         internal static var useSystemLanguage = true
-        private static var selectedLanguage : String?
+        private static var selectedLanguage: String?
     }
 }

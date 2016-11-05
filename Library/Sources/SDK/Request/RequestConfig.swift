@@ -3,12 +3,12 @@ import Foundation
 
 
 internal var sharedCaptchaIsRun = false
-internal var sharedCaptchaAnswer : [String : String]?
+internal var sharedCaptchaAnswer: [String : String]?
 
 
 
 ///HTTP prtocol methods. See - https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods
-public enum HttpMethod : String {
+public enum HttpMethod: String {
     case GET, POST
 }
 
@@ -22,7 +22,7 @@ public struct RequestConfig {
     ///Whether to allow automatic processing of some API error
     public var catchErrors = VK.config.catchErrors
     ///Allows print log messages to console
-    public var logToConsole : Bool = VK.config.logToConsole
+    public var logToConsole: Bool = VK.config.logToConsole
     ///HTTP prtocol dending method. See - https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods
     public var httpMethod = HttpMethod.GET
     
@@ -70,8 +70,8 @@ public struct RequestConfig {
     
     @discardableResult public func send(
         onSuccess successBlock: VK.SuccessBlock? = nil,
-        onError errorBlock:  VK.ErrorBlock? = nil,
-        onProgress progressBlock:  VK.ProgressBlock? = nil
+        onError errorBlock: VK.ErrorBlock? = nil,
+        onProgress progressBlock: VK.ProgressBlock? = nil
         ) -> RequestExecution {
         
         return RequestInstance.createWith(config: self, successBlock: successBlock, errorBlock: errorBlock, progressBlock: progressBlock)

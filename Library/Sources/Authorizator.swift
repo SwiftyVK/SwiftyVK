@@ -17,7 +17,7 @@ internal struct Authorizator {
     
     
     
-    fileprivate static var paramsUrl : String {
+    fileprivate static var paramsUrl: String {
         let _perm = VK.Scope.toInt(VK.delegate!.vkWillAuthorize())
         let _redir = canAuthorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
         
@@ -30,7 +30,7 @@ internal struct Authorizator {
     
     internal static func authorize() -> AuthError? {
         error = nil
-
+        
         guard Token.get() == nil else {return nil}
         
         Thread.isMainThread
@@ -61,8 +61,7 @@ internal struct Authorizator {
     private static func start() {
         if canAuthorizeWithVkApp {
             startWithApp()
-        }
-        else {
+        } else {
             startWithWeb()
         }
         
@@ -100,7 +99,7 @@ internal struct Authorizator {
         
         
         
-        internal static var canAuthorizeWithVkApp : Bool {
+        internal static var canAuthorizeWithVkApp: Bool {
             return UIApplication.shared.canOpenURL(URL(string: "vk\(VK.appID!)://")!)
         }
         
@@ -115,7 +114,7 @@ internal struct Authorizator {
         
         
         internal static func recieveTokenURL(url: URL, fromApp app: String?) {
-            if (app == "com.vk.vkclient" || app == "com.vk.vkhd" || url.scheme == "vk\(VK.appID!)") {
+            if app == "com.vk.vkclient" || app == "com.vk.vkhd" || url.scheme == "vk\(VK.appID!)" {
                 if url.absoluteString.contains("access_token=") {
                     _ = Token(urlString: url.absoluteString)
                     WebPresenter.cancel()
@@ -138,7 +137,7 @@ internal struct Authorizator {
 #if os(OSX)
     private typealias OSXAuthorizator = Authorizator
     extension OSXAuthorizator {
-        internal static var canAuthorizeWithVkApp : Bool {return false}
+        internal static var canAuthorizeWithVkApp: Bool {return false}
         fileprivate static func startWithApp() {}
     }
 #endif

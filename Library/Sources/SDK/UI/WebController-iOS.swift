@@ -9,9 +9,9 @@ private let WebViewName = Resources.withSuffix("WebView")
 
 internal final class WebController: UIViewController, UIWebViewDelegate {
     
-    @IBOutlet fileprivate weak var webView : UIWebView?
-    @IBOutlet fileprivate weak var activity : UIActivityIndicatorView!
-    fileprivate var parentView : UIViewController?
+    @IBOutlet private weak var webView: UIWebView?
+    @IBOutlet private weak var activity: UIActivityIndicatorView!
+    fileprivate var parentView: UIViewController?
     private weak var delegate: WebPresenter!
     private var url: String?
     
@@ -88,7 +88,7 @@ internal final class WebController: UIViewController, UIWebViewDelegate {
     
     
     
-    //MARK: frameLoadDelegate protocol
+    //MARK: - frameLoadDelegate protocol
     func webViewDidFinishLoad(_ webView: UIWebView) {
         activity.stopAnimating()
         delegate?.handleResponse(webView.request!.url!.absoluteString)

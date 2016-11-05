@@ -17,11 +17,9 @@ internal struct UrlFabric {
         
         if config.upload {
             request = createWith(media: config.media, url: config.customUrl)
-        }
-        else if config.api {
+        } else if config.api {
             request = craeteWith(apiMethod: config.method, parameters: config.parameters, httpMethod: config.httpMethod)
-        }
-        else {
+        } else {
             request = createWith(url: config.customUrl)
         }
         
@@ -52,8 +50,7 @@ internal struct UrlFabric {
         
         if httpMethod == .GET {
             req.url = URL(string: methodUrl + apiMethod + "?" + paramStr)
-        }
-        else {
+        } else {
             req.url = URL(string: methodUrl + apiMethod)
             let charset = String(CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(String.Encoding.utf8.rawValue)))
             req.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
@@ -77,7 +74,7 @@ internal struct UrlFabric {
         let body = NSMutableData()
         
         for (index, file) in media.enumerated() {
-            let name : String
+            let name: String
             
             switch file.mediaType {
             case .video:
@@ -88,7 +85,9 @@ internal struct UrlFabric {
                 name = "file\(index)"
             }
             
-            body.append("\r\n--\(boundary)\r\nContent-Disposition: form-data; name=\"\(name)\"; filename=\"file.\(file.type)\"\r\nContent-Type: document/other\r\n\r\n".data(using: .utf8, allowLossyConversion: false)!)
+            body
+                .append("\r\n--\(boundary)\r\nContent-Disposition: form-data; name=\"\(name)\"; filename=\"file.\(file.type)\"\r\nContent-Type: document/other\r\n\r\n"
+                .data(using: .utf8, allowLossyConversion: false)!)
             body.append(file.data as Data)
         }
         body.append("\r\n--\(boundary)--\r".data(using: .utf8, allowLossyConversion: false)!)

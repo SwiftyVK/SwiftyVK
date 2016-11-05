@@ -8,7 +8,7 @@ private class ResourceTestClass {}
 
 
 internal struct Resources {
-  private static let pathSuffix : String = {
+  private static let pathSuffix: String = {
     #if os(OSX)
       return "-OSX"
     #elseif os(iOS)
@@ -22,14 +22,13 @@ internal struct Resources {
   
   
     
-  internal static let bundle : Bundle = {
+  internal static let bundle: Bundle = {
     let name = "SwiftyVKResources" + pathSuffix
     let ext = "bundle"
     
     if let path = Bundle.main.path(forResource: name, ofType: ext) {
       return Bundle(path:path)!
-    }
-    else if let path = Bundle(for:object_getClass(ResourceTestClass())).path(forResource: name, ofType: ext) {
+    } else if let path = Bundle(for:object_getClass(ResourceTestClass())).path(forResource: name, ofType: ext) {
       return Bundle(path:path)!
     }
     
@@ -38,7 +37,7 @@ internal struct Resources {
   
     
 
-  internal static func withSuffix(_ name : String) -> String {
+  internal static func withSuffix(_ name: String) -> String {
     return name + pathSuffix
   }
 }

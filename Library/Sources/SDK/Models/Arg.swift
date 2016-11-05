@@ -1,6 +1,7 @@
+// swiftlint:disable type_body_length
 extension VK {
   ///Parameters for methods VK API
-  public enum Arg : String, Hashable {
+  public enum Arg: String, Hashable {
     case userIDs = "user_ids"
     case fields
     case nameCase = "name_case"
@@ -314,7 +315,7 @@ extension VK {
     case aid
     case gid
     
-    public var hashValue : Int {
+    public var hashValue: Int {
       return self.rawValue.hashValue
     }
   }

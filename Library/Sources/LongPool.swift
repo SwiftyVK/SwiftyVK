@@ -21,8 +21,8 @@ extension VK_LongPool {
      * To subscribe to notifications, use NSNotificationCenter using the names of VK.LP.notifications
      */
     public struct LP {
-        public fileprivate(set) static var active : Bool = false
-        private static var observer : LPObserver?
+        public fileprivate(set) static var active: Bool = false
+        private static var observer: LPObserver?
         private static var lpKey = String()
         private static var keyIsExpired = false
         private static var server = String()
@@ -70,12 +70,12 @@ extension VK_LongPool {
                     ts = response["ts"].stringValue
                     keyIsExpired = false
                     update()
-                },
+            },
                 onError: {error in
                     // VK.Log.put("LongPool", "Error get server with request \(req.id)")
                     Thread.sleep(forTimeInterval: 10)
                     getServer()
-                }
+            }
             )
         }
         
@@ -108,14 +108,14 @@ extension VK_LongPool {
                             ? (keyIsExpired = true)
                             : observer?.connectionRestore()
                         update()
-                    },
+                },
                     onError: {error in
                         // VK.Log.put("LongPool", "Received error with request \(req.id)")
                         
                         observer?.connectionLost()
                         Thread.sleep(forTimeInterval: 10)
                         update()
-                    }
+                }
                 )
             }
         }
@@ -211,7 +211,8 @@ extension VK_LongPool {
             public static let type6 = "VKLPNotificationType6"
             ///7,$peer_id,$local_id — read all incoming messages with up to $peer_id $local_id inclusive
             public static let type7 = "VKLPNotificationType7"
-            ///8,-$user_id,$extra — each $user_id has become online, $extra is not equal to 0 if the flag was handed over to mode 64, in the low byte (remainder of the division by 256) of $extra lying platform identifier
+            ///8,-$user_id,$extra — each $user_id has become online, 
+            ///$extra is not equal to 0 if the flag was handed over to mode 64, in the low byte (remainder of the division by 256) of $extra lying platform identifier
             public static let type8 = "VKLPNotificationType8"
             ///9,-$user_id,$flags — each $user_id has become offline ($flags is 0 if the user has left the site (for example, pulled out), and 1 if the offline timeout (eg, status away))
             public static let type9 = "VKLPNotificationType9"
@@ -246,7 +247,7 @@ extension VK_LongPool {
 //
 ///The wrapper for a variety of objects such as JSON to be compatible with NSObject. Access to the property is via an unwrap array
 public final class JSONWrapper {
-    public let unwrap : [JSON]
+    public let unwrap: [JSON]
     
     public init(_ value: [JSON]) {
         self.unwrap = value
@@ -262,7 +263,7 @@ public final class JSONWrapper {
 //
 //
 //
-internal final class LPObserver : NSObject {
+internal final class LPObserver: NSObject {
     private var connected = true
     
     internal override init() {
@@ -280,7 +281,7 @@ internal final class LPObserver : NSObject {
             NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged), name: ReachabilityChangedNotification, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(connectionLostForce), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(connectionRestoreForce), name:NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-            try! reachability?.startNotifier()
+            _ = try? reachability?.startNotifier()
         #endif
     }
     
@@ -288,8 +289,9 @@ internal final class LPObserver : NSObject {
     
     #if os(iOS)
     @objc private func reachabilityChanged(note: NSNotification) {
-    let reachability = note.object as! Reachability
-    reachability.isReachable ? connectionRestore() : connectionLost()
+        if let reachability = note.object as? Reachability {
+            reachability.isReachable ? connectionRestore() : connectionLost()
+        }
     }
     #endif
     

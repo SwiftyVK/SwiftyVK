@@ -19,8 +19,7 @@ internal final class CaptchaPresenter {
 
             do {
                 let req = URLRequest(url: URL(string: imageUrl)!, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 5)
-                data = try NSURLConnection.sendSynchronousRequest(req, returning: nil)}
-            catch _ {
+                data = try NSURLConnection.sendSynchronousRequest(req, returning: nil)} catch _ {
                 return RequestError.captchaFailed
             }
             

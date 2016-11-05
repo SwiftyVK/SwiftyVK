@@ -6,7 +6,7 @@ private let session = URLSession(configuration: .default, delegate: nil, delegat
 
 
 
-internal final class SendTask : Operation {
+internal final class SendTask: Operation {
     unowned private let delegate: RequestInstance
     private let config: RequestConfig
     private var task: URLSessionTask!
@@ -27,8 +27,7 @@ internal final class SendTask : Operation {
         
         if config.api {
             SendQueue.queue.addApi(operation)
-        }
-        else {
+        } else {
             SendQueue.queue.addNotApi(operation)
         }
         return operation
@@ -51,7 +50,7 @@ internal final class SendTask : Operation {
     override func main() {
         let semaphore = DispatchSemaphore(value: 0)
         
-        let completeon : (Data?, URLResponse?, Error?) -> () = {data, response, error in
+        let completeon: (Data?, URLResponse?, Error?) -> () = {data, response, error in
             guard !self.isCancelled else {
                 semaphore.signal()
                 return
@@ -59,11 +58,9 @@ internal final class SendTask : Operation {
             
             if let data = data {
                 self.delegate.handle(data: data)
-            }
-            else if let error = error {
+            } else if let error = error {
                 self.delegate.handle(error: error)
-            }
-            else {
+            } else {
                 self.delegate.handle(error: RequestError.unexpectedResponse)
             }
             
@@ -85,7 +82,7 @@ internal final class SendTask : Operation {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard let keyPath = keyPath else {return}
         
-        switch(keyPath) {
+        switch keyPath {
         case (#keyPath(URLSessionTask.countOfBytesReceived)):
             delegate.handle(received: task.countOfBytesExpectedToReceive, of: task.countOfBytesExpectedToReceive)
         case(#keyPath(URLSessionTask.countOfBytesSent)):

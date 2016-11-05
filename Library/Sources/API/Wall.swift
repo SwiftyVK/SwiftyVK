@@ -129,5 +129,3 @@ extension _VKAPI {
     }
   }
 }
-
-

@@ -2,7 +2,7 @@ import Foundation
 
 
 
-public struct Media : CustomStringConvertible {
+public struct Media: CustomStringConvertible {
   
   enum MediaType {
     case image
@@ -13,7 +13,7 @@ public struct Media : CustomStringConvertible {
   
   
   
-  public enum ImageType : String {
+  public enum ImageType: String {
     case JPG
     case PNG
     case BMP
@@ -22,11 +22,11 @@ public struct Media : CustomStringConvertible {
   
   
   
-  let data : Data
-  let mediaType : MediaType
-  var imageType : ImageType = .JPG
-  var documentType : String = "untitled"
-  var type : String {
+  let data: Data
+  let mediaType: MediaType
+  var imageType: ImageType = .JPG
+  var documentType: String = "untitled"
+  var type: String {
     switch mediaType {
     case .image:
       return imageType.rawValue

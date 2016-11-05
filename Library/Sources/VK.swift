@@ -47,21 +47,21 @@ public protocol VKDelegate: class {
  * For user authentication you must call authorize()
  */
 public struct VK {
-    internal static var delegate : VKDelegate? {
-        set{delegateInstance = newValue}
-        get{assert(VK.state != .unknown, "At first initialize VK with configure() method")
+    internal static var delegate: VKDelegate? {
+        set {delegateInstance = newValue}
+        get {assert(VK.state != .unknown, "At first initialize VK with configure() method")
             return delegateInstance}
     }
-    public private(set) static var appID : String? {
-        set{appIDInstance = newValue}
-        get{assert(VK.state != .unknown, "At first initialize VK with configure() method")
+    public private(set) static var appID: String? {
+        set {appIDInstance = newValue}
+        get {assert(VK.state != .unknown, "At first initialize VK with configure() method")
             return appIDInstance}
     }
-    private static weak var delegateInstance : VKDelegate?
-    private static var appIDInstance : String?
+    private static weak var delegateInstance: VKDelegate?
+    private static var appIDInstance: String?
     
     
-
+    
     /**
      Initialize library with identifier and application delegate
      - parameter appID: application ID
@@ -71,16 +71,16 @@ public struct VK {
         delegate = owner
         appID    = id
         _ = Token.get()
-         VK.Log.put("Global", "SwiftyVK configured")
+        VK.Log.put("Global", "SwiftyVK configured")
     }
     
     
     
-    fileprivate static var configured : Bool {
+    fileprivate static var configured: Bool {
         return VK.delegateInstance != nil && VK.appIDInstance != nil
     }
     
-
+    
     
     /**
      Getting authenticate token.
@@ -88,7 +88,7 @@ public struct VK {
      * If not, shows a pop-up notification with authorization request
      */
     public static func logIn() {
-        _ = Authorizator.authorize();
+        _ = Authorizator.authorize()
     }
     
     
@@ -96,13 +96,13 @@ public struct VK {
     #if os(iOS)
     @available(iOS 9.0, *)
     public static func process(url: URL, options: [AnyHashable: Any]) {
-    Authorizator.recieveTokenURL(url: url, fromApp: options[UIApplicationOpenURLOptionsKey.sourceApplication.rawValue] as? String);
+        Authorizator.recieveTokenURL(url: url, fromApp: options[UIApplicationOpenURLOptionsKey.sourceApplication.rawValue] as? String)
     }
     
     
     @available(iOS, introduced:4.2, deprecated:9.0, message:"Please use url:options:")
     public static func process(url: URL, sourceApplication app: String?) {
-    Authorizator.recieveTokenURL(url: url, fromApp: app);
+        Authorizator.recieveTokenURL(url: url, fromApp: app)
     }
     #endif
     
@@ -128,11 +128,11 @@ extension VK {
     public enum States {
         case unknown
         case configured
-//        case authorization
+        //        case authorization
         case authorized
     }
     
-    public static var state : States {
+    public static var state: States {
         guard VK.configured else {
             return .unknown
         }

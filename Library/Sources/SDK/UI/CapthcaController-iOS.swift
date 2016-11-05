@@ -9,7 +9,7 @@ private let CaptchaViewName = Resources.withSuffix("CaptchaView")
 class CaptchaController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet private weak var imageView: UIImageView!
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet private weak var textField: UITextField!
     private var parentView: UIViewController!
     private var delegate: CaptchaPresenter!
     private var image: UIImage?

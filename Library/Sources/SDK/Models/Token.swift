@@ -2,7 +2,7 @@ import Foundation
 
 
 
-private var tokenInstance : Token! {
+private var tokenInstance: Token! {
 willSet {
     if tokenInstance != nil && newValue == nil {
         VK.delegate!.vkDidUnauthorize()
@@ -28,12 +28,12 @@ internal class Token: NSObject, NSCoding {
         kSecAttrAccount: VK.appID!,
         ] as NSDictionary
     
-    private var token       : String
-    private var expires     : Int
+    private var token: String
+    private var expires: Int
     private var isOffline   = false
     fileprivate var parameters: Dictionary<String, String>
     
-    override var description : String {
+    override var description: String {
         return "Token with parameters: \(parameters))"
     }
     
@@ -61,8 +61,7 @@ internal class Token: NSObject, NSCoding {
         
         if tokenInstance != nil && self.isExpired() == false {
             return tokenInstance.token
-        }
-        else if let _ = _load(), self.isExpired() == false {
+        } else if let _ = _load(), self.isExpired() == false {
             return tokenInstance.token
         }
         return nil
@@ -70,7 +69,7 @@ internal class Token: NSObject, NSCoding {
     
     
     
-    class var exist : Bool {
+    class var exist: Bool {
         return tokenInstance != nil
     }
     
@@ -94,8 +93,7 @@ internal class Token: NSObject, NSCoding {
     private class func isExpired() -> Bool {
         if tokenInstance == nil {
             return true
-        }
-        else if tokenInstance.isOffline == false && tokenInstance.expires < Int(Date().timeIntervalSince1970) {
+        } else if tokenInstance.isOffline == false && tokenInstance.expires < Int(Date().timeIntervalSince1970) {
             VK.Log.put("Token", "expired")
             revoke = false
             
@@ -119,8 +117,7 @@ internal class Token: NSObject, NSCoding {
         }
         
         let path  = VK.delegate!.vkShouldUseTokenPath()
-        if let path = path  {tokenInstance = self.loadFromFile(path)}
-        else                {tokenInstance = self.loadFromDefaults()}
+        if let path = path {tokenInstance = self.loadFromFile(path)} else {tokenInstance = self.loadFromDefaults()}
         
         if tokenInstance == nil {
             VK.Log.put("Token", " not saved yet in storage")
@@ -134,17 +131,20 @@ internal class Token: NSObject, NSCoding {
     private class func loadFromDefaults() -> Token? {
         let defaults = UserDefaults.standard
         if !(defaults.object(forKey: "Token") != nil) {return nil}
-        let object: Any! = NSKeyedUnarchiver.unarchiveObject(with: defaults.object(forKey: "Token") as! Data)
-        if object == nil {
-            VK.Log.put("Token", "load from NSUSerDefaults failed")
-            return nil
+        guard
+            let data = defaults.object(forKey: "Token") as? Data,
+            let object: Any = NSKeyedUnarchiver.unarchiveObject(with: data)
+            else {
+                VK.Log.put("Token", "load from userDefaults failed")
+                return nil
         }
-        VK.Log.put("Token", "loaded from NSUserDefaults")
+        
+        VK.Log.put("Token", "loaded from userDefaults")
         return object as? Token
     }
     
 
-    private class func loadFromFile(_ filePath : String) -> Token? {
+    private class func loadFromFile(_ filePath: String) -> Token? {
         let manager = FileManager.default
         if !manager.fileExists(atPath: filePath) {
             VK.Log.put("Token", "loaded from file \(filePath) failed")
@@ -158,8 +158,7 @@ internal class Token: NSObject, NSCoding {
     
     
     private static func loadFromKeychain() -> Token? {
-        
-        let keychainQuery = (Token.keychainParams.mutableCopy() as! NSMutableDictionary)
+        guard let keychainQuery = (Token.keychainParams.mutableCopy() as? NSMutableDictionary) else {return nil}
         keychainQuery.setObject(kCFBooleanTrue, forKey: NSString(format: kSecReturnData))
         keychainQuery.setObject(kSecMatchLimitOne, forKey: NSString(format: kSecMatchLimit))
         
@@ -180,7 +179,7 @@ internal class Token: NSObject, NSCoding {
     func save() {
         Token.removeSavedData()
         
-        let keychainQuery = (Token.keychainParams.mutableCopy() as! NSMutableDictionary)
+        guard let keychainQuery = (Token.keychainParams.mutableCopy() as? NSMutableDictionary) else {return}
         keychainQuery.setObject(NSKeyedArchiver.archivedData(withRootObject: self), forKey: NSString(format: kSecValueData))
         
         if SecItemAdd(keychainQuery, nil) == .allZeros {
@@ -208,8 +207,7 @@ internal class Token: NSObject, NSCoding {
             if manager.fileExists(atPath: path) {
                 _ = try? manager.removeItem(atPath: path)
             }
-        }
-        else {
+        } else {
             let defaults = UserDefaults.standard
             if defaults.object(forKey: "Token") != nil {defaults.removeObject(forKey: "Token")}
             defaults.synchronize()
@@ -224,26 +222,24 @@ internal class Token: NSObject, NSCoding {
     
     //MARK: - NSCoding protocol
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(parameters,   forKey: "parameters")
-        aCoder.encode(token,        forKey: "token")
-        aCoder.encode(expires,      forKey: "expires")
-        aCoder.encode(isOffline,    forKey: "isOffline")
+        aCoder.encode(parameters, forKey: "parameters")
+        aCoder.encode(token, forKey: "token")
+        aCoder.encode(expires, forKey: "expires")
+        aCoder.encode(isOffline, forKey: "isOffline")
     }
     
     
     
     required init?(coder aDecoder: NSCoder) {
-        token         = aDecoder.decodeObject(forKey: "token") as! String
+        token         = aDecoder.decodeObject(forKey: "token") as? String ?? ""
         expires       = aDecoder.decodeInteger(forKey: "expires")
         isOffline     = aDecoder.decodeBool(forKey: "isOffline")
         
         if let parameters = aDecoder.decodeObject(forKey: "parameters") as? Dictionary<String, String> {
             self.parameters = parameters
-        }
-        else {
+        } else {
             self.parameters = [:]
         }
         
     }
 }
-

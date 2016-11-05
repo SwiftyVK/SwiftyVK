@@ -9,7 +9,7 @@ private let WebViewName = Resources.withSuffix("WebView")
 
 internal final class WebController: NSWindowController, WebFrameLoadDelegate {
     
-    @IBOutlet private weak var webView : WebView?
+    @IBOutlet private weak var webView: WebView?
     @IBOutlet private weak var activity: NSProgressIndicator!
     private var parentWindow: NSWindow?
     private weak var delegate: WebPresenter!
@@ -86,13 +86,12 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
         if let parent = parentWindow {
             newX = (parent.frame.origin.x + ((parent.frame.width - newWidth) / 2))
             newY = parent.frame.origin.y + (parent.frame.height - newHeight)
-        }
-        else {
+        } else {
             newX = window!.frame.origin.x - window!.frame.size.width/2
             newY = window!.frame.origin.y - window!.frame.size.height
         }
         
-        window!.setFrame(NSMakeRect(newX, newY, newWidth, newHeight), display: true, animate: true)
+        window!.setFrame(NSRect(x: newX, y: newY, width: newWidth, height: newHeight), display: true, animate: true)
     }
     
     
@@ -123,7 +122,7 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
     
     
     
-    //MARK: frameLoadDelegate protocol
+    //MARK: - frameLoadDelegate protocol
     func webView(_ sender: WebView!, didFinishLoadFor frame: WebFrame!) {
         delegate?.handleResponse(frame.dataSource!.response.url!.absoluteString)
     }

@@ -8,8 +8,8 @@ private let CaptchaViewName = Resources.withSuffix("CaptchaView")
 
 class CaptchaController: NSWindowController, NSTextFieldDelegate {
     
-    @IBOutlet weak var imageView: NSImageView!
-    @IBOutlet weak var textField: NSTextField!
+    @IBOutlet private weak var imageView: NSImageView!
+    @IBOutlet private weak var textField: NSTextField!
     private var parentWindow: NSWindow?
     private weak var delegate: CaptchaPresenter!
     private var image: NSImage?

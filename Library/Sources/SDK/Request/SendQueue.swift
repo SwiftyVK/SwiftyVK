@@ -2,7 +2,7 @@ import Foundation
 
 
 
-internal final class SendQueue : OperationQueue {
+internal final class SendQueue: OperationQueue {
     static let queue = SendQueue()
     
     private let addingQueue = DispatchQueue(label: "SwiftyVK.SendQueue")
@@ -44,8 +44,7 @@ internal final class SendQueue : OperationQueue {
                 self.apiCounter += 1
                 VK.Log.put("SendQueue", "\(self) send \(op)")
                 self.addOperation(op)
-            }
-            else {
+            } else {
                 self.waited.append(op)
                 VK.Log.put("SendQueue", "\(self) wait \(op)")
             }

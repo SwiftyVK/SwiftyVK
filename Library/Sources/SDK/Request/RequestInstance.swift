@@ -18,7 +18,7 @@ public protocol RequestExecution {
 
 
 
-internal final class RequestInstance : Operation, RequestExecution {
+internal final class RequestInstance: Operation, RequestExecution {
     
     fileprivate static let queue: OperationQueue = {
        let q = OperationQueue()
@@ -36,18 +36,18 @@ internal final class RequestInstance : Operation, RequestExecution {
     fileprivate var currentSend: SendTask?
     fileprivate var result: Result!
     
-    fileprivate let successBlock:  VK.SuccessBlock?
+    fileprivate let successBlock: VK.SuccessBlock?
     fileprivate let errorBlock: VK.ErrorBlock?
     fileprivate let progressBlock: VK.ProgressBlock?
     
     var state: RequestState = .created
     
-    override var description : String {
+    override var description: String {
         return "request #\(id)"
     }
     
     
-    
+
     static func createWith(
         config: RequestConfig,
         successBlock: VK.SuccessBlock?,
@@ -175,12 +175,10 @@ extension RequestInstance {
                 config = nextConfig
                 sendAttempts = 0
                 send()
-            }
-            else {
+            } else {
                 execute(response: response)
             }
-        }
-        else if let error = result.error {
+        } else if let error = result.error {
             catchError(error: error)
         }
     }
@@ -221,10 +219,17 @@ extension RequestInstance {
             }
             send()
         case 14:
+            guard
+                let sid = error.errorUserInfo["captcha_sid"] as? String,
+                let imgUrl = error.errorUserInfo["captcha_img"] as? String
+                else {
+                    execute(error: error)
+                    return
+            }
 
             if let error = CaptchaPresenter.present(
-                sid: error.errorUserInfo["captcha_sid"] as! String,
-                imageUrl: error.errorUserInfo["captcha_img"] as! String,
+                sid: sid,
+                imageUrl: imgUrl,
                 request: self
                 ) {
                 handle(error: error)
