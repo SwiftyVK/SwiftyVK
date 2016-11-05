@@ -28,6 +28,13 @@
 
 
 #if swift(>=3.0)
+  #if OHHTTPSTUBS_NSURLSESSION_HTTPBODY
+    extension URLRequest {
+        public var ohhttpStubs_httpBody: Data? {
+            return (self as NSURLRequest).ohhttpStubs_HTTPBody()
+        }
+    }
+  #endif
 #else
 #if swift(>=2.2)
     extension OHHTTPStubs {
@@ -70,9 +77,15 @@
  * - Returns: The `OHHTTPStubsResponse` instance that will stub with the given status code
  *            & headers, and use the file content as the response body.
  */
+#if swift(>=3.0)
+public func fixture(filePath: String, status: Int32 = 200, headers: [AnyHashable: Any]?) -> OHHTTPStubsResponse {
+    return OHHTTPStubsResponse(fileAtPath: filePath, statusCode: status, headers: headers)
+}
+#else
 public func fixture(filePath: String, status: Int32 = 200, headers: [NSObject: AnyObject]?) -> OHHTTPStubsResponse {
     return OHHTTPStubsResponse(fileAtPath: filePath, statusCode: status, headers: headers)
 }
+#endif
 
 /**
  * Helper to call the stubbing function in a more concise way?
@@ -84,6 +97,7 @@ public func fixture(filePath: String, status: Int32 = 200, headers: [NSObject: A
  *            and can be later used to remove it with `removeStub:`
  */
 #if swift(>=3.0)
+@discardableResult
 public func stub(condition: @escaping OHHTTPStubsTestBlock, response: @escaping OHHTTPStubsResponseBlock) -> OHHTTPStubsDescriptor {
     return OHHTTPStubs.stubRequests(passingTest: condition, withStubResponse: response)
 }

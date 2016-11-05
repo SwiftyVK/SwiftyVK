@@ -43,9 +43,7 @@ final class APIWorker {
     
     
     
-    class func captcha() {
-        VK.config.logToConsole = true
-        
+    class func captcha() {        
         VK.API.custom(method: "captcha.force").send(
             onSuccess: {response in print("SwiftyVK: captcha.force success \n \(response)")},
             onError: {error in print("SwiftyVK: captcha.force fail \n \(error)")}

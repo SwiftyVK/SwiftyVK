@@ -119,7 +119,7 @@ class Login_Tests: VKTestCase {
                 exp.fulfill()
             },
             onError: {error in
-                XCTAssertEqual(error as? AuthError, .deniedFromUser, "Unexpected error code")
+                XCTAssertEqual(error as? AuthError, .failedAuthorization, "Unexpected error code")
                 exp.fulfill()
             }
         )

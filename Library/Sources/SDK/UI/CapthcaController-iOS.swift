@@ -44,6 +44,7 @@ class CaptchaController: UIViewController, UITextFieldDelegate {
         textField.delegate = self
         textField.becomeFirstResponder()
         super.viewWillAppear(animated)
+        delegate.didAppear()
     }
     
     

@@ -13,29 +13,29 @@ internal struct UrlFabric {
     
     
     internal static func createWith(config: RequestConfig) -> URLRequest {
-        let result : NSMutableURLRequest
+        var request: URLRequest
         
         if config.upload {
-            result = createWith(media: config.media, url: config.customUrl)
+            request = createWith(media: config.media, url: config.customUrl)
         }
         else if config.api {
-            result = craeteWith(apiMethod: config.method, parameters: config.parameters, httpMethod: config.httpMethod)
+            request = craeteWith(apiMethod: config.method, parameters: config.parameters, httpMethod: config.httpMethod)
         }
         else {
-            result = createWith(url: config.customUrl)
+            request = createWith(url: config.customUrl)
         }
         
-        result.timeoutInterval = config.timeout
+        request.timeoutInterval = config.timeout
         
-        return result as URLRequest
+        return request
     }
     
     
     
-    private static func createWith(url: String) -> NSMutableURLRequest {
+    private static func createWith(url: String) -> URLRequest {
         let emptyUrl = URL(string: methodUrl)!
         
-        let req = NSMutableURLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+        var req = URLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
         req.httpMethod = "GET"
         req.url = URL(string: url)
         return req
@@ -43,11 +43,11 @@ internal struct UrlFabric {
     
     
     
-    private static func craeteWith(apiMethod: String, parameters: [VK.Arg: String], httpMethod: HttpMethod) -> NSMutableURLRequest {
+    private static func craeteWith(apiMethod: String, parameters: [VK.Arg: String], httpMethod: HttpMethod) -> URLRequest {
         let paramStr = stringFrom(parameters: parameters)
         let emptyUrl = URL(string: methodUrl)!
         
-        let req = NSMutableURLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+        var req = URLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
         req.httpMethod = httpMethod.rawValue
         
         if httpMethod == .GET {
@@ -65,10 +65,10 @@ internal struct UrlFabric {
     
     
     
-    private static func createWith(media: [Media], url: String) -> NSMutableURLRequest {
+    private static func createWith(media: [Media], url: String) -> URLRequest {
         let emptyUrl = URL(string: methodUrl)!
         
-        let req = NSMutableURLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+        var req = URLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
         req.httpMethod = "POST"
         req.url = URL(string: url)
         req.addValue("", forHTTPHeaderField: "Accept-Language")
@@ -117,9 +117,9 @@ internal struct UrlFabric {
             paramArray.add("lang=\(lang)")
         }
         
-        if sharedCaptchaAnswer != nil {
-            paramArray.add("captcha_sid=\(sharedCaptchaAnswer!["captcha_sid"])")
-            paramArray.add("captcha_key=\(sharedCaptchaAnswer!["captcha_key"])")
+        if let sid = sharedCaptchaAnswer?["captcha_sid"], let key = sharedCaptchaAnswer?["captcha_key"] {
+            paramArray.add("captcha_sid=\(sid)")
+            paramArray.add("captcha_key=\(key)")
             sharedCaptchaAnswer = nil
         }
     

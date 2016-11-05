@@ -47,7 +47,13 @@ class CaptchaController: NSWindowController, NSTextFieldDelegate {
         window?.titlebarAppearsTransparent = true
         imageView.image = image
         textField.delegate = self
+        
+        DispatchQueue.global(qos: .background).async {
+            Thread.sleep(forTimeInterval: 0.5)
+            self.delegate.didAppear()
+        }
     }
+    
     
     
     

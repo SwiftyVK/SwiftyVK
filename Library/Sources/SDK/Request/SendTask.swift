@@ -73,8 +73,8 @@ internal final class SendTask : Operation {
         let urlRequest = UrlFabric.createWith(config: config)
         self.task = session.dataTask(with: urlRequest, completionHandler: completeon)
         
-        task.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived), options: NSKeyValueObservingOptions.new, context: nil)
-        task.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesSent), options: NSKeyValueObservingOptions.new, context: nil)
+        task.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived), options: .new, context: nil)
+        task.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesSent), options: .new, context: nil)
         
         task.resume()
         semaphore.wait()

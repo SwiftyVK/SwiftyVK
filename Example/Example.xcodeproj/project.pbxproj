@@ -11,7 +11,7 @@
 		A2087A5E1D8580A90076BB5E /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2087A561D8580940076BB5E /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A2087A611D8580B00076BB5E /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2087A581D8580940076BB5E /* SwiftyVK.framework */; };
 		A2087A621D8580B00076BB5E /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2087A581D8580940076BB5E /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A21CD49C1D98143300FF2D88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CD49B1D98143300FF2D88 /* AppDelegate.swift */; };
+		A20DB7281DCCBA050030DFE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CD49B1D98143300FF2D88 /* AppDelegate.swift */; };
 		A21CD49D1D98143300FF2D88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CD49B1D98143300FF2D88 /* AppDelegate.swift */; };
 		A22599261D8B0E05008535BE /* error.need.authorazation.json in Resources */ = {isa = PBXBuildFile; fileRef = A22599201D8B0CDD008535BE /* error.need.authorazation.json */; };
 		A22599271D8B0E05008535BE /* error.need.authorazation.json in Resources */ = {isa = PBXBuildFile; fileRef = A22599201D8B0CDD008535BE /* error.need.authorazation.json */; };
@@ -693,7 +693,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A21CD49C1D98143300FF2D88 /* AppDelegate.swift in Sources */,
+				A20DB7281DCCBA050030DFE2 /* AppDelegate.swift in Sources */,
 				A2527EBD1BD13F7E00F65412 /* APIWorker.swift in Sources */,
 				A227371D1CF462F60042868A /* VKDelegateExample.swift in Sources */,
 			);

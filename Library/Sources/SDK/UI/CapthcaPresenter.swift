@@ -47,10 +47,26 @@ internal final class CaptchaPresenter {
     
     
     
+    func didAppear() {
+        NotificationCenter.default.post(
+            name: NSNotification.Name(rawValue: "TestCaptchaDidLoad"),
+            object: nil,
+            userInfo: ["captcha": controller]
+        )
+    }
+    
+    
+    
     func finish(answer: String?) {
+        self.answer = answer
+        
         if let answer = answer {
-            sharedCaptchaAnswer = [sid: answer]
+            sharedCaptchaAnswer = [
+                "captcha_sid": sid,
+                "captcha_key": answer
+            ]
         }
+        
         semaphore.signal()
     }
     

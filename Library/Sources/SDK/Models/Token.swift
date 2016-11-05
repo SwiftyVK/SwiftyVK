@@ -21,10 +21,17 @@ internal class Token: NSObject, NSCoding {
     
     internal private(set) static var revoke = true
     
+    private static let keychainParams = [
+        kSecAttrAccessible: kSecAttrAccessibleWhenUnlocked,
+        kSecClass: kSecClassGenericPassword,
+        kSecAttrService: "SwiftyVK",
+        kSecAttrAccount: VK.appID!,
+        ] as NSDictionary
+    
     private var token       : String
     private var expires     : Int
     private var isOffline   = false
-    fileprivate var parameters  : Dictionary<String, String>
+    fileprivate var parameters: Dictionary<String, String>
     
     override var description : String {
         return "Token with parameters: \(parameters))"
@@ -35,7 +42,7 @@ internal class Token: NSObject, NSCoding {
     init(urlString: String) {
         let parameters = Token.parse(urlString)
         token       = parameters["access_token"]!
-        expires     = 0 + Int(Date().timeIntervalSince1970)
+        expires     = Int(Date().timeIntervalSince1970)
         if parameters["expires_in"] != nil {expires += Int(parameters["expires_in"]!)!}
         isOffline   = (parameters["expires_in"]?.isEmpty == false && (Int(parameters["expires_in"]!) == 0) || parameters["expires_in"] == nil)
         self.parameters = parameters
@@ -91,8 +98,13 @@ internal class Token: NSObject, NSCoding {
         else if tokenInstance.isOffline == false && tokenInstance.expires < Int(Date().timeIntervalSince1970) {
             VK.Log.put("Token", "expired")
             revoke = false
-            Token.remove()
-            return true
+            
+            if let _ = Authorizator.authorize() {
+                Token.remove()
+                return true
+            }
+            
+            return false
         }
         return false
     }
@@ -100,9 +112,20 @@ internal class Token: NSObject, NSCoding {
     
     
     private class func _load() -> Token? {
+        
+        if let token = loadFromKeychain() {
+            tokenInstance = token
+            return tokenInstance
+        }
+        
         let path  = VK.delegate!.vkShouldUseTokenPath()
         if let path = path  {tokenInstance = self.loadFromFile(path)}
         else                {tokenInstance = self.loadFromDefaults()}
+        
+        if tokenInstance == nil {
+            VK.Log.put("Token", " not saved yet in storage")
+        }
+        
         return tokenInstance
     }
     
@@ -120,7 +143,7 @@ internal class Token: NSObject, NSCoding {
         return object as? Token
     }
     
-    ///Загрузка из файла
+
     private class func loadFromFile(_ filePath : String) -> Token? {
         let manager = FileManager.default
         if !manager.fileExists(atPath: filePath) {
@@ -134,67 +157,56 @@ internal class Token: NSObject, NSCoding {
     
     
     
+    private static func loadFromKeychain() -> Token? {
+        
+        let keychainQuery = (Token.keychainParams.mutableCopy() as! NSMutableDictionary)
+        keychainQuery.setObject(kCFBooleanTrue, forKey: NSString(format: kSecReturnData))
+        keychainQuery.setObject(kSecMatchLimitOne, forKey: NSString(format: kSecMatchLimit))
+        
+        var keychainResult: AnyObject?
+        
+        guard
+            SecItemCopyMatching(keychainQuery, &keychainResult) == .allZeros,
+            let data = keychainResult as? Data,
+            let token = NSKeyedUnarchiver.unarchiveObject(with: data) as? Token
+            else {return nil}
+        
+        VK.Log.put("Token", "loaded from keychain")
+        return token
+    }
+    
+    
+    
     func save() {
-        saveToKeychain()
-//        let path  = VK.delegate!.vkShouldUseTokenPath()
-//        if let path = path  {saveToFile(path)}
-//        else                {saveToDefaults()}
-    }
-    
-    
-    
-    private func saveToDefaults() {
-        let defaults = UserDefaults.standard
-        defaults.set(NSKeyedArchiver.archivedData(withRootObject: self), forKey: "Token")
-        defaults.synchronize()
-        VK.Log.put("Token", "saved to NSUserDefaults")
-    }
-    
-    
-    
-    
-    private func saveToKeychain() {
+        Token.removeSavedData()
         
-        guard let data = parameters
-            .reduce("#", {"\($0)\($1.key)=\($1.value)&"})
-            .data(using: .utf8, allowLossyConversion: false)
-            else {return}
+        let keychainQuery = (Token.keychainParams.mutableCopy() as! NSMutableDictionary)
+        keychainQuery.setObject(NSKeyedArchiver.archivedData(withRootObject: self), forKey: NSString(format: kSecValueData))
         
-        let keychainQuery = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: "SwiftyVK",
-            kSecAttrAccount: VK.appID!,
-            kSecValueData: data
-        ] as NSDictionary as CFDictionary
-        
-        SecItemDelete(keychainQuery)
-        print(SecItemAdd(keychainQuery, nil))
-    }
-    
-    
-    
-    private func saveToFile(_ filePath : String) {
-        let manager = FileManager.default
-        if manager.fileExists(atPath: filePath) {
-            do {
-                try manager.removeItem(atPath: filePath)
-            }
-            catch _ {}
+        if SecItemAdd(keychainQuery, nil) == .allZeros {
+            VK.Log.put("Token", "saved to keychain")
         }
-        NSKeyedArchiver.archiveRootObject(self, toFile: filePath)
-        VK.Log.put("Token", "saved to file: \(filePath)")
     }
     
     
     
     class func remove() {
+        removeSavedData()
+        tokenInstance = nil
+        VK.Log.put("Token", "removed")
+    }
+    
+    
+    
+    private class func removeSavedData() {
+        SecItemDelete(keychainParams)
+        
         let path = VK.delegate!.vkShouldUseTokenPath()
         
         if let path = path {
             let manager = FileManager.default
             if manager.fileExists(atPath: path) {
-                do {try manager.removeItem(atPath: path)}
-                catch _ {}
+                _ = try? manager.removeItem(atPath: path)
             }
         }
         else {
@@ -202,9 +214,6 @@ internal class Token: NSObject, NSCoding {
             if defaults.object(forKey: "Token") != nil {defaults.removeObject(forKey: "Token")}
             defaults.synchronize()
         }
-
-        if tokenInstance != nil {tokenInstance = nil}
-        VK.Log.put("Token", "removed")
     }
     
     
@@ -220,6 +229,7 @@ internal class Token: NSObject, NSCoding {
         aCoder.encode(expires,      forKey: "expires")
         aCoder.encode(isOffline,    forKey: "isOffline")
     }
+    
     
     
     required init?(coder aDecoder: NSCoder) {

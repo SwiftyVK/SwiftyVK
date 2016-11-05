@@ -60,9 +60,12 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
     
     
     func load(url: String) {
+
         if self.url == nil {
             self.url = url
         }
+        
+        VK.Log.put("WebController", "load \(self.url!)")
         
         DispatchQueue.main.async {
             self.webView!.mainFrame.load(URLRequest(url: URL(string: self.url!)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 3))
@@ -72,6 +75,8 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
     
     
     func expand() {
+        VK.Log.put("WebController", "expand")
+        
         NSApplication.shared().activate(ignoringOtherApps: true)
         let newHeight = CGFloat(350)
         let newWidth = CGFloat(500)
@@ -93,6 +98,8 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
     
     
     func goBack() {
+        VK.Log.put("WebController", "goBack")
+
         DispatchQueue.main.async {
             self.webView?.goBack()
         }
@@ -101,6 +108,8 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
     
     
     func hide() {
+        VK.Log.put("WebController", "hide")
+
         DispatchQueue.main.async {
             
             if let parent = self.parentWindow {

@@ -42,6 +42,9 @@
                   Identifier = "Login_Tests/test_autologin()">
                </Test>
                <Test
+                  Identifier = "Sending_Tests/test_wait_for_connection()">
+               </Test>
+               <Test
                   Identifier = "UI_Tests/test_autologin()">
                </Test>
                <Test
@@ -49,6 +52,9 @@
                </Test>
                <Test
                   Identifier = "UI_Tests/test_captcha_synchroniously()">
+               </Test>
+               <Test
+                  Identifier = "Upload_Tests/test_photo_to_market_album()">
                </Test>
                <Test
                   Identifier = "VKTestCase">

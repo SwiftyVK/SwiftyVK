@@ -26,6 +26,7 @@ internal final class WebPresenter {
     
     class func start(withUrl url: String) -> AuthError? {
         
+        VK.Log.put("WebPresenter", "start")
         let presenter = WebPresenter()
         
         guard let controller = WebController.create(withDelegate: presenter) else {
@@ -36,18 +37,22 @@ internal final class WebPresenter {
         presenter.controller = controller
         presenter.controller.load(url: url)
         presenter.semaphore.wait()
+        VK.Log.put("WebPresenter", "finish")
+
         return presenter.error
     }
     
     
     
     class func cancel() {
+        VK.Log.put("WebPresenter", "cancel")
         currentController?.hide()
     }
     
     
     
     func handleResponse(_ urlString : String) {
+        
         if urlString.contains("access_token=") {
             _ = Token(urlString: urlString)
             error = nil
@@ -80,6 +85,8 @@ internal final class WebPresenter {
     
     
     func handleError(_ error: AuthError) {
+        VK.Log.put("WebPresenter", "handle \(error)")
+
         if fails <= 3 {
             self.error = error
             fails += 1

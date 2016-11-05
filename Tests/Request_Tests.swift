@@ -72,28 +72,6 @@ class Sending_Tests: VKTestCase {
     
     
     
-    
-    func test_wait_for_connection() {
-        Stubs.apiWith(jsonFile: "success.users.get", shouldFails: 10)
-        let exp = expectation(description: "ready")
-        
-        var req = VK.API.Users.get([VK.Arg.userIDs : "1"])
-        req.maxAttempts = 1
-        
-        req.send(
-            onSuccess: {response in
-                exp.fulfill()
-            },
-            onError: {error in
-                XCTFail("Unexpected error: \(error)")
-                exp.fulfill()
-            }
-        )
-        waitForExpectations(timeout: reqTimeout*10) {_ in}
-    }
-    
-    
-    
     func test_execute_error() {
         Stubs.apiWith(method: "groups.isMember", jsonFile: "error.missing.parameter", maxCalls: VK.config.maxAttempts)
         let exp = expectation(description: "ready")
@@ -114,29 +92,7 @@ class Sending_Tests: VKTestCase {
     
     
     
-    func test_asynchroniously() {
-        Stubs.apiWith(jsonFile: "success.users.get", maxCalls: 10)
-        let exp = expectation(description: "ready")
-        var exeCount = 0
-        
-        for n in 1...10 {
-            VK.API.Users.get([VK.Arg.userIDs : "\(n)"]).send(
-                onSuccess: {response in
-                    exeCount += 1
-                    exeCount >= 10 ? exp.fulfill() : ()
-                },
-                onError: {error in
-                    XCTFail("\(n) call has unexpected error: \(error)")
-                    exp.fulfill()
-            })
-        }
-        
-        waitForExpectations(timeout: reqTimeout*10) {_ in}
-    }
-    
-    
-    
-    func test_send_queue_with_limit() {
+    func test_send_queue() {
         Stubs.apiWith(jsonFile: "success.users.get")
         let backup = VK.config.sendLimit
         let needSendCount = 100

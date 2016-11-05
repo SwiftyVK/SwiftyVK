@@ -16,6 +16,7 @@ class VKDelegateExample: VKDelegate {
     
     
     init() {
+        VK.config.logToConsole = true
         VK.configure(appID: appID, delegate: self)
     }
     

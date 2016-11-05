@@ -58,6 +58,8 @@ internal final class WebController: UIViewController, UIWebViewDelegate {
             self.url = url
         }
         
+        VK.Log.put("WebController", "load \(self.url!)")
+        
         DispatchQueue.main.sync {
             self.webView?.loadRequest(URLRequest(url: URL(string: self.url!)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 3))
         }
@@ -70,12 +72,16 @@ internal final class WebController: UIViewController, UIWebViewDelegate {
     
     
     func goBack() {
+        VK.Log.put("WebController", "goBack")
+
         webView?.goBack()
     }
     
     
     
     func hide() {
+        VK.Log.put("WebController", "hide")
+
         self.parentView?.dismiss(animated: true, completion: nil)
         self.webView!.delegate = nil
     }
