@@ -1,4 +1,4 @@
-# SwiftyVK [![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://developer.apple.com/swift/) [![VK API](https://img.shields.io/badge/VK_API-5.53-blue.svg?style=flat)](https://vk.com/dev/versions) [![Platform](https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat)](http://cocoadocs.org/docsets/SwiftyVK) [![Build Status](https://travis-ci.org/WE-St0r/SwiftyVK.svg?branch=swift-3)](https://travis-ci.org/WE-St0r/SwiftyVK) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftyVK.svg?style=flat)](https://cocoapods.org/pods/SwiftyVK) [![Carthage Compatible](https://img.shields.io/badge/Carthage-✔️-brightgreen.svg)](https://github.com/WE-St0r/SwiftyVK) [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/WE-St0r/SwiftyVK/master/LICENSE) 
+# SwiftyVK [![Swift](https://img.shields.io/badge/Swift-3.0.1-orange.svg?style=flat)](https://developer.apple.com/swift/) [![VK API](https://img.shields.io/badge/VK_API-5.53-blue.svg?style=flat)](https://vk.com/dev/versions) [![Platform](https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat)](http://cocoadocs.org/docsets/SwiftyVK) [![Build Status](https://travis-ci.org/WE-St0r/SwiftyVK.svg?branch=swift-3)](https://travis-ci.org/WE-St0r/SwiftyVK) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftyVK.svg?style=flat)](https://cocoapods.org/pods/SwiftyVK) [![Carthage Compatible](https://img.shields.io/badge/Carthage-✔️-brightgreen.svg)](https://github.com/WE-St0r/SwiftyVK) [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/WE-St0r/SwiftyVK/master/LICENSE) 
 
 SwiftyVK makes it easy to interact with social network "VKontakte" API for iOS and OSX.
 
@@ -72,7 +72,7 @@ class YourClass: Superclass, VKDelegate {
   }
 
   func vkDidAuthorizeWith(parameters: Dictionary<String, String>) {}
-    //Called when the user is log in. 
+    //Called when the user is log in.
     //Here you can start to send requests to the API.
   }
 
@@ -101,7 +101,7 @@ class YourClass: Superclass, VKDelegate {
     return //Parent window for modal view or nil if view should present in separate window
   }
 }
-``` 
+```
 *See full implementation in Example project*
 
 ###**Initialization**
@@ -121,7 +121,7 @@ VK.start(appID: applicationID, delegate: VKDelegate)
 ```swift
 VK.logIn()
 ```
-* And user will see authorization dialog. 
+* And user will see authorization dialog.
 
 After this, you will check VK state:
 ```swift
@@ -178,7 +178,7 @@ Or a bit shorter:
 ```swift
 let req = VK.API.Users.get([VK.Arg.userId : "1"]).send(
   method: .Get
-  onSuccess: {response in print(response)}, 
+  onSuccess: {response in print(response)},
   onError: {error in print(error)}
 )
 
@@ -276,7 +276,7 @@ req.send()
 )
 ```
 
-This way you can download all the other supported Vkontakte file types. Can see the implementation of other types of loading in the library tests. 
+This way you can download all the other supported Vkontakte file types. Can see the implementation of other types of loading in the library tests.
 
 Keep in mind that in some cases, such as uploading photos to a message, using this method, you just load the file to the server and get its ID. To send a message with photo, you need to add photo ID to the message.
 
