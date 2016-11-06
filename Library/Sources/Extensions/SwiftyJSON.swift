@@ -20,7 +20,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-// swiftlint:disable file_length
 import Foundation
 
 // MARK: - Error
@@ -67,7 +66,8 @@ public struct JSON {
     do {
       let object: Any = try JSONSerialization.jsonObject(with: data, options: opt)
       self.init(object)
-    } catch let aError as NSError {
+    }
+    catch let aError as NSError {
       if error != nil {
         error??.pointee = aError
       }
@@ -152,7 +152,8 @@ public struct JSON {
       case let number as NSNumber:
         if number.isBool {
           _type = .bool
-        } else {
+        }
+        else {
           _type = .number
         }
         self.rawNumber = number
@@ -300,9 +301,11 @@ extension JSON {
         var r = JSON.null
         r._error = self._error ?? NSError(domain: ErrorDomain, code: ErrorWrongType, userInfo: [NSLocalizedDescriptionKey: "Array[\(index)] failure, It is not an array"])
         return r
-      } else if index >= 0 && index < self.rawArray.count {
+      }
+      else if index >= 0 && index < self.rawArray.count {
         return JSON(self.rawArray[index])
-      } else {
+      }
+      else {
         var r = JSON.null
         r._error = NSError(domain: ErrorDomain, code:ErrorIndexOutOfBounds, userInfo: [NSLocalizedDescriptionKey: "Array[\(index)] is out of bounds"])
         return r
@@ -324,10 +327,12 @@ extension JSON {
       if self.type == .dictionary {
         if let o = self.rawDictionary[key] {
           r = JSON(o)
-        } else {
+        }
+        else {
           r._error = NSError(domain: ErrorDomain, code: ErrorNotExist, userInfo: [NSLocalizedDescriptionKey: "Dictionary[\"\(key)\"] does not exist"])
         }
-      } else {
+      }
+      else {
         r._error = self._error ?? NSError(domain: ErrorDomain, code: ErrorWrongType, userInfo: [NSLocalizedDescriptionKey: "Dictionary[\"\(key)\"] failure, It is not an dictionary"])
       }
       return r
@@ -470,7 +475,8 @@ extension JSON: Swift.RawRepresentable {
   public init?(rawValue: Any) {
     if JSON(rawValue).type == .unknown {
       return nil
-    } else {
+    }
+    else {
       self.init(rawValue)
     }
   }
@@ -493,7 +499,8 @@ extension JSON: Swift.RawRepresentable {
       do {
         let data = try self.rawData(options: opt)
         return String(data: data, encoding: encoding)
-      } catch _ {
+      }
+      catch _ {
         return nil
       }
     case .string:
@@ -517,7 +524,8 @@ extension JSON: Swift.CustomStringConvertible, Swift.CustomDebugStringConvertibl
   public var description: String {
     if let string = self.rawString(options:.prettyPrinted) {
       return string
-    } else {
+    }
+    else {
       return "unknown"
     }
   }
@@ -536,7 +544,8 @@ extension JSON {
     get {
       if self.type == .array {
         return self.rawArray.map { JSON($0) }
-      } else {
+      }
+      else {
         return nil
       }
     }
@@ -562,7 +571,8 @@ extension JSON {
     set {
       if let array = newValue {
         self.object = array
-      } else {
+      }
+      else {
         self.object = NSNull()
       }
     }
@@ -582,7 +592,8 @@ extension JSON {
         d[element.0] = JSON(element.1)
         return d
       }
-    } else {
+    }
+    else {
       return nil
     }
   }
@@ -605,7 +616,8 @@ extension JSON {
     set {
       if let v = newValue {
         self.object = v
-      } else {
+      }
+      else {
         self.object = NSNull()
       }
     }
@@ -629,7 +641,8 @@ extension JSON {
     set {
       if let newValue = newValue {
         self.object = NSNumber(value: newValue)
-      } else {
+      }
+      else {
         self.object = NSNull()
       }
     }
@@ -668,7 +681,8 @@ extension JSON {
     set {
       if let newValue = newValue {
         self.object = NSString(string:newValue)
-      } else {
+      }
+      else {
         self.object = NSNull()
       }
     }
@@ -768,7 +782,8 @@ extension JSON {
       case .string:
         if let encodedString_ = self.rawString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) {
           return Foundation.URL(string: encodedString_)
-        } else {
+        }
+        else {
           return nil
         }
       default:
@@ -792,7 +807,8 @@ extension JSON {
     set {
       if let newValue = newValue {
         self.object = NSNumber(value: newValue)
-      } else {
+      }
+      else {
         self.object = NSNull()
       }
     }
@@ -814,7 +830,8 @@ extension JSON {
     set {
       if let newValue = newValue {
         self.object = NSNumber(value: newValue)
-      } else {
+      }
+      else {
         self.object = NSNull()
       }
     }
@@ -836,7 +853,8 @@ extension JSON {
     set {
       if let newValue = newValue {
         self.object = NSNumber(value: newValue)
-      } else {
+      }
+      else {
         self.object = NSNull()
       }
     }
@@ -858,7 +876,8 @@ extension JSON {
     set {
       if let newValue = newValue {
         self.object = NSNumber(value: newValue)
-      } else {
+      }
+      else {
         self.object = NSNull()
       }
     }
@@ -880,7 +899,8 @@ extension JSON {
     set {
       if let newValue = newValue {
         self.object = NSNumber(value: newValue)
-      } else {
+      }
+      else {
         self.object =  NSNull()
       }
     }
@@ -902,7 +922,8 @@ extension JSON {
     set {
       if let newValue = newValue {
         self.object = NSNumber(value: newValue)
-      } else {
+      }
+      else {
         self.object =  NSNull()
       }
     }
@@ -924,7 +945,8 @@ extension JSON {
     set {
       if let newValue = newValue {
         self.object = NSNumber(value: newValue)
-      } else {
+      }
+      else {
         self.object =  NSNull()
       }
     }
@@ -946,7 +968,8 @@ extension JSON {
     set {
       if let newValue = newValue {
         self.object = NSNumber(value: newValue)
-      } else {
+      }
+      else {
         self.object =  NSNull()
       }
     }
@@ -968,7 +991,8 @@ extension JSON {
     set {
       if let newValue = newValue {
         self.object = NSNumber(value: newValue)
-      } else {
+      }
+      else {
         self.object =  NSNull()
       }
     }
@@ -990,7 +1014,8 @@ extension JSON {
     set {
       if let newValue = newValue {
         self.object = NSNumber(value: newValue)
-      } else {
+      }
+      else {
         self.object =  NSNull()
       }
     }
@@ -1012,7 +1037,8 @@ extension JSON {
     set {
       if let newValue = newValue {
         self.object = NSNumber(value: newValue)
-      } else {
+      }
+      else {
         self.object =  NSNull()
       }
     }
@@ -1034,7 +1060,8 @@ extension JSON {
     set {
       if let newValue = newValue {
         self.object = NSNumber(value: newValue)
-      } else {
+      }
+      else {
         self.object =  NSNull()
       }
     }
@@ -1151,7 +1178,8 @@ extension NSNumber {
       if (self.compare(trueNumber) == ComparisonResult.orderedSame && objCType == trueObjCType)
         || (self.compare(falseNumber) == ComparisonResult.orderedSame && objCType == falseObjCType) {
         return true
-      } else {
+      }
+      else {
         return false
       }
     }

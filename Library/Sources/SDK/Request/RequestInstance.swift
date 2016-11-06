@@ -19,34 +19,34 @@ public protocol RequestExecution {
 
 
 internal final class RequestInstance: Operation, RequestExecution {
-    
+
     fileprivate static let queue: OperationQueue = {
        let q = OperationQueue()
         q.qualityOfService = QualityOfService.userInitiated
         q.maxConcurrentOperationCount = 1
         return q
     }()
-    
+
     internal let id: Int64
     internal var log = [String]()
     internal fileprivate(set) var config: RequestConfig
-    
+
     fileprivate let semaphore = DispatchSemaphore(value: 0)
     fileprivate var sendAttempts = 0
     fileprivate var currentSend: SendTask?
     fileprivate var result: Result!
-    
+
     fileprivate let successBlock: VK.SuccessBlock?
     fileprivate let errorBlock: VK.ErrorBlock?
     fileprivate let progressBlock: VK.ProgressBlock?
-    
+
     var state: RequestState = .created
-    
+
     override var description: String {
         return "request #\(id)"
     }
-    
-    
+
+
 
     static func createWith(
         config: RequestConfig,
@@ -58,9 +58,9 @@ internal final class RequestInstance: Operation, RequestExecution {
         queue.addOperation(instance)
         return instance
     }
-    
-    
-    
+
+
+
     private init(
         config: RequestConfig,
         successBlock: VK.SuccessBlock?,
@@ -76,18 +76,18 @@ internal final class RequestInstance: Operation, RequestExecution {
         result = Result(request: self)
 //        VK.Log.put("Life", "init \(self)")
     }
-    
-    
-    
+
+
+
     override func main() {
         VK.Log.put(self, "started", atNewLine: true)
         send()
         state = .sended
         semaphore.wait()
     }
-    
-    
-    
+
+
+
     override func cancel() {
         currentSend?.cancel()
         state = .cancelled
@@ -95,9 +95,9 @@ internal final class RequestInstance: Operation, RequestExecution {
         semaphore.signal()
         VK.Log.put(self, "cancelled")
     }
-    
-    
-    
+
+
+
     deinit {
 //        VK.Log.put("Life", "deinit \(self)")
     }
@@ -109,51 +109,51 @@ internal final class RequestInstance: Operation, RequestExecution {
 extension RequestInstance {
 
 
-    
+
     func send() {
         guard !self.isCancelled else {return}
-        
+
         guard sendAttempts < config.maxAttempts else {
             if result.error == nil {
                 result.setError(error: RequestError.maximumAttemptsExceeded)
             }
-            
+
             execute(error: result.error!)
             return
         }
-        
-        
+
+
         sendAttempts += 1
         VK.Log.put(self, "send \(sendAttempts) of \(config.maxAttempts) times")
         currentSend = SendTask.createWith(id: sendAttempts, config: config, delegate: self)
     }
-    
-    
-    
+
+
+
     func handle(sended: Int64, of expected: Int64) {
         guard !isCancelled else {return}
         VK.Log.put(self, "send \(sended) of \(expected) bytes")
     }
-    
-    
-    
+
+
+
     func handle(received: Int64, of expected: Int64) {
         guard !isCancelled else {return}
         VK.Log.put(self, "receive \(received) of \(expected) bytes")
         progressBlock?(received, expected)
     }
-    
-    
-    
+
+
+
     func handle(data: Data) {
         guard !isCancelled else {return}
         VK.Log.put(self, "handle response with \(data.count) bytes")
         result.parseResponseFrom(data: data)
         processResult()
     }
-    
-    
-    
+
+
+
     func handle(error: Error) {
         guard !isCancelled else {return}
         result.setError(error: error)
@@ -165,9 +165,9 @@ extension RequestInstance {
 
 //MARK: - Process result
 extension RequestInstance {
-    
-    
-    
+
+
+
     fileprivate func processResult() {
         if let response = result.response {
             if let nextConfig = config.nextRequest?(response) {
@@ -175,16 +175,18 @@ extension RequestInstance {
                 config = nextConfig
                 sendAttempts = 0
                 send()
-            } else {
+            }
+            else {
                 execute(response: response)
             }
-        } else if let error = result.error {
+        }
+        else if let error = result.error {
             catchError(error: error)
         }
     }
-    
-    
-    
+
+
+
     fileprivate func execute(response: JSON) {
         guard !isCancelled else {return}
         VK.Log.put(self, "execute success block")
@@ -192,9 +194,9 @@ extension RequestInstance {
         successBlock?(response)
         semaphore.signal()
     }
-    
-    
-    
+
+
+
     fileprivate func execute(error: Error) {
         guard !isCancelled else {return}
         VK.Log.put(self, "execute error block")
@@ -202,15 +204,15 @@ extension RequestInstance {
         errorBlock?(error)
         semaphore.signal()
     }
-    
-    
-    
+
+
+
     fileprivate func catchError(error err: Error) {
         guard !isCancelled && sendAttempts < config.maxAttempts && config.catchErrors == true, let error = err as? ApiError else {
             execute(error: err)
             return
         }
-        
+
         switch error.errorCode {
         case 5:
             if let error = Authorizator.authorize() {
@@ -236,7 +238,7 @@ extension RequestInstance {
                 break
             }
             send()
-            
+
         case 17:
             if let url = error.errorUserInfo["redirect_uri"] as? String, let error = Authorizator.validate(withUrl: url) {
                 handle(error: error)

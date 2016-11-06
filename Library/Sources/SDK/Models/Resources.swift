@@ -19,23 +19,24 @@ internal struct Resources {
       return "-watchOS"
     #endif
   }()
-  
-  
-    
+
+
+
   internal static let bundle: Bundle = {
     let name = "SwiftyVKResources" + pathSuffix
     let ext = "bundle"
-    
+
     if let path = Bundle.main.path(forResource: name, ofType: ext) {
       return Bundle(path:path)!
-    } else if let path = Bundle(for:object_getClass(ResourceTestClass())).path(forResource: name, ofType: ext) {
+    }
+    else if let path = Bundle(for:object_getClass(ResourceTestClass())).path(forResource: name, ofType: ext) {
       return Bundle(path:path)!
     }
-    
+
     return Bundle.main
   }()
-  
-    
+
+
 
   internal static func withSuffix(_ name: String) -> String {
     return name + pathSuffix

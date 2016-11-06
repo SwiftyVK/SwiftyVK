@@ -1,3 +1,4 @@
+// swiftlint:disable cyclomatic_complexity
 extension VK {
   ///Application scope
   public enum Scope: Int {
@@ -21,23 +22,23 @@ extension VK {
     case ads           = 32768
     case offline       = 65536
     case market        = 134217728
-    
-    
+
+
     public var description: String {return Scope.toString([self])}
 
-    
-    
+
+
    public static func toInt(_ permissions: Set<Scope>) -> Int {
       var finishPerm = Int()
       for perm in permissions {finishPerm += perm.rawValue}
       return finishPerm
     }
-    
-    
-    
+
+
+
    public static func fromInt(_ permissions: Int) -> Set<Scope> {
       var result = Set<Scope>()
-      
+
       if (permissions & 1) == 1 {result.insert(.notify)}
       if (permissions & 2) == 2 {result.insert(.friends)}
       if (permissions & 4) == 4 {result.insert(.photos)}
@@ -58,15 +59,15 @@ extension VK {
       if (permissions & 32768) == 32768 {result.insert(.ads)}
       if (permissions & 65536) == 65536 {result.insert(.offline)}
       if (permissions & 134217728) == 134217728 {result.insert(.market)}
-    
+
       return result
     }
-    
-    
-    
+
+
+    // swiftlint:disable switch_case_on_newline
     public static func toString(_ permissions: Set<Scope>) -> String {
       var result = String()
-      
+
       for permission in permissions {
         switch permission {
         case .notify        : result += "notify,"
@@ -90,15 +91,16 @@ extension VK {
         default : break
         }
       }
-      
+
       return result
     }
-    
-    
-    
+    // swiftlint:enable switch_case_on_newline
+
+
+
     public static func fromString(_ permissions: String) -> Set<Scope> {
       var result = Set<Scope>()
-      
+
       if permissions.contains("notify") {result.insert(.notify)}
       if permissions.contains("friends") {result.insert(.friends)}
       if permissions.contains("photos") {result.insert(.photos)}
@@ -118,7 +120,7 @@ extension VK {
       if permissions.contains("ads") {result.insert(.ads)}
       if permissions.contains("notify") {result.insert(.notify)}
       if permissions.contains("offers") {result.insert(.offers)}
-      
+
       return result
     }
   }

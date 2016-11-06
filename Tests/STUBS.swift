@@ -221,12 +221,12 @@ struct Stubs {
             
             caller.expectation(forNotification: "TestCaptchaDidLoad", object: nil) {notification -> Bool in
                 guard let controller = notification.userInfo?["captcha"] as? CaptchaController else {return false}
+                controller.setText(to: captcha)
+
                 #if os(OSX)
-                    controller.textField.stringValue = captcha
                     controller.controlTextDidEndEditing(Notification(name: Notification.Name("")))
                 #endif
                 #if os(iOS)
-                    controller.textField.text = captcha
                     _ = controller.textFieldShouldReturn(controller.textField)
                     controller.viewDidDisappear(true)
                 #endif

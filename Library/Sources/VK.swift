@@ -59,9 +59,9 @@ public struct VK {
     }
     private static weak var delegateInstance: VKDelegate?
     private static var appIDInstance: String?
-    
-    
-    
+
+
+
     /**
      Initialize library with identifier and application delegate
      - parameter appID: application ID
@@ -73,15 +73,15 @@ public struct VK {
         _ = Token.get()
         VK.Log.put("Global", "SwiftyVK configured")
     }
-    
-    
-    
+
+
+
     fileprivate static var configured: Bool {
         return VK.delegateInstance != nil && VK.appIDInstance != nil
     }
-    
-    
-    
+
+
+
     /**
      Getting authenticate token.
      * If the token is already stored in the file, then the authentication takes place in the background
@@ -90,24 +90,24 @@ public struct VK {
     public static func logIn() {
         _ = Authorizator.authorize()
     }
-    
-    
-    
+
+
+
     #if os(iOS)
     @available(iOS 9.0, *)
     public static func process(url: URL, options: [AnyHashable: Any]) {
         Authorizator.recieveTokenURL(url: url, fromApp: options[UIApplicationOpenURLOptionsKey.sourceApplication.rawValue] as? String)
     }
-    
-    
+
+
     @available(iOS, introduced:4.2, deprecated:9.0, message:"Please use url:options:")
     public static func process(url: URL, sourceApplication app: String?) {
         Authorizator.recieveTokenURL(url: url, fromApp: app)
     }
     #endif
-    
-    
-    
+
+
+
     public static func logOut() {
         LP.stop()
         Token.remove()
@@ -131,7 +131,7 @@ extension VK {
         //        case authorization
         case authorized
     }
-    
+
     public static var state: States {
         guard VK.configured else {
             return .unknown

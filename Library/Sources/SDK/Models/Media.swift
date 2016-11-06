@@ -3,25 +3,25 @@ import Foundation
 
 
 public struct Media: CustomStringConvertible {
-  
+
   enum MediaType {
     case image
     case audio
     case video
     case document
   }
-  
-  
-  
+
+
+
   public enum ImageType: String {
     case JPG
     case PNG
     case BMP
     case GIF
   }
-  
-  
-  
+
+
+
   let data: Data
   let mediaType: MediaType
   var imageType: ImageType = .JPG
@@ -38,37 +38,37 @@ public struct Media: CustomStringConvertible {
       return "video"
     }
   }
-  
-  
+
+
   public var description: String {
     get {
     return "Media with type \(type)"
     }
   }
-  
-  
+
+
   public init(imageData: Data, type: ImageType) {
     mediaType = .image
     imageType = type
     data = imageData
   }
-  
-  
-  
+
+
+
   public init(audioData: Data) {
     mediaType = .audio
     data = audioData
   }
-  
-  
-  
+
+
+
   public init(videoData: Data) {
     mediaType = .video
     data = videoData
   }
-  
-  
-  
+
+
+
   public init(documentData: Data, type: String) {
     mediaType = .document
     documentType = type

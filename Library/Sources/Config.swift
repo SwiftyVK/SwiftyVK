@@ -16,21 +16,21 @@ extension VK {
         public static var sendLimit: Int = 3
         ///Allows print log messages to console
         public static var logToConsole: Bool = false
-        
+
         public static var language: String? {
             get {
                 if useSystemLanguage {
                     let syslemLang = Bundle.preferredLocalizations(from: supportedLanguages).first
-                    
+
                     if syslemLang == "uk" {
                         return "ua"
                     }
-                    
+
                     return syslemLang
                 }
                 return self.selectedLanguage
             }
-            
+
             set {
                 guard newValue == nil || supportedLanguages.contains(newValue!) else {return}
                 self.selectedLanguage = newValue

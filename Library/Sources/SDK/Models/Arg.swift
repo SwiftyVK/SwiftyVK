@@ -314,7 +314,7 @@ extension VK {
     case randomId = "random_id"
     case aid
     case gid
-    
+
     public var hashValue: Int {
       return self.rawValue.hashValue
     }

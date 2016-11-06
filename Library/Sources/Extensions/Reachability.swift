@@ -57,9 +57,12 @@ public class Reachability {
         
         public var description: String {
             switch self {
-            case .reachableViaWWAN: return "Cellular"
-            case .reachableViaWiFi: return "WiFi"
-            case .notReachable: return "No Connection"
+            case .reachableViaWWAN:
+                return "Cellular"
+            case .reachableViaWiFi:
+                return "WiFi"
+            case .notReachable:
+                return "No Connection"
             }
         }
     }
@@ -286,7 +289,8 @@ fileprivate extension Reachability {
         
         if gotFlags {
             return flags
-        } else {
+        }
+        else {
             return SCNetworkReachabilityFlags()
         }
     }

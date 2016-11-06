@@ -57,23 +57,6 @@
                BlueprintName = "SwiftyVK-Tests-OSX"
                ReferencedContainer = "container:Example.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "Captcha_Tests">
-               </Test>
-               <Test
-                  Identifier = "Components_Tests">
-               </Test>
-               <Test
-                  Identifier = "Login_Tests">
-               </Test>
-               <Test
-                  Identifier = "Sending_Tests">
-               </Test>
-               <Test
-                  Identifier = "Upload_Tests">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

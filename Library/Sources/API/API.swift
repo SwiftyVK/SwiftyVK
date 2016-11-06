@@ -7,9 +7,9 @@ public struct _VKAPI {
   public static func execute(_ code: String) -> RequestConfig {
     return RequestConfig(method: "execute", parameters: [VK.Arg.code : code])
   }
-  
-  
-  
+
+
+
   /**
   Call stored functions on the VK servers
   
@@ -20,9 +20,9 @@ public struct _VKAPI {
   public static func remote(method: String, parameters: [VK.Arg : String] = [:]) -> RequestConfig {
     return RequestConfig(method: "execute.\(method)", parameters: parameters)
   }
-  
-  
-  
+
+
+
   /**
   Formation of the request with the ability to manually specify the name of the method. Well, just in case :)
   - parameter method: method name

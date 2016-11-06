@@ -14,12 +14,12 @@ extension _VKAPI {
                 groupId: String = "",
                 caption: String = "",
                 location: CLLocationCoordinate2D? = nil) -> RequestConfig {
-                
+
                 var getServerReq = VK.API.Photos.getUploadServer([.albumId : albumId, .groupId : groupId])
-                
+
                 getServerReq.next {response -> RequestConfig in
                     var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: Array(media.prefix(5)))
-                    
+
                     uploadReq.next {response -> RequestConfig in
                         var saveReq = VK.API.Photos.save([
                             .albumId : albumId,
@@ -30,7 +30,7 @@ extension _VKAPI {
                             .hash : response["hash"].stringValue,
                             .caption : caption
                             ])
-                        
+
                         if let lat = location?.latitude, let lon = location?.longitude {
                             saveReq.parameters[.latitude] = String(lat)
                             saveReq.parameters[.longitude] = String(lon)
@@ -41,16 +41,16 @@ extension _VKAPI {
                 }
                 return getServerReq
             }
-            
-            
-            
+
+
+
             ///Upload photo to message
             public static func toMessage(_ Media: Media) -> RequestConfig {
                 var getServerReq = VK.API.Photos.getMessagesUploadServer()
-                
+
                 getServerReq.next {response -> RequestConfig in
                     var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [Media])
-                    
+
                     uploadReq.next {response -> RequestConfig in
                         return VK.API.Photos.saveMessagesPhoto([
                             .photo : response["photo"].stringValue,
@@ -62,9 +62,9 @@ extension _VKAPI {
                 }
                 return getServerReq
             }
-            
-            
-            
+
+
+
             ///Upload photo to market
             public static func toMarket(
                 _ Media: Media,
@@ -74,7 +74,7 @@ extension _VKAPI {
                 cropY: String = "",
                 cropW: String = ""
                 ) -> RequestConfig {
-                
+
                 var getServerReq = VK.API.Photos.getMarketUploadServer([.groupId: groupId])
                 if mainPhoto {
                     getServerReq.add(parameters: [
@@ -84,10 +84,10 @@ extension _VKAPI {
                         .cropWidth: cropW
                         ])
                 }
-                
+
                 getServerReq.next {response -> RequestConfig in
                     var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [Media])
-                    
+
                     uploadReq.next {response -> RequestConfig in
                         return VK.API.Photos.saveMarketPhoto([
                             .groupId: groupId,
@@ -98,21 +98,21 @@ extension _VKAPI {
                             .cropHash: response["crop_hash"].stringValue
                             ])
                     }
-                    
+
                     return uploadReq
                 }
                 return getServerReq
             }
-            
-            
-            
+
+
+
             ///Upload photo to market album
             public static func toMarketAlbum(_ Media: Media, groupId: String) -> RequestConfig {
                 var getServerReq = VK.API.Photos.getMarketAlbumUploadServer([.groupId: groupId, ])
-                
+
                 getServerReq.next {response -> RequestConfig in
                     var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [Media])
-                    
+
                     uploadReq.next {response -> RequestConfig in
                         return VK.API.Photos.saveMarketAlbumPhoto([
                             .groupId: groupId,
@@ -125,32 +125,32 @@ extension _VKAPI {
                 }
                 return getServerReq
             }
-            
-            
-            
+
+
+
             ///Upload photo to user or group wall
             public struct toWall {
                 ///Upload photo to user wall
                 public static func toUser(_ Media: Media, userId: String) -> RequestConfig {
                     return pToWall(Media, userId: userId)
                 }
-                
-                
-                
+
+
+
                 ///Upload photo to group wall
                 public static func toGroup(_ Media: Media, groupId: String) -> RequestConfig {
                     return pToWall(Media, groupId: groupId)
                 }
-                
-                
-                
+
+
+
                 ///Upload photo to user or group wall
                 private static func pToWall(_ Media: Media, userId: String = "", groupId: String = "") -> RequestConfig {
                     var getServerReq = VK.API.Photos.getWallUploadServer([.groupId : groupId])
-                    
+
                     getServerReq.next {response -> RequestConfig in
                         var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [Media])
-                        
+
                         uploadReq.next {response -> RequestConfig in
                             return VK.API.Photos.saveWallPhoto([
                                 .userId : userId,
@@ -162,14 +162,14 @@ extension _VKAPI {
                         }
                         return uploadReq
                     }
-                    
+
                     return getServerReq
                 }
             }
         }
-        
-        
-        
+
+
+
         ///Upload video from file or url
         public struct Video {
             ///Upload local video file
@@ -184,7 +184,7 @@ extension _VKAPI {
                 isRepeat: Bool = false,
                 isNoComments: Bool = false
                 ) -> RequestConfig {
-                
+
                 var saveReq = VK.API.Video.save([
                     .link : "",
                     .name : name,
@@ -195,15 +195,15 @@ extension _VKAPI {
                     .wallpost : isWallPost ? "1" : "0",
                     .`repeat` : isRepeat ? "1" : "0"
                     ])
-                
+
                 saveReq.next {response -> RequestConfig in
                     return RequestConfig(url: response["upload_url"].stringValue, media: [Media])
                 }
                 return saveReq
             }
-            
-            
-            
+
+
+
             ///Upload local video from external resource
             public static func fromUrl(
                 _ url: String,
@@ -216,7 +216,7 @@ extension _VKAPI {
                 isRepeat: Bool = false,
                 isNoComments: Bool = false
                 ) -> RequestConfig {
-                
+
                 return VK.API.Video.save([
                     .link : url,
                     .name : name,
@@ -230,16 +230,16 @@ extension _VKAPI {
                 )
             }
         }
-        
-        
-        
+
+
+
         ///Upload audio
         public static func audio(_ Media: Media, artist: String = "", title: String = "") -> RequestConfig {
             var getServierReq = VK.API.Audio.getUploadServer()
-            
+
             getServierReq.next {response -> RequestConfig in
                 var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [Media])
-                
+
                 uploadReq.next {response -> RequestConfig in
                     return VK.API.Audio.save([
                         .audio : response["audio"].stringValue,
@@ -253,9 +253,9 @@ extension _VKAPI {
             }
             return getServierReq
         }
-        
-        
-        
+
+
+
         ///Upload document
         public static func document(
             _ Media: Media,
@@ -263,10 +263,10 @@ extension _VKAPI {
             title: String = "",
             tags: String = "") -> RequestConfig {
             var getServierReq = VK.API.Docs.getUploadServer([.groupId : groupId])
-            
+
             getServierReq.next {response -> RequestConfig in
                 var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [Media])
-                
+
                 uploadReq.next {response -> RequestConfig in
                     return VK.API.Docs.save([
                         .file : (response["file"].stringValue),
