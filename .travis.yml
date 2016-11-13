@@ -16,8 +16,6 @@ env:
 
 
 before_install:
-- brew update
-- brew install carthage
 - cd Example
 - carthage update
 - cd ..
