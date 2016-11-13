@@ -4,8 +4,6 @@ import XCTest
 
 class Components_Tests: VKTestCase {
   
-  
-  
   func test_default_language() {
     XCTAssertNotNil(VK.config.language, "Language is not set")
     VK.config.language = "fi"

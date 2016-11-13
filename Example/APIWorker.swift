@@ -84,7 +84,8 @@ final class APIWorker {
         let media = Media(imageData: data, type: .JPG)
         VK.API.Upload.Photo.toWall.toUser(media, userId: "4680178").send(
             onSuccess: {response in print("SwiftyVK: friendsGet success \n \(response)")},
-            onError: {error in print("SwiftyVK: friendsGet fail \n \(error)")}
+            onError: {error in print("SwiftyVK: friendsGet fail \n \(error)")},
+            onProgress: {done, total in print("send \(done) of \(total)")}
         )
     }
 }

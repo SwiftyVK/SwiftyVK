@@ -2,7 +2,7 @@ import UIKit
 
 
 
-private let CaptchaViewName = Resources.withSuffix("CaptchaView")
+private let captchaViewName = Resources.withSuffix("CaptchaView")
 
 
 
@@ -21,7 +21,7 @@ class CaptchaController: UIViewController, UITextFieldDelegate {
             return nil
         }
 
-        let controller = CaptchaController(nibName: CaptchaViewName, bundle: Resources.bundle)
+        let controller = CaptchaController(nibName: captchaViewName, bundle: Resources.bundle)
         controller.parentView = parent
         controller.image = image
         controller.delegate = delegate
@@ -57,7 +57,7 @@ class CaptchaController: UIViewController, UITextFieldDelegate {
 
 
     override func viewDidDisappear(_ animated: Bool) {
-        delegate.finish(answer: nil)
+        delegate?.finish(answer: nil)
         super.viewDidDisappear(animated)
         delegate = nil
     }
@@ -66,7 +66,7 @@ class CaptchaController: UIViewController, UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.parentView?.dismiss(animated: true, completion: nil)
-        delegate.finish(answer: textField.text)
+        delegate.finish(answer: self.textField.text)
         return true
     }
 

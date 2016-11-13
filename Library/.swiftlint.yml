@@ -7,8 +7,6 @@ excluded:
 disabled_rules:
   - vertical_whitespace
   - nesting
-  - variable_name
-  - type_name
 
 opt_in_rules:
   - private_outlet
@@ -17,7 +15,7 @@ opt_in_rules:
   - overridden_super_call
   - redundant_nil_coalesing
   - switch_case_on_newline
-  # - force_unwrapping
+  - force_unwrapping
   # - missing_docs
   # - closure_spacing
   # - conditional_returns_on_newline
@@ -33,13 +31,20 @@ line_length:
 function_body_length:
   warning: 100
   error: 150
-# variable_name:
-#   min_length:
-#     warning: 2
-#     error: 2
-#   max_length:
-#     warning: 50
-#     error: 100
+variable_name:
+  min_length:
+    warning: 2
+    error: 2
+  max_length:
+    warning: 40
+    error: 60
+type_name:
+  min_length:
+    warning: 2
+    error: 2
+  max_length:
+    warning: 40
+    error: 60
 statement_position:
   statement_mode: uncuddled_else
 trailing_whitespace:

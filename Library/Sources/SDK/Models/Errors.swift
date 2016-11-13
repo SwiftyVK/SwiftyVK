@@ -7,6 +7,7 @@ public enum AuthError: Int, CustomNSError, CustomStringConvertible {
     case deniedFromUser             = 2
     case failedValidation           = 3
     case failedAuthorization        = 4
+    case notConfigured              = 5
 
     public static let errorDomain = "SwiftyVKAuthError"
     public var errorCode: Int {return rawValue}
@@ -25,6 +26,7 @@ public enum RequestError: Int, CustomNSError, CustomStringConvertible {
     case maximumAttemptsExceeded    = 3
     case responseParsingFailed      = 4
     case captchaFailed              = 5
+    case notConfigured              = 6
 
     public static let errorDomain = "SwiftyVKRequestError"
     public var errorCode: Int {return rawValue}

@@ -6,6 +6,19 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		A280A8941DD0EFB0003BF914 /* SwiftyVK-Tests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A280A8951DD0EFB0003BF914 /* Build configuration list for PBXAggregateTarget "SwiftyVK-Tests" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = "SwiftyVK-Tests";
+			productName = "SwiftyVK-Tests";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		A2087A5D1D8580A90076BB5E /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2087A561D8580940076BB5E /* SwiftyVK.framework */; };
 		A2087A5E1D8580A90076BB5E /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2087A561D8580940076BB5E /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -507,6 +520,11 @@
 							};
 						};
 					};
+					A280A8941DD0EFB0003BF914 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 842SSJ357W;
+						ProvisioningStyle = Automatic;
+					};
 					A2EB712C1BD27639008E7D86 = {
 						CreatedOnToolsVersion = 7.1;
 						LastSwiftMigration = 0800;
@@ -543,6 +561,7 @@
 				A2527E791BD13A5300F65412 /* SwiftyVK-Example-iOS */,
 				A2EB712C1BD27639008E7D86 /* SwiftyVK-Tests-OSX */,
 				A2EB713A1BD27652008E7D86 /* SwiftyVK-Tests-iOS */,
+				A280A8941DD0EFB0003BF914 /* SwiftyVK-Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -1055,6 +1074,22 @@
 			};
 			name = Release;
 		};
+		A280A8961DD0EFB0003BF914 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 842SSJ357W;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A280A8971DD0EFB0003BF914 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 842SSJ357W;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		A2EB71351BD27639008E7D86 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1297,6 +1332,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		A280A8951DD0EFB0003BF914 /* Build configuration list for PBXAggregateTarget "SwiftyVK-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A280A8961DD0EFB0003BF914 /* Debug */,
+				A280A8971DD0EFB0003BF914 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		A2EB71341BD27639008E7D86 /* Build configuration list for PBXNativeTarget "SwiftyVK-Tests-OSX" */ = {
 			isa = XCConfigurationList;

@@ -2,7 +2,7 @@ import Cocoa
 
 
 
-private let CaptchaViewName = Resources.withSuffix("CaptchaView")
+private let captchaViewName = Resources.withSuffix("CaptchaView")
 
 
 
@@ -26,15 +26,19 @@ class CaptchaController: NSWindowController, NSTextFieldDelegate {
         controller.image = image
         controller.delegate = delegate
 
-        DispatchQueue.main.sync {
-            NSNib(nibNamed: CaptchaViewName, bundle: Resources.bundle)?.instantiate(withOwner: controller, topLevelObjects: nil)
-
+        return DispatchQueue.main.sync {
+            NSNib(nibNamed: captchaViewName, bundle: Resources.bundle)?.instantiate(withOwner: controller, topLevelObjects: nil)
+            
+            guard let window = controller.window else {
+                return nil
+            }
+            
             _ = controller.parentWindow != nil
-                ? controller.parentWindow?.beginSheet(controller.window!, completionHandler: nil)
+                ? controller.parentWindow?.beginSheet(window, completionHandler: nil)
                 : controller.showWindow(nil)
+            
+            return controller
         }
-
-        return controller
     }
 
 
@@ -64,9 +68,9 @@ class CaptchaController: NSWindowController, NSTextFieldDelegate {
 
 
     override func controlTextDidEndEditing(_ obj: Notification) {
-        if window != nil {
-            parentWindow?.endSheet(window!)
-            window?.orderOut(parentWindow)
+        if let window = window {
+            parentWindow?.endSheet(window)
+            window.orderOut(parentWindow)
         }
         delegate.finish(answer: textField.stringValue)
     }

@@ -19,14 +19,14 @@ public struct RequestConfig {
     public var timeout = VK.config.timeOut
     ///Maximum number of attempts to send, after which execution priryvaetsya and an error is returned
     public var maxAttempts = VK.config.maxAttempts
-    ///Whether to allow automatic processing of some API error
-    public var catchErrors = VK.config.catchErrors
-    ///Allows print log messages to console
-    public var logToConsole: Bool = VK.config.logToConsole
     ///HTTP prtocol dending method. See - https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods
     public var httpMethod = HttpMethod.GET
-
+    ///Request API parameters
     public var parameters: [VK.Arg : String]
+    ///Whether to allow automatic processing of some API error
+    public var catchErrors = VK.config.catchErrors
+    ///Allows print log messages on this request to console
+    public var logToConsole: Bool = VK.config.logToConsole
 
     internal private(set) var nextRequest: ((JSON) -> RequestConfig)?
 
@@ -67,23 +67,45 @@ public struct RequestConfig {
     }
 
 
-
+    
+    /// Send request to VK
+    ///
+    /// - Parameters:
+    ///   - successBlock: called when request receive valid response
+    ///   - errorBlock: called when request receive error
+    ///   - progressBlock: called when part of data transfereed to server
+    /// - Returns: instance of RequestExecution
     @discardableResult public func send(
         onSuccess successBlock: VK.SuccessBlock? = nil,
         onError errorBlock: VK.ErrorBlock? = nil,
         onProgress progressBlock: VK.ProgressBlock? = nil
-        ) -> RequestExecution {
+        ) -> RequestExecution? {
+        
+        if VK.state < .configured {
+            errorBlock?(RequestError.notConfigured)
+            return nil
+        }
 
         return RequestInstance.createWith(config: self, successBlock: successBlock, errorBlock: errorBlock, progressBlock: progressBlock)
     }
 
 
-
+    
+    
+    /// Add a request that will be sent after the request will receive a valid response
+    ///
+    /// - Parameter next: block of code, which should return the next query
+    /// - Parameter response: response of this request
     public mutating func next(_ next: @escaping (_ response: JSON) -> RequestConfig) {
         nextRequest = next
     }
-
-
+    
+    
+    
+    
+    /// Add ned request parameters
+    ///
+    /// - Parameter parameters: new request parameters
     public mutating func add(parameters: [VK.Arg : String]) {
         for (key, value) in parameters {
             self.parameters[key] = value

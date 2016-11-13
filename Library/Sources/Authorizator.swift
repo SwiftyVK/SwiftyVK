@@ -17,14 +17,18 @@ internal struct Authorizator {
 
 
 
-    fileprivate static var paramsUrl: String {
-        let _perm = VK.Scope.toInt(VK.delegate!.vkWillAuthorize())
+    fileprivate static var paramsUrl: String? {
+        guard let appId = VK.appID, let delegate = VK.delegate else {
+            return nil
+        }
+        
+        let _perm = VK.Scope.toInt(delegate.vkWillAuthorize())
         let _redir = canAuthorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
 
-        return  "client_id=\(VK.appID!)&scope=\(_perm)&display=mobile&v\(VK.config.apiVersion)&sdk_version=\(VK.config.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
+        return  "client_id=\(appId)&scope=\(_perm)&display=mobile&v\(VK.config.apiVersion)&sdk_version=\(VK.config.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
     }
 
-    private static var error: AuthError?
+    fileprivate static var error: AuthError?
 
 
 
@@ -66,13 +70,12 @@ internal struct Authorizator {
             startWithWeb()
         }
 
-        if VK.state != .authorized {
-            if error == nil {
-                error = AuthError.deniedFromUser
-            }
+        if VK.state < .authorized {
+            
+            let _error = error ?? .deniedFromUser
 
             DispatchQueue.global(qos: .default).async {
-                VK.delegate?.vkAutorizationFailedWith(error: error!)
+                VK.delegate?.vkAutorizationFailedWith(error: _error)
             }
         }
     }
@@ -80,6 +83,11 @@ internal struct Authorizator {
 
 
     fileprivate static func startWithWeb() {
+        guard let paramsUrl = paramsUrl else {
+            error = .notConfigured
+            return
+        }
+        
         error = WebPresenter.start(withUrl: webAuthorizeUrl+paramsUrl)
     }
 }
@@ -101,13 +109,21 @@ internal struct Authorizator {
 
 
         internal static var canAuthorizeWithVkApp: Bool {
-            return UIApplication.shared.canOpenURL(URL(string: "vk\(VK.appID!)://")!)
+            guard let appId = VK.appID, let url = URL(string: "vk\(appId)://") else {
+                return false
+            }
+            
+            return UIApplication.shared.canOpenURL(url)
         }
 
 
 
         fileprivate static func startWithApp() {
-            UIApplication.shared.openURL(URL(string: appAuthorizeUrl+paramsUrl)!)
+            guard let paramsUrl = paramsUrl, let url = URL(string: appAuthorizeUrl+paramsUrl) else {
+                return
+            }
+            
+            UIApplication.shared.openURL(url)
             Thread.sleep(forTimeInterval: 1)
             startWithWeb()
         }
@@ -115,7 +131,11 @@ internal struct Authorizator {
 
 
         internal static func recieveTokenURL(url: URL, fromApp app: String?) {
-            if app == "com.vk.vkclient" || app == "com.vk.vkhd" || url.scheme == "vk\(VK.appID!)" {
+            guard let appId = VK.appID else {
+                return
+            }
+            
+            if app == "com.vk.vkclient" || app == "com.vk.vkhd" || url.scheme == "vk\(appId)" {
                 if url.absoluteString.contains("access_token=") {
                     _ = Token(urlString: url.absoluteString)
                     WebPresenter.cancel()

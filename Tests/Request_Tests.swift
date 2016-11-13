@@ -4,8 +4,6 @@ import XCTest
 
 class Sending_Tests: VKTestCase {
     
-    
-    
     func test_get_method() {
         Stubs.apiWith(params: ["user_ids":"1"], httpMethod: .GET, jsonFile: "success.users.get")
         let exp = expectation(description: "ready")
@@ -60,10 +58,16 @@ class Sending_Tests: VKTestCase {
         weak var weakObject: NSObject? = strongObject
         strongObject = nil
         
-        VK.API.Users.get([VK.Arg.userIDs : "a"]).send {response in
-            let _ = strongObject?.description
-            exp.fulfill()
-        }
+        VK.API.Users.get([VK.Arg.userIDs : "a"]).send(
+            onSuccess: {_ in
+                let _ = strongObject?.description
+                exp.fulfill()
+            },
+            onError: {_ in
+                let _ = strongObject?.description
+                exp.fulfill()
+            }
+        )
         
         waitForExpectations(timeout: reqTimeout) {_ in
             XCTAssertNil(weakObject, "Test object did not released")

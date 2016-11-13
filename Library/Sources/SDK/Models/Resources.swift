@@ -26,11 +26,15 @@ internal struct Resources {
     let name = "SwiftyVKResources" + pathSuffix
     let ext = "bundle"
 
-    if let path = Bundle.main.path(forResource: name, ofType: ext) {
-      return Bundle(path:path)!
+    if
+        let path = Bundle.main.path(forResource: name, ofType: ext),
+        let bundle = Bundle(path:path) {
+        return bundle
     }
-    else if let path = Bundle(for:object_getClass(ResourceTestClass())).path(forResource: name, ofType: ext) {
-      return Bundle(path:path)!
+    else if
+        let path = Bundle(for:object_getClass(ResourceTestClass())).path(forResource: name, ofType: ext),
+        let bundle = Bundle(path:path) {
+            return bundle
     }
 
     return Bundle.main

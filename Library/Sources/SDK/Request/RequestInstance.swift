@@ -114,11 +114,8 @@ extension RequestInstance {
         guard !self.isCancelled else {return}
 
         guard sendAttempts < config.maxAttempts else {
-            if result.error == nil {
-                result.setError(error: RequestError.maximumAttemptsExceeded)
-            }
-
-            execute(error: result.error!)
+            let error = result.error ?? result.setError(error: RequestError.maximumAttemptsExceeded)
+            execute(error: error)
             return
         }
 
@@ -235,7 +232,7 @@ extension RequestInstance {
                 request: self
                 ) {
                 handle(error: error)
-                break
+                return
             }
             send()
 

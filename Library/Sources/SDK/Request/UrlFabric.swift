@@ -9,6 +9,14 @@ private let methodUrl = "https://api.vk.com/method/"
 
 ///NSURLRequest fabric
 internal struct UrlFabric {
+    
+    
+    
+    private static var emptyUrl: URL {
+        // swiftlint:disable force_unwrapping
+        return URL(string: methodUrl)!
+        // swiftlint:enable force_unwrapping
+    }
 
 
 
@@ -33,8 +41,6 @@ internal struct UrlFabric {
 
 
     private static func createWith(url: String) -> URLRequest {
-        let emptyUrl = URL(string: methodUrl)!
-
         var req = URLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
         req.httpMethod = "GET"
         req.url = URL(string: url)
@@ -45,7 +51,6 @@ internal struct UrlFabric {
 
     private static func craeteWith(apiMethod: String, parameters: [VK.Arg: String], httpMethod: HttpMethod) -> URLRequest {
         let paramStr = stringFrom(parameters: parameters)
-        let emptyUrl = URL(string: methodUrl)!
 
         var req = URLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
         req.httpMethod = httpMethod.rawValue
@@ -66,8 +71,6 @@ internal struct UrlFabric {
 
 
     private static func createWith(media: [Media], url: String) -> URLRequest {
-        let emptyUrl = URL(string: methodUrl)!
-
         var req = URLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
         req.httpMethod = "POST"
         req.url = URL(string: url)
@@ -87,13 +90,18 @@ internal struct UrlFabric {
             case .image:
                 name = "file\(index)"
             }
+            
+            if let data = "\r\n--\(boundary)\r\nContent-Disposition: form-data; name=\"\(name)\"; filename=\"file.\(file.type)\"\r\nContent-Type: document/other\r\n\r\n"
+                .data(using: .utf8, allowLossyConversion: false) {
+                body.append(data)
+            }
 
-            body
-                .append("\r\n--\(boundary)\r\nContent-Disposition: form-data; name=\"\(name)\"; filename=\"file.\(file.type)\"\r\nContent-Type: document/other\r\n\r\n"
-                .data(using: .utf8, allowLossyConversion: false)!)
             body.append(file.data as Data)
         }
-        body.append("\r\n--\(boundary)--\r".data(using: .utf8, allowLossyConversion: false)!)
+        
+        if let data = "\r\n--\(boundary)--\r".data(using: .utf8, allowLossyConversion: false) {
+            body.append(data)
+        }
 
         req.httpBody = body as Data
         return req
@@ -125,6 +133,6 @@ internal struct UrlFabric {
             sharedCaptchaAnswer = nil
         }
 
-        return paramArray.componentsJoined(by: "&").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        return paramArray.componentsJoined(by: "&").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
     }
 }

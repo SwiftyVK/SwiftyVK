@@ -1,7 +1,8 @@
+// swiftlint:disable type_name
 extension VK {
     public struct config {
         //Returns used VK API version
-        public static var apiVersion = "5.53"
+        public static var apiVersion = "5.60"
         //Returns used VK SDK version
         public static let sdkVersion = "1.3.17"
         ///Requests timeout
@@ -16,29 +17,35 @@ extension VK {
         public static var sendLimit: Int = 3
         ///Allows print log messages to console
         public static var logToConsole: Bool = false
-
+        ///This language will be used in responses from VK
         public static var language: String? {
             get {
-                if useSystemLanguage {
-                    let syslemLang = Bundle.preferredLocalizations(from: supportedLanguages).first
-
-                    if syslemLang == "uk" {
-                        return "ua"
-                    }
-
-                    return syslemLang
+                if let selectedLanguage = selectedLanguage {
+                    return selectedLanguage
                 }
-                return self.selectedLanguage
+                
+                let syslemLang = Bundle.preferredLocalizations(from: supportedLanguages).first
+                
+                if syslemLang == "uk" {
+                    return "ua"
+                }
+                
+                return syslemLang
             }
 
             set {
-                guard newValue == nil || supportedLanguages.contains(newValue!) else {return}
+                guard let newValue = newValue else {
+                    selectedLanguage = nil
+                    return
+                }
+                guard supportedLanguages.contains(newValue) else {
+                    return
+                }
+
                 self.selectedLanguage = newValue
-                useSystemLanguage = (newValue == nil)
             }
         }
         internal static let supportedLanguages = ["ru", "uk", "be", "en", "es", "fi", "de", "it"]
-        internal static var useSystemLanguage = true
         private static var selectedLanguage: String?
     }
 }

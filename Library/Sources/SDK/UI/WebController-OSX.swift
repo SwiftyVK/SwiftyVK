@@ -3,7 +3,7 @@ import WebKit
 
 
 
-private let WebViewName = Resources.withSuffix("WebView")
+private let webViewName = Resources.withSuffix("WebView")
 
 
 
@@ -24,10 +24,12 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
         controller.parentWindow = VK.delegate?.vkWillPresentView()
 
         return DispatchQueue.main.sync {
-            NSNib(nibNamed: WebViewName, bundle: Resources.bundle)?.instantiate(withOwner: controller, topLevelObjects: nil)
-
+            NSNib(nibNamed: webViewName, bundle: Resources.bundle)?.instantiate(withOwner: controller, topLevelObjects: nil)
+            
+            guard let window = controller.window else {return nil}
+            
             _ = controller.parentWindow != nil
-                ? controller.parentWindow?.beginSheet(controller.window!, completionHandler: nil)
+                ? controller.parentWindow?.beginSheet(window, completionHandler: nil)
                 : controller.showWindow(nil)
 
             return controller
@@ -38,23 +40,23 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        guard let window = window else {return}
+        webView?.frameLoadDelegate  = self
 
-        webView!.frameLoadDelegate  = self
-
-        window?.styleMask.formUnion(NSFullSizeContentViewWindowMask)
-        window?.titleVisibility = .hidden
-        window?.titlebarAppearsTransparent = true
-        window?.setFrame(
+        window.styleMask.formUnion(NSFullSizeContentViewWindowMask)
+        window.titleVisibility = .hidden
+        window.titlebarAppearsTransparent = true
+        window.setFrame(
             NSRect(
-                x: window!.frame.origin.x,
-                y: window!.frame.origin.y,
-                width: window!.frame.size.width,
-                height: window!.frame.size.height - 20
+                x: window.frame.origin.x,
+                y: window.frame.origin.y,
+                width: window.frame.size.width,
+                height: window.frame.size.height - 20
             ), display: true
         )
 
         self.activity.startAnimation(self)
-        self.webView!.setMaintainsBackForwardList(true)
+        self.webView?.setMaintainsBackForwardList(true)
     }
 
 
@@ -65,16 +67,18 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
             self.url = url
         }
 
-        VK.Log.put("WebController", "load \(self.url!)")
+        guard let urlStr = self.url, let url = URL(string: urlStr) else {return}
+        VK.Log.put("WebController", "load \(urlStr)")
 
         DispatchQueue.main.async {
-            self.webView!.mainFrame.load(URLRequest(url: URL(string: self.url!)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 3))
+            self.webView?.mainFrame.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 3))
         }
     }
 
 
 
     func expand() {
+        guard let window = window else {return}
         VK.Log.put("WebController", "expand")
 
         NSApplication.shared().activate(ignoringOtherApps: true)
@@ -88,11 +92,11 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
             newY = parent.frame.origin.y + (parent.frame.height - newHeight)
         }
         else {
-            newX = window!.frame.origin.x - window!.frame.size.width/2
-            newY = window!.frame.origin.y - window!.frame.size.height
+            newX = window.frame.origin.x - window.frame.size.width/2
+            newY = window.frame.origin.y - window.frame.size.height
         }
 
-        window!.setFrame(NSRect(x: newX, y: newY, width: newWidth, height: newHeight), display: true, animate: true)
+        window.setFrame(NSRect(x: newX, y: newY, width: newWidth, height: newHeight), display: true, animate: true)
     }
 
 
@@ -108,15 +112,16 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
 
 
     func hide() {
+        guard let window = window else {return}
         VK.Log.put("WebController", "hide")
 
         DispatchQueue.main.async {
 
             if let parent = self.parentWindow {
-                parent.endSheet(self.window!)
-                self.window!.orderOut(parent)
+                parent.endSheet(window)
+                window.orderOut(parent)
             }
-            self.webView!.frameLoadDelegate = nil
+            self.webView?.frameLoadDelegate = nil
             self.delegate?.finish()
         }
     }
@@ -125,7 +130,8 @@ internal final class WebController: NSWindowController, WebFrameLoadDelegate {
 
     //MARK: - frameLoadDelegate protocol
     func webView(_ sender: WebView!, didFinishLoadFor frame: WebFrame!) {
-        delegate?.handleResponse(frame.dataSource!.response.url!.absoluteString)
+        let string = frame.dataSource?.response.url?.absoluteString ?? ""
+        delegate?.handleResponse(string)
     }
 
 

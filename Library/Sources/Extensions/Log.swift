@@ -58,9 +58,10 @@ extension VK {
 
     internal static func put(_ req: RequestInstance, _ message: String, atNewLine: Bool = false) {
       let block = {
+        
         let date = form.string(from: Date())
         req.log.append("\(date): \(message)")
-        let key = String("Req \(req.id)")!
+        let key = String("Req \(req.id)") ?? "???"
 
         if dictionary.count >= 100 {
           let keyToRemove = array.removeFirst()

@@ -47,18 +47,8 @@ public protocol VKDelegate: class {
  * For user authentication you must call authorize()
  */
 public struct VK {
-    internal static var delegate: VKDelegate? {
-        set {delegateInstance = newValue}
-        get {assert(VK.state != .unknown, "At first initialize VK with configure() method")
-            return delegateInstance}
-    }
-    public private(set) static var appID: String? {
-        set {appIDInstance = newValue}
-        get {assert(VK.state != .unknown, "At first initialize VK with configure() method")
-            return appIDInstance}
-    }
-    private static weak var delegateInstance: VKDelegate?
-    private static var appIDInstance: String?
+    internal weak static var delegate: VKDelegate?
+    public private(set) static var appID: String?
 
 
 
@@ -67,17 +57,11 @@ public struct VK {
      - parameter appID: application ID
      - parameter delegate: Delegate corresponding protocol VKDelegate
      */
-    public static func configure(appID id: String, delegate owner: VKDelegate) {
+    public static func configure(withAppId id: String, delegate owner: VKDelegate) {
         delegate = owner
         appID    = id
         _ = Token.get()
         VK.Log.put("Global", "SwiftyVK configured")
-    }
-
-
-
-    fileprivate static var configured: Bool {
-        return VK.delegateInstance != nil && VK.appIDInstance != nil
     }
 
 
@@ -100,6 +84,7 @@ public struct VK {
     }
 
 
+    
     @available(iOS, introduced:4.2, deprecated:9.0, message:"Please use url:options:")
     public static func process(url: URL, sourceApplication app: String?) {
         Authorizator.recieveTokenURL(url: url, fromApp: app)
@@ -125,15 +110,17 @@ public struct VK {
 //
 //MARK: - States
 extension VK {
-    public enum States {
-        case unknown
-        case configured
+    public enum States: Int, Comparable {
+        case unknown = 0
+        case configured  = 1
         //        case authorization
-        case authorized
+        case authorized = 2
     }
+    
+    
 
     public static var state: States {
-        guard VK.configured else {
+        guard VK.delegate != nil && VK.appID != nil else {
             return .unknown
         }
         guard Token.exist else {
@@ -159,4 +146,28 @@ extension VK {
     public typealias SuccessBlock = (_ response: JSON) -> ()
     public typealias ErrorBlock = (_ error: Swift.Error) -> ()
     public typealias ProgressBlock = (_ done: Int64, _ total: Int64) -> ()
+}
+
+
+
+public func > (lhs: VK.States, rhs: VK.States) -> Bool {
+    return lhs.rawValue > rhs.rawValue
+}
+
+
+
+public func >= (lhs: VK.States, rhs: VK.States) -> Bool {
+    return lhs.rawValue >= rhs.rawValue
+}
+
+
+
+public func < (lhs: VK.States, rhs: VK.States) -> Bool {
+    return lhs.rawValue < rhs.rawValue
+}
+
+
+
+public func <= (lhs: VK.States, rhs: VK.States) -> Bool {
+    return lhs.rawValue <= rhs.rawValue
 }

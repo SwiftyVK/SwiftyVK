@@ -6,14 +6,12 @@ import OHHTTPStubs
 
 class Login_Tests: VKTestCase {
     
-    
-    
     let delay : Double = 60
     
     
     private func prepareForLogin() {
         VK.logOut()
-        XCTAssertNotEqual(VK.state, VK.States.authorized, "Unexpected VK.state")
+        XCTAssertNotEqual(VK.state, .authorized, "Unexpected VK.state")
         VK.config.catchErrors = true
         XCTAssertTrue(VK.config.catchErrors, "VK should catch errors")
         
@@ -69,7 +67,7 @@ class Login_Tests: VKTestCase {
                 exp.fulfill()
             },
             onError: {error in
-                XCTAssertEqual((error as? ApiError)?._code, 5, "Unexpected error")
+                XCTAssertEqual((error as? ApiError)?.errorCode, 5, "Unexpected error")
                 exp.fulfill()
             }
         )

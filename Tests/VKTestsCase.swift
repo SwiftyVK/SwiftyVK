@@ -4,12 +4,14 @@ import OHHTTPStubs
 
 
 class VKTestCase : XCTestCase {
+    
     let reqTimeout = 5.0
     
     
     
     override func setUp() {
-        super.setUp()
+        OHHTTPStubs.removeAllStubs()
+
         VK.config.logToConsole = true
 //        VK.Log.purge()
         _ = ReqClock()
@@ -17,18 +19,20 @@ class VKTestCase : XCTestCase {
         if VK.config.logToConsole {
             printSync("!~~~~~~~~~~!~~~~~~~~~~!~~~~~~~~~~!~~~~~~~~~~!~~~~~~~~~~!\n")
         }
+        
+        super.setUp()
     }
     
     
     
     override func tearDown() {
         OHHTTPStubs.removeAllStubs()
-        super.tearDown()
         
         if VK.config.logToConsole {
             printSync("\n!~~~~~~~~~~!~~~~~~~~~~!~~~~~~~~~~!~~~~~~~~~~!~~~~~~~~~~!")
         }
         
+        super.tearDown()
     }
     
     

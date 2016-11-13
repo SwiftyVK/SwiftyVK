@@ -25,7 +25,7 @@ internal class Token: NSObject, NSCoding {
         kSecAttrAccessible: kSecAttrAccessibleWhenUnlocked,
         kSecClass: kSecClassGenericPassword,
         kSecAttrService: "SwiftyVK",
-        kSecAttrAccount: VK.appID!,
+        kSecAttrAccount: VK.appID ?? "",
         ] as NSDictionary
 
     private var token: String
@@ -41,7 +41,7 @@ internal class Token: NSObject, NSCoding {
 
     init(urlString: String) {
         let parameters = Token.parse(urlString)
-        token       = parameters["access_token"]!
+        token       = parameters["access_token"] ?? ""
         expires     = Int(Date().timeIntervalSince1970)
         if parameters["expires_in"] != nil {expires += Int(parameters["expires_in"]!)!}
         isOffline   = (parameters["expires_in"]?.isEmpty == false && (Int(parameters["expires_in"]!) == 0) || parameters["expires_in"] == nil)
