@@ -85,7 +85,7 @@ class YourClass: Superclass, VKDelegate {
   }
 
   func vkShouldUseTokenPath() -> String? {
-    /** ---DEPRECATED. TOKEN NOW STORED IN KEYCHAIN---
+    // ---DEPRECATED. TOKEN NOW STORED IN KEYCHAIN---
     //Called when SwiftyVK need know where a token is located.
     return //Path to save/read token or nil if should save token to UserDefaults
   }
