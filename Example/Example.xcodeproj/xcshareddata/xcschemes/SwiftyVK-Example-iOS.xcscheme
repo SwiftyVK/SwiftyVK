@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A2EB713A1BD27652008E7D86"
+               BuildableName = "SwiftyVK-Tests-iOS.xctest"
+               BlueprintName = "SwiftyVK-Tests-iOS"
+               ReferencedContainer = "container:Example.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
