@@ -15,6 +15,13 @@ env:
   - IOS_DESTANATION="OS=10.0,name=iPhone 7"
 
 
+before_install:
+- brew update
+- brew install carthage
+- cd Example
+- carthage update
+- cd ..
+
 script: 
   - set -o pipefail
   - xcodebuild -workspace "$WORKSPACE" -scheme "$IOS_SCHEME" -destination "$IOS_DESTANATION" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" build | xcpretty -c
