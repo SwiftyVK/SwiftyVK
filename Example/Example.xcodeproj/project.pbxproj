@@ -1340,6 +1340,7 @@
 				A280A8971DD0EFB0003BF914 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A2EB71341BD27639008E7D86 /* Build configuration list for PBXNativeTarget "SwiftyVK-Tests-OSX" */ = {
 			isa = XCConfigurationList;
