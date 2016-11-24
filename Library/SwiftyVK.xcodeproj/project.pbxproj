@@ -12,6 +12,7 @@
 			buildConfigurationList = A21F10BB1DCDFCF6003EFDDC /* Build configuration list for PBXAggregateTarget "SwiftyVK" */;
 			buildPhases = (
 				A21F10C01DCDFD1A003EFDDC /* SwiftLint */,
+				A20C36471DE04A16004AA642 /* NeedLess */,
 			);
 			dependencies = (
 				A21F10BF1DCDFD01003EFDDC /* PBXTargetDependency */,
@@ -663,6 +664,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		A20C36471DE04A16004AA642 /* NeedLess */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = NeedLess;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "IFS=$'\\n' find . -name \"*.swift\" -exec needless -Xcode {} \\;";
+		};
 		A21F10C01DCDFD1A003EFDDC /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -675,7 +690,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint lint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
