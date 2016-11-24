@@ -54,21 +54,21 @@ internal final class WebPresenter {
     func handleResponse(_ urlString: String) {
 
         if urlString.contains("access_token=") {
+            controller.hide()
             _ = Token(urlString: urlString)
             error = nil
-            controller.hide()
         }
         else if urlString.contains("success=1") {
-            error = nil
             controller.hide()
+            error = nil
         }
         else if urlString.contains("access_denied") || urlString.contains("cancel=1") {
-            error = AuthError.deniedFromUser
             controller.hide()
+            error = AuthError.deniedFromUser
         }
         else if urlString.contains("fail=1") {
-            error = .failedAuthorization
             controller.hide()
+            error = .failedAuthorization
         }
         else if urlString.contains(authorizeUrl) ||
             urlString.contains("act=security_check") ||

@@ -80,6 +80,7 @@ extension VK {
     case fromGroup = "from_group"
     case message
     case attachments
+    case attachment
     case services
     case signed
     case publishDate = "publish_date"
