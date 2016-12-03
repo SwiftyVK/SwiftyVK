@@ -2,14 +2,14 @@ import Foundation
 
 
 
-private var tokenInstance: Token! {
+private var tokenInstance: Token? {
 willSet {
     if tokenInstance != nil && newValue == nil {
         VK.delegate?.vkDidUnauthorize()
     }
 }
 didSet {
-    if oldValue == nil && tokenInstance != nil {
+    if oldValue == nil, let tokenInstance = tokenInstance {
         VK.delegate?.vkDidAuthorizeWith(parameters: tokenInstance.parameters)
     }
 }
@@ -30,7 +30,7 @@ internal class Token: NSObject, NSCoding {
 
     private var token: String
     private var expires: Int
-    private var isOffline = false
+    private var infinite = false
     fileprivate var parameters: Dictionary<String, String>
 
     override var description: String {
@@ -44,7 +44,7 @@ internal class Token: NSObject, NSCoding {
         token       = parameters["access_token"] ?? ""
         expires     = Int(Date().timeIntervalSince1970)
         if parameters["expires_in"] != nil {expires += Int(parameters["expires_in"]!)!}
-        isOffline   = (parameters["expires_in"]?.isEmpty == false && (Int(parameters["expires_in"]!) == 0) || parameters["expires_in"] == nil)
+        infinite   = (parameters["expires_in"]?.isEmpty == false && (Int(parameters["expires_in"]!) == 0) || parameters["expires_in"] == nil)
         self.parameters = parameters
 
         super.init()
@@ -59,13 +59,29 @@ internal class Token: NSObject, NSCoding {
     class func get() -> String? {
         VK.Log.put("Token", "getting")
 
-        if tokenInstance != nil && self.isExpired() == false {
+        if let tokenInstance = tokenInstance, tokenInstance.valid {
             return tokenInstance.token
         }
-        else if let _ = _load(), self.isExpired() == false {
+        else if let tokenInstance = _load(), tokenInstance.valid {
             return tokenInstance.token
         }
+        
         return nil
+    }
+    
+    
+    
+    private var valid: Bool {
+        
+        if infinite || expires > Int(Date().timeIntervalSince1970) {
+            return true
+        }
+        
+        VK.Log.put("Token", "expired")
+        Token.revoke = false
+        Token.remove()
+        
+        return (Authorizator.authorize() == nil)
     }
 
 
@@ -87,26 +103,6 @@ internal class Token: NSObject, NSCoding {
         }
         VK.Log.put("Token", "parse from parameters: \(parameters)")
         return parameters
-    }
-
-
-
-    private class func isExpired() -> Bool {
-        if tokenInstance == nil {
-            return true
-        }
-        else if tokenInstance.isOffline == false && tokenInstance.expires < Int(Date().timeIntervalSince1970) {
-            VK.Log.put("Token", "expired")
-            revoke = false
-
-            if let _ = Authorizator.authorize() {
-                Token.remove()
-                return true
-            }
-
-            return false
-        }
-        return false
     }
 
 
@@ -230,7 +226,7 @@ internal class Token: NSObject, NSCoding {
         aCoder.encode(parameters, forKey: "parameters")
         aCoder.encode(token, forKey: "token")
         aCoder.encode(expires, forKey: "expires")
-        aCoder.encode(isOffline, forKey: "isOffline")
+        aCoder.encode(infinite, forKey: "isOffline")
     }
 
 
@@ -238,7 +234,7 @@ internal class Token: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         token         = aDecoder.decodeObject(forKey: "token") as? String ?? ""
         expires       = aDecoder.decodeInteger(forKey: "expires")
-        isOffline     = aDecoder.decodeBool(forKey: "isOffline")
+        infinite     = aDecoder.decodeBool(forKey: "isOffline")
 
         if let parameters = aDecoder.decodeObject(forKey: "parameters") as? Dictionary<String, String> {
             self.parameters = parameters
