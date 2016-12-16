@@ -108,13 +108,13 @@ extension VK {
         //        case authorization
         case authorized = 2
         // equatable
-		public static func == (lhs: VK.States, rhs: VK.States) -> Bool {
-			return lhs.rawValue == rhs.rawValue
-		}
-		// comparable
-		public static func < (lhs: VK.States, rhs: VK.States) -> Bool {
-			return lhs.rawValue < rhs.rawValue
-		}
+	public static func == (lhs: VK.States, rhs: VK.States) -> Bool {
+		return lhs.rawValue == rhs.rawValue
+	}
+	// comparable
+	public static func < (lhs: VK.States, rhs: VK.States) -> Bool {
+		return lhs.rawValue < rhs.rawValue
+	}
     }
     
     
