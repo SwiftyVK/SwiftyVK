@@ -107,6 +107,14 @@ extension VK {
         case configured  = 1
         //        case authorization
         case authorized = 2
+        // equatable
+		public static func == (lhs: VK.States, rhs: VK.States) -> Bool {
+			return lhs.rawValue == rhs.rawValue
+		}
+		// comparable
+		public static func < (lhs: VK.States, rhs: VK.States) -> Bool {
+			return lhs.rawValue < rhs.rawValue
+		}
     }
     
     
@@ -138,28 +146,4 @@ extension VK {
     public typealias SuccessBlock = (_ response: JSON) -> ()
     public typealias ErrorBlock = (_ error: Swift.Error) -> ()
     public typealias ProgressBlock = (_ done: Int64, _ total: Int64) -> ()
-}
-
-
-
-public func > (lhs: VK.States, rhs: VK.States) -> Bool {
-    return lhs.rawValue > rhs.rawValue
-}
-
-
-
-public func >= (lhs: VK.States, rhs: VK.States) -> Bool {
-    return lhs.rawValue >= rhs.rawValue
-}
-
-
-
-public func < (lhs: VK.States, rhs: VK.States) -> Bool {
-    return lhs.rawValue < rhs.rawValue
-}
-
-
-
-public func <= (lhs: VK.States, rhs: VK.States) -> Bool {
-    return lhs.rawValue <= rhs.rawValue
 }
