@@ -52,10 +52,10 @@ internal struct Authorizator {
         Thread.isMainThread
             ? sheetQueue.async {
                 error = WebPresenter.start(withUrl: url)
-                }
+            }
             : sheetQueue.sync {
                 error = WebPresenter.start(withUrl: url)
-        }
+            }
 
         return error
     }
@@ -88,7 +88,7 @@ internal struct Authorizator {
             return
         }
         
-        error = WebPresenter.start(withUrl: webAuthorizeUrl+paramsUrl)
+        error = WebPresenter.start(withUrl: webAuthorizeUrl + paramsUrl)
     }
 }
 //
@@ -119,7 +119,7 @@ internal struct Authorizator {
 
 
         fileprivate static func startWithApp() {
-            guard let paramsUrl = paramsUrl, let url = URL(string: appAuthorizeUrl+paramsUrl) else {
+            guard let paramsUrl = paramsUrl, let url = URL(string: appAuthorizeUrl + paramsUrl) else {
                 return
             }
             

@@ -12,8 +12,8 @@ private var lpQueue = DispatchQueue(label: "VKLongPollQueue")
 
 
 
-private typealias VK_LongPool = VK
-extension VK_LongPool {
+private typealias VKLongPool = VK
+extension VKLongPool {
     /**
      Long pool client. More - https://vk.com/dev/using_longpoll
      * To start and stop the server, use the start() and stop() functions
@@ -57,7 +57,7 @@ extension VK_LongPool {
 
 
         private static func getServer() {
-            var req = VK.API.Messages.getLongPollServer([VK.Arg.useSsl : "0", VK.Arg.needPts : "1"])
+            var req = VK.API.Messages.getLongPollServer([VK.Arg.useSsl: "0", VK.Arg.needPts: "1"])
             req.catchErrors = false
             req.maxAttempts = 1
 
@@ -71,7 +71,7 @@ extension VK_LongPool {
                     keyIsExpired = false
                     update()
             },
-                onError: {error in
+                onError: {_ in
                     // VK.Log.put("LongPool", "Error get server with request \(req.id)")
                     Thread.sleep(forTimeInterval: 10)
                     getServer()
@@ -109,7 +109,7 @@ extension VK_LongPool {
                             : observer?.connectionRestore()
                         update()
                 },
-                    onError: {error in
+                    onError: {_ in
                         // VK.Log.put("LongPool", "Received error with request \(req.id)")
 
                         observer?.connectionLost()

@@ -100,11 +100,11 @@ public struct VK {
 //
 //
 //
-//MARK: - States
+// MARK: - States
 extension VK {
     public enum States: Int, Comparable {
         case unknown = 0
-        case configured  = 1
+        case configured = 1
         //        case authorization
         case authorized = 2
     }
@@ -131,7 +131,7 @@ extension VK {
 //
 //
 //
-//MARK: - Extensions
+// MARK: - Extensions
 extension VK {
     ///Access to the API methods
     public typealias API = _VKAPI

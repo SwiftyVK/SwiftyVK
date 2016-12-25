@@ -25,13 +25,13 @@ internal class Token: NSObject, NSCoding {
         kSecAttrAccessible: kSecAttrAccessibleWhenUnlocked,
         kSecClass: kSecClassGenericPassword,
         kSecAttrService: "SwiftyVK",
-        kSecAttrAccount: VK.appID ?? "",
+        kSecAttrAccount: VK.appID ?? ""
         ] as NSDictionary
 
     private var token: String
     private var expires: Int
     private var infinite = false
-    fileprivate var parameters: Dictionary<String, String>
+    fileprivate var parameters: [String: String]
 
     override var description: String {
         return "Token with parameters: \(parameters))"
@@ -92,10 +92,10 @@ internal class Token: NSObject, NSCoding {
 
 
 
-    private class func parse(_ request: String) -> Dictionary<String, String> {
+    private class func parse(_ request: String) -> [String : String] {
         let cleanRequest  = request.components(separatedBy: "#")[1]
         let preParameters = cleanRequest.components(separatedBy: "&")
-        var parameters    = Dictionary<String, String>()
+        var parameters    = [String: String]()
 
         for keyValueString in preParameters {
             let keyValueArray = keyValueString.components(separatedBy: "=")
@@ -221,7 +221,7 @@ internal class Token: NSObject, NSCoding {
 
 
 
-    //MARK: - NSCoding protocol
+    // MARK: - NSCoding protocol
     func encode(with aCoder: NSCoder) {
         aCoder.encode(parameters, forKey: "parameters")
         aCoder.encode(token, forKey: "token")
@@ -236,7 +236,7 @@ internal class Token: NSObject, NSCoding {
         expires       = aDecoder.decodeInteger(forKey: "expires")
         infinite     = aDecoder.decodeBool(forKey: "isOffline")
 
-        if let parameters = aDecoder.decodeObject(forKey: "parameters") as? Dictionary<String, String> {
+        if let parameters = aDecoder.decodeObject(forKey: "parameters") as? [String : String] {
             self.parameters = parameters
         }
         else {

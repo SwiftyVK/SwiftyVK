@@ -12,7 +12,7 @@
         @IBOutlet private weak var imageView: UIImageView!
         @IBOutlet private weak var textField: UITextField!
         private var parentView: UIViewController!
-        private var delegate: CaptchaPresenter!
+        private weak var delegate: CaptchaPresenter!
         private var image: UIImage?
         
         

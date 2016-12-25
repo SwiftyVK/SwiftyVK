@@ -6,7 +6,7 @@ public struct _VKAPI {
   - returns: Request
   */
   public static func execute(_ code: String) -> RequestConfig {
-    return RequestConfig(method: "execute", parameters: [VK.Arg.code : code])
+    return RequestConfig(method: "execute", parameters: [VK.Arg.code: code])
   }
 
 

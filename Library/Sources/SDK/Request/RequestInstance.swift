@@ -105,7 +105,7 @@ internal final class RequestInstance: Operation, RequestExecution {
 
 
 
-//MARK: - Send request & handle response
+// MARK: - Send request & handle response
 extension RequestInstance {
 
 
@@ -160,7 +160,7 @@ extension RequestInstance {
 
 
 
-//MARK: - Process result
+// MARK: - Process result
 extension RequestInstance {
 
 

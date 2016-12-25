@@ -90,7 +90,7 @@
         
         
         
-        //MARK: - frameLoadDelegate protocol
+        // MARK: - frameLoadDelegate protocol
         func webViewDidFinishLoad(_ webView: UIWebView) {
             activity.stopAnimating()
             delegate?.handleResponse(webView.request?.url?.absoluteString ?? "")

@@ -7,6 +7,7 @@ excluded:
 disabled_rules:
   - vertical_whitespace
   - nesting
+  - void_return
 
 opt_in_rules:
   - private_outlet
@@ -15,11 +16,18 @@ opt_in_rules:
   - overridden_super_call
   - redundant_nil_coalesing
   - switch_case_on_newline
-  - force_unwrapping
+  - empty_count
+  - redundant_nil_coalescing
+  - nimble_operator
+  - closure_end_indentation
+  - file_header
+  - first_where
+  - prohibited_super_call
+  # - operator_usage_whitespace
+  # - number_separator
   # - missing_docs
   # - closure_spacing
   # - conditional_returns_on_newline
-
 
 
 file_length:
@@ -51,4 +59,4 @@ trailing_whitespace:
   ignores_empty_lines: true
   ignores_comments: true
 colon:
-  flexible_right_spacing: false
+  flexible_right_spacing: true

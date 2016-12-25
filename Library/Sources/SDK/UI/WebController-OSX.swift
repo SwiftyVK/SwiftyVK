@@ -129,7 +129,7 @@
         
         
         
-        //MARK: - frameLoadDelegate protocol
+        // MARK: - frameLoadDelegate protocol
         func webView(_ sender: WebView!, didFinishLoadFor frame: WebFrame!) {
             let string = frame.dataSource?.response.url?.absoluteString ?? ""
             delegate?.handleResponse(string)

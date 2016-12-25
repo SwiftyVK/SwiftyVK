@@ -41,9 +41,7 @@ public struct Media: CustomStringConvertible {
 
 
   public var description: String {
-    get {
     return "Media with type \(type)"
-    }
   }
 
 

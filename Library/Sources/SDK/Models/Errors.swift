@@ -42,7 +42,7 @@ public enum RequestError: Int, CustomNSError, CustomStringConvertible {
 public struct ApiError: CustomNSError, CustomStringConvertible {
     public static let errorDomain = "SwiftyVKApiError"
     public private(set) var errorCode: Int = 0
-    public var errorUserInfo = [String : Any]()
+    public var errorUserInfo = [String: Any]()
 
     public var description: String {
         return String(format: "error %@[%d]: %@", ApiError.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
