@@ -32,8 +32,7 @@ class ReqClock : NSObject {
 
 #if os(iOS)
     private let captchaData = UIImagePNGRepresentation(#imageLiteral(resourceName: "captcha.jpg"))!
-#endif
-#if os(OSX)
+#elseif os(OSX)
     private let captchaData = #imageLiteral(resourceName: "captcha.jpg").tiffRepresentation!
 #endif
 
@@ -113,12 +112,12 @@ struct Stubs {
         }
         
         _ = stub(condition:
-                testMethod &&
+            testMethod &&
                 testApiUrl &&
                 pathStartsWith("/method/"+method) &&
                 testParams &&
                 testAuth &&
-                testCaptcha
+            testCaptcha
         ) { _ in
             callCount += 1
             ReqClock.count += 1
@@ -151,12 +150,12 @@ struct Stubs {
         }
         
         _ = stub(condition:
-                isScheme("https") &&
+            isScheme("https") &&
                 isHost("upload.vk.com") &&
                 isMethodPOST() &&
                 hasHeaderNamed("Content-Transfer-Encoding", value: "8bit") &&
                 hasHeaderNamed("Content-Type", value: "multipart/form-data;  boundary=(======SwiftyVK======)")
-//                {$0.httpBody?.count == dataSize}
+            //                {$0.httpBody?.count == dataSize}
             
         ) { _ in
             return Simulates.success(filePath: filePath, delay: nil)
@@ -222,11 +221,10 @@ struct Stubs {
             caller.expectation(forNotification: "TestCaptchaDidLoad", object: nil) {notification -> Bool in
                 guard let controller = notification.userInfo?["captcha"] as? CaptchaController else {return false}
                 controller.setText(to: captcha)
-
+                
                 #if os(OSX)
                     controller.controlTextDidEndEditing(Notification(name: Notification.Name("")))
-                #endif
-                #if os(iOS)
+                #elseif os(iOS)
                     _ = controller.textFieldShouldReturn(UITextField(frame: .zero))
                     controller.viewDidDisappear(true)
                 #endif

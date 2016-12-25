@@ -1,8 +1,7 @@
 import Foundation
 #if os(iOS)
     import UIKit
-#endif
-#if os(OSX)
+#elseif os(OSX)
     import Cocoa
 #endif
 

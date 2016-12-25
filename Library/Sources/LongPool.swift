@@ -1,8 +1,7 @@
 import Foundation
 #if os(iOS)
     import UIKit
-#endif
-#if os(OSX)
+#elseif os(OSX)
     import Cocoa
 #endif
 
@@ -277,9 +276,7 @@ internal final class LPObserver: NSObject {
         #if os(OSX)
             NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(connectionLostForce), name:NSNotification.Name.NSWorkspaceScreensDidSleep, object: nil)
             NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(connectionRestoreForce), name:NSNotification.Name.NSWorkspaceScreensDidWake, object: nil)
-        #endif
-
-        #if os(iOS)
+        #elseif os(iOS)
             let reachability = Reachability()
             NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged), name: ReachabilityChangedNotification, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(connectionLostForce), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)

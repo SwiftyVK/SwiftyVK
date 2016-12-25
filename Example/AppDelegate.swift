@@ -36,12 +36,10 @@ var vkDelegateReference : VKDelegate?
             return true
         }
     }
-#endif
-
-
-
-
-#if os(OSX)
+    
+    
+    
+#elseif os(OSX)
     import Cocoa
     
     

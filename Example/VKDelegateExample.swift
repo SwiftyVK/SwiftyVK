@@ -2,8 +2,7 @@ import SwiftyVK
 
 #if os(OSX)
     import Cocoa
-#endif
-#if os(iOS)
+#elseif os(iOS)
     import UIKit
 #endif
 
@@ -56,11 +55,10 @@ class VKDelegateExample: VKDelegate {
     func vkWillPresentView() -> NSWindow? {
         return NSApplication.shared().windows[0]
     }
-    #endif
     
     
     
-    #if os(iOS)
+    #elseif os(iOS)
     func vkWillPresentView() -> UIViewController {
         return UIApplication.shared.delegate!.window!!.rootViewController!
     }

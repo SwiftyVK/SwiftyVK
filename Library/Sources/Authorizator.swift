@@ -1,7 +1,6 @@
 #if os(OSX)
     import Foundation
-#endif
-#if os(iOS)
+#elseif os(iOS)
     import UIKit
 #endif
 
@@ -143,7 +142,6 @@ internal struct Authorizator {
             }
         }
     }
-#endif
 //
 //
 //
@@ -155,7 +153,7 @@ internal struct Authorizator {
 //
 //
 //
-#if os(OSX)
+#elseif os(OSX)
     private typealias OSXAuthorizator = Authorizator
     extension OSXAuthorizator {
         internal static var canAuthorizeWithVkApp: Bool {return false}
