@@ -2,7 +2,7 @@
 extension VK {
     public struct config {
         //Returns used VK API version
-        public static var apiVersion = "5.60"
+        public static var apiVersion = "5.62"
         //Returns used VK SDK version
         public static let sdkVersion = "1.3.17"
         ///Requests timeout
