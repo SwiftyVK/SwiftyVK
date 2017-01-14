@@ -104,7 +104,7 @@ extension VK {
     public enum States: Int, Comparable {
         case unknown = 0
         case configured = 1
-        //        case authorization
+        // case authorization
         case authorized = 2
         // equatable
 	public static func == (lhs: VK.States, rhs: VK.States) -> Bool {
