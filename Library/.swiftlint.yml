@@ -5,11 +5,14 @@ excluded:
   - Sources/Extensions/Reachability.swift
 
 disabled_rules:
-  - vertical_whitespace
   - nesting
   - void_return
+  - unused_optional_binding
 
 opt_in_rules:
+  - attributes
+  - force_unwrapping
+  - object_literal
   - private_outlet
   - empty_count
   - explicit_init
@@ -29,7 +32,8 @@ opt_in_rules:
   # - closure_spacing
   # - conditional_returns_on_newline
 
-
+vertical_whitespace:
+  max_empty_lines: 3
 file_length:
   warning: 500
   error: 1000

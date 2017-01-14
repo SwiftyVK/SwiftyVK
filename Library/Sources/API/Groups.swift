@@ -60,7 +60,6 @@ extension _VKAPI {
 
 
 
-
     ///Returns invited user. More - https://vk.com/dev/groups.getInvitedUsers
     public static func getInvitedUsers(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
       return RequestConfig(method: "groups.getInvitedUsers", parameters: parameters)

@@ -59,7 +59,8 @@ internal final class SendQueue: OperationQueue {
 
 
 
-    @objc private func dropCounter() {
+    @objc
+    private func dropCounter() {
         addingQueue.async {
             guard !self.waited.isEmpty || self.apiCounter > 0 else {
                 return

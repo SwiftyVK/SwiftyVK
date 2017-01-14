@@ -44,7 +44,6 @@
         
         
         
-        
         override func viewWillAppear(_ animated: Bool) {
             imageView?.layer.cornerRadius = 15
             imageView?.layer.masksToBounds = true

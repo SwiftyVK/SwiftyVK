@@ -6,7 +6,6 @@ private class ResourceTestClass {}
 
 
 
-
 internal struct Resources {
   private static let pathSuffix: String = {
     #if os(OSX)

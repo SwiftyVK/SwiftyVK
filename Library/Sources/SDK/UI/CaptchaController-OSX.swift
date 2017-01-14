@@ -67,7 +67,6 @@
         
         
         
-        
         override func controlTextDidEndEditing(_ obj: Notification) {
             if let window = window {
                 parentWindow?.endSheet(window)

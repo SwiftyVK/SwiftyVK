@@ -50,7 +50,8 @@ internal struct Result: CustomStringConvertible {
 
 
 
-    @discardableResult internal mutating func setError(error: Error) -> Error {
+    @discardableResult
+    internal mutating func setError(error: Error) -> Error {
         self.error = error
         return error
     }

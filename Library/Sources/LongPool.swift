@@ -288,7 +288,8 @@ internal final class LPObserver: NSObject {
 
 
     #if os(iOS)
-    @objc private func reachabilityChanged(note: NSNotification) {
+    @objc
+    private func reachabilityChanged(note: NSNotification) {
         if let reachability = note.object as? Reachability {
             reachability.isReachable ? connectionRestore() : connectionLost()
         }
@@ -297,8 +298,8 @@ internal final class LPObserver: NSObject {
 
 
 
-
-    @objc private func connectionRestoreForce() {
+    @objc
+    private func connectionRestoreForce() {
         lpQueue.async {
             VK.LP.isActive = true
             VK.LP.update()
@@ -306,7 +307,8 @@ internal final class LPObserver: NSObject {
     }
 
 
-    @objc private func connectionLostForce() {
+    @objc
+    private func connectionLostForce() {
         lpQueue.async {
             VK.LP.isActive = false
             self.connectionLost()

@@ -75,7 +75,8 @@ public struct RequestConfig {
     ///   - errorBlock: called when request receive error
     ///   - progressBlock: called when part of data transfereed to server
     /// - Returns: instance of RequestExecution
-    @discardableResult public func send(
+    @discardableResult
+    public func send(
         onSuccess successBlock: VK.SuccessBlock? = nil,
         onError errorBlock: VK.ErrorBlock? = nil,
         onProgress progressBlock: VK.ProgressBlock? = nil
@@ -91,7 +92,6 @@ public struct RequestConfig {
 
 
     
-    
     /// Add a request that will be sent after the request will receive a valid response
     ///
     /// - Parameter next: block of code, which should return the next query
@@ -99,7 +99,6 @@ public struct RequestConfig {
     public mutating func next(_ next: @escaping (_ response: JSON) -> RequestConfig) {
         nextRequest = next
     }
-    
     
     
     

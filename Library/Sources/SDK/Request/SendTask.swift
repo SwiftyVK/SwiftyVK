@@ -40,7 +40,6 @@ internal final class SendTask: Operation {
 
 
 
-
     override func main() {
         let semaphore = DispatchSemaphore(value: 0)
 

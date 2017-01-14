@@ -39,7 +39,6 @@ extension _VKAPI {
 
 
 
-
     ///Returns information about photos by their IDs. More - https://vk.com/dev/photos.getById
     public static func getById(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
       return RequestConfig(method: "photos.getById", parameters: parameters)
