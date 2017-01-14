@@ -20,8 +20,15 @@ public protocol RequestExecution {
 
 internal final class RequestInstance: Operation, RequestExecution {
 
-    fileprivate static let queue: OperationQueue = {
+    fileprivate static let apiQueue: OperationQueue = {
        let q = OperationQueue()
+        q.qualityOfService = QualityOfService.userInitiated
+        q.maxConcurrentOperationCount = 1
+        return q
+    }()
+    
+    fileprivate static let notApiQueue: OperationQueue = {
+        let q = OperationQueue()
         q.qualityOfService = QualityOfService.userInitiated
         q.maxConcurrentOperationCount = 1
         return q
@@ -55,7 +62,7 @@ internal final class RequestInstance: Operation, RequestExecution {
         progressBlock: VK.ProgressBlock?
         ) -> RequestExecution {
         let instance = RequestInstance(config: config, successBlock: successBlock, errorBlock: errorBlock, progressBlock: progressBlock)
-        queue.addOperation(instance)
+        (config.api ? apiQueue : notApiQueue).addOperation(instance)
         return instance
     }
 
