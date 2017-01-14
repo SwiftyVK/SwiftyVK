@@ -16,7 +16,7 @@ internal final class SendTask: Operation {
 
 
     override var description: String {
-        return "send task #\(delegate.id)-\(id)"
+        return "task #\(delegate.id)-\(id)"
     }
 
 

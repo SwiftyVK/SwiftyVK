@@ -32,13 +32,13 @@ extension VKLongPool {
         public static func start() {
             lpQueue.async {
                 guard VK.state == .authorized && !isActive else {
-                    // VK.Log.put("LongPool", "User is not authorized or LongPool is active yet")
+                     VK.Log.put("LongPool", "User is not authorized or LongPool is active yet")
                     return}
                 isActive = true
                 keyIsExpired = true
                 getServer()
                 observer = LPObserver()
-                // VK.Log.put("LongPool", "Stared")
+                 VK.Log.put("LongPool", "Stared")
             }
         }
 
@@ -49,7 +49,7 @@ extension VKLongPool {
             lpQueue.async {
                 observer = nil
                 isActive = false
-                // VK.Log.put("LongPool", "Stopped")
+                 VK.Log.put("LongPool", "Stopped")
             }
         }
 
@@ -60,10 +60,10 @@ extension VKLongPool {
             req.catchErrors = false
             req.maxAttempts = 1
 
-            // VK.Log.put("LongPool", "Getting server with request \(req.id)")
+             VK.Log.put("LongPool", "Getting server with \(req)")
             req.send(
                 onSuccess: {response in
-                    // VK.Log.put("LongPool", "get server with request \(req.id)")
+                     VK.Log.put("LongPool", "get server with \(req)")
                     lpKey = response["key"].stringValue
                     server = response["server"].stringValue
                     ts = response["ts"].stringValue
@@ -71,7 +71,7 @@ extension VKLongPool {
                     update()
             },
                 onError: {_ in
-                    // VK.Log.put("LongPool", "Error get server with request \(req.id)")
+                     VK.Log.put("LongPool", "Error get server with \(req)")
                     Thread.sleep(forTimeInterval: 10)
                     getServer()
             }
@@ -95,10 +95,10 @@ extension VKLongPool {
                 req.timeout = 30
                 req.maxAttempts = 1
 
-                // VK.Log.put("LongPool", "Send with request \(req.id)")
+                 VK.Log.put("LongPool", "Send with \(req)")
                 req.send(
                     onSuccess: {response in
-                        // VK.Log.put("LongPool", "Received response with request \(req.id)")
+                         VK.Log.put("LongPool", "Received response with \(req)")
 
                         ts = response["ts"].stringValue
                         parse(response["updates"].array)
@@ -109,7 +109,7 @@ extension VKLongPool {
                         update()
                 },
                     onError: {_ in
-                        // VK.Log.put("LongPool", "Received error with request \(req.id)")
+                         VK.Log.put("LongPool", "Received error with \(req)")
 
                         observer?.connectionLost()
                         Thread.sleep(forTimeInterval: 10)
@@ -271,7 +271,7 @@ internal final class LPObserver: NSObject {
     internal override init() {
         super.init()
 
-        // VK.Log.put("LongPool", "Init observer")
+         VK.Log.put("LongPool", "Init observer")
 
         #if os(OSX)
             NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(connectionLostForce), name:NSNotification.Name.NSWorkspaceScreensDidSleep, object: nil)
@@ -319,7 +319,7 @@ internal final class LPObserver: NSObject {
 
         if connected == true {
             connected = false
-            // VK.Log.put("LongPool", "Connection lost")
+             VK.Log.put("LongPool", "Connection lost")
             NotificationCenter.default.post(name: VK.LP.notifications.connectinDidLost, object: nil)
         }
     }
@@ -330,13 +330,13 @@ internal final class LPObserver: NSObject {
 
         if connected == false {
             connected = true
-            // VK.Log.put("LongPool", "Connection restored")
+             VK.Log.put("LongPool", "Connection restored")
             NotificationCenter.default.post(name: VK.LP.notifications.connectinDidRestore, object: nil)
         }
     }
 
 
     deinit {
-        // VK.Log.put("LongPool", "Deinit observer")
+         VK.Log.put("LongPool", "Deinit observer")
     }
 }
