@@ -29,7 +29,6 @@ class VKDelegateExample: VKDelegate {
     
     func vkDidAuthorizeWith(parameters: Dictionary<String, String>) {
         NotificationCenter.default.post(name: Notification.Name(rawValue: "TestVkDidAuthorize"), object: nil)
-        VK.LP.start()
     }
     
     

@@ -109,32 +109,32 @@ internal struct UrlFabric {
     
     
     
-    private static func createQueryFrom(parameters: [VK.Arg : String]) -> String {
-        var components = URLComponents()
+    internal static func createQueryFrom(parameters: [VK.Arg : String]) -> String {
+        let paramArray = NSMutableArray()
         
-        var queryItems = parameters.map {parameter -> URLQueryItem in
-            URLQueryItem(name: parameter.key.rawValue, value: parameter.value)
+        for (name, value) in parameters {
+            if let encodedValue = value.addingPercentEncoding(withAllowedCharacters: .urlQueryParametersAllowed) {
+                paramArray.add("\(name.rawValue)=\(encodedValue)")
+            }
         }
         
-        queryItems.append(URLQueryItem(name: "v", value: "VK.config.apiVersion"))
-        queryItems.append(URLQueryItem(name: "https", value: "1"))
+        paramArray.add("v=\(VK.config.apiVersion)")
+        paramArray.add("https=1")
         
         if let token = Token.get() {
-            queryItems.append(URLQueryItem(name: "access_token", value: token))
-            
+            paramArray.add("access_token=\(token)")
         }
         
         if let lang = VK.config.language {
-            queryItems.append(URLQueryItem(name: "lang", value: lang))
+            paramArray.add("lang=\(lang)")
         }
         
         if let sid = sharedCaptchaAnswer?["captcha_sid"], let key = sharedCaptchaAnswer?["captcha_key"] {
-            queryItems.append(URLQueryItem(name: "captcha_sid", value: sid))
-            queryItems.append(URLQueryItem(name: "captcha_key", value: key))
+            paramArray.add("captcha_sid=\(sid)")
+            paramArray.add("captcha_key=\(key)")
             sharedCaptchaAnswer = nil
         }
         
-        components.queryItems = queryItems
-        return components.percentEncodedQuery ?? ""
+        return paramArray.componentsJoined(by: "&")
     }
 }

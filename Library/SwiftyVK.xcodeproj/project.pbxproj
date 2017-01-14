@@ -28,6 +28,8 @@
 		A2066AEB1D9C388F0065A4D7 /* RequestInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2066AE91D9C388F0065A4D7 /* RequestInstance.swift */; };
 		A20FF11A1BEB6BB5009FBE3D /* Authorizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */; };
 		A20FF11C1BEB7DC8009FBE3D /* Authorizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */; };
+		A21E81591E2A7E68008E81E7 /* UrlCharactesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E81581E2A7E68008E81E7 /* UrlCharactesSet.swift */; };
+		A21E815A1E2A8303008E81E7 /* UrlCharactesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E81581E2A7E68008E81E7 /* UrlCharactesSet.swift */; };
 		A236B2B61DB6864F002376C8 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B51DB6864F002376C8 /* WebPresenter.swift */; };
 		A236B2B71DB6864F002376C8 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B51DB6864F002376C8 /* WebPresenter.swift */; };
 		A236B2B91DB68E4F002376C8 /* WebController-OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B81DB68E4F002376C8 /* WebController-OSX.swift */; };
@@ -196,6 +198,7 @@
 /* Begin PBXFileReference section */
 		A2066AE91D9C388F0065A4D7 /* RequestInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestInstance.swift; sourceTree = "<group>"; };
 		A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorizator.swift; sourceTree = "<group>"; };
+		A21E81581E2A7E68008E81E7 /* UrlCharactesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlCharactesSet.swift; sourceTree = "<group>"; };
 		A234A40A1BE34F6800856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/CaptchaView-OSX.strings"; sourceTree = "<group>"; };
 		A234A40B1BE34F6800856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A234A40C1BE34F6900856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/CaptchaView-iOS.strings"; sourceTree = "<group>"; };
@@ -379,6 +382,7 @@
 				A2527D7B1BD12FD200F65412 /* Log.swift */,
 				A2527D7C1BD12FD200F65412 /* Reachability.swift */,
 				A2527D7E1BD12FD200F65412 /* SwiftyJSON.swift */,
+				A21E81581E2A7E68008E81E7 /* UrlCharactesSet.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -733,6 +737,7 @@
 				A2EB6F031BD18395008E7D86 /* User.swift in Sources */,
 				A2EB6F041BD18395008E7D86 /* Utils.swift in Sources */,
 				A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */,
+				A21E815A1E2A8303008E81E7 /* UrlCharactesSet.swift in Sources */,
 				A2EB6F051BD18395008E7D86 /* Video.swift in Sources */,
 				A2EB6F061BD18395008E7D86 /* Wall.swift in Sources */,
 				A2EB6F071BD18395008E7D86 /* Arg.swift in Sources */,
@@ -759,6 +764,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2EB6EBD1BD18389008E7D86 /* VK.swift in Sources */,
+				A21E81591E2A7E68008E81E7 /* UrlCharactesSet.swift in Sources */,
 				A2EB6EBE1BD18389008E7D86 /* LongPool.swift in Sources */,
 				A2EB6EBF1BD18389008E7D86 /* Account.swift in Sources */,
 				A2EB6EC01BD18389008E7D86 /* API.swift in Sources */,
@@ -942,6 +948,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -1213,7 +1220,6 @@
 				PRODUCT_NAME = SwiftyVK;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
