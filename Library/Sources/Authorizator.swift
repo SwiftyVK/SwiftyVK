@@ -42,6 +42,10 @@ internal struct Authorizator {
 
         return error
     }
+    
+    internal static func authorize(token: String, expiresIn: Int?) {
+        Token(token: token, expiresIn: expiresIn)
+    }
 
 
 

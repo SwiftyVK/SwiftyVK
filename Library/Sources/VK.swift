@@ -73,6 +73,10 @@ public struct VK {
     public static func logIn() {
         _ = Authorizator.authorize()
     }
+    
+    public static func logIn(token: String, expiresIn: Int?) {
+        Authorizator.authorize(token: token, expiresIn: expiresIn)
+    }
 
 
 
