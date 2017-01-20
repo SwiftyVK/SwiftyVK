@@ -11,8 +11,8 @@ private var lpQueue = DispatchQueue(label: "VKLongPollQueue")
 
 
 
-private typealias VKLongPool = VK
-extension VKLongPool {
+private typealias VKLongPoll = VK
+extension VKLongPoll {
     /**
      Long pool client. More - https://vk.com/dev/using_longpoll
      * To start and stop the server, use the start() and stop() functions
