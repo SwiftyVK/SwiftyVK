@@ -93,13 +93,13 @@
         // MARK: - frameLoadDelegate protocol
         func webViewDidFinishLoad(_ webView: UIWebView) {
             activity.stopAnimating()
-            delegate?.handleResponse(webView.request?.url?.absoluteString ?? "")
+            delegate?.handle(response: webView.request?.url?.absoluteString ?? "")
         }
         
         
         
         func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-            delegate?.handleError(.failedAuthorization)
+            delegate?.handle(error: .failedAuthorization)
         }
     }
 #endif

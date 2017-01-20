@@ -66,7 +66,7 @@ public struct VK {
 
 
     /**
-     Getting authenticate token.
+     Gets authenticate token.
      * If the token is already stored in the file, then the authentication takes place in the background
      * If not, shows a pop-up notification with authorization request
      */
@@ -74,8 +74,14 @@ public struct VK {
         _ = Authorizator.authorize()
     }
     
-    public static func logIn(token: String, expiresIn: Int?) {
-        Authorizator.authorize(token: token, expiresIn: expiresIn)
+    
+    /**
+     Creates a token from string
+     - parameter rawToken: token string repersented e.g. "487tajfalsf476tir0jfao4804slrjgsf3"
+     - parameter expiresIn: expiry time in milliseconds from now. By default = 0 (infinite token)
+     */
+    public static func logInWith(rawToken: String, expiresIn: Int = 0) {
+        Authorizator.authorizeWith(rawToken: rawToken, expiresIn: expiresIn)
     }
 
 

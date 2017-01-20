@@ -131,14 +131,14 @@
         
         // MARK: - frameLoadDelegate protocol
         func webView(_ sender: WebView!, didFinishLoadFor frame: WebFrame!) {
-            let string = frame.dataSource?.response.url?.absoluteString ?? ""
-            delegate?.handleResponse(string)
+            let response = frame.dataSource?.response.url?.absoluteString ?? ""
+            delegate?.handle(response: response)
         }
         
         
         
         func webView(_ sender: WebView!, didFailLoadWithError error: Error!, for frame: WebFrame!) {
-            delegate?.handleError(AuthError.failedAuthorization)
+            delegate?.handle(error: .failedAuthorization)
         }
     }
 #endif

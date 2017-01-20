@@ -43,8 +43,10 @@ internal struct Authorizator {
         return error
     }
     
-    internal static func authorize(token: String, expiresIn: Int?) {
-        Token(token: token, expiresIn: expiresIn)
+    
+    
+    internal static func authorizeWith(rawToken: String, expiresIn: Int) {
+        _ = Token(fromRawToken: rawToken, expiresIn: expiresIn)
     }
 
 
@@ -140,7 +142,7 @@ internal struct Authorizator {
             
             if app == "com.vk.vkclient" || app == "com.vk.vkhd" || url.scheme == "vk\(appId)" {
                 if url.absoluteString.contains("access_token=") {
-                    _ = Token(urlString: url.absoluteString)
+                    _ = Token(fromResponse: url.absoluteString)
                     WebPresenter.cancel()
                 }
             }
