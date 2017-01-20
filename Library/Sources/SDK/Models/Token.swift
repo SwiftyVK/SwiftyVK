@@ -53,6 +53,19 @@ internal class Token: NSObject, NSCoding {
         VK.Log.put("Token", "init \(self)")
         save()
     }
+    
+    init(token: String, expiresIn: Int?) {
+        self.token       = token
+        expires     = Int(Date().timeIntervalSince1970) + (expiresIn ?? 0)
+        infinite   = expiresIn == nil || expiresIn == 0
+        self.parameters = [:] // FIXME: Is this even used for anything after init?
+        
+        super.init()
+        tokenInstance = self
+        Token.revoke = true
+        VK.Log.put("Token", "init \(self) from given token and expire date")
+        save()
+    }
 
 
 
