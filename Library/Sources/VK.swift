@@ -75,6 +75,7 @@ public struct VK {
     }
     
     
+    
     /**
      Creates a token from string
      - parameter rawToken: token string repersented e.g. "487tajfalsf476tir0jfao4804slrjgsf3"

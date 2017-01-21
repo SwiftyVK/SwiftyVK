@@ -7,12 +7,12 @@ import Foundation
 
 
 
-private var lpQueue = DispatchQueue(label: "VKLongPollQueue")
+private var lpQueue = DispatchQueue(label: "VKLongPoolQueue")
 
 
 
-private typealias VKLongPoll = VK
-extension VKLongPoll {
+private typealias VKLongPool = VK
+extension VKLongPool {
     /**
      Long pool client. More - https://vk.com/dev/using_longpoll
      * To start and stop the server, use the start() and stop() functions
