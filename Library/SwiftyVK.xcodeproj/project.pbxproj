@@ -137,8 +137,6 @@
 		A2EB6F171BD18395008E7D86 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7E1BD12FD200F65412 /* SwiftyJSON.swift */; };
 		A2EB6F181BD183A4008E7D86 /* SwiftyVK.h in Headers */ = {isa = PBXBuildFile; fileRef = A2527D901BD12FD200F65412 /* SwiftyVK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A2EB6F191BD183A5008E7D86 /* SwiftyVK.h in Headers */ = {isa = PBXBuildFile; fileRef = A2527D901BD12FD200F65412 /* SwiftyVK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A2EB71DC1BD3F020008E7D86 /* SwiftyVKResources-OSX.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */; };
-		A2EB71DD1BD3F027008E7D86 /* SwiftyVKResources-iOS.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = A2527D551BD1134500F65412 /* SwiftyVKResources-iOS.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,29 +169,6 @@
 			remoteInfo = "SwiftyVKResources-iOS";
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		A2EB71D71BD3EFCD008E7D86 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = "$(SRCROOT)/Resources/Bundles";
-			dstSubfolderSpec = 0;
-			files = (
-				A2EB71DC1BD3F020008E7D86 /* SwiftyVKResources-OSX.bundle in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A2EB71DA1BD3EFFD008E7D86 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(SRCROOT)/Resources/Bundles";
-			dstSubfolderSpec = 0;
-			files = (
-				A2EB71DD1BD3F027008E7D86 /* SwiftyVKResources-iOS.bundle in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A2066AE91D9C388F0065A4D7 /* RequestInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestInstance.swift; sourceTree = "<group>"; };
@@ -539,7 +514,6 @@
 				A2EB6E961BD180DD008E7D86 /* Sources */,
 				A2EB6E981BD180DD008E7D86 /* Headers */,
 				A2EB6E991BD180DD008E7D86 /* Resources */,
-				A2EB71DA1BD3EFFD008E7D86 /* CopyFiles */,
 				A2F33E681D8F1DF900856417 /* Frameworks */,
 			);
 			buildRules = (
@@ -559,7 +533,6 @@
 				A2EB6EA31BD180E9008E7D86 /* Sources */,
 				A2EB6EA51BD180E9008E7D86 /* Headers */,
 				A2EB6EA61BD180E9008E7D86 /* Resources */,
-				A2EB71D71BD3EFCD008E7D86 /* CopyFiles */,
 				A2F33E751D8F202400856417 /* Frameworks */,
 			);
 			buildRules = (
@@ -1216,7 +1189,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.WE-St0r.SwiftyVK";
 				PRODUCT_NAME = SwiftyVK;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1267,7 +1240,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.WE-St0r.SwiftyVK";
 				PRODUCT_NAME = SwiftyVK;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1330,7 +1303,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-OSX";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.WE-St0r.SwiftyVK";
 				PRODUCT_NAME = SwiftyVK;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -1384,7 +1357,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-OSX";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.WE-St0r.SwiftyVK";
 				PRODUCT_NAME = SwiftyVK;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
