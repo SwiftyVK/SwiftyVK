@@ -96,25 +96,31 @@ class Sending_Tests: VKTestCase {
     
     
     
-    func test_send_queue() {
+    func test_limited_send() {
         Stubs.apiWith(jsonFile: "success.users.get")
+        VK.config.useSendLimit = true
         let backup = VK.config.sendLimit
-        let needSendCount = 100
+        let needSendCount = Stubs.enabled ? 10 : 100
 //        VK.config.sendLimit = needSendCount
         let exp = self.expectation(description: "ready")
         let requests = NSMutableDictionary()
         var executed = 0
+        var shouldNextExecuted = 1
         
         for n in 1...needSendCount {
             requests[n] = "~"
             
             VK.API.Users.get([VK.Arg.userIDs : "\(n)"]).send(
                 onSuccess: {response in
+                    XCTAssertEqual(n, shouldNextExecuted)
+                    shouldNextExecuted += 1
                     requests[n] = "+"
                     executed += 1
                     executed >= needSendCount ? exp.fulfill() : ()
                 },
                 onError: {error in
+                    XCTAssertEqual(n, shouldNextExecuted)
+                    shouldNextExecuted += 1
                     requests[n] = "-"
                     executed += 1
                     executed >= needSendCount ? exp.fulfill() : ()
@@ -125,8 +131,54 @@ class Sending_Tests: VKTestCase {
             VK.config.sendLimit = backup
             let results = self.getResults(requests)
             print(results.statistic)
-            XCTAssertGreaterThan(results.all.count/50, results.error.count, "Too many errors")
+            XCTAssertGreaterThan(max(results.all.count/50, 1), results.error.count, "Too many errors")
             XCTAssertTrue(results.unused.isEmpty, "\(results.unused.count) requests was not send")
+        }
+    }
+    
+    
+    
+    func test_unlimited_send() {
+        guard Stubs.enabled else {return}
+    
+        Stubs.apiWith(method: "users.get", jsonFile: "success.users.get", delay: 10)
+        Stubs.apiWith(method: "users.getFollowers", jsonFile: "success.users.get")
+
+        VK.config.useSendLimit = false
+        
+        var slowRequestIsExecuted = false
+        
+        let needFastRequestExecutions = 10
+        var fastRequestExetutedCount = 0
+        
+        let exp = self.expectation(description: "ready")
+        
+        VK.API.Users.get().send(
+            onSuccess: {response in
+                slowRequestIsExecuted = true
+            },
+            onError: {error in
+                slowRequestIsExecuted = true
+            }
+        )
+        
+        for _ in 1...needFastRequestExecutions {
+            
+            VK.API.Users.getFollowers().send(
+                onSuccess: {response in
+                    fastRequestExetutedCount += 1
+                    fastRequestExetutedCount >= needFastRequestExecutions ? exp.fulfill() : ()
+                },
+                onError: {error in
+                    fastRequestExetutedCount += 1
+                    fastRequestExetutedCount >= needFastRequestExecutions ? exp.fulfill() : ()
+                }
+            )
+        }
+        
+        self.waitForExpectations(timeout: reqTimeout*20) {_ in
+            VK.config.useSendLimit = true
+            XCTAssertFalse(slowRequestIsExecuted)
         }
     }
     
@@ -138,7 +190,7 @@ class Sending_Tests: VKTestCase {
             let exp = self.expectation(description: "ready")
             var executed = 0
             
-            for n in 1...10 {
+            for n in 1...5 {
                 let req = VK.API.Users.get([VK.Arg.userIDs : "\(n)"])
                 req.send(
                     onSuccess: {response in

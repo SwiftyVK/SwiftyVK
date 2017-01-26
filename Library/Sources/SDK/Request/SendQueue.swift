@@ -5,9 +5,9 @@ import Foundation
 internal final class SendQueue: OperationQueue {
     static let queue = SendQueue()
 
-    private let addingQueue = DispatchQueue(label: "SwiftyVK.addingQueue")
-    private let notApiQueue = DispatchQueue(label: "SwiftyVK.notApiQueue")
-    private let runLoopQueue = DispatchQueue(label: "SwiftyVK.runLoopQueue")
+    private let orderedSendQueue = DispatchQueue(label: "SwiftyVK.orderedSendQueue")
+    private let unorderedSendQueue = DispatchQueue(label: "SwiftyVK.unorderedSendQueue", attributes: .concurrent)
+    private let dropCouterQueue = DispatchQueue(label: "SwiftyVK.dropCouterQueue")
 
     private var apiCounter = 0
     private var waited = [SendTask]()
@@ -23,9 +23,9 @@ internal final class SendQueue: OperationQueue {
         maxConcurrentOperationCount = 1
         VK.Log.put("LifeCycle", "init \(self)")
 
-        runLoopQueue.async {
+        dropCouterQueue.async {
             let timer = Timer(timeInterval: 1, target: self, selector: #selector(self.dropCounter), userInfo: nil, repeats: true)
-            timer.tolerance = 0.05
+            timer.tolerance = 0.01
             RunLoop.current.add(timer, forMode: .defaultRunLoopMode)
             CFRunLoopRun()
         }
@@ -33,26 +33,33 @@ internal final class SendQueue: OperationQueue {
     
 
 
-    func add(task op: SendTask, api: Bool) {
-        
-        guard api else {
-            notApiQueue.async {
-                VK.Log.put("SendQueue", "send free \(op)")
-                op.start()
-            }
-            
-            return
+    func add(task: SendTask, api: Bool) {
+        VK.config.useSendLimit && api
+            ? sendOrdered(task: task)
+            : sendUnordered(task: task)
+    }
+    
+    
+    
+    private func sendUnordered(task: SendTask) {
+        unorderedSendQueue.async {
+            VK.Log.put("SendQueue", "send free \(task)")
+            task.start()
         }
-        
-        addingQueue.async {
+    }
+    
+    
+    
+    private func sendOrdered(task: SendTask) {
+        orderedSendQueue.async {
             if !VK.config.useSendLimit || self.apiCounter < VK.config.sendLimit {
                 self.apiCounter += 1
-                VK.Log.put("SendQueue", "\(self) send \(op)")
-                self.addOperation(op)
+                VK.Log.put("SendQueue", "\(self) send \(task)")
+                self.addOperation(task)
             }
             else {
-                self.waited.append(op)
-                VK.Log.put("SendQueue", "\(self) wait \(op)")
+                self.waited.append(task)
+                VK.Log.put("SendQueue", "\(self) wait \(task)")
             }
         }
     }
@@ -61,7 +68,7 @@ internal final class SendQueue: OperationQueue {
 
     @objc
     private func dropCounter() {
-        addingQueue.async {
+        orderedSendQueue.async {
             guard !self.waited.isEmpty || self.apiCounter > 0 else {
                 return
             }
