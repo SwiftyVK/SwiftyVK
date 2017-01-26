@@ -26,7 +26,6 @@ class VKTestCase : XCTestCase {
     
     
     override func tearDown() {
-        OHHTTPStubs.removeAllStubs()
         
         if VK.config.logToConsole {
             printSync("\n!~~~~~~~~~~!~~~~~~~~~~!~~~~~~~~~~!~~~~~~~~~~!~~~~~~~~~~!")
