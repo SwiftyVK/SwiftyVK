@@ -44,6 +44,8 @@
 		A25AE9391D9AD57E008C0AA9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE9381D9AD57E008C0AA9 /* Config.swift */; };
 		A25AE93A1D9AD583008C0AA9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE9381D9AD57E008C0AA9 /* Config.swift */; };
 		A26D88BB1DC124C200AD63CD /* WebController-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */; };
+		A26F8B811E3A78DB00273E35 /* SwiftyVKResources-OSX.bundle in Copy Bundle Resources For Cocoapods */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */; };
+		A26F8B831E3A78F400273E35 /* SwiftyVKResources-iOS.bundle in Copy Bundle Resources For Cocoapods */ = {isa = PBXBuildFile; fileRef = A2527D551BD1134500F65412 /* SwiftyVKResources-iOS.bundle */; };
 		A28368EC1D9D742700EEBE2A /* SendTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* SendTask.swift */; };
 		A28368ED1D9D742D00EEBE2A /* SendTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* SendTask.swift */; };
 		A28368EF1D9D75DC00EEBE2A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EE1D9D75DC00EEBE2A /* Result.swift */; };
@@ -170,6 +172,31 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A26F8B801E3A78C600273E35 /* Copy Bundle Resources For Cocoapods */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(SRCROOT)/Resources/Bundles";
+			dstSubfolderSpec = 0;
+			files = (
+				A26F8B811E3A78DB00273E35 /* SwiftyVKResources-OSX.bundle in Copy Bundle Resources For Cocoapods */,
+			);
+			name = "Copy Bundle Resources For Cocoapods";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A26F8B821E3A78EC00273E35 /* Copy Bundle Resources For Cocoapods */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(SRCROOT)/Resources/Bundles";
+			dstSubfolderSpec = 0;
+			files = (
+				A26F8B831E3A78F400273E35 /* SwiftyVKResources-iOS.bundle in Copy Bundle Resources For Cocoapods */,
+			);
+			name = "Copy Bundle Resources For Cocoapods";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		A2066AE91D9C388F0065A4D7 /* RequestInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestInstance.swift; sourceTree = "<group>"; };
 		A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorizator.swift; sourceTree = "<group>"; };
@@ -260,23 +287,6 @@
 		A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		A2F33E681D8F1DF900856417 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A2F33E751D8F202400856417 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		A2527D251BD1123E00F65412 = {
@@ -514,7 +524,7 @@
 				A2EB6E961BD180DD008E7D86 /* Sources */,
 				A2EB6E981BD180DD008E7D86 /* Headers */,
 				A2EB6E991BD180DD008E7D86 /* Resources */,
-				A2F33E681D8F1DF900856417 /* Frameworks */,
+				A26F8B821E3A78EC00273E35 /* Copy Bundle Resources For Cocoapods */,
 			);
 			buildRules = (
 			);
@@ -533,7 +543,7 @@
 				A2EB6EA31BD180E9008E7D86 /* Sources */,
 				A2EB6EA51BD180E9008E7D86 /* Headers */,
 				A2EB6EA61BD180E9008E7D86 /* Resources */,
-				A2F33E751D8F202400856417 /* Frameworks */,
+				A26F8B801E3A78C600273E35 /* Copy Bundle Resources For Cocoapods */,
 			);
 			buildRules = (
 			);
