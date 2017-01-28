@@ -6,4 +6,5 @@ coverage:
   ignore:
     - Example
     - Tests
-    - Library/API
+    - Library/Sources/API
+    - Library/Sources/Extensions
