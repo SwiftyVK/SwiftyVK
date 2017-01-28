@@ -29,6 +29,9 @@
          location = "group:Example/../.travis.yml">
       </FileRef>
       <FileRef
+         location = "group:Library/../.codecov.yml">
+      </FileRef>
+      <FileRef
          location = "group:Example/../.swift-version">
       </FileRef>
       <FileRef
