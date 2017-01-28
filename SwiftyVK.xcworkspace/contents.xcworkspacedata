@@ -5,9 +5,6 @@
       location = "group:LICENSE">
    </FileRef>
    <FileRef
-      location = "group:README.md">
-   </FileRef>
-   <FileRef
       location = "group:Library/SwiftyVK.xcodeproj">
    </FileRef>
    <FileRef
@@ -15,7 +12,10 @@
    </FileRef>
    <Group
       location = "container:"
-      name = "Suppoting">
+      name = "Supporting">
+      <FileRef
+         location = "group:README.md">
+      </FileRef>
       <FileRef
          location = "group:SwiftyVK.podspec">
       </FileRef>
