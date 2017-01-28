@@ -14,7 +14,7 @@ class Captcha_Tests: XCTestCase {
         let exp = expectation(description: "ready")
         Stubs.apiWith(method: "captcha.force", jsonFile: "success.users.get", needCaptcha: true)
         Stubs.Autorization.success()
-        Stubs.Captcha.success(caller: self)
+        Stubs.Captcha.success(caller: XCTestCase())
         
         var req = VK.API.custom(method: "captcha.force")
         req.maxAttempts = 2
@@ -35,18 +35,19 @@ class Captcha_Tests: XCTestCase {
     
     
     func test_wrong_answer() {
-        let exp = expectation(description: "ready")
         Stubs.apiWith(method: "captcha.force", jsonFile: "success.users.get", needCaptcha: true)
         Stubs.Autorization.success()
-        Stubs.Captcha.failed(caller: self)
         
+        Stubs.Captcha.failed(caller: XCTestCase())
+        
+        let exp = expectation(description: "ready")
         var req = VK.API.custom(method: "captcha.force")
         req.maxAttempts = 2
         
         req.send(
             onSuccess: {response in
-                XCTFail("Unexpected response: \(response)")
                 exp.fulfill()
+                XCTFail("Unexpected response: \(response)")
             },
             onError: {error in
                 exp.fulfill()

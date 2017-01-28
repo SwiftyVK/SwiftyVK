@@ -226,7 +226,6 @@ struct Stubs {
                     controller.controlTextDidEndEditing(Notification(name: Notification.Name("")))
                 #elseif os(iOS)
                     _ = controller.textFieldShouldReturn(UITextField(frame: .zero))
-                    controller.viewDidDisappear(true)
                 #endif
                 return true
             }

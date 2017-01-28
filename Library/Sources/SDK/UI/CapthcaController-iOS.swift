@@ -51,6 +51,12 @@
             textField.delegate = self
             textField.becomeFirstResponder()
             super.viewWillAppear(animated)
+        }
+        
+        
+        
+        override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
             delegate.didAppear()
         }
         
