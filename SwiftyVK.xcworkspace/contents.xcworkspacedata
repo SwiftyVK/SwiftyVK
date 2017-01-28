@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:SwiftyVK.podspec">
-   </FileRef>
-   <FileRef
       location = "group:LICENSE">
    </FileRef>
    <FileRef
@@ -16,4 +13,29 @@
    <FileRef
       location = "group:Example/Example.xcodeproj">
    </FileRef>
+   <Group
+      location = "container:"
+      name = "Suppoting">
+      <FileRef
+         location = "group:SwiftyVK.podspec">
+      </FileRef>
+      <FileRef
+         location = "group:Example/../Package.swift">
+      </FileRef>
+      <FileRef
+         location = "group:Library/.swiftlint.yml">
+      </FileRef>
+      <FileRef
+         location = "group:Example/../.travis.yml">
+      </FileRef>
+      <FileRef
+         location = "group:Example/../.swift-version">
+      </FileRef>
+      <FileRef
+         location = "group:Library/../.gitignore">
+      </FileRef>
+      <FileRef
+         location = "group:Example/Cartfile.private">
+      </FileRef>
+   </Group>
 </Workspace>
