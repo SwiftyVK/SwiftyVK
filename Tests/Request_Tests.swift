@@ -96,6 +96,30 @@ class Sending_Tests: VKTestCase {
     
     
     
+    func test_timeout_error() {
+        Stubs.apiWith(jsonFile: "success.users.get", maxCalls: VK.config.maxAttempts, delay: 5)
+        let exp = expectation(description: "ready")
+        
+        var req = VK.API.Users.get()
+        req.timeout = 1
+        req.maxAttempts = 1
+        
+        req.send(
+            onSuccess: {response in
+                XCTFail("Unexpected response: \(response)")
+                exp.fulfill()
+            },
+            onError: {error in
+                XCTAssertEqual(error._code, -1001)
+                exp.fulfill()
+            }
+        )
+        
+        waitForExpectations(timeout: reqTimeout*2) {_ in}
+    }
+    
+    
+    
     func test_limited_send() {
         Stubs.apiWith(jsonFile: "success.users.get")
         VK.config.useSendLimit = true

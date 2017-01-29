@@ -257,17 +257,21 @@ struct Stubs {
             
             Stubs.apiWith(method: "messages.getLongPollServer", jsonFile: "success.messages.getLongPollServer")
             
-            var emptyStub: OHHTTPStubsDescriptor!
-            
-            emptyStub = stub(condition: isHost("fakeLongPoll.vk.com")) { _ in
+            _ = stub(condition: isHost("fakeLongPoll.vk.com")) { _ in
+                var emptyStub: OHHTTPStubsDescriptor!
                 
-                OHHTTPStubs.removeStub(emptyStub)
-
-                _ = stub(condition: isHost("fakeLongPoll.vk.com")) { _ in
-                    return Simulates.success(filePath: fullResponsePath, delay: 0)
+                emptyStub = stub(condition: isHost("fakeLongPoll.vk.com")) { _ in
+                    
+                    OHHTTPStubs.removeStub(emptyStub)
+                    
+                    _ = stub(condition: isHost("fakeLongPoll.vk.com")) { _ in
+                        return Simulates.success(filePath: fullResponsePath, delay: 5)
+                    }
+                    
+                    return Simulates.success(filePath: emptyResponsePath, delay: 5)
                 }
                 
-                return Simulates.success(filePath: emptyResponsePath, delay: 0)
+                return Simulates.success(filePath: emptyResponsePath, delay: 35)
             }
         }
     }
