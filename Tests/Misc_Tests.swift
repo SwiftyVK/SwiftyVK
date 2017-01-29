@@ -25,4 +25,21 @@ class Components_Tests: VKTestCase {
         XCTAssertEqual(rawMessage, encodedMesage.removingPercentEncoding)
         print(encodedMesage)
     }
+    
+    
+
+    func test_scope_parsing() {
+        let intScopes = 140492031
+        let stringScopes = "groups,ads,questions,email,docs,notifications,pages,audio,notify,messages,stats,wall,market,offline,offers,photos,video,notes,friends,status,"
+        
+        let scopesFromSet: Set = [VK.Scope.ads, .audio, .docs, .email, .friends, .groups, .market, .messages, .notes, .notifications, .notify, .offers, .offline, .pages, .photos, .questions, .stats, .status, .video, .wall]
+        let scopesFromInt = VK.Scope.create(from: intScopes)
+        let scopesFromString = VK.Scope.create(from: stringScopes)
+        
+        XCTAssertEqual(Set<VK.Scope>(), scopesFromSet.subtracting(scopesFromInt))
+        XCTAssertEqual(Set<VK.Scope>(), scopesFromSet.subtracting(scopesFromString))
+
+        XCTAssertEqual(VK.Scope.toInt(scopesFromSet), intScopes)
+        XCTAssertEqual(VK.Scope.toString(scopesFromSet), stringScopes)
+    }
 }

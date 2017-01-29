@@ -6,11 +6,11 @@
 	<dict>
 		<key>Base.lproj/CaptchaView-iOS.nib</key>
 		<data>
-		nZkwwf+5gw/MrUNoYYz+6mXfFh4=
+		97sazj5mR2rLChzw1QQKPc39m+o=
 		</data>
 		<key>Base.lproj/WebView-iOS.nib</key>
 		<data>
-		LX3LGxCg0nTixlN6ubBJgoF5b2I=
+		yvsJveRnZat+30Kfx9K1htcufmk=
 		</data>
 		<key>be.lproj/CaptchaView-iOS.strings</key>
 		<dict>
@@ -91,22 +91,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			nZkwwf+5gw/MrUNoYYz+6mXfFh4=
+			97sazj5mR2rLChzw1QQKPc39m+o=
 			</data>
 			<key>hash2</key>
 			<data>
-			73Ao5Pb0mOiBtCDlGH7cYt9LjRnM28vG+uZTC4sbl9E=
+			GO4SE0BlBzIC8sJBC9MoEw7RxhJN/vMcnOIJ1mF5Tz8=
 			</data>
 		</dict>
 		<key>Base.lproj/WebView-iOS.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LX3LGxCg0nTixlN6ubBJgoF5b2I=
+			yvsJveRnZat+30Kfx9K1htcufmk=
 			</data>
 			<key>hash2</key>
 			<data>
-			JYH/pYjJpS2tX/nvGq2tybUkXIQew0pH0W3CMeIC7X4=
+			aC1Y9QuUkgMR76fCpjhC+Z2Uzsvhl4tG7nr2o38xwLY=
 			</data>
 		</dict>
 		<key>be.lproj/CaptchaView-iOS.strings</key>

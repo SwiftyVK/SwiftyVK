@@ -24,6 +24,7 @@ extension VK {
         case market        = 134217728
         
         
+
         public var description: String {return Scope.toString([self])}
         
         
@@ -77,8 +78,9 @@ extension VK {
             if permissions.contains("notifications") {result.insert(.notifications)}
             if permissions.contains("stats") {result.insert(.stats)}
             if permissions.contains("ads") {result.insert(.ads)}
-            if permissions.contains("notify") {result.insert(.notify)}
             if permissions.contains("offers") {result.insert(.offers)}
+            if permissions.contains("offline") {result.insert(.offline)}
+            if permissions.contains("market") {result.insert(.market)}
             
             return result
         }
@@ -105,6 +107,7 @@ extension VK {
                 case .audio         : result += "audio,"
                 case .video         : result += "video,"
                 case .docs          : result += "docs,"
+                case .notes         : result += "notes,"
                 case .pages         : result += "pages,"
                 case .status        : result += "status,"
                 case .offers        : result += "offers,"
@@ -117,7 +120,7 @@ extension VK {
                 case .stats         : result += "stats,"
                 case .ads           : result += "ads,"
                 case .offline       : result += "offline,"
-                default : break
+                case .market        : result += "market,"
                 }
             }
             
