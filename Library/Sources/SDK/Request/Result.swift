@@ -12,6 +12,7 @@ internal struct Result: CustomStringConvertible {
             VK.Log.put(request, "result contained \(error)")
         }
     }
+    
     internal private(set) var response: JSON? {
         didSet {error != nil && response != nil ? error = nil : ()}
     }

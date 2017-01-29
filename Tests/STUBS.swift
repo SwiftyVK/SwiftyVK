@@ -39,8 +39,10 @@ class ReqClock : NSObject {
 
 
 struct Stubs {
+    
     static var enabled : Bool {return runInCI() || forceEnabled}
     static let forceEnabled = true
+    
     
     
     static func apiWith(
@@ -141,8 +143,8 @@ struct Stubs {
     
     
     static func uploadServerWith(jsonFile: String, dataSize: Int) {
-        guard enabled else {return}
         
+        guard enabled else {return}
         
         guard let filePath = Bundle(for:VKTestCase.self).path(forResource: jsonFile, ofType: "json") else {
             XCTFail("Can't find the \(jsonFile).json file")
@@ -165,6 +167,7 @@ struct Stubs {
     
     
     struct Autorization {
+        
         static func success() {
             authWith(redirect: "https://oauth.vk.com/blank.html#access_token=1234567890&expires_in=0&user_id=0")
         }
@@ -199,9 +202,8 @@ struct Stubs {
     }
     
     
+    
     struct Captcha {
-        
-        
         
         static func success(caller: XCTestCase) {
             captchaWith(caller: caller, captcha: "1234567890")
@@ -231,6 +233,45 @@ struct Stubs {
             }
         }
     }
+    
+    
+    
+    struct LongPoll {
+        
+        static func normalFlow() {
+            guard enabled else {return}
+            
+            let emptyResponse = "success.longPollEmptyResponse"
+            
+            guard let emptyResponsePath = Bundle(for:VKTestCase.self).path(forResource: emptyResponse, ofType: "json") else {
+                XCTFail("Can't find the \(emptyResponse).json file")
+                return
+            }
+            
+            let fullResponse = "success.longPollFullResponse"
+            
+            guard let fullResponsePath = Bundle(for:VKTestCase.self).path(forResource: fullResponse, ofType: "json") else {
+                XCTFail("Can't find the \(fullResponse).json file")
+                return
+            }
+            
+            Stubs.apiWith(method: "messages.getLongPollServer", jsonFile: "success.messages.getLongPollServer")
+            
+            var emptyStub: OHHTTPStubsDescriptor!
+            
+            emptyStub = stub(condition: isHost("fakeLongPoll.vk.com")) { _ in
+                
+                OHHTTPStubs.removeStub(emptyStub)
+
+                _ = stub(condition: isHost("fakeLongPoll.vk.com")) { _ in
+                    return Simulates.success(filePath: fullResponsePath, delay: 0)
+                }
+                
+                return Simulates.success(filePath: emptyResponsePath, delay: 0)
+            }
+        }
+    }
+
     
     
     private struct Simulates {
