@@ -97,10 +97,10 @@ class Sending_Tests: VKTestCase {
     
     
     func test_timeout_error() {
-        Stubs.apiWith(jsonFile: "success.users.get", maxCalls: VK.config.maxAttempts, delay: 5)
+        Stubs.apiWith(method: "users.report", jsonFile: "success.users.get", delay: 50)
         let exp = expectation(description: "ready")
         
-        var req = VK.API.Users.get()
+        var req = VK.API.Users.report()
         req.timeout = 1
         req.maxAttempts = 1
         
