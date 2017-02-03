@@ -193,13 +193,20 @@ internal class Token: NSObject, NSCoding {
     func save() {
         Token.removeSavedData()
 
-        guard let keychainQuery = (Token.keychainParams.mutableCopy() as? NSMutableDictionary) else {return}
+        guard let keychainQuery = (Token.keychainParams.mutableCopy() as? NSMutableDictionary) else {
+            VK.Log.put("Token", "not saved to keychain. Query is empty")
+            return
+        }
         
         keychainQuery.setObject(NSKeyedArchiver.archivedData(withRootObject: self), forKey: NSString(format: kSecValueData))
 
-        if SecItemAdd(keychainQuery, nil) == .allZeros {
-            VK.Log.put("Token", "saved to keychain")
+        let keychainCode = SecItemAdd(keychainQuery, nil)
+        
+        guard keychainCode == .allZeros else {
+            VK.Log.put("Token", "not saved to keychain with error code \(keychainCode)")
         }
+        
+        VK.Log.put("Token", "saved to keychain")
     }
 
 
