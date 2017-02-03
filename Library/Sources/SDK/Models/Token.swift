@@ -204,6 +204,7 @@ internal class Token: NSObject, NSCoding {
         
         guard keychainCode == .allZeros else {
             VK.Log.put("Token", "not saved to keychain with error code \(keychainCode)")
+            return
         }
         
         VK.Log.put("Token", "saved to keychain")
