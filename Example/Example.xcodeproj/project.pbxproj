@@ -1042,7 +1042,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-Example-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-Example-iOS2";
 				PRODUCT_NAME = "~SwiftyVK~";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1088,7 +1088,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-Example-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK-Example-iOS2";
 				PRODUCT_NAME = "~SwiftyVK~";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
