@@ -1,6 +1,7 @@
-### New Issue Checklist
+🚫IMPORTANT! If this template is not filled out your issue **will** be closed with no comment. Please fill template and remove this line.🚫
 
-🚫 If this template is not filled out your issue **will** be closed with no comment. 🚫
+
+### New Issue Checklist
 
 * [ ] I have looked at the [README.md](./README.md)
 * [ ] I have looked at the [Example project](./Example)
