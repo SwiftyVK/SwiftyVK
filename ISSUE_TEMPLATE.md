@@ -12,10 +12,10 @@
 -------------------------|-------------------------------------|
  Platform                | e.g. ios/osx
  Platform Version        | e.g. 8.0
-  Swift Version         | e.g. 3.0
- SwiftyVK Version         | e.g. 2.0.0
+  Swift Version          | e.g. 3.0
+ SwiftyVK Version        | e.g. 2.0.0
  Integration Method      | e.g. carthage/cocoapods/manually
  
 ### Issue Description
 
-⚠️ Replace this with the description of your issue. ⚠️ 
+Place description of your issue here
