@@ -63,7 +63,7 @@ internal struct Result: CustomStringConvertible {
         if response != nil {
             return "result with response"
         }
-        else if let error = error as? NSError {
+        else if let error = error as NSError? {
             return "result with: \(error)"
         }
         else if let error = error {

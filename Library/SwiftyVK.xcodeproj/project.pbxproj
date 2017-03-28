@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		A21F10B81DCDFCF6003EFDDC /* SwiftyVK */ = {
+		A21F10B81DCDFCF6003EFDDC /* LintAllTargets */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = A21F10BB1DCDFCF6003EFDDC /* Build configuration list for PBXAggregateTarget "SwiftyVK" */;
+			buildConfigurationList = A21F10BB1DCDFCF6003EFDDC /* Build configuration list for PBXAggregateTarget "LintAllTargets" */;
 			buildPhases = (
 				A21F10C01DCDFD1A003EFDDC /* SwiftLint */,
 				A20C36471DE04A16004AA642 /* NeedLess */,
@@ -18,7 +18,7 @@
 				A21F10BF1DCDFD01003EFDDC /* PBXTargetDependency */,
 				A21F10BD1DCDFCFE003EFDDC /* PBXTargetDependency */,
 			);
-			name = SwiftyVK;
+			name = LintAllTargets;
 			productName = SwiftyVK;
 		};
 /* End PBXAggregateTarget section */
@@ -562,7 +562,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				TargetAttributes = {
 					A21F10B81DCDFCF6003EFDDC = {
 						CreatedOnToolsVersion = 8.1;
@@ -604,7 +604,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A21F10B81DCDFCF6003EFDDC /* SwiftyVK */,
+				A21F10B81DCDFCF6003EFDDC /* LintAllTargets */,
 				A2EB6EA71BD180E9008E7D86 /* SwiftyVK-OSX */,
 				A2EB6E9A1BD180DD008E7D86 /* SwiftyVK-iOS */,
 				A2527D4A1BD1130D00F65412 /* SwiftyVKResources-OSX */,
@@ -1381,7 +1381,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A21F10BB1DCDFCF6003EFDDC /* Build configuration list for PBXAggregateTarget "SwiftyVK" */ = {
+		A21F10BB1DCDFCF6003EFDDC /* Build configuration list for PBXAggregateTarget "LintAllTargets" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A21F10B91DCDFCF6003EFDDC /* Debug */,
