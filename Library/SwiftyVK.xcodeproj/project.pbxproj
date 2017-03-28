@@ -43,6 +43,8 @@
 		A2527E3E1BD1357000F65412 /* WebView-iOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E231BD1343F00F65412 /* WebView-iOS.xib */; };
 		A25AE9391D9AD57E008C0AA9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE9381D9AD57E008C0AA9 /* Config.swift */; };
 		A25AE93A1D9AD583008C0AA9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE9381D9AD57E008C0AA9 /* Config.swift */; };
+		A2666F0D1E8ADE6100434762 /* ApiMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2666F0C1E8ADE6100434762 /* ApiMethods.swift */; };
+		A2666F0E1E8ADF0900434762 /* ApiMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2666F0C1E8ADE6100434762 /* ApiMethods.swift */; };
 		A26D88BB1DC124C200AD63CD /* WebController-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */; };
 		A26F8B811E3A78DB00273E35 /* SwiftyVKResources-OSX.bundle in Copy Bundle Resources For Cocoapods */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */; };
 		A26F8B831E3A78F400273E35 /* SwiftyVKResources-iOS.bundle in Copy Bundle Resources For Cocoapods */ = {isa = PBXBuildFile; fileRef = A2527D551BD1134500F65412 /* SwiftyVKResources-iOS.bundle */; };
@@ -275,6 +277,7 @@
 		A2527E361BD134EF00F65412 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A2527E381BD134F000F65412 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = "ru.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A25AE9381D9AD57E008C0AA9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		A2666F0C1E8ADE6100434762 /* ApiMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiMethods.swift; sourceTree = "<group>"; };
 		A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WebController-iOS.swift"; sourceTree = "<group>"; };
 		A28368EB1D9D742700EEBE2A /* SendTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendTask.swift; sourceTree = "<group>"; };
 		A28368EE1D9D75DC00EEBE2A /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -328,6 +331,7 @@
 		A2527D5D1BD12FD200F65412 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				A2666F0C1E8ADE6100434762 /* ApiMethods.swift */,
 				A2527D5F1BD12FD200F65412 /* API.swift */,
 				A2527D5E1BD12FD200F65412 /* Account.swift */,
 				A2527D601BD12FD200F65412 /* Audio.swift */,
@@ -731,6 +735,7 @@
 				A2EB6F0B1BD18395008E7D86 /* Scope.swift in Sources */,
 				A20FF11A1BEB6BB5009FBE3D /* Authorizator.swift in Sources */,
 				A24D10901C56A49E008263B0 /* Market.swift in Sources */,
+				A2666F0E1E8ADF0900434762 /* ApiMethods.swift in Sources */,
 				A2EB6F0C1BD18395008E7D86 /* Token.swift in Sources */,
 				A2EB6F0E1BD18395008E7D86 /* UrlFabric.swift in Sources */,
 				A2B4ECB11DCA4FB7009435B6 /* CapthcaController-iOS.swift in Sources */,
@@ -765,6 +770,7 @@
 				A2EB6EC91BD18389008E7D86 /* Messages.swift in Sources */,
 				A2EB6ECA1BD18389008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6ECB1BD18389008E7D86 /* Notes.swift in Sources */,
+				A2666F0D1E8ADE6100434762 /* ApiMethods.swift in Sources */,
 				A236B2B91DB68E4F002376C8 /* WebController-OSX.swift in Sources */,
 				A25AE9391D9AD57E008C0AA9 /* Config.swift in Sources */,
 				A2EB6ECC1BD18389008E7D86 /* Notifacations.swift in Sources */,
