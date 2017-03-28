@@ -26,6 +26,10 @@ opt_in_rules:
   - file_header
   - first_where
   - prohibited_super_call
+  - fatal_error_message
+  - unused_optional_binding
+  # - implicitly_unwrapped_optional
+  # - explicit_type_interface
   # - operator_usage_whitespace
   # - number_separator
   # - missing_docs
