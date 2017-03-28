@@ -4,6 +4,7 @@ public protocol Method: RawRepresentable {
 }
 
 public struct Api {
+    static var account = Account.self
 }
 
 public struct _VKAPI {
