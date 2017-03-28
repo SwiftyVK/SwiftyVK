@@ -5,7 +5,8 @@ public protocol Method: RawRepresentable {
 
 public struct Api {
     static let account = Account.self
-    static let audio = Audio.search
+    static let audio = Audio.self
+    static let board = Board.self
 }
 
 public struct _VKAPI {
