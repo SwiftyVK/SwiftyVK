@@ -6,11 +6,11 @@
 	<dict>
 		<key>Resources/Base.lproj/CaptchaView-OSX.nib</key>
 		<data>
-		6HfDUr9jhBxeFkb9P9S01pcQELA=
+		3icvBWZSRTgEKDNfoWj531FtbME=
 		</data>
 		<key>Resources/Base.lproj/WebView-OSX.nib</key>
 		<data>
-		c8kp5/FzNvIDTvHl3GVUVZDnVlo=
+		AcI3fnFXwZNJ6MVwkrFX692LzMA=
 		</data>
 		<key>Resources/be.lproj/CaptchaView-OSX.strings</key>
 		<dict>
@@ -163,22 +163,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6HfDUr9jhBxeFkb9P9S01pcQELA=
+			3icvBWZSRTgEKDNfoWj531FtbME=
 			</data>
 			<key>hash2</key>
 			<data>
-			jL9NFAKbGfshRqMbZpNPIul83cMpNUAKbX0c5Q/VwzM=
+			qy+LG+zi9c0lfTSNzQ01hB5GwVjtc97srTcZDITBAy8=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/WebView-OSX.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			c8kp5/FzNvIDTvHl3GVUVZDnVlo=
+			AcI3fnFXwZNJ6MVwkrFX692LzMA=
 			</data>
 			<key>hash2</key>
 			<data>
-			hPtJrJE2LujVJIPOhFmNMvNctYNSlkDDfwPMbAOFj+Y=
+			xShciQz1h6DIdFxChlwssh4LUlwLPg/QbeXxVByF4K8=
 			</data>
 		</dict>
 		<key>Resources/be.lproj/CaptchaView-OSX.strings</key>

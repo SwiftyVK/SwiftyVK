@@ -72,7 +72,7 @@
             VK.Log.put("WebController", "load \(urlStr)")
             
             DispatchQueue.main.async {
-                self.webView?.mainFrame.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 3))
+                self.webView?.mainFrame.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10))
             }
         }
         
@@ -135,9 +135,11 @@
             delegate?.handle(response: response)
         }
         
-        
-        
         func webView(_ sender: WebView!, didFailLoadWithError error: Error!, for frame: WebFrame!) {
+            delegate?.handle(error: .failedAuthorization)
+        }
+        
+        func webView(_ sender: WebView!, didFailProvisionalLoadWithError error: Error!, for frame: WebFrame!) {
             delegate?.handle(error: .failedAuthorization)
         }
     }

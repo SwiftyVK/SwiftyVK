@@ -61,10 +61,7 @@
             
             guard let urlStr = self.url, let url = URL(string: urlStr) else {return}
             VK.Log.put("WebController", "load \(urlStr)")
-            
-            DispatchQueue.main.sync {
-                self.webView?.loadRequest(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 3))
-            }
+            webView?.loadRequest(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10))
         }
         
         
