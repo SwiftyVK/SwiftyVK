@@ -4,7 +4,8 @@ public protocol Method: RawRepresentable {
 }
 
 public struct Api {
-    static var account = Account.self
+    static let account = Account.self
+    static let audio = Audio.search
 }
 
 public struct _VKAPI {
