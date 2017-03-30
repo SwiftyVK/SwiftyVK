@@ -24,6 +24,7 @@ install:
   - gem install xcpretty-travis-formatter
   - cd Example
   - carthage update --platform ios,mac
+  - cd ..
   
 script:
   - set -o pipefail
