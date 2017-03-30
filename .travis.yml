@@ -13,16 +13,20 @@ env:
   - IOS_SCHEME="SwiftyVK-Example-iOS"
   - IOS_DESTANATION="platform=iOS Simulator,OS=10.3,name=iPhone 7 Plus"
 
-
 before_install:
-- gem install xcpretty-travis-formatter
-- cd Example
-- carthage update --platform ios,mac
-- ../.install_swiftlint.sh && cd ../
+  - pwd
+  - ls -la
+  - .install_swiftlint.sh
+  - swiftlint lint --path ./Library --config ./Library/.swiftlint.yml --strict
 
+
+install:
+  - gem install xcpretty-travis-formatter
+  - cd Example
+  - carthage update --platform ios,mac
+  
 script:
   - set -o pipefail
-  - swiftlint lint --path ./Library --config ./Library/.swiftlint.yml --strict
   - xcodebuild -workspace SwiftyVK.xcworkspace -scheme "$IOS_SCHEME" -destination "$IOS_DESTANATION" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" -enableCodeCoverage YES build-for-testing test-without-building | xcpretty -f `xcpretty-travis-formatter`
   - xcodebuild -workspace "$WORKSPACE" -scheme "$MAC_SCHEME" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_TESTABILITY=YES -enableCodeCoverage YES build-for-testing test-without-building | xcpretty -f `xcpretty-travis-formatter`
 
