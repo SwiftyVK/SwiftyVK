@@ -7,6 +7,7 @@ public struct Api {
     static let account = Account.self
     static let audio = Audio.self
     static let board = Board.self
+    static let database = Database.self
 }
 
 public struct _VKAPI {
