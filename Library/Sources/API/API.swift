@@ -1,15 +1,10 @@
-// swiftlint:disable type_name
 public protocol Method: RawRepresentable {
     associatedtype RawValue = String
 }
 
-public struct Api {
-    static let account = Account.self
-    static let audio = Audio.self
-    static let board = Board.self
-    static let database = Database.self
-}
+public struct Api {}
 
+// swiftlint:disable type_name
 public struct _VKAPI {
   /**
   A universal method for calling a sequence of other methods while saving and filtering interim results. More - https://vk.com/dev/execute
