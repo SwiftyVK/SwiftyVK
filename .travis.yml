@@ -16,7 +16,7 @@ env:
 before_install:
   - pwd
   - ls -la
-  - .install_swiftlint.sh
+  - ./.install_swiftlint.sh
   - swiftlint lint --path ./Library --config ./Library/.swiftlint.yml --strict
 
 
