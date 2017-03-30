@@ -3,6 +3,7 @@ public extension Api {
         case get = "docs.get"
         case getById = "docs.getById"
         case getUploadServer = "docs.getUploadServer"
+        case getUploadServer = "docs.getUploadServer"
         case getWallUploadServer = "docs.getWallUploadServer"
         case save = "docs.save"
         case delete = "docs.delete"
