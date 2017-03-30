@@ -2,11 +2,7 @@
     import Cocoa
     import WebKit
     
-    
-    
     private let webViewName = Resources.withSuffix("WebView")
-    
-    
     
     internal final class WebController: NSWindowController, WebFrameLoadDelegate {
         
@@ -15,8 +11,6 @@
         private var parentWindow: NSWindow?
         private weak var delegate: WebPresenter!
         private var url: String?
-        
-        
         
         class func create(withDelegate delegate: WebPresenter) -> WebController? {
             
@@ -36,8 +30,6 @@
                 return controller
             }
         }
-        
-        
         
         override func awakeFromNib() {
             super.awakeFromNib()
@@ -60,8 +52,6 @@
             self.webView?.setMaintainsBackForwardList(true)
         }
         
-        
-        
         func load(url: String) {
             
             if self.url == nil {
@@ -75,8 +65,6 @@
                 self.webView?.mainFrame.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10))
             }
         }
-        
-        
         
         func expand() {
             guard let window = window else {return}
@@ -100,8 +88,6 @@
             window.setFrame(NSRect(x: newX, y: newY, width: newWidth, height: newHeight), display: true, animate: true)
         }
         
-        
-        
         func goBack() {
             VK.Log.put("WebController", "goBack")
             
@@ -109,8 +95,6 @@
                 self.webView?.goBack()
             }
         }
-        
-        
         
         func hide() {
             guard let window = window else {return}
@@ -126,8 +110,6 @@
                 self.delegate?.finish()
             }
         }
-        
-        
         
         // MARK: - frameLoadDelegate protocol
         func webView(_ sender: WebView!, didFinishLoadFor frame: WebFrame!) {

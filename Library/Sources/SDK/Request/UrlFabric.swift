@@ -1,24 +1,16 @@
 import Foundation
 
-
-
 private let boundary = "(======SwiftyVK======)"
 private let methodUrl = "https://api.vk.com/method/"
 
-
-
 ///NSURLRequest fabric
 internal struct UrlFabric {
-    
-    
     
     private static var emptyUrl: URL {
         // swiftlint:disable force_unwrapping
         return URL(string: methodUrl)!
         // swiftlint:enable force_unwrapping
     }
-
-
 
     internal static func createWith(config: RequestConfig) -> URLRequest {
         var request: URLRequest
@@ -38,16 +30,12 @@ internal struct UrlFabric {
         return request
     }
 
-
-
     private static func createWith(url: String) -> URLRequest {
         var req = URLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
         req.httpMethod = "GET"
         req.url = URL(string: url)
         return req
     }
-
-
 
     private static func craeteWith(apiMethod: String, parameters: [VK.Arg: String], httpMethod: HttpMethod) -> URLRequest {
         let query = createQueryFrom(parameters: parameters)
@@ -67,8 +55,6 @@ internal struct UrlFabric {
 
         return req
     }
-
-
 
     private static func createWith(media: [Media], url: String) -> URLRequest {
         var req = URLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
@@ -106,8 +92,6 @@ internal struct UrlFabric {
         req.httpBody = body as Data
         return req
     }
-    
-    
     
     internal static func createQueryFrom(parameters: [VK.Arg : String]) -> String {
         let paramArray = NSMutableArray()

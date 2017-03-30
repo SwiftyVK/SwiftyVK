@@ -5,7 +5,6 @@ import Foundation
     import Cocoa
 #endif
 
-
 ///Delegate to the SwiftyVK
 public protocol VKDelegate: class {
     /**Called when SwiftyVK need autorization permissions
@@ -49,8 +48,6 @@ public struct VK {
     internal weak static var delegate: VKDelegate?
     public private(set) static var appID: String?
 
-
-
     /**
      Initialize library with identifier and application delegate
      - parameter appID: application ID
@@ -63,8 +60,6 @@ public struct VK {
         VK.Log.put("Global", "SwiftyVK configured")
     }
 
-
-
     /**
      Gets authenticate token.
      * If the token is already stored in the file, then the authentication takes place in the background
@@ -73,8 +68,6 @@ public struct VK {
     public static func logIn() {
         _ = Authorizator.authorize()
     }
-    
-    
     
     /**
      Creates a token from string
@@ -85,15 +78,11 @@ public struct VK {
         Authorizator.authorizeWith(rawToken: rawToken, expiresIn: expiresIn)
     }
 
-
-
     #if os(iOS)
     public static func process(url: URL, sourceApplication app: String?) {
         Authorizator.recieveTokenURL(url: url, fromApp: app)
     }
     #endif
-
-
 
     public static func logOut() {
         LP.stop()
@@ -126,8 +115,6 @@ extension VK {
 		return lhs.rawValue < rhs.rawValue
 	}
     }
-    
-    
 
     public static var state: States {
         guard VK.delegate != nil && VK.appID != nil else {

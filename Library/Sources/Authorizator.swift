@@ -4,17 +4,11 @@
     import UIKit
 #endif
 
-
-
 private let redirectUrl = "https://oauth.vk.com/blank.html"
 private let webAuthorizeUrl = "https://oauth.vk.com/authorize?"
 private let appAuthorizeUrl = "vkauthorize://authorize?"
 
-
-
 internal struct Authorizator {
-
-
 
     fileprivate static var paramsUrl: String? {
         guard let appId = VK.appID, let delegate = VK.delegate else {
@@ -29,8 +23,6 @@ internal struct Authorizator {
 
     fileprivate static var error: AuthError?
 
-
-
     internal static func authorize() -> AuthError? {
         error = nil
 
@@ -43,13 +35,9 @@ internal struct Authorizator {
         return error
     }
     
-    
-    
     internal static func authorizeWith(rawToken: String, expiresIn: Int) {
         _ = Token(fromRawToken: rawToken, expiresIn: expiresIn)
     }
-
-
 
     internal static func validate(withUrl url: String) -> AuthError? {
         error = nil
@@ -64,8 +52,6 @@ internal struct Authorizator {
 
         return error
     }
-
-
 
     private static func start() {
         if canAuthorizeWithVkApp {
@@ -84,8 +70,6 @@ internal struct Authorizator {
             }
         }
     }
-
-
 
     fileprivate static func startWithWeb() {
         guard let paramsUrl = paramsUrl else {
@@ -111,8 +95,6 @@ internal struct Authorizator {
     private typealias IOSAuthorizator = Authorizator
     extension IOSAuthorizator {
 
-
-
         internal static var canAuthorizeWithVkApp: Bool {
             guard let appId = VK.appID, let url = URL(string: "vk\(appId)://") else {
                 return false
@@ -120,8 +102,6 @@ internal struct Authorizator {
             
             return UIApplication.shared.canOpenURL(url)
         }
-
-
 
         fileprivate static func startWithApp() {
             guard let paramsUrl = paramsUrl, let url = URL(string: appAuthorizeUrl + paramsUrl) else {
@@ -132,8 +112,6 @@ internal struct Authorizator {
             Thread.sleep(forTimeInterval: 1)
             startWithWeb()
         }
-
-
 
         internal static func recieveTokenURL(url: URL, fromApp app: String?) {
             guard let appId = VK.appID else {

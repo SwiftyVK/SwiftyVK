@@ -1,11 +1,7 @@
 #if os(iOS)
     import UIKit
     
-    
-    
     private let captchaViewName = Resources.withSuffix("CaptchaView")
-    
-    
     
     class CaptchaController: UIViewController, UITextFieldDelegate {
         
@@ -14,7 +10,6 @@
         private var parentView: UIViewController!
         private weak var delegate: CaptchaPresenter!
         private var image: UIImage?
-        
         
         static func create(data: Data, delegate: CaptchaPresenter) -> CaptchaController? {
             
@@ -36,13 +31,9 @@
             return controller
         }
         
-        
-        
         func setText(to text: String) {
             textField.text = text
         }
-        
-        
         
         override func viewWillAppear(_ animated: Bool) {
             imageView?.layer.cornerRadius = 15
@@ -53,22 +44,16 @@
             super.viewWillAppear(animated)
         }
         
-        
-        
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
             delegate.didAppear()
         }
-        
-        
         
         override func viewDidDisappear(_ animated: Bool) {
             delegate?.finish(answer: nil)
             super.viewDidDisappear(animated)
             delegate = nil
         }
-        
-        
         
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
             self.parentView?.dismiss(animated: true, completion: nil)

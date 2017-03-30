@@ -1,14 +1,10 @@
 import Foundation
 
-
-
 internal final class CaptchaPresenter {
     private let semaphore = DispatchSemaphore(value: 0)
     private var controller: CaptchaController!
     private var sid: String
     private var answer: String?
-    
-    
     
     static func present(sid: String, imageUrl: String, request: RequestInstance) -> RequestError? {
         
@@ -43,13 +39,9 @@ catch {
         }
     }
     
-    
-    
     private init(sid: String) {
         self.sid = sid
     }
-    
-    
     
     func didAppear() {
         NotificationCenter.default.post(
@@ -58,8 +50,6 @@ catch {
             userInfo: ["captcha": controller]
         )
     }
-    
-    
     
     func finish(answer: String?) {
         self.answer = answer

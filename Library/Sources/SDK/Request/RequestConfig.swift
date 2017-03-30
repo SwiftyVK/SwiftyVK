@@ -1,18 +1,12 @@
 import Foundation
 
-
-
 internal var sharedCaptchaIsRun = false
 internal var sharedCaptchaAnswer: [String : String]?
-
-
 
 ///HTTP prtocol methods. See - https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods
 public enum HttpMethod: String {
     case GET, POST
 }
-
-
 
 public struct RequestConfig {
     ///Request timeout
@@ -36,8 +30,6 @@ public struct RequestConfig {
     internal var api: Bool {return !method.isEmpty}
     internal var upload: Bool {return !media.isEmpty && !customUrl.isEmpty && httpMethod == .POST}
 
-
-
     internal init(url: String) {
         self.customUrl      = url
         self.method         = ""
@@ -45,16 +37,12 @@ public struct RequestConfig {
         self.media          = []
     }
 
-
-
     internal init(method: String, parameters: [VK.Arg : String] = [:]) {
         self.method         = method
         self.parameters     = parameters
         self.customUrl      = ""
         self.media          = []
     }
-
-
 
     internal init(url: String, media: [Media]) {
         let dataLength      = TimeInterval(media.reduce(0) {return $0 + $1.data.count})
@@ -65,8 +53,6 @@ public struct RequestConfig {
         self.customUrl      = url
         self.media          = media
     }
-
-
     
     /// Send request to VK
     ///
@@ -89,8 +75,6 @@ public struct RequestConfig {
 
         return RequestInstance.createWith(config: self, successBlock: successBlock, errorBlock: errorBlock, progressBlock: progressBlock)
     }
-
-
     
     /// Add a request that will be sent after the request will receive a valid response
     ///
@@ -99,8 +83,6 @@ public struct RequestConfig {
     public mutating func next(_ next: @escaping (_ response: JSON) -> RequestConfig) {
         nextRequest = next
     }
-    
-    
     
     /// Add ned request parameters
     ///

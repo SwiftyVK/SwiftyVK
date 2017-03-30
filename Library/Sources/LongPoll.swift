@@ -5,11 +5,7 @@ import Foundation
     import Cocoa
 #endif
 
-
-
 private var lpQueue = DispatchQueue(label: "VKLongPollQueue")
-
-
 
 private typealias VKLongPoll = VK
 extension VKLongPoll {
@@ -27,7 +23,6 @@ extension VKLongPoll {
         private static var server = String()
         private static var ts = String()
         
-        
         ///Starting receiving updates from the long pool server
         public static func start() {
             lpQueue.async {
@@ -43,8 +38,6 @@ extension VKLongPoll {
             }
         }
         
-        
-        
         ///Pause receiving updates from the long pool server
         public static func stop() {
             lpQueue.async {
@@ -53,8 +46,6 @@ extension VKLongPoll {
                 VK.Log.put("LongPoll", "Stopped")
             }
         }
-        
-        
         
         private static func getServer() {
             var req = VK.API.Messages.getLongPollServer([VK.Arg.useSsl: "0", VK.Arg.needPts: "1"])
@@ -78,8 +69,6 @@ extension VKLongPoll {
             }
             )
         }
-        
-        
         
         fileprivate static func update() {
             lpQueue.async {
@@ -119,7 +108,6 @@ extension VKLongPoll {
                 )
             }
         }
-        
         
         // swiftlint:disable cyclomatic_complexity
         private static func parse(_ updates: [JSON]?) {
@@ -194,7 +182,6 @@ extension VKLongPoll {
             !all.isEmpty ? NotificationCenter.default.post(name: notifications.typeAll, object: JSONWrapper(all)) : ()
         }
         // swiftlint:enable cyclomatic_complexity
-        
         
         // swiftlint:disable type_name
         public enum notifications {
@@ -286,8 +273,6 @@ internal final class LPObserver: NSObject {
         #endif
     }
     
-    
-    
     #if os(iOS)
     @objc
     private func reachabilityChanged(note: NSNotification) {
@@ -297,8 +282,6 @@ internal final class LPObserver: NSObject {
     }
     #endif
     
-    
-    
     @objc
     private func connectionRestoreForce() {
         lpQueue.async {
@@ -307,7 +290,6 @@ internal final class LPObserver: NSObject {
         }
     }
     
-    
     @objc
     private func connectionLostForce() {
         lpQueue.async {
@@ -315,8 +297,6 @@ internal final class LPObserver: NSObject {
             self.connectionLost()
         }
     }
-    
-    
     
     fileprivate func connectionLost() {
         
@@ -327,8 +307,6 @@ internal final class LPObserver: NSObject {
         }
     }
     
-    
-    
     fileprivate func connectionRestore() {
         
         if connected == false {
@@ -337,7 +315,6 @@ internal final class LPObserver: NSObject {
             NotificationCenter.default.post(name: VK.LP.notifications.connectinDidRestore, object: nil)
         }
     }
-    
     
     deinit {
         VK.Log.put("LongPoll", "Deinit observer")

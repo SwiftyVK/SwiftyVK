@@ -1,7 +1,5 @@
 import Foundation
 
-
-
 public struct Media: CustomStringConvertible {
 
   enum MediaType {
@@ -11,16 +9,12 @@ public struct Media: CustomStringConvertible {
     case document
   }
 
-
-
   public enum ImageType: String {
     case JPG
     case PNG
     case BMP
     case GIF
   }
-
-
 
   let data: Data
   let mediaType: MediaType
@@ -39,11 +33,9 @@ public struct Media: CustomStringConvertible {
     }
   }
 
-
   public var description: String {
     return "Media with type \(type)"
   }
-
 
   public init(imageData: Data, type: ImageType) {
     mediaType = .image
@@ -51,21 +43,15 @@ public struct Media: CustomStringConvertible {
     data = imageData
   }
 
-
-
   public init(audioData: Data) {
     mediaType = .audio
     data = audioData
   }
 
-
-
   public init(videoData: Data) {
     mediaType = .video
     data = videoData
   }
-
-
 
   public init(documentData: Data, type: String) {
     mediaType = .document

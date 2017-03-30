@@ -1,11 +1,7 @@
 #if os(macOS)
     import Cocoa
     
-    
-    
     private let captchaViewName = Resources.withSuffix("CaptchaView")
-    
-    
     
     class CaptchaController: NSWindowController, NSTextFieldDelegate {
         
@@ -14,7 +10,6 @@
         private var parentWindow: NSWindow?
         private weak var delegate: CaptchaPresenter!
         private var image: NSImage?
-        
         
         static func create(data: Data, delegate: CaptchaPresenter) -> CaptchaController? {
             
@@ -42,13 +37,9 @@
             }
         }
         
-        
-        
         func setText(to text: String) {
             textField.stringValue = text
         }
-        
-        
         
         override func awakeFromNib() {
             super.awakeFromNib()
@@ -64,8 +55,6 @@
                 self.delegate.didAppear()
             }
         }
-        
-        
         
         override func controlTextDidEndEditing(_ obj: Notification) {
             if let window = window {

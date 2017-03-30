@@ -22,12 +22,8 @@ extension VK {
         case ads           = 32768
         case offline       = 65536
         case market        = 134217728
-        
-        
 
         public var description: String {return Scope.toString([self])}
-        
-        
         
         public static func create(from permissions: Int) -> Set<Scope> {
             var result = Set<Scope>()
@@ -56,8 +52,6 @@ extension VK {
             return result
         }
         
-        
-        
         public static func create(from permissions: String) -> Set<Scope> {
             var result = Set<Scope>()
             
@@ -85,15 +79,11 @@ extension VK {
             return result
         }
         
-        
-        
         public static func toInt(_ permissions: Set<Scope>) -> Int {
             var finishPerm = Int()
             for perm in permissions {finishPerm += perm.rawValue}
             return finishPerm
         }
-        
-        
         
         // swiftlint:disable switch_case_on_newline
         public static func toString(_ permissions: Set<Scope>) -> String {

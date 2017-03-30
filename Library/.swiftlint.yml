@@ -36,8 +36,6 @@ opt_in_rules:
   # - closure_spacing
   # - conditional_returns_on_newline
 
-vertical_whitespace:
-  max_empty_lines: 3
 file_length:
   warning: 500
   error: 1000

@@ -1,7 +1,5 @@
 import CoreLocation
 
-
-
 extension _VKAPI {
     //Metods to upload Mediafiles
     public struct Upload {
@@ -42,8 +40,6 @@ extension _VKAPI {
                 return getServerReq
             }
 
-
-
             ///Upload photo to message
             public static func toMessage(_ media: Media) -> RequestConfig {
                 var getServerReq = VK.API.Photos.getMessagesUploadServer()
@@ -62,8 +58,6 @@ extension _VKAPI {
                 }
                 return getServerReq
             }
-
-
 
             ///Upload photo to market
             public static func toMarket(
@@ -104,8 +98,6 @@ extension _VKAPI {
                 return getServerReq
             }
 
-
-
             ///Upload photo to market album
             public static func toMarketAlbum(_ media: Media, groupId: String) -> RequestConfig {
                 var getServerReq = VK.API.Photos.getMarketAlbumUploadServer([.groupId: groupId])
@@ -126,7 +118,6 @@ extension _VKAPI {
                 return getServerReq
             }
 
-
             // swiftlint:disable type_name
             ///Upload photo to user or group wall
             public struct toWall {
@@ -136,14 +127,10 @@ extension _VKAPI {
                     return pToWall(media, userId: userId)
                 }
 
-
-
                 ///Upload photo to group wall
                 public static func toGroup(_ media: Media, groupId: String) -> RequestConfig {
                     return pToWall(media, groupId: groupId)
                 }
-
-
 
                 ///Upload photo to user or group wall
                 private static func pToWall(_ media: Media, userId: String = "", groupId: String = "") -> RequestConfig {
@@ -168,8 +155,6 @@ extension _VKAPI {
                 }
             }
         }
-
-
 
         ///Upload video from file or url
         public struct Video {
@@ -203,8 +188,6 @@ extension _VKAPI {
                 return saveReq
             }
 
-
-
             ///Upload local video from external resource
             public static func fromUrl(
                 _ url: String,
@@ -232,8 +215,6 @@ extension _VKAPI {
             }
         }
 
-
-
         ///Upload audio
         public static func audio(_ media: Media, artist: String = "", title: String = "") -> RequestConfig {
             var getServierReq = VK.API.Audio.getUploadServer()
@@ -254,8 +235,6 @@ extension _VKAPI {
             }
             return getServierReq
         }
-
-
 
         ///Upload document
         public static func document(

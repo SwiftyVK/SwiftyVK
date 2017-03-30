@@ -1,7 +1,5 @@
 import Foundation
 
-
-
 internal struct Result: CustomStringConvertible {
     private unowned let request: RequestInstance
 
@@ -17,12 +15,9 @@ internal struct Result: CustomStringConvertible {
         didSet {error != nil && response != nil ? error = nil : ()}
     }
 
-
-
     init(request: RequestInstance) {
         self.request = request
     }
-
 
     internal mutating func parseResponseFrom(data: Data) {
             let parsingError: NSErrorPointer = nil
@@ -49,15 +44,11 @@ internal struct Result: CustomStringConvertible {
             }
     }
 
-
-
     @discardableResult
     internal mutating func setError(error: Error) -> Error {
         self.error = error
         return error
     }
-
-
 
     var description: String {
         if response != nil {

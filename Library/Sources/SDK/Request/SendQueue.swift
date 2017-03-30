@@ -1,7 +1,5 @@
 import Foundation
 
-
-
 internal final class SendQueue: OperationQueue {
     static let queue = SendQueue()
 
@@ -16,7 +14,6 @@ internal final class SendQueue: OperationQueue {
         return String(format: "[%d:%d]", apiCounter, waited.count)
     }
 
-
     private override init() {
         super.init()
         qualityOfService = .userInitiated
@@ -30,8 +27,6 @@ internal final class SendQueue: OperationQueue {
             CFRunLoopRun()
         }
     }
-    
-
 
     func add(task: SendTask, api: Bool) {
         VK.config.useSendLimit && api
@@ -39,16 +34,12 @@ internal final class SendQueue: OperationQueue {
             : sendUnordered(task: task)
     }
     
-    
-    
     private func sendUnordered(task: SendTask) {
         unorderedSendQueue.async {
             VK.Log.put("SendQueue", "send free \(task)")
             task.start()
         }
     }
-    
-    
     
     private func sendOrdered(task: SendTask) {
         orderedSendQueue.async {
@@ -63,8 +54,6 @@ internal final class SendQueue: OperationQueue {
             }
         }
     }
-
-
 
     @objc
     private func dropCounter() {

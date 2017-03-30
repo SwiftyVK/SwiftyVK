@@ -1,10 +1,6 @@
 import Foundation
 
-
-
 private class ResourceTestClass {}
-
-
 
 internal struct Resources {
   private static let pathSuffix: String = {
@@ -18,8 +14,6 @@ internal struct Resources {
       return "-watchOS"
     #endif
   }()
-
-
 
   internal static let bundle: Bundle = {
     let name = "SwiftyVKResources" + pathSuffix
@@ -38,8 +32,6 @@ internal struct Resources {
 
     return Bundle.main
   }()
-
-
 
   internal static func withSuffix(_ name: String) -> String {
     return name + pathSuffix

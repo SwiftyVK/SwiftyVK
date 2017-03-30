@@ -1,7 +1,5 @@
 import Foundation
 
-
-
 private var tokenInstance: Token? {
 willSet {
     if tokenInstance != nil && newValue == nil {
@@ -14,8 +12,6 @@ didSet {
     }
 }
 }
-
-
 
 internal class Token: NSObject, NSCoding {
 
@@ -37,8 +33,6 @@ internal class Token: NSObject, NSCoding {
         return "Token with parameters: \(parameters))"
     }
 
-
-
     convenience init(fromResponse response: String) {
         let parameters  = Token.parseParametersFrom(response: response)
         let token       = parameters["access_token"] ?? ""
@@ -46,8 +40,6 @@ internal class Token: NSObject, NSCoding {
 
         self.init(fromRawToken: token, expiresIn: expiresIn, params: parameters)
     }
-    
-    
     
     init(fromRawToken rawToken: String, expiresIn: Int, params: [String: String] = [:]) {
         token           = rawToken
@@ -62,8 +54,6 @@ internal class Token: NSObject, NSCoding {
         save()
     }
 
-
-
     class func get() -> String? {
         VK.Log.put("Token", "getting")
 
@@ -77,8 +67,6 @@ internal class Token: NSObject, NSCoding {
         return nil
     }
     
-    
-    
     private var valid: Bool {
         if infinite || expires > Int(Date().timeIntervalSince1970) {
             return true
@@ -91,13 +79,9 @@ internal class Token: NSObject, NSCoding {
         return (Authorizator.authorize() == nil)
     }
 
-
-
     class var exist: Bool {
         return tokenInstance != nil
     }
-
-
 
     private class func parseParametersFrom(response: String) -> [String : String] {
         let fragment    = response.components(separatedBy: "#")[1]
@@ -112,8 +96,6 @@ internal class Token: NSObject, NSCoding {
         VK.Log.put("Token", "parse from parameters: \(parameters)")
         return parameters
     }
-
-
 
     private class func _load() -> Token? {
         if let token = loadFromKeychain() {
@@ -135,8 +117,6 @@ internal class Token: NSObject, NSCoding {
         return tokenInstance
     }
 
-
-
     private class func loadFromDefaults() -> Token? {
         let defaults = UserDefaults.standard
         
@@ -154,7 +134,6 @@ internal class Token: NSObject, NSCoding {
         return object as? Token
     }
 
-
     private class func loadFromFile(_ filePath: String) -> Token? {
         let manager = FileManager.default
         
@@ -167,8 +146,6 @@ internal class Token: NSObject, NSCoding {
         VK.Log.put("Token", "loaded from file: \(filePath)")
         return token
     }
-
-
 
     private static func loadFromKeychain() -> Token? {
         guard let keychainQuery = (Token.keychainParams.mutableCopy() as? NSMutableDictionary) else {return nil}
@@ -187,8 +164,6 @@ internal class Token: NSObject, NSCoding {
         VK.Log.put("Token", "loaded from keychain")
         return token
     }
-
-
 
     func save() {
         Token.removeSavedData()
@@ -210,15 +185,11 @@ internal class Token: NSObject, NSCoding {
         VK.Log.put("Token", "saved to keychain")
     }
 
-
-
     class func remove() {
         removeSavedData()
         tokenInstance = nil
         VK.Log.put("Token", "removed")
     }
-
-
 
     private class func removeSavedData() {
         SecItemDelete(keychainParams)
@@ -236,11 +207,7 @@ internal class Token: NSObject, NSCoding {
         }
     }
 
-
-
     deinit {VK.Log.put("Token", "deinit \(self)")}
-
-
 
     // MARK: - NSCoding protocol
     func encode(with aCoder: NSCoder) {
@@ -249,8 +216,6 @@ internal class Token: NSObject, NSCoding {
         aCoder.encode(expires, forKey: "expires")
         aCoder.encode(infinite, forKey: "isOffline")
     }
-
-
 
     required init?(coder aDecoder: NSCoder) {
         token       = aDecoder.decodeObject(forKey: "token") as? String ?? ""

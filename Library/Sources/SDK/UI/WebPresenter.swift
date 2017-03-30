@@ -8,12 +8,8 @@
 
 import Foundation
 
-
-
 internal let sheetQueue = DispatchQueue(label: "asdfghjkl")
 private let authorizeUrl = "https://oauth.vk.com/authorize?"
-
-
 
 internal final class WebPresenter {
     private let semaphore = DispatchSemaphore(value: 0)
@@ -21,8 +17,6 @@ internal final class WebPresenter {
     private var fails = 0
     private var error: AuthError?
     private weak static var currentController: WebController?
-
-
 
     class func start(withUrl url: String) -> AuthError? {
 
@@ -42,14 +36,10 @@ internal final class WebPresenter {
         return presenter.error
     }
 
-
-
     class func cancel() {
         VK.Log.put("WebPresenter", "cancel")
         currentController?.hide()
     }
-
-
 
     func handle(response: String) {
 
@@ -81,8 +71,6 @@ internal final class WebPresenter {
         }
     }
 
-
-
     func handle(error: AuthError) {
         VK.Log.put("WebPresenter", "handle \(error)")
 
@@ -95,8 +83,6 @@ internal final class WebPresenter {
             controller.hide()
         }
     }
-
-
 
     func finish() {
         semaphore.signal()

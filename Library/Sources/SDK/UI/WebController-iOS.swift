@@ -2,11 +2,7 @@
     import UIKit
     import WebKit
     
-    
-    
     private let webViewName = Resources.withSuffix("WebView")
-    
-    
     
     internal final class WebController: UIViewController, UIWebViewDelegate {
         
@@ -15,8 +11,6 @@
         fileprivate var parentView: UIViewController?
         private weak var delegate: WebPresenter!
         private var url: String?
-        
-        
         
         class func create(withDelegate delegate: WebPresenter) -> WebController? {
             
@@ -38,21 +32,15 @@
             return controller
         }
         
-        
-        
         override func viewDidLoad() {
             webView?.delegate = self
             super.viewDidLoad()
         }
         
-        
-        
         override func viewDidDisappear(_ animated: Bool) {
             delegate?.finish()
             super.viewDidDisappear(animated)
         }
-        
-        
         
         func load(url: String) {
             if self.url == nil {
@@ -64,19 +52,13 @@
             webView?.loadRequest(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10))
         }
         
-        
-        
         func expand() {}
-        
-        
         
         func goBack() {
             VK.Log.put("WebController", "goBack")
             
             webView?.goBack()
         }
-        
-        
         
         func hide() {
             VK.Log.put("WebController", "hide")
@@ -85,15 +67,11 @@
             self.webView?.delegate = nil
         }
         
-        
-        
         // MARK: - frameLoadDelegate protocol
         func webViewDidFinishLoad(_ webView: UIWebView) {
             activity.stopAnimating()
             delegate?.handle(response: webView.request?.url?.absoluteString ?? "")
         }
-        
-        
         
         func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
             delegate?.handle(error: .failedAuthorization)

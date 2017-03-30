@@ -1,7 +1,5 @@
 import Foundation
 
-
-
 extension CharacterSet {
     
     public static var urlQueryParametersAllowed: CharacterSet {
