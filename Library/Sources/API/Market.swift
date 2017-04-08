@@ -1,28 +1,30 @@
-public extension Api {
-    public enum Market: String, Method {
-        case get = "market.get"
-        case getById = "market.getById"
-        case search = "market.search"
-        case getAlbums = "market.getAlbums"
-        case getAlbumById = "market.getAlbumById"
-        case createComment = "market.createComment"
-        case getComments = "market.getComments"
-        case deleteComment = "market.deleteComment"
-        case restoreComment = "market.restoreComment"
-        case editComment = "market.editComment"
-        case reportComment = "market.reportComment"
-        case getCategories = "market.getCategories"
-        case report = "market.report"
-        case add = "market.add"
-        case edit = "market.edit"
-        case delete = "market.delete"
-        case restore = "market.restore"
-        case reorderItems = "market.reorderItems"
-        case reorderAlbums = "market.reorderAlbums"
-        case addAlbum = "market.addAlbum"
-        case editAlbum = "market.editAlbum"
-        case deleteAlbum = "market.deleteAlbum"
-        case removeFromAlbum = "market.removeFromAlbum"
-        case addToAlbum = "market.addToAlbum"
+public extension VK.Api {
+    public enum Market: Method {
+        public var _group: String { return "market" }
+        
+        case get(Parameters)
+        case getById(Parameters)
+        case search(Parameters)
+        case getAlbums(Parameters)
+        case getAlbumById(Parameters)
+        case createComment(Parameters)
+        case getComments(Parameters)
+        case deleteComment(Parameters)
+        case restoreComment(Parameters)
+        case editComment(Parameters)
+        case reportComment(Parameters)
+        case getCategories(Parameters)
+        case report(Parameters)
+        case add(Parameters)
+        case edit(Parameters)
+        case delete(Parameters)
+        case restore(Parameters)
+        case reorderItems(Parameters)
+        case reorderAlbums(Parameters)
+        case addAlbum(Parameters)
+        case editAlbum(Parameters)
+        case deleteAlbum(Parameters)
+        case removeFromAlbum(Parameters)
+        case addToAlbum(Parameters)
     }
 }

@@ -1,3 +1,11 @@
+public typealias Parameters = [VK.Arg: String]
+
+extension Dictionary where Key == VK.Arg, Value == String {
+    static var empty: [VK.Arg: String] {
+        return [:]
+    }
+}
+
 // swiftlint:disable type_body_length identifier_name
 extension VK {
   ///Parameters for methods VK API

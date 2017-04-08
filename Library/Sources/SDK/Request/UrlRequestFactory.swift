@@ -3,42 +3,45 @@ import Foundation
 private let boundary = "(======SwiftyVK======)"
 private let methodUrl = "https://api.vk.com/method/"
 
-///NSURLRequest fabric
-internal struct UrlFabric {
+protocol UrlRequestFactory {
+    init()
+    func make(from request: Request) -> URLRequest
+}
+
+struct UrlRequestFactoryImpl: UrlRequestFactory {
     
-    private static var emptyUrl: URL {
+    private var emptyUrl: URL {
         // swiftlint:disable force_unwrapping
         return URL(string: methodUrl)!
         // swiftlint:enable force_unwrapping
     }
 
-    internal static func createWith(config: RequestConfig) -> URLRequest {
-        var request: URLRequest
-
-        if config.upload {
-            request = createWith(media: config.media, url: config.customUrl)
+    func make(from request: Request) -> URLRequest {
+        var urlRequest: URLRequest
+        
+        switch request.rawRequest {
+        case .api(let method, let parameters):
+            urlRequest = make(from: method, parameters: parameters, httpMethod: request.config.httpMethod)
+        case .upload(let url, let media):
+            urlRequest = make(from: media, url: url)
+        case .url(let url):
+            urlRequest = make(from: url)
         }
-        else if config.api {
-            request = craeteWith(apiMethod: config.method, parameters: config.parameters, httpMethod: config.httpMethod)
-        }
-        else {
-            request = createWith(url: config.customUrl)
-        }
 
-        request.timeoutInterval = config.timeout
+        urlRequest.timeoutInterval = request.config.timeout
 
-        return request
+        return urlRequest
     }
 
-    private static func createWith(url: String) -> URLRequest {
+    private func make(from url: String) -> URLRequest {
         var req = URLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
         req.httpMethod = "GET"
         req.url = URL(string: url)
         return req
     }
 
-    private static func craeteWith(apiMethod: String, parameters: [VK.Arg: String], httpMethod: HttpMethod) -> URLRequest {
-        let query = createQueryFrom(parameters: parameters)
+    private func make(from apiMethod: String, parameters: [VK.Arg: String], httpMethod: HttpMethod) -> URLRequest {
+        let query = makeQuery(from: parameters)
 
         var req = URLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
         req.httpMethod = httpMethod.rawValue
@@ -48,7 +51,11 @@ internal struct UrlFabric {
         }
         else {
             req.url = URL(string: methodUrl + apiMethod)
-            let charset = String(CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(String.Encoding.utf8.rawValue)))
+            let charset = String(
+                CFStringConvertEncodingToIANACharSetName(
+                    CFStringConvertNSStringEncodingToEncoding(String.Encoding.utf8.rawValue)
+                )
+            )
             req.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
             req.httpBody = query.data(using: .utf8)
         }
@@ -56,7 +63,7 @@ internal struct UrlFabric {
         return req
     }
 
-    private static func createWith(media: [Media], url: String) -> URLRequest {
+    private func make(from media: [Media], url: String) -> URLRequest {
         var req = URLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
         req.httpMethod = "POST"
         req.url = URL(string: url)
@@ -77,7 +84,8 @@ internal struct UrlFabric {
                 name = "file\(index)"
             }
             
-            if let data = "\r\n--\(boundary)\r\nContent-Disposition: form-data; name=\"\(name)\"; filename=\"file.\(file.type)\"\r\nContent-Type: document/other\r\n\r\n"
+            if let data = ("\r\n--\(boundary)\r\nContent-Disposition: form-data; name="
+                + "\"\(name)\"; filename=\"file.\(file.type)\"\r\nContent-Type: document/other\r\n\r\n")
                 .data(using: .utf8, allowLossyConversion: false) {
                 body.append(data)
             }
@@ -93,7 +101,7 @@ internal struct UrlFabric {
         return req
     }
     
-    internal static func createQueryFrom(parameters: [VK.Arg : String]) -> String {
+    private func makeQuery(from parameters: [VK.Arg : String]) -> String {
         let paramArray = NSMutableArray()
         
         for (name, value) in parameters {

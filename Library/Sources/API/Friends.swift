@@ -1,22 +1,24 @@
-public extension Api {
-    public enum Friends: String, Method {
-        case get = "friends.get"
-        case getOnline = "friends.getOnline"
-        case getMutual = "friends.getMutual"
-        case getRecent = "friends.getRecent"
-        case getRequests = "friends.getRequests"
-        case add = "friends.add"
-        case delete = "friends.delete"
-        case getLists = "friends.getLists"
-        case addList = "friends.addList"
-        case editList = "friends.editList"
-        case deleteList = "friends.deleteList"
-        case getAppUsers = "friends.getAppUsers"
-        case getByPhones = "friends.getByPhones"
-        case deleteAllRequests = "friends.deleteAllRequests"
-        case getSuggestions = "friends.getSuggestions"
-        case areFriends = "friends.areFriends"
-        case getAvailableForCall = "friends.getAvailableForCall"
-        case search = "friends.search"
+public extension VK.Api {
+    public enum Friends: Method {
+        public var _group: String { return "friends" }
+        
+        case get(Parameters)
+        case getOnline(Parameters)
+        case getMutual(Parameters)
+        case getRecent(Parameters)
+        case getRequests(Parameters)
+        case add(Parameters)
+        case delete(Parameters)
+        case getLists(Parameters)
+        case addList(Parameters)
+        case editList(Parameters)
+        case deleteList(Parameters)
+        case getAppUsers(Parameters)
+        case getByPhones(Parameters)
+        case deleteAllRequests(Parameters)
+        case getSuggestions(Parameters)
+        case areFriends(Parameters)
+        case getAvailableForCall(Parameters)
+        case search(Parameters)
     }
 }

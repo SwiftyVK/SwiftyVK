@@ -1,10 +1,12 @@
-public extension Api {
-    public enum Places: String, Method {
-        case add = "places.add"
-        case getById = "places.getById"
-        case search = "places.search"
-        case checkin = "places.checkin"
-        case getCheckins = "places.getCheckins"
-        case getTypes = "places.getTypes"
+public extension VK.Api {
+    public enum Places: Method {
+        public var _group: String { return "places" }
+        
+        case add(Parameters)
+        case getById(Parameters)
+        case search(Parameters)
+        case checkin(Parameters)
+        case getCheckins(Parameters)
+        case getTypes(Parameters)
     }
 }

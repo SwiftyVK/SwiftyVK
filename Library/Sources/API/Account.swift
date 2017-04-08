@@ -1,24 +1,26 @@
-public extension Api {
-    public enum Account: String, Method {
-        case getCounters = "account.getCounters"
-        case setNameInMenu = "account.setNameInMenu"
-        case setOnline = "account.setOnline"
-        case setOffline = "account.setOffline"
-        case lookupContacts = "account.lookupContacts"
-        case registerDevice = "account.registerDevice"
-        case unregisterDevice = "account.unregisterDevice"
-        case setSilenceMode = "account.setSilenceMode"
-        case getPushSettings = "account.getPushSettings"
-        case setPushSettings = "account.setPushSettings"
-        case getAppPermissions = "account.getAppPermissions"
-        case getActiveOffers = "account.getActiveOffers"
-        case banUser = "account.banUser"
-        case unbanUser = "account.unbanUser"
-        case getBanned = "account.getBanned"
-        case getInfo = "account.getInfo"
-        case setInfo = "account.setInfo"
-        case changePassword = "account.changePassword"
-        case getProfileInfo = "account.getProfileInfo"
-        case saveProfileInfo = "account.saveProfileInfo"
+public extension VK.Api {
+    public enum Account: Method {
+        public var _group: String { return "account" }
+        
+        case getCounters(Parameters)
+        case setNameInMenu(Parameters)
+        case setOnline(Parameters)
+        case setOffline(Parameters)
+        case lookupContacts(Parameters)
+        case registerDevice(Parameters)
+        case unregisterDevice(Parameters)
+        case setSilenceMode(Parameters)
+        case getPushSettings(Parameters)
+        case setPushSettings(Parameters)
+        case getAppPermissions(Parameters)
+        case getActiveOffers(Parameters)
+        case banUser(Parameters)
+        case unbanUser(Parameters)
+        case getBanned(Parameters)
+        case getInfo(Parameters)
+        case setInfo(Parameters)
+        case changePassword(Parameters)
+        case getProfileInfo(Parameters)
+        case saveProfileInfo(Parameters)
     }
 }

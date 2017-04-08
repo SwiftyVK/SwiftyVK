@@ -8,10 +8,10 @@
 
 import Foundation
 
-internal let sheetQueue = DispatchQueue(label: "asdfghjkl")
+let sheetQueue = DispatchQueue(label: "sheetQueue")
 private let authorizeUrl = "https://oauth.vk.com/authorize?"
 
-internal final class WebPresenter {
+final class WebPresenter {
     private let semaphore = DispatchSemaphore(value: 0)
     private var controller: WebController!
     private var fails = 0

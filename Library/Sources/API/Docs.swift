@@ -1,11 +1,13 @@
-public extension Api {
-    public enum Docs: String, Method {
-        case get = "docs.get"
-        case getById = "docs.getById"
-        case getUploadServer = "docs.getUploadServer"
-        case getWallUploadServer = "docs.getWallUploadServer"
-        case save = "docs.save"
-        case delete = "docs.delete"
-        case add = "docs.add"
+public extension VK.Api {
+    public enum Docs: Method {
+        public var _group: String { return "docs" }
+        
+        case get(Parameters)
+        case getById(Parameters)
+        case getUploadServer(Parameters)
+        case getWallUploadServer(Parameters)
+        case save(Parameters)
+        case delete(Parameters)
+        case add(Parameters)
     }
 }

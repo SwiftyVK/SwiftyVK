@@ -1,5 +1,7 @@
-public extension Api {
-    public enum Gifts: String, Method {
-        case get = "gifts.get"
+public extension VK.Api {
+    public enum Gifts: Method {
+        public var _group: String { return "gifts" }
+        
+        case get(Parameters)
     }
 }

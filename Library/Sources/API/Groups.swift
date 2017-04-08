@@ -1,30 +1,33 @@
-public extension Api {
-    public enum Groups: String, Method {
-        case isMember = "groups.isMember"
-        case getById = "groups.getById"
-        case get = "groups.get"
-        case getMembers = "groups.getMembers"
-        case join = "groups.join"
-        case leave = "groups.leave"
-        case getInvites = "groups.getInvites"
-        case getInvitedUsers = "groups.getInvitedUsers"
-        case banUser = "groups.banUser"
-        case unbanUser = "groups.unbanUser"
-        case getBanned = "groups.getBanned"
-        case create = "groups.create"
-        case edit = "groups.edit"
-        case editPlace = "groups.editPlace"
-        case getSettings = "groups.getSettings"
-        case getRequests = "groups.getRequests"
-        case editManager = "groups.editManager"
-        case invite = "groups.invite"
-        case addLink = "groups.addLink"
-        case deleteLink = "groups.deleteLink"
-        case editLink = "groups.editLink"
-        case reorderLink = "groups.reorderLink"
-        case removeUser = "groups.removeUser"
-        case approveRequest = "groups.approveRequest"
-        case getCatalog = "groups.getCatalog"
-        case getCatalogInfo = "groups.getCatalogInfo"
+public extension VK.Api {
+    public enum Groups: Method {
+        
+        public var _group: String { return "groups" }
+        
+        case isMember(Parameters)
+        case getById(Parameters)
+        case get(Parameters)
+        case getMembers(Parameters)
+        case join(Parameters)
+        case leave(Parameters)
+        case getInvites(Parameters)
+        case getInvitedUsers(Parameters)
+        case banUser(Parameters)
+        case unbanUser(Parameters)
+        case getBanned(Parameters)
+        case create(Parameters)
+        case edit(Parameters)
+        case editPlace(Parameters)
+        case getSettings(Parameters)
+        case getRequests(Parameters)
+        case editManager(Parameters)
+        case invite(Parameters)
+        case addLink(Parameters)
+        case deleteLink(Parameters)
+        case editLink(Parameters)
+        case reorderLink(Parameters)
+        case removeUser(Parameters)
+        case approveRequest(Parameters)
+        case getCatalog(Parameters)
+        case getCatalogInfo(Parameters)
     }
 }

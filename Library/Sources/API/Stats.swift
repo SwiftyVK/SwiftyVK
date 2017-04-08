@@ -1,7 +1,9 @@
-public extension Api {
-    public enum Stats: String, Method {
-        case get = "stats.get"
-        case trackVisitor = "stats.trackVisitor"
-        case getPostReach = "stats.getPostReach"
+public extension VK.Api {
+    public enum Stats: Method {
+        public var _group: String { return "stats" }
+        
+        case get(Parameters)
+        case trackVisitor(Parameters)
+        case getPostReach(Parameters)
     }
 }

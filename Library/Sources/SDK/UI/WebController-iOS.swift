@@ -4,7 +4,7 @@
     
     private let webViewName = Resources.withSuffix("WebView")
     
-    internal final class WebController: UIViewController, UIWebViewDelegate {
+    final class WebController: UIViewController, UIWebViewDelegate {
         
         @IBOutlet private weak var webView: UIWebView?
         @IBOutlet private weak var activity: UIActivityIndicatorView!

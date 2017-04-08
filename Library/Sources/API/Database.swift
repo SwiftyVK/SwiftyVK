@@ -1,15 +1,17 @@
-public extension Api {
-    public enum Database: String, Method {
-        case getCountries = "database.getCountries"
-        case getRegions = "database.getRegions"
-        case getStreetsById = "database.getStreetsById"
-        case getCountriesById = "database.getCountriesById"
-        case getCities = "database.getCities"
-        case getCitiesById = "database.getCitiesById"
-        case getUniversities = "database.getUniversities"
-        case getSchools = "database.getSchools"
-        case getSchoolClasses = "database.getSchoolClasses"
-        case getFaculties = "database.getFaculties"
-        case getChairs = "database.getChairs"
+public extension VK.Api {
+    public enum Database: Method {
+        public var _group: String { return "database" }
+        
+        case getCountries(Parameters)
+        case getRegions(Parameters)
+        case getStreetsById(Parameters)
+        case getCountriesById(Parameters)
+        case getCities(Parameters)
+        case getCitiesById(Parameters)
+        case getUniversities(Parameters)
+        case getSchools(Parameters)
+        case getSchoolClasses(Parameters)
+        case getFaculties(Parameters)
+        case getChairs(Parameters)
     }
 }

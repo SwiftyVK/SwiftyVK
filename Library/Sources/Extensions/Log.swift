@@ -1,7 +1,7 @@
 import Foundation
 
-internal let printQueue = DispatchQueue(label: "SwiftyVK.PrintQueue")
-internal let logQueue = DispatchQueue(label: "SwiftyVK.LogQueue")
+let printQueue = DispatchQueue(label: "SwiftyVK.PrintQueue")
+let logQueue = DispatchQueue(label: "SwiftyVK.LogQueue")
 
 private let form: DateFormatter = {
   let f = DateFormatter()
@@ -18,14 +18,7 @@ extension VK {
     private static var reqId: Int64 = 0
     private static var taskId: Int64 = 0
 
-    internal static func generateRequestId() -> Int64 {
-        return logQueue.sync {
-            reqId += 1
-            return reqId
-        }
-    }
-
-    internal static func generateTaskId() -> Int64 {
+    static func generateTaskId() -> Int64 {
         return logQueue.sync {
             taskId += 1
             return taskId
@@ -44,34 +37,34 @@ extension VK {
       return NSArray(array: requestsQueue)
     }
 
-    internal static func put(_ req: RequestInstance, _ message: String, atNewLine: Bool = false) {
-      let block = {
-        
-        let date = form.string(from: Date())
-        req.log.append("\(date): \(message)")
-        let key = String("Req \(req.id)") ?? "???"
-
-        if dictionary.count >= 100 {
-          let keyToRemove = array.removeFirst()
-          dictionary.removeObject(forKey: keyToRemove)
-        }
-
-        self._put(key, message, false)
-        if req.config.logToConsole {
-            printSync("\(atNewLine ? "\n" : "")\(date): \(key) ~ \(message)")
-        }
-      }
-
-      logQueue.async(execute: block)
+    static func put(_ req: Any, _ message: String, atNewLine: Bool = false) {
+//      let block = {
+//        
+//        let date = form.string(from: Date())
+//        req.log.append("\(date): \(message)")
+//        let key = String("Req \(req.id)") ?? "???"
+//
+//        if dictionary.count >= 100 {
+//          let keyToRemove = array.removeFirst()
+//          dictionary.removeObject(forKey: keyToRemove)
+//        }
+//
+//        self._put(key, message, false)
+//        if req.config.logToConsole {
+//            printSync("\(atNewLine ? "\n" : "")\(date): \(key) ~ \(message)")
+//        }
+//      }
+//
+//      logQueue.async(execute: block)
     }
 
-    internal static func put(_ reqId: Int64, _ message: String) {
+    static func put(_ reqId: Int64, _ message: String) {
         logQueue.async {
             _put("Req \(reqId)", message, VK.config.logToConsole)
         }
     }
 
-    internal static func put(_ key: String, _ message: String) {
+    static func put(_ key: String, _ message: String) {
       logQueue.async {
         _put(key, message, VK.config.logToConsole)
       }
@@ -115,13 +108,13 @@ extension VK {
 }
 
 /**Print to console synchronously*/
-internal func printSync(_ some : Any) {
+func printSync(_ some : Any) {
   printQueue.sync {
     print(some)
   }
 }
 
-internal func printAsync(_ some : Any) {
+func printAsync(_ some : Any) {
   printQueue.async {
     printSync(some)
   }

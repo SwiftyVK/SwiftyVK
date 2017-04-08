@@ -1,34 +1,36 @@
-public extension Api {
-    public enum Video: String, Method {
-        case get = "video.get"
-        case edit = "video.edit"
-        case add = "video.add"
-        case save = "video.save"
-        case delete = "video.delete"
-        case restore = "video.restore"
-        case search = "video.search"
-        case getUserVideos = "video.getUserVideos"
-        case getAlbums = "video.getAlbums"
-        case getAlbumById = "video.getAlbumById"
-        case addAlbum = "video.addAlbum"
-        case deleteAlbum = "video.deleteAlbum"
-        case moveToAlbum = "video.moveToAlbum"
-        case addToAlbum = "video.addToAlbum"
-        case removeFromAlbum = "video.removeFromAlbum"
-        case getAlbumsByVideo = "video.getAlbumsByVideo"
-        case getComments = "video.getComments"
-        case createComment = "video.createComment"
-        case deleteComment = "video.deleteComment"
-        case restoreComment = "video.restoreComment"
-        case editComment = "video.editComment"
-        case getTags = "video.getTags"
-        case putTag = "video.putTag"
-        case removeTag = "video.removeTag"
-        case getNewTags = "video.getNewTags"
-        case report = "video.report"
-        case reportComment = "video.reportComment"
-        case getCatalog = "video.getCatalog"
-        case getCatalogSection = "video.getCatalogSection"
-        case hideCatalogSection = "video.hideCatalogSection"
+public extension VK.Api {
+    public enum Video: Method {
+        public var _group: String { return "video" }
+        
+        case get(Parameters)
+        case edit(Parameters)
+        case add(Parameters)
+        case save(Parameters)
+        case delete(Parameters)
+        case restore(Parameters)
+        case search(Parameters)
+        case getUserVideos(Parameters)
+        case getAlbums(Parameters)
+        case getAlbumById(Parameters)
+        case addAlbum(Parameters)
+        case deleteAlbum(Parameters)
+        case moveToAlbum(Parameters)
+        case addToAlbum(Parameters)
+        case removeFromAlbum(Parameters)
+        case getAlbumsByVideo(Parameters)
+        case getComments(Parameters)
+        case createComment(Parameters)
+        case deleteComment(Parameters)
+        case restoreComment(Parameters)
+        case editComment(Parameters)
+        case getTags(Parameters)
+        case putTag(Parameters)
+        case removeTag(Parameters)
+        case getNewTags(Parameters)
+        case report(Parameters)
+        case reportComment(Parameters)
+        case getCatalog(Parameters)
+        case getCatalogSection(Parameters)
+        case hideCatalogSection(Parameters)
     }
 }

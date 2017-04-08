@@ -45,7 +45,7 @@ extension VK {
                 self.selectedLanguage = newValue
             }
         }
-        internal static let supportedLanguages = ["ru", "uk", "be", "en", "es", "fi", "de", "it"]
+        static let supportedLanguages = ["ru", "uk", "be", "en", "es", "fi", "de", "it"]
         private static var selectedLanguage: String?
     }
 }

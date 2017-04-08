@@ -1,6 +1,9 @@
-public extension Api {
-    public enum Status: String, Method {
-        case get = "status.get"
-        case set = "status.set"
+public extension VK.Api {
+    public enum Status: Method {
+        
+        public var _group: String { return "status" }
+        
+        case get(Parameters)
+        case set(Parameters)
     }
 }

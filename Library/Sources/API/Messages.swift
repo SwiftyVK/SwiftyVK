@@ -1,28 +1,30 @@
-public extension Api {
-    public enum Messages: String, Method {
-        case get = "messages.get"
-        case getDialogs = "messages.getDialogs"
-        case getById = "messages.getById"
-        case search = "messages.search"
-        case getHistory = "messages.getHistory"
-        case send = "messages.send"
-        case delete = "messages.delete"
-        case restore = "messages.restore"
-        case markAsRead = "messages.markAsRead"
-        case markAsImportant = "messages.markAsImportant"
-        case getLongPollServer = "messages.getLongPollServer"
-        case getLongPollHistory = "messages.getLongPollHistory"
-        case getChat = "messages.getChat"
-        case createChat = "messages.createChat"
-        case editChat = "messages.editChat"
-        case getChatUsers = "messages.getChatUsers"
-        case setActivity = "messages.setActivity"
-        case searchDialogs = "messages.searchDialogs"
-        case addChatUser = "messages.addChatUser"
-        case removeChatUser = "messages.removeChatUser"
-        case getLastActivity = "messages.getLastActivity"
-        case setChatPhoto = "messages.setChatPhoto"
-        case deleteChatPhoto = "messages.deleteChatPhoto"
-        case getHistoryAttachments = "messages.getHistoryAttachments"
+public extension VK.Api {
+    public enum Messages: Method {
+        public var _group: String { return "messages" }
+        
+        case get(Parameters)
+        case getDialogs(Parameters)
+        case getById(Parameters)
+        case search(Parameters)
+        case getHistory(Parameters)
+        case send(Parameters)
+        case delete(Parameters)
+        case restore(Parameters)
+        case markAsRead(Parameters)
+        case markAsImportant(Parameters)
+        case getLongPollServer(Parameters)
+        case getLongPollHistory(Parameters)
+        case getChat(Parameters)
+        case createChat(Parameters)
+        case editChat(Parameters)
+        case getChatUsers(Parameters)
+        case setActivity(Parameters)
+        case searchDialogs(Parameters)
+        case addChatUser(Parameters)
+        case removeChatUser(Parameters)
+        case getLastActivity(Parameters)
+        case setChatPhoto(Parameters)
+        case deleteChatPhoto(Parameters)
+        case getHistoryAttachments(Parameters)
     }
 }

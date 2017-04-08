@@ -48,65 +48,65 @@ extension VKLongPoll {
         }
         
         private static func getServer() {
-            var req = VK.API.Messages.getLongPollServer([VK.Arg.useSsl: "0", VK.Arg.needPts: "1"])
-            req.catchErrors = false
-            req.maxAttempts = 1
-            
-            VK.Log.put("LongPoll", "Getting server with \(req)")
-            req.send(
-                onSuccess: {response in
-                    VK.Log.put("LongPoll", "get server with \(req)")
-                    lpKey = response["key"].stringValue
-                    server = response["server"].stringValue
-                    ts = response["ts"].stringValue
-                    keyIsExpired = false
-                    update()
-            },
-                onError: {_ in
-                    VK.Log.put("LongPoll", "Error get server with \(req)")
-                    Thread.sleep(forTimeInterval: 10)
-                    getServer()
-            }
-            )
+//            var req = VK.API.Messages.getLongPollServer([VK.Arg.useSsl: "0", VK.Arg.needPts: "1"])
+//            req.catchErrors = false
+//            req.maxAttempts = 1
+//            
+//            VK.Log.put("LongPoll", "Getting server with \(req)")
+//            req.send(
+//                onSuccess: {response in
+//                    VK.Log.put("LongPoll", "get server with \(req)")
+//                    lpKey = response["key"].stringValue
+//                    server = response["server"].stringValue
+//                    ts = response["ts"].stringValue
+//                    keyIsExpired = false
+//                    update()
+//            },
+//                onError: {_ in
+//                    VK.Log.put("LongPoll", "Error get server with \(req)")
+//                    Thread.sleep(forTimeInterval: 10)
+//                    getServer()
+//            }
+//            )
         }
         
         fileprivate static func update() {
-            lpQueue.async {
-                guard isActive else {return}
-                
-                guard !keyIsExpired && !server.isEmpty && !lpKey.isEmpty && !ts.isEmpty else {
-                    observer?.connectionLost()
-                    getServer()
-                    return
-                }
-                
-                var req = RequestConfig(url: "https://\(server)?act=a_check&key=\(lpKey)&ts=\(ts)&wait=25&mode=106")
-                req.catchErrors = false
-                req.timeout = 30
-                req.maxAttempts = 1
-                
-                VK.Log.put("LongPoll", "Send with \(req)")
-                req.send(
-                    onSuccess: {response in
-                        VK.Log.put("LongPoll", "Received response with \(req)")
-                        
-                        ts = response["ts"].stringValue
-                        parse(response["updates"].array)
-                        
-                        _ = (response["failed"].intValue > 0)
-                            ? (keyIsExpired = true)
-                            : observer?.connectionRestore()
-                        update()
-                },
-                    onError: {_ in
-                        VK.Log.put("LongPoll", "Received error with \(req)")
-                        
-                        observer?.connectionLost()
-                        Thread.sleep(forTimeInterval: 10)
-                        update()
-                }
-                )
-            }
+//            lpQueue.async {
+//                guard isActive else {return}
+//                
+//                guard !keyIsExpired && !server.isEmpty && !lpKey.isEmpty && !ts.isEmpty else {
+//                    observer?.connectionLost()
+//                    getServer()
+//                    return
+//                }
+//                
+//                var req = RequestConfig(url: "https://\(server)?act=a_check&key=\(lpKey)&ts=\(ts)&wait=25&mode=106")
+//                req.catchErrors = false
+//                req.timeout = 30
+//                req.maxAttempts = 1
+//                
+//                VK.Log.put("LongPoll", "Send with \(req)")
+//                req.send(
+//                    onSuccess: {response in
+//                        VK.Log.put("LongPoll", "Received response with \(req)")
+//                        
+//                        ts = response["ts"].stringValue
+//                        parse(response["updates"].array)
+//                        
+//                        _ = (response["failed"].intValue > 0)
+//                            ? (keyIsExpired = true)
+//                            : observer?.connectionRestore()
+//                        update()
+//                },
+//                    onError: {_ in
+//                        VK.Log.put("LongPoll", "Received error with \(req)")
+//                        
+//                        observer?.connectionLost()
+//                        Thread.sleep(forTimeInterval: 10)
+//                        update()
+//                }
+//                )
+//            }
         }
         
         // swiftlint:disable cyclomatic_complexity
@@ -253,10 +253,10 @@ public final class JSONWrapper {
 //
 //
 //
-internal final class LPObserver: NSObject {
+final class LPObserver: NSObject {
     private var connected = true
     
-    internal override init() {
+    override init() {
         super.init()
         
         VK.Log.put("LongPoll", "Init observer")

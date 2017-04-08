@@ -45,7 +45,7 @@ public protocol VKDelegate: class {
  * For user authentication you must call authorize()
  */
 public struct VK {
-    internal weak static var delegate: VKDelegate?
+    weak static var delegate: VKDelegate?
     public private(set) static var appID: String?
 
     /**
@@ -138,9 +138,8 @@ extension VK {
 //
 // MARK: - Extensions
 extension VK {
-    ///Access to the API methods
-    public typealias API = _VKAPI
-    public typealias SuccessBlock = (_ response: JSON) -> ()
-    public typealias ErrorBlock = (_ error: Swift.Error) -> ()
-    public typealias ProgressBlock = (_ done: Int64, _ total: Int64) -> ()
+    
+    public struct Api {
+        private init() {}
+    }
 }

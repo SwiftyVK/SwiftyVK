@@ -1,12 +1,14 @@
-public extension Api {
-    public enum Pages: String, Method {
-        case get = "pages.get"
-        case save = "pages.save"
-        case saveAccess = "pages.saveAccess"
-        case getHistory = "pages.getHistory"
-        case getTitles = "pages.getTitles"
-        case getVersion = "pages.getVersion"
-        case parseWiki = "pages.parseWiki"
-        case clearCache = "pages.clearCache"
+public extension VK.Api {
+    public enum Pages: Method {
+        public var _group: String { return "pages" }
+        
+        case get(Parameters)
+        case save(Parameters)
+        case saveAccess(Parameters)
+        case getHistory(Parameters)
+        case getTitles(Parameters)
+        case getVersion(Parameters)
+        case parseWiki(Parameters)
+        case clearCache(Parameters)
     }
 }

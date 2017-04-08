@@ -1,5 +1,7 @@
-public extension Api {
-    public enum Search: String, Method {
-        case getHints = "search.getHints"
+public extension VK.Api {
+    public enum Search: Method {
+        public var _group: String { return "search" }
+        
+        case getHints(Parameters)
     }
 }

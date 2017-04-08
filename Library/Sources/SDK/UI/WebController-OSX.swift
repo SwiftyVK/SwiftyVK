@@ -4,7 +4,7 @@
     
     private let webViewName = Resources.withSuffix("WebView")
     
-    internal final class WebController: NSWindowController, WebFrameLoadDelegate {
+    final class WebController: NSWindowController, WebFrameLoadDelegate {
         
         @IBOutlet private weak var webView: WebView?
         @IBOutlet private weak var activity: NSProgressIndicator!

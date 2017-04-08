@@ -1,12 +1,12 @@
 import Foundation
 
-internal final class CaptchaPresenter {
+final class CaptchaPresenter {
     private let semaphore = DispatchSemaphore(value: 0)
     private var controller: CaptchaController!
     private var sid: String
     private var answer: String?
     
-    static func present(sid: String, imageUrl: String, request: RequestInstance) -> RequestError? {
+    static func present(sid: String, imageUrl: String, request: Task) -> RequestError? {
         
         guard let url = URL(string: imageUrl) else {
             return RequestError.captchaFailed

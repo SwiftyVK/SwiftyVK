@@ -1,7 +1,9 @@
-public extension Api {
-    public enum Storage: String, Method {
-        case get = "storage.get"
-        case set = "storage.set"
-        case getKeys = "storage.getKeys"
+public extension VK.Api {
+    public enum Storage: Method {
+        public var _group: String { return "storage" }
+        
+        case get(Parameters)
+        case set(Parameters)
+        case getKeys(Parameters)
     }
 }

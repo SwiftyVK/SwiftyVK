@@ -1,17 +1,19 @@
-public extension Api {
-    public enum Board: String, Method {
-        case getTopics = "board.getTopics"
-        case getComments = "board.getComments"
-        case addTopic = "board.addTopic"
-        case addComment = "board.addComment"
-        case deleteTopic = "board.deleteTopic"
-        case editTopic = "board.editTopic"
-        case editComment = "board.editComment"
-        case restoreComment = "board.restoreComment"
-        case deleteComment = "board.deleteComment"
-        case openTopic = "board.openTopic"
-        case closeTopic = "board.closeTopic"
-        case fixTopic = "board.fixTopic"
-        case unfixTopic = "board.unfixTopic"
+public extension VK.Api {
+    public enum Board: Method {
+        public var _group: String { return "board" }
+        
+        case getTopics(Parameters)
+        case getComments(Parameters)
+        case addTopic(Parameters)
+        case addComment(Parameters)
+        case deleteTopic(Parameters)
+        case editTopic(Parameters)
+        case editComment(Parameters)
+        case restoreComment(Parameters)
+        case deleteComment(Parameters)
+        case openTopic(Parameters)
+        case closeTopic(Parameters)
+        case fixTopic(Parameters)
+        case unfixTopic(Parameters)
     }
 }

@@ -1,8 +1,10 @@
-public extension Api {
-    public enum Likes: String, Method {
-        case getList = "likes.getList"
-        case add = "likes.add"
-        case delete = "likes.delete"
-        case isLiked = "likes.isLiked"
+public extension VK.Api {
+    public enum Likes: Method {
+        public var _group: String { return "likes" }
+        
+        case getList(Parameters)
+        case add(Parameters)
+        case delete(Parameters)
+        case isLiked(Parameters)
     }
 }

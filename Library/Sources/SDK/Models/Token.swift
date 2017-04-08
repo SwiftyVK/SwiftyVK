@@ -13,9 +13,9 @@ didSet {
 }
 }
 
-internal class Token: NSObject, NSCoding {
+class Token: NSObject, NSCoding {
 
-    internal private(set) static var revoke = true
+    private(set) static var revoke = true
 
     private static let keychainParams = [
         kSecAttrAccessible: kSecAttrAccessibleWhenUnlocked,

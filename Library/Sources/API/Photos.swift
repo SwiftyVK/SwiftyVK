@@ -1,48 +1,50 @@
-public extension Api {
-    public enum Photos: String, Method {
-        case createAlbum = "photos.createAlbum"
-        case editAlbum = "photos.editAlbum"
-        case getAlbums = "photos.getAlbums"
-        case get = "photos.get"
-        case getAlbumsCount = "photos.getAlbumsCount"
-        case getById = "photos.getById"
-        case getUploadServer = "photos.getUploadServer"
-        case getOwnerPhotoUploadServer = "photos.getOwnerPhotoUploadServer"
-        case getChatUploadServer = "photos.getChatUploadServer"
-        case saveOwnerPhoto = "photos.saveOwnerPhoto"
-        case saveWallPhoto = "photos.saveWallPhoto"
-        case getWallUploadServer = "photos.getWallUploadServer"
-        case getMessagesUploadServer = "photos.getMessagesUploadServer"
-        case saveMessagesPhoto = "photos.saveMessagesPhoto"
-        case report = "photos.report"
-        case reportComment = "photos.reportComment"
-        case search = "photos.search"
-        case save = "photos.save"
-        case copy = "photos.copy"
-        case edit = "photos.edit"
-        case move = "photos.move"
-        case makeCover = "photos.makeCover"
-        case reorderAlbums = "photos.reorderAlbums"
-        case reorderPhotos = "photos.reorderPhotos"
-        case getAll = "photos.getAll"
-        case getUserPhotos = "photos.getUserPhotos"
-        case deleteAlbum = "photos.deleteAlbum"
-        case delete = "photos.delete"
-        case restore = "photos.restore"
-        case confirmTag = "photos.confirmTag"
-        case getComments = "photos.getComments"
-        case getAllComments = "photos.getAllComments"
-        case createComment = "photos.createComment"
-        case deleteComment = "photos.deleteComment"
-        case restoreComment = "photos.restoreComment"
-        case editComment = "photos.editComment"
-        case getTags = "photos.getTags"
-        case putTag = "photos.putTag"
-        case removeTag = "photos.removeTag"
-        case getNewTags = "photos.getNewTags"
-        case getMarketAlbumUploadServer = "photos.getMarketAlbumUploadServer"
-        case saveMarketPhoto = "photos.saveMarketPhoto"
-        case saveMarketAlbumPhoto = "photos.saveMarketAlbumPhoto"
-        case getMarketUploadServer = "photos.getMarketUploadServer"
+public extension VK.Api {
+    public enum Photos: Method {
+        public var _group: String { return "photos" }
+        
+        case createAlbum(Parameters)
+        case editAlbum(Parameters)
+        case getAlbums(Parameters)
+        case get(Parameters)
+        case getAlbumsCount(Parameters)
+        case getById(Parameters)
+        case getUploadServer(Parameters)
+        case getOwnerPhotoUploadServer(Parameters)
+        case getChatUploadServer(Parameters)
+        case saveOwnerPhoto(Parameters)
+        case saveWallPhoto(Parameters)
+        case getWallUploadServer(Parameters)
+        case getMessagesUploadServer(Parameters)
+        case saveMessagesPhoto(Parameters)
+        case report(Parameters)
+        case reportComment(Parameters)
+        case search(Parameters)
+        case save(Parameters)
+        case copy(Parameters)
+        case edit(Parameters)
+        case move(Parameters)
+        case makeCover(Parameters)
+        case reorderAlbums(Parameters)
+        case reorderPhotos(Parameters)
+        case getAll(Parameters)
+        case getUserPhotos(Parameters)
+        case deleteAlbum(Parameters)
+        case delete(Parameters)
+        case restore(Parameters)
+        case confirmTag(Parameters)
+        case getComments(Parameters)
+        case getAllComments(Parameters)
+        case createComment(Parameters)
+        case deleteComment(Parameters)
+        case restoreComment(Parameters)
+        case editComment(Parameters)
+        case getTags(Parameters)
+        case putTag(Parameters)
+        case removeTag(Parameters)
+        case getNewTags(Parameters)
+        case getMarketAlbumUploadServer(Parameters)
+        case saveMarketPhoto(Parameters)
+        case saveMarketAlbumPhoto(Parameters)
+        case getMarketUploadServer(Parameters)
     }
 }

@@ -1,22 +1,24 @@
-public extension Api {
-    public enum Wall: String, Method {
-        case get = "video.get"
-        case search = "wall.search"
-        case getById = "wall.getById"
-        case post = "wall.post"
-        case repost = "wall.repost"
-        case getReposts = "wall.getReposts"
-        case edit = "wall.edit"
-        case delete = "wall.delete"
-        case restore = "wall.restore"
-        case pin = "wall.pin"
-        case unpin = "wall.unpin"
-        case getComments = "wall.getComments"
-        case addComment = "wall.addComment"
-        case editComment = "wall.editComment"
-        case deleteComment = "wall.deleteComment"
-        case restoreComment = "wall.restoreComment"
-        case reportPost = "wall.reportPost"
-        case reportComment = "wall.reportComment"
+public extension VK.Api {
+    public enum Wall: Method {
+        public var _group: String { return "wall" }
+        
+        case get(Parameters)
+        case search(Parameters)
+        case getById(Parameters)
+        case post(Parameters)
+        case repost(Parameters)
+        case getReposts(Parameters)
+        case edit(Parameters)
+        case delete(Parameters)
+        case restore(Parameters)
+        case pin(Parameters)
+        case unpin(Parameters)
+        case getComments(Parameters)
+        case addComment(Parameters)
+        case editComment(Parameters)
+        case deleteComment(Parameters)
+        case restoreComment(Parameters)
+        case reportPost(Parameters)
+        case reportComment(Parameters)
     }
 }

@@ -1,7 +1,9 @@
-public extension Api {
-    public enum Utils: String, Method {
-        case checkLink = "utils.checkLink"
-        case resolveScreenName = "utils.resolveScreenName"
-        case getServerTime = "utils.getServerTime"
+public extension VK.Api {
+    public enum Utils: Method {
+        public var _group: String { return "utils" }
+        
+        case checkLink(Parameters)
+        case resolveScreenName(Parameters)
+        case getServerTime(Parameters)
     }
 }

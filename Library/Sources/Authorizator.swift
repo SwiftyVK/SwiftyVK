@@ -8,7 +8,7 @@ private let redirectUrl = "https://oauth.vk.com/blank.html"
 private let webAuthorizeUrl = "https://oauth.vk.com/authorize?"
 private let appAuthorizeUrl = "vkauthorize://authorize?"
 
-internal struct Authorizator {
+struct Authorizator {
 
     fileprivate static var paramsUrl: String? {
         guard let appId = VK.appID, let delegate = VK.delegate else {
@@ -23,7 +23,7 @@ internal struct Authorizator {
 
     fileprivate static var error: AuthError?
 
-    internal static func authorize() -> AuthError? {
+    static func authorize() -> AuthError? {
         error = nil
 
         guard Token.get() == nil else {return nil}
@@ -35,11 +35,11 @@ internal struct Authorizator {
         return error
     }
     
-    internal static func authorizeWith(rawToken: String, expiresIn: Int) {
+    static func authorizeWith(rawToken: String, expiresIn: Int) {
         _ = Token(fromRawToken: rawToken, expiresIn: expiresIn)
     }
 
-    internal static func validate(withUrl url: String) -> AuthError? {
+    static func validate(withUrl url: String) -> AuthError? {
         error = nil
 
         Thread.isMainThread
@@ -95,7 +95,7 @@ internal struct Authorizator {
     private typealias IOSAuthorizator = Authorizator
     extension IOSAuthorizator {
 
-        internal static var canAuthorizeWithVkApp: Bool {
+        static var canAuthorizeWithVkApp: Bool {
             guard let appId = VK.appID, let url = URL(string: "vk\(appId)://") else {
                 return false
             }
@@ -113,7 +113,7 @@ internal struct Authorizator {
             startWithWeb()
         }
 
-        internal static func recieveTokenURL(url: URL, fromApp app: String?) {
+        static func recieveTokenURL(url: URL, fromApp app: String?) {
             guard let appId = VK.appID else {
                 return
             }
@@ -140,7 +140,7 @@ internal struct Authorizator {
 #elseif os(OSX)
     private typealias OSXAuthorizator = Authorizator
     extension OSXAuthorizator {
-        internal static var canAuthorizeWithVkApp: Bool {return false}
+        static var canAuthorizeWithVkApp: Bool {return false}
         fileprivate static func startWithApp() {}
     }
 #endif
