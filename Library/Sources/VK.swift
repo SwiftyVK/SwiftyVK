@@ -16,9 +16,6 @@ public protocol VKDelegate: class {
     func vkDidUnauthorize()
     ///Called when SwiftyVK did failed autorization
     func vkAutorizationFailedWith(error: AuthError)
-    /** ---DEPRECATED. TOKEN NOW STORED IN KEYCHAIN--- Called when SwiftyVK need know where a token is located
-     - returns: Path to save/read token or nil if should save token to UserDefaults*/
-    func vkShouldUseTokenPath() -> String?
     #if os(iOS)
     /**Called when need to display a view from SwiftyVK
      - returns: UIViewController that should present autorization view controller*/

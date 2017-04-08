@@ -103,48 +103,11 @@ class Token: NSObject, NSCoding {
             return tokenInstance
         }
 
-        if let path = VK.delegate?.vkShouldUseTokenPath() {
-            tokenInstance = self.loadFromFile(path)
-        }
-        else {
-            tokenInstance = self.loadFromDefaults()
-        }
-
         if tokenInstance == nil {
             VK.Log.put("Token", " not saved yet in storage")
         }
 
         return tokenInstance
-    }
-
-    private class func loadFromDefaults() -> Token? {
-        let defaults = UserDefaults.standard
-        
-        if !(defaults.object(forKey: "Token") != nil) {return nil}
-        
-        guard
-            let data = defaults.object(forKey: "Token") as? Data,
-            let object: Any = NSKeyedUnarchiver.unarchiveObject(with: data)
-            else {
-                VK.Log.put("Token", "load from userDefaults failed")
-                return nil
-        }
-
-        VK.Log.put("Token", "loaded from userDefaults")
-        return object as? Token
-    }
-
-    private class func loadFromFile(_ filePath: String) -> Token? {
-        let manager = FileManager.default
-        
-        if !manager.fileExists(atPath: filePath) {
-            VK.Log.put("Token", "loaded from file \(filePath) failed")
-            return nil
-        }
-        
-        let token = (NSKeyedUnarchiver.unarchiveObject(withFile: filePath)) as? Token
-        VK.Log.put("Token", "loaded from file: \(filePath)")
-        return token
     }
 
     private static func loadFromKeychain() -> Token? {
@@ -193,18 +156,6 @@ class Token: NSObject, NSCoding {
 
     private class func removeSavedData() {
         SecItemDelete(keychainParams)
-
-        if let path = VK.delegate?.vkShouldUseTokenPath() {
-            let manager = FileManager.default
-            if manager.fileExists(atPath: path) {
-                _ = try? manager.removeItem(atPath: path)
-            }
-        }
-        else {
-            let defaults = UserDefaults.standard
-            if defaults.object(forKey: "Token") != nil {defaults.removeObject(forKey: "Token")}
-            defaults.synchronize()
-        }
     }
 
     deinit {VK.Log.put("Token", "deinit \(self)")}
