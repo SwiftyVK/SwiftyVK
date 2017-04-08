@@ -1,6 +1,5 @@
 public extension VK.Api {
     public enum Groups: Method {
-        
         public var _group: String { return "groups" }
         
         case isMember(Parameters)
