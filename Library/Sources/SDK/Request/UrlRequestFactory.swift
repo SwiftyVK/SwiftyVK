@@ -75,7 +75,7 @@ struct UrlRequestFactoryImpl: UrlRequestFactory {
         for (index, file) in media.enumerated() {
             let name: String
 
-            switch file.mediaType {
+            switch file {
             case .video:
                 name = "video_file"
             case .audio, .document:

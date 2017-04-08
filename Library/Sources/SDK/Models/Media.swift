@@ -1,31 +1,17 @@
 import Foundation
 
-public struct Media: CustomStringConvertible {
+public enum Media: CustomStringConvertible {
+    case image(data: Data, type: ImageType)
+    case audio(data: Data)
+    case video(data: Data)
+    case document(data: Data, type: String)
     
-    enum MediaType {
-        case image
-        case audio
-        case video
-        case document
-    }
-    
-    public enum ImageType: String {
-        case JPG
-        case PNG
-        case BMP
-        case GIF
-    }
-    
-    let data: Data
-    let mediaType: MediaType
-    var imageType: ImageType = .JPG
-    var documentType: String = "untitled"
     var type: String {
-        switch mediaType {
-        case .image:
-            return imageType.rawValue
-        case .document:
-            return documentType
+        switch self {
+        case .image(_, let type):
+            return type.rawValue
+        case .document(_, let type):
+            return type
         case .audio:
             return "mp3"
         case .video:
@@ -33,29 +19,27 @@ public struct Media: CustomStringConvertible {
         }
     }
     
+    var data: Data {
+        switch self {
+        case .image(let data, _):
+            return data
+        case .document(let data, _):
+            return data
+        case .audio(let data):
+            return data
+        case .video(let data):
+            return data
+        }
+    }
+    
     public var description: String {
         return "Media with type \(type)"
     }
-    
-    public init(imageData: Data, type: ImageType) {
-        mediaType = .image
-        imageType = type
-        data = imageData
-    }
-    
-    public init(audioData: Data) {
-        mediaType = .audio
-        data = audioData
-    }
-    
-    public init(videoData: Data) {
-        mediaType = .video
-        data = videoData
-    }
-    
-    public init(documentData: Data, type: String) {
-        mediaType = .document
-        documentType = type
-        data = documentData
-    }
+}
+
+public enum ImageType: String {
+    case JPG
+    case PNG
+    case BMP
+    case GIF
 }
