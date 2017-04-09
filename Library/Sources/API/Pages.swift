@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Pages: Method {
-        public var _group: String { return "pages" }
-        
+    public enum Pages: Method {        
         case get(Parameters)
         case save(Parameters)
         case saveAccess(Parameters)

@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Notes: Method {
-        public var _group: String { return "notes" }
-        
+    public enum Notes: Method {        
         case get(Parameters)
         case getById(Parameters)
         case getFriendsNotes(Parameters)

@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Database: Method {
-        public var _group: String { return "database" }
-        
+    public enum Database: Method {        
         case getCountries(Parameters)
         case getRegions(Parameters)
         case getStreetsById(Parameters)

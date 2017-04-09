@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Board: Method {
-        public var _group: String { return "board" }
-        
+    public enum Board: Method {        
         case getTopics(Parameters)
         case getComments(Parameters)
         case addTopic(Parameters)

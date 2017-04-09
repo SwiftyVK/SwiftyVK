@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Account: Method {
-        public var _group: String { return "account" }
-        
+    public enum Account: Method {        
         case getCounters(Parameters)
         case setNameInMenu(Parameters)
         case setOnline(Parameters)

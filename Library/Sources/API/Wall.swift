@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Wall: Method {
-        public var _group: String { return "wall" }
-        
+    public enum Wall: Method {        
         case get(Parameters)
         case search(Parameters)
         case getById(Parameters)

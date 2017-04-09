@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum NewsFeed: Method {
-        public var _group: String { return "newsfeed" }
-        
+    public enum NewsFeed: Method {        
         case get(Parameters)
         case getRecommended(Parameters)
         case getComments(Parameters)

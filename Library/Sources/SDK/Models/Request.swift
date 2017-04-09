@@ -11,7 +11,7 @@ public final class Request {
     
     init(
         rawRequest: Raw,
-        config: Config
+        config: Config = .default
         ) {
         self.rawRequest = rawRequest
         self.config = config

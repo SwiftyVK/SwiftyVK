@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Users: Method {
-        public var _group: String { return "users" }
-        
+    public enum Users: Method {        
         case get(Parameters)
         case search(Parameters)
         case isAppUser(Parameters)

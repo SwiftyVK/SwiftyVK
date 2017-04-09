@@ -45,6 +45,7 @@ struct UrlRequestFactoryImpl: UrlRequestFactory {
 
         var req = URLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
         req.httpMethod = httpMethod.rawValue
+        print(methodUrl + apiMethod + "?" + query)
 
         if httpMethod == .GET {
             req.url = URL(string: methodUrl + apiMethod + "?" + query)
@@ -126,7 +127,7 @@ struct UrlRequestFactoryImpl: UrlRequestFactory {
             paramArray.add("captcha_key=\(key)")
             sharedCaptchaAnswer = nil
         }
-        
+
         return paramArray.componentsJoined(by: "&")
     }
 }

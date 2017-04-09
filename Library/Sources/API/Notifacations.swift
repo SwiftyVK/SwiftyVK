@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Notifications: Method {
-        public var _group: String { return "notifications" }
-        
+    public enum Notifications: Method {        
         case get(Parameters)
         case markAsViewed(Parameters)
     }

@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Photos: Method {
-        public var _group: String { return "photos" }
-        
+    public enum Photos: Method {        
         case createAlbum(Parameters)
         case editAlbum(Parameters)
         case getAlbums(Parameters)

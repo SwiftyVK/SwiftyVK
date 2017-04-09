@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Market: Method {
-        public var _group: String { return "market" }
-        
+    public enum Market: Method {        
         case get(Parameters)
         case getById(Parameters)
         case search(Parameters)

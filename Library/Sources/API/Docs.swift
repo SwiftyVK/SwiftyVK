@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Docs: Method {
-        public var _group: String { return "docs" }
-        
+    public enum Docs: Method {        
         case get(Parameters)
         case getById(Parameters)
         case getUploadServer(Parameters)

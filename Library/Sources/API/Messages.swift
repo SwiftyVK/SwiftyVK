@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Messages: Method {
-        public var _group: String { return "messages" }
-        
+    public enum Messages: Method {        
         case get(Parameters)
         case getDialogs(Parameters)
         case getById(Parameters)

@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Search: Method {
-        public var _group: String { return "search" }
-        
+    public enum Search: Method {        
         case getHints(Parameters)
     }
 }

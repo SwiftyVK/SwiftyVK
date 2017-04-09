@@ -1,6 +1,4 @@
-public protocol Method {
-    var _group: String { get }
-}
+public protocol Method {}
 
 public extension Method {
     
@@ -13,11 +11,35 @@ public extension Method {
         return request().send(with: callbacks)
     }
     
-    var method: String {
-        return "\(_group).\(Mirror(reflecting: self).children.first?.label ?? String())"
+    private var group: String {
+        return String(describing: type(of: self)).lowercased()
     }
     
-    var parameters: Parameters {
+    private var method: String {
+        return "\(group).\(Mirror(reflecting: self).children.first?.label ?? String())"
+    }
+    
+    private var parameters: Parameters {
         return Mirror(reflecting: self).children.first?.value as? Parameters ?? .empty
+    }
+}
+
+// Do not use this class directly. Use Api.Custom
+public class CustomMethod {
+    public let method: String
+    public let parameters: Parameters
+    
+    init(method: String, parameters: Parameters = .empty) {
+        self.method = method
+        self.parameters = parameters
+    }
+    
+    public func request(with config: Config = .default) -> Request {
+        return Request(rawRequest: .api(method: method, parameters: parameters), config: config)
+    }
+    
+    @discardableResult
+    public func send(with callbacks: Callbacks) -> Task {
+        return request().send(with: callbacks)
     }
 }

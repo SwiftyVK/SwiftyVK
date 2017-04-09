@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Video: Method {
-        public var _group: String { return "video" }
-        
+    public enum Video: Method {        
         case get(Parameters)
         case edit(Parameters)
         case add(Parameters)

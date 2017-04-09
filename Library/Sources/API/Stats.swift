@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Stats: Method {
-        public var _group: String { return "stats" }
-        
+    public enum Stats: Method {        
         case get(Parameters)
         case trackVisitor(Parameters)
         case getPostReach(Parameters)

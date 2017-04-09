@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Polls: Method {
-        public var _group: String { return "polls" }
-        
+    public enum Polls: Method {        
         case getById(Parameters)
         case addVote(Parameters)
         case deleteVote(Parameters)

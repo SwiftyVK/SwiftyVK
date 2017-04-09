@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Gifts: Method {
-        public var _group: String { return "gifts" }
-        
+    public enum Gifts: Method {        
         case get(Parameters)
     }
 }

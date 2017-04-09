@@ -44,9 +44,8 @@ final class APIWorker {
     
     
     class func captcha() {
-        
-        VK.Api.Custom.methodWith(name: "captcha.force").send(with: Callbacks(
-            onSuccess: {response in print("SwiftyVK: captcha.force success \n \(response)") },
+        VK.Api.Custom.method(name: "captcha.force").send(with: Callbacks(
+            onSuccess: { response in print("SwiftyVK: captcha.force success \n \(response)") },
             onError: { error in print("SwiftyVK: captcha.force fail \n \(error)") }
             )
         )
@@ -55,7 +54,7 @@ final class APIWorker {
     
     
     class func validation() {
-        VK.Api.Custom.methodWith(name: "account.testValidation").send(with: Callbacks(
+        VK.Api.Custom.method(name: "account.testValidation").send(with: Callbacks(
             onSuccess: {response in print("SwiftyVK: account.testValidation success \n \(response)")},
             onError: {error in print("SwiftyVK: account.testValidation fail \n \(error)")}
             )

@@ -1,7 +1,5 @@
 public extension VK.Api {
-    public enum Fave: Method {
-        public var _group: String { return "fave" }
-        
+    public enum Fave: Method {        
         case getUsers(Parameters)
         case getPhotos(Parameters)
         case getPosts(Parameters)
