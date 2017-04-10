@@ -315,6 +315,8 @@ extension VK {
     case randomId = "random_id"
     case aid
     case gid
+    case deviceId = "device_id"
+    case sandbox
 
     public var hashValue: Int {
       return self.rawValue.hashValue
