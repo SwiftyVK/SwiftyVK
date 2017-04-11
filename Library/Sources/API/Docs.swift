@@ -1,5 +1,5 @@
 public extension VK.Api {
-    public enum Docs: Method {        
+    public enum Docs: Method {
         case get(Parameters)
         case getById(Parameters)
         case getUploadServer(Parameters)

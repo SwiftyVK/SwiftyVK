@@ -23,13 +23,21 @@ public final class Request {
     }
     
     @discardableResult
-    public func send(with callbacks: Callbacks) -> Task {
-        return TaskFactoryImpl<AttemptImpl, UrlRequestFactoryImpl>.makeTaskFrom(
+    public func send(with callbacks: Callbacks, session: Session?) -> Task {
+        
+        guard let session = (session ?? VK.depencyBox.sessionClass().default) as? InternalSession else {
+            assertionFailure("Session should be a InternalSession!")
+            return FailedTask()
+        }
+        
+        let task = VK.depencyBox.task(
             request: self,
             callbacks: callbacks,
-            taskSheduler: TaskShedulerImpl(),
-            attemptSheduler: AttemptShedulerImpl(limit: 0)
+            session: session
         )
+        
+        session.shedule(task: task, concurrent: rawRequest.canSentConcurrently)
+        return task
     }
 }
 

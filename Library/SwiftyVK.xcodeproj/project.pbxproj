@@ -30,6 +30,8 @@
 		A20FF11C1BEB7DC8009FBE3D /* Authorizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */; };
 		A217DAA81E9924DE00EA1430 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAA71E9924DE00EA1430 /* Method.swift */; };
 		A217DAA91E9924DE00EA1430 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAA71E9924DE00EA1430 /* Method.swift */; };
+		A217DAAC1E9926A500EA1430 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAAB1E9926A500EA1430 /* Session.swift */; };
+		A217DAAD1E9926A500EA1430 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAAB1E9926A500EA1430 /* Session.swift */; };
 		A21E81591E2A7E68008E81E7 /* UrlCharactesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E81581E2A7E68008E81E7 /* UrlCharactesSet.swift */; };
 		A21E815A1E2A8303008E81E7 /* UrlCharactesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E81581E2A7E68008E81E7 /* UrlCharactesSet.swift */; };
 		A236B2B61DB6864F002376C8 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B51DB6864F002376C8 /* WebPresenter.swift */; };
@@ -53,10 +55,10 @@
 		A26F8B831E3A78F400273E35 /* SwiftyVKResources-iOS.bundle in Copy Bundle Resources For Cocoapods */ = {isa = PBXBuildFile; fileRef = A2527D551BD1134500F65412 /* SwiftyVKResources-iOS.bundle */; };
 		A28368EC1D9D742700EEBE2A /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* Attempt.swift */; };
 		A28368ED1D9D742D00EEBE2A /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* Attempt.swift */; };
+		A2838DA31E9AA0DA00FE5BE2 /* DepencyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2838DA21E9AA0DA00FE5BE2 /* DepencyBox.swift */; };
+		A2838DA41E9AA0DA00FE5BE2 /* DepencyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2838DA21E9AA0DA00FE5BE2 /* DepencyBox.swift */; };
 		A2967E741CBBC4A700B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
 		A2967E751CBBC51600B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
-		A29F1CD11E9566FB00BE5369 /* TaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29F1CD01E9566FB00BE5369 /* TaskFactory.swift */; };
-		A29F1CD21E9566FB00BE5369 /* TaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29F1CD01E9566FB00BE5369 /* TaskFactory.swift */; };
 		A29F1CD41E95674A00BE5369 /* TaskSheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */; };
 		A29F1CD51E95674A00BE5369 /* TaskSheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */; };
 		A2B4ECAC1DCA4F6B009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
@@ -207,6 +209,7 @@
 		A2066AE91D9C388F0065A4D7 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorizator.swift; sourceTree = "<group>"; };
 		A217DAA71E9924DE00EA1430 /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
+		A217DAAB1E9926A500EA1430 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		A21E81581E2A7E68008E81E7 /* UrlCharactesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlCharactesSet.swift; sourceTree = "<group>"; };
 		A234A40A1BE34F6800856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/CaptchaView-OSX.strings"; sourceTree = "<group>"; };
 		A234A40B1BE34F6800856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
@@ -284,8 +287,8 @@
 		A25AE9381D9AD57E008C0AA9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WebController-iOS.swift"; sourceTree = "<group>"; };
 		A28368EB1D9D742700EEBE2A /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
+		A2838DA21E9AA0DA00FE5BE2 /* DepencyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepencyBox.swift; sourceTree = "<group>"; };
 		A2967E731CBBC4A700B7D48F /* Gifts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gifts.swift; sourceTree = "<group>"; };
-		A29F1CD01E9566FB00BE5369 /* TaskFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskFactory.swift; sourceTree = "<group>"; };
 		A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskSheduler.swift; sourceTree = "<group>"; };
 		A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapthcaPresenter.swift; sourceTree = "<group>"; };
 		A2B4ECAE1DCA4FA5009435B6 /* CaptchaController-OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CaptchaController-OSX.swift"; sourceTree = "<group>"; };
@@ -298,6 +301,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		A217DAAA1E99266100EA1430 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				A217DAAB1E9926A500EA1430 /* Session.swift */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
 		A24A294A1E96BC53006152E6 /* Shedulers */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,7 +405,9 @@
 		A2527D801BD12FD200F65412 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				A2838DA21E9AA0DA00FE5BE2 /* DepencyBox.swift */,
 				A2527D811BD12FD200F65412 /* Models */,
+				A217DAAA1E99266100EA1430 /* Session */,
 				A2527D881BD12FD200F65412 /* Task */,
 				A24A294A1E96BC53006152E6 /* Shedulers */,
 				A2527D8D1BD12FD200F65412 /* UI */,
@@ -421,7 +434,6 @@
 		A2527D881BD12FD200F65412 /* Task */ = {
 			isa = PBXGroup;
 			children = (
-				A29F1CD01E9566FB00BE5369 /* TaskFactory.swift */,
 				A2066AE91D9C388F0065A4D7 /* Task.swift */,
 				A28368EB1D9D742700EEBE2A /* Attempt.swift */,
 				A2527D8A1BD12FD200F65412 /* UrlRequestFactory.swift */,
@@ -710,7 +722,6 @@
 			files = (
 				A2EB6EEA1BD18394008E7D86 /* VK.swift in Sources */,
 				A2EB6EEB1BD18394008E7D86 /* LongPoll.swift in Sources */,
-				A29F1CD21E9566FB00BE5369 /* TaskFactory.swift in Sources */,
 				A29F1CD51E95674A00BE5369 /* TaskSheduler.swift in Sources */,
 				A2EB6EEC1BD18394008E7D86 /* Account.swift in Sources */,
 				A2EB6EEE1BD18394008E7D86 /* Audio.swift in Sources */,
@@ -719,6 +730,7 @@
 				A28368ED1D9D742D00EEBE2A /* Attempt.swift in Sources */,
 				A2EB6EF11BD18394008E7D86 /* Docs.swift in Sources */,
 				A2EB6EF21BD18394008E7D86 /* Fave.swift in Sources */,
+				A217DAAD1E9926A500EA1430 /* Session.swift in Sources */,
 				A2EB6EF31BD18394008E7D86 /* Friends.swift in Sources */,
 				A2EB6EF41BD18394008E7D86 /* Groups.swift in Sources */,
 				A26D88BB1DC124C200AD63CD /* WebController-iOS.swift in Sources */,
@@ -729,6 +741,7 @@
 				A24A294E1E96BC77006152E6 /* AttemptSheduler.swift in Sources */,
 				A2EB6EF91BD18394008E7D86 /* Notifacations.swift in Sources */,
 				A2EB6EFA1BD18394008E7D86 /* Pages.swift in Sources */,
+				A2838DA41E9AA0DA00FE5BE2 /* DepencyBox.swift in Sources */,
 				A2EB6EFB1BD18394008E7D86 /* Photos.swift in Sources */,
 				A2EB6EFC1BD18394008E7D86 /* Places.swift in Sources */,
 				A24390571DA2BA1D00B9D047 /* Errors.swift in Sources */,
@@ -789,6 +802,7 @@
 				A2EB6EC71BD18389008E7D86 /* Groups.swift in Sources */,
 				A2EB6EC81BD18389008E7D86 /* Likes.swift in Sources */,
 				A2EB6EC91BD18389008E7D86 /* Messages.swift in Sources */,
+				A2838DA31E9AA0DA00FE5BE2 /* DepencyBox.swift in Sources */,
 				A2EB6ECA1BD18389008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6ECB1BD18389008E7D86 /* Notes.swift in Sources */,
 				A236B2B91DB68E4F002376C8 /* WebController-OSX.swift in Sources */,
@@ -798,7 +812,7 @@
 				A2EB6ECD1BD18389008E7D86 /* Pages.swift in Sources */,
 				A2EB6ECE1BD18389008E7D86 /* Photos.swift in Sources */,
 				A2EB6ECF1BD18389008E7D86 /* Places.swift in Sources */,
-				A29F1CD11E9566FB00BE5369 /* TaskFactory.swift in Sources */,
+				A217DAAC1E9926A500EA1430 /* Session.swift in Sources */,
 				A2EB6ED01BD18389008E7D86 /* Polls.swift in Sources */,
 				A2EB6ED11BD18389008E7D86 /* Search.swift in Sources */,
 				A2967E741CBBC4A700B7D48F /* Gifts.swift in Sources */,

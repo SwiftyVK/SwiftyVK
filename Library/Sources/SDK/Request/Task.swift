@@ -15,7 +15,7 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
     private let callbacks: Callbacks
     private let semaphore = DispatchSemaphore(value: 0)
     private var sendAttempts = 0
-    private var attemptSheduler: AttemptSheduler
+    private var session: InternalSession
     private weak var currentAttempt: Attempt?
     
     override var description: String {
@@ -25,12 +25,12 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
     init(
         request: Request,
         callbacks: Callbacks,
-        attemptSheduler: AttemptSheduler
+        session: InternalSession
         ) {
         self.id = IdGenerator.next()
         self.request  = request
         self.callbacks = callbacks
-        self.attemptSheduler = attemptSheduler
+        self.session = session
         super.init()
     }
     
@@ -78,7 +78,7 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
             callbacks: AttemptCallbacks(onFinish: handleResult, onSent: handleSended, onRecive: handleReceived)
         )
         
-        attemptSheduler.shedule(attempt: newAttempt, concurrent: request.rawRequest.canSentConcurrently)
+        session.shedule(attempt: newAttempt, concurrent: request.rawRequest.canSentConcurrently)
         currentAttempt = newAttempt
     }
     
@@ -172,6 +172,11 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
             execute(error: error)
         }
     }
+}
+
+public struct FailedTask: Task {
+    public let state: TaskState = .failed(RequestError.notConfigured)
+    public func cancel() {}
 }
 
 public enum TaskState {

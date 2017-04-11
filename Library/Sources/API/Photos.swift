@@ -1,5 +1,5 @@
 public extension VK.Api {
-    public enum Photos: Method {        
+    public enum Photos: Method {
         case createAlbum(Parameters)
         case editAlbum(Parameters)
         case getAlbums(Parameters)

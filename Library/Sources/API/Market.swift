@@ -1,5 +1,5 @@
 public extension VK.Api {
-    public enum Market: Method {        
+    public enum Market: Method {
         case get(Parameters)
         case getById(Parameters)
         case search(Parameters)

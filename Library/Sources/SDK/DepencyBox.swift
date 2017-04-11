@@ -1,0 +1,32 @@
+protocol DepencyBox {
+    
+    func sessionClass() -> Session.Type
+
+    func task(
+        request: Request,
+        callbacks: Callbacks,
+        session: InternalSession
+        ) -> Task
+}
+
+final class DepencyBoxImpl: DepencyBox {
+    
+    init() {}
+    
+    func sessionClass() -> Session.Type {
+        return SessionImpl.self
+    }
+    
+    func task(
+        request: Request,
+        callbacks: Callbacks,
+        session: InternalSession
+        ) -> Task {
+        
+        return TaskImpl<AttemptImpl, UrlRequestFactoryImpl>(
+            request: request,
+            callbacks: callbacks,
+            session: session
+        )
+    }
+}

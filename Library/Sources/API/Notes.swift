@@ -1,5 +1,5 @@
 public extension VK.Api {
-    public enum Notes: Method {        
+    public enum Notes: Method {
         case get(Parameters)
         case getById(Parameters)
         case getFriendsNotes(Parameters)

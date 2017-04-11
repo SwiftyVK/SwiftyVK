@@ -1,5 +1,5 @@
 public extension VK.Api {
-    public enum Groups: Method {        
+    public enum Groups: Method {
         case isMember(Parameters)
         case getById(Parameters)
         case get(Parameters)

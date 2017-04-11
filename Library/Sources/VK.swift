@@ -42,6 +42,7 @@ public protocol VKDelegate: class {
  * For user authentication you must call authorize()
  */
 public struct VK {
+    static var depencyBox: DepencyBox = DepencyBoxImpl()
     weak static var delegate: VKDelegate?
     public private(set) static var appID: String?
 

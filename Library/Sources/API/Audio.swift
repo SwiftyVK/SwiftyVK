@@ -1,5 +1,6 @@
 public extension VK.Api {
-    public enum Audio: Method {        
+    
+    public enum Audio: Method {
         case get(Parameters)
         case getById(Parameters)
         case getLyrics(Parameters)

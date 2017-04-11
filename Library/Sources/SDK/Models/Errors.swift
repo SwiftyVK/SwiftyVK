@@ -1,7 +1,5 @@
 import Foundation
 
-
-
 public enum AuthError: Int, CustomNSError, CustomStringConvertible {
     case nilParentView              = 1
     case deniedFromUser             = 2
@@ -17,8 +15,6 @@ public enum AuthError: Int, CustomNSError, CustomStringConvertible {
         return String(format: "error %@[%d]: %@", AuthError.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
     }
 }
-
-
 
 public enum RequestError: Int, CustomNSError, CustomStringConvertible {
     case unexpectedResponse         = 1
@@ -37,8 +33,6 @@ public enum RequestError: Int, CustomNSError, CustomStringConvertible {
     }
 }
 
-
-
 public struct ApiError: CustomNSError, CustomStringConvertible {
     public static let errorDomain = "SwiftyVKApiError"
     public private(set) var errorCode: Int = 0
@@ -48,8 +42,6 @@ public struct ApiError: CustomNSError, CustomStringConvertible {
         return String(format: "error %@[%d]: %@", ApiError.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
     }
 
-    
-    
     init(json: JSON) {
         
         if let message = json["error_msg"].string {
@@ -72,8 +64,6 @@ public struct ApiError: CustomNSError, CustomStringConvertible {
         }
     }
 }
-
-
 
 extension NSError {
     override open var description: String {
