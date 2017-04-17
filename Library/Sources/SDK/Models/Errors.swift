@@ -45,7 +45,7 @@ public struct ApiError: CustomNSError, CustomStringConvertible {
     init(json: JSON) {
         
         if let message = json["error_msg"].string {
-            errorCode = json["error_code"].intValue
+            errorCode  = json["error_code"].intValue
             errorUserInfo[NSLocalizedDescriptionKey] = message
         }
         else if let message = json.string {

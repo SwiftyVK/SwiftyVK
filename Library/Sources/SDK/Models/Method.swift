@@ -7,8 +7,8 @@ public extension Method {
     }
     
     @discardableResult
-    public func send(with callbacks: Callbacks, session: Session? = nil) -> Task {
-        return request().send(with: callbacks, session: session)
+    public func send(with callbacks: Callbacks, in session: Session? = nil) -> Task {
+        return request().send(with: callbacks, in: session)
     }
     
     private var group: String {
@@ -39,7 +39,7 @@ public class CustomMethod {
     }
     
     @discardableResult
-    public func send(with callbacks: Callbacks, session: Session? = nil) -> Task {
-        return request().send(with: callbacks, session: session)
+    public func send(with callbacks: Callbacks, in session: Session? = nil) -> Task {
+        return request().send(with: callbacks, in: session)
     }
 }

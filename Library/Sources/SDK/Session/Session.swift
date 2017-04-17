@@ -1,13 +1,9 @@
 public protocol Session: class {
     static var `default`: Session { get }
+    func send(request: Request, callbacks: Callbacks) -> Task
 }
 
-protocol InternalSession: Session {
-    func shedule(task: Task, concurrent: Bool)
-    func shedule(attempt: Attempt, concurrent: Bool)
-}
-
-public final class SessionImpl: InternalSession {
+public final class SessionImpl: Session {
     public static let `default`: Session = SessionImpl()
     
     let taskSheduler: TaskSheduler = TaskShedulerImpl()
@@ -15,8 +11,19 @@ public final class SessionImpl: InternalSession {
     
 //    let appId: String
 //    let scopes: VK.Scope
-    
+
     init() {}
+    
+    public func send(request: Request, callbacks: Callbacks) -> Task {
+        let task = VK.depencyBox.task(
+            request: request,
+            callbacks: callbacks,
+            attemptSheduler: attemptSheduler
+        )
+        
+        shedule(task: task, concurrent: request.rawRequest.canSentConcurrently)
+        return task
+    }
     
     func shedule(task: Task, concurrent: Bool) {
         taskSheduler.shedule(task: task, concurrent: concurrent)

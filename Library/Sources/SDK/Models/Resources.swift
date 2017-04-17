@@ -17,15 +17,15 @@ struct Resources {
     
     static let bundle: Bundle = {
         let name = "SwiftyVKResources" + pathSuffix
-        let ext = "bundle"
+        let `extension` = "bundle"
         
         if
-            let path = Bundle.main.path(forResource: name, ofType: ext),
+            let path = Bundle.main.path(forResource: name, ofType: `extension`),
             let bundle = Bundle(path:path) {
             return bundle
         }
         else if
-            let path = Bundle(for:object_getClass(ResourceTestClass())).path(forResource: name, ofType: ext),
+            let path = Bundle(for:object_getClass(ResourceTestClass())).path(forResource: name, ofType: `extension`),
             let bundle = Bundle(path:path) {
             return bundle
         }

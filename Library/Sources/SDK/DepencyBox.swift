@@ -5,7 +5,7 @@ protocol DepencyBox {
     func task(
         request: Request,
         callbacks: Callbacks,
-        session: InternalSession
+        attemptSheduler: AttemptSheduler
         ) -> Task
 }
 
@@ -20,13 +20,13 @@ final class DepencyBoxImpl: DepencyBox {
     func task(
         request: Request,
         callbacks: Callbacks,
-        session: InternalSession
+        attemptSheduler: AttemptSheduler
         ) -> Task {
         
         return TaskImpl<AttemptImpl, UrlRequestFactoryImpl>(
             request: request,
             callbacks: callbacks,
-            session: session
+            attemptSheduler: attemptSheduler
         )
     }
 }
