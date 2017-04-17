@@ -1,31 +1,24 @@
 protocol TaskSheduler {
-    func shedule(task: Task, concurrent: Bool)
+    func shedule(task: Task, concurrent: Bool) throws
 }
 
 final class TaskShedulerImpl: TaskSheduler {
     
-    private let serialQueue: OperationQueue = {
+    private lazy var serialQueue: OperationQueue = {
         let queue = OperationQueue()
-        queue.underlyingQueue = DispatchQueue(
-            label: "SwiftyVK.serialTaskQueue",
-            qos: .userInitiated
-        )
+        queue.maxConcurrentOperationCount = 1
         return queue
     }()
     
-    private let concurrentQueue: OperationQueue = {
+    private lazy var concurrentQueue: OperationQueue = {
         let queue = OperationQueue()
-        queue.underlyingQueue = DispatchQueue(
-            label: "SwiftyVK.concurrentTaskQueue",
-            qos: .userInitiated,
-            attributes: .concurrent
-        )
+        queue.maxConcurrentOperationCount = .max
         return queue
     }()
     
-    func shedule(task: Task, concurrent: Bool) {
+    func shedule(task: Task, concurrent: Bool) throws {
         guard let task = task as? Operation else {
-            return
+            throw RequestError.wrongTaskType
         }
         
         if concurrent {

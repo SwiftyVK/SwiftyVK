@@ -18,6 +18,10 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
     private var attemptSheduler: AttemptSheduler
     private weak var currentAttempt: Attempt?
     
+    override var isFinished: Bool {
+        return state == .finished(JSON(true))
+    }
+    
     override var description: String {
         return "task #\(id)"
     }
@@ -115,7 +119,7 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
     private func execute(response: JSON) {
         guard !isCancelled else { return }
         VK.Log.put(self, "execute success block")
-        state = .successed(response)
+        state = .finished(response)
         callbacks.onSuccess?(response)
         semaphore.signal()
     }
@@ -174,12 +178,29 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
     }
 }
 
-public enum TaskState {
+public enum TaskState: Equatable {
     case created
     case sended
-    case successed(JSON)
+    case finished(JSON)
     case failed(Error)
     case cancelled
+    
+    public static func ==(lhs: TaskState, rhs: TaskState) -> Bool {
+        switch (lhs, rhs) {
+        case (created, created):
+            return true
+        case (sended, sended):
+            return true
+        case (finished, finished):
+            return true
+        case (failed, failed):
+            return true
+        case (cancelled, cancelled):
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 struct IdGenerator {
