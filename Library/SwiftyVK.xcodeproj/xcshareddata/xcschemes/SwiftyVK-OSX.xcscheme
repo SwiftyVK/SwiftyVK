@@ -20,6 +20,20 @@
                ReferencedContainer = "container:SwiftyVK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A23708B91EA52F0D00103212"
+               BuildableName = "SwiftyVK-Tests-OSX.xctest"
+               BlueprintName = "SwiftyVK-Tests-OSX"
+               ReferencedContainer = "container:SwiftyVK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -29,7 +43,26 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A23708B91EA52F0D00103212"
+               BuildableName = "SwiftyVK-Tests-OSX.xctest"
+               BlueprintName = "SwiftyVK-Tests-OSX"
+               ReferencedContainer = "container:SwiftyVK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "A2EB6EA71BD180E9008E7D86"
+            BuildableName = "SwiftyVK.framework"
+            BlueprintName = "SwiftyVK-OSX"
+            ReferencedContainer = "container:SwiftyVK.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

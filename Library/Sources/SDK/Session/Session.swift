@@ -29,7 +29,7 @@ public final class SessionImpl: Session {
         try? taskSheduler.shedule(task: task, concurrent: concurrent)
     }
     
-    func shedule(attempt: Attempt, concurrent: Bool) {
-        attemptSheduler.shedule(attempt: attempt, concurrent: concurrent)
+    func shedule(attempt: Attempt, concurrent: Bool) throws {
+        try attemptSheduler.shedule(attempt: attempt, concurrent: concurrent)
     }
 }

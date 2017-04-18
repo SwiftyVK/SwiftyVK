@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "A21F10B81DCDFCF6003EFDDC"
+            BuildableName = "LintAllTargets"
+            BlueprintName = "LintAllTargets"
+            ReferencedContainer = "container:SwiftyVK.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

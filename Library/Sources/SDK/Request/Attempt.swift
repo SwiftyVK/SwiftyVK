@@ -14,6 +14,14 @@ final class AttemptImpl: Operation, Attempt {
     private let timeout: TimeInterval
     private var task: URLSessionTask!
     private let callbacks: AttemptCallbacks
+    private var taskIsFinished = false {
+        willSet { willChangeValue(forKey: "isFinished") }
+        didSet { didChangeValue(forKey: "isFinished") }
+    }
+    
+    override var isFinished: Bool {
+        return taskIsFinished
+    }
     
     init(request: URLRequest, timeout: TimeInterval, callbacks: AttemptCallbacks) {
         self.request = request
@@ -23,11 +31,8 @@ final class AttemptImpl: Operation, Attempt {
     }
 
     override func main() {
-        let semaphore = DispatchSemaphore(value: 0)
 
-        let completeon: (Data?, URLResponse?, Error?) -> () = { [weak self] data, response, error in
-            
-            defer { semaphore.signal() }
+        let completion: (Data?, URLResponse?, Error?) -> () = { [weak self] data, response, error in
             guard let `self` = self, !self.isCancelled else { return }
 
             if let error = error {
@@ -39,21 +44,21 @@ final class AttemptImpl: Operation, Attempt {
             else {
                 self.callbacks.onFinish(.error(RequestError.unexpectedResponse))
             }
+            
+            self.taskIsFinished = true
         }
         
         attemptQueue.sync {
             session.configuration.timeoutIntervalForRequest = self.timeout
             session.configuration.timeoutIntervalForResource = self.timeout
 
-            self.task = session.dataTask(with: request, completionHandler: completeon)
+            self.task = session.dataTask(with: request, completionHandler: completion)
             
             task.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived), options: .new, context: nil)
             task.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesSent), options: .new, context: nil)
             
             task.resume()
         }
-        
-        semaphore.wait()
     }
     
     override func observeValue(

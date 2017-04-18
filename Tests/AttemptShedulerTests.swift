@@ -1,19 +1,20 @@
 import XCTest
 @testable import SwiftyVK
 
-final class TaskShedulerTests: XCTestCase {
+final class AttemptShedulerTests: XCTestCase {
+    let shedulerLimit = 30
     let count = 100
     var totalDelay: TimeInterval {
-        return TaskMock().delay*Double(count)
+        return AttemptMock().delay*Double(count)
     }
     
     func test_concurrentShedule() {
         // Given
-        let sheduler = TaskShedulerImpl()
-        let samples = (0..<100).map { _ in TaskMock() }
+        let sheduler = AttemptShedulerImpl(limit: shedulerLimit)
+        let samples = (0..<count).map { _ in AttemptMock() }
         
         // When
-        samples.forEach { try! sheduler.shedule(task: $0, concurrent: true) }
+        samples.forEach { try! sheduler.shedule(attempt: $0, concurrent: true) }
         
         // Then
         Thread.sleep(forTimeInterval: totalDelay/10)
@@ -27,22 +28,22 @@ final class TaskShedulerTests: XCTestCase {
     
     func test_serialShedule() {
         // Given
-        let sheduler = TaskShedulerImpl()
-        let samples = (0..<count).map { _ in TaskMock() }
+        let sheduler = AttemptShedulerImpl(limit: shedulerLimit)
+        let samples = (0..<count).map { _ in AttemptMock() }
         
         // When
-        samples.forEach { try! sheduler.shedule(task: $0, concurrent: false) }
+        samples.forEach { try! sheduler.shedule(attempt: $0, concurrent: false) }
         
         // Then
-        Thread.sleep(forTimeInterval: totalDelay)
+        Thread.sleep(forTimeInterval: 1)
         
         XCTAssertLessThan(
             samples.filter { $0.isFinished }.count,
-            count,
+            shedulerLimit*2,
             "Operations should be executed serially"
         )
         
-        Thread.sleep(forTimeInterval: totalDelay)
+        Thread.sleep(forTimeInterval: Double(count/shedulerLimit))
         
         XCTAssertEqual(
             samples.filter { $0.isFinished }.count,
@@ -53,20 +54,20 @@ final class TaskShedulerTests: XCTestCase {
     
     func test_randomShedule() {
         // Given
-        let sheduler = TaskShedulerImpl()
-        let serial = (0..<count).map { _ in TaskMock() }
-        let concurrent = (0..<count).map { _ in TaskMock() }
+        let sheduler = AttemptShedulerImpl(limit: shedulerLimit)
+        let serial = (0..<count).map { _ in AttemptMock() }
+        let concurrent = (0..<count).map { _ in AttemptMock() }
         let samples = serial.map { ($0, false) } + concurrent.map { ($0, true) }
         
         // When
-        samples.forEach { try! sheduler.shedule(task: $0.0, concurrent: $0.1) }
+        samples.forEach { try! sheduler.shedule(attempt: $0.0, concurrent: $0.1) }
         
         // Then
-        Thread.sleep(forTimeInterval: totalDelay)
+        Thread.sleep(forTimeInterval: 1)
         
         XCTAssertLessThan(
             serial.filter { $0.isFinished }.count,
-            count,
+            shedulerLimit*2,
             "Operations should be executed serially"
         )
         
@@ -76,7 +77,7 @@ final class TaskShedulerTests: XCTestCase {
             "All concurrent operations should be executed"
         )
         
-        Thread.sleep(forTimeInterval: totalDelay)
+        Thread.sleep(forTimeInterval: Double(count/shedulerLimit))
         
         XCTAssertEqual(
             serial.filter { $0.isFinished }.count,
@@ -87,16 +88,25 @@ final class TaskShedulerTests: XCTestCase {
     
     func test_wrongShedule() {
         // Given
-        let sheduler = TaskShedulerImpl()
-        let sample = WrongTaskMock()
+        let sheduler = AttemptShedulerImpl(limit: shedulerLimit)
+        let sample = WrongAttemptMock()
         
         do {
             // When
-            try sheduler.shedule(task: sample, concurrent: false)
+            try sheduler.shedule(attempt: sample, concurrent: false)
             XCTFail("Wrong attempt should cause exception")
         } catch let error {
             // Then
-            XCTAssertEqual(error as? RequestError, .wrongTaskType)
+            XCTAssertEqual(error as? RequestError, .wrongAttemptType)
         }
+    }
+    
+    func test_setAndGetLimit() {
+        // Given
+        let sheduler = AttemptShedulerImpl(limit: 0)
+        // When
+        sheduler.limit = 1
+        // Then
+        XCTAssertEqual(sheduler.limit, 1)
     }
 }

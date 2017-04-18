@@ -1,11 +1,26 @@
-import SwiftyVK
+@testable import SwiftyVK
 
 final class TaskMock: Operation, Task {
-    var state: TaskState
-    var delay = 0.1
+    var state: TaskState {
+        willSet {
+            if case .finished = newValue {
+                willChangeValue(forKey: "isFinished")
+            }
+        }
+        didSet {
+            if case .finished = state {
+                didChangeValue(forKey: "isFinished")
+            }
+        }
+    }
+    var delay = 0.01
     
     override var isFinished: Bool {
-        return state == .finished(JSON(true))
+        if case .finished = state {
+            return true
+        }
+        
+        return false
     }
     
     override init() {

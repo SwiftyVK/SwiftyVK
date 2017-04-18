@@ -1,18 +1,14 @@
 import Foundation
 
 protocol AttemptSheduler {
-    func shedule(attempt: Attempt, concurrent: Bool)
+    func shedule(attempt: Attempt, concurrent: Bool) throws
 }
 
 final class AttemptShedulerImpl: AttemptSheduler {
     
-    private let concurrentQueue: OperationQueue = {
+    private lazy var concurrentQueue: OperationQueue = {
         let queue = OperationQueue()
-        queue.underlyingQueue = DispatchQueue(
-            label: "SwiftyVK.concurrentAttemptQueue",
-            qos: .userInitiated,
-            attributes: .concurrent
-        )
+        queue.maxConcurrentOperationCount = .max
         return queue
     }()
     private let serialQueue: AttemptApiQueue
@@ -26,9 +22,9 @@ final class AttemptShedulerImpl: AttemptSheduler {
         serialQueue = AttemptApiQueue(limit: limit)
     }
     
-    func shedule(attempt: Attempt, concurrent: Bool) {
+    func shedule(attempt: Attempt, concurrent: Bool) throws {
         guard let attempt = attempt as? Operation else {
-            return
+            throw RequestError.wrongAttemptType
         }
         
         if concurrent {
@@ -101,7 +97,7 @@ private class AttemptApiQueue: OperationQueue {
         while !waited.isEmpty && sent < limit {
             sent += 1
             let op = waited.removeFirst()
-            addOperation(op)
+            super.addOperation(op)
         }
     }
 }

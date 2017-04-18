@@ -8,7 +8,19 @@ public protocol Task {
 final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: Operation, Task {
     
     let id: Int64
-    var state: TaskState = .created
+    var state: TaskState = .created {
+        willSet {
+            if case .finished = newValue {
+                willChangeValue(forKey: "isFinished")
+            }
+        }
+        didSet {
+            if case .finished = state {
+                didChangeValue(forKey: "isFinished")
+            }
+        }
+    }
+    
     var log = [String]()
     
     private var request: Request
@@ -19,7 +31,11 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
     private weak var currentAttempt: Attempt?
     
     override var isFinished: Bool {
-        return state == .finished(JSON(true))
+        if case .finished = state {
+            return true
+        }
+        
+        return false
     }
     
     override var description: String {
@@ -82,8 +98,12 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
             callbacks: AttemptCallbacks(onFinish: handleResult, onSent: handleSended, onRecive: handleReceived)
         )
         
-        attemptSheduler.shedule(attempt: newAttempt, concurrent: request.rawRequest.canSentConcurrently)
-        currentAttempt = newAttempt
+        do {
+            try attemptSheduler.shedule(attempt: newAttempt, concurrent: request.rawRequest.canSentConcurrently)
+            currentAttempt = newAttempt
+        } catch let error {
+            execute(error: error)
+        }
     }
     
     private func handleSended(_ total: Int64, of expected: Int64) {
@@ -178,29 +198,12 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
     }
 }
 
-public enum TaskState: Equatable {
+public enum TaskState {
     case created
     case sended
     case finished(JSON)
     case failed(Error)
     case cancelled
-    
-    public static func ==(lhs: TaskState, rhs: TaskState) -> Bool {
-        switch (lhs, rhs) {
-        case (created, created):
-            return true
-        case (sended, sended):
-            return true
-        case (finished, finished):
-            return true
-        case (failed, failed):
-            return true
-        case (cancelled, cancelled):
-            return true
-        default:
-            return false
-        }
-    }
 }
 
 struct IdGenerator {

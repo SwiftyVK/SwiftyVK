@@ -40,6 +40,8 @@
 		A23708BF1EA52F0D00103212 /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */; };
 		A23708C81EA532B900103212 /* TaskShedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23708C61EA5309700103212 /* TaskShedulerTests.swift */; };
 		A2433A441EA533500058BB6D /* TaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2433A431EA533500058BB6D /* TaskMock.swift */; };
+		A2433A461EA542100058BB6D /* AttemptShedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2433A451EA542100058BB6D /* AttemptShedulerTests.swift */; };
+		A2433A481EA542620058BB6D /* AttemptMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2433A471EA542620058BB6D /* AttemptMock.swift */; };
 		A24390571DA2BA1D00B9D047 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D1369A1DA00E9000C487C1 /* Errors.swift */; };
 		A24A29491E96B2F8006152E6 /* AttemptSheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A29481E96B2F8006152E6 /* AttemptSheduler.swift */; };
 		A24A294E1E96BC77006152E6 /* AttemptSheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A29481E96B2F8006152E6 /* AttemptSheduler.swift */; };
@@ -246,6 +248,8 @@
 		A23708BE1EA52F0D00103212 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A23708C61EA5309700103212 /* TaskShedulerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskShedulerTests.swift; sourceTree = "<group>"; };
 		A2433A431EA533500058BB6D /* TaskMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskMock.swift; sourceTree = "<group>"; };
+		A2433A451EA542100058BB6D /* AttemptShedulerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptShedulerTests.swift; sourceTree = "<group>"; };
+		A2433A471EA542620058BB6D /* AttemptMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptMock.swift; sourceTree = "<group>"; };
 		A24A29481E96B2F8006152E6 /* AttemptSheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptSheduler.swift; sourceTree = "<group>"; };
 		A24D108E1C56A49E008263B0 /* Market.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Market.swift; sourceTree = "<group>"; };
 		A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftyVKResources-OSX.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -349,6 +353,7 @@
 			children = (
 				A2433A421EA5331A0058BB6D /* Doubles */,
 				A23708C61EA5309700103212 /* TaskShedulerTests.swift */,
+				A2433A451EA542100058BB6D /* AttemptShedulerTests.swift */,
 			);
 			name = Tests;
 			path = ../Tests;
@@ -358,6 +363,7 @@
 			isa = PBXGroup;
 			children = (
 				A2433A431EA533500058BB6D /* TaskMock.swift */,
+				A2433A471EA542620058BB6D /* AttemptMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -807,6 +813,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2433A461EA542100058BB6D /* AttemptShedulerTests.swift in Sources */,
+				A2433A481EA542620058BB6D /* AttemptMock.swift in Sources */,
 				A23708C81EA532B900103212 /* TaskShedulerTests.swift in Sources */,
 				A2433A441EA533500058BB6D /* TaskMock.swift in Sources */,
 			);
