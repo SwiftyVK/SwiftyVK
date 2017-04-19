@@ -66,6 +66,7 @@
 		A2967E751CBBC51600B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
 		A29F1CD41E95674A00BE5369 /* TaskSheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */; };
 		A29F1CD51E95674A00BE5369 /* TaskSheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */; };
+		A2B40DFD1EA693B700106AE3 /* UrlRequestFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B40DFC1EA693B700106AE3 /* UrlRequestFactoryTests.swift */; };
 		A2B4ECAC1DCA4F6B009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
 		A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
 		A2B4ECAF1DCA4FA5009435B6 /* CaptchaController-OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAE1DCA4FA5009435B6 /* CaptchaController-OSX.swift */; };
@@ -309,6 +310,7 @@
 		A2838DA21E9AA0DA00FE5BE2 /* DepencyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepencyBox.swift; sourceTree = "<group>"; };
 		A2967E731CBBC4A700B7D48F /* Gifts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gifts.swift; sourceTree = "<group>"; };
 		A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskSheduler.swift; sourceTree = "<group>"; };
+		A2B40DFC1EA693B700106AE3 /* UrlRequestFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlRequestFactoryTests.swift; sourceTree = "<group>"; };
 		A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapthcaPresenter.swift; sourceTree = "<group>"; };
 		A2B4ECAE1DCA4FA5009435B6 /* CaptchaController-OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CaptchaController-OSX.swift"; sourceTree = "<group>"; };
 		A2B4ECB01DCA4FB7009435B6 /* CapthcaController-iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CapthcaController-iOS.swift"; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				A2433A421EA5331A0058BB6D /* Doubles */,
 				A23708C61EA5309700103212 /* TaskShedulerTests.swift */,
 				A2433A451EA542100058BB6D /* AttemptShedulerTests.swift */,
+				A2B40DFC1EA693B700106AE3 /* UrlRequestFactoryTests.swift */,
 			);
 			name = Tests;
 			path = ../Tests;
@@ -816,6 +819,7 @@
 				A2433A461EA542100058BB6D /* AttemptShedulerTests.swift in Sources */,
 				A2433A481EA542620058BB6D /* AttemptMock.swift in Sources */,
 				A23708C81EA532B900103212 /* TaskShedulerTests.swift in Sources */,
+				A2B40DFD1EA693B700106AE3 /* UrlRequestFactoryTests.swift in Sources */,
 				A2433A441EA533500058BB6D /* TaskMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

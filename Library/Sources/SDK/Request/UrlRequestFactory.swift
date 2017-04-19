@@ -5,27 +5,21 @@ private let methodUrl = "https://api.vk.com/method/"
 
 protocol UrlRequestFactory {
     init()
-    func make(from request: Request) -> URLRequest
+    func make(from request: Request) throws -> URLRequest
 }
 
 struct UrlRequestFactoryImpl: UrlRequestFactory {
-    
-    private var emptyUrl: URL {
-        // swiftlint:disable force_unwrapping
-        return URL(string: methodUrl)!
-        // swiftlint:enable force_unwrapping
-    }
 
-    func make(from request: Request) -> URLRequest {
+    func make(from request: Request) throws -> URLRequest {
         var urlRequest: URLRequest
         
         switch request.rawRequest {
         case .api(let method, let parameters):
-            urlRequest = make(from: method, parameters: parameters, httpMethod: request.config.httpMethod)
+            urlRequest = try make(from: method, parameters: parameters, httpMethod: request.config.httpMethod)
         case .upload(let url, let media):
-            urlRequest = make(from: media, url: url)
+            urlRequest = try make(from: media, url: url)
         case .url(let url):
-            urlRequest = make(from: url)
+            urlRequest = try make(from: url)
         }
 
         urlRequest.timeoutInterval = request.config.timeout
@@ -33,41 +27,65 @@ struct UrlRequestFactoryImpl: UrlRequestFactory {
         return urlRequest
     }
 
-    private func make(from url: String) -> URLRequest {
-        var req = URLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+    private func make(from url: String) throws -> URLRequest {
+        guard let url = URL(string: url) else {
+            throw RequestError.wrongUrl
+        }
+        
+        var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
         req.httpMethod = "GET"
-        req.url = URL(string: url)
         return req
     }
 
-    private func make(from apiMethod: String, parameters: [VK.Arg: String], httpMethod: HttpMethod) -> URLRequest {
+    private func make(from apiMethod: String, parameters: [VK.Arg: String], httpMethod: HttpMethod) throws
+        -> URLRequest {
+        var req: URLRequest
+        
         let query = makeQuery(from: parameters)
 
-        var req = URLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+        switch httpMethod {
+        case .GET:
+            req = try makeGetRequest(from: apiMethod, query: query)
+        case .POST:
+            req = try makePostRequest(from: apiMethod, query: query)
+        }
+        
         req.httpMethod = httpMethod.rawValue
-        print(methodUrl + apiMethod + "?" + query)
-
-        if httpMethod == .GET {
-            req.url = URL(string: methodUrl + apiMethod + "?" + query)
+        return req
+    }
+    
+    private func makeGetRequest(from apiMethod: String, query: String) throws -> URLRequest {
+        guard let url = URL(string: methodUrl + apiMethod + "?" + query) else {
+            throw RequestError.wrongUrl
         }
-        else {
-            req.url = URL(string: methodUrl + apiMethod)
-            let charset = String(
-                CFStringConvertEncodingToIANACharSetName(
-                    CFStringConvertNSStringEncodingToEncoding(String.Encoding.utf8.rawValue)
-                )
+        
+        return URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+    }
+    
+    private func makePostRequest(from apiMethod: String, query: String) throws -> URLRequest {
+        guard let url = URL(string: methodUrl + apiMethod) else {
+            throw RequestError.wrongUrl
+        }
+        
+        var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+        
+        let charset = String(
+            CFStringConvertEncodingToIANACharSetName(
+                CFStringConvertNSStringEncodingToEncoding(String.Encoding.utf8.rawValue)
             )
-            req.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
-            req.httpBody = query.data(using: .utf8)
-        }
-
+        )
+        req.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
+        req.httpBody = query.data(using: .utf8)
         return req
     }
 
-    private func make(from media: [Media], url: String) -> URLRequest {
-        var req = URLRequest(url: emptyUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+    private func make(from media: [Media], url: String) throws -> URLRequest {
+        guard let url = URL(string: url) else {
+            throw RequestError.wrongUrl
+        }
+        
+        var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
         req.httpMethod = "POST"
-        req.url = URL(string: url)
         req.addValue("", forHTTPHeaderField: "Accept-Language")
         req.addValue("8bit", forHTTPHeaderField: "Content-Transfer-Encoding")
         req.setValue("multipart/form-data;  boundary=\(boundary)", forHTTPHeaderField: "Content-Type")

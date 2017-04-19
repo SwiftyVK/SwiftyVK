@@ -56,7 +56,7 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
     
     override func main() {
         VK.Log.put(self, "started", atNewLine: true)
-        send()
+        trySend()
         state = .sended
         semaphore.wait()
     }
@@ -83,27 +83,33 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
             return
         }
         
-        send()
+        trySend()
     }
     
-    private func send() {
+    private func trySend() {
+        do {
+            try send()
+        }
+        catch let error {
+            execute(error: error)
+        }
+    }
+    
+    private func send() throws {
         guard !self.isCancelled else {return}
         
         sendAttempts += 1
         VK.Log.put(self, "send \(sendAttempts) of \(request.config.maxAttempts) times")
         
         let newAttempt = AttemptT(
-            request: UrlRequestFactoryT().make(from: request),
+            request: try UrlRequestFactoryT().make(from: request),
             timeout: request.config.timeout,
             callbacks: AttemptCallbacks(onFinish: handleResult, onSent: handleSended, onRecive: handleReceived)
         )
         
-        do {
-            try attemptSheduler.shedule(attempt: newAttempt, concurrent: request.rawRequest.canSentConcurrently)
-            currentAttempt = newAttempt
-        } catch let error {
-            execute(error: error)
-        }
+        try attemptSheduler.shedule(attempt: newAttempt, concurrent: request.rawRequest.canSentConcurrently)
+        currentAttempt = newAttempt
+        
     }
     
     private func handleSended(_ total: Int64, of expected: Int64) {
@@ -126,7 +132,7 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
                 VK.Log.put(self, "=== prepare next task ===")
                 request = next
                 sendAttempts = 0
-                send()
+                trySend()
             }
             else {
                 execute(response: response)

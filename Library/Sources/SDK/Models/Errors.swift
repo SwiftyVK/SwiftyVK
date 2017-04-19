@@ -25,6 +25,7 @@ public enum RequestError: Int, CustomNSError, CustomStringConvertible {
     case notConfigured              = 6
     case wrongTaskType              = 7
     case wrongAttemptType           = 8
+    case wrongUrl                   = 9
 
     public static let errorDomain = "SwiftyVKRequestError"
     public var errorCode: Int {return rawValue}
