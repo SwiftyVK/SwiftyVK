@@ -317,7 +317,8 @@ extension VK {
     case gid
     case deviceId = "device_id"
     case sandbox
-
+    case settings
+    
     public var hashValue: Int {
       return self.rawValue.hashValue
     }
