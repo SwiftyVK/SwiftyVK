@@ -1,45 +1,68 @@
-//import CoreLocation
-//
-//extension _VKAPI {
-//    //Metods to upload Mediafiles
-//    public struct Upload {
-//        ///Methods to upload photo
-//        public struct Photo {
-//            ///Upload photo to user album
-//            public static func toAlbum(
-//                _ media: [Media],
-//                albumId: String,
-//                groupId: String = "",
-//                caption: String = "",
-//                location: CLLocationCoordinate2D? = nil) -> RequestConfig {
-//
-//                var getServerReq = Api.Photos.getUploadServer([.albumId: albumId, .groupId: groupId])
-//
-//                getServerReq.next {response -> RequestConfig in
-//                    var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: Array(media.prefix(5)))
-//
-//                    uploadReq.next {response -> RequestConfig in
-//                        var saveReq = Api.Photos.save([
-//                            .albumId: albumId,
-//                            .groupId: groupId,
-//                            .server: response["server"].stringValue,
-//                            .photosList: response["photos_list"].stringValue,
-//                            .aid: response["aid"].stringValue,
-//                            .hash: response["hash"].stringValue,
-//                            .caption: caption
-//                            ])
-//
-//                        if let lat = location?.latitude, let lon = location?.longitude {
-//                            saveReq.parameters[.latitude] = String(lat)
-//                            saveReq.parameters[.longitude] = String(lon)
-//                        }
-//                        return saveReq
-//                    }
-//                    return uploadReq
-//                }
-//                return getServerReq
-//            }
-//
+import CoreLocation
+
+public enum UploadTarget {
+    case user(id: String)
+    case group(id: String)
+    
+    var decoded: (userId: String?, groupId: String?) {
+        switch self {
+        case .user(let id):
+            return (userId: id, groupId: nil)
+        case .group(let id):
+            return (userId: nil, groupId: id)
+        }
+    }
+}
+
+extension VK.Api {
+    //Metods to upload Mediafiles
+    public struct Upload {
+        ///Methods to upload photo
+        public struct Photo {
+            ///Upload photo to user album
+            public static func toAlbum(
+                _ media: [Media],
+                target: UploadTarget,
+                albumId: String,
+                caption: String = "",
+                location: CLLocationCoordinate2D? = nil,
+                config: Config = .default,
+                uploadTimeout: TimeInterval = 30
+                ) -> Request {
+                
+                return VK.Api.Photos.getUploadServer([
+                    .albumId: albumId,
+                    .userId: target.decoded.userId,
+                    .groupId: target.decoded.groupId
+                    ])
+                    .request(with: config)
+                    .next {
+                        Request(
+                            of: .upload(
+                                url: $0["upload_url"].stringValue,
+                                media: Array(media.prefix(5)
+                                )
+                            ),
+                            config: config.mutatedWith(timeout: uploadTimeout)
+                        )
+                    }
+                    .next {
+                        VK.Api.Photos.save([
+                            .albumId: albumId,
+                            .userId: target.decoded.userId,
+                            .groupId: target.decoded.groupId,
+                            .server: $0["server"].stringValue,
+                            .photosList: $0["photos_list"].stringValue,
+                            .aid: $0["aid"].stringValue,
+                            .hash: $0["hash"].stringValue,
+                            .caption: caption,
+                            .latitude: location?.latitude.toString(),
+                            .longitude: location?.longitude.toString()
+                            ]).request()
+                }
+            }
+        }
+
 //            ///Upload photo to message
 //            public static func toMessage(_ media: Media) -> RequestConfig {
 //                var getServerReq = Api.Photos.getMessagesUploadServer()
@@ -258,5 +281,5 @@
 //            }
 //            return getServierReq
 //        }
-//    }
-//}
+    }
+}
