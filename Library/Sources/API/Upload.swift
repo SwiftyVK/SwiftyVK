@@ -24,7 +24,7 @@ extension VK.Api {
                 _ media: [Media],
                 to target: UploadTarget,
                 albumId: String,
-                caption: String = "",
+                caption: String? = nil,
                 location: CLLocationCoordinate2D? = nil,
                 config: Config = .default,
                 uploadTimeout: TimeInterval = 30
@@ -161,10 +161,10 @@ extension VK.Api {
             //Upload local video file
             public static func fromFile(
                 _ media: Media,
-                name: String = "No name",
-                description: String = "",
-                groupId: String = "",
-                albumId: String = "",
+                name: String? = nil,
+                description: String? = nil,
+                groupId: String? = nil,
+                albumId: String? = nil,
                 isPrivate: Bool = false,
                 isWallPost: Bool = false,
                 isRepeat: Bool = false,
@@ -194,11 +194,11 @@ extension VK.Api {
             
             ///Upload local video from external resource
             public static func fromUrl(
-                _ url: String,
-                name: String = "No name",
-                description: String = "",
-                groupId: String = "",
-                albumId: String = "",
+                _ url: String? = nil,
+                name: String? = nil,
+                description: String? = nil,
+                groupId: String? = nil,
+                albumId: String? = nil,
                 isPrivate: Bool = false,
                 isWallPost: Bool = false,
                 isRepeat: Bool = false,
@@ -219,27 +219,28 @@ extension VK.Api {
                     .request(with: config)
             }
         }
-//
-//        ///Upload audio
-//        public static func audio(_ media: Media, artist: String = "", title: String = "") -> RequestConfig {
-//            var getServierReq = Api.Audio.getUploadServer()
-//
-//            getServierReq.next {response -> RequestConfig in
-//                var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [media])
-//
-//                uploadReq.next {response -> RequestConfig in
-//                    return Api.Audio.save([
-//                        .audio: response["audio"].stringValue,
-//                        .server: response["server"].stringValue,
-//                        .hash: response["hash"].stringValue,
-//                        .artist: artist,
-//                        .title: title
-//                        ])
-//                }
-//                return uploadReq
-//            }
-//            return getServierReq
-//        }
+        
+        ///Upload audio
+        public static func audio(
+            _ media: Media,
+            artist: String? = nil,
+            title: String? = nil,
+            config: Config = .default,
+            uploadTimeout: TimeInterval = 30
+            ) -> Request {
+            return VK.Api.Audio.getUploadServer(.empty)
+                .request(with: config)
+                .next {
+                    VK.Api.Audio.save([
+                        .audio: $0["audio"].stringValue,
+                        .server: $0["server"].stringValue,
+                        .hash: $0["hash"].stringValue,
+                        .artist: artist,
+                        .title: title
+                        ])
+                        .request(with: config.mutated(timeout: uploadTimeout))
+            }
+        }
 //
 //        ///Upload document
 //        public static func document(
