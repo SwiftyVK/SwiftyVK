@@ -110,26 +110,27 @@ extension VK.Api {
                         .request(with: config.mutated(timeout: uploadTimeout))
             }
         }
-//
-//            ///Upload photo to market album
-//            public static func toMarketAlbum(_ media: Media, groupId: String) -> RequestConfig {
-//                var getServerReq = Api.Photos.getMarketAlbumUploadServer([.groupId: groupId])
-//
-//                getServerReq.next {response -> RequestConfig in
-//                    var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [media])
-//
-//                    uploadReq.next {response -> RequestConfig in
-//                        return Api.Photos.saveMarketAlbumPhoto([
-//                            .groupId: groupId,
-//                            .photo: response["photo"].stringValue,
-//                            .server: response["server"].stringValue,
-//                            .hash: response["hash"].stringValue
-//                            ])
-//                    }
-//                    return uploadReq
-//                }
-//                return getServerReq
-//            }
+        
+        ///Upload photo to market album
+        public static func toMarketAlbum(
+            _ media: Media,
+            groupId: String,
+            config: Config = .default,
+            uploadTimeout: TimeInterval = 30
+            ) -> Request {
+            
+            return VK.Api.Photos.getMarketAlbumUploadServer([.groupId: groupId])
+                .request(with: config)
+                .next {
+                    VK.Api.Photos.saveMarketAlbumPhoto([
+                        .groupId: groupId,
+                        .photo: $0["photo"].stringValue,
+                        .server: $0["server"].stringValue,
+                        .hash: $0["hash"].stringValue
+                        ])
+                        .request(with: config.mutated(timeout: uploadTimeout))
+            }
+        }
 //
 //            // swiftlint:disable type_name
 //            ///Upload photo to user or group wall
