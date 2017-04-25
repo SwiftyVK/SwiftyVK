@@ -43,7 +43,7 @@ extension VK.Api {
                                 media: Array(media.prefix(5)
                                 )
                             ),
-                            config: config.mutatedWith(timeout: uploadTimeout)
+                            config: config.mutated(timeout: uploadTimeout)
                         )
                     }
                     .next {
@@ -58,7 +58,8 @@ extension VK.Api {
                             .caption: caption,
                             .latitude: location?.latitude.toString(),
                             .longitude: location?.longitude.toString()
-                            ]).request()
+                            ])
+                            .request(with: config)
                 }
             }
         }
@@ -73,53 +74,42 @@ extension VK.Api {
             return VK.Api.Photos.getMessagesUploadServer(.empty)
                 .request(with: config)
                 .next {
-                    return VK.Api.Photos.saveMessagesPhoto([
+                    VK.Api.Photos.saveMessagesPhoto([
                         .photo: $0["photo"].string,
                         .server: $0["server"].string,
                         .hash: $0["hash"].string
                         ])
-                        .request(with: config.mutatedWith(timeout: uploadTimeout))
+                        .request(with: config.mutated(timeout: uploadTimeout))
             }
         }
-//
-//            ///Upload photo to market
-//            public static func toMarket(
-//                _ media: Media,
-//                groupId: String,
-//                mainPhoto: Bool = false,
-//                cropX: String = "",
-//                cropY: String = "",
-//                cropW: String = ""
-//                ) -> RequestConfig {
-//
-//                var getServerReq = Api.Photos.getMarketUploadServer([.groupId: groupId])
-//                if mainPhoto {
-//                    getServerReq.add(parameters: [
-//                        .mainPhoto: "1",
-//                        .cropX: cropX,
-//                        .cropY: cropY,
-//                        .cropWidth: cropW
-//                        ])
-//                }
-//
-//                getServerReq.next {response -> RequestConfig in
-//                    var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [media])
-//
-//                    uploadReq.next {response -> RequestConfig in
-//                        return Api.Photos.saveMarketPhoto([
-//                            .groupId: groupId,
-//                            .photo: response["photo"].stringValue,
-//                            .server: response["server"].stringValue,
-//                            .hash: response["hash"].stringValue,
-//                            .cropData: response["crop_data"].stringValue,
-//                            .cropHash: response["crop_hash"].stringValue
-//                            ])
-//                    }
-//
-//                    return uploadReq
-//                }
-//                return getServerReq
-//            }
+        
+        ///Upload photo to market
+        public static func toMarket(
+            _ media: Media,
+            mainPhotoConfig: (cropX: String?, cropY: String?, cropW: String?)?,
+            groupId: String,
+            config: Config = .default,
+            uploadTimeout: TimeInterval = 30
+            ) -> Request {
+            
+            return VK.Api.Photos.getMarketUploadServer([.groupId: groupId])
+                .request(with: config)
+                .next {
+                    VK.Api.Photos.saveMarketPhoto([
+                        .groupId: groupId,
+                        .photo: $0["photo"].string,
+                        .server: $0["server"].string,
+                        .hash: $0["hash"].string,
+                        .cropData: $0["crop_data"].string,
+                        .cropHash: $0["crop_hash"].string,
+                        .mainPhoto: (mainPhotoConfig != nil ? "1" : "0"),
+                        .cropX: mainPhotoConfig?.cropX,
+                        .cropY: mainPhotoConfig?.cropY,
+                        .cropWidth: mainPhotoConfig?.cropW
+                        ])
+                        .request(with: config.mutated(timeout: uploadTimeout))
+            }
+        }
 //
 //            ///Upload photo to market album
 //            public static func toMarketAlbum(_ media: Media, groupId: String) -> RequestConfig {

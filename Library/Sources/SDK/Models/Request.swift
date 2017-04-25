@@ -71,7 +71,7 @@ public struct Config {
         self.logToConsole = logToConsole
     }
     
-    func mutatedWith(
+    func mutated(
         timeout: TimeInterval? = nil,
         maxAttempts: Int? = nil,
         httpMethod: HttpMethod? = nil,
