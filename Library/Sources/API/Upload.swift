@@ -228,6 +228,7 @@ extension VK.Api {
             config: Config = .default,
             uploadTimeout: TimeInterval = 30
             ) -> Request {
+            
             return VK.Api.Audio.getUploadServer(.empty)
                 .request(with: config)
                 .next {
@@ -241,28 +242,27 @@ extension VK.Api {
                         .request(with: config.mutated(timeout: uploadTimeout))
             }
         }
-//
-//        ///Upload document
-//        public static func document(
-//            _ media: Media,
-//            groupId: String = "",
-//            title: String = "",
-//            tags: String = "") -> RequestConfig {
-//            var getServierReq = Api.Docs.getUploadServer([.groupId: groupId])
-//
-//            getServierReq.next {response -> RequestConfig in
-//                var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [media])
-//
-//                uploadReq.next {response -> RequestConfig in
-//                    return Api.Docs.save([
-//                        .file: (response["file"].stringValue),
-//                        .title: title,
-//                        .tags: tags
-//                        ])
-//                }
-//                return uploadReq
-//            }
-//            return getServierReq
-//        }
+        
+        ///Upload document
+        public static func document(
+            _ media: Media,
+            groupId: String? = nil,
+            title: String? = nil,
+            tags: String? = nil,
+            config: Config = .default,
+            uploadTimeout: TimeInterval = 3
+            ) -> Request {
+            
+            return VK.Api.Docs.getUploadServer([.groupId: groupId])
+                .request(with: config)
+                .next {
+                    VK.Api.Docs.save([
+                        .file: $0["file"].string,
+                        .title: title,
+                        .tags: tags
+                        ])
+                        .request(with: config.mutated(timeout: uploadTimeout))
+            }
+        }
     }
 }
