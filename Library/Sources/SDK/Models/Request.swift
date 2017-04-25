@@ -70,6 +70,22 @@ public struct Config {
         self.catchErrors = catchErrors
         self.logToConsole = logToConsole
     }
+    
+    func mutatedWith(
+        timeout: TimeInterval? = nil,
+        maxAttempts: Int? = nil,
+        httpMethod: HttpMethod? = nil,
+        catchErrors: Bool? = nil,
+        logToConsole: Bool? = nil
+        ) -> Config {
+        return Config(
+            timeout: timeout ?? self.timeout,
+            maxAttempts: maxAttempts ?? self.maxAttempts,
+            httpMethod: httpMethod ?? self.httpMethod,
+            catchErrors: catchErrors ?? self.catchErrors,
+            logToConsole: logToConsole ?? self.logToConsole
+        )
+    }
 }
 
 public struct Callbacks {
