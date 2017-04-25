@@ -131,44 +131,30 @@ extension VK.Api {
                         .request(with: config.mutated(timeout: uploadTimeout))
             }
         }
-//
-//            // swiftlint:disable type_name
-//            ///Upload photo to user or group wall
-//            public struct toWall {
-//                // swiftlint:enable type_name
-//                ///Upload photo to user wall
-//                public static func toUser(_ media: Media, userId: String) -> RequestConfig {
-//                    return pToWall(media, userId: userId)
-//                }
-//
-//                ///Upload photo to group wall
-//                public static func toGroup(_ media: Media, groupId: String) -> RequestConfig {
-//                    return pToWall(media, groupId: groupId)
-//                }
-//
-//                ///Upload photo to user or group wall
-//                private static func pToWall(_ media: Media, userId: String = "", groupId: String = "") -> RequestConfig {
-//                    var getServerReq = Api.Photos.getWallUploadServer([.groupId: groupId])
-//
-//                    getServerReq.next {response -> RequestConfig in
-//                        var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [media])
-//
-//                        uploadReq.next {response -> RequestConfig in
-//                            return Api.Photos.saveWallPhoto([
-//                                .userId: userId,
-//                                .groupId: groupId,
-//                                .photo: response["photo"].stringValue,
-//                                .server: response["server"].stringValue,
-//                                .hash: response["hash"].stringValue
-//                                ])
-//                        }
-//                        return uploadReq
-//                    }
-//
-//                    return getServerReq
-//                }
-//            }
-//        }
+        
+        ///Upload photo to user or group wall
+        public static func toWall(
+            _ media: Media,
+            target: UploadTarget,
+            config: Config = .default,
+            uploadTimeout: TimeInterval = 30
+            ) -> Request {
+            return VK.Api.Photos.getWallUploadServer([
+                .userId: target.decoded.userId,
+                .groupId: target.decoded.groupId
+                ])
+                .request(with: config)
+                .next {
+                    VK.Api.Photos.saveWallPhoto([
+                        .userId: target.decoded.userId,
+                        .groupId: target.decoded.groupId,
+                        .photo: $0["photo"].stringValue,
+                        .server: $0["server"].stringValue,
+                        .hash: $0["hash"].stringValue
+                        ])
+                        .request(with: config.mutated(timeout: uploadTimeout))
+            }
+        }
 //
 //        ///Upload video from file or url
 //        public struct Video {
@@ -227,7 +213,6 @@ extension VK.Api {
 //                    ]
 //                )
 //            }
-//        }
 //
 //        ///Upload audio
 //        public static func audio(_ media: Media, artist: String = "", title: String = "") -> RequestConfig {
