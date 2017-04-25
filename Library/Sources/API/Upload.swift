@@ -51,10 +51,10 @@ extension VK.Api {
                             .albumId: albumId,
                             .userId: target.decoded.userId,
                             .groupId: target.decoded.groupId,
-                            .server: $0["server"].stringValue,
-                            .photosList: $0["photos_list"].stringValue,
-                            .aid: $0["aid"].stringValue,
-                            .hash: $0["hash"].stringValue,
+                            .server: $0["server"].string,
+                            .photosList: $0["photos_list"].string,
+                            .aid: $0["aid"].string,
+                            .hash: $0["hash"].string,
                             .caption: caption,
                             .latitude: location?.latitude.toString(),
                             .longitude: location?.longitude.toString()
@@ -62,25 +62,25 @@ extension VK.Api {
                 }
             }
         }
-
-//            ///Upload photo to message
-//            public static func toMessage(_ media: Media) -> RequestConfig {
-//                var getServerReq = Api.Photos.getMessagesUploadServer()
-//
-//                getServerReq.next {response -> RequestConfig in
-//                    var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [media])
-//
-//                    uploadReq.next {response -> RequestConfig in
-//                        return Api.Photos.saveMessagesPhoto([
-//                            .photo: response["photo"].stringValue,
-//                            .server: response["server"].stringValue,
-//                            .hash: response["hash"].stringValue
-//                            ])
-//                    }
-//                    return uploadReq
-//                }
-//                return getServerReq
-//            }
+        
+        ///Upload photo to message
+        public static func toMessage(
+            _ media: Media,
+            config: Config = .default,
+            uploadTimeout: TimeInterval = 30
+            ) -> Request {
+            
+            return VK.Api.Photos.getMessagesUploadServer(.empty)
+                .request(with: config)
+                .next {
+                    return VK.Api.Photos.saveMessagesPhoto([
+                        .photo: $0["photo"].string,
+                        .server: $0["server"].string,
+                        .hash: $0["hash"].string
+                        ])
+                        .request(with: config.mutatedWith(timeout: uploadTimeout))
+            }
+        }
 //
 //            ///Upload photo to market
 //            public static func toMarket(
