@@ -3,7 +3,7 @@ public protocol Method {}
 public extension Method {
     
     public func request(with config: Config = .default) -> Request {
-        return Request(rawRequest: .api(method: method, parameters: parameters), config: config)
+        return Request(of: .api(method: method, parameters: parameters), config: config)
     }
     
     @discardableResult
@@ -35,7 +35,7 @@ public class CustomMethod {
     }
     
     public func request(with config: Config = .default) -> Request {
-        return Request(rawRequest: .api(method: method, parameters: parameters), config: config)
+        return Request(of: .api(method: method, parameters: parameters), config: config)
     }
     
     @discardableResult

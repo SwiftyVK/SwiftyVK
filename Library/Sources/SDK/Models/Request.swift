@@ -10,7 +10,7 @@ public final class Request {
     var nexts = [((JSON) -> Request)]()
     
     init(
-        rawRequest: Raw,
+        of rawRequest: Raw,
         config: Config = .default
         ) {
         self.rawRequest = rawRequest
