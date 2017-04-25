@@ -37,7 +37,7 @@ struct UrlRequestFactoryImpl: UrlRequestFactory {
         return req
     }
 
-    private func make(from apiMethod: String, parameters: [VK.Arg: String], httpMethod: HttpMethod) throws
+    private func make(from apiMethod: String, parameters: Parameters, httpMethod: HttpMethod) throws
         -> URLRequest {
         var req: URLRequest
         
@@ -120,10 +120,14 @@ struct UrlRequestFactoryImpl: UrlRequestFactory {
         return req
     }
     
-    private func makeQuery(from parameters: [VK.Arg : String]) -> String {
+    private func makeQuery(from parameters: Parameters) -> String {
         let paramArray = NSMutableArray()
         
         for (name, value) in parameters {
+            guard let value = value else {
+                continue
+            }
+            
             if let encodedValue = value.addingPercentEncoding(withAllowedCharacters: .urlQueryParametersAllowed) {
                 paramArray.add("\(name.rawValue)=\(encodedValue)")
             }

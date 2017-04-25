@@ -1,7 +1,7 @@
-public typealias Parameters = [VK.Arg: String]
+public typealias Parameters = [VK.Arg: String?]
 
-extension Dictionary where Key == VK.Arg, Value == String {
-    static var empty: [VK.Arg: String] {
+extension Dictionary where Key == VK.Arg, Value == String? {
+    static var empty: [VK.Arg: String?] {
         return [:]
     }
 }

@@ -17,6 +17,7 @@ public final class Request {
         self.config = config
     }
     
+    @discardableResult
     public func next(_ next: @escaping ((JSON) -> Request)) -> Request {
         nexts = [next] + nexts
         return self
@@ -31,7 +32,7 @@ public final class Request {
 
 extension Request {
     enum Raw {
-        case api(method: String, parameters: [VK.Arg : String])
+        case api(method: String, parameters: Parameters)
         case url(String)
         case upload(url: String, media: [Media])
         
