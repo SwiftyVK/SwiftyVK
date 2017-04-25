@@ -228,7 +228,6 @@ extension VK.Api {
             config: Config = .default,
             uploadTimeout: TimeInterval = 30
             ) -> Request {
-            
             return VK.Api.Audio.getUploadServer(.empty)
                 .request(with: config)
                 .next {
@@ -250,7 +249,7 @@ extension VK.Api {
             title: String? = nil,
             tags: String? = nil,
             config: Config = .default,
-            uploadTimeout: TimeInterval = 3
+            uploadTimeout: TimeInterval = 30
             ) -> Request {
             
             return VK.Api.Docs.getUploadServer([.groupId: groupId])
@@ -262,6 +261,7 @@ extension VK.Api {
                         .tags: tags
                         ])
                         .request(with: config.mutated(timeout: uploadTimeout))
+                    
             }
         }
     }
