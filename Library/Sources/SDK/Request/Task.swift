@@ -5,7 +5,7 @@ public protocol Task {
     func cancel()
 }
 
-final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: Operation, Task {
+final class TaskImpl<AttemptT: Attempt>: Operation, Task {
     
     let id: Int64
     var state: TaskState = .created {
@@ -28,6 +28,7 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
     private let semaphore = DispatchSemaphore(value: 0)
     private var sendAttempts = 0
     private var attemptSheduler: AttemptSheduler
+    private var urlRequestBuilder: UrlRequestBuilder
     private weak var currentAttempt: Attempt?
     
     override var isFinished: Bool {
@@ -45,12 +46,14 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
     init(
         request: Request,
         callbacks: Callbacks,
-        attemptSheduler: AttemptSheduler
+        attemptSheduler: AttemptSheduler,
+        urlRequestBuilder: UrlRequestBuilder
         ) {
         self.id = IdGenerator.next()
         self.request  = request
         self.callbacks = callbacks
         self.attemptSheduler = attemptSheduler
+        self.urlRequestBuilder = urlRequestBuilder
         super.init()
     }
     
@@ -101,8 +104,14 @@ final class TaskImpl<AttemptT: Attempt, UrlRequestFactoryT: UrlRequestFactory>: 
         sendAttempts += 1
         VK.Log.put(self, "send \(sendAttempts) of \(request.config.maxAttempts) times")
         
+        let urlRequest = try urlRequestBuilder.make(
+            from: request.rawRequest,
+            httpMethod: request.config.httpMethod,
+            timeout: request.config.timeout
+        )
+        
         let newAttempt = AttemptT(
-            request: try UrlRequestFactoryT().make(from: request),
+            request: urlRequest,
             timeout: request.config.timeout,
             callbacks: AttemptCallbacks(onFinish: handleResult, onSent: handleSended, onRecive: handleReceived)
         )
