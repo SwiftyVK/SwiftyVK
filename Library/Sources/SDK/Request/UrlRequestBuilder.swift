@@ -1,7 +1,8 @@
 import Foundation
 
 protocol UrlRequestBuilder {
-    func make(from request: Request.Raw, httpMethod: HttpMethod, timeout: TimeInterval) throws -> URLRequest
+    func make(from request: Request.Raw, httpMethod: HttpMethod, timeout: TimeInterval, capthca: Captcha?)
+        throws -> URLRequest
 }
 
 final class UrlRequestBuilderImpl: UrlRequestBuilder {
@@ -19,12 +20,14 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         self.bodyBuilder = bodyBuilder
     }
     
-    func make(from request: Request.Raw, httpMethod: HttpMethod, timeout: TimeInterval) throws -> URLRequest {
+    func make(from request: Request.Raw, httpMethod: HttpMethod, timeout: TimeInterval, capthca: Captcha?)
+        throws -> URLRequest
+    {
         var urlRequest: URLRequest
         
         switch request {
         case .api(let method, let parameters):
-            urlRequest = try make(from: method, parameters: parameters, httpMethod: httpMethod)
+            urlRequest = try make(from: method, parameters: parameters, httpMethod: httpMethod, capthca: capthca)
         case .upload(let url, let media):
             urlRequest = try make(from: media, url: url)
         case .url(let url):
@@ -36,10 +39,12 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         return urlRequest
     }
     
-    private func make(from apiMethod: String, parameters: Parameters, httpMethod: HttpMethod) throws -> URLRequest {
+    private func make(from apiMethod: String, parameters: Parameters, httpMethod: HttpMethod, capthca: Captcha?)
+        throws -> URLRequest
+    {
         var req: URLRequest
         
-        let query = queryBuilder.makeQuery(from: parameters)
+        let query = queryBuilder.makeQuery(from: parameters, captcha: capthca)
         
         switch httpMethod {
         case .GET:

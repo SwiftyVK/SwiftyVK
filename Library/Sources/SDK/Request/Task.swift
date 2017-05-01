@@ -107,7 +107,8 @@ final class TaskImpl<AttemptT: Attempt>: Operation, Task {
         let urlRequest = try urlRequestBuilder.make(
             from: request.rawRequest,
             httpMethod: request.config.httpMethod,
-            timeout: request.config.timeout
+            timeout: request.config.timeout,
+            capthca: makeCaptcha()
         )
         
         let newAttempt = AttemptT(
@@ -119,6 +120,17 @@ final class TaskImpl<AttemptT: Attempt>: Operation, Task {
         try attemptSheduler.shedule(attempt: newAttempt, concurrent: request.rawRequest.canSentConcurrently)
         currentAttempt = newAttempt
         
+    }
+    
+    private func makeCaptcha() -> Captcha? {
+        var captcha: Captcha?
+        
+        if let sid = sharedCaptchaAnswer?["captcha_sid"], let key = sharedCaptchaAnswer?["captcha_key"] {
+            captcha = (sid: sid, key: key)
+            sharedCaptchaAnswer = nil
+        }
+        
+        return captcha
     }
     
     private func handleSended(_ total: Int64, of expected: Int64) {

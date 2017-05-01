@@ -1,10 +1,12 @@
+typealias Captcha = (sid: String, key: String)
+
 protocol QueryBuilder {
-    func makeQuery(from parameters: Parameters) -> String
+    func makeQuery(from parameters: Parameters, captcha: Captcha?) -> String
 }
 
 final class QueryBuilderImpl: QueryBuilder {
     
-    func makeQuery(from parameters: Parameters) -> String {
+    func makeQuery(from parameters: Parameters, captcha: Captcha? = nil) -> String {
         let paramArray = NSMutableArray()
         
         for (name, value) in parameters {
@@ -28,10 +30,9 @@ final class QueryBuilderImpl: QueryBuilder {
             paramArray.add("lang=\(lang)")
         }
         
-        if let sid = sharedCaptchaAnswer?["captcha_sid"], let key = sharedCaptchaAnswer?["captcha_key"] {
-            paramArray.add("captcha_sid=\(sid)")
-            paramArray.add("captcha_key=\(key)")
-            sharedCaptchaAnswer = nil
+        if let captcha = captcha {
+            paramArray.add("captcha_sid=\(captcha.sid)")
+            paramArray.add("captcha_key=\(captcha.key)")
         }
         
         return paramArray.componentsJoined(by: "&")

@@ -3,62 +3,67 @@ import XCTest
 
 final class QueryBuilderTests: XCTestCase {
     
-//    var builder: QueryBuilder {
-//        return QueryBuilderImpl()
-//    }
-//    
-//    func test_apiVersion() {
-//        // Given
-//        let sample = try! builder.makeQuery(from: <#T##Parameters#>)
-//        
-//        // When
-//        let sample = try! builder.makeQuery(from: <#T##Parameters#>)
-//        
-//        // Then
-//        XCTAssertTrue(sample.contains("v=\(VK.config.apiVersion)"))
-//    }
-//    
-//    func test_requestLanguage() {
-//        // Given
-//        let request = VK.Api.Users.get(.empty).request()
-//        
-//        // When
-//        let sample = try! builder.makeQuery(from: <#T##Parameters#>)
-//        
-//        // Then
-//        XCTAssertTrue(sample.contains("lang=\(VK.config.language!)"))
-//    }
-//    
-//    func test_httpsFlag() {
-//        // Given
-//        let request = VK.Api.Users.get(.empty).request()
-//        
-//        // When
-//        let sample = try! builder.makeQuery(from: <#T##Parameters#>)
-//        
-//        // Then
-//        XCTAssertTrue(sample.contains("https=1"))
-//    }
-//    
-//    func test_apiGetRequestParameters() {
-//        // Given
-//        let request = VK.Api.Users.get([.userId: "test"]).request()
-//        
-//        // When
-//        let sample = try! builder.makeQuery(from: <#T##Parameters#>)
-//        
-//        // Then
-//        XCTAssertTrue(sample.contains("user_id=test"))
-//    }
-//    
-//    func test_apiPostRequestParameters() {
-//        // Given
-//        let request = VK.Api.Users.get([.userId: "test"]).request(with: Config(httpMethod: .POST))
-//        
-//        // When
-//        let sample = String(data: try! builder.makeQuery(from: <#T##Parameters#>)
-//        
-//        // Then
-//        XCTAssertTrue(sample.contains("user_id=test"))
-//    }
+    var builder: QueryBuilderImpl {
+        return QueryBuilderImpl()
+    }
+    
+    private func parameters(from parameters: String) -> [String: String] {
+        var result = [String: String]()
+        
+        parameters.components(separatedBy: "&").forEach {
+            let components = $0.components(separatedBy: "=")
+            result[components.first!] = components.last!
+        }
+        
+        return result
+    }
+    
+    func test_apiVersion() {
+        // When
+        let sample = parameters(from: builder.makeQuery(from: .empty))
+
+        // Then
+        XCTAssertEqual(sample["v"], VK.config.apiVersion)
+    }
+
+    func test_language() {
+        // When
+        let sample = parameters(from: builder.makeQuery(from: .empty))
+        
+        // Then
+        XCTAssertEqual(sample["lang"], VK.config.language!)
+    }
+
+    func test_httpsFlag() {
+        // When
+        let sample = parameters(from: builder.makeQuery(from: .empty))
+        
+        // Then
+        XCTAssertEqual(sample["https"], "1")
+    }
+
+    func test_apiGetRequestParameters() {
+        // When
+        let sample = parameters(from: builder.makeQuery(from: [.userId: "test"]))
+        
+        // Then
+        XCTAssertEqual(sample[VK.Arg.userId.rawValue], "test")
+    }
+    
+    func test_ignoreNullParameter() {
+        // When
+        let sample = parameters(from: builder.makeQuery(from: [.userId: nil]))
+        
+        // Then
+        XCTAssertFalse(sample.keys.contains(VK.Arg.userId.rawValue))
+    }
+    
+    func test_addCaptchaParameters() {
+        // When
+        let sample = parameters(from: builder.makeQuery(from: [.userId: nil], captcha: (sid: "sid", key: "key")))
+        
+        // Then
+        XCTAssertEqual(sample["captcha_sid"], "sid")
+        XCTAssertEqual(sample["captcha_key"], "key")
+    }
 }
