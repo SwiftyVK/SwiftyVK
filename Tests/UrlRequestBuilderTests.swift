@@ -3,10 +3,13 @@ import XCTest
 
 final class UrlRequestBuilderTests: XCTestCase {
     
+    private let queryBuilder = QueryBuilderMock()
+    private let bodyBuilder = BodyBuilderMock()
+
     private var builder: UrlRequestBuilder {
         return UrlRequestBuilderImpl(
-            queryBuilder: QueryBuilderMock(),
-            bodyBuilder: BodyBuilderMock()
+            queryBuilder: queryBuilder,
+            bodyBuilder: bodyBuilder
         )
     }
     
@@ -40,7 +43,7 @@ final class UrlRequestBuilderTests: XCTestCase {
         XCTAssertEqual(sample.scheme, "https")
         XCTAssertEqual(sample.host, "api.vk.com")
         XCTAssertEqual(sample.path, "/method/" + methodName)
-        XCTAssertEqual(sample.query, "parameters")
+        XCTAssertEqual(sample.query, queryBuilder.parameters)
 
     }
     
@@ -67,8 +70,6 @@ final class UrlRequestBuilderTests: XCTestCase {
     }
     
     func test_apiGetRequestHeaders() {
-        // Given
-        
         // When
         let sample = try! makeUrlRequestFrom(httpMethod: .GET).allHTTPHeaderFields!
         
@@ -77,14 +78,20 @@ final class UrlRequestBuilderTests: XCTestCase {
     }
     
     func test_apiPostRequestHeaders() {
-        // Given
-        
         // When
         let sample = try! makeUrlRequestFrom(httpMethod: .POST).allHTTPHeaderFields!
         
         // Then
         XCTAssertEqual(sample.count, 1)
         XCTAssertEqual(sample["Content-Type"], "application/x-www-form-urlencoded; charset=utf-8")
+    }
+    
+    func test_apiPostRequestBody() {
+        // When
+        let sample = try! makeUrlRequestFrom(httpMethod: .POST).httpBody!
+        
+        // Then
+        XCTAssertEqual(sample, queryBuilder.parameters.data(using: .utf8))
     }
     
     func test_uploadRequestUrl() {
@@ -99,8 +106,6 @@ final class UrlRequestBuilderTests: XCTestCase {
     }
     
     func test_uploadRequestWrongUrl() {
-        // Given
-        
         do {
             // When
             let _ = try makeUrlRequestFrom(request: .upload(url: "", media: []))
@@ -112,8 +117,6 @@ final class UrlRequestBuilderTests: XCTestCase {
     }
     
     func test_uploadRequestHttpMethod() {
-        // Given
-        
         // When
         let sample = try! makeUrlRequestFrom(request: .upload(url: "https://test.com", media: [])).httpMethod!
         
@@ -122,8 +125,6 @@ final class UrlRequestBuilderTests: XCTestCase {
     }
     
     func test_uploadRequestHeaders() {
-        // Given
-        
         // When
         let sample = try! makeUrlRequestFrom(request: .upload(url: "https://test.com", media: [])).allHTTPHeaderFields!
         
@@ -132,6 +133,14 @@ final class UrlRequestBuilderTests: XCTestCase {
         XCTAssertEqual(sample["Content-Type"], "multipart/form-data;  boundary=boundary")
         XCTAssertEqual(sample["Accept-Language"], "")
         XCTAssertEqual(sample["Content-Transfer-Encoding"], "8bit")
+    }
+    
+    func test_uploadPostRequestBody() {
+        // When
+        let sample = try! makeUrlRequestFrom(request: .upload(url: "https://test.com", media: [])).httpBody!
+        
+        // Then
+        XCTAssertEqual(sample, bodyBuilder.data)
     }
     
     func test_customRequestUrl() {
@@ -146,8 +155,6 @@ final class UrlRequestBuilderTests: XCTestCase {
     }
     
     func test_customRequestWrongUrl() {
-        // Given
-        
         do {
             // When
             let _ = try makeUrlRequestFrom(request: .url(""))
@@ -159,8 +166,6 @@ final class UrlRequestBuilderTests: XCTestCase {
     }
     
     func test_customRequestHttpMethod() {
-        // Given
-        
         // When
         let sample = try! makeUrlRequestFrom(request: .url("https://test.com")).httpMethod!
         
@@ -169,8 +174,6 @@ final class UrlRequestBuilderTests: XCTestCase {
     }
     
     func test_customRequestHeaders() {
-        // Given
-        
         // When
         let sample = try! makeUrlRequestFrom(request: .url("https://test.com")).allHTTPHeaderFields!
         

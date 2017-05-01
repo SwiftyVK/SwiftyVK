@@ -6,7 +6,7 @@ protocol UrlRequestBuilder {
 
 final class UrlRequestBuilderImpl: UrlRequestBuilder {
     
-    private let methodUrl = "https://api.vk.com/method/"
+    private let baseUrl = "https://api.vk.com/method/"
     
     private let queryBuilder: QueryBuilder
     private let bodyBuilder: BodyBuilder
@@ -54,19 +54,19 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
     }
     
     private func makeGetRequest(from apiMethod: String, query: String) throws -> URLRequest {
-        guard let url = URL(string: methodUrl + apiMethod + "?" + query) else {
+        guard let url = URL(string: baseUrl + apiMethod + "?" + query) else {
             throw RequestError.wrongUrl
         }
         
-        return URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+        return URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
     }
     
     private func makePostRequest(from apiMethod: String, query: String) throws -> URLRequest {
-        guard let url = URL(string: methodUrl + apiMethod) else {
+        guard let url = URL(string: baseUrl + apiMethod) else {
             throw RequestError.wrongUrl
         }
         
-        var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+        var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
         
         let charset = String(
             CFStringConvertEncodingToIANACharSetName(
@@ -85,7 +85,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
             throw RequestError.wrongUrl
         }
         
-        var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+        var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
         req.httpMethod = "POST"
         req.addValue("", forHTTPHeaderField: "Accept-Language")
         req.addValue("8bit", forHTTPHeaderField: "Content-Transfer-Encoding")
@@ -100,7 +100,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
             throw RequestError.wrongUrl
         }
         
-        var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0)
+        var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
         req.httpMethod = "GET"
         
         return req
