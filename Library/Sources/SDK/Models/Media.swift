@@ -38,8 +38,8 @@ public enum Media: CustomStringConvertible {
 }
 
 public enum ImageType: String {
-    case JPG
-    case PNG
-    case BMP
-    case GIF
+    case jpg
+    case png
+    case bmp
+    case gif
 }

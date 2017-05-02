@@ -34,7 +34,7 @@ extension Request {
     enum Raw {
         case api(method: String, parameters: Parameters)
         case url(String)
-        case upload(url: String, media: [Media])
+        case upload(url: String, media: [Media], partType: PartType)
         
         var canSentConcurrently: Bool {
             switch self {

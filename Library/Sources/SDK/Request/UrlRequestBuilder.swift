@@ -10,11 +10,11 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
     private let baseUrl = "https://api.vk.com/method/"
     
     private let queryBuilder: QueryBuilder
-    private let bodyBuilder: BodyBuilder
+    private let bodyBuilder: MultipartBodyBuilder
     
     init(
         queryBuilder: QueryBuilder,
-        bodyBuilder: BodyBuilder
+        bodyBuilder: MultipartBodyBuilder
         ) {
         self.queryBuilder = queryBuilder
         self.bodyBuilder = bodyBuilder
@@ -28,8 +28,8 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         switch request {
         case .api(let method, let parameters):
             urlRequest = try make(from: method, parameters: parameters, httpMethod: httpMethod, capthca: capthca)
-        case .upload(let url, let media):
-            urlRequest = try make(from: media, url: url)
+        case .upload(let url, let media, let partType):
+            urlRequest = try make(from: media, url: url, partType: partType)
         case .url(let url):
             urlRequest = try make(from: url)
         }
@@ -85,7 +85,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         return req
     }
     
-    private func make(from media: [Media], url: String) throws -> URLRequest {
+    private func make(from media: [Media], url: String, partType: PartType) throws -> URLRequest {
         guard let url = URL(string: url) else {
             throw RequestError.wrongUrl
         }
@@ -95,7 +95,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         req.addValue("", forHTTPHeaderField: "Accept-Language")
         req.addValue("8bit", forHTTPHeaderField: "Content-Transfer-Encoding")
         req.setValue("multipart/form-data;  boundary=\(bodyBuilder.boundary)", forHTTPHeaderField: "Content-Type")
-        req.httpBody = bodyBuilder.makeBody(from: media)
+        req.httpBody = bodyBuilder.makeBody(from: media, partType: partType)
         
         return req
     }

@@ -132,6 +132,13 @@
 			remoteGlobalIDString = A2527D551BD1134500F65412;
 			remoteInfo = "SwiftyVKResources-iOS";
 		};
+		A223C8841EB8E33600EC4E4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A23708BA1EA52F0D00103212;
+			remoteInfo = "SwiftyVK-Tests-OSX";
+		};
 		A2EB71321BD27639008E7D86 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A2527E5B1BD139E200F65412 /* Project object */;
@@ -302,6 +309,7 @@
 				A2087A581D8580940076BB5E /* SwiftyVK.framework */,
 				A2087A5A1D8580940076BB5E /* SwiftyVKResources-OSX.bundle */,
 				A2087A5C1D8580940076BB5E /* SwiftyVKResources-iOS.bundle */,
+				A223C8851EB8E33600EC4E4A /* SwiftyVK-Tests-OSX.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -609,6 +617,13 @@
 			fileType = wrapper.cfbundle;
 			path = "SwiftyVKResources-iOS.bundle";
 			remoteRef = A2087A5B1D8580940076BB5E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A223C8851EB8E33600EC4E4A /* SwiftyVK-Tests-OSX.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SwiftyVK-Tests-OSX.xctest";
+			remoteRef = A223C8841EB8E33600EC4E4A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

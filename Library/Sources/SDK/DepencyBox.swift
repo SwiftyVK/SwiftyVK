@@ -32,7 +32,7 @@ final class DepencyBoxImpl: DepencyBox {
     func urlRequestBuilder() -> UrlRequestBuilder {
         return UrlRequestBuilderImpl(
             queryBuilder: QueryBuilderImpl(),
-            bodyBuilder: BodyBuilderImpl()
+            bodyBuilder: MultipartBodyBuilderImpl()
         )
     }
 }

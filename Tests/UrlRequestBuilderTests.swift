@@ -4,7 +4,7 @@ import XCTest
 final class UrlRequestBuilderTests: XCTestCase {
     
     private let queryBuilder = QueryBuilderMock()
-    private let bodyBuilder = BodyBuilderMock()
+    private let bodyBuilder = MultipartBodyBuilderMock()
 
     private var builder: UrlRequestBuilder {
         return UrlRequestBuilderImpl(
@@ -99,7 +99,7 @@ final class UrlRequestBuilderTests: XCTestCase {
         let url = "https://test.com"
         
         // When
-        let sample = try! makeUrlRequestFrom(request: .upload(url: "https://test.com", media: [])).url!.absoluteString
+        let sample = try! makeUrlRequestFrom(request: .upload(url: "https://test.com", media: [], partType: .file)).url!.absoluteString
         
         // Then
         XCTAssertEqual(sample, url)
@@ -108,7 +108,7 @@ final class UrlRequestBuilderTests: XCTestCase {
     func test_uploadRequestWrongUrl() {
         do {
             // When
-            let _ = try makeUrlRequestFrom(request: .upload(url: "", media: []))
+            let _ = try makeUrlRequestFrom(request: .upload(url: "", media: [], partType: .file))
             XCTFail("Test should be failed")
         } catch let error {
             // Then
@@ -118,7 +118,7 @@ final class UrlRequestBuilderTests: XCTestCase {
     
     func test_uploadRequestHttpMethod() {
         // When
-        let sample = try! makeUrlRequestFrom(request: .upload(url: "https://test.com", media: [])).httpMethod!
+        let sample = try! makeUrlRequestFrom(request: .upload(url: "https://test.com", media: [], partType: .file)).httpMethod!
         
         // Then
         XCTAssertEqual(sample, "POST")
@@ -126,7 +126,7 @@ final class UrlRequestBuilderTests: XCTestCase {
     
     func test_uploadRequestHeaders() {
         // When
-        let sample = try! makeUrlRequestFrom(request: .upload(url: "https://test.com", media: [])).allHTTPHeaderFields!
+        let sample = try! makeUrlRequestFrom(request: .upload(url: "https://test.com", media: [], partType: .file)).allHTTPHeaderFields!
         
         // Then
         XCTAssertEqual(sample.count, 3)
@@ -137,7 +137,7 @@ final class UrlRequestBuilderTests: XCTestCase {
     
     func test_uploadPostRequestBody() {
         // When
-        let sample = try! makeUrlRequestFrom(request: .upload(url: "https://test.com", media: [])).httpBody!
+        let sample = try! makeUrlRequestFrom(request: .upload(url: "https://test.com", media: [], partType: .file)).httpBody!
         
         // Then
         XCTAssertEqual(sample, bodyBuilder.data)

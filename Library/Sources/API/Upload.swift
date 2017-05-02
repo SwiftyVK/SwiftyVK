@@ -40,8 +40,8 @@ extension VK.Api {
                         Request(
                             of: .upload(
                                 url: $0["upload_url"].stringValue,
-                                media: Array(media.prefix(5)
-                                )
+                                media: Array(media.prefix(5)),
+                                partType: .indexedFile
                             ),
                             config: config.mutated(timeout: uploadTimeout)
                         )
@@ -74,12 +74,22 @@ extension VK.Api {
             return VK.Api.Photos.getMessagesUploadServer(.empty)
                 .request(with: config)
                 .next {
+                    Request(
+                        of: .upload(
+                            url: $0["upload_url"].stringValue,
+                            media: [media],
+                            partType: .photo
+                        ),
+                        config: config.mutated(timeout: uploadTimeout)
+                    )
+                }
+                .next {
                     VK.Api.Photos.saveMessagesPhoto([
                         .photo: $0["photo"].string,
                         .server: $0["server"].string,
                         .hash: $0["hash"].string
                         ])
-                        .request(with: config.mutated(timeout: uploadTimeout))
+                        .request(with: config)
             }
         }
         
@@ -95,6 +105,16 @@ extension VK.Api {
             return VK.Api.Photos.getMarketUploadServer([.groupId: groupId])
                 .request(with: config)
                 .next {
+                    Request(
+                        of: .upload(
+                            url: $0["upload_url"].stringValue,
+                            media: [media],
+                            partType: .file
+                        ),
+                        config: config.mutated(timeout: uploadTimeout)
+                    )
+                }
+                .next {
                     VK.Api.Photos.saveMarketPhoto([
                         .groupId: groupId,
                         .photo: $0["photo"].string,
@@ -107,7 +127,7 @@ extension VK.Api {
                         .cropY: mainPhotoConfig?.cropY,
                         .cropWidth: mainPhotoConfig?.cropW
                         ])
-                        .request(with: config.mutated(timeout: uploadTimeout))
+                        .request(with: config)
             }
         }
         
@@ -122,13 +142,23 @@ extension VK.Api {
             return VK.Api.Photos.getMarketAlbumUploadServer([.groupId: groupId])
                 .request(with: config)
                 .next {
+                    Request(
+                        of: .upload(
+                            url: $0["upload_url"].stringValue,
+                            media: [media],
+                            partType: .file
+                        ),
+                        config: config.mutated(timeout: uploadTimeout)
+                    )
+                }
+                .next {
                     VK.Api.Photos.saveMarketAlbumPhoto([
                         .groupId: groupId,
                         .photo: $0["photo"].string,
                         .server: $0["server"].string,
                         .hash: $0["hash"].string
                         ])
-                        .request(with: config.mutated(timeout: uploadTimeout))
+                        .request(with: config)
             }
         }
         
@@ -145,6 +175,16 @@ extension VK.Api {
                 ])
                 .request(with: config)
                 .next {
+                    Request(
+                        of: .upload(
+                            url: $0["upload_url"].stringValue,
+                            media: [media],
+                            partType: .photo
+                        ),
+                        config: config.mutated(timeout: uploadTimeout)
+                    )
+                }
+                .next {
                     VK.Api.Photos.saveWallPhoto([
                         .userId: target.decoded.userId,
                         .groupId: target.decoded.groupId,
@@ -152,7 +192,7 @@ extension VK.Api {
                         .server: $0["server"].string,
                         .hash: $0["hash"].string
                         ])
-                        .request(with: config.mutated(timeout: uploadTimeout))
+                        .request(with: config)
             }
         }
         
@@ -186,7 +226,11 @@ extension VK.Api {
                     .request(with: config)
                     .next {
                         Request(
-                            of: .upload(url: $0["upload_url"].stringValue, media: [media]),
+                            of: .upload(
+                                url: $0["upload_url"].stringValue,
+                                media: [media],
+                                partType: .video
+                            ),
                             config: config.mutated(timeout: uploadTimeout)
                         )
                 }
@@ -231,6 +275,16 @@ extension VK.Api {
             return VK.Api.Audio.getUploadServer(.empty)
                 .request(with: config)
                 .next {
+                    Request(
+                        of: .upload(
+                            url: $0["upload_url"].stringValue,
+                            media: [media],
+                            partType: .file
+                        ),
+                        config: config.mutated(timeout: uploadTimeout)
+                    )
+                }
+                .next {
                     VK.Api.Audio.save([
                         .audio: $0["audio"].stringValue,
                         .server: $0["server"].stringValue,
@@ -238,7 +292,7 @@ extension VK.Api {
                         .artist: artist,
                         .title: title
                         ])
-                        .request(with: config.mutated(timeout: uploadTimeout))
+                        .request(with: config)
             }
         }
         
@@ -255,12 +309,22 @@ extension VK.Api {
             return VK.Api.Docs.getUploadServer([.groupId: groupId])
                 .request(with: config)
                 .next {
+                    Request(
+                        of: .upload(
+                            url: $0["upload_url"].stringValue,
+                            media: [media],
+                            partType: .file
+                        ),
+                        config: config.mutated(timeout: uploadTimeout)
+                    )
+                }
+                .next {
                     VK.Api.Docs.save([
                         .file: $0["file"].string,
                         .title: title,
                         .tags: tags
                         ])
-                        .request(with: config.mutated(timeout: uploadTimeout))
+                        .request(with: config)
                     
             }
         }
