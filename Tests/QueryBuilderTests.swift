@@ -66,4 +66,16 @@ final class QueryBuilderTests: XCTestCase {
         XCTAssertEqual(sample["captcha_sid"], "sid")
         XCTAssertEqual(sample["captcha_key"], "key")
     }
+    
+    func test_percentEncoding() {
+        // Given
+        let rawMessage = " !#$&'()*+,./:;=?@[]"
+        
+        // When
+        let encodedQuery = builder.makeQuery(from: [.message: rawMessage])
+        let encodedMesage = encodedQuery.components(separatedBy: "=")[1].components(separatedBy: "&")[0]
+        
+        // Then
+        XCTAssertEqual(rawMessage, encodedMesage.removingPercentEncoding)
+    }
 }
