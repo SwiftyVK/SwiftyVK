@@ -255,8 +255,6 @@
 		A236B2B51DB6864F002376C8 /* WebPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPresenter.swift; sourceTree = "<group>"; };
 		A236B2B81DB68E4F002376C8 /* WebController-OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WebController-OSX.swift"; sourceTree = "<group>"; };
 		A23708BA1EA52F0D00103212 /* SwiftyVK-Tests-OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftyVK-Tests-OSX.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A23708BC1EA52F0D00103212 /* SwiftyVK_OSX_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyVK_OSX_Tests.swift; sourceTree = "<group>"; };
-		A23708BE1EA52F0D00103212 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A23708C61EA5309700103212 /* TaskShedulerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskShedulerTests.swift; sourceTree = "<group>"; };
 		A2433A431EA533500058BB6D /* TaskMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskMock.swift; sourceTree = "<group>"; };
 		A2433A451EA542100058BB6D /* AttemptShedulerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptShedulerTests.swift; sourceTree = "<group>"; };
@@ -358,15 +356,6 @@
 			path = Session;
 			sourceTree = "<group>";
 		};
-		A23708BB1EA52F0D00103212 /* SwiftyVK-OSX-Tests */ = {
-			isa = PBXGroup;
-			children = (
-				A23708BC1EA52F0D00103212 /* SwiftyVK_OSX_Tests.swift */,
-				A23708BE1EA52F0D00103212 /* Info.plist */,
-			);
-			path = "SwiftyVK-OSX-Tests";
-			sourceTree = "<group>";
-		};
 		A23708C51EA52F9C00103212 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -428,7 +417,6 @@
 			children = (
 				A2527D5C1BD12FD200F65412 /* Source */,
 				A2527DF01BD133E100F65412 /* Resources */,
-				A23708BB1EA52F0D00103212 /* SwiftyVK-OSX-Tests */,
 				A2527D321BD1129500F65412 /* Products */,
 				A23708C51EA52F9C00103212 /* Tests */,
 			);
