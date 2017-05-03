@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyVK
 
-final class MultipartBodyBuilderTests: XCTestCase {
+final class MultipartBodyBuilderTests: BaseTestCase {
     
     var builder: MultipartBodyBuilderImpl {
         return MultipartBodyBuilderImpl()

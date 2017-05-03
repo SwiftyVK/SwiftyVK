@@ -25,7 +25,7 @@ public final class Request {
     
     @discardableResult
     public func send(with callbacks: Callbacks, in session: Session? = nil) -> Task {
-        let session = session ?? VK.dependencyBox.sessionClass().default
+        let session = session ?? VK.dependencyBox.defaultSession
         return session.send(request: self, callbacks: callbacks)
     }
 }

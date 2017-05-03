@@ -1,8 +1,9 @@
 import XCTest
 @testable import SwiftyVK
 
-final class AttemptShedulerTests: XCTestCase {
-    let shedulerLimit = 30
+final class AttemptShedulerTests: BaseTestCase {
+    
+    let shedulerLimit = AttemptLimit.limit(30)
     let count = 100
     var totalDelay: TimeInterval {
         return AttemptMock().delay*Double(count)
@@ -39,11 +40,11 @@ final class AttemptShedulerTests: XCTestCase {
         
         XCTAssertLessThan(
             samples.filter { $0.isFinished }.count,
-            shedulerLimit*2,
+            shedulerLimit.count*2,
             "Operations should be executed serially"
         )
         
-        Thread.sleep(forTimeInterval: Double(count/shedulerLimit))
+        Thread.sleep(forTimeInterval: Double(count/shedulerLimit.count))
         
         XCTAssertEqual(
             samples.filter { $0.isFinished }.count,
@@ -67,7 +68,7 @@ final class AttemptShedulerTests: XCTestCase {
         
         XCTAssertLessThan(
             serial.filter { $0.isFinished }.count,
-            shedulerLimit*2,
+            shedulerLimit.count*2,
             "Operations should be executed serially"
         )
         
@@ -77,7 +78,7 @@ final class AttemptShedulerTests: XCTestCase {
             "All concurrent operations should be executed"
         )
         
-        Thread.sleep(forTimeInterval: Double(count/shedulerLimit))
+        Thread.sleep(forTimeInterval: Double(count/shedulerLimit.count))
         
         XCTAssertEqual(
             serial.filter { $0.isFinished }.count,
@@ -103,10 +104,10 @@ final class AttemptShedulerTests: XCTestCase {
     
     func test_setAndGetLimit() {
         // Given
-        let sheduler = AttemptShedulerImpl(limit: 0)
+        let sheduler = AttemptShedulerImpl(limit: .none)
         // When
-        sheduler.limit = 1
+        sheduler.limit = .limit(1)
         // Then
-        XCTAssertEqual(sheduler.limit, 1)
+        XCTAssertEqual(sheduler.limit.count, 1)
     }
 }

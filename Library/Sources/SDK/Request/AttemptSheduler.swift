@@ -13,12 +13,12 @@ final class AttemptShedulerImpl: AttemptSheduler {
     }()
     private let serialQueue: AttemptApiQueue
     
-    var limit: Int {
+    var limit: AttemptLimit {
         get { return serialQueue.limit }
         set { serialQueue.limit = newValue }
     }
     
-    init(limit: Int) {
+    init(limit: AttemptLimit) {
         serialQueue = AttemptApiQueue(limit: limit)
     }
     
@@ -46,9 +46,9 @@ private class AttemptApiQueue: OperationQueue {
     
     private var sent = 0
     private var waited = [Operation]()
-    var limit: Int
+    var limit: AttemptLimit
     
-    init(limit: Int) {
+    init(limit: AttemptLimit) {
         self.limit = limit
         
         super.init()
@@ -75,7 +75,7 @@ private class AttemptApiQueue: OperationQueue {
     }
     
     private func addOperationSync(_ operation: Operation) {
-        if limit < 1 || sent < limit {
+        if limit.count < 1 || sent < limit.count {
             sent += 1
             super.addOperation(operation)
         }
@@ -94,10 +94,24 @@ private class AttemptApiQueue: OperationQueue {
         
         self.sent = 0
         
-        while !waited.isEmpty && sent < limit {
+        while !waited.isEmpty && sent < limit.count {
             sent += 1
             let op = waited.removeFirst()
             super.addOperation(op)
+        }
+    }
+}
+
+public enum AttemptLimit {
+    case none
+    case limit(Int)
+    
+    var count: Int {
+        switch self {
+        case .none:
+            return 0
+        case .limit(let limit):
+            return limit
         }
     }
 }

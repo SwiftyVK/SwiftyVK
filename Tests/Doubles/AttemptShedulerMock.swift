@@ -2,5 +2,9 @@
 
 final class AttemptShedulerMock: AttemptSheduler {
     
-    func shedule(attempt: Attempt, concurrent: Bool) throws {}
+    var sheduleCallCount = 0
+    
+    func shedule(attempt: Attempt, concurrent: Bool) throws {
+        sheduleCallCount += 1
+    }
 }

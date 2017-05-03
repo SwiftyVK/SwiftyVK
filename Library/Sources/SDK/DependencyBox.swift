@@ -1,6 +1,12 @@
 protocol DependencyBox {
     
-    func sessionClass() -> Session.Type
+    var defaultSession: Session {get}
+    
+    func session() -> Session
+    
+    func taskSheduler() -> TaskSheduler
+    
+    func attemptSheduler(limit: Int) -> AttemptSheduler
     
     func task(
         request: Request,
@@ -10,9 +16,24 @@ protocol DependencyBox {
 }
 
 final class DependencyBoxImpl: DependencyBox {
-        
-    func sessionClass() -> Session.Type {
-        return SessionImpl.self
+    
+    lazy var defaultSession: Session = {
+        self.session()
+    }()
+    
+    func session() -> Session {
+        return SessionImpl(
+            taskSheduler: taskSheduler(),
+            attemptSheduler: attemptSheduler(limit: 3)
+        )
+    }
+    
+    func attemptSheduler(limit: Int) -> AttemptSheduler {
+        return AttemptShedulerImpl(limit: .limit(3))
+    }
+    
+    func taskSheduler() -> TaskSheduler {
+        return TaskShedulerImpl()
     }
     
     func task(
@@ -29,7 +50,7 @@ final class DependencyBoxImpl: DependencyBox {
         )
     }
     
-    func urlRequestBuilder() -> UrlRequestBuilder {
+    private func urlRequestBuilder() -> UrlRequestBuilder {
         return UrlRequestBuilderImpl(
             queryBuilder: QueryBuilderImpl(),
             bodyBuilder: MultipartBodyBuilderImpl()

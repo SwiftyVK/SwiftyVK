@@ -1,18 +1,22 @@
 public protocol Session: class {
     static var `default`: Session { get }
+    static func new() -> Session
+    
     func send(request: Request, callbacks: Callbacks) -> Task
 }
 
 public final class SessionImpl: Session {
-    public static let `default`: Session = SessionImpl()
     
-    let taskSheduler: TaskSheduler = TaskShedulerImpl()
-    let attemptSheduler: AttemptSheduler = AttemptShedulerImpl(limit: 0)
+    private let taskSheduler: TaskSheduler
+    private let attemptSheduler: AttemptSheduler
     
-//    let appId: String
-//    let scopes: VK.Scope
-
-    init() {}
+    init(
+        taskSheduler: TaskSheduler,
+        attemptSheduler: AttemptSheduler
+        ) {
+        self.taskSheduler = taskSheduler
+        self.attemptSheduler = attemptSheduler
+    }
     
     public func send(request: Request, callbacks: Callbacks) -> Task {
         let task = VK.dependencyBox.task(
@@ -31,5 +35,13 @@ public final class SessionImpl: Session {
     
     func shedule(attempt: Attempt, concurrent: Bool) throws {
         try attemptSheduler.shedule(attempt: attempt, concurrent: concurrent)
+    }
+}
+
+extension SessionImpl {
+    public static let `default`: Session = VK.dependencyBox.defaultSession
+    
+    public static func new() -> Session {
+        return VK.dependencyBox.session()
     }
 }

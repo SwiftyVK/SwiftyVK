@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyVK
 
-final class DependencyBoxTests: XCTestCase {
+final class DependencyBoxTests: BaseTestCase {
     
     private var box: DependencyBox {
         return DependencyBoxImpl()
@@ -9,7 +9,7 @@ final class DependencyBoxTests: XCTestCase {
     
     
     func test_SessionType() {
-        XCTAssertTrue(box.sessionClass() == SessionImpl.self)
+        XCTAssertTrue(box.session() is SessionImpl)
     }
     
     func test_TaskType() {
