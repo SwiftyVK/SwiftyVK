@@ -15,7 +15,7 @@ public final class SessionImpl: Session {
     init() {}
     
     public func send(request: Request, callbacks: Callbacks) -> Task {
-        let task = VK.depencyBox.task(
+        let task = VK.dependencyBox.task(
             request: request,
             callbacks: callbacks,
             attemptSheduler: attemptSheduler

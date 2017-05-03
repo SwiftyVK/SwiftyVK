@@ -34,6 +34,8 @@
 		A217DAAD1E9926A500EA1430 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAAB1E9926A500EA1430 /* Session.swift */; };
 		A21E81591E2A7E68008E81E7 /* UrlCharactesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E81581E2A7E68008E81E7 /* UrlCharactesSet.swift */; };
 		A21E815A1E2A8303008E81E7 /* UrlCharactesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E81581E2A7E68008E81E7 /* UrlCharactesSet.swift */; };
+		A22179C51EBA3BBA006B71FD /* DependencyBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179C41EBA3BBA006B71FD /* DependencyBoxTests.swift */; };
+		A22179C81EBA3DBD006B71FD /* AttemptShedulerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */; };
 		A236B2B61DB6864F002376C8 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B51DB6864F002376C8 /* WebPresenter.swift */; };
 		A236B2B71DB6864F002376C8 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B51DB6864F002376C8 /* WebPresenter.swift */; };
 		A236B2B91DB68E4F002376C8 /* WebController-OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B81DB68E4F002376C8 /* WebController-OSX.swift */; };
@@ -234,6 +236,8 @@
 		A217DAA71E9924DE00EA1430 /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		A217DAAB1E9926A500EA1430 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		A21E81581E2A7E68008E81E7 /* UrlCharactesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlCharactesSet.swift; sourceTree = "<group>"; };
+		A22179C41EBA3BBA006B71FD /* DependencyBoxTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyBoxTests.swift; sourceTree = "<group>"; };
+		A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptShedulerMock.swift; sourceTree = "<group>"; };
 		A234A40A1BE34F6800856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/CaptchaView-OSX.strings"; sourceTree = "<group>"; };
 		A234A40B1BE34F6800856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A234A40C1BE34F6900856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/CaptchaView-iOS.strings"; sourceTree = "<group>"; };
@@ -365,6 +369,7 @@
 				A2B40DFC1EA693B700106AE3 /* UrlRequestBuilderTests.swift */,
 				A24DDAF11EB73E3F002EA273 /* QueryBuilderTests.swift */,
 				A25A3A2C1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift */,
+				A22179C41EBA3BBA006B71FD /* DependencyBoxTests.swift */,
 			);
 			name = Tests;
 			path = ../Tests;
@@ -377,6 +382,7 @@
 				A2433A471EA542620058BB6D /* AttemptMock.swift */,
 				A24DDAEB1EB73C9E002EA273 /* QueryBuilderMock.swift */,
 				A24DDAEF1EB73CB6002EA273 /* BodyBuilderMock.swift */,
+				A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -502,8 +508,8 @@
 			isa = PBXGroup;
 			children = (
 				A2838DA21E9AA0DA00FE5BE2 /* DepencyBox.swift */,
-				A2527D811BD12FD200F65412 /* Models */,
 				A24DDAE91EB73A2C002EA273 /* Logic */,
+				A2527D811BD12FD200F65412 /* Models */,
 				A2527D8D1BD12FD200F65412 /* UI */,
 			);
 			path = SDK;
@@ -847,9 +853,11 @@
 				A2433A461EA542100058BB6D /* AttemptShedulerTests.swift in Sources */,
 				A2433A481EA542620058BB6D /* AttemptMock.swift in Sources */,
 				A24DDAF21EB73E3F002EA273 /* QueryBuilderTests.swift in Sources */,
+				A22179C81EBA3DBD006B71FD /* AttemptShedulerMock.swift in Sources */,
 				A24DDAEE1EB73CA3002EA273 /* QueryBuilderMock.swift in Sources */,
 				A25A3A2D1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift in Sources */,
 				A23708C81EA532B900103212 /* TaskShedulerTests.swift in Sources */,
+				A22179C51EBA3BBA006B71FD /* DependencyBoxTests.swift in Sources */,
 				A2B40DFD1EA693B700106AE3 /* UrlRequestBuilderTests.swift in Sources */,
 				A2433A441EA533500058BB6D /* TaskMock.swift in Sources */,
 				A24DDAF01EB73CB6002EA273 /* BodyBuilderMock.swift in Sources */,

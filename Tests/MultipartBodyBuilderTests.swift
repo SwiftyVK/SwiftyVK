@@ -1,18 +1,6 @@
 import XCTest
 @testable import SwiftyVK
 
-private extension Data {
-    func toString() -> String {
-        return String(data: self, encoding: .utf8) ?? ""
-    }
-}
-
-private extension String {
-    func splitByLines() -> [String] {
-        return self.components(separatedBy: "\r\n")
-    }
-}
-
 final class MultipartBodyBuilderTests: XCTestCase {
     
     var builder: MultipartBodyBuilderImpl {
@@ -93,5 +81,17 @@ final class MultipartBodyBuilderTests: XCTestCase {
         
         // Then
         XCTAssertEqual(sample[2], "Content-Disposition: form-data; name=\"photo\"; filename=\"file.jpg\"")
+    }
+}
+
+private extension Data {
+    func toString() -> String {
+        return String(data: self, encoding: .utf8) ?? ""
+    }
+}
+
+private extension String {
+    func splitByLines() -> [String] {
+        return self.components(separatedBy: "\r\n")
     }
 }

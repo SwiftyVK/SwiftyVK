@@ -1,4 +1,4 @@
-protocol DepencyBox {
+protocol DependencyBox {
     
     func sessionClass() -> Session.Type
     
@@ -9,7 +9,7 @@ protocol DepencyBox {
         ) -> Task
 }
 
-final class DepencyBoxImpl: DepencyBox {
+final class DependencyBoxImpl: DependencyBox {
         
     func sessionClass() -> Session.Type {
         return SessionImpl.self

@@ -25,7 +25,7 @@ public final class Request {
     
     @discardableResult
     public func send(with callbacks: Callbacks, in session: Session? = nil) -> Task {
-        let session = session ?? VK.depencyBox.sessionClass().default
+        let session = session ?? VK.dependencyBox.sessionClass().default
         return session.send(request: self, callbacks: callbacks)
     }
 }
@@ -90,7 +90,7 @@ public struct Config {
 
 public struct Callbacks {
     
-    static let empty = Callbacks()
+    public static let empty = Callbacks()
     
     let onSuccess: ((JSON) -> ())?
     let onError: ((Error) -> ())?
