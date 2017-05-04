@@ -59,15 +59,15 @@ extension VK {
     }
 
     static func put(_ reqId: Int64, _ message: String) {
-        logQueue.async {
-            _put("Req \(reqId)", message, VK.config.logToConsole)
-        }
+//        logQueue.async {
+//            _put("Req \(reqId)", message, VK.config.logToConsole)
+//        }
     }
 
     static func put(_ key: String, _ message: String) {
-      logQueue.async {
-        _put(key, message, VK.config.logToConsole)
-      }
+//      logQueue.async {
+//        _put(key, message, VK.config.logToConsole)
+//      }
     }
 
     private static func _put(_ key: String, _ message: String, _ printToConsole: Bool) {

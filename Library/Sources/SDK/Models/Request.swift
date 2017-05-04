@@ -26,6 +26,7 @@ public final class Request {
     @discardableResult
     public func send(with callbacks: Callbacks, in session: Session? = nil) -> Task {
         let session = session ?? VK.dependencyBox.defaultSession
+        config.inject(sessionConfig: session.config)
         return session.send(request: self, callbacks: callbacks)
     }
 }
@@ -44,47 +45,6 @@ extension Request {
                 return true
             }
         }
-    }
-}
-
-public struct Config {
-    
-    static let `default` = Config()
-    
-    var timeout: TimeInterval
-    var maxAttempts: Int
-    var httpMethod: HttpMethod
-    var catchErrors: Bool
-    var logToConsole: Bool
-    
-    init(
-        timeout: TimeInterval = VK.config.timeOut,
-        maxAttempts: Int = VK.config.maxAttempts,
-        httpMethod: HttpMethod = .GET,
-        catchErrors: Bool = VK.config.catchErrors,
-        logToConsole: Bool = VK.config.logToConsole
-        ) {
-        self.timeout = timeout
-        self.maxAttempts = maxAttempts
-        self.httpMethod = httpMethod
-        self.catchErrors = catchErrors
-        self.logToConsole = logToConsole
-    }
-    
-    func mutated(
-        timeout: TimeInterval? = nil,
-        maxAttempts: Int? = nil,
-        httpMethod: HttpMethod? = nil,
-        catchErrors: Bool? = nil,
-        logToConsole: Bool? = nil
-        ) -> Config {
-        return Config(
-            timeout: timeout ?? self.timeout,
-            maxAttempts: maxAttempts ?? self.maxAttempts,
-            httpMethod: httpMethod ?? self.httpMethod,
-            catchErrors: catchErrors ?? self.catchErrors,
-            logToConsole: logToConsole ?? self.logToConsole
-        )
     }
 }
 

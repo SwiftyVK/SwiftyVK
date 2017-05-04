@@ -43,7 +43,7 @@ extension VK.Api {
                                 media: Array(media.prefix(5)),
                                 partType: .indexedFile
                             ),
-                            config: config.mutated(timeout: uploadTimeout)
+                            config: config.mutated(attemptTimeout: uploadTimeout)
                         )
                     }
                     .next {
@@ -80,7 +80,7 @@ extension VK.Api {
                             media: [media],
                             partType: .photo
                         ),
-                        config: config.mutated(timeout: uploadTimeout)
+                        config: config.mutated(attemptTimeout: uploadTimeout)
                     )
                 }
                 .next {
@@ -111,7 +111,7 @@ extension VK.Api {
                             media: [media],
                             partType: .file
                         ),
-                        config: config.mutated(timeout: uploadTimeout)
+                        config: config.mutated(attemptTimeout: uploadTimeout)
                     )
                 }
                 .next {
@@ -148,7 +148,7 @@ extension VK.Api {
                             media: [media],
                             partType: .file
                         ),
-                        config: config.mutated(timeout: uploadTimeout)
+                        config: config.mutated(attemptTimeout: uploadTimeout)
                     )
                 }
                 .next {
@@ -181,7 +181,7 @@ extension VK.Api {
                             media: [media],
                             partType: .photo
                         ),
-                        config: config.mutated(timeout: uploadTimeout)
+                        config: config.mutated(attemptTimeout: uploadTimeout)
                     )
                 }
                 .next {
@@ -231,7 +231,7 @@ extension VK.Api {
                                 media: [media],
                                 partType: .video
                             ),
-                            config: config.mutated(timeout: uploadTimeout)
+                            config: config.mutated(attemptTimeout: uploadTimeout)
                         )
                 }
             }
@@ -281,7 +281,7 @@ extension VK.Api {
                             media: [media],
                             partType: .file
                         ),
-                        config: config.mutated(timeout: uploadTimeout)
+                        config: config.mutated(attemptTimeout: uploadTimeout)
                     )
                 }
                 .next {
@@ -315,7 +315,7 @@ extension VK.Api {
                             media: [media],
                             partType: .file
                         ),
-                        config: config.mutated(timeout: uploadTimeout)
+                        config: config.mutated(attemptTimeout: uploadTimeout)
                     )
                 }
                 .next {

@@ -18,7 +18,7 @@ struct Authorizator {
         let _perm = VK.Scope.toInt(delegate.vkWillAuthorize())
         let _redir = canAuthorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
 
-        return  "client_id=\(appId)&scope=\(_perm)&display=mobile&v\(VK.config.apiVersion)&sdk_version=\(VK.config.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
+        return  "client_id=\(appId)&scope=\(_perm)&display=mobile&v\(SessionConfig.apiVersion)&sdk_version=\(SessionConfig.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
     }
 
     fileprivate static var error: AuthError?

@@ -43,6 +43,7 @@ public protocol VKDelegate: class {
  */
 public struct VK {
     static var dependencyBox: DependencyBox = DependencyBoxImpl()
+    public static var session = dependencyBox.sessionType
     weak static var delegate: VKDelegate?
     public private(set) static var appID: String?
 

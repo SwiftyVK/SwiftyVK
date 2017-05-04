@@ -103,6 +103,8 @@ private class AttemptApiQueue: OperationQueue {
 }
 
 public enum AttemptLimit {
+    static let `default` = AttemptLimit.limit(3)
+
     case none
     case limit(Int)
     

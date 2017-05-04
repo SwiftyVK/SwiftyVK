@@ -41,6 +41,8 @@
 		A22179CE1EBA52A2006B71FD /* DependencyBoxMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179CD1EBA52A2006B71FD /* DependencyBoxMock.swift */; };
 		A22179D01EBA530C006B71FD /* SessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179CF1EBA530C006B71FD /* SessionMock.swift */; };
 		A22179D21EBA5393006B71FD /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179D11EBA5393006B71FD /* BaseTestCase.swift */; };
+		A22179D41EBA57AF006B71FD /* SessionConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179D31EBA57AF006B71FD /* SessionConfig.swift */; };
+		A22179D51EBA57AF006B71FD /* SessionConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179D31EBA57AF006B71FD /* SessionConfig.swift */; };
 		A236B2B61DB6864F002376C8 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B51DB6864F002376C8 /* WebPresenter.swift */; };
 		A236B2B71DB6864F002376C8 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B51DB6864F002376C8 /* WebPresenter.swift */; };
 		A236B2B91DB68E4F002376C8 /* WebController-OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B81DB68E4F002376C8 /* WebController-OSX.swift */; };
@@ -68,8 +70,6 @@
 		A254C0C81E9904CB001A5456 /* Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254C0C71E9904CB001A5456 /* Custom.swift */; };
 		A254C0C91E9904CB001A5456 /* Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254C0C71E9904CB001A5456 /* Custom.swift */; };
 		A25A3A2D1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A3A2C1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift */; };
-		A25AE9391D9AD57E008C0AA9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE9381D9AD57E008C0AA9 /* Config.swift */; };
-		A25AE93A1D9AD583008C0AA9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AE9381D9AD57E008C0AA9 /* Config.swift */; };
 		A26D88BB1DC124C200AD63CD /* WebController-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */; };
 		A26F8B811E3A78DB00273E35 /* SwiftyVKResources-OSX.bundle in Copy Bundle Resources For Cocoapods */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */; };
 		A26F8B831E3A78F400273E35 /* SwiftyVKResources-iOS.bundle in Copy Bundle Resources For Cocoapods */ = {isa = PBXBuildFile; fileRef = A2527D551BD1134500F65412 /* SwiftyVKResources-iOS.bundle */; };
@@ -77,6 +77,8 @@
 		A28368ED1D9D742D00EEBE2A /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* Attempt.swift */; };
 		A2838DA31E9AA0DA00FE5BE2 /* DependencyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2838DA21E9AA0DA00FE5BE2 /* DependencyBox.swift */; };
 		A2838DA41E9AA0DA00FE5BE2 /* DependencyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2838DA21E9AA0DA00FE5BE2 /* DependencyBox.swift */; };
+		A29508841EBBA24B00981EC0 /* RequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29508831EBBA24B00981EC0 /* RequestConfig.swift */; };
+		A29508851EBBA24B00981EC0 /* RequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29508831EBBA24B00981EC0 /* RequestConfig.swift */; };
 		A2967E741CBBC4A700B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
 		A2967E751CBBC51600B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
 		A29F1CD41E95674A00BE5369 /* TaskSheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */; };
@@ -248,6 +250,7 @@
 		A22179CD1EBA52A2006B71FD /* DependencyBoxMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyBoxMock.swift; sourceTree = "<group>"; };
 		A22179CF1EBA530C006B71FD /* SessionMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionMock.swift; sourceTree = "<group>"; };
 		A22179D11EBA5393006B71FD /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
+		A22179D31EBA57AF006B71FD /* SessionConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConfig.swift; sourceTree = "<group>"; };
 		A234A40A1BE34F6800856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/CaptchaView-OSX.strings"; sourceTree = "<group>"; };
 		A234A40B1BE34F6800856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A234A40C1BE34F6900856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/CaptchaView-iOS.strings"; sourceTree = "<group>"; };
@@ -332,10 +335,10 @@
 		A2527E381BD134F000F65412 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = "ru.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A254C0C71E9904CB001A5456 /* Custom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Custom.swift; sourceTree = "<group>"; };
 		A25A3A2C1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartBodyBuilderTests.swift; sourceTree = "<group>"; };
-		A25AE9381D9AD57E008C0AA9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WebController-iOS.swift"; sourceTree = "<group>"; };
 		A28368EB1D9D742700EEBE2A /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
 		A2838DA21E9AA0DA00FE5BE2 /* DependencyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyBox.swift; sourceTree = "<group>"; };
+		A29508831EBBA24B00981EC0 /* RequestConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestConfig.swift; sourceTree = "<group>"; };
 		A2967E731CBBC4A700B7D48F /* Gifts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gifts.swift; sourceTree = "<group>"; };
 		A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskSheduler.swift; sourceTree = "<group>"; };
 		A2A3E6341EAFC1C70029FA44 /* Numbers+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Numbers+Extensions.swift"; sourceTree = "<group>"; };
@@ -366,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				A217DAAB1E9926A500EA1430 /* Session.swift */,
+				A22179D31EBA57AF006B71FD /* SessionConfig.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -460,7 +464,6 @@
 			children = (
 				A2527D901BD12FD200F65412 /* SwiftyVK.h */,
 				A2527D911BD12FD200F65412 /* VK.swift */,
-				A25AE9381D9AD57E008C0AA9 /* Config.swift */,
 				A2527D7F1BD12FD200F65412 /* LongPoll.swift */,
 				A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */,
 				A2527D801BD12FD200F65412 /* SDK */,
@@ -535,6 +538,7 @@
 			children = (
 				A217DAA71E9924DE00EA1430 /* Method.swift */,
 				A2CF0D401E98EF0900EAFF30 /* Request.swift */,
+				A29508831EBBA24B00981EC0 /* RequestConfig.swift */,
 				A2CF0D411E98EF0900EAFF30 /* Result.swift */,
 				A2527D821BD12FD200F65412 /* Arg.swift */,
 				A2D1369A1DA00E9000C487C1 /* Errors.swift */,
@@ -904,10 +908,12 @@
 				A26D88BB1DC124C200AD63CD /* WebController-iOS.swift in Sources */,
 				A2EB6EF51BD18394008E7D86 /* Likes.swift in Sources */,
 				A2EB6EF61BD18394008E7D86 /* Messages.swift in Sources */,
+				A22179D51EBA57AF006B71FD /* SessionConfig.swift in Sources */,
 				A2EB6EF71BD18394008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6EF81BD18394008E7D86 /* Notes.swift in Sources */,
 				A24A294E1E96BC77006152E6 /* AttemptSheduler.swift in Sources */,
 				A2EB6EF91BD18394008E7D86 /* Notifacations.swift in Sources */,
+				A29508851EBBA24B00981EC0 /* RequestConfig.swift in Sources */,
 				A2EB6EFA1BD18394008E7D86 /* Pages.swift in Sources */,
 				A2838DA41E9AA0DA00FE5BE2 /* DependencyBox.swift in Sources */,
 				A2EB6EFB1BD18394008E7D86 /* Photos.swift in Sources */,
@@ -934,7 +940,6 @@
 				A217DAA91E9924DE00EA1430 /* Method.swift in Sources */,
 				A2066AEB1D9C388F0065A4D7 /* Task.swift in Sources */,
 				A2EB6F091BD18395008E7D86 /* Media.swift in Sources */,
-				A25AE93A1D9AD583008C0AA9 /* Config.swift in Sources */,
 				A2EB6F0A1BD18395008E7D86 /* Resources.swift in Sources */,
 				A2CF0D451E98EF0900EAFF30 /* Result.swift in Sources */,
 				A2EB6F0B1BD18395008E7D86 /* Scope.swift in Sources */,
@@ -975,11 +980,11 @@
 				A2EB6EC91BD18389008E7D86 /* Messages.swift in Sources */,
 				A24DDAE41EB737C7002EA273 /* QueryBuilder.swift in Sources */,
 				A2838DA31E9AA0DA00FE5BE2 /* DependencyBox.swift in Sources */,
+				A22179D41EBA57AF006B71FD /* SessionConfig.swift in Sources */,
 				A2EB6ECA1BD18389008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6ECB1BD18389008E7D86 /* Notes.swift in Sources */,
 				A236B2B91DB68E4F002376C8 /* WebController-OSX.swift in Sources */,
 				A2CF0D441E98EF0900EAFF30 /* Result.swift in Sources */,
-				A25AE9391D9AD57E008C0AA9 /* Config.swift in Sources */,
 				A2EB6ECC1BD18389008E7D86 /* Notifacations.swift in Sources */,
 				A2EB6ECD1BD18389008E7D86 /* Pages.swift in Sources */,
 				A2EB6ECE1BD18389008E7D86 /* Photos.swift in Sources */,
@@ -1003,6 +1008,7 @@
 				A2EB6ED91BD18389008E7D86 /* Wall.swift in Sources */,
 				A2EB6EDA1BD18389008E7D86 /* Arg.swift in Sources */,
 				A2A3E6351EAFC1C70029FA44 /* Numbers+Extensions.swift in Sources */,
+				A29508841EBBA24B00981EC0 /* RequestConfig.swift in Sources */,
 				A2CF0D421E98EF0900EAFF30 /* Request.swift in Sources */,
 				A2EB6EDC1BD18389008E7D86 /* Media.swift in Sources */,
 				A2B4ECAC1DCA4F6B009435B6 /* CapthcaPresenter.swift in Sources */,
