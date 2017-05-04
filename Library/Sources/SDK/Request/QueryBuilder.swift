@@ -1,38 +1,39 @@
 typealias Captcha = (sid: String, key: String)
 
 protocol QueryBuilder {
-    func makeQuery(from parameters: Parameters, captcha: Captcha?) -> String
+    func makeQuery(from parameters: Parameters, captcha: Captcha?, config: Config) -> String
 }
 
 final class QueryBuilderImpl: QueryBuilder {
     
-    func makeQuery(from parameters: Parameters, captcha: Captcha? = nil) -> String {
+    func makeQuery(from parameters: Parameters, captcha: Captcha? = nil, config: Config = .default) -> String {
         let paramArray = NSMutableArray()
         
+        var rawParameters = [String: String]()
+        
         for (name, value) in parameters {
-            guard let value = value else {
-                continue
-            }
-            
-            if let encodedValue = value.addingPercentEncoding(withAllowedCharacters: .urlQueryParametersAllowed) {
-                paramArray.add("\(name.rawValue)=\(encodedValue)")
-            }
+            guard let value = value else { continue }
+            rawParameters[name.rawValue] = value
         }
         
-        paramArray.add("v=\(VK.config.apiVersion)")
-        paramArray.add("https=1")
+        rawParameters["v"] = SessionConfig.apiVersion
+        rawParameters["lang"] = config.language.rawValue
+        rawParameters["https"] = "1"
+        
         
         if let token = Token.get() {
-            paramArray.add("access_token=\(token)")
-        }
-        
-        if let lang = VK.config.language {
-            paramArray.add("lang=\(lang)")
+             rawParameters["access_token"] = token
         }
         
         if let captcha = captcha {
-            paramArray.add("captcha_sid=\(captcha.sid)")
-            paramArray.add("captcha_key=\(captcha.key)")
+            rawParameters["captcha_sid"] = captcha.sid
+            rawParameters["captcha_key"] = captcha.key
+        }
+        
+        for (name, value) in rawParameters {
+            if let encodedValue = value.addingPercentEncoding(withAllowedCharacters: .urlQueryParametersAllowed) {
+                paramArray.add("\(name)=\(encodedValue)")
+            }
         }
         
         return paramArray.componentsJoined(by: "&")
