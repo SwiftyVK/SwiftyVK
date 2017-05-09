@@ -23,7 +23,7 @@ final class QueryBuilderTests: BaseTestCase {
         let sample = parameters(from: builder.makeQuery(from: .empty))
 
         // Then
-        XCTAssertEqual(sample["v"], VK.config.apiVersion)
+        XCTAssertEqual(sample["v"], SessionConfig.apiVersion)
     }
 
     func test_language() {
@@ -31,7 +31,7 @@ final class QueryBuilderTests: BaseTestCase {
         let sample = parameters(from: builder.makeQuery(from: .empty))
         
         // Then
-        XCTAssertEqual(sample["lang"], VK.config.language!)
+        XCTAssertEqual(sample["lang"], SessionConfig.default.language.rawValue)
     }
 
     func test_httpsFlag() {
@@ -73,7 +73,7 @@ final class QueryBuilderTests: BaseTestCase {
         
         // When
         let encodedQuery = builder.makeQuery(from: [.message: rawMessage])
-        let encodedMesage = encodedQuery.components(separatedBy: "=")[1].components(separatedBy: "&")[0]
+        let encodedMesage = encodedQuery.components(separatedBy: "&")[1].components(separatedBy: "=")[1]
         
         // Then
         XCTAssertEqual(rawMessage, encodedMesage.removingPercentEncoding)

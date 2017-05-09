@@ -2,11 +2,7 @@
 
 final class SessionMock: Session {
     
-    public static var `default`: Session = VK.dependencyBox.defaultSession
-    
-    public static func new() -> Session {
-        return SessionMock()
-    }
+    var config = SessionConfig()
     
     public func send(request: SwiftyVK.Request, callbacks: SwiftyVK.Callbacks) -> Task {
         return TaskMock()

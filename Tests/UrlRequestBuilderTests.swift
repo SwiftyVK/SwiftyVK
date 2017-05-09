@@ -18,7 +18,7 @@ final class UrlRequestBuilderTests: BaseTestCase {
         httpMethod: HttpMethod = .GET,
         timeout: TimeInterval = 0
         ) throws -> URLRequest {
-        return try builder.make(from:request, httpMethod: httpMethod, timeout: timeout, capthca: nil)
+        return try builder.make(from:request, httpMethod: httpMethod, config: Config(attemptTimeout: timeout), capthca: nil)
     }
     
     func test_requestTimeout() {

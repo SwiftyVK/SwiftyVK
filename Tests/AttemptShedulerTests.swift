@@ -3,7 +3,7 @@ import XCTest
 
 final class AttemptShedulerTests: BaseTestCase {
     
-    let shedulerLimit = AttemptLimit.limit(30)
+    let shedulerLimit = AttemptLimit.limited(30)
     let count = 100
     var totalDelay: TimeInterval {
         return AttemptMock().delay*Double(count)
@@ -102,12 +102,22 @@ final class AttemptShedulerTests: BaseTestCase {
         }
     }
     
-    func test_setAndGetLimit() {
+    func test_setLimit() {
         // Given
-        let sheduler = AttemptShedulerImpl(limit: .none)
+        let sheduler = AttemptShedulerImpl(limit: .unlimited)
+        let samples = (0..<count).map { _ in AttemptMock() }
+        
         // When
-        sheduler.limit = .limit(1)
+        sheduler.setLimit(to: .limited(1))
+        samples.forEach { try! sheduler.shedule(attempt: $0, concurrent: false) }
+        
         // Then
-        XCTAssertEqual(sheduler.limit.count, 1)
+        Thread.sleep(forTimeInterval: 1)
+        
+        XCTAssertEqual(
+            samples.filter { $0.isFinished } .count,
+            1,
+            "Only one operation should be executed"
+        )
     }
 }
