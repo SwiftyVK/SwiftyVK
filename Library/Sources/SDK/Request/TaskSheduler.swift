@@ -1,4 +1,4 @@
-protocol TaskSheduler {
+protocol TaskSheduler: class {
     func shedule(task: Task, concurrent: Bool) throws
 }
 

@@ -1,6 +1,7 @@
 import Foundation
 
-protocol AttemptSheduler {
+protocol AttemptSheduler: class {
+    func setLimit(to: AttemptLimit)
     func shedule(attempt: Attempt, concurrent: Bool) throws
 }
 
@@ -13,13 +14,17 @@ final class AttemptShedulerImpl: AttemptSheduler {
     }()
     private let serialQueue: AttemptApiQueue
     
-    var limit: AttemptLimit {
+    private var limit: AttemptLimit {
         get { return serialQueue.limit }
         set { serialQueue.limit = newValue }
     }
     
     init(limit: AttemptLimit) {
         serialQueue = AttemptApiQueue(limit: limit)
+    }
+    
+    func setLimit(to newLimit: AttemptLimit) {
+        limit = newLimit
     }
     
     func shedule(attempt: Attempt, concurrent: Bool) throws {
@@ -98,22 +103,6 @@ private class AttemptApiQueue: OperationQueue {
             sent += 1
             let op = waited.removeFirst()
             super.addOperation(op)
-        }
-    }
-}
-
-public enum AttemptLimit {
-    static let `default` = AttemptLimit.limit(3)
-
-    case none
-    case limit(Int)
-    
-    var count: Int {
-        switch self {
-        case .none:
-            return 0
-        case .limit(let limit):
-            return limit
         }
     }
 }

@@ -1,5 +1,7 @@
 public final class SessionConfig {
     
+    public static let `default` = SessionConfig()
+    
     public static var apiVersion = "5.62"
     public static let sdkVersion = "1.3.17"
     public var language: Language
@@ -8,18 +10,28 @@ public final class SessionConfig {
     public var handleErrors: Bool
     public var enableLogging: Bool
     
-    init(
+    public var limitPerSec: AttemptLimit {
+        didSet {
+            onLimitPerSecChange?(limitPerSec)
+        }
+    }
+    
+    var onLimitPerSecChange: ((AttemptLimit) -> ())?
+    
+    public init(
         language: Language = .default,
         attemptLimit: AttemptLimit = .default,
         attemptTimeout: TimeInterval = 10,
         handleErrors: Bool = true,
-        enableLogging: Bool = false
+        enableLogging: Bool = false,
+        limitPerSec: AttemptLimit = .default
         ) {
         self.language = language
         self.attemptLimit = attemptLimit
         self.attemptTimeout = attemptTimeout
         self.handleErrors = handleErrors
         self.enableLogging = enableLogging
+        self.limitPerSec = limitPerSec
     }
 }
 
@@ -33,7 +45,7 @@ public enum Language: String {
     case de
     case it
     
-    static var `default`: Language {
+    public static var `default`: Language {
         return system ?? .en
     }
     
@@ -45,5 +57,21 @@ public enum Language: String {
         }
         
         return Language(rawValue: systemLanguage)
+    }
+}
+
+public enum AttemptLimit {
+    static let `default` = AttemptLimit.limited(3)
+    
+    case unlimited
+    case limited(Int)
+    
+    var count: Int {
+        switch self {
+        case .unlimited:
+            return 0
+        case .limited(let limit):
+            return limit
+        }
     }
 }

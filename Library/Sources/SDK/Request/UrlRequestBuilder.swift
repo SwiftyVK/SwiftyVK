@@ -59,7 +59,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         ) throws -> URLRequest {
         var req: URLRequest
         
-        let query = queryBuilder.makeQuery(from: parameters, captcha: capthca, config: config)
+        let query = queryBuilder.makeQuery(from: parameters, config: config, captcha: capthca)
         
         switch httpMethod {
         case .GET:
