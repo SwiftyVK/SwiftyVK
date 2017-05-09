@@ -73,6 +73,10 @@
 		A26D88BB1DC124C200AD63CD /* WebController-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */; };
 		A26F8B811E3A78DB00273E35 /* SwiftyVKResources-OSX.bundle in Copy Bundle Resources For Cocoapods */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */; };
 		A26F8B831E3A78F400273E35 /* SwiftyVKResources-iOS.bundle in Copy Bundle Resources For Cocoapods */ = {isa = PBXBuildFile; fileRef = A2527D551BD1134500F65412 /* SwiftyVKResources-iOS.bundle */; };
+		A27015D61EC1F48E00B9C5C2 /* SessionCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27015D51EC1F48E00B9C5C2 /* SessionCallbacks.swift */; };
+		A27015D71EC1F48E00B9C5C2 /* SessionCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27015D51EC1F48E00B9C5C2 /* SessionCallbacks.swift */; };
+		A27015D91EC1F6D100B9C5C2 /* SessionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27015D81EC1F6D100B9C5C2 /* SessionState.swift */; };
+		A27015DA1EC1F6D100B9C5C2 /* SessionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27015D81EC1F6D100B9C5C2 /* SessionState.swift */; };
 		A28368EC1D9D742700EEBE2A /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* Attempt.swift */; };
 		A28368ED1D9D742D00EEBE2A /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* Attempt.swift */; };
 		A2838DA31E9AA0DA00FE5BE2 /* DependencyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2838DA21E9AA0DA00FE5BE2 /* DependencyBox.swift */; };
@@ -336,6 +340,8 @@
 		A254C0C71E9904CB001A5456 /* Custom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Custom.swift; sourceTree = "<group>"; };
 		A25A3A2C1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartBodyBuilderTests.swift; sourceTree = "<group>"; };
 		A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WebController-iOS.swift"; sourceTree = "<group>"; };
+		A27015D51EC1F48E00B9C5C2 /* SessionCallbacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionCallbacks.swift; sourceTree = "<group>"; };
+		A27015D81EC1F6D100B9C5C2 /* SessionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionState.swift; sourceTree = "<group>"; };
 		A28368EB1D9D742700EEBE2A /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
 		A2838DA21E9AA0DA00FE5BE2 /* DependencyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyBox.swift; sourceTree = "<group>"; };
 		A29508831EBBA24B00981EC0 /* RequestConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestConfig.swift; sourceTree = "<group>"; };
@@ -370,6 +376,8 @@
 			children = (
 				A217DAAB1E9926A500EA1430 /* Session.swift */,
 				A22179D31EBA57AF006B71FD /* SessionConfig.swift */,
+				A27015D81EC1F6D100B9C5C2 /* SessionState.swift */,
+				A27015D51EC1F48E00B9C5C2 /* SessionCallbacks.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -922,6 +930,7 @@
 				A2EB6EFD1BD18394008E7D86 /* Polls.swift in Sources */,
 				A2EB6EFE1BD18394008E7D86 /* Search.swift in Sources */,
 				A2967E751CBBC51600B7D48F /* Gifts.swift in Sources */,
+				A27015DA1EC1F6D100B9C5C2 /* SessionState.swift in Sources */,
 				A2A3E6361EAFC1CC0029FA44 /* Numbers+Extensions.swift in Sources */,
 				A2EB6EFF1BD18394008E7D86 /* Stats.swift in Sources */,
 				A2EB6F001BD18394008E7D86 /* Status.swift in Sources */,
@@ -949,6 +958,7 @@
 				A2EB6F0E1BD18395008E7D86 /* UrlRequestBuilder.swift in Sources */,
 				A2B4ECB11DCA4FB7009435B6 /* CapthcaController-iOS.swift in Sources */,
 				A254C0C91E9904CB001A5456 /* Custom.swift in Sources */,
+				A27015D71EC1F48E00B9C5C2 /* SessionCallbacks.swift in Sources */,
 				A24DDAE51EB737C7002EA273 /* QueryBuilder.swift in Sources */,
 				A2EB6F141BD18395008E7D86 /* Log.swift in Sources */,
 				A2EB6F151BD18395008E7D86 /* Reachability.swift in Sources */,
@@ -990,6 +1000,7 @@
 				A2EB6ECE1BD18389008E7D86 /* Photos.swift in Sources */,
 				A2EB6ECF1BD18389008E7D86 /* Places.swift in Sources */,
 				A217DAAC1E9926A500EA1430 /* Session.swift in Sources */,
+				A27015D91EC1F6D100B9C5C2 /* SessionState.swift in Sources */,
 				A2EB6ED01BD18389008E7D86 /* Polls.swift in Sources */,
 				A2EB6ED11BD18389008E7D86 /* Search.swift in Sources */,
 				A2967E741CBBC4A700B7D48F /* Gifts.swift in Sources */,
@@ -1002,6 +1013,7 @@
 				A2EB6ED51BD18389008E7D86 /* Upload.swift in Sources */,
 				A2EB6ED61BD18389008E7D86 /* Users.swift in Sources */,
 				A2EB6ED71BD18389008E7D86 /* Utils.swift in Sources */,
+				A27015D61EC1F48E00B9C5C2 /* SessionCallbacks.swift in Sources */,
 				A2EB6ED81BD18389008E7D86 /* Video.swift in Sources */,
 				A20FF11C1BEB7DC8009FBE3D /* Authorizator.swift in Sources */,
 				A254C0C81E9904CB001A5456 /* Custom.swift in Sources */,

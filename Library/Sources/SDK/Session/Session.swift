@@ -1,22 +1,12 @@
 public protocol Session: class {
     static var `default`: Session { get }
-    var config: SessionConfig { get set }
-    
     static func new() -> Session
-    
+
+    var config: SessionConfig { get set }
+    var state: SessionState { get }
+    func activate(appId: String, callbacks: SessionCallbacks) throws
     func send(request: Request, callbacks: Callbacks) -> Task
 }
-
-public extension Session {
-    public static var `default`: Session {
-        return VK.dependencyBox.defaultSession
-    }
-    
-    public static func new() -> Session {
-        return VK.dependencyBox.session()
-    }
-}
-
 
 public final class SessionImpl: Session {
     
@@ -26,6 +16,11 @@ public final class SessionImpl: Session {
         }
     }
     
+    public var state: SessionState
+    
+    private var appId: String?
+    private var callbacks: SessionCallbacks = .default
+    
     private let taskSheduler: TaskSheduler
     private let attemptSheduler: AttemptSheduler
     
@@ -34,11 +29,22 @@ public final class SessionImpl: Session {
         taskSheduler: TaskSheduler,
         attemptSheduler: AttemptSheduler
         ) {
+        self.state = .initiated
         self.config = config
         self.taskSheduler = taskSheduler
         self.attemptSheduler = attemptSheduler
         
         updateLimitPerSec()
+    }
+    
+    public func activate(appId: String, callbacks: SessionCallbacks) throws {
+        guard state < .activated else {
+            throw AuthError.alreadyActivated
+        }
+        
+        self.state = .activated
+        self.appId = appId
+        self.callbacks = callbacks
     }
     
     public func send(request: Request, callbacks: Callbacks) -> Task {
@@ -66,5 +72,15 @@ public final class SessionImpl: Session {
         config.onLimitPerSecChange = { [weak attemptSheduler] newLimit in
             attemptSheduler?.setLimit(to: newLimit)
         }
+    }
+}
+
+public extension Session {
+    public static var `default`: Session {
+        return VK.dependencyBox.defaultSession
+    }
+    
+    public static func new() -> Session {
+        return VK.dependencyBox.session()
     }
 }
