@@ -21,9 +21,9 @@ struct Authorizator {
         return  "client_id=\(appId)&scope=\(_perm)&display=mobile&v\(SessionConfig.apiVersion)&sdk_version=\(SessionConfig.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
     }
 
-    fileprivate static var error: AuthError?
+    fileprivate static var error: SessionError?
 
-    static func authorize() -> AuthError? {
+    static func authorize() -> SessionError? {
         error = nil
 
         guard Token.get() == nil else {return nil}
@@ -39,7 +39,7 @@ struct Authorizator {
         _ = Token(fromRawToken: rawToken, expiresIn: expiresIn)
     }
 
-    static func validate(withUrl url: String) -> AuthError? {
+    static func validate(withUrl url: String) -> SessionError? {
         error = nil
 
         Thread.isMainThread

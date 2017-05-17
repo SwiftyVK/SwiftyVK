@@ -1,7 +1,4 @@
 public protocol Session: class {
-    static var `default`: Session { get }
-    static func new() -> Session
-
     var config: SessionConfig { get set }
     var state: SessionState { get }
     func activate(appId: String, callbacks: SessionCallbacks) throws
@@ -23,23 +20,26 @@ public final class SessionImpl: Session {
     
     private let taskSheduler: TaskSheduler
     private let attemptSheduler: AttemptSheduler
+    private let createTask: (Request, Callbacks, AttemptSheduler) -> Task
     
     init(
         config: SessionConfig = .default,
         taskSheduler: TaskSheduler,
-        attemptSheduler: AttemptSheduler
+        attemptSheduler: AttemptSheduler,
+        createTask: @escaping (Request, Callbacks, AttemptSheduler) -> Task
         ) {
         self.state = .initiated
         self.config = config
         self.taskSheduler = taskSheduler
         self.attemptSheduler = attemptSheduler
+        self.createTask = createTask
         
         updateLimitPerSec()
     }
     
     public func activate(appId: String, callbacks: SessionCallbacks) throws {
         guard state < .activated else {
-            throw AuthError.alreadyActivated
+            throw SessionError.alreadyActivated
         }
         
         self.state = .activated
@@ -48,18 +48,25 @@ public final class SessionImpl: Session {
     }
     
     public func send(request: Request, callbacks: Callbacks) -> Task {
-        let task = VK.dependencyBox.task(
-            request: request,
-            callbacks: callbacks,
-            attemptSheduler: attemptSheduler
-        )
         
-        shedule(task: task, concurrent: request.rawRequest.canSentConcurrently)
+        let task = createTask(request, callbacks, attemptSheduler)
+        
+        guard state > .dead else {
+            callbacks.onError?(SessionError.sessionIsDead)
+            return task
+        }
+        
+        do {
+            try shedule(task: task, concurrent: request.rawRequest.canSentConcurrently)
+        } catch let error {
+            callbacks.onError?(error)
+        }
+        
         return task
     }
     
-    func shedule(task: Task, concurrent: Bool) {
-        try? taskSheduler.shedule(task: task, concurrent: concurrent)
+    func shedule(task: Task, concurrent: Bool) throws {
+        try taskSheduler.shedule(task: task, concurrent: concurrent)
     }
     
     func shedule(attempt: Attempt, concurrent: Bool) throws {
@@ -72,15 +79,5 @@ public final class SessionImpl: Session {
         config.onLimitPerSecChange = { [weak attemptSheduler] newLimit in
             attemptSheduler?.setLimit(to: newLimit)
         }
-    }
-}
-
-public extension Session {
-    public static var `default`: Session {
-        return VK.dependencyBox.defaultSession
-    }
-    
-    public static func new() -> Session {
-        return VK.dependencyBox.session()
     }
 }

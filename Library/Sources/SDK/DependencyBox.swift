@@ -1,8 +1,6 @@
 protocol DependencyBox {
     
-    var sessionType: Session.Type { get }
-    
-    var defaultSession: Session { get }
+    var sessionManager: SessionManager { get }
     
     func session() -> Session
     
@@ -19,18 +17,15 @@ protocol DependencyBox {
 
 final class DependencyBoxImpl: DependencyBox {
     
-    public var sessionType: Session.Type {
-        return SessionImpl.self
-    }
-    
-    lazy var defaultSession: Session = {
-        self.session()
+    lazy public var sessionManager: SessionManager = {
+        return SessionManagerImpl(dependencyBox: self)
     }()
     
     func session() -> Session {
         return SessionImpl(
             taskSheduler: taskSheduler(),
-            attemptSheduler: attemptSheduler(limit: 3)
+            attemptSheduler: attemptSheduler(limit: 3),
+            createTask: task
         )
     }
     

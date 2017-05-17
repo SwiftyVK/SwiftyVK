@@ -99,6 +99,8 @@
 		A2CF0D441E98EF0900EAFF30 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF0D411E98EF0900EAFF30 /* Result.swift */; };
 		A2CF0D451E98EF0900EAFF30 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF0D411E98EF0900EAFF30 /* Result.swift */; };
 		A2D1369B1DA00E9000C487C1 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D1369A1DA00E9000C487C1 /* Errors.swift */; };
+		A2D2713C1EC4D0BA00B24D09 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionManager.swift */; };
+		A2D2713D1EC4D0BA00B24D09 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionManager.swift */; };
 		A2EB6EB71BD182E3008E7D86 /* SwiftyVKResources-OSX.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */; };
 		A2EB6EB91BD18343008E7D86 /* SwiftyVKResources-iOS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2527D551BD1134500F65412 /* SwiftyVKResources-iOS.bundle */; };
 		A2EB6EBD1BD18389008E7D86 /* VK.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D911BD12FD200F65412 /* VK.swift */; };
@@ -355,6 +357,7 @@
 		A2CF0D401E98EF0900EAFF30 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		A2CF0D411E98EF0900EAFF30 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		A2D1369A1DA00E9000C487C1 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		A2D2713B1EC4D0BA00B24D09 /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -374,6 +377,7 @@
 		A217DAAA1E99266100EA1430 /* Session */ = {
 			isa = PBXGroup;
 			children = (
+				A2D2713B1EC4D0BA00B24D09 /* SessionManager.swift */,
 				A217DAAB1E9926A500EA1430 /* Session.swift */,
 				A22179D31EBA57AF006B71FD /* SessionConfig.swift */,
 				A27015D81EC1F6D100B9C5C2 /* SessionState.swift */,
@@ -914,6 +918,7 @@
 				A2EB6EF31BD18394008E7D86 /* Friends.swift in Sources */,
 				A2EB6EF41BD18394008E7D86 /* Groups.swift in Sources */,
 				A26D88BB1DC124C200AD63CD /* WebController-iOS.swift in Sources */,
+				A2D2713D1EC4D0BA00B24D09 /* SessionManager.swift in Sources */,
 				A2EB6EF51BD18394008E7D86 /* Likes.swift in Sources */,
 				A2EB6EF61BD18394008E7D86 /* Messages.swift in Sources */,
 				A22179D51EBA57AF006B71FD /* SessionConfig.swift in Sources */,
@@ -990,6 +995,7 @@
 				A2EB6EC91BD18389008E7D86 /* Messages.swift in Sources */,
 				A24DDAE41EB737C7002EA273 /* QueryBuilder.swift in Sources */,
 				A2838DA31E9AA0DA00FE5BE2 /* DependencyBox.swift in Sources */,
+				A2D2713C1EC4D0BA00B24D09 /* SessionManager.swift in Sources */,
 				A22179D41EBA57AF006B71FD /* SessionConfig.swift in Sources */,
 				A2EB6ECA1BD18389008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6ECB1BD18389008E7D86 /* Notes.swift in Sources */,

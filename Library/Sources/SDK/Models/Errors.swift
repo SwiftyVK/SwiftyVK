@@ -1,19 +1,21 @@
 import Foundation
 
-public enum AuthError: Int, CustomNSError, CustomStringConvertible {
+public enum SessionError: Int, CustomNSError, CustomStringConvertible {
     case nilParentView              = 1
     case deniedFromUser             = 2
     case failedValidation           = 3
     case failedAuthorization        = 4
     case notConfigured              = 5
     case alreadyActivated           = 6
+    case cantKillDefaultSession     = 7
+    case sessionIsDead              = 8
 
-    public static let errorDomain = "SwiftyVKAuthError"
+    public static let errorDomain = "SwiftyVKSessionError"
     public var errorCode: Int {return rawValue}
     public var errorUserInfo: [String : Any] {return [:]}
 
     public var description: String {
-        return String(format: "error %@[%d]: %@", AuthError.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
+        return String(format: "error %@[%d]: %@", SessionError.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
     }
 }
 

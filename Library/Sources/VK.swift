@@ -15,7 +15,7 @@ public protocol VKDelegate: class {
     ///Called when SwiftyVK did unauthorize and remove token
     func vkDidUnauthorize()
     ///Called when SwiftyVK did failed autorization
-    func vkAutorizationFailedWith(error: AuthError)
+    func vkAutorizationFailedWith(error: SessionError)
     #if os(iOS)
     /**Called when need to display a view from SwiftyVK
      - returns: UIViewController that should present autorization view controller*/
@@ -42,8 +42,7 @@ public protocol VKDelegate: class {
  * For user authentication you must call authorize()
  */
 public struct VK {
-    static var dependencyBox: DependencyBox = DependencyBoxImpl()
-    public static var session = dependencyBox.sessionType
+    public static var sessions = DependencyBoxImpl().sessionManager
     weak static var delegate: VKDelegate?
     public private(set) static var appID: String?
 

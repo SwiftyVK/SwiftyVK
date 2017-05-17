@@ -15,16 +15,16 @@ final class WebPresenter {
     private let semaphore = DispatchSemaphore(value: 0)
     private var controller: WebController!
     private var fails = 0
-    private var error: AuthError?
+    private var error: SessionError?
     private weak static var currentController: WebController?
 
-    class func start(withUrl url: String) -> AuthError? {
+    class func start(withUrl url: String) -> SessionError? {
 
         VK.Log.put("WebPresenter", "start")
         let presenter = WebPresenter()
 
         guard let controller = WebController.create(withDelegate: presenter) else {
-            return AuthError.nilParentView
+            return SessionError.nilParentView
         }
 
         currentController = controller
@@ -54,7 +54,7 @@ final class WebPresenter {
         }
         else if response.contains("access_denied") || response.contains("cancel=1") {
             controller.hide()
-            error = AuthError.deniedFromUser
+            error = SessionError.deniedFromUser
         }
         else if response.contains("fail=1") {
             controller.hide()
@@ -71,7 +71,7 @@ final class WebPresenter {
         }
     }
 
-    func handle(error: AuthError) {
+    func handle(error: SessionError) {
         VK.Log.put("WebPresenter", "handle \(error)")
 
         if fails <= 3 {

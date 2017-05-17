@@ -12,14 +12,14 @@ public final class SessionCallbacks {
     
     let onNeedLogin: (() -> Set<VK.Scope>)
     let onLoginSuccess: (([String : String]) -> ())?
-    let onLoginFail: ((AuthError) -> ())?
+    let onLoginFail: ((SessionError) -> ())?
     let onLogout: (() -> ())?
     let onNeedWindow: (() -> Displayer)?
     
     init(
         onNeedLogin: @escaping (() -> Set<VK.Scope>) = { return [] },
         onLoginSuccess: (([String : String]) -> ())? = nil,
-        onLoginFail: ((AuthError) -> ())? = nil,
+        onLoginFail: ((SessionError) -> ())? = nil,
         onLogout: (() -> ())? = nil,
         onNeedWindow: (() -> Displayer)? = nil
         ) {

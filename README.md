@@ -76,7 +76,7 @@ class YourClass: Superclass, VKDelegate {
     //Here you can start to send requests to the API.
   }
 
-  func vkAutorizationFailedWith(error: AuthError) {
+  func vkAutorizationFailedWith(error: SessionError) {
    //Called when SwiftyVK could not authorize. To let the application know that something went wrong.
   }
 
