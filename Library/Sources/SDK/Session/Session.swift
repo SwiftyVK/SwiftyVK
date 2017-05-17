@@ -1,5 +1,4 @@
 public protocol Session: class {
-    var id: String { get }
     var config: SessionConfig { get set }
     var state: SessionState { get }
     func activate(appId: String, callbacks: SessionCallbacks) throws
@@ -7,7 +6,12 @@ public protocol Session: class {
     func send(request: Request, callbacks: Callbacks) -> Task
 }
 
-public final class SessionImpl: Session {
+protocol SessionInternalRepr: Session {
+    var id: String { get }
+    var state: SessionState { get set }
+}
+
+public final class SessionImpl: SessionInternalRepr {
     
     public var config: SessionConfig {
         didSet {
@@ -31,7 +35,7 @@ public final class SessionImpl: Session {
         attemptSheduler: AttemptSheduler,
         createTask: @escaping (Request, Callbacks, AttemptSheduler) -> Task
         ) {
-        self.id = String.random(10)
+        self.id = String.random(20)
         self.state = .initiated
         self.config = config
         self.taskSheduler = taskSheduler

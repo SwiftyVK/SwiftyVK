@@ -1,7 +1,7 @@
 @testable import SwiftyVK
 
-final class SessionMock: Session {
-    let id = String.random(10)
+final class SessionMock: SessionInternalRepr {
+    let id = String.random(20)
     var config = SessionConfig()
     var state = SessionState.initiated
     var isDefault = false

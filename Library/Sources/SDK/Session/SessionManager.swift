@@ -17,9 +17,12 @@ extension SessionManager {
 public class SessionManagerImpl: SessionManager {
 
     private let dependencyBox: DependencyBox
-    
     private var sessions = NSHashTable<AnyObject>(options: .strongMemory)
-    lazy public var `default`: Session = { return self.new() }()
+    private var canKillDefaultSessions = false
+    
+    lazy public var `default`: Session = {
+        return self.new()
+    }()
     
     init(dependencyBox: DependencyBox) {
         self.dependencyBox = dependencyBox
@@ -38,14 +41,23 @@ public class SessionManagerImpl: SessionManager {
     
     public func kill(session: Session) throws {
         
-        guard session !== `default` else {
+        if !canKillDefaultSessions && session === `default` {
             throw SessionError.cantKillDefaultSession
         }
         
+        (session as? SessionInternalRepr)?.state = .dead
         sessions.remove(session)
     }
     
     public func makeDefault(session: Session) {
         self.default = session
+    }
+    
+    deinit {
+        canKillDefaultSessions = true
+        
+        for session in (sessions.allObjects as? [Session] ?? []) {
+            try? kill(session: session)
+        }
     }
 }

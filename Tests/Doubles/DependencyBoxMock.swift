@@ -6,10 +6,6 @@ final class DependencyBoxMock: DependencyBox {
         return SessionManagerMock()
     }
     
-    public var sessionType: Session.Type {
-        return SessionMock.self
-    }
-    
     lazy var defaultSession: Session = {
         self.session()
     }()
