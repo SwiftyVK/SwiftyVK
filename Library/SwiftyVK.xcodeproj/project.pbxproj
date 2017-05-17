@@ -101,6 +101,8 @@
 		A2D1369B1DA00E9000C487C1 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D1369A1DA00E9000C487C1 /* Errors.swift */; };
 		A2D2713C1EC4D0BA00B24D09 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionManager.swift */; };
 		A2D2713D1EC4D0BA00B24D09 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionManager.swift */; };
+		A2E5C5D61ECCAA5400652262 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */; };
+		A2E5C5D71ECCAAB600652262 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */; };
 		A2EB6EB71BD182E3008E7D86 /* SwiftyVKResources-OSX.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */; };
 		A2EB6EB91BD18343008E7D86 /* SwiftyVKResources-iOS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2527D551BD1134500F65412 /* SwiftyVKResources-iOS.bundle */; };
 		A2EB6EBD1BD18389008E7D86 /* VK.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D911BD12FD200F65412 /* VK.swift */; };
@@ -358,6 +360,7 @@
 		A2CF0D411E98EF0900EAFF30 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		A2D1369A1DA00E9000C487C1 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		A2D2713B1EC4D0BA00B24D09 /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -530,6 +533,7 @@
 				A2527D7E1BD12FD200F65412 /* SwiftyJSON.swift */,
 				A21E81581E2A7E68008E81E7 /* UrlCharactesSet.swift */,
 				A2A3E6341EAFC1C70029FA44 /* Numbers+Extensions.swift */,
+				A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -944,6 +948,7 @@
 				A236B2B71DB6864F002376C8 /* WebPresenter.swift in Sources */,
 				A2EB6F031BD18395008E7D86 /* Users.swift in Sources */,
 				A2EB6F041BD18395008E7D86 /* Utils.swift in Sources */,
+				A2E5C5D71ECCAAB600652262 /* String+Extensions.swift in Sources */,
 				A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */,
 				A2CF0D431E98EF0900EAFF30 /* Request.swift in Sources */,
 				A21E815A1E2A8303008E81E7 /* UrlCharactesSet.swift in Sources */,
@@ -979,6 +984,7 @@
 				A21E81591E2A7E68008E81E7 /* UrlCharactesSet.swift in Sources */,
 				A2EB6EBE1BD18389008E7D86 /* LongPoll.swift in Sources */,
 				A2EB6EBF1BD18389008E7D86 /* Account.swift in Sources */,
+				A2E5C5D61ECCAA5400652262 /* String+Extensions.swift in Sources */,
 				A28368EC1D9D742700EEBE2A /* Attempt.swift in Sources */,
 				A2B4ECAF1DCA4FA5009435B6 /* CaptchaController-OSX.swift in Sources */,
 				A2EB6EC11BD18389008E7D86 /* Audio.swift in Sources */,
