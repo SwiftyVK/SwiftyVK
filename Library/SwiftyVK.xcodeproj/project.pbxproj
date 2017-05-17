@@ -103,6 +103,8 @@
 		A2D2713D1EC4D0BA00B24D09 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionManager.swift */; };
 		A2E5C5D61ECCAA5400652262 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */; };
 		A2E5C5D71ECCAAB600652262 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */; };
+		A2E5C5D91ECCAD4800652262 /* SessionManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D81ECCAD4800652262 /* SessionManagerMock.swift */; };
+		A2E5C5DB1ECCAFC800652262 /* SessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5DA1ECCAFC800652262 /* SessionManagerTests.swift */; };
 		A2EB6EB71BD182E3008E7D86 /* SwiftyVKResources-OSX.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */; };
 		A2EB6EB91BD18343008E7D86 /* SwiftyVKResources-iOS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2527D551BD1134500F65412 /* SwiftyVKResources-iOS.bundle */; };
 		A2EB6EBD1BD18389008E7D86 /* VK.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D911BD12FD200F65412 /* VK.swift */; };
@@ -361,6 +363,8 @@
 		A2D1369A1DA00E9000C487C1 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		A2D2713B1EC4D0BA00B24D09 /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		A2E5C5D81ECCAD4800652262 /* SessionManagerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManagerMock.swift; sourceTree = "<group>"; };
+		A2E5C5DA1ECCAFC800652262 /* SessionManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManagerTests.swift; sourceTree = "<group>"; };
 		A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -401,6 +405,7 @@
 				A25A3A2C1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift */,
 				A22179C41EBA3BBA006B71FD /* DependencyBoxTests.swift */,
 				A22179C91EBA4059006B71FD /* SessionTests.swift */,
+				A2E5C5DA1ECCAFC800652262 /* SessionManagerTests.swift */,
 			);
 			name = Tests;
 			path = ../Tests;
@@ -417,6 +422,7 @@
 				A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */,
 				A22179CB1EBA5009006B71FD /* TaskShedulerMock.swift */,
 				A22179CF1EBA530C006B71FD /* SessionMock.swift */,
+				A2E5C5D81ECCAD4800652262 /* SessionManagerMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -887,7 +893,9 @@
 			files = (
 				A22179CE1EBA52A2006B71FD /* DependencyBoxMock.swift in Sources */,
 				A22179CA1EBA4059006B71FD /* SessionTests.swift in Sources */,
+				A2E5C5D91ECCAD4800652262 /* SessionManagerMock.swift in Sources */,
 				A2433A461EA542100058BB6D /* AttemptShedulerTests.swift in Sources */,
+				A2E5C5DB1ECCAFC800652262 /* SessionManagerTests.swift in Sources */,
 				A2433A481EA542620058BB6D /* AttemptMock.swift in Sources */,
 				A22179D21EBA5393006B71FD /* BaseTestCase.swift in Sources */,
 				A22179CC1EBA5009006B71FD /* TaskShedulerMock.swift in Sources */,

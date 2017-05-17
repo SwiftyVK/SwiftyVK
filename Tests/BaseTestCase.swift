@@ -3,8 +3,10 @@ import XCTest
 
 class BaseTestCase: XCTestCase {
  
+    let dependencyBoxMock = DependencyBoxMock()
+    
     override func setUp() {
-        VK.dependencyBox = DependencyBoxMock()
+        VK.sessions = dependencyBoxMock.sessionManager
         super.setUp()
     }
 }

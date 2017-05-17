@@ -75,7 +75,7 @@ final class TaskImpl<AttemptT: Attempt>: Operation, Task {
     private func resendWith(error: Error?) {
         guard !self.isCancelled else {return}
         
-        guard sendAttempts < request.config.attemptLimit.count else {
+        guard sendAttempts < request.config.maxAttemptsLimit.count else {
             if let error = error {
                 execute(error: error)
             }
@@ -102,7 +102,7 @@ final class TaskImpl<AttemptT: Attempt>: Operation, Task {
         guard !self.isCancelled else {return}
         
         sendAttempts += 1
-        VK.Log.put(self, "send \(sendAttempts) of \(request.config.attemptLimit.count) times")
+        VK.Log.put(self, "send \(sendAttempts) of \(request.config.maxAttemptsLimit.count) times")
         
         let urlRequest = try urlRequestBuilder.make(
             from: request.rawRequest,
@@ -182,7 +182,7 @@ final class TaskImpl<AttemptT: Attempt>: Operation, Task {
     private func `catch`(error rawError: Error) {
         guard
             !isCancelled,
-            sendAttempts < request.config.attemptLimit.count,
+            sendAttempts < request.config.maxAttemptsLimit.count,
             request.config.handleErrors == true,
             let error = rawError as? ApiError
             else {

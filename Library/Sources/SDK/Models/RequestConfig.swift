@@ -8,8 +8,8 @@ public struct Config {
     var language: Language {
         return _language ?? sessionConfig?.language ?? .default
     }
-    var attemptLimit: AttemptLimit {
-        return _attemptLimit ?? sessionConfig?.attemptLimit ?? .default
+    var maxAttemptsLimit: AttemptLimit {
+        return _attemptsMaxLimit ?? sessionConfig?.attemptsMaxLimit ?? .default
     }
     var attemptTimeout: TimeInterval {
         return _attemptTimeout ?? sessionConfig?.attemptTimeout ?? 10
@@ -22,7 +22,7 @@ public struct Config {
     }
     
     private var _language: Language?
-    private var _attemptLimit: AttemptLimit?
+    private var _attemptsMaxLimit: AttemptLimit?
     private var _attemptTimeout: TimeInterval?
     private var _handleErrors: Bool?
     private var _enableLogging: Bool?
@@ -31,14 +31,14 @@ public struct Config {
     init(
         httpMethod: HttpMethod = .GET,
         language: Language? = nil,
-        attemptLimit: AttemptLimit? = nil,
+        attemptsMaxLimit: AttemptLimit? = nil,
         attemptTimeout: TimeInterval? = nil,
         handleErrors: Bool? = nil,
         enableLogging: Bool? = nil
         ) {
         self.httpMethod = httpMethod
         _language = language
-        _attemptLimit = attemptLimit
+        _attemptsMaxLimit = attemptsMaxLimit
         _attemptTimeout = attemptTimeout
         _handleErrors = handleErrors
         _enableLogging = enableLogging
@@ -58,7 +58,7 @@ public struct Config {
         var newConfig = Config(
             httpMethod: httpMethod,
             language: language ?? _language,
-            attemptLimit: attemptLimit ?? _attemptLimit,
+            attemptsMaxLimit: attemptLimit ?? _attemptsMaxLimit,
             attemptTimeout: attemptTimeout ?? _attemptTimeout,
             handleErrors: handleErrors ?? _handleErrors,
             enableLogging: enableLogging ?? _enableLogging

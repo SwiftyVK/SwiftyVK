@@ -2,6 +2,10 @@
 
 final class DependencyBoxMock: DependencyBox {
     
+    var sessionManager: SessionManager {
+        return SessionManagerMock()
+    }
+    
     public var sessionType: Session.Type {
         return SessionMock.self
     }

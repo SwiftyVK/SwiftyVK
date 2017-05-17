@@ -5,33 +5,33 @@ public final class SessionConfig {
     public static var apiVersion = "5.62"
     public static let sdkVersion = "1.3.17"
     public var language: Language
-    public var attemptLimit: AttemptLimit
+    public var attemptsMaxLimit: AttemptLimit
     public var attemptTimeout: TimeInterval
     public var handleErrors: Bool
     public var enableLogging: Bool
     
-    public var limitPerSec: AttemptLimit {
+    public var attemptsPerSecLimit: AttemptLimit {
         didSet {
-            onLimitPerSecChange?(limitPerSec)
+            onAttemptsPerSecLimitChange?(attemptsPerSecLimit)
         }
     }
     
-    var onLimitPerSecChange: ((AttemptLimit) -> ())?
+    var onAttemptsPerSecLimitChange: ((AttemptLimit) -> ())?
     
     public init(
         language: Language = .default,
-        attemptLimit: AttemptLimit = .default,
+        attemptsMaxLimit: AttemptLimit = .default,
+        attemptsPerSecLimit: AttemptLimit = .default,
         attemptTimeout: TimeInterval = 10,
         handleErrors: Bool = true,
-        enableLogging: Bool = false,
-        limitPerSec: AttemptLimit = .default
+        enableLogging: Bool = false
         ) {
         self.language = language
-        self.attemptLimit = attemptLimit
+        self.attemptsMaxLimit = attemptsMaxLimit
+        self.attemptsPerSecLimit = attemptsPerSecLimit
         self.attemptTimeout = attemptTimeout
         self.handleErrors = handleErrors
         self.enableLogging = enableLogging
-        self.limitPerSec = limitPerSec
     }
 }
 

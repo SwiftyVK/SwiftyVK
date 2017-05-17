@@ -1,6 +1,7 @@
 @testable import SwiftyVK
 
 final class SessionMock: Session {
+    let id = String.random(10)
     var config = SessionConfig()
     var state = SessionState.initiated
     var isDefault = false

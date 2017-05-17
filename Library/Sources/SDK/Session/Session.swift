@@ -3,6 +3,7 @@ public protocol Session: class {
     var config: SessionConfig { get set }
     var state: SessionState { get }
     func activate(appId: String, callbacks: SessionCallbacks) throws
+    @discardableResult
     func send(request: Request, callbacks: Callbacks) -> Task
 }
 
@@ -10,7 +11,7 @@ public final class SessionImpl: Session {
     
     public var config: SessionConfig {
         didSet {
-            updateAttemptShedulerLimit()
+            updateAttemptShedulerPerSecLimit()
         }
     }
     
@@ -37,7 +38,7 @@ public final class SessionImpl: Session {
         self.attemptSheduler = attemptSheduler
         self.createTask = createTask
         
-        updateAttemptShedulerLimit()
+        updateAttemptShedulerPerSecLimit()
     }
     
     public func activate(appId: String, callbacks: SessionCallbacks) throws {
@@ -50,6 +51,7 @@ public final class SessionImpl: Session {
         self.callbacks = callbacks
     }
     
+    @discardableResult
     public func send(request: Request, callbacks: Callbacks) -> Task {
         
         let task = createTask(request, callbacks, attemptSheduler)
@@ -76,10 +78,10 @@ public final class SessionImpl: Session {
         try attemptSheduler.shedule(attempt: attempt, concurrent: concurrent)
     }
     
-    private func updateAttemptShedulerLimit() {
-        attemptSheduler.setLimit(to: config.limitPerSec)
+    private func updateAttemptShedulerPerSecLimit() {
+        attemptSheduler.setLimit(to: config.attemptsPerSecLimit)
         
-        config.onLimitPerSecChange = { [weak attemptSheduler] newLimit in
+        config.onAttemptsPerSecLimitChange = { [weak attemptSheduler] newLimit in
             attemptSheduler?.setLimit(to: newLimit)
         }
     }
