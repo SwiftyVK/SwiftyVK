@@ -9,7 +9,7 @@ public final class SessionImpl: Session {
     
     public var config: SessionConfig {
         didSet {
-            updateLimitPerSec()
+            updateTaskShedulerLimit()
         }
     }
     
@@ -34,7 +34,7 @@ public final class SessionImpl: Session {
         self.attemptSheduler = attemptSheduler
         self.createTask = createTask
         
-        updateLimitPerSec()
+        updateTaskShedulerLimit()
     }
     
     public func activate(appId: String, callbacks: SessionCallbacks) throws {
@@ -73,7 +73,7 @@ public final class SessionImpl: Session {
         try attemptSheduler.shedule(attempt: attempt, concurrent: concurrent)
     }
     
-    private func updateLimitPerSec() {
+    private func updateTaskShedulerLimit() {
         attemptSheduler.setLimit(to: config.limitPerSec)
         
         config.onLimitPerSecChange = { [weak attemptSheduler] newLimit in
