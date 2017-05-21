@@ -1,7 +1,7 @@
 public protocol Session: class {
     var config: SessionConfig { get set }
     var state: SessionState { get }
-    func activate(appId: String, callbacks: SessionCallbacks) throws
+    func activate(appId: String, callbacks: SessionCallbacks)
     func logIn()
     func logIn(rawToken: String, expires: TimeInterval)
     func logOut()
@@ -52,9 +52,9 @@ public final class SessionImpl: SessionInternalRepr {
         updateAttemptShedulerPerSecLimit()
     }
     
-    public func activate(appId: String, callbacks: SessionCallbacks) throws {
+    public func activate(appId: String, callbacks: SessionCallbacks) {
         guard state < .activated else {
-            throw SessionError.alreadyActivated
+            return
         }
         
         self.state = .activated
