@@ -14,7 +14,7 @@ extension SessionManager {
     }
 }
 
-public class SessionManagerImpl: SessionManager {
+public final class SessionManagerImpl: SessionManager {
 
     private let dependencyBox: DependencyBox
     private var sessions = NSHashTable<AnyObject>(options: .strongMemory)
