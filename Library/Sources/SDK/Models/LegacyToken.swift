@@ -1,6 +1,6 @@
 import Foundation
 
-private var tokenInstance: Token? {
+private var tokenInstance: LegacyToken? {
 willSet {
     if tokenInstance != nil && newValue == nil {
         VK.delegate?.vkDidUnauthorize()
@@ -13,7 +13,7 @@ didSet {
 }
 }
 
-class Token: NSObject, NSCoding {
+class LegacyToken: NSObject, NSCoding {
 
     private(set) static var revoke = true
 
@@ -34,7 +34,7 @@ class Token: NSObject, NSCoding {
     }
 
     convenience init(fromResponse response: String) {
-        let parameters  = Token.parseParametersFrom(response: response)
+        let parameters  = LegacyToken.parseParametersFrom(response: response)
         let token       = parameters["access_token"] ?? ""
         let expiresIn   = Int(parameters["expires_in"] ?? "-1") ?? -1
 
@@ -49,7 +49,7 @@ class Token: NSObject, NSCoding {
         
         super.init()
         tokenInstance = self
-        Token.revoke = true
+        LegacyToken.revoke = true
         VK.Log.put("Token", "init \(self)")
         save()
     }
@@ -73,8 +73,8 @@ class Token: NSObject, NSCoding {
         }
         
         VK.Log.put("Token", "expired")
-        Token.revoke = false
-        Token.remove()
+        LegacyToken.revoke = false
+        LegacyToken.remove()
         
         return (LegacyAuthorizator.authorize() == nil)
     }
@@ -97,7 +97,7 @@ class Token: NSObject, NSCoding {
         return parameters
     }
 
-    private class func _load() -> Token? {
+    private class func _load() -> LegacyToken? {
         if let token = loadFromKeychain() {
             tokenInstance = token
             return tokenInstance
@@ -110,8 +110,8 @@ class Token: NSObject, NSCoding {
         return tokenInstance
     }
 
-    private static func loadFromKeychain() -> Token? {
-        guard let keychainQuery = (Token.keychainParams.mutableCopy() as? NSMutableDictionary) else {return nil}
+    private static func loadFromKeychain() -> LegacyToken? {
+        guard let keychainQuery = (LegacyToken.keychainParams.mutableCopy() as? NSMutableDictionary) else {return nil}
         
         keychainQuery.setObject(kCFBooleanTrue, forKey: NSString(format: kSecReturnData))
         keychainQuery.setObject(kSecMatchLimitOne, forKey: NSString(format: kSecMatchLimit))
@@ -121,7 +121,7 @@ class Token: NSObject, NSCoding {
         guard
             SecItemCopyMatching(keychainQuery, &keychainResult) == .allZeros,
             let data = keychainResult as? Data,
-            let token = NSKeyedUnarchiver.unarchiveObject(with: data) as? Token
+            let token = NSKeyedUnarchiver.unarchiveObject(with: data) as? LegacyToken
             else {return nil}
 
         VK.Log.put("Token", "loaded from keychain")
@@ -129,9 +129,9 @@ class Token: NSObject, NSCoding {
     }
 
     func save() {
-        Token.removeSavedData()
+        LegacyToken.removeSavedData()
 
-        guard let keychainQuery = (Token.keychainParams.mutableCopy() as? NSMutableDictionary) else {
+        guard let keychainQuery = (LegacyToken.keychainParams.mutableCopy() as? NSMutableDictionary) else {
             VK.Log.put("Token", "not saved to keychain. Query is empty")
             return
         }

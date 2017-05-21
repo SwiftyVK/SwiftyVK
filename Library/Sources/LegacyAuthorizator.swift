@@ -18,7 +18,7 @@ struct LegacyAuthorizator {
         let _perm = VK.Scope.toInt(delegate.vkWillAuthorize())
         let _redir = canAuthorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
 
-        return  "client_id=\(appId)&scope=\(_perm)&display=mobile&v\(SessionConfig.apiVersion)&sdk_version=\(SessionConfig.sdkVersion)\(_redir)&response_type=token&revoke=\(Token.revoke ? 1 : 0)"
+        return  "client_id=\(appId)&scope=\(_perm)&display=mobile&v\(SessionConfig.apiVersion)&sdk_version=\(SessionConfig.sdkVersion)\(_redir)&response_type=token&revoke=\(LegacyToken.revoke ? 1 : 0)"
     }
 
     fileprivate static var error: SessionError?
@@ -26,7 +26,7 @@ struct LegacyAuthorizator {
     static func authorize() -> SessionError? {
         error = nil
 
-        guard Token.get() == nil else {return nil}
+        guard LegacyToken.get() == nil else {return nil}
 
         Thread.isMainThread
             ? sheetQueue.async(execute: start)
@@ -36,7 +36,7 @@ struct LegacyAuthorizator {
     }
     
     static func authorizeWith(rawToken: String, expiresIn: Int) {
-        _ = Token(fromRawToken: rawToken, expiresIn: expiresIn)
+        _ = LegacyToken(fromRawToken: rawToken, expiresIn: expiresIn)
     }
 
     static func validate(withUrl url: String) -> SessionError? {

@@ -45,7 +45,7 @@ final class WebPresenter {
 
         if response.contains("access_token=") {
             controller.hide()
-            _ = Token(fromResponse: response)
+            _ = LegacyToken(fromResponse: response)
             error = nil
         }
         else if response.contains("success=1") {

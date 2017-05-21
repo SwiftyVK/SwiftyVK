@@ -20,7 +20,7 @@ final class QueryBuilderImpl: QueryBuilder {
         rawParameters["lang"] = config.language.rawValue
         rawParameters["https"] = "1"
         
-        if let token = Token.get() {
+        if let token = LegacyToken.get() {
              rawParameters["access_token"] = token
         }
         

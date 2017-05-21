@@ -54,7 +54,7 @@ public struct VK {
     public static func configure(withAppId id: String, delegate owner: VKDelegate) {
         delegate = owner
         appID    = id
-        _ = Token.get()
+        _ = LegacyToken.get()
         VK.Log.put("Global", "SwiftyVK configured")
     }
 
@@ -84,7 +84,7 @@ public struct VK {
 
     public static func logOut() {
         LP.stop()
-        Token.remove()
+        LegacyToken.remove()
     }
 }
 //
@@ -118,7 +118,7 @@ extension VK {
         guard VK.delegate != nil && VK.appID != nil else {
             return .unknown
         }
-        guard Token.exist else {
+        guard LegacyToken.exist else {
             return .configured
         }
         return .authorized

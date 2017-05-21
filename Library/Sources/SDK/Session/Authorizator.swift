@@ -10,8 +10,12 @@ final class AuthorizatorImpl: Authorizator {
     private let webAuthorizeUrl = "https://oauth.vk.com/authorize?"
     private let appAuthorizeUrl = "vkauthorize://authorize?"
     
-    init() {
-        
+    private unowned var session: Session
+    
+    init(
+        session: Session
+        ) {
+        self.session = session
     }
  
     func authorize() throws {

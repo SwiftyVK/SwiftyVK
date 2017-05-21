@@ -141,7 +141,7 @@
 		A2EB6EDC1BD18389008E7D86 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D841BD12FD200F65412 /* Media.swift */; };
 		A2EB6EDD1BD18389008E7D86 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D851BD12FD200F65412 /* Resources.swift */; };
 		A2EB6EDE1BD18389008E7D86 /* Scope.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D861BD12FD200F65412 /* Scope.swift */; };
-		A2EB6EDF1BD18389008E7D86 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D871BD12FD200F65412 /* Token.swift */; };
+		A2EB6EDF1BD18389008E7D86 /* LegacyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D871BD12FD200F65412 /* LegacyToken.swift */; };
 		A2EB6EE11BD18389008E7D86 /* UrlRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8A1BD12FD200F65412 /* UrlRequestBuilder.swift */; };
 		A2EB6EE71BD18389008E7D86 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7B1BD12FD200F65412 /* Log.swift */; };
 		A2EB6EE91BD18389008E7D86 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7E1BD12FD200F65412 /* SwiftyJSON.swift */; };
@@ -177,7 +177,7 @@
 		A2EB6F091BD18395008E7D86 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D841BD12FD200F65412 /* Media.swift */; };
 		A2EB6F0A1BD18395008E7D86 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D851BD12FD200F65412 /* Resources.swift */; };
 		A2EB6F0B1BD18395008E7D86 /* Scope.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D861BD12FD200F65412 /* Scope.swift */; };
-		A2EB6F0C1BD18395008E7D86 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D871BD12FD200F65412 /* Token.swift */; };
+		A2EB6F0C1BD18395008E7D86 /* LegacyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D871BD12FD200F65412 /* LegacyToken.swift */; };
 		A2EB6F0E1BD18395008E7D86 /* UrlRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8A1BD12FD200F65412 /* UrlRequestBuilder.swift */; };
 		A2EB6F141BD18395008E7D86 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7B1BD12FD200F65412 /* Log.swift */; };
 		A2EB6F151BD18395008E7D86 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7C1BD12FD200F65412 /* Reachability.swift */; };
@@ -331,7 +331,7 @@
 		A2527D841BD12FD200F65412 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		A2527D851BD12FD200F65412 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		A2527D861BD12FD200F65412 /* Scope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scope.swift; sourceTree = "<group>"; };
-		A2527D871BD12FD200F65412 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Token.swift; sourceTree = "<group>"; };
+		A2527D871BD12FD200F65412 /* LegacyToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LegacyToken.swift; sourceTree = "<group>"; };
 		A2527D8A1BD12FD200F65412 /* UrlRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UrlRequestBuilder.swift; path = Request/UrlRequestBuilder.swift; sourceTree = "<group>"; };
 		A2527D901BD12FD200F65412 /* SwiftyVK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyVK.h; sourceTree = "<group>"; };
 		A2527D911BD12FD200F65412 /* VK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VK.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -570,7 +570,7 @@
 				A2D1369A1DA00E9000C487C1 /* Errors.swift */,
 				A2527D841BD12FD200F65412 /* Media.swift */,
 				A2527D861BD12FD200F65412 /* Scope.swift */,
-				A2527D871BD12FD200F65412 /* Token.swift */,
+				A2527D871BD12FD200F65412 /* LegacyToken.swift */,
 				A2527D851BD12FD200F65412 /* Resources.swift */,
 			);
 			path = Models;
@@ -977,7 +977,7 @@
 				A2EB6F0B1BD18395008E7D86 /* Scope.swift in Sources */,
 				A20FF11A1BEB6BB5009FBE3D /* LegacyAuthorizator.swift in Sources */,
 				A24D10901C56A49E008263B0 /* Market.swift in Sources */,
-				A2EB6F0C1BD18395008E7D86 /* Token.swift in Sources */,
+				A2EB6F0C1BD18395008E7D86 /* LegacyToken.swift in Sources */,
 				A2EB6F0E1BD18395008E7D86 /* UrlRequestBuilder.swift in Sources */,
 				A2B4ECB11DCA4FB7009435B6 /* CapthcaController-iOS.swift in Sources */,
 				A254C0C91E9904CB001A5456 /* Custom.swift in Sources */,
@@ -1052,7 +1052,7 @@
 				A2B4ECAC1DCA4F6B009435B6 /* CapthcaPresenter.swift in Sources */,
 				A2EB6EDD1BD18389008E7D86 /* Resources.swift in Sources */,
 				A2EB6EDE1BD18389008E7D86 /* Scope.swift in Sources */,
-				A2EB6EDF1BD18389008E7D86 /* Token.swift in Sources */,
+				A2EB6EDF1BD18389008E7D86 /* LegacyToken.swift in Sources */,
 				A2EB6EE11BD18389008E7D86 /* UrlRequestBuilder.swift in Sources */,
 				A29F1CD41E95674A00BE5369 /* TaskSheduler.swift in Sources */,
 				A2EB6EE71BD18389008E7D86 /* Log.swift in Sources */,
