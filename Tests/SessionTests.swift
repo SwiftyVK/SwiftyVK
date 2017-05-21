@@ -7,13 +7,15 @@ final class SessionTests: BaseTestCase {
     var sessionObjects: (SessionImpl, TaskShedulerMock, AttemptShedulerMock) {
         let taskSheduler = TaskShedulerMock()
         let attemptSheduler = AttemptShedulerMock()
+        let authorizator = AuthorizatorMock()
         let tokenRepository = TokenRepositoryMock()
         
         let session = SessionImpl(
             taskSheduler: taskSheduler,
             attemptSheduler: attemptSheduler,
+            authorizator: authorizator,
             tokenRepository: tokenRepository,
-            dependencyMaker: dependencyBoxMock
+            taskMaker: dependencyBoxMock
         )
         
         return (session, taskSheduler, attemptSheduler)
@@ -71,24 +73,9 @@ final class SessionTests: BaseTestCase {
         // Given
         let (session, _, _) = sessionObjects
         // When
-        try? session.activate(appId: "", callbacks: .default)
+        session.activate(appId: "", callbacks: .default)
         // Then
         XCTAssertEqual(session.state, .activated)
-    }
-    
-    func test_activate_whenAlreadyActivated() {
-        // Given
-        let (session, _, _) = sessionObjects
-        // When
-        try? session.activate(appId: "", callbacks: .default)
-        
-        do {
-            try session.activate(appId: "", callbacks: .default)
-        } catch let error {
-            // Then
-            XCTAssertEqual(error as? SessionError, .alreadyActivated)
-            XCTAssertEqual(session.state, .activated)
-        }
     }
     
     func test_sendTask_whenSessionDead() {

@@ -6,11 +6,11 @@ final class SessionMock: SessionInternalRepr {
     var state = SessionState.initiated
     var isDefault = false
     
-    func activate(appId: String, callbacks: SessionCallbacks) throws {}
+    func activate(appId: String, callbacks: SessionCallbacks) {}
     
     func logIn() {}
     
-    func logIn(rawToken: String, expires: TimeInterval) {}
+    func logInWith(rawToken: String, expires: TimeInterval) {}
     
     func logOut() {}
     
