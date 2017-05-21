@@ -24,7 +24,7 @@ final class DependencyBoxTests: BaseTestCase {
         )
         
         // Then
-        XCTAssertTrue(task is TaskImpl<AttemptImpl>)
+        XCTAssertTrue(task is TaskImpl)
     }
     
     func test_TokenType() {

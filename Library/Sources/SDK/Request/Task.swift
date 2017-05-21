@@ -5,7 +5,7 @@ public protocol Task {
     func cancel()
 }
 
-final class TaskImpl<AttemptT: Attempt>: Operation, Task {
+final class TaskImpl: Operation, Task {
     
     let id: Int64
     var state: TaskState = .created {
@@ -27,8 +27,9 @@ final class TaskImpl<AttemptT: Attempt>: Operation, Task {
     private let callbacks: Callbacks
     private let semaphore = DispatchSemaphore(value: 0)
     private var sendAttempts = 0
-    private var attemptSheduler: AttemptSheduler
-    private var urlRequestBuilder: UrlRequestBuilder
+    private let attemptSheduler: AttemptSheduler
+    private let urlRequestBuilder: UrlRequestBuilder
+    private let attemptMaker: AttemptMaker
     private weak var currentAttempt: Attempt?
     
     override var isFinished: Bool {
@@ -47,13 +48,15 @@ final class TaskImpl<AttemptT: Attempt>: Operation, Task {
         request: Request,
         callbacks: Callbacks,
         attemptSheduler: AttemptSheduler,
-        urlRequestBuilder: UrlRequestBuilder
+        urlRequestBuilder: UrlRequestBuilder,
+        attemptMaker: AttemptMaker
         ) {
         self.id = IdGenerator.next()
         self.request  = request
         self.callbacks = callbacks
         self.attemptSheduler = attemptSheduler
         self.urlRequestBuilder = urlRequestBuilder
+        self.attemptMaker = attemptMaker
         super.init()
     }
     
@@ -111,7 +114,7 @@ final class TaskImpl<AttemptT: Attempt>: Operation, Task {
             capthca: makeCaptcha()
         )
         
-        let newAttempt = AttemptT(
+        let newAttempt = attemptMaker.attempt(
             request: urlRequest,
             timeout: request.config.attemptTimeout,
             callbacks: AttemptCallbacks(onFinish: handleResult, onSent: handleSended, onRecive: handleReceived)

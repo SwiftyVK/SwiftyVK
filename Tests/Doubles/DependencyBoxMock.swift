@@ -31,6 +31,10 @@ final class DependencyBoxMock: DependencyBox {
         return TaskMock()
     }
     
+    func attempt(request: URLRequest, timeout: TimeInterval, callbacks: AttemptCallbacks) -> Attempt {
+        return AttemptMock()
+    }
+    
     func authorizator() -> Authorizator {
         return AuthorizatorMock()
     }

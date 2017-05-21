@@ -2,11 +2,15 @@ protocol TaskMaker {
     func task(request: Request, callbacks: Callbacks, attemptSheduler: AttemptSheduler) -> Task
 }
 
+protocol AttemptMaker {
+    func attempt(request: URLRequest, timeout: TimeInterval, callbacks: AttemptCallbacks) -> Attempt
+}
+
 protocol TokenMaker {
     func token(token: String, expires: TimeInterval, info: [String : String]) -> Token
 }
 
-protocol DependencyBox: TaskMaker, TokenMaker {
+protocol DependencyBox: TaskMaker, AttemptMaker, TokenMaker {
     var sessionManager: SessionManager { get }
     func session() -> Session
     func authorizator() -> Authorizator
@@ -48,12 +52,17 @@ final class DependencyBoxImpl: DependencyBox {
     }()
     
     func task(request: Request, callbacks: Callbacks, attemptSheduler: AttemptSheduler) -> Task {
-        return TaskImpl<AttemptImpl>(
+        return TaskImpl(
             request: request,
             callbacks: callbacks,
             attemptSheduler: attemptSheduler,
-            urlRequestBuilder: urlRequestBuilder()
+            urlRequestBuilder: urlRequestBuilder(),
+            attemptMaker: self
         )
+    }
+    
+    func attempt(request: URLRequest, timeout: TimeInterval, callbacks: AttemptCallbacks) -> Attempt {
+        return AttemptImpl(request: request, timeout: timeout, callbacks: callbacks)
     }
     
     func tokenRepository() -> TokenRepository {
