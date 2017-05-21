@@ -8,7 +8,7 @@ private let redirectUrl = "https://oauth.vk.com/blank.html"
 private let webAuthorizeUrl = "https://oauth.vk.com/authorize?"
 private let appAuthorizeUrl = "vkauthorize://authorize?"
 
-struct Authorizator {
+struct LegacyAuthorizator {
 
     fileprivate static var paramsUrl: String? {
         guard let appId = VK.appID, let delegate = VK.delegate else {
@@ -92,7 +92,7 @@ struct Authorizator {
 //
 //
 #if os(iOS)
-    private typealias IOSAuthorizator = Authorizator
+    private typealias IOSAuthorizator = LegacyAuthorizator
     extension IOSAuthorizator {
 
         static var canAuthorizeWithVkApp: Bool {
@@ -138,7 +138,7 @@ struct Authorizator {
 //
 //
 #elseif os(OSX)
-    private typealias OSXAuthorizator = Authorizator
+    private typealias OSXAuthorizator = LegacyAuthorizator
     extension OSXAuthorizator {
         static var canAuthorizeWithVkApp: Bool {return false}
         fileprivate static func startWithApp() {}

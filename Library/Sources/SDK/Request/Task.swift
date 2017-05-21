@@ -192,7 +192,7 @@ final class TaskImpl<AttemptT: Attempt>: Operation, Task {
         
         switch error.errorCode {
         case 5:
-            if let error = Authorizator.authorize() {
+            if let error = LegacyAuthorizator.authorize() {
                 handleResult(.error(error))
                 break
             }
@@ -214,7 +214,7 @@ final class TaskImpl<AttemptT: Attempt>: Operation, Task {
         case 17:
             if
                 let url = error.errorUserInfo["redirect_uri"] as? String,
-                let error = Authorizator.validate(withUrl: url) {
+                let error = LegacyAuthorizator.validate(withUrl: url) {
                 handleResult(.error(error))
                 break
             }

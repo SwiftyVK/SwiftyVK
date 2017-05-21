@@ -76,7 +76,7 @@ class Token: NSObject, NSCoding {
         Token.revoke = false
         Token.remove()
         
-        return (Authorizator.authorize() == nil)
+        return (LegacyAuthorizator.authorize() == nil)
     }
 
     class var exist: Bool {

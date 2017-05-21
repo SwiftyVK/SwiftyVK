@@ -64,7 +64,7 @@ public struct VK {
      * If not, shows a pop-up notification with authorization request
      */
     public static func logIn() {
-        _ = Authorizator.authorize()
+        _ = LegacyAuthorizator.authorize()
     }
     
     /**
@@ -73,7 +73,7 @@ public struct VK {
      - parameter expiresIn: expiry time in milliseconds from now. By default = 0 (infinite token)
      */
     public static func logInWith(rawToken: String, expiresIn: Int = 0) {
-        Authorizator.authorizeWith(rawToken: rawToken, expiresIn: expiresIn)
+        LegacyAuthorizator.authorizeWith(rawToken: rawToken, expiresIn: expiresIn)
     }
 
     #if os(iOS)
