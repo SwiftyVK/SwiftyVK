@@ -31,23 +31,26 @@ public final class SessionImpl: SessionInternalRepr {
     
     private let taskSheduler: TaskSheduler
     private let attemptSheduler: AttemptSheduler
+    private let authorizator: Authorizator
     private let tokenRepository: TokenRepository
-    private let dependencyMaker: AuthorizatorMaker & TaskMaker
+    private let taskMaker: TaskMaker
     
     init(
         config: SessionConfig = .default,
         taskSheduler: TaskSheduler,
         attemptSheduler: AttemptSheduler,
+        authorizator: Authorizator,
         tokenRepository: TokenRepository,
-        dependencyMaker: AuthorizatorMaker & TaskMaker
+        taskMaker: TaskMaker
         ) {
         self.id = String.random(20)
         self.state = .initiated
         self.config = config
         self.taskSheduler = taskSheduler
         self.attemptSheduler = attemptSheduler
+        self.authorizator = authorizator
         self.tokenRepository = tokenRepository
-        self.dependencyMaker = dependencyMaker
+        self.taskMaker = taskMaker
         
         updateAttemptShedulerPerSecLimit()
     }
@@ -78,7 +81,7 @@ public final class SessionImpl: SessionInternalRepr {
     
     private func logInWithAuthorizator() {
         do {
-            let token = try dependencyMaker.authorizator().authorizeWith(scopes: callbacks.onNeedLogin())
+            let token = try authorizator.authorizeWith(scopes: callbacks.onNeedLogin())
             tokenRepository.save(token: token, for:  id)
             callbacks.onLoginSuccess?(token.info)
             self.state = .authorized
@@ -94,7 +97,7 @@ public final class SessionImpl: SessionInternalRepr {
             return
         }
         
-        let token = dependencyMaker.authorizator().authorizeWith(rawToken: rawToken, expires: expires)
+        let token = authorizator.authorizeWith(rawToken: rawToken, expires: expires)
         tokenRepository.save(token: token, for: id)
         callbacks.onLoginSuccess?(token.info)
         self.state = .authorized
@@ -114,7 +117,7 @@ public final class SessionImpl: SessionInternalRepr {
     @discardableResult
     public func send(request: Request, callbacks: Callbacks) -> Task {
         
-        let task = dependencyMaker.task(request: request, callbacks: callbacks, attemptSheduler: attemptSheduler)
+        let task = taskMaker.task(request: request, callbacks: callbacks, attemptSheduler: attemptSheduler)
         
         guard state > .dead else {
             callbacks.onError?(SessionError.sessionIsDead)
