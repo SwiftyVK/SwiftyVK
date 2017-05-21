@@ -2,6 +2,9 @@ public protocol Session: class {
     var config: SessionConfig { get set }
     var state: SessionState { get }
     func activate(appId: String, callbacks: SessionCallbacks) throws
+    func logIn()
+    func logIn(rawToken: String, expires: TimeInterval)
+    func logOut()
     @discardableResult
     func send(request: Request, callbacks: Callbacks) -> Task
 }
@@ -24,17 +27,18 @@ public final class SessionImpl: SessionInternalRepr {
     public let id: String
     private var appId: String?
     private var callbacks: SessionCallbacks = .default
+    private var token: Token?
     
     private let taskSheduler: TaskSheduler
     private let attemptSheduler: AttemptSheduler
-    private let authorizator: Authorizator
     private let taskMaker: TaskMaker
+    private let authorizatorMaker: AuthorizatorMaker
     
     init(
         config: SessionConfig = .default,
         taskSheduler: TaskSheduler,
         attemptSheduler: AttemptSheduler,
-        authorizator: Authorizator,
+        authorizatorMaker: AuthorizatorMaker,
         taskMaker: TaskMaker
         ) {
         self.id = String.random(20)
@@ -42,10 +46,9 @@ public final class SessionImpl: SessionInternalRepr {
         self.config = config
         self.taskSheduler = taskSheduler
         self.attemptSheduler = attemptSheduler
-        self.authorizator = authorizator
         self.taskMaker = taskMaker
+        self.authorizatorMaker = authorizatorMaker
         
-        authorizator.set(session: self)
         updateAttemptShedulerPerSecLimit()
     }
     
@@ -57,6 +60,42 @@ public final class SessionImpl: SessionInternalRepr {
         self.state = .activated
         self.appId = appId
         self.callbacks = callbacks
+    }
+    
+    public func logIn() {
+        guard state >= .activated else {
+            callbacks.onLoginFail?(SessionError.sessionIsDead)
+            return
+        }
+        
+        do {
+            let token = try authorizatorMaker.authorizator().authorizeWith(scopes: callbacks.onNeedLogin())
+            callbacks.onLoginSuccess?(token.info)
+            self.state = .authorized
+            self.token = token
+        } catch let error {
+            callbacks.onLoginFail?(error)
+        }
+    }
+    
+    public func logIn(rawToken: String, expires: TimeInterval) {
+        guard state >= .activated else {
+            callbacks.onLoginFail?(SessionError.sessionIsDead)
+            return
+        }
+        
+        let token = authorizatorMaker.authorizator().authorizeWith(rawToken: rawToken, expires: expires)
+        callbacks.onLoginSuccess?(token.info)
+        self.state = .authorized
+        self.token = token
+    }
+    
+    public func logOut() {
+        if state == .authorized {
+            state = .activated
+        }
+        
+        self.token = nil
     }
     
     @discardableResult

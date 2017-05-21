@@ -8,7 +8,11 @@ final class SessionMock: SessionInternalRepr {
     
     func activate(appId: String, callbacks: SessionCallbacks) throws {}
     
-    func makeDefault() {}
+    func logIn() {}
+    
+    func logIn(rawToken: String, expires: TimeInterval) {}
+    
+    func logOut() {}
     
     public func send(request: SwiftyVK.Request, callbacks: SwiftyVK.Callbacks) -> Task {
         return TaskMock()

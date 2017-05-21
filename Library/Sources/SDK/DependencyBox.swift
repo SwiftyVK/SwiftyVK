@@ -2,16 +2,19 @@ protocol TaskMaker {
     func task(request: Request, callbacks: Callbacks, attemptSheduler: AttemptSheduler) -> Task
 }
 
+protocol AuthorizatorMaker {
+    func authorizator() -> Authorizator
+}
+
 protocol TokenMaker {
     func token(token: String, expires: TimeInterval, info: [String : String]) -> Token
 }
 
-protocol DependencyBox: TaskMaker, TokenMaker {
+protocol DependencyBox: TaskMaker, AuthorizatorMaker, TokenMaker {
     var sessionManager: SessionManager { get }
     func session() -> Session
     func taskSheduler() -> TaskSheduler
     func attemptSheduler(limit: Int) -> AttemptSheduler
-    func authorizator() -> Authorizator
 }
 
 final class DependencyBoxImpl: DependencyBox {
@@ -24,7 +27,7 @@ final class DependencyBoxImpl: DependencyBox {
         return SessionImpl(
             taskSheduler: taskSheduler(),
             attemptSheduler: attemptSheduler(limit: 3),
-            authorizator: authorizator(),
+            authorizatorMaker: self,
             taskMaker: self
         )
     }

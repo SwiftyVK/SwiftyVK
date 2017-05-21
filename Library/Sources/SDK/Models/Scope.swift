@@ -1,4 +1,6 @@
 // swiftlint:disable cyclomatic_complexity
+public typealias Scopes = Set<VK.Scope>
+
 extension VK {
     ///Application scope
     public enum Scope: Int {

@@ -10,16 +10,16 @@ import Foundation
 public final class SessionCallbacks {
     static let `default` = SessionCallbacks()
     
-    let onNeedLogin: (() -> Set<VK.Scope>)
+    let onNeedLogin: (() -> Scopes)
     let onLoginSuccess: (([String : String]) -> ())?
-    let onLoginFail: ((SessionError) -> ())?
+    let onLoginFail: ((Error) -> ())?
     let onLogout: (() -> ())?
     let onNeedWindow: (() -> Displayer)?
     
     init(
-        onNeedLogin: @escaping (() -> Set<VK.Scope>) = { [] },
+        onNeedLogin: @escaping (() -> Scopes) = { [] },
         onLoginSuccess: (([String : String]) -> ())? = nil,
-        onLoginFail: ((SessionError) -> ())? = nil,
+        onLoginFail: ((Error) -> ())? = nil,
         onLogout: (() -> ())? = nil,
         onNeedWindow: (() -> Displayer)? = nil
         ) {

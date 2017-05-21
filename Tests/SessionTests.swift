@@ -4,24 +4,23 @@ import XCTest
 final class SessionTests: BaseTestCase {
     
     
-    var sessionObjects: (SessionImpl, TaskShedulerMock, AttemptShedulerMock, AuthorizatorMock) {
+    var sessionObjects: (SessionImpl, TaskShedulerMock, AttemptShedulerMock) {
         let taskSheduler = TaskShedulerMock()
         let attemptSheduler = AttemptShedulerMock()
-        let authorizator = AuthorizatorMock()
         
         let session = SessionImpl(
             taskSheduler: taskSheduler,
             attemptSheduler: attemptSheduler,
-            authorizator: authorizator,
+            authorizatorMaker: dependencyBoxMock,
             taskMaker: dependencyBoxMock
         )
         
-        return (session, taskSheduler, attemptSheduler, authorizator)
+        return (session, taskSheduler, attemptSheduler)
     }
     
     func test_sheduleTask() {
         // Given
-        let (session, taskSheduler, _, _) = sessionObjects
+        let (session, taskSheduler, _) = sessionObjects
         let task = TaskMock()
         // Then
         try? session.shedule(task: task, concurrent: true)
@@ -31,7 +30,7 @@ final class SessionTests: BaseTestCase {
     
     func test_sheduleAttempt() {
         // Given
-        let (session, _, attemptSheduler, _) = sessionObjects
+        let (session, _, attemptSheduler) = sessionObjects
         let attempt = AttemptMock()
         // Then
         try! session.shedule(attempt: attempt, concurrent: true)
@@ -41,7 +40,7 @@ final class SessionTests: BaseTestCase {
     
     func test_send() {
         // Given
-        let (session, taskSheduler, _, _) = sessionObjects
+        let (session, taskSheduler, _) = sessionObjects
         let request = Request(of: .url(""))
         // Then
         _ = session.send(request: request, callbacks: .empty)
@@ -51,7 +50,7 @@ final class SessionTests: BaseTestCase {
     
     func test_updateTaskShedulerLimit() {
         // Given
-        let (session, _, attemptSheduler, _) = sessionObjects
+        let (session, _, attemptSheduler) = sessionObjects
         // When
         session.config.attemptsPerSecLimit = .limited(1)
         // Then
@@ -60,7 +59,7 @@ final class SessionTests: BaseTestCase {
     
     func test_updateConfig() {
         // Given
-        let (session, _, attemptSheduler, _) = sessionObjects
+        let (session, _, attemptSheduler) = sessionObjects
         // When
         session.config = SessionConfig(attemptsPerSecLimit: .limited(1))
         // Then
@@ -69,7 +68,7 @@ final class SessionTests: BaseTestCase {
     
     func test_activate() {
         // Given
-        let (session, _, _, _) = sessionObjects
+        let (session, _, _) = sessionObjects
         // When
         try? session.activate(appId: "", callbacks: .default)
         // Then
@@ -78,7 +77,7 @@ final class SessionTests: BaseTestCase {
     
     func test_activate_whenAlreadyActivated() {
         // Given
-        let (session, _, _, _) = sessionObjects
+        let (session, _, _) = sessionObjects
         // When
         try? session.activate(appId: "", callbacks: .default)
         
@@ -93,7 +92,7 @@ final class SessionTests: BaseTestCase {
     
     func test_sendTask_whenSessionDead() {
         // Given
-        let (session, _, _, _) = sessionObjects
+        let (session, _, _) = sessionObjects
         let request = Request(of: .url(""))
         // When
         session.state = .dead
@@ -110,7 +109,7 @@ final class SessionTests: BaseTestCase {
     
     func test_sendWrongTask() {
         // Given
-        let (session, taskSheduler, _, _) = sessionObjects
+        let (session, taskSheduler, _) = sessionObjects
         let request = Request(of: .url(""))
         // When
         taskSheduler.shouldThrows = true
