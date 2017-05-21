@@ -91,6 +91,9 @@
 		A2A3E6361EAFC1CC0029FA44 /* Numbers+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A3E6341EAFC1C70029FA44 /* Numbers+Extensions.swift */; };
 		A2AF16731ED19AEB00485716 /* Authorizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF16721ED19AEB00485716 /* Authorizator.swift */; };
 		A2AF16741ED19AEB00485716 /* Authorizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF16721ED19AEB00485716 /* Authorizator.swift */; };
+		A2AF16761ED19E2300485716 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF16751ED19E2300485716 /* Token.swift */; };
+		A2AF16771ED19E2300485716 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF16751ED19E2300485716 /* Token.swift */; };
+		A2AF16791ED1AD2E00485716 /* TokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF16781ED1AD2E00485716 /* TokenTests.swift */; };
 		A2B40DFD1EA693B700106AE3 /* UrlRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B40DFC1EA693B700106AE3 /* UrlRequestBuilderTests.swift */; };
 		A2B4ECAC1DCA4F6B009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
 		A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
@@ -357,6 +360,8 @@
 		A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskSheduler.swift; sourceTree = "<group>"; };
 		A2A3E6341EAFC1C70029FA44 /* Numbers+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Numbers+Extensions.swift"; sourceTree = "<group>"; };
 		A2AF16721ED19AEB00485716 /* Authorizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorizator.swift; sourceTree = "<group>"; };
+		A2AF16751ED19E2300485716 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		A2AF16781ED1AD2E00485716 /* TokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTests.swift; sourceTree = "<group>"; };
 		A2B40DFC1EA693B700106AE3 /* UrlRequestBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlRequestBuilderTests.swift; sourceTree = "<group>"; };
 		A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapthcaPresenter.swift; sourceTree = "<group>"; };
 		A2B4ECAE1DCA4FA5009435B6 /* CaptchaController-OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CaptchaController-OSX.swift"; sourceTree = "<group>"; };
@@ -393,6 +398,7 @@
 				A27015D81EC1F6D100B9C5C2 /* SessionState.swift */,
 				A27015D51EC1F48E00B9C5C2 /* SessionCallbacks.swift */,
 				A2AF16721ED19AEB00485716 /* Authorizator.swift */,
+				A2AF16751ED19E2300485716 /* Token.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -410,6 +416,7 @@
 				A22179C41EBA3BBA006B71FD /* DependencyBoxTests.swift */,
 				A22179C91EBA4059006B71FD /* SessionTests.swift */,
 				A2E5C5DA1ECCAFC800652262 /* SessionManagerTests.swift */,
+				A2AF16781ED1AD2E00485716 /* TokenTests.swift */,
 			);
 			name = Tests;
 			path = ../Tests;
@@ -902,6 +909,7 @@
 				A2E5C5DB1ECCAFC800652262 /* SessionManagerTests.swift in Sources */,
 				A2433A481EA542620058BB6D /* AttemptMock.swift in Sources */,
 				A22179D21EBA5393006B71FD /* BaseTestCase.swift in Sources */,
+				A2AF16791ED1AD2E00485716 /* TokenTests.swift in Sources */,
 				A22179CC1EBA5009006B71FD /* TaskShedulerMock.swift in Sources */,
 				A24DDAF21EB73E3F002EA273 /* QueryBuilderTests.swift in Sources */,
 				A22179C81EBA3DBD006B71FD /* AttemptShedulerMock.swift in Sources */,
@@ -927,6 +935,7 @@
 				A2EB6EEE1BD18394008E7D86 /* Audio.swift in Sources */,
 				A2EB6EEF1BD18394008E7D86 /* Board.swift in Sources */,
 				A2EB6EF01BD18394008E7D86 /* Database.swift in Sources */,
+				A2AF16771ED19E2300485716 /* Token.swift in Sources */,
 				A28368ED1D9D742D00EEBE2A /* Attempt.swift in Sources */,
 				A2EB6EF11BD18394008E7D86 /* Docs.swift in Sources */,
 				A2EB6EF21BD18394008E7D86 /* Fave.swift in Sources */,
@@ -1044,6 +1053,7 @@
 				A20FF11C1BEB7DC8009FBE3D /* LegacyAuthorizator.swift in Sources */,
 				A254C0C81E9904CB001A5456 /* Custom.swift in Sources */,
 				A2EB6ED91BD18389008E7D86 /* Wall.swift in Sources */,
+				A2AF16761ED19E2300485716 /* Token.swift in Sources */,
 				A2EB6EDA1BD18389008E7D86 /* Arg.swift in Sources */,
 				A2A3E6351EAFC1C70029FA44 /* Numbers+Extensions.swift in Sources */,
 				A29508841EBBA24B00981EC0 /* RequestConfig.swift in Sources */,
