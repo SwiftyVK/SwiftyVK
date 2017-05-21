@@ -108,6 +108,10 @@
 		A2D1369B1DA00E9000C487C1 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D1369A1DA00E9000C487C1 /* Errors.swift */; };
 		A2D2713C1EC4D0BA00B24D09 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionManager.swift */; };
 		A2D2713D1EC4D0BA00B24D09 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionManager.swift */; };
+		A2E34DBC1ED1F1260041E663 /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBB1ED1F1260041E663 /* TokenRepository.swift */; };
+		A2E34DBD1ED1F1260041E663 /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBB1ED1F1260041E663 /* TokenRepository.swift */; };
+		A2E34DBF1ED1F6FE0041E663 /* TokenRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBE1ED1F6FE0041E663 /* TokenRepositoryMock.swift */; };
+		A2E34DC11ED1FB2F0041E663 /* TokenRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DC01ED1FB2F0041E663 /* TokenRepositoryTests.swift */; };
 		A2E5C5D61ECCAA5400652262 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */; };
 		A2E5C5D71ECCAAB600652262 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */; };
 		A2E5C5D91ECCAD4800652262 /* SessionManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D81ECCAD4800652262 /* SessionManagerMock.swift */; };
@@ -374,6 +378,9 @@
 		A2CF0D411E98EF0900EAFF30 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		A2D1369A1DA00E9000C487C1 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		A2D2713B1EC4D0BA00B24D09 /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		A2E34DBB1ED1F1260041E663 /* TokenRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRepository.swift; sourceTree = "<group>"; };
+		A2E34DBE1ED1F6FE0041E663 /* TokenRepositoryMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRepositoryMock.swift; sourceTree = "<group>"; };
+		A2E34DC01ED1FB2F0041E663 /* TokenRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRepositoryTests.swift; sourceTree = "<group>"; };
 		A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		A2E5C5D81ECCAD4800652262 /* SessionManagerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManagerMock.swift; sourceTree = "<group>"; };
 		A2E5C5DA1ECCAFC800652262 /* SessionManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManagerTests.swift; sourceTree = "<group>"; };
@@ -403,6 +410,7 @@
 				A27015D51EC1F48E00B9C5C2 /* SessionCallbacks.swift */,
 				A2AF16721ED19AEB00485716 /* Authorizator.swift */,
 				A2AF16751ED19E2300485716 /* Token.swift */,
+				A2E34DBB1ED1F1260041E663 /* TokenRepository.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -421,6 +429,7 @@
 				A22179C91EBA4059006B71FD /* SessionTests.swift */,
 				A2E5C5DA1ECCAFC800652262 /* SessionManagerTests.swift */,
 				A2AF16781ED1AD2E00485716 /* TokenTests.swift */,
+				A2E34DC01ED1FB2F0041E663 /* TokenRepositoryTests.swift */,
 			);
 			name = Tests;
 			path = ../Tests;
@@ -440,6 +449,7 @@
 				A2E5C5D81ECCAD4800652262 /* SessionManagerMock.swift */,
 				A2AF167A1ED1CC9B00485716 /* TokenMock.swift */,
 				A2AF167C1ED1CCA900485716 /* AuthorizatorMock.swift */,
+				A2E34DBE1ED1F6FE0041E663 /* TokenRepositoryMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -909,6 +919,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A22179CE1EBA52A2006B71FD /* DependencyBoxMock.swift in Sources */,
+				A2E34DC11ED1FB2F0041E663 /* TokenRepositoryTests.swift in Sources */,
 				A2AF167D1ED1CCA900485716 /* AuthorizatorMock.swift in Sources */,
 				A22179CA1EBA4059006B71FD /* SessionTests.swift in Sources */,
 				A2E5C5D91ECCAD4800652262 /* SessionManagerMock.swift in Sources */,
@@ -927,6 +938,7 @@
 				A22179C51EBA3BBA006B71FD /* DependencyBoxTests.swift in Sources */,
 				A22179D01EBA530C006B71FD /* SessionMock.swift in Sources */,
 				A2B40DFD1EA693B700106AE3 /* UrlRequestBuilderTests.swift in Sources */,
+				A2E34DBF1ED1F6FE0041E663 /* TokenRepositoryMock.swift in Sources */,
 				A2433A441EA533500058BB6D /* TaskMock.swift in Sources */,
 				A24DDAF01EB73CB6002EA273 /* BodyBuilderMock.swift in Sources */,
 			);
@@ -981,6 +993,7 @@
 				A2E5C5D71ECCAAB600652262 /* String+Extensions.swift in Sources */,
 				A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */,
 				A2CF0D431E98EF0900EAFF30 /* Request.swift in Sources */,
+				A2E34DBD1ED1F1260041E663 /* TokenRepository.swift in Sources */,
 				A21E815A1E2A8303008E81E7 /* UrlCharactesSet.swift in Sources */,
 				A2EB6F051BD18395008E7D86 /* Video.swift in Sources */,
 				A2EB6F061BD18395008E7D86 /* Wall.swift in Sources */,
@@ -1069,6 +1082,7 @@
 				A2EB6EDC1BD18389008E7D86 /* Media.swift in Sources */,
 				A2B4ECAC1DCA4F6B009435B6 /* CapthcaPresenter.swift in Sources */,
 				A2EB6EDD1BD18389008E7D86 /* Resources.swift in Sources */,
+				A2E34DBC1ED1F1260041E663 /* TokenRepository.swift in Sources */,
 				A2EB6EDE1BD18389008E7D86 /* Scope.swift in Sources */,
 				A2EB6EDF1BD18389008E7D86 /* LegacyToken.swift in Sources */,
 				A2EB6EE11BD18389008E7D86 /* UrlRequestBuilder.swift in Sources */,

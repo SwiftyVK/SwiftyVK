@@ -31,23 +31,23 @@ public final class SessionImpl: SessionInternalRepr {
     
     private let taskSheduler: TaskSheduler
     private let attemptSheduler: AttemptSheduler
-    private let taskMaker: TaskMaker
-    private let authorizatorMaker: AuthorizatorMaker
+    private let tokenRepository: TokenRepository
+    private let dependencyMaker: AuthorizatorMaker & TaskMaker
     
     init(
         config: SessionConfig = .default,
         taskSheduler: TaskSheduler,
         attemptSheduler: AttemptSheduler,
-        authorizatorMaker: AuthorizatorMaker,
-        taskMaker: TaskMaker
+        tokenRepository: TokenRepository,
+        dependencyMaker: AuthorizatorMaker & TaskMaker
         ) {
         self.id = String.random(20)
         self.state = .initiated
         self.config = config
         self.taskSheduler = taskSheduler
         self.attemptSheduler = attemptSheduler
-        self.taskMaker = taskMaker
-        self.authorizatorMaker = authorizatorMaker
+        self.tokenRepository = tokenRepository
+        self.dependencyMaker = dependencyMaker
         
         updateAttemptShedulerPerSecLimit()
     }
@@ -68,8 +68,18 @@ public final class SessionImpl: SessionInternalRepr {
             return
         }
         
+        if let token = tokenRepository.getFor(sessionId: id) {
+            self.state = .authorized
+            self.token = token
+        } else {
+            logInWithAuthorizator()
+        }
+    }
+    
+    private func logInWithAuthorizator() {
         do {
-            let token = try authorizatorMaker.authorizator().authorizeWith(scopes: callbacks.onNeedLogin())
+            let token = try dependencyMaker.authorizator().authorizeWith(scopes: callbacks.onNeedLogin())
+            tokenRepository.save(token: token, for:  id)
             callbacks.onLoginSuccess?(token.info)
             self.state = .authorized
             self.token = token
@@ -84,24 +94,27 @@ public final class SessionImpl: SessionInternalRepr {
             return
         }
         
-        let token = authorizatorMaker.authorizator().authorizeWith(rawToken: rawToken, expires: expires)
+        let token = dependencyMaker.authorizator().authorizeWith(rawToken: rawToken, expires: expires)
+        tokenRepository.save(token: token, for: id)
         callbacks.onLoginSuccess?(token.info)
         self.state = .authorized
         self.token = token
     }
     
     public func logOut() {
-        if state == .authorized {
-            state = .activated
+        guard state >= .authorized else {
+            return
         }
-        
+
+        state = .activated
+        tokenRepository.removeFor(sessionId: id)
         self.token = nil
     }
     
     @discardableResult
     public func send(request: Request, callbacks: Callbacks) -> Task {
         
-        let task = taskMaker.task(request: request, callbacks: callbacks, attemptSheduler: attemptSheduler)
+        let task = dependencyMaker.task(request: request, callbacks: callbacks, attemptSheduler: attemptSheduler)
         
         guard state > .dead else {
             callbacks.onError?(SessionError.sessionIsDead)

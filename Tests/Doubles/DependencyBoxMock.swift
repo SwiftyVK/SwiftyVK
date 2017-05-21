@@ -35,6 +35,10 @@ final class DependencyBoxMock: DependencyBox {
         return AuthorizatorMock()
     }
     
+    func tokenRepository() -> TokenRepository {
+        return TokenRepositoryMock()
+    }
+    
     func token(token: String, expires: TimeInterval, info: [String : String]) -> Token {
         return TokenMock()
     }

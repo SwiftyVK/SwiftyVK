@@ -7,12 +7,13 @@ final class SessionTests: BaseTestCase {
     var sessionObjects: (SessionImpl, TaskShedulerMock, AttemptShedulerMock) {
         let taskSheduler = TaskShedulerMock()
         let attemptSheduler = AttemptShedulerMock()
+        let tokenRepository = TokenRepositoryMock()
         
         let session = SessionImpl(
             taskSheduler: taskSheduler,
             attemptSheduler: attemptSheduler,
-            authorizatorMaker: dependencyBoxMock,
-            taskMaker: dependencyBoxMock
+            tokenRepository: tokenRepository,
+            dependencyMaker: dependencyBoxMock
         )
         
         return (session, taskSheduler, attemptSheduler)
