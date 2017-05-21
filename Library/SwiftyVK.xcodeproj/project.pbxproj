@@ -94,6 +94,8 @@
 		A2AF16761ED19E2300485716 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF16751ED19E2300485716 /* Token.swift */; };
 		A2AF16771ED19E2300485716 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF16751ED19E2300485716 /* Token.swift */; };
 		A2AF16791ED1AD2E00485716 /* TokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF16781ED1AD2E00485716 /* TokenTests.swift */; };
+		A2AF167B1ED1CC9B00485716 /* TokenMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF167A1ED1CC9B00485716 /* TokenMock.swift */; };
+		A2AF167D1ED1CCA900485716 /* AuthorizatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF167C1ED1CCA900485716 /* AuthorizatorMock.swift */; };
 		A2B40DFD1EA693B700106AE3 /* UrlRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B40DFC1EA693B700106AE3 /* UrlRequestBuilderTests.swift */; };
 		A2B4ECAC1DCA4F6B009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
 		A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
@@ -362,6 +364,8 @@
 		A2AF16721ED19AEB00485716 /* Authorizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorizator.swift; sourceTree = "<group>"; };
 		A2AF16751ED19E2300485716 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		A2AF16781ED1AD2E00485716 /* TokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTests.swift; sourceTree = "<group>"; };
+		A2AF167A1ED1CC9B00485716 /* TokenMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenMock.swift; sourceTree = "<group>"; };
+		A2AF167C1ED1CCA900485716 /* AuthorizatorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizatorMock.swift; sourceTree = "<group>"; };
 		A2B40DFC1EA693B700106AE3 /* UrlRequestBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlRequestBuilderTests.swift; sourceTree = "<group>"; };
 		A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapthcaPresenter.swift; sourceTree = "<group>"; };
 		A2B4ECAE1DCA4FA5009435B6 /* CaptchaController-OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CaptchaController-OSX.swift"; sourceTree = "<group>"; };
@@ -434,6 +438,8 @@
 				A22179CB1EBA5009006B71FD /* TaskShedulerMock.swift */,
 				A22179CF1EBA530C006B71FD /* SessionMock.swift */,
 				A2E5C5D81ECCAD4800652262 /* SessionManagerMock.swift */,
+				A2AF167A1ED1CC9B00485716 /* TokenMock.swift */,
+				A2AF167C1ED1CCA900485716 /* AuthorizatorMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -903,6 +909,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A22179CE1EBA52A2006B71FD /* DependencyBoxMock.swift in Sources */,
+				A2AF167D1ED1CCA900485716 /* AuthorizatorMock.swift in Sources */,
 				A22179CA1EBA4059006B71FD /* SessionTests.swift in Sources */,
 				A2E5C5D91ECCAD4800652262 /* SessionManagerMock.swift in Sources */,
 				A2433A461EA542100058BB6D /* AttemptShedulerTests.swift in Sources */,
@@ -915,6 +922,7 @@
 				A22179C81EBA3DBD006B71FD /* AttemptShedulerMock.swift in Sources */,
 				A24DDAEE1EB73CA3002EA273 /* QueryBuilderMock.swift in Sources */,
 				A25A3A2D1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift in Sources */,
+				A2AF167B1ED1CC9B00485716 /* TokenMock.swift in Sources */,
 				A23708C81EA532B900103212 /* TaskShedulerTests.swift in Sources */,
 				A22179C51EBA3BBA006B71FD /* DependencyBoxTests.swift in Sources */,
 				A22179D01EBA530C006B71FD /* SessionMock.swift in Sources */,

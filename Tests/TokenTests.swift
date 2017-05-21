@@ -21,9 +21,9 @@ final class TokenTests: BaseTestCase {
     
     func test_expiredToken_isNotValid() {
         // When
-        let token = TokenImpl(token: "test", expires: 1, info: [:])
+        let token = TokenImpl(token: "test", expires: 0.1, info: [:])
         
-        Thread.sleep(forTimeInterval: 2)
+        Thread.sleep(forTimeInterval: 0.2)
         // Then
         XCTAssertFalse(token.isValid)
         XCTAssertNil(token.get())
@@ -52,11 +52,11 @@ final class TokenTests: BaseTestCase {
     
     func test_expiresToken_nsCoding() {
         // Given
-        let token = TokenImpl(token: "test", expires: 1, info: ["test" : "test"])
+        let token = TokenImpl(token: "test", expires: 0.1, info: ["test" : "test"])
         // When
         let archived = NSKeyedArchiver.archivedData(withRootObject: token)
         let unarcheved = NSKeyedUnarchiver.unarchiveObject(with: archived) as? TokenImpl
-        Thread.sleep(forTimeInterval: 2)
+        Thread.sleep(forTimeInterval: 0.2)
         // Then
         XCTAssertNotNil(unarcheved)
         XCTAssertEqual(token.isValid, unarcheved?.isValid)

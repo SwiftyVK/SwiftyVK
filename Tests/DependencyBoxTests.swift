@@ -7,7 +7,7 @@ final class DependencyBoxTests: BaseTestCase {
         return DependencyBoxImpl()
     }
 
-    func test_SessionManager() {
+    func test_SessionManagerType() {
         XCTAssertTrue(box.sessionManager is SessionManagerImpl)
     }
     
@@ -25,5 +25,19 @@ final class DependencyBoxTests: BaseTestCase {
         
         // Then
         XCTAssertTrue(task is TaskImpl<AttemptImpl>)
+    }
+    
+    func test_TokenType() {
+        // When
+        let token = box.token(token: "", expires: 0, info: [:])
+        // Then
+        XCTAssertTrue(token is TokenImpl)
+    }
+    
+    func test_AuthorizatorType() {
+        // When
+        let authorizator = box.authorizator()
+        // Then
+        XCTAssertTrue(authorizator is AuthorizatorImpl)
     }
 }

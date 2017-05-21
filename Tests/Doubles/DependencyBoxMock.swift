@@ -31,6 +31,14 @@ final class DependencyBoxMock: DependencyBox {
         return TaskMock()
     }
     
+    func authorizator() -> Authorizator {
+        return AuthorizatorMock()
+    }
+    
+    func token(token: String, expires: TimeInterval, info: [String : String]) -> Token {
+        return TokenMock()
+    }
+    
     private func urlRequestBuilder() -> UrlRequestBuilder {
         return UrlRequestBuilderImpl(
             queryBuilder: QueryBuilderImpl(),

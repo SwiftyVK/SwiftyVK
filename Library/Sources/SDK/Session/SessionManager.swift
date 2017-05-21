@@ -28,10 +28,7 @@ public final class SessionManagerImpl: SessionManager {
         self.dependencyBox = dependencyBox
     }
     
-    public func new(
-        config: SessionConfig
-        ) -> Session {
-        
+    public func new(config: SessionConfig) -> Session {
         let session = dependencyBox.session()
         session.config = config
 
@@ -40,7 +37,6 @@ public final class SessionManagerImpl: SessionManager {
     }
     
     public func kill(session: Session) throws {
-        
         if !canKillDefaultSessions && session === `default` {
             throw SessionError.cantKillDefaultSession
         }

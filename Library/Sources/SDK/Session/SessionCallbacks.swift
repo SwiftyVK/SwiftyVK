@@ -17,7 +17,7 @@ public final class SessionCallbacks {
     let onNeedWindow: (() -> Displayer)?
     
     init(
-        onNeedLogin: @escaping (() -> Set<VK.Scope>) = { return [] },
+        onNeedLogin: @escaping (() -> Set<VK.Scope>) = { [] },
         onLoginSuccess: (([String : String]) -> ())? = nil,
         onLoginFail: ((SessionError) -> ())? = nil,
         onLogout: (() -> ())? = nil,

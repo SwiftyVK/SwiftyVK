@@ -27,21 +27,25 @@ public final class SessionImpl: SessionInternalRepr {
     
     private let taskSheduler: TaskSheduler
     private let attemptSheduler: AttemptSheduler
-    private let createTask: (Request, Callbacks, AttemptSheduler) -> Task
+    private let authorizator: Authorizator
+    private let taskMaker: TaskMaker
     
     init(
         config: SessionConfig = .default,
         taskSheduler: TaskSheduler,
         attemptSheduler: AttemptSheduler,
-        createTask: @escaping (Request, Callbacks, AttemptSheduler) -> Task
+        authorizator: Authorizator,
+        taskMaker: TaskMaker
         ) {
         self.id = String.random(20)
         self.state = .initiated
         self.config = config
         self.taskSheduler = taskSheduler
         self.attemptSheduler = attemptSheduler
-        self.createTask = createTask
+        self.authorizator = authorizator
+        self.taskMaker = taskMaker
         
+        authorizator.set(session: self)
         updateAttemptShedulerPerSecLimit()
     }
     
@@ -58,7 +62,7 @@ public final class SessionImpl: SessionInternalRepr {
     @discardableResult
     public func send(request: Request, callbacks: Callbacks) -> Task {
         
-        let task = createTask(request, callbacks, attemptSheduler)
+        let task = taskMaker.task(request: request, callbacks: callbacks, attemptSheduler: attemptSheduler)
         
         guard state > .dead else {
             callbacks.onError?(SessionError.sessionIsDead)

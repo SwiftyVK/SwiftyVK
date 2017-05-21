@@ -3,17 +3,26 @@ import XCTest
 
 final class SessionTests: BaseTestCase {
     
-    func test_sheduleTask() {
-        // Given
-        let task = TaskMock()
+    
+    var sessionObjects: (SessionImpl, TaskShedulerMock, AttemptShedulerMock, AuthorizatorMock) {
         let taskSheduler = TaskShedulerMock()
         let attemptSheduler = AttemptShedulerMock()
+        let authorizator = AuthorizatorMock()
         
         let session = SessionImpl(
             taskSheduler: taskSheduler,
-            attemptSheduler: attemptSheduler, createTask: dependencyBoxMock.task
+            attemptSheduler: attemptSheduler,
+            authorizator: authorizator,
+            taskMaker: dependencyBoxMock
         )
         
+        return (session, taskSheduler, attemptSheduler, authorizator)
+    }
+    
+    func test_sheduleTask() {
+        // Given
+        let (session, taskSheduler, _, _) = sessionObjects
+        let task = TaskMock()
         // Then
         try? session.shedule(task: task, concurrent: true)
         // When
@@ -22,15 +31,8 @@ final class SessionTests: BaseTestCase {
     
     func test_sheduleAttempt() {
         // Given
+        let (session, _, attemptSheduler, _) = sessionObjects
         let attempt = AttemptMock()
-        let taskSheduler = TaskShedulerMock()
-        let attemptSheduler = AttemptShedulerMock()
-        
-        let session = SessionImpl(
-            taskSheduler: taskSheduler,
-            attemptSheduler: attemptSheduler, createTask: dependencyBoxMock.task
-        )
-        
         // Then
         try! session.shedule(attempt: attempt, concurrent: true)
         // When
@@ -39,14 +41,8 @@ final class SessionTests: BaseTestCase {
     
     func test_send() {
         // Given
+        let (session, taskSheduler, _, _) = sessionObjects
         let request = Request(of: .url(""))
-        let taskSheduler = TaskShedulerMock()
-        let attemptSheduler = AttemptShedulerMock()
-        
-        let session = SessionImpl(
-            taskSheduler: taskSheduler,
-            attemptSheduler: attemptSheduler, createTask: dependencyBoxMock.task
-        )
         // Then
         _ = session.send(request: request, callbacks: .empty)
         // When
@@ -55,13 +51,7 @@ final class SessionTests: BaseTestCase {
     
     func test_updateTaskShedulerLimit() {
         // Given
-        let taskSheduler = TaskShedulerMock()
-        let attemptSheduler = AttemptShedulerMock()
-        
-        let session = SessionImpl(
-            taskSheduler: taskSheduler,
-            attemptSheduler: attemptSheduler, createTask: dependencyBoxMock.task
-        )
+        let (session, _, attemptSheduler, _) = sessionObjects
         // When
         session.config.attemptsPerSecLimit = .limited(1)
         // Then
@@ -70,13 +60,7 @@ final class SessionTests: BaseTestCase {
     
     func test_updateConfig() {
         // Given
-        let taskSheduler = TaskShedulerMock()
-        let attemptSheduler = AttemptShedulerMock()
-        
-        let session = SessionImpl(
-            taskSheduler: taskSheduler,
-            attemptSheduler: attemptSheduler, createTask: dependencyBoxMock.task
-        )
+        let (session, _, attemptSheduler, _) = sessionObjects
         // When
         session.config = SessionConfig(attemptsPerSecLimit: .limited(1))
         // Then
@@ -85,13 +69,7 @@ final class SessionTests: BaseTestCase {
     
     func test_activate() {
         // Given
-        let taskSheduler = TaskShedulerMock()
-        let attemptSheduler = AttemptShedulerMock()
-        
-        let session = SessionImpl(
-            taskSheduler: taskSheduler,
-            attemptSheduler: attemptSheduler, createTask: dependencyBoxMock.task
-        )
+        let (session, _, _, _) = sessionObjects
         // When
         try? session.activate(appId: "", callbacks: .default)
         // Then
@@ -100,13 +78,7 @@ final class SessionTests: BaseTestCase {
     
     func test_activate_whenAlreadyActivated() {
         // Given
-        let taskSheduler = TaskShedulerMock()
-        let attemptSheduler = AttemptShedulerMock()
-        
-        let session = SessionImpl(
-            taskSheduler: taskSheduler,
-            attemptSheduler: attemptSheduler, createTask: dependencyBoxMock.task
-        )
+        let (session, _, _, _) = sessionObjects
         // When
         try? session.activate(appId: "", callbacks: .default)
         
@@ -121,17 +93,11 @@ final class SessionTests: BaseTestCase {
     
     func test_sendTask_whenSessionDead() {
         // Given
+        let (session, _, _, _) = sessionObjects
         let request = Request(of: .url(""))
-        let taskSheduler = TaskShedulerMock()
-        let attemptSheduler = AttemptShedulerMock()
-        
-        let session = SessionImpl(
-            taskSheduler: taskSheduler,
-            attemptSheduler: attemptSheduler, createTask: dependencyBoxMock.task
-        )
-        
-        session.state = .dead
         // When
+        session.state = .dead
+
         session.send(
             request: request,
             callbacks: Callbacks(
@@ -144,17 +110,11 @@ final class SessionTests: BaseTestCase {
     
     func test_sendWrongTask() {
         // Given
-        let request =  Request(of: .url(""))
-        let taskSheduler = TaskShedulerMock()
-        let attemptSheduler = AttemptShedulerMock()
-        
-        let session = SessionImpl(
-            taskSheduler: taskSheduler,
-            attemptSheduler: attemptSheduler, createTask: dependencyBoxMock.task
-        )
-        
-        taskSheduler.shouldThrows = true
+        let (session, taskSheduler, _, _) = sessionObjects
+        let request = Request(of: .url(""))
         // When
+        taskSheduler.shouldThrows = true
+
         session.send(
             request: request,
             callbacks: Callbacks(
