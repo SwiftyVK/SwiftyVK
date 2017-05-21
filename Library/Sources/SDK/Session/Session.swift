@@ -3,7 +3,7 @@ public protocol Session: class {
     var state: SessionState { get }
     func activate(appId: String, callbacks: SessionCallbacks)
     func logIn()
-    func logIn(rawToken: String, expires: TimeInterval)
+    func logInWith(rawToken: String, expires: TimeInterval)
     func logOut()
     @discardableResult
     func send(request: Request, callbacks: Callbacks) -> Task
@@ -88,7 +88,7 @@ public final class SessionImpl: SessionInternalRepr {
         }
     }
     
-    public func logIn(rawToken: String, expires: TimeInterval) {
+    public func logInWith(rawToken: String, expires: TimeInterval) {
         guard state >= .activated else {
             callbacks.onLoginFail?(SessionError.sessionIsDead)
             return
