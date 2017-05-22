@@ -1,12 +1,12 @@
 import Foundation
 
-protocol TokenRepository: class {
+protocol TokenStorage: class {
     func save(token: Token, for sessionId: String)
     func getFor(sessionId: String) -> Token?
     func removeFor(sessionId: String)
 }
 
-class TokenRepositoryImpl: TokenRepository {
+class TokenStorageImpl: TokenStorage {
     
     func save(token: Token, for sessionId: String) {
         let keychainQuery = keychainParamsFor(sessionId: sessionId)

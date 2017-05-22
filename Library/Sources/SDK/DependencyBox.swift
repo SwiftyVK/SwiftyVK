@@ -14,7 +14,7 @@ protocol DependencyBox: TaskMaker, AttemptMaker, TokenMaker {
     var sessionManager: SessionManager { get }
     func session() -> Session
     func authorizator() -> Authorizator
-    func tokenRepository() -> TokenRepository
+    func tokenStorage() -> TokenStorage
     func taskSheduler() -> TaskSheduler
     func attemptSheduler(limit: Int) -> AttemptSheduler
 }
@@ -30,7 +30,7 @@ final class DependencyBoxImpl: DependencyBox {
             taskSheduler: taskSheduler(),
             attemptSheduler: attemptSheduler(limit: 3),
             authorizator: authorizator(),
-            tokenRepository: tokenRepository(),
+            tokenStorage: tokenStorage(),
             taskMaker: self
         )
     }
@@ -65,12 +65,12 @@ final class DependencyBoxImpl: DependencyBox {
         return AttemptImpl(request: request, timeout: timeout, callbacks: callbacks)
     }
     
-    func tokenRepository() -> TokenRepository {
-        return sharedTokenRepository
+    func tokenStorage() -> TokenStorage {
+        return sharedTokenStorage
     }
     
-    private lazy var sharedTokenRepository: TokenRepository = {
-        return TokenRepositoryImpl()
+    private lazy var sharedTokenStorage: TokenStorage = {
+        return TokenStorageImpl()
     }()
     
     func token(token: String, expires: TimeInterval, info: [String : String]) -> Token {

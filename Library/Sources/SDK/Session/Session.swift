@@ -32,7 +32,7 @@ public final class SessionImpl: SessionInternalRepr {
     private let taskSheduler: TaskSheduler
     private let attemptSheduler: AttemptSheduler
     private let authorizator: Authorizator
-    private let tokenRepository: TokenRepository
+    private let tokenStorage: TokenStorage
     private let taskMaker: TaskMaker
     
     init(
@@ -40,7 +40,7 @@ public final class SessionImpl: SessionInternalRepr {
         taskSheduler: TaskSheduler,
         attemptSheduler: AttemptSheduler,
         authorizator: Authorizator,
-        tokenRepository: TokenRepository,
+        tokenStorage: TokenStorage,
         taskMaker: TaskMaker
         ) {
         self.id = String.random(20)
@@ -49,7 +49,7 @@ public final class SessionImpl: SessionInternalRepr {
         self.taskSheduler = taskSheduler
         self.attemptSheduler = attemptSheduler
         self.authorizator = authorizator
-        self.tokenRepository = tokenRepository
+        self.tokenStorage = tokenStorage
         self.taskMaker = taskMaker
         
         updateAttemptShedulerPerSecLimit()
@@ -71,7 +71,7 @@ public final class SessionImpl: SessionInternalRepr {
             return
         }
         
-        if let token = tokenRepository.getFor(sessionId: id) {
+        if let token = tokenStorage.getFor(sessionId: id) {
             self.state = .authorized
             self.token = token
         } else {
@@ -82,7 +82,7 @@ public final class SessionImpl: SessionInternalRepr {
     private func logInWithAuthorizator() {
         do {
             let token = try authorizator.authorizeWith(scopes: callbacks.onNeedLogin())
-            tokenRepository.save(token: token, for:  id)
+            tokenStorage.save(token: token, for:  id)
             callbacks.onLoginSuccess?(token.info)
             self.state = .authorized
             self.token = token
@@ -98,7 +98,7 @@ public final class SessionImpl: SessionInternalRepr {
         }
         
         let token = authorizator.authorizeWith(rawToken: rawToken, expires: expires)
-        tokenRepository.save(token: token, for: id)
+        tokenStorage.save(token: token, for: id)
         callbacks.onLoginSuccess?(token.info)
         self.state = .authorized
         self.token = token
@@ -110,7 +110,7 @@ public final class SessionImpl: SessionInternalRepr {
         }
 
         state = .activated
-        tokenRepository.removeFor(sessionId: id)
+        tokenStorage.removeFor(sessionId: id)
         self.token = nil
     }
     

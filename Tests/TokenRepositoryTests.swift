@@ -1,11 +1,11 @@
 import XCTest
 @testable import SwiftyVK
 
-final class TokenRepositoryTests: BaseTestCase {
+final class TokenStorageTests: BaseTestCase {
     
     func test_getSaved() {
         // Given
-        let repository = TokenRepositoryImpl()
+        let repository = TokenStorageImpl()
         let id = "testId"
         // When
         let token = TokenMock()
@@ -17,7 +17,7 @@ final class TokenRepositoryTests: BaseTestCase {
     
     func test_getRemoved() {
         // Given
-        let repository = TokenRepositoryImpl()
+        let repository = TokenStorageImpl()
         let id = "testId"
         // When
         repository.removeFor(sessionId: id)
