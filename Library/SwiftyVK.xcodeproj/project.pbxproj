@@ -73,8 +73,6 @@
 		A26D88BB1DC124C200AD63CD /* WebController-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */; };
 		A26F8B811E3A78DB00273E35 /* SwiftyVKResources-OSX.bundle in Copy Bundle Resources For Cocoapods */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */; };
 		A26F8B831E3A78F400273E35 /* SwiftyVKResources-iOS.bundle in Copy Bundle Resources For Cocoapods */ = {isa = PBXBuildFile; fileRef = A2527D551BD1134500F65412 /* SwiftyVKResources-iOS.bundle */; };
-		A27015D61EC1F48E00B9C5C2 /* SessionCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27015D51EC1F48E00B9C5C2 /* SessionCallbacks.swift */; };
-		A27015D71EC1F48E00B9C5C2 /* SessionCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27015D51EC1F48E00B9C5C2 /* SessionCallbacks.swift */; };
 		A27015D91EC1F6D100B9C5C2 /* SessionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27015D81EC1F6D100B9C5C2 /* SessionState.swift */; };
 		A27015DA1EC1F6D100B9C5C2 /* SessionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27015D81EC1F6D100B9C5C2 /* SessionState.swift */; };
 		A28368EC1D9D742700EEBE2A /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* Attempt.swift */; };
@@ -108,10 +106,10 @@
 		A2D1369B1DA00E9000C487C1 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D1369A1DA00E9000C487C1 /* Errors.swift */; };
 		A2D2713C1EC4D0BA00B24D09 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionManager.swift */; };
 		A2D2713D1EC4D0BA00B24D09 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionManager.swift */; };
-		A2E34DBC1ED1F1260041E663 /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBB1ED1F1260041E663 /* TokenRepository.swift */; };
-		A2E34DBD1ED1F1260041E663 /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBB1ED1F1260041E663 /* TokenRepository.swift */; };
-		A2E34DBF1ED1F6FE0041E663 /* TokenRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBE1ED1F6FE0041E663 /* TokenRepositoryMock.swift */; };
-		A2E34DC11ED1FB2F0041E663 /* TokenRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DC01ED1FB2F0041E663 /* TokenRepositoryTests.swift */; };
+		A2E34DBC1ED1F1260041E663 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBB1ED1F1260041E663 /* TokenStorage.swift */; };
+		A2E34DBD1ED1F1260041E663 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBB1ED1F1260041E663 /* TokenStorage.swift */; };
+		A2E34DBF1ED1F6FE0041E663 /* TokenStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBE1ED1F6FE0041E663 /* TokenStorageMock.swift */; };
+		A2E34DC11ED1FB2F0041E663 /* TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DC01ED1FB2F0041E663 /* TokenStorageTests.swift */; };
 		A2E5C5D61ECCAA5400652262 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */; };
 		A2E5C5D71ECCAAB600652262 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */; };
 		A2E5C5D91ECCAD4800652262 /* SessionManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D81ECCAD4800652262 /* SessionManagerMock.swift */; };
@@ -357,7 +355,6 @@
 		A254C0C71E9904CB001A5456 /* Custom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Custom.swift; sourceTree = "<group>"; };
 		A25A3A2C1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartBodyBuilderTests.swift; sourceTree = "<group>"; };
 		A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WebController-iOS.swift"; sourceTree = "<group>"; };
-		A27015D51EC1F48E00B9C5C2 /* SessionCallbacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionCallbacks.swift; sourceTree = "<group>"; };
 		A27015D81EC1F6D100B9C5C2 /* SessionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionState.swift; sourceTree = "<group>"; };
 		A28368EB1D9D742700EEBE2A /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
 		A2838DA21E9AA0DA00FE5BE2 /* DependencyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyBox.swift; sourceTree = "<group>"; };
@@ -378,9 +375,9 @@
 		A2CF0D411E98EF0900EAFF30 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		A2D1369A1DA00E9000C487C1 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		A2D2713B1EC4D0BA00B24D09 /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
-		A2E34DBB1ED1F1260041E663 /* TokenRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRepository.swift; sourceTree = "<group>"; };
-		A2E34DBE1ED1F6FE0041E663 /* TokenRepositoryMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRepositoryMock.swift; sourceTree = "<group>"; };
-		A2E34DC01ED1FB2F0041E663 /* TokenRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRepositoryTests.swift; sourceTree = "<group>"; };
+		A2E34DBB1ED1F1260041E663 /* TokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
+		A2E34DBE1ED1F6FE0041E663 /* TokenStorageMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorageMock.swift; sourceTree = "<group>"; };
+		A2E34DC01ED1FB2F0041E663 /* TokenStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorageTests.swift; sourceTree = "<group>"; };
 		A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		A2E5C5D81ECCAD4800652262 /* SessionManagerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManagerMock.swift; sourceTree = "<group>"; };
 		A2E5C5DA1ECCAFC800652262 /* SessionManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManagerTests.swift; sourceTree = "<group>"; };
@@ -407,10 +404,9 @@
 				A217DAAB1E9926A500EA1430 /* Session.swift */,
 				A22179D31EBA57AF006B71FD /* SessionConfig.swift */,
 				A27015D81EC1F6D100B9C5C2 /* SessionState.swift */,
-				A27015D51EC1F48E00B9C5C2 /* SessionCallbacks.swift */,
 				A2AF16721ED19AEB00485716 /* Authorizator.swift */,
 				A2AF16751ED19E2300485716 /* Token.swift */,
-				A2E34DBB1ED1F1260041E663 /* TokenRepository.swift */,
+				A2E34DBB1ED1F1260041E663 /* TokenStorage.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -429,7 +425,7 @@
 				A22179C91EBA4059006B71FD /* SessionTests.swift */,
 				A2E5C5DA1ECCAFC800652262 /* SessionManagerTests.swift */,
 				A2AF16781ED1AD2E00485716 /* TokenTests.swift */,
-				A2E34DC01ED1FB2F0041E663 /* TokenRepositoryTests.swift */,
+				A2E34DC01ED1FB2F0041E663 /* TokenStorageTests.swift */,
 			);
 			name = Tests;
 			path = ../Tests;
@@ -449,7 +445,7 @@
 				A2E5C5D81ECCAD4800652262 /* SessionManagerMock.swift */,
 				A2AF167A1ED1CC9B00485716 /* TokenMock.swift */,
 				A2AF167C1ED1CCA900485716 /* AuthorizatorMock.swift */,
-				A2E34DBE1ED1F6FE0041E663 /* TokenRepositoryMock.swift */,
+				A2E34DBE1ED1F6FE0041E663 /* TokenStorageMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -919,7 +915,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A22179CE1EBA52A2006B71FD /* DependencyBoxMock.swift in Sources */,
-				A2E34DC11ED1FB2F0041E663 /* TokenRepositoryTests.swift in Sources */,
+				A2E34DC11ED1FB2F0041E663 /* TokenStorageTests.swift in Sources */,
 				A2AF167D1ED1CCA900485716 /* AuthorizatorMock.swift in Sources */,
 				A22179CA1EBA4059006B71FD /* SessionTests.swift in Sources */,
 				A2E5C5D91ECCAD4800652262 /* SessionManagerMock.swift in Sources */,
@@ -938,7 +934,7 @@
 				A22179C51EBA3BBA006B71FD /* DependencyBoxTests.swift in Sources */,
 				A22179D01EBA530C006B71FD /* SessionMock.swift in Sources */,
 				A2B40DFD1EA693B700106AE3 /* UrlRequestBuilderTests.swift in Sources */,
-				A2E34DBF1ED1F6FE0041E663 /* TokenRepositoryMock.swift in Sources */,
+				A2E34DBF1ED1F6FE0041E663 /* TokenStorageMock.swift in Sources */,
 				A2433A441EA533500058BB6D /* TaskMock.swift in Sources */,
 				A24DDAF01EB73CB6002EA273 /* BodyBuilderMock.swift in Sources */,
 			);
@@ -993,7 +989,7 @@
 				A2E5C5D71ECCAAB600652262 /* String+Extensions.swift in Sources */,
 				A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */,
 				A2CF0D431E98EF0900EAFF30 /* Request.swift in Sources */,
-				A2E34DBD1ED1F1260041E663 /* TokenRepository.swift in Sources */,
+				A2E34DBD1ED1F1260041E663 /* TokenStorage.swift in Sources */,
 				A21E815A1E2A8303008E81E7 /* UrlCharactesSet.swift in Sources */,
 				A2EB6F051BD18395008E7D86 /* Video.swift in Sources */,
 				A2EB6F061BD18395008E7D86 /* Wall.swift in Sources */,
@@ -1011,7 +1007,6 @@
 				A2EB6F0E1BD18395008E7D86 /* UrlRequestBuilder.swift in Sources */,
 				A2B4ECB11DCA4FB7009435B6 /* CapthcaController-iOS.swift in Sources */,
 				A254C0C91E9904CB001A5456 /* Custom.swift in Sources */,
-				A27015D71EC1F48E00B9C5C2 /* SessionCallbacks.swift in Sources */,
 				A24DDAE51EB737C7002EA273 /* QueryBuilder.swift in Sources */,
 				A2EB6F141BD18395008E7D86 /* Log.swift in Sources */,
 				A2EB6F151BD18395008E7D86 /* Reachability.swift in Sources */,
@@ -1069,7 +1064,6 @@
 				A2EB6ED51BD18389008E7D86 /* Upload.swift in Sources */,
 				A2EB6ED61BD18389008E7D86 /* Users.swift in Sources */,
 				A2EB6ED71BD18389008E7D86 /* Utils.swift in Sources */,
-				A27015D61EC1F48E00B9C5C2 /* SessionCallbacks.swift in Sources */,
 				A2EB6ED81BD18389008E7D86 /* Video.swift in Sources */,
 				A20FF11C1BEB7DC8009FBE3D /* LegacyAuthorizator.swift in Sources */,
 				A254C0C81E9904CB001A5456 /* Custom.swift in Sources */,
@@ -1082,7 +1076,7 @@
 				A2EB6EDC1BD18389008E7D86 /* Media.swift in Sources */,
 				A2B4ECAC1DCA4F6B009435B6 /* CapthcaPresenter.swift in Sources */,
 				A2EB6EDD1BD18389008E7D86 /* Resources.swift in Sources */,
-				A2E34DBC1ED1F1260041E663 /* TokenRepository.swift in Sources */,
+				A2E34DBC1ED1F1260041E663 /* TokenStorage.swift in Sources */,
 				A2EB6EDE1BD18389008E7D86 /* Scope.swift in Sources */,
 				A2EB6EDF1BD18389008E7D86 /* LegacyToken.swift in Sources */,
 				A2EB6EE11BD18389008E7D86 /* UrlRequestBuilder.swift in Sources */,

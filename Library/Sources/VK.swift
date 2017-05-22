@@ -1,12 +1,14 @@
 import Foundation
 #if os(iOS)
     import UIKit
+    public typealias Displayer = UIWindow
 #elseif os(OSX)
     import Cocoa
+    public typealias Displayer = NSWindow
 #endif
 
 ///Delegate to the SwiftyVK
-public protocol VKDelegate: class {
+public protocol LegacyVKDelegate: class {
     /**Called when SwiftyVK need autorization permissions
      - returns: permissions as VK.Scope type*/
     func vkWillAuthorize() -> Set<VK.Scope>
@@ -36,24 +38,40 @@ public protocol VKDelegate: class {
 //
 //
 //
+public protocol SwiftyVKDelegate: class {
+    func vkWillPresentView() -> Displayer?
+    func vkWillLogIn(in: Session) -> Scopes
+    func vkLogInDidSuccess(in: Session, with parameters: [String : String])
+    func vkLogInDidFail(in: Session, with error: Error)
+    func vkDidLogOut(in: Session)
+}
 /**
  Library to connect to the social network "VKontakte"
  * To use, you must call configure() specifying the application ID and a delegate
  * For user authentication you must call authorize()
  */
 public struct VK {
-    public static var sessions = DependencyBoxImpl().sessionManager
-    weak static var delegate: VKDelegate?
-    public private(set) static var appID: String?
+    public internal(set) static var sessions: SessionManager = {
+        assert(appId != nil, "You should initialize SwiftyVK first with VK.initializeWith(_:_:)")
+        return DependencyBoxImpl().sessionManager
+    }()
+    
+    weak static var delegate: SwiftyVKDelegate?
+    weak static var legacyDelegate: LegacyVKDelegate?
+    public private(set) static var appId: String?
 
+    public static func initializeWith(appId: String, delegate: SwiftyVKDelegate) {
+        self.appId = appId
+        self.delegate = delegate
+    }
     /**
      Initialize library with identifier and application delegate
      - parameter appID: application ID
      - parameter delegate: Delegate corresponding protocol VKDelegate
      */
-    public static func configure(withAppId id: String, delegate owner: VKDelegate) {
-        delegate = owner
-        appID    = id
+    public static func configure(withAppId id: String, delegate owner: LegacyVKDelegate) {
+        legacyDelegate = owner
+        appId    = id
         _ = LegacyToken.get()
         VK.Log.put("Global", "SwiftyVK configured")
     }
@@ -115,7 +133,7 @@ extension VK {
     }
 
     public static var state: States {
-        guard VK.delegate != nil && VK.appID != nil else {
+        guard VK.legacyDelegate != nil && VK.appId != nil else {
             return .unknown
         }
         guard LegacyToken.exist else {

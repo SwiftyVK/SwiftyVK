@@ -11,7 +11,7 @@ private let appAuthorizeUrl = "vkauthorize://authorize?"
 struct LegacyAuthorizator {
 
     fileprivate static var paramsUrl: String? {
-        guard let appId = VK.appID, let delegate = VK.delegate else {
+        guard let appId = VK.appId, let delegate = VK.legacyDelegate else {
             return nil
         }
         
@@ -66,7 +66,7 @@ struct LegacyAuthorizator {
             let _error = error ?? .deniedFromUser
 
             DispatchQueue.global(qos: .default).async {
-                VK.delegate?.vkAutorizationFailedWith(error: _error)
+                VK.legacyDelegate?.vkAutorizationFailedWith(error: _error)
             }
         }
     }

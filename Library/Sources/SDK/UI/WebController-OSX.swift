@@ -16,7 +16,7 @@
             
             let controller          = WebController()
             controller.delegate     = delegate
-            controller.parentWindow = VK.delegate?.vkWillPresentView()
+            controller.parentWindow = VK.legacyDelegate?.vkWillPresentView()
             
             return DispatchQueue.main.sync {
                 NSNib(nibNamed: webViewName, bundle: Resources.bundle)?.instantiate(withOwner: controller, topLevelObjects: nil)

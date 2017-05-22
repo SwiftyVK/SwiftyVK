@@ -3,12 +3,12 @@ import Foundation
 private var tokenInstance: LegacyToken? {
 willSet {
     if tokenInstance != nil && newValue == nil {
-        VK.delegate?.vkDidUnauthorize()
+        VK.legacyDelegate?.vkDidUnauthorize()
     }
 }
 didSet {
     if oldValue == nil, let tokenInstance = tokenInstance {
-        VK.delegate?.vkDidAuthorizeWith(parameters: tokenInstance.parameters)
+        VK.legacyDelegate?.vkDidAuthorizeWith(parameters: tokenInstance.parameters)
     }
 }
 }
@@ -21,7 +21,7 @@ class LegacyToken: NSObject, NSCoding {
         kSecAttrAccessible: kSecAttrAccessibleWhenUnlocked,
         kSecClass: kSecClassGenericPassword,
         kSecAttrService: "SwiftyVK",
-        kSecAttrAccount: VK.appID ?? ""
+        kSecAttrAccount: VK.appId ?? ""
         ] as NSDictionary
 
     private var token: String

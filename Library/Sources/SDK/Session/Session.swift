@@ -1,16 +1,14 @@
 public protocol Session: class {
+    var id: String { get }
     var config: SessionConfig { get set }
     var state: SessionState { get }
-    func activate(appId: String, callbacks: SessionCallbacks)
     func logIn()
     func logInWith(rawToken: String, expires: TimeInterval)
-    func logOut()
     @discardableResult
     func send(request: Request, callbacks: Callbacks) -> Task
 }
 
 protocol SessionInternalRepr: Session {
-    var id: String { get }
     func die()
 }
 
@@ -27,16 +25,12 @@ public final class SessionImpl: SessionInternalRepr {
             return .dead
         } else if token != nil {
             return .authorized
-        } else if appId != nil {
-            return .activated
         } else {
             return .initiated
         }
     }
     
     public var id: String
-    private var appId: String?
-    private var callbacks: SessionCallbacks = .default
     private var token: Token?
     
     private let taskSheduler: TaskSheduler
@@ -64,18 +58,9 @@ public final class SessionImpl: SessionInternalRepr {
         updateAttemptShedulerPerSecLimit()
     }
     
-    public func activate(appId: String, callbacks: SessionCallbacks) {
-        guard state < .activated else {
-            return
-        }
-        
-        self.appId = appId
-        self.callbacks = callbacks
-    }
-    
     public func logIn() {
-        guard state >= .activated else {
-            callbacks.onLoginFail?(SessionError.sessionIsDead)
+        guard state > .dead else {
+            VK.delegate?.vkLogInDidFail(in: self, with: SessionError.sessionIsDead)
             return
         }
         
@@ -87,25 +72,30 @@ public final class SessionImpl: SessionInternalRepr {
     }
     
     private func logInWithAuthorizator() {
+        guard let scopes = VK.delegate?.vkWillLogIn(in: self) else {
+            VK.delegate?.vkLogInDidFail(in: self, with: SessionError.scopesNotFound)
+            return
+        }
+        
         do {
-            let token = try authorizator.authorizeWith(scopes: callbacks.onNeedLogin())
+            let token = try authorizator.authorizeWith(scopes: scopes)
             tokenStorage.save(token: token, for:  id)
-            callbacks.onLoginSuccess?(token.info)
+            VK.delegate?.vkLogInDidSuccess(in: self, with: token.info)
             self.token = token
         } catch let error {
-            callbacks.onLoginFail?(error)
+            VK.delegate?.vkLogInDidFail(in: self, with: error)
         }
     }
     
     public func logInWith(rawToken: String, expires: TimeInterval) {
-        guard state >= .activated else {
-            callbacks.onLoginFail?(SessionError.sessionIsDead)
+        guard state > .dead else {
+            VK.delegate?.vkLogInDidFail(in: self, with: SessionError.sessionIsDead)
             return
         }
         
         let token = authorizator.authorizeWith(rawToken: rawToken, expires: expires)
         tokenStorage.save(token: token, for: id)
-        callbacks.onLoginSuccess?(token.info)
+        VK.delegate?.vkLogInDidSuccess(in: self, with: token.info)
         self.token = token
     }
     
@@ -116,6 +106,7 @@ public final class SessionImpl: SessionInternalRepr {
 
         tokenStorage.removeFor(sessionId: id)
         self.token = nil
+        VK.delegate?.vkDidLogOut(in: self)
     }
     
     @discardableResult

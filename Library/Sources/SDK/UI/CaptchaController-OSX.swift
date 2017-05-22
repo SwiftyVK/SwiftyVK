@@ -18,7 +18,7 @@
             }
             
             let controller = CaptchaController()
-            controller.parentWindow = VK.delegate?.vkWillPresentView()
+            controller.parentWindow = VK.legacyDelegate?.vkWillPresentView()
             controller.image = image
             controller.delegate = delegate
             

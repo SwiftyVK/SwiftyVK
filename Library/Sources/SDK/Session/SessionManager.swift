@@ -1,6 +1,7 @@
 import Foundation
 
 public protocol SessionManager: class {
+    func all() -> [Session]
     var `default`: Session { get }
     func new(config: SessionConfig) -> Session
     func kill(session: Session) throws
@@ -49,11 +50,17 @@ public final class SessionManagerImpl: SessionManager {
         self.default = session
     }
     
+    public func all() -> [Session] {
+        return sessions.allObjects
+            .flatMap { $0 as? Session }
+            .filter { $0.state > .dead }
+    }
+    
     deinit {
         canKillDefaultSessions = true
-        
-        for session in (sessions.allObjects as? [Session] ?? []) {
-            try? kill(session: session)
-        }
+        sessions.allObjects
+            .flatMap { $0 as? Session }
+            .filter { $0.state > .dead }
+            .forEach { try? kill(session: $0) }
     }
 }

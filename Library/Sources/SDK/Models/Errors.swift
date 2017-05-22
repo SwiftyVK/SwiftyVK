@@ -6,6 +6,7 @@ public enum SessionError: Int, CustomNSError, CustomStringConvertible {
     case failedValidation           = 3
     case failedAuthorization        = 4
     case notConfigured              = 5
+    case scopesNotFound             = 6
     case cantKillDefaultSession     = 7
     case sessionIsDead              = 8
 
