@@ -138,7 +138,17 @@ final class SessionTests: BaseTestCase {
         XCTAssertEqual(authorizator.authorizeWithRawTokenCallCount, 1)
     }
     
-    func test_logInWithRawToken_inactivateSession() {
+    func test_logInWithInactiveSession() {
+        // Given
+        let (session, _, _, authorizator, _) = sessionObjects
+        // When
+        session.logIn()
+        // Then
+        XCTAssertEqual(session.state, .initiated)
+        XCTAssertEqual(authorizator.authorizeCallCount, 0)
+    }
+    
+    func test_logInWithRawToken_withInactiveSession() {
         // Given
         let (session, _, _, authorizator, _) = sessionObjects
         // When
@@ -175,7 +185,7 @@ final class SessionTests: BaseTestCase {
         let (session, _, _, _, _) = sessionObjects
         let request = Request(of: .url(""))
         // When
-        session.state = .dead
+        session.id = ""
 
         session.send(
             request: request,

@@ -11,7 +11,7 @@ public protocol Session: class {
 
 protocol SessionInternalRepr: Session {
     var id: String { get }
-    var state: SessionState { get set }
+    func die()
 }
 
 public final class SessionImpl: SessionInternalRepr {
@@ -22,9 +22,19 @@ public final class SessionImpl: SessionInternalRepr {
         }
     }
     
-    public var state: SessionState
+    public var state: SessionState {
+        if id.isEmpty {
+            return .dead
+        } else if token != nil {
+            return .authorized
+        } else if appId != nil {
+            return .activated
+        } else {
+            return .initiated
+        }
+    }
     
-    public let id: String
+    public var id: String
     private var appId: String?
     private var callbacks: SessionCallbacks = .default
     private var token: Token?
@@ -44,7 +54,6 @@ public final class SessionImpl: SessionInternalRepr {
         taskMaker: TaskMaker
         ) {
         self.id = String.random(20)
-        self.state = .initiated
         self.config = config
         self.taskSheduler = taskSheduler
         self.attemptSheduler = attemptSheduler
@@ -60,7 +69,6 @@ public final class SessionImpl: SessionInternalRepr {
             return
         }
         
-        self.state = .activated
         self.appId = appId
         self.callbacks = callbacks
     }
@@ -72,7 +80,6 @@ public final class SessionImpl: SessionInternalRepr {
         }
         
         if let token = tokenStorage.getFor(sessionId: id) {
-            self.state = .authorized
             self.token = token
         } else {
             logInWithAuthorizator()
@@ -84,7 +91,6 @@ public final class SessionImpl: SessionInternalRepr {
             let token = try authorizator.authorizeWith(scopes: callbacks.onNeedLogin())
             tokenStorage.save(token: token, for:  id)
             callbacks.onLoginSuccess?(token.info)
-            self.state = .authorized
             self.token = token
         } catch let error {
             callbacks.onLoginFail?(error)
@@ -100,7 +106,6 @@ public final class SessionImpl: SessionInternalRepr {
         let token = authorizator.authorizeWith(rawToken: rawToken, expires: expires)
         tokenStorage.save(token: token, for: id)
         callbacks.onLoginSuccess?(token.info)
-        self.state = .authorized
         self.token = token
     }
     
@@ -109,7 +114,6 @@ public final class SessionImpl: SessionInternalRepr {
             return
         }
 
-        state = .activated
         tokenStorage.removeFor(sessionId: id)
         self.token = nil
     }
@@ -139,6 +143,10 @@ public final class SessionImpl: SessionInternalRepr {
     
     func shedule(attempt: Attempt, concurrent: Bool) throws {
         try attemptSheduler.shedule(attempt: attempt, concurrent: concurrent)
+    }
+    
+    func die() {
+        id = ""
     }
     
     private func updateAttemptShedulerPerSecLimit() {

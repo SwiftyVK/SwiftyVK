@@ -41,7 +41,7 @@ public final class SessionManagerImpl: SessionManager {
             throw SessionError.cantKillDefaultSession
         }
         
-        (session as? SessionInternalRepr)?.state = .dead
+        (session as? SessionInternalRepr)?.die()
         sessions.remove(session)
     }
     

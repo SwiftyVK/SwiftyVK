@@ -17,4 +17,8 @@ final class SessionMock: SessionInternalRepr {
     public func send(request: SwiftyVK.Request, callbacks: SwiftyVK.Callbacks) -> Task {
         return TaskMock()
     }
+    
+    func die() {
+        state = .dead
+    }
 }
