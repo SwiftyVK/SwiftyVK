@@ -6,15 +6,13 @@ final class SessionMock: SessionInternalRepr {
     var state = SessionState.initiated
     var isDefault = false
     
-    func activate(appId: String, callbacks: SessionCallbacks) {}
-    
     func logIn() {}
     
     func logInWith(rawToken: String, expires: TimeInterval) {}
     
     func logOut() {}
     
-    public func send(request: SwiftyVK.Request, callbacks: SwiftyVK.Callbacks) -> Task {
+    public func send(request: Request, callbacks: Callbacks) -> Task {
         return TaskMock()
     }
     

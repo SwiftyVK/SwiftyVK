@@ -13,7 +13,7 @@ protocol SessionInternalRepr: Session {
 }
 
 public final class SessionImpl: SessionInternalRepr {
-    
+
     public var config: SessionConfig {
         didSet {
             updateAttemptShedulerPerSecLimit()

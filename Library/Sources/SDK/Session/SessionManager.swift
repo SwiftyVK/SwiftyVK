@@ -1,8 +1,8 @@
 import Foundation
 
 public protocol SessionManager: class {
-    func all() -> [Session]
     var `default`: Session { get }
+    func all() -> [Session]
     func new(config: SessionConfig) -> Session
     func kill(session: Session) throws
     func makeDefault(session: Session)

@@ -40,10 +40,10 @@ public protocol LegacyVKDelegate: class {
 //
 public protocol SwiftyVKDelegate: class {
     func vkWillPresentView() -> Displayer?
-    func vkWillLogIn(in: Session) -> Scopes
-    func vkLogInDidSuccess(in: Session, with parameters: [String : String])
-    func vkLogInDidFail(in: Session, with error: Error)
-    func vkDidLogOut(in: Session)
+    func vkWillLogIn(in session: Session) -> Scopes
+    func vkLogInDidSuccess(in session: Session, with parameters: [String : String])
+    func vkLogInDidFail(in session: Session, with error: Error)
+    func vkDidLogOut(in session: Session)
 }
 /**
  Library to connect to the social network "VKontakte"
@@ -56,7 +56,7 @@ public struct VK {
         return DependencyBoxImpl().sessionManager
     }()
     
-    weak static var delegate: SwiftyVKDelegate?
+    static var delegate: SwiftyVKDelegate?
     weak static var legacyDelegate: LegacyVKDelegate?
     public private(set) static var appId: String?
 
