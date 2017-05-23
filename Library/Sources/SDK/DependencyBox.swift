@@ -15,14 +15,14 @@ protocol TokenMaker {
 }
 
 protocol DependencyBox: SessionMaker, TaskMaker, AttemptMaker, TokenMaker {
-    var sessionManager: SessionManager { get }
+    var sessionStorage: SessionStorage { get }
     func session() -> Session
 }
 
 final class DependencyBoxImpl: DependencyBox {
     
-    lazy public var sessionManager: SessionManager = {
-        return SessionManagerImpl(sessionMaker: self)
+    lazy public var sessionStorage: SessionStorage = {
+        return SessionStorageImpl(sessionMaker: self)
     }()
     
     func session() -> Session {

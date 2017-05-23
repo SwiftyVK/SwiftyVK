@@ -1,21 +1,21 @@
 import Foundation
 
-public protocol SessionManager: class {
+public protocol SessionStorage: class {
     var `default`: Session { get }
     var all: [Session] { get }
     func new(with config: SessionConfig) -> Session
     func kill(session: Session) throws
-    func makeDefault(session: Session)
+    func makeDefault(session: Session) throws
 }
 
-extension SessionManager {
+extension SessionStorage {
     
     func new() -> Session {
         return new(with: .default)
     }
 }
 
-public final class SessionManagerImpl: SessionManager {
+public final class SessionStorageImpl: SessionStorage {
 
     private let sessionMaker: SessionMaker
     private var sessions = NSHashTable<AnyObject>(options: .strongMemory)
@@ -56,7 +56,11 @@ public final class SessionManagerImpl: SessionManager {
         sessions.remove(session)
     }
     
-    public func makeDefault(session: Session) {
+    public func makeDefault(session: Session) throws {
+        if session.state == .dead {
+            throw SessionError.sessionIsDead
+        }
+        
         self.default = session
     }
     

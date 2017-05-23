@@ -7,8 +7,8 @@ final class DependencyBoxTests: BaseTestCase {
         return DependencyBoxImpl()
     }
 
-    func test_SessionManagerType() {
-        XCTAssertTrue(box.sessionManager is SessionManagerImpl)
+    func test_SessionStorageType() {
+        XCTAssertTrue(box.sessionStorage is SessionStorageImpl)
     }
     
     func test_SessionImplType() {

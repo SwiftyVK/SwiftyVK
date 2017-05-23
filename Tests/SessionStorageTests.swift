@@ -1,10 +1,10 @@
 import XCTest
 @testable import SwiftyVK
 
-final class SessionManagerTests: BaseTestCase {
+final class SessionStorageTests: BaseTestCase {
     
-    var manager: SessionManagerImpl {
-        return SessionManagerImpl(dependencyBox: dependencyBoxMock)
+    var manager: SessionStorageImpl {
+        return SessionStorageImpl(dependencyBox: dependencyBoxMock)
     }
     
     func test_makeNewSession() {

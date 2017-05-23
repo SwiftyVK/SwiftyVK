@@ -2,8 +2,8 @@
 
 final class DependencyBoxMock: DependencyBox {
     
-    var sessionManager: SessionManager {
-        return SessionManagerMock()
+    var sessionStorage: SessionStorage {
+        return SessionStorageMock()
     }
     
     lazy var defaultSession: Session = {

@@ -49,9 +49,9 @@ public protocol SwiftyVKDelegate: class {
  * For user authentication you must call authorize()
  */
 public struct VK {
-    public internal(set) static var sessions: SessionManager = {
+    public internal(set) static var sessions: SessionStorage = {
         assert(appId != nil, "You should initialize SwiftyVK first with VK.initializeWith(_:_:)")
-        return DependencyBoxImpl().sessionManager
+        return DependencyBoxImpl().sessionStorage
     }()
     
     static var delegate: SwiftyVKDelegate?

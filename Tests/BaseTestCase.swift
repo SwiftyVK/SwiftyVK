@@ -8,7 +8,7 @@ class BaseTestCase: XCTestCase {
     
     override func setUp() {
         VK.initializeWith(appId: "", delegate: swiftyVkDelegateMock)
-        VK.sessions = dependencyBoxMock.sessionManager
+        VK.sessions = dependencyBoxMock.sessionStorage
         super.setUp()
     }
 }

@@ -1,6 +1,6 @@
 @testable import SwiftyVK
 
-final class SessionManagerMock: SessionManager {
+final class SessionStorageMock: SessionStorage {
     
     let `default`: Session = SessionMock()
     
