@@ -17,7 +17,7 @@ extension SessionManager {
 
 public final class SessionManagerImpl: SessionManager {
 
-    private let dependencyBox: DependencyBox
+    private let sessionMaker: SessionMaker
     private var sessions = NSHashTable<AnyObject>(options: .strongMemory)
     private var canKillDefaultSessions = false
     
@@ -31,12 +31,12 @@ public final class SessionManagerImpl: SessionManager {
             .filter { $0.state > .dead }
     }
     
-    init(dependencyBox: DependencyBox) {
-        self.dependencyBox = dependencyBox
+    init(sessionMaker: SessionMaker) {
+        self.sessionMaker = sessionMaker
     }
     
     public func new(with config: SessionConfig) -> Session {
-        let session = dependencyBox.session()
+        let session = sessionMaker.session()
         session.config = config
 
         sessions.add(session)

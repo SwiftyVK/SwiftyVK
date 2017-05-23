@@ -2,8 +2,8 @@ public protocol Session: class {
     var id: String { get }
     var config: SessionConfig { get set }
     var state: SessionState { get }
-    func logIn()
-    func logInWith(rawToken: String, expires: TimeInterval)
+    func logIn() throws -> [String : String]
+    func logInWith(rawToken: String, expires: TimeInterval) throws
     @discardableResult
     func send(request: Request, callbacks: Callbacks) -> Task
 }
@@ -16,7 +16,7 @@ public final class SessionImpl: SessionInternalRepr {
 
     public var config: SessionConfig {
         didSet {
-            updateAttemptShedulerPerSecLimit()
+            updateShedulerLimit()
         }
     }
     
@@ -32,11 +32,10 @@ public final class SessionImpl: SessionInternalRepr {
     
     public var id: String
     private var token: Token?
-    
+
     private let taskSheduler: TaskSheduler
     private let attemptSheduler: AttemptSheduler
     private let authorizator: Authorizator
-    private let tokenStorage: TokenStorage
     private let taskMaker: TaskMaker
     
     init(
@@ -44,7 +43,6 @@ public final class SessionImpl: SessionInternalRepr {
         taskSheduler: TaskSheduler,
         attemptSheduler: AttemptSheduler,
         authorizator: Authorizator,
-        tokenStorage: TokenStorage,
         taskMaker: TaskMaker
         ) {
         self.id = String.random(20)
@@ -52,74 +50,32 @@ public final class SessionImpl: SessionInternalRepr {
         self.taskSheduler = taskSheduler
         self.attemptSheduler = attemptSheduler
         self.authorizator = authorizator
-        self.tokenStorage = tokenStorage
         self.taskMaker = taskMaker
         
-        updateAttemptShedulerPerSecLimit()
+        updateShedulerLimit()
     }
     
-    public func logIn() {
-        guard state > .dead else {
-            VK.delegate?.vkLogInDidFail(in: self, with: SessionError.sessionIsDead)
-            return
-        }
-        
-        if let token = tokenStorage.getFor(sessionId: id) {
-            self.token = token
-        } else {
-            logInWithAuthorizator()
-        }
+    public func logIn() throws -> [String : String] {
+        try throwIfDead()
+        token = try authorizator.authorize(session: self)
+        return token?.info ?? [:]
     }
     
-    private func logInWithAuthorizator() {
-        guard let scopes = VK.delegate?.vkWillLogIn(in: self) else {
-            VK.delegate?.vkLogInDidFail(in: self, with: SessionError.scopesNotFound)
-            return
-        }
-        
-        do {
-            let token = try authorizator.authorizeWith(scopes: scopes)
-            tokenStorage.save(token: token, for:  id)
-            VK.delegate?.vkLogInDidSuccess(in: self, with: token.info)
-            self.token = token
-        } catch let error {
-            VK.delegate?.vkLogInDidFail(in: self, with: error)
-        }
-    }
-    
-    public func logInWith(rawToken: String, expires: TimeInterval) {
-        guard state > .dead else {
-            VK.delegate?.vkLogInDidFail(in: self, with: SessionError.sessionIsDead)
-            return
-        }
-        
-        let token = authorizator.authorizeWith(rawToken: rawToken, expires: expires)
-        tokenStorage.save(token: token, for: id)
-        VK.delegate?.vkLogInDidSuccess(in: self, with: token.info)
-        self.token = token
+    public func logInWith(rawToken: String, expires: TimeInterval) throws {
+        try throwIfDead()
+        token = authorizator.authorize(session: self, rawToken: rawToken, expires: expires)
     }
     
     public func logOut() {
-        guard state >= .authorized else {
-            return
-        }
-
-        tokenStorage.removeFor(sessionId: id)
-        self.token = nil
-        VK.delegate?.vkDidLogOut(in: self)
+        token = authorizator.reset(session: self)
     }
     
     @discardableResult
     public func send(request: Request, callbacks: Callbacks) -> Task {
-        
         let task = taskMaker.task(request: request, callbacks: callbacks, attemptSheduler: attemptSheduler)
         
-        guard state > .dead else {
-            callbacks.onError?(SessionError.sessionIsDead)
-            return task
-        }
-        
         do {
+            try throwIfDead()
             try shedule(task: task, concurrent: request.rawRequest.canSentConcurrently)
         } catch let error {
             callbacks.onError?(error)
@@ -140,7 +96,13 @@ public final class SessionImpl: SessionInternalRepr {
         id = ""
     }
     
-    private func updateAttemptShedulerPerSecLimit() {
+    private func throwIfDead() throws {
+        guard state > .dead else {
+            throw SessionError.sessionIsDead
+        }
+    }
+    
+    private func updateShedulerLimit() {
         attemptSheduler.setLimit(to: config.attemptsPerSecLimit)
         
         config.onAttemptsPerSecLimitChange = { [weak attemptSheduler] newLimit in

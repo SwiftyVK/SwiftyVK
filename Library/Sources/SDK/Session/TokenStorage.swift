@@ -1,14 +1,14 @@
 import Foundation
 
 protocol TokenStorage: class {
-    func save(token: Token, for sessionId: String)
+    func save(token: Token, for sessionId: String) throws
     func getFor(sessionId: String) -> Token?
     func removeFor(sessionId: String)
 }
 
 class TokenStorageImpl: TokenStorage {
     
-    func save(token: Token, for sessionId: String) {
+    func save(token: Token, for sessionId: String) throws {
         let keychainQuery = keychainParamsFor(sessionId: sessionId)
         
         keychainQuery.setObject(
@@ -16,11 +16,11 @@ class TokenStorageImpl: TokenStorage {
         )
         
         removeFor(sessionId: sessionId)
-
+        
         let keychainCode = SecItemAdd(keychainQuery, nil)
         
         guard keychainCode == .allZeros else {
-            return
+            throw SessionError.tokenNotSavedInStorage
         }
     }
     
@@ -32,12 +32,16 @@ class TokenStorageImpl: TokenStorage {
         
         var keychainResult: AnyObject?
         
-        guard
-            SecItemCopyMatching(keychainQuery, &keychainResult) == .allZeros,
-            let data = keychainResult as? Data,
-            let token = NSKeyedUnarchiver.unarchiveObject(with: data) as? Token
-            else {
-                return nil
+        guard SecItemCopyMatching(keychainQuery, &keychainResult) == .allZeros else {
+            return nil
+        }
+        
+        guard let data = keychainResult as? Data else {
+            return nil
+        }
+        
+        guard let token = NSKeyedUnarchiver.unarchiveObject(with: data) as? Token else {
+            return nil
         }
         
         return token

@@ -41,8 +41,6 @@ public protocol LegacyVKDelegate: class {
 public protocol SwiftyVKDelegate: class {
     func vkWillPresentView() -> Displayer?
     func vkWillLogIn(in session: Session) -> Scopes
-    func vkLogInDidSuccess(in session: Session, with parameters: [String : String])
-    func vkLogInDidFail(in session: Session, with error: Error)
     func vkDidLogOut(in session: Session)
 }
 /**
