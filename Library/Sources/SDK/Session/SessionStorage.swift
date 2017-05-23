@@ -3,15 +3,15 @@ import Foundation
 public protocol SessionStorage: class {
     var `default`: Session { get }
     var all: [Session] { get }
-    func new(with config: SessionConfig) -> Session
-    func kill(session: Session) throws
-    func makeDefault(session: Session) throws
+    func make(with config: SessionConfig) -> Session
+    func destroy(session: Session) throws
+    func markAsDefault(session: Session) throws
 }
 
 extension SessionStorage {
     
-    func new() -> Session {
-        return new(with: .default)
+    func make() -> Session {
+        return make(with: .default)
     }
 }
 
@@ -22,20 +22,20 @@ public final class SessionStorageImpl: SessionStorage {
     private var canKillDefaultSessions = false
     
     lazy public var `default`: Session = {
-        return self.new()
+        return self.make()
     }()
     
     public var all: [Session] {
         return sessions.allObjects
             .flatMap { $0 as? Session }
-            .filter { $0.state > .dead }
+            .filter { $0.state > .destroyed }
     }
     
     init(sessionMaker: SessionMaker) {
         self.sessionMaker = sessionMaker
     }
     
-    public func new(with config: SessionConfig) -> Session {
+    public func make(with config: SessionConfig) -> Session {
         let session = sessionMaker.session()
         session.config = config
 
@@ -43,22 +43,22 @@ public final class SessionStorageImpl: SessionStorage {
         return session
     }
     
-    public func kill(session: Session) throws {
+    public func destroy(session: Session) throws {
         if !canKillDefaultSessions && session === `default` {
-            throw SessionError.cantKillDefaultSession
+            throw SessionError.cantDestroyDefaultSession
         }
         
-        if session.state == .dead {
-            throw SessionError.sessionIsDead
+        if session.state == .destroyed {
+            throw SessionError.sessionDestroyed
         }
         
         (session as? SessionInternalRepr)?.die()
         sessions.remove(session)
     }
     
-    public func makeDefault(session: Session) throws {
-        if session.state == .dead {
-            throw SessionError.sessionIsDead
+    public func markAsDefault(session: Session) throws {
+        if session.state == .destroyed {
+            throw SessionError.sessionDestroyed
         }
         
         self.default = session
@@ -68,7 +68,7 @@ public final class SessionStorageImpl: SessionStorage {
         canKillDefaultSessions = true
         sessions.allObjects
             .flatMap { $0 as? Session }
-            .filter { $0.state > .dead }
-            .forEach { try? kill(session: $0) }
+            .filter { $0.state > .destroyed }
+            .forEach { try? destroy(session: $0) }
     }
 }

@@ -1,5 +1,5 @@
 public enum SessionState: Int, Comparable {
-    case dead = -1
+    case destroyed = -1
     case initiated = 0
     case authorized = 1
     

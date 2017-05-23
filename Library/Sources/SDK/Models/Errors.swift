@@ -7,8 +7,8 @@ public enum SessionError: Int, CustomNSError, CustomStringConvertible {
     case failedAuthorization        = 4
     case notConfigured              = 5
     case delegateNotFound           = 6
-    case cantKillDefaultSession     = 7
-    case sessionIsDead              = 8
+    case cantDestroyDefaultSession  = 7
+    case sessionDestroyed           = 8
     case tokenNotSavedInStorage     = 9
 
     public static let errorDomain = "SwiftyVKSessionError"

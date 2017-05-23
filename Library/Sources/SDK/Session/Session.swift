@@ -22,7 +22,7 @@ public final class SessionImpl: SessionInternalRepr {
     
     public var state: SessionState {
         if id.isEmpty {
-            return .dead
+            return .destroyed
         } else if token != nil {
             return .authorized
         } else {
@@ -56,13 +56,13 @@ public final class SessionImpl: SessionInternalRepr {
     }
     
     public func logIn() throws -> [String : String] {
-        try throwIfDead()
+        try throwIfDestroyed()
         token = try authorizator.authorize(session: self)
         return token?.info ?? [:]
     }
     
     public func logInWith(rawToken: String, expires: TimeInterval) throws {
-        try throwIfDead()
+        try throwIfDestroyed()
         token = authorizator.authorize(session: self, rawToken: rawToken, expires: expires)
     }
     
@@ -75,7 +75,7 @@ public final class SessionImpl: SessionInternalRepr {
         let task = taskMaker.task(request: request, callbacks: callbacks, attemptSheduler: attemptSheduler)
         
         do {
-            try throwIfDead()
+            try throwIfDestroyed()
             try shedule(task: task, concurrent: request.rawRequest.canSentConcurrently)
         } catch let error {
             callbacks.onError?(error)
@@ -96,9 +96,9 @@ public final class SessionImpl: SessionInternalRepr {
         id = ""
     }
     
-    private func throwIfDead() throws {
-        guard state > .dead else {
-            throw SessionError.sessionIsDead
+    private func throwIfDestroyed() throws {
+        guard state > .destroyed else {
+            throw SessionError.sessionDestroyed
         }
     }
     
