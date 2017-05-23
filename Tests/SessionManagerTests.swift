@@ -41,7 +41,7 @@ final class SessionManagerTests: BaseTestCase {
         XCTAssertEqual(newSession.state, .dead)
     }
     
-    func test_attemptToKillDefaultSession() {
+    func test_killDefaultSession_shouldBeFail() {
         // Given
         let manager = self.manager
         // When
@@ -50,7 +50,32 @@ final class SessionManagerTests: BaseTestCase {
         } catch let error {
             // Then
             XCTAssertEqual(error as? SessionError, .cantKillDefaultSession)
-
+            
         }
     }
+    
+    func test_killDeadSession_shouldBeFail() {
+        // Given
+        let manager = self.manager
+        let session = manager.new()
+        // When
+        do {
+            try manager.kill(session: session)
+        } catch let error {
+            // Then
+            XCTAssertEqual(error as? SessionError, .sessionIsDead)
+            
+        }
+    }
+    
+    func test_getAllSessions() {
+        // Given
+        let manager = self.manager
+        // When
+        let sessions = [manager.new(), manager.new(), manager.new(), manager.new()]
+        // Then
+        XCTAssertEqual(manager.all.count, sessions.count)
+    }
+    
+    
 }

@@ -4,11 +4,11 @@ final class SessionManagerMock: SessionManager {
     
     let `default`: Session = SessionMock()
     
-    func all() -> [Session] {
+    var all: [Session] {
         return [`default`]
     }
     
-    func new(config: SessionConfig) -> Session {
+    func new(with config: SessionConfig) -> Session {
         return `default`
     }
     

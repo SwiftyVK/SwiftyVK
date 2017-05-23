@@ -2,8 +2,8 @@ import Foundation
 
 public protocol SessionManager: class {
     var `default`: Session { get }
-    func all() -> [Session]
-    func new(config: SessionConfig) -> Session
+    var all: [Session] { get }
+    func new(with config: SessionConfig) -> Session
     func kill(session: Session) throws
     func makeDefault(session: Session)
 }
@@ -11,7 +11,7 @@ public protocol SessionManager: class {
 extension SessionManager {
     
     func new() -> Session {
-        return new(config: .default)
+        return new(with: .default)
     }
 }
 
@@ -25,11 +25,17 @@ public final class SessionManagerImpl: SessionManager {
         return self.new()
     }()
     
+    public var all: [Session] {
+        return sessions.allObjects
+            .flatMap { $0 as? Session }
+            .filter { $0.state > .dead }
+    }
+    
     init(dependencyBox: DependencyBox) {
         self.dependencyBox = dependencyBox
     }
     
-    public func new(config: SessionConfig) -> Session {
+    public func new(with config: SessionConfig) -> Session {
         let session = dependencyBox.session()
         session.config = config
 
@@ -42,18 +48,16 @@ public final class SessionManagerImpl: SessionManager {
             throw SessionError.cantKillDefaultSession
         }
         
+        if session.state == .dead {
+            throw SessionError.sessionIsDead
+        }
+        
         (session as? SessionInternalRepr)?.die()
         sessions.remove(session)
     }
     
     public func makeDefault(session: Session) {
         self.default = session
-    }
-    
-    public func all() -> [Session] {
-        return sessions.allObjects
-            .flatMap { $0 as? Session }
-            .filter { $0.state > .dead }
     }
     
     deinit {
