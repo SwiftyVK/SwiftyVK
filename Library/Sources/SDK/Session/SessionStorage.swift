@@ -26,9 +26,7 @@ public final class SessionStorageImpl: SessionStorage {
     }()
     
     public var all: [Session] {
-        return sessions.allObjects
-            .flatMap { $0 as? Session }
-            .filter { $0.state > .destroyed }
+        return sessions.allObjects.flatMap { $0 as? Session }
     }
     
     init(sessionMaker: SessionMaker) {
@@ -44,7 +42,7 @@ public final class SessionStorageImpl: SessionStorage {
     }
     
     public func destroy(session: Session) throws {
-        if !canKillDefaultSessions && session === `default` {
+        if !canKillDefaultSessions && session == `default` {
             throw SessionError.cantDestroyDefaultSession
         }
         
@@ -52,7 +50,7 @@ public final class SessionStorageImpl: SessionStorage {
             throw SessionError.sessionDestroyed
         }
         
-        (session as? SessionInternalRepr)?.die()
+        (session as? SessionInternalRepr)?.destroy()
         sessions.remove(session)
     }
     
@@ -66,9 +64,6 @@ public final class SessionStorageImpl: SessionStorage {
     
     deinit {
         canKillDefaultSessions = true
-        sessions.allObjects
-            .flatMap { $0 as? Session }
-            .filter { $0.state > .destroyed }
-            .forEach { try? destroy(session: $0) }
+        sessions.allObjects.flatMap { $0 as? Session } .forEach { try? destroy(session: $0) }
     }
 }

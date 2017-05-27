@@ -23,7 +23,7 @@ final class SessionStorageTests: BaseTestCase {
         XCTAssertTrue(storage.default === newSession)
     }
     
-    func test_killSession() {
+    func test_destroySession() {
         // Given
         let newSession = storage.make()
         // When
@@ -32,7 +32,7 @@ final class SessionStorageTests: BaseTestCase {
         XCTAssertEqual(newSession.state, .destroyed)
     }
     
-    func test_autoKillAllSessions() {
+    func test_autoDestroyAllSessions() {
         // Given
         let defaultSession = storage.default
         let newSession = storage.make()
@@ -41,7 +41,7 @@ final class SessionStorageTests: BaseTestCase {
         XCTAssertEqual(newSession.state, .destroyed)
     }
     
-    func test_killDefaultSession_shouldBeFail() {
+    func test_destroyDefaultSession_shouldBeFail() {
         // Given
         let storage = self.storage
         // When
@@ -54,7 +54,7 @@ final class SessionStorageTests: BaseTestCase {
         }
     }
     
-    func test_killDeadSession_shouldBeFail() {
+    func test_destroyDeadSession_shouldBeFail() {
         // Given
         let storage = self.storage
         let session = storage.make()

@@ -10,7 +10,7 @@ public protocol Session: class {
 }
 
 protocol SessionInternalRepr: Session {
-    func die()
+    func destroy()
 }
 
 public final class SessionImpl: SessionInternalRepr {
@@ -94,7 +94,7 @@ public final class SessionImpl: SessionInternalRepr {
         try attemptSheduler.shedule(attempt: attempt, concurrent: concurrent)
     }
     
-    func die() {
+    func destroy() {
         id = ""
     }
     
@@ -111,4 +111,8 @@ public final class SessionImpl: SessionInternalRepr {
             attemptSheduler?.setLimit(to: newLimit)
         }
     }
+}
+
+public func ==(lhs: Session, rhs: Session) -> Bool {
+    return lhs.id == rhs.id
 }

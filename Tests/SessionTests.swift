@@ -101,7 +101,7 @@ final class SessionTests: BaseTestCase {
         // Given
         let (session, _, _, _) = sessionObjects
         // When
-        session.die()
+        session.destroy()
         
         do {
             try session.logIn()
@@ -117,7 +117,7 @@ final class SessionTests: BaseTestCase {
         // Given
         let (session, _, _, _) = sessionObjects
         // When
-        session.die()
+        session.destroy()
         
         do {
             try session.logIn()
@@ -202,11 +202,11 @@ final class SessionTests: BaseTestCase {
         )
     }
     
-    func test_sessionDie() {
+    func test_destroy() {
         // Given
         let (session, _, _, _) = sessionObjects
         // When
-        session.die()
+        session.destroy()
         // Then
         XCTAssertEqual(session.state, .destroyed)
     }

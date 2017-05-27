@@ -20,7 +20,7 @@ final class SessionMock: SessionInternalRepr {
         return TaskMock()
     }
     
-    func die() {
+    func destroy() {
         state = .destroyed
     }
 }
