@@ -3,26 +3,24 @@ import XCTest
 
 final class SessionTests: BaseTestCase {
     
-    var sessionObjects: (SessionImpl, TaskShedulerMock, AttemptShedulerMock, AuthorizatorMock, TokenStorageMock) {
+    var sessionObjects: (SessionImpl, TaskShedulerMock, AttemptShedulerMock, AuthorizatorMock) {
         let taskSheduler = TaskShedulerMock()
         let attemptSheduler = AttemptShedulerMock()
         let authorizator = AuthorizatorMock()
-        let tokenStorage = TokenStorageMock()
         
         let session = SessionImpl(
             taskSheduler: taskSheduler,
             attemptSheduler: attemptSheduler,
             authorizator: authorizator,
-            tokenStorage: tokenStorage,
             taskMaker: dependencyBoxMock
         )
         
-        return (session, taskSheduler, attemptSheduler, authorizator, tokenStorage)
+        return (session, taskSheduler, attemptSheduler, authorizator)
     }
     
     func test_sheduleTask() {
         // Given
-        let (session, taskSheduler, _, _, _) = sessionObjects
+        let (session, taskSheduler, _, _) = sessionObjects
         let task = TaskMock()
         // Then
         try? session.shedule(task: task, concurrent: true)
@@ -32,7 +30,7 @@ final class SessionTests: BaseTestCase {
     
     func test_sheduleAttempt() {
         // Given
-        let (session, _, attemptSheduler, _, _) = sessionObjects
+        let (session, _, attemptSheduler, _) = sessionObjects
         let attempt = AttemptMock()
         // Then
         try! session.shedule(attempt: attempt, concurrent: true)
@@ -42,7 +40,7 @@ final class SessionTests: BaseTestCase {
     
     func test_send() {
         // Given
-        let (session, taskSheduler, _, _, _) = sessionObjects
+        let (session, taskSheduler, _, _) = sessionObjects
         let request = Request(of: .url(""))
         // Then
         _ = session.send(request: request, callbacks: .empty)
@@ -52,7 +50,7 @@ final class SessionTests: BaseTestCase {
     
     func test_updateTaskShedulerLimit() {
         // Given
-        let (session, _, attemptSheduler, _, _) = sessionObjects
+        let (session, _, attemptSheduler, _) = sessionObjects
         // When
         session.config.attemptsPerSecLimit = .limited(1)
         // Then
@@ -61,7 +59,7 @@ final class SessionTests: BaseTestCase {
     
     func test_updateConfig() {
         // Given
-        let (session, _, attemptSheduler, _, _) = sessionObjects
+        let (session, _, attemptSheduler, _) = sessionObjects
         // When
         session.config = SessionConfig(attemptsPerSecLimit: .limited(1))
         // Then
@@ -70,110 +68,77 @@ final class SessionTests: BaseTestCase {
     
     func test_logIn_shouldBeSuccess() {
         // Given
-        let (session, _, _, authorizator, repository) = sessionObjects
-        let exp = expectation(description: "")
+        let (session, _, _, authorizator) = sessionObjects
         // When
-        swiftyVkDelegateMock.onVkLogInDidSuccess = { (givenGession, _) in
-            XCTAssertEqual(givenGession.id, session.id)
-            exp.fulfill()
+        do {
+            try session.logIn()
+        } catch let error {
+            XCTFail("\(error)")
         }
-        
-        session.logIn()
         // Then
-        waitForExpectations(timeout: 0.1, handler: nil)
         XCTAssertEqual(session.state, .authorized)
         XCTAssertEqual(authorizator.authorizeCallCount, 1)
-        XCTAssertEqual(repository.saveCallCount, 1)
-        XCTAssertEqual(repository.removeCallCount, 0)
     }
     
     func test_logIn_shouldBeFail_whenAuthorizatorThrows() {
         // Given
-        let (session, _, _, authorizator, repository) = sessionObjects
-        let exp = expectation(description: "")
+        let (session, _, _, authorizator) = sessionObjects
         // When
-        
-        swiftyVkDelegateMock.onVkLogInDidFail = { (givenGession, error) in
-            XCTAssertEqual(givenGession.id, session.id)
-            XCTAssertEqual(error as? SessionError, .failedAuthorization)
-            exp.fulfill()
-        }
-        
         authorizator.authorizeShouldThrows = true
-        session.logIn()
+        
+        do {
+            try session.logIn()
+            XCTFail("Log in sould be fail")
+        } catch let error {
+            XCTAssertEqual(error as? SessionError, .failedAuthorization)
+        }
         // Then
-        waitForExpectations(timeout: 0.1, handler: nil)
         XCTAssertEqual(session.state, .initiated)
         XCTAssertEqual(authorizator.authorizeCallCount, 1)
-        XCTAssertEqual(repository.saveCallCount, 0)
-        XCTAssertEqual(repository.removeCallCount, 0)
     }
     
-    func test_logIn_shouldBeFail_whenSessionIsDead() {
+    func test_logIn_shouldBeFail_whenSessionDestroyed() {
         // Given
-        let (session, _, _, _, _) = sessionObjects
-        let exp = expectation(description: "")
+        let (session, _, _, _) = sessionObjects
         // When
-        
-        swiftyVkDelegateMock.onVkLogInDidFail = { (givenGession, error) in
-            XCTAssertEqual(givenGession.id, session.id)
-            XCTAssertEqual(error as? SessionError, .sessionIsDead)
-            exp.fulfill()
-        }
-        
         session.die()
-        session.logIn()
-        // Then
-        waitForExpectations(timeout: 0.1, handler: nil)
-        XCTAssertEqual(session.state, .dead)
-    }
-    
-    func test_logInWithRawToken_shouldBeFail_whenSessionIsDead() {
-        // Given
-        let (session, _, _, _, _) = sessionObjects
-        let exp = expectation(description: "")
-        // When
-        swiftyVkDelegateMock.onVkLogInDidFail = { (givenGession, error) in
-            XCTAssertEqual(givenGession.id, session.id)
-            XCTAssertEqual(error as? SessionError, .sessionIsDead)
-            exp.fulfill()
-        }
         
+        do {
+            try session.logIn()
+            XCTFail("Log in sould be fail")
+        } catch let error {
+            XCTAssertEqual(error as? SessionError, .sessionDestroyed)
+        }
+        // Then
+        XCTAssertEqual(session.state, .destroyed)
+    }
+    
+    func test_logInWithRawToken_shouldBeFail_whenSessionDestroyed() {
+        // Given
+        let (session, _, _, _) = sessionObjects
+        // When
         session.die()
-        session.logInWith(rawToken: "", expires: 0)
+        
+        do {
+            try session.logIn()
+            XCTFail("Log in sould be fail")
+        } catch let error {
+            XCTAssertEqual(error as? SessionError, .sessionDestroyed)
+        }
         // Then
-        waitForExpectations(timeout: 0.1, handler: nil)
-        XCTAssertEqual(session.state, .dead)
-    }
-    
-    func test_logIn_dhouldBeFail_whenDelegateNotFound() {
-        // Given
-        let (session, _, _, _, _) = sessionObjects
-        // When
-        VK.delegate = nil
-        session.logIn()
-        // Then
-        XCTAssertEqual(session.state, .initiated)
-    }
-    
-    func test_logInWithRepository() {
-        // Given
-        let (session, _, _, authorizator, repository) = sessionObjects
-        // When
-        repository.token = TokenMock()
-        session.logIn()
-        // Then
-        XCTAssertEqual(session.state, .authorized)
-        XCTAssertEqual(authorizator.authorizeCallCount, 0)
-        XCTAssertEqual(repository.saveCallCount, 0)
-        XCTAssertEqual(repository.removeCallCount, 0)
+        XCTAssertEqual(session.state, .destroyed)
     }
     
     func test_logInWithRawToken() {
         // Given
-        let (session, _, _, authorizator, _) = sessionObjects
+        let (session, _, _, authorizator) = sessionObjects
         // When
-        session.logInWith(rawToken: "", expires: 0)
+        
+        do {
+            try session.logInWith(rawToken: "", expires: 0)
+        } catch let error {
+            XCTFail("\(error)")
+        }
         // Then
         XCTAssertEqual(session.state, .authorized)
         XCTAssertEqual(authorizator.authorizeWithRawTokenCallCount, 1)
@@ -181,28 +146,31 @@ final class SessionTests: BaseTestCase {
     
     func test_logOut() {
         // Given
-        let (session, _, _, _, repository) = sessionObjects
+        let (session, _, _, _) = sessionObjects
         // When
-        session.logInWith(rawToken: "", expires: 0)
+        do {
+            try session.logInWith(rawToken: "", expires: 0)
+        } catch let error {
+            XCTFail("\(error)")
+        }
+        
         session.logOut()
         // Then
         XCTAssertEqual(session.state, .initiated)
-        XCTAssertEqual(repository.removeCallCount, 1)
     }
     
     func test_logOut_withoutToken() {
         // Given
-        let (session, _, _, _, repository) = sessionObjects
+        let (session, _, _, _) = sessionObjects
         // When
         session.logOut()
         // Then
         XCTAssertEqual(session.state, .initiated)
-        XCTAssertEqual(repository.removeCallCount, 0)
     }
     
-    func test_sendTask_whenSessionDead() {
+    func test_sendTask_whenSessionDestroyed() {
         // Given
-        let (session, _, _, _, _) = sessionObjects
+        let (session, _, _, _) = sessionObjects
         let request = Request(of: .url(""))
         // When
         session.id = ""
@@ -212,14 +180,14 @@ final class SessionTests: BaseTestCase {
             callbacks: Callbacks(
                 onError: { error in
                     // Then
-                    XCTAssertEqual(error as? SessionError, .sessionIsDead)
+                    XCTAssertEqual(error as? SessionError, .sessionDestroyed)
             })
         )
     }
     
-    func test_sendWrongTask() {
+    func test_sendWrongTask_shouldBeFail() {
         // Given
-        let (session, taskSheduler, _, _, _) = sessionObjects
+        let (session, taskSheduler, _, _) = sessionObjects
         let request = Request(of: .url(""))
         // When
         taskSheduler.shouldThrows = true
@@ -236,10 +204,10 @@ final class SessionTests: BaseTestCase {
     
     func test_sessionDie() {
         // Given
-        let (session, _, _, _, _) = sessionObjects
+        let (session, _, _, _) = sessionObjects
         // When
         session.die()
         // Then
-        XCTAssertEqual(session.state, .dead)
+        XCTAssertEqual(session.state, .destroyed)
     }
 }

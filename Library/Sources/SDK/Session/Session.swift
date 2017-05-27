@@ -2,6 +2,7 @@ public protocol Session: class {
     var id: String { get }
     var config: SessionConfig { get set }
     var state: SessionState { get }
+    @discardableResult
     func logIn() throws -> [String : String]
     func logInWith(rawToken: String, expires: TimeInterval) throws
     @discardableResult
@@ -55,6 +56,7 @@ public final class SessionImpl: SessionInternalRepr {
         updateShedulerLimit()
     }
     
+    @discardableResult
     public func logIn() throws -> [String : String] {
         try throwIfDestroyed()
         token = try authorizator.authorize(session: self)

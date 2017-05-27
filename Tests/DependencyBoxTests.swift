@@ -33,11 +33,4 @@ final class DependencyBoxTests: BaseTestCase {
         // Then
         XCTAssertTrue(token is TokenImpl)
     }
-    
-    func test_AuthorizatorType() {
-        // When
-        let authorizator = box.authorizator()
-        // Then
-        XCTAssertTrue(authorizator is AuthorizatorImpl)
-    }
 }

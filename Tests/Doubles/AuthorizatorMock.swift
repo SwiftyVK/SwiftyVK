@@ -5,7 +5,7 @@ final class AuthorizatorMock: Authorizator {
     var authorizeShouldThrows = false
     var authorizeCallCount = 0
     
-    func authorizeWith(scopes: Scopes) throws -> Token {
+    func authorize(session: Session) throws -> Token {
         authorizeCallCount += 1
         
         if authorizeShouldThrows {
@@ -17,11 +17,15 @@ final class AuthorizatorMock: Authorizator {
     
     var authorizeWithRawTokenCallCount = 0
     
-    func authorizeWith(rawToken: String, expires: TimeInterval) -> Token {
+    func authorize(session: Session, rawToken: String, expires: TimeInterval) -> Token {
         authorizeWithRawTokenCallCount += 1
         
         return TokenMock()
     }
     
-    func validate(withUrl url: String) throws {}
+    func validate(with url: URL) throws {}
+    
+    func reset(session: Session) -> Token? {
+        return nil
+    }
 }

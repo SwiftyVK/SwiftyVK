@@ -17,8 +17,6 @@ final class SwiftyVKDelegateMock: SwiftyVKDelegate {
     
     var onVkWillPresentView: (() -> Displayer?)?
     var onVkWillLogIn: ((Session) -> Scopes)?
-    var onVkLogInDidSuccess: ((Session, [String : String]) -> ())?
-    var onVkLogInDidFail: ((Session, Error) -> ())?
     var onVkDidLogOut: ((Session) -> ())?
     
     
@@ -28,14 +26,6 @@ final class SwiftyVKDelegateMock: SwiftyVKDelegate {
     
     func vkWillLogIn(in session: Session) -> Scopes {
         return onVkWillLogIn?(session) ?? Scopes()
-    }
-    
-    func vkLogInDidSuccess(in session: Session, with parameters: [String : String]) {
-        onVkLogInDidSuccess?(session, parameters)
-    }
-    
-    func vkLogInDidFail(in session: Session, with error: Error) {
-        onVkLogInDidFail?(session, error)
     }
     
     func vkDidLogOut(in session: Session) {

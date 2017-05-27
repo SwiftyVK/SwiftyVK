@@ -9,7 +9,13 @@ final class TokenStorageTests: BaseTestCase {
         let id = "testId"
         // When
         let token = TokenMock()
-        repository.save(token: token, for: id)
+        
+        do {
+            try repository.save(token: token, for: id)
+        } catch let error {
+            XCTFail("\(error)")
+        }
+        
         let restoredToken = repository.getFor(sessionId: id) as? TokenMock
         // Then
         XCTAssertEqual(restoredToken?.token, token.token)

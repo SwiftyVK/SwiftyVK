@@ -8,11 +8,11 @@ final class SessionStorageMock: SessionStorage {
         return [`default`]
     }
     
-    func new(with config: SessionConfig) -> Session {
+    func make(with config: SessionConfig) -> Session {
         return `default`
     }
     
-    func kill(session: Session) throws {}
+    func destroy(session: Session) throws {}
     
-    func makeDefault(session: Session) {}
+    func markAsDefault(session: Session) {}
 }
