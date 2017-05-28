@@ -1,5 +1,5 @@
 #if os(OSX)
-    import Foundation
+    import Cocoa
 #elseif os(iOS)
     import UIKit
 #endif
@@ -15,7 +15,7 @@ struct LegacyAuthorizator {
             return nil
         }
         
-        let _perm = VK.Scope.toInt(delegate.vkWillAuthorize())
+        let _perm = delegate.vkWillAuthorize().toInt()
         let _redir = canAuthorizeWithVkApp ? "" : "&redirect_uri=\(redirectUrl)"
 
         return  "client_id=\(appId)&scope=\(_perm)&display=mobile&v\(SessionConfig.apiVersion)&sdk_version=\(SessionConfig.sdkVersion)\(_redir)&response_type=token&revoke=\(LegacyToken.revoke ? 1 : 0)"
@@ -96,7 +96,7 @@ struct LegacyAuthorizator {
     extension IOSAuthorizator {
 
         static var canAuthorizeWithVkApp: Bool {
-            guard let appId = VK.appID, let url = URL(string: "vk\(appId)://") else {
+            guard let appId = VK.appId, let url = URL(string: "vk\(appId)://") else {
                 return false
             }
             
@@ -114,13 +114,13 @@ struct LegacyAuthorizator {
         }
 
         static func recieveTokenURL(url: URL, fromApp app: String?) {
-            guard let appId = VK.appID else {
+            guard let appId = VK.appId else {
                 return
             }
             
             if app == "com.vk.vkclient" || app == "com.vk.vkhd" || url.scheme == "vk\(appId)" {
                 if url.absoluteString.contains("access_token=") {
-                    _ = Token(fromResponse: url.absoluteString)
+                    _ = LegacyToken(fromResponse: url.absoluteString)
                     WebPresenter.cancel()
                 }
             }

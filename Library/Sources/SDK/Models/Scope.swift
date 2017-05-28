@@ -25,7 +25,9 @@ extension VK {
         case offline       = 65536
         case market        = 134217728
 
-        public var description: String {return Scope.toString([self])}
+        public var description: String {
+            return Mirror(reflecting: self).children.first?.label.flatMap { $0 } ?? String()
+        }
         
         public static func create(from permissions: Int) -> Set<Scope> {
             var result = Set<Scope>()
@@ -80,44 +82,19 @@ extension VK {
             
             return result
         }
-        
-        public static func toInt(_ permissions: Set<Scope>) -> Int {
-            var finishPerm = Int()
-            for perm in permissions {finishPerm += perm.rawValue}
-            return finishPerm
+    }
+}
+
+
+extension Set where Element == VK.Scope {
+    
+    public func toInt() -> Int {
+        return self.reduce(0) { $0.0 + $0.1.rawValue }
+    }
+    
+    public func toString() -> String {
+        return self.reduce("") {
+            $0.0 + (Mirror(reflecting: $0.1).children.first?.label.flatMap { $0 + "," } ?? String())
         }
-        
-        // swiftlint:disable switch_case_on_newline
-        public static func toString(_ permissions: Set<Scope>) -> String {
-            var result = String()
-            
-            for permission in permissions {
-                switch permission {
-                case .notify        : result += "notify,"
-                case .friends       : result += "friends,"
-                case .photos        : result += "photos,"
-                case .audio         : result += "audio,"
-                case .video         : result += "video,"
-                case .docs          : result += "docs,"
-                case .notes         : result += "notes,"
-                case .pages         : result += "pages,"
-                case .status        : result += "status,"
-                case .offers        : result += "offers,"
-                case .questions     : result += "questions,"
-                case .wall          : result += "wall,"
-                case .groups        : result += "groups,"
-                case .messages      : result += "messages,"
-                case .email         : result += "email,"
-                case .notifications : result += "notifications,"
-                case .stats         : result += "stats,"
-                case .ads           : result += "ads,"
-                case .offline       : result += "offline,"
-                case .market        : result += "market,"
-                }
-            }
-            
-            return result
-        }
-        // swiftlint:enable switch_case_on_newline
     }
 }

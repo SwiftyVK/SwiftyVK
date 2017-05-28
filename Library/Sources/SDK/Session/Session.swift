@@ -59,7 +59,7 @@ public final class SessionImpl: SessionInternalRepr {
     @discardableResult
     public func logIn() throws -> [String : String] {
         try throwIfDestroyed()
-        token = try authorizator.authorize(session: self)
+        token = try authorizator.authorize(session: self, revoke: token == nil)
         return token?.info ?? [:]
     }
     

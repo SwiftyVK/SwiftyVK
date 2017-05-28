@@ -1,3 +1,9 @@
+#if os(OSX)
+    import Cocoa
+#elseif os(iOS)
+    import UIKit
+#endif
+
 protocol SessionMaker {
     func session() -> Session
 }
@@ -35,9 +41,19 @@ final class DependencyBoxImpl: DependencyBox {
     }
     
     private lazy var sharedAuthorizator: Authorizator = {
+        
+        let urlOpener: UrlOpener
+        
+        #if os(iOS)
+            urlOpener = UIApplication.shared
+        #elseif os(macOS)
+            urlOpener = MacOsApplication()
+        #endif
+        
         return AuthorizatorImpl(
             tokenStorage: TokenStorageImpl(),
-            tokenMaker: self
+            tokenMaker: self,
+            vkAppProxy: VkAppProxyImpl(urlOpener: urlOpener)
         )
     }()
     

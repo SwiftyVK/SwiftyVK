@@ -10,6 +10,8 @@ public enum SessionError: Int, CustomNSError, CustomStringConvertible {
     case cantDestroyDefaultSession  = 7
     case sessionDestroyed           = 8
     case tokenNotSavedInStorage     = 9
+    case cantBuildUrlForVkApp       = 10
+    case authCalledFromMainThread   = 11
 
     public static let errorDomain = "SwiftyVKSessionError"
     public var errorCode: Int {return rawValue}

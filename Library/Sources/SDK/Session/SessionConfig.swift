@@ -4,6 +4,9 @@ public final class SessionConfig {
     
     public static var apiVersion = "5.62"
     public static let sdkVersion = "1.3.17"
+    
+    public var apiVersion = "5.62"
+    public let sdkVersion = "1.3.17"
     public var language: Language
     public var attemptsMaxLimit: AttemptLimit
     public var attemptTimeout: TimeInterval

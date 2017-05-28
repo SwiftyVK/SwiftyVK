@@ -5,7 +5,7 @@ final class AuthorizatorMock: Authorizator {
     var authorizeShouldThrows = false
     var authorizeCallCount = 0
     
-    func authorize(session: Session) throws -> Token {
+    func authorize(session: Session, revoke: Bool) throws -> Token {
         authorizeCallCount += 1
         
         if authorizeShouldThrows {

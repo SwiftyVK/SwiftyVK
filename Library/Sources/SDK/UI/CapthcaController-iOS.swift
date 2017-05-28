@@ -13,7 +13,7 @@
         
         static func create(data: Data, delegate: CaptchaPresenter) -> CaptchaController? {
             
-            guard let parent = VK.delegate?.vkWillPresentView(), let image = UIImage(data: data) else {
+            guard let parent = VK.legacyDelegate?.vkWillPresentView(), let image = UIImage(data: data) else {
                 return nil
             }
             

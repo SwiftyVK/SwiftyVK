@@ -94,7 +94,7 @@ public struct VK {
 
     #if os(iOS)
     public static func process(url: URL, sourceApplication app: String?) {
-        Authorizator.recieveTokenURL(url: url, fromApp: app)
+        LegacyAuthorizator.recieveTokenURL(url: url, fromApp: app)
     }
     #endif
 

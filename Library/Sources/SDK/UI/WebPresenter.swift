@@ -1,11 +1,3 @@
-//
-//  WebProxy.swift
-//  SwiftyVK
-//
-//  Created by Алексей Кудрявцев on 18.10.16.
-//
-//
-
 import Foundation
 
 let sheetQueue = DispatchQueue(label: "sheetQueue")

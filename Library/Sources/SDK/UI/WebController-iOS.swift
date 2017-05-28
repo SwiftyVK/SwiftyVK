@@ -14,7 +14,7 @@
         
         class func create(withDelegate delegate: WebPresenter) -> WebController? {
             
-            guard let parentView = VK.delegate?.vkWillPresentView() else {
+            guard let parentView = VK.legacyDelegate?.vkWillPresentView() else {
                 return nil
             }
             
