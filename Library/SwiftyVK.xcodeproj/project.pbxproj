@@ -207,6 +207,7 @@
 		A2F6322D1ED9CB780063C9E0 /* UrlOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6322B1ED9C88D0063C9E0 /* UrlOpener.swift */; };
 		A2F632331ED9DC7D0063C9E0 /* VkAppProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F632321ED9DC7D0063C9E0 /* VkAppProxy.swift */; };
 		A2F632341ED9DC7D0063C9E0 /* VkAppProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F632321ED9DC7D0063C9E0 /* VkAppProxy.swift */; };
+		A2F6F8E51EDDF00400933DBC /* Atomic-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6F8E41EDDF00400933DBC /* Atomic-Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -409,6 +410,7 @@
 		A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F6322B1ED9C88D0063C9E0 /* UrlOpener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UrlOpener.swift; path = ../Extensions/UrlOpener.swift; sourceTree = "<group>"; };
 		A2F632321ED9DC7D0063C9E0 /* VkAppProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VkAppProxy.swift; sourceTree = "<group>"; };
+		A2F6F8E41EDDF00400933DBC /* Atomic-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Atomic-Tests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -451,6 +453,7 @@
 				A2E34DC01ED1FB2F0041E663 /* TokenStorageTests.swift */,
 				A23E692B1EDAEC5800AA3B3B /* VKProxyTests.swift */,
 				A2B805571EDDB313004DA7EB /* WebPresenterTests.swift */,
+				A2F6F8E41EDDF00400933DBC /* Atomic-Tests.swift */,
 			);
 			name = Tests;
 			path = ../Tests;
@@ -968,6 +971,7 @@
 			files = (
 				A22179CE1EBA52A2006B71FD /* DependencyBoxMock.swift in Sources */,
 				A2E34DC11ED1FB2F0041E663 /* TokenStorageTests.swift in Sources */,
+				A2F6F8E51EDDF00400933DBC /* Atomic-Tests.swift in Sources */,
 				A2AF167D1ED1CCA900485716 /* AuthorizatorMock.swift in Sources */,
 				A23E692C1EDAEC5800AA3B3B /* VKProxyTests.swift in Sources */,
 				A2B805581EDDB313004DA7EB /* WebPresenterTests.swift in Sources */,

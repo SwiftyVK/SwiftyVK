@@ -18,13 +18,13 @@ class Atomic<Value> where Value: Equatable {
     /// Wrap new value atomically
     /// - parameter newValue: any Equatable value
     func wrap(_ newValue: Value) {
-        guard value != newValue else {return}
+        guard value != newValue else { return }
         
         lock.performCritical {
             let oldValue = value
-            willWrap?(newValue)
+            willWrap?(oldValue)
             value = newValue
-            didWrap?(oldValue)
+            didWrap?(newValue)
         }
     }
     
@@ -63,11 +63,11 @@ class Atomic<Value> where Value: Equatable {
             let oldValue = value
             let newValue = try scope(value)
             
-            guard newValue != oldValue else {return}
+            guard newValue != oldValue else { return }
             
-            willWrap?(newValue)
+            willWrap?(oldValue)
             value = newValue
-            didWrap?(oldValue)
+            didWrap?(newValue)
         }
     }
 }
