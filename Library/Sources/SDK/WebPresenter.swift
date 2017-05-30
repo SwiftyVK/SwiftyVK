@@ -3,12 +3,12 @@ protocol WebPresenter: class {
     func dismiss()
 }
 
-protocol WebHandler: WebPresenter {
-    func handle(response: String)
+protocol WebHandler: class {
+    func handle(url: URL)
     func handle(error: Error)
 }
 
-final class WebPresenterImpl: WebHandler {
+final class WebPresenterImpl: WebPresenter, WebHandler {
     private let semaphore = DispatchSemaphore(value: 0)
     private var result: WebPresenterResult?
     private var canFinish = Atomic(true)
@@ -21,7 +21,7 @@ final class WebPresenterImpl: WebHandler {
     }
     
     func presentWith(url: URL) throws -> String {
-        try controller.load(url: url, handler: self)
+        controller.load(url: url, handler: self)
         semaphore.wait()
         
         switch result {
@@ -34,24 +34,34 @@ final class WebPresenterImpl: WebHandler {
         }
     }
     
-    func handle(response: String) {
-        if response.contains("access_token=") {
-            finishWith(.response(response))
+    func handle(url: URL) {
+        let host = url.host ?? ""
+        let query = url.query ?? ""
+        let fragment = url.fragment ?? ""
+        
+        guard !host.isEmpty && (!query.isEmpty || !fragment.isEmpty) else {
+            finishWith(.error(SessionError.wrongAuthUrl))
+            return
         }
-        else if response.contains("success=1") {
-            finishWith(.response(response))
+
+        if fragment.contains("access_token=") {
+            finishWith(.response(fragment))
         }
-        else if response.contains("access_denied") ||
-            response.contains("cancel=1") {
+        else if fragment.contains("success=1") {
+            finishWith(.response(fragment))
+        }
+        else if fragment.contains("access_denied") ||
+            fragment.contains("cancel=1") {
             finishWith(.error(SessionError.deniedFromUser))
         }
-        else if response.contains("fail=1") {
+        else if fragment.contains("fail=1") {
             finishWith(.error(SessionError.failedAuthorization))
         }
-        else if response.contains("https://oauth.vk.com/authorize?") ||
-            response.contains("act=security_check") ||
-            response.contains("api_validation_test") ||
-            response.contains("https://m.vk.com/login?") {
+        else if host.contains("vk.com") && (
+            url.path == "/authorize" ||
+            url.path == "/login" ||
+            query.contains("act=security_check") ||
+            query.contains("api_validation_test")) {
             controller.expand()
         }
         else {

@@ -9,7 +9,6 @@ final class VKProxyTests: BaseTestCase {
         return (urlOpener, vkProxy)
     }
     
-    
     func test_openUrl_shoudBeSussess() {
         // Given
         let (urlOpener, vkProxy) = proxyObjects
