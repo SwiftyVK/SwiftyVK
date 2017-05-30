@@ -44,10 +44,10 @@ struct LegacyAuthorizator {
 
         Thread.isMainThread
             ? sheetQueue.async {
-                error = WebPresenter.start(withUrl: url)
+                error = LegacyWebPresenter.start(withUrl: url)
             }
             : sheetQueue.sync {
-                error = WebPresenter.start(withUrl: url)
+                error = LegacyWebPresenter.start(withUrl: url)
             }
 
         return error
@@ -77,7 +77,7 @@ struct LegacyAuthorizator {
             return
         }
         
-        error = WebPresenter.start(withUrl: webAuthorizeUrl + paramsUrl)
+        error = LegacyWebPresenter.start(withUrl: webAuthorizeUrl + paramsUrl)
     }
 }
 //
@@ -121,7 +121,7 @@ struct LegacyAuthorizator {
             if app == "com.vk.vkclient" || app == "com.vk.vkhd" || url.scheme == "vk\(appId)" {
                 if url.absoluteString.contains("access_token=") {
                     _ = LegacyToken(fromResponse: url.absoluteString)
-                    WebPresenter.cancel()
+                    LegacyWebPresenter.cancel()
                 }
             }
         }

@@ -4,17 +4,17 @@
     
     private let webViewName = Resources.withSuffix("WebView")
     
-    final class WebController: NSWindowController, WebFrameLoadDelegate {
+    final class LegacyWebController: NSWindowController, WebFrameLoadDelegate {
         
         @IBOutlet private weak var webView: WebView?
         @IBOutlet private weak var activity: NSProgressIndicator!
         private var parentWindow: NSWindow?
-        private weak var delegate: WebPresenter!
+        private weak var delegate: LegacyWebPresenter!
         private var url: String?
         
-        class func create(withDelegate delegate: WebPresenter) -> WebController? {
+        class func create(withDelegate delegate: LegacyWebPresenter) -> LegacyWebController? {
             
-            let controller          = WebController()
+            let controller          = LegacyWebController()
             controller.delegate     = delegate
             controller.parentWindow = VK.legacyDelegate?.vkWillPresentView()
             

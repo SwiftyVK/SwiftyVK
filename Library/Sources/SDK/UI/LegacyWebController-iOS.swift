@@ -4,24 +4,24 @@
     
     private let webViewName = Resources.withSuffix("WebView")
     
-    final class WebController: UIViewController, UIWebViewDelegate {
+    final class LegacyWebController: UIViewController, UIWebViewDelegate {
         
         @IBOutlet private weak var webView: UIWebView?
         @IBOutlet private weak var activity: UIActivityIndicatorView!
         fileprivate var parentView: UIViewController?
-        private weak var delegate: WebPresenter!
+        private weak var delegate: LegacyWebPresenter!
         private var url: String?
         
-        class func create(withDelegate delegate: WebPresenter) -> WebController? {
+        class func create(withDelegate delegate: LegacyWebPresenter) -> LegacyWebController? {
             
             guard let parentView = VK.legacyDelegate?.vkWillPresentView() else {
                 return nil
             }
             
-            var controller: WebController!
+            var controller: LegacyWebController!
             
             DispatchQueue.main.sync {
-                controller              = WebController(nibName: webViewName, bundle: Resources.bundle)
+                controller              = LegacyWebController(nibName: webViewName, bundle: Resources.bundle)
                 controller.delegate     = delegate
                 controller.parentView   = parentView
                 controller.modalPresentationStyle = .overFullScreen

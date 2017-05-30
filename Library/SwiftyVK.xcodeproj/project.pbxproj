@@ -43,13 +43,15 @@
 		A22179D21EBA5393006B71FD /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179D11EBA5393006B71FD /* BaseTestCase.swift */; };
 		A22179D41EBA57AF006B71FD /* SessionConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179D31EBA57AF006B71FD /* SessionConfig.swift */; };
 		A22179D51EBA57AF006B71FD /* SessionConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179D31EBA57AF006B71FD /* SessionConfig.swift */; };
-		A236B2B61DB6864F002376C8 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B51DB6864F002376C8 /* WebPresenter.swift */; };
-		A236B2B71DB6864F002376C8 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B51DB6864F002376C8 /* WebPresenter.swift */; };
-		A236B2B91DB68E4F002376C8 /* WebController-OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B81DB68E4F002376C8 /* WebController-OSX.swift */; };
+		A236B2B61DB6864F002376C8 /* LegacyWebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B51DB6864F002376C8 /* LegacyWebPresenter.swift */; };
+		A236B2B71DB6864F002376C8 /* LegacyWebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B51DB6864F002376C8 /* LegacyWebPresenter.swift */; };
+		A236B2B91DB68E4F002376C8 /* LegacyWebController-OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B2B81DB68E4F002376C8 /* LegacyWebController-OSX.swift */; };
 		A23708BF1EA52F0D00103212 /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */; };
 		A23708C81EA532B900103212 /* TaskShedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23708C61EA5309700103212 /* TaskShedulerTests.swift */; };
 		A23E692C1EDAEC5800AA3B3B /* VKProxyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23E692B1EDAEC5800AA3B3B /* VKProxyTests.swift */; };
 		A23E692E1EDAEC6400AA3B3B /* UrlOpenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23E692D1EDAEC6400AA3B3B /* UrlOpenerMock.swift */; };
+		A23E69331EDB49FB00AA3B3B /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23E69321EDB49FB00AA3B3B /* WebPresenter.swift */; };
+		A23E69341EDB49FB00AA3B3B /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23E69321EDB49FB00AA3B3B /* WebPresenter.swift */; };
 		A2433A441EA533500058BB6D /* TaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2433A431EA533500058BB6D /* TaskMock.swift */; };
 		A2433A461EA542100058BB6D /* AttemptShedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2433A451EA542100058BB6D /* AttemptShedulerTests.swift */; };
 		A2433A481EA542620058BB6D /* AttemptMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2433A471EA542620058BB6D /* AttemptMock.swift */; };
@@ -72,7 +74,7 @@
 		A254C0C81E9904CB001A5456 /* Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254C0C71E9904CB001A5456 /* Custom.swift */; };
 		A254C0C91E9904CB001A5456 /* Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254C0C71E9904CB001A5456 /* Custom.swift */; };
 		A25A3A2D1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A3A2C1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift */; };
-		A26D88BB1DC124C200AD63CD /* WebController-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */; };
+		A26D88BB1DC124C200AD63CD /* LegacyWebController-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26D88BA1DC124C200AD63CD /* LegacyWebController-iOS.swift */; };
 		A26F8B811E3A78DB00273E35 /* SwiftyVKResources-OSX.bundle in Copy Bundle Resources For Cocoapods */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVKResources-OSX.bundle */; };
 		A26F8B831E3A78F400273E35 /* SwiftyVKResources-iOS.bundle in Copy Bundle Resources For Cocoapods */ = {isa = PBXBuildFile; fileRef = A2527D551BD1134500F65412 /* SwiftyVKResources-iOS.bundle */; };
 		A27015D91EC1F6D100B9C5C2 /* SessionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27015D81EC1F6D100B9C5C2 /* SessionState.swift */; };
@@ -101,6 +103,12 @@
 		A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
 		A2B4ECAF1DCA4FA5009435B6 /* CaptchaController-OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAE1DCA4FA5009435B6 /* CaptchaController-OSX.swift */; };
 		A2B4ECB11DCA4FB7009435B6 /* CapthcaController-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECB01DCA4FB7009435B6 /* CapthcaController-iOS.swift */; };
+		A2B805531EDDAFD2004DA7EB /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B805521EDDAFD2004DA7EB /* WebController.swift */; };
+		A2B805541EDDAFD2004DA7EB /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B805521EDDAFD2004DA7EB /* WebController.swift */; };
+		A2BDF36C1EDC9D8E00E9263A /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BDF36B1EDC9D8E00E9263A /* Atomic.swift */; };
+		A2BDF36D1EDC9D8E00E9263A /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BDF36B1EDC9D8E00E9263A /* Atomic.swift */; };
+		A2BDF36F1EDC9EB200E9263A /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BDF36E1EDC9EB200E9263A /* Lock.swift */; };
+		A2BDF3701EDC9EB200E9263A /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BDF36E1EDC9EB200E9263A /* Lock.swift */; };
 		A2CF0D421E98EF0900EAFF30 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF0D401E98EF0900EAFF30 /* Request.swift */; };
 		A2CF0D431E98EF0900EAFF30 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF0D401E98EF0900EAFF30 /* Request.swift */; };
 		A2CF0D441E98EF0900EAFF30 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF0D411E98EF0900EAFF30 /* Result.swift */; };
@@ -294,12 +302,13 @@
 		A234A4191BE34FE000856CA5 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = "be.lproj/CaptchaView-OSX.strings"; sourceTree = "<group>"; };
 		A234A41A1BE34FE000856CA5 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = "be.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A234A41B1BE34FE000856CA5 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = "be.lproj/CaptchaView-iOS.strings"; sourceTree = "<group>"; };
-		A236B2B51DB6864F002376C8 /* WebPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPresenter.swift; sourceTree = "<group>"; };
-		A236B2B81DB68E4F002376C8 /* WebController-OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WebController-OSX.swift"; sourceTree = "<group>"; };
+		A236B2B51DB6864F002376C8 /* LegacyWebPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegacyWebPresenter.swift; sourceTree = "<group>"; };
+		A236B2B81DB68E4F002376C8 /* LegacyWebController-OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LegacyWebController-OSX.swift"; sourceTree = "<group>"; };
 		A23708BA1EA52F0D00103212 /* SwiftyVK-Tests-OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftyVK-Tests-OSX.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A23708C61EA5309700103212 /* TaskShedulerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskShedulerTests.swift; sourceTree = "<group>"; };
 		A23E692B1EDAEC5800AA3B3B /* VKProxyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKProxyTests.swift; sourceTree = "<group>"; };
 		A23E692D1EDAEC6400AA3B3B /* UrlOpenerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlOpenerMock.swift; sourceTree = "<group>"; };
+		A23E69321EDB49FB00AA3B3B /* WebPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPresenter.swift; sourceTree = "<group>"; };
 		A2433A431EA533500058BB6D /* TaskMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskMock.swift; sourceTree = "<group>"; };
 		A2433A451EA542100058BB6D /* AttemptShedulerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptShedulerTests.swift; sourceTree = "<group>"; };
 		A2433A471EA542620058BB6D /* AttemptMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptMock.swift; sourceTree = "<group>"; };
@@ -362,7 +371,7 @@
 		A2527E381BD134F000F65412 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = "ru.lproj/WebView-OSX.strings"; sourceTree = "<group>"; };
 		A254C0C71E9904CB001A5456 /* Custom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Custom.swift; sourceTree = "<group>"; };
 		A25A3A2C1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartBodyBuilderTests.swift; sourceTree = "<group>"; };
-		A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WebController-iOS.swift"; sourceTree = "<group>"; };
+		A26D88BA1DC124C200AD63CD /* LegacyWebController-iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LegacyWebController-iOS.swift"; sourceTree = "<group>"; };
 		A27015D81EC1F6D100B9C5C2 /* SessionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionState.swift; sourceTree = "<group>"; };
 		A28368EB1D9D742700EEBE2A /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
 		A2838DA21E9AA0DA00FE5BE2 /* DependencyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyBox.swift; sourceTree = "<group>"; };
@@ -379,6 +388,9 @@
 		A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapthcaPresenter.swift; sourceTree = "<group>"; };
 		A2B4ECAE1DCA4FA5009435B6 /* CaptchaController-OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CaptchaController-OSX.swift"; sourceTree = "<group>"; };
 		A2B4ECB01DCA4FB7009435B6 /* CapthcaController-iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CapthcaController-iOS.swift"; sourceTree = "<group>"; };
+		A2B805521EDDAFD2004DA7EB /* WebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebController.swift; sourceTree = "<group>"; };
+		A2BDF36B1EDC9D8E00E9263A /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
+		A2BDF36E1EDC9EB200E9263A /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		A2CF0D401E98EF0900EAFF30 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		A2CF0D411E98EF0900EAFF30 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		A2D1369A1DA00E9000C487C1 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -568,6 +580,8 @@
 		A2527D791BD12FD200F65412 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A2BDF36B1EDC9D8E00E9263A /* Atomic.swift */,
+				A2BDF36E1EDC9EB200E9263A /* Lock.swift */,
 				A2527D7B1BD12FD200F65412 /* Log.swift */,
 				A2527D7C1BD12FD200F65412 /* Reachability.swift */,
 				A2527D7E1BD12FD200F65412 /* SwiftyJSON.swift */,
@@ -666,9 +680,9 @@
 		A2B52C0F1DC91DBA000F5BB0 /* Web */ = {
 			isa = PBXGroup;
 			children = (
-				A236B2B51DB6864F002376C8 /* WebPresenter.swift */,
-				A236B2B81DB68E4F002376C8 /* WebController-OSX.swift */,
-				A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */,
+				A236B2B51DB6864F002376C8 /* LegacyWebPresenter.swift */,
+				A236B2B81DB68E4F002376C8 /* LegacyWebController-OSX.swift */,
+				A26D88BA1DC124C200AD63CD /* LegacyWebController-iOS.swift */,
 			);
 			name = Web;
 			sourceTree = "<group>";
@@ -679,6 +693,8 @@
 				A2AF16721ED19AEB00485716 /* Authorizator.swift */,
 				A2F632321ED9DC7D0063C9E0 /* VkAppProxy.swift */,
 				A2F6322B1ED9C88D0063C9E0 /* UrlOpener.swift */,
+				A23E69321EDB49FB00AA3B3B /* WebPresenter.swift */,
+				A2B805521EDDAFD2004DA7EB /* WebController.swift */,
 			);
 			name = Authorizator;
 			sourceTree = "<group>";
@@ -991,15 +1007,17 @@
 				A2AF16741ED19AEB00485716 /* Authorizator.swift in Sources */,
 				A2EB6EF31BD18394008E7D86 /* Friends.swift in Sources */,
 				A2EB6EF41BD18394008E7D86 /* Groups.swift in Sources */,
-				A26D88BB1DC124C200AD63CD /* WebController-iOS.swift in Sources */,
+				A26D88BB1DC124C200AD63CD /* LegacyWebController-iOS.swift in Sources */,
 				A2D2713D1EC4D0BA00B24D09 /* SessionStorage.swift in Sources */,
 				A2EB6EF51BD18394008E7D86 /* Likes.swift in Sources */,
 				A2EB6EF61BD18394008E7D86 /* Messages.swift in Sources */,
 				A22179D51EBA57AF006B71FD /* SessionConfig.swift in Sources */,
 				A2EB6EF71BD18394008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6EF81BD18394008E7D86 /* Notes.swift in Sources */,
+				A2BDF3701EDC9EB200E9263A /* Lock.swift in Sources */,
 				A24A294E1E96BC77006152E6 /* AttemptSheduler.swift in Sources */,
 				A2EB6EF91BD18394008E7D86 /* Notifacations.swift in Sources */,
+				A2B805541EDDAFD2004DA7EB /* WebController.swift in Sources */,
 				A29508851EBBA24B00981EC0 /* RequestConfig.swift in Sources */,
 				A2EB6EFA1BD18394008E7D86 /* Pages.swift in Sources */,
 				A2838DA41E9AA0DA00FE5BE2 /* DependencyBox.swift in Sources */,
@@ -1015,10 +1033,11 @@
 				A2EB6F001BD18394008E7D86 /* Status.swift in Sources */,
 				A2EB6F011BD18394008E7D86 /* Storage.swift in Sources */,
 				A2EB6F021BD18394008E7D86 /* Upload.swift in Sources */,
-				A236B2B71DB6864F002376C8 /* WebPresenter.swift in Sources */,
+				A236B2B71DB6864F002376C8 /* LegacyWebPresenter.swift in Sources */,
 				A2EB6F031BD18395008E7D86 /* Users.swift in Sources */,
 				A2EB6F041BD18395008E7D86 /* Utils.swift in Sources */,
 				A2F6322D1ED9CB780063C9E0 /* UrlOpener.swift in Sources */,
+				A23E69341EDB49FB00AA3B3B /* WebPresenter.swift in Sources */,
 				A2E5C5D71ECCAAB600652262 /* String+Extensions.swift in Sources */,
 				A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */,
 				A2CF0D431E98EF0900EAFF30 /* Request.swift in Sources */,
@@ -1034,6 +1053,7 @@
 				A2EB6F091BD18395008E7D86 /* Media.swift in Sources */,
 				A2EB6F0A1BD18395008E7D86 /* Resources.swift in Sources */,
 				A2CF0D451E98EF0900EAFF30 /* Result.swift in Sources */,
+				A2BDF36D1EDC9D8E00E9263A /* Atomic.swift in Sources */,
 				A2EB6F0B1BD18395008E7D86 /* Scope.swift in Sources */,
 				A20FF11A1BEB6BB5009FBE3D /* LegacyAuthorizator.swift in Sources */,
 				A24D10901C56A49E008263B0 /* Market.swift in Sources */,
@@ -1060,6 +1080,8 @@
 				A28368EC1D9D742700EEBE2A /* Attempt.swift in Sources */,
 				A2B4ECAF1DCA4FA5009435B6 /* CaptchaController-OSX.swift in Sources */,
 				A2EB6EC11BD18389008E7D86 /* Audio.swift in Sources */,
+				A2B805531EDDAFD2004DA7EB /* WebController.swift in Sources */,
+				A2BDF36F1EDC9EB200E9263A /* Lock.swift in Sources */,
 				A2066AEA1D9C388F0065A4D7 /* Task.swift in Sources */,
 				A24A29491E96B2F8006152E6 /* AttemptSheduler.swift in Sources */,
 				A2EB6EC21BD18389008E7D86 /* Board.swift in Sources */,
@@ -1078,7 +1100,7 @@
 				A22179D41EBA57AF006B71FD /* SessionConfig.swift in Sources */,
 				A2EB6ECA1BD18389008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6ECB1BD18389008E7D86 /* Notes.swift in Sources */,
-				A236B2B91DB68E4F002376C8 /* WebController-OSX.swift in Sources */,
+				A236B2B91DB68E4F002376C8 /* LegacyWebController-OSX.swift in Sources */,
 				A2CF0D441E98EF0900EAFF30 /* Result.swift in Sources */,
 				A2EB6ECC1BD18389008E7D86 /* Notifacations.swift in Sources */,
 				A2EB6ECD1BD18389008E7D86 /* Pages.swift in Sources */,
@@ -1089,7 +1111,7 @@
 				A2EB6ED01BD18389008E7D86 /* Polls.swift in Sources */,
 				A2EB6ED11BD18389008E7D86 /* Search.swift in Sources */,
 				A2967E741CBBC4A700B7D48F /* Gifts.swift in Sources */,
-				A236B2B61DB6864F002376C8 /* WebPresenter.swift in Sources */,
+				A236B2B61DB6864F002376C8 /* LegacyWebPresenter.swift in Sources */,
 				A2F6322C1ED9C88D0063C9E0 /* UrlOpener.swift in Sources */,
 				A24DDAE71EB73810002EA273 /* MultipartBodyBuilder.swift in Sources */,
 				A2D1369B1DA00E9000C487C1 /* Errors.swift in Sources */,
@@ -1097,6 +1119,7 @@
 				A2EB6ED31BD18389008E7D86 /* Status.swift in Sources */,
 				A2F632331ED9DC7D0063C9E0 /* VkAppProxy.swift in Sources */,
 				A2EB6ED41BD18389008E7D86 /* Storage.swift in Sources */,
+				A23E69331EDB49FB00AA3B3B /* WebPresenter.swift in Sources */,
 				A2EB6ED51BD18389008E7D86 /* Upload.swift in Sources */,
 				A2EB6ED61BD18389008E7D86 /* Users.swift in Sources */,
 				A2EB6ED71BD18389008E7D86 /* Utils.swift in Sources */,
@@ -1105,6 +1128,7 @@
 				A254C0C81E9904CB001A5456 /* Custom.swift in Sources */,
 				A2EB6ED91BD18389008E7D86 /* Wall.swift in Sources */,
 				A2AF16761ED19E2300485716 /* Token.swift in Sources */,
+				A2BDF36C1EDC9D8E00E9263A /* Atomic.swift in Sources */,
 				A2EB6EDA1BD18389008E7D86 /* Arg.swift in Sources */,
 				A2A3E6351EAFC1C70029FA44 /* Numbers+Extensions.swift in Sources */,
 				A29508841EBBA24B00981EC0 /* RequestConfig.swift in Sources */,

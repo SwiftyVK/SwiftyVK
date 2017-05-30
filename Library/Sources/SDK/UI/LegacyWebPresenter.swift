@@ -3,33 +3,33 @@ import Foundation
 let sheetQueue = DispatchQueue(label: "sheetQueue")
 private let authorizeUrl = "https://oauth.vk.com/authorize?"
 
-final class WebPresenter {
+final class LegacyWebPresenter {
     private let semaphore = DispatchSemaphore(value: 0)
-    private var controller: WebController!
+    private var controller: LegacyWebController!
     private var fails = 0
     private var error: SessionError?
-    private weak static var currentController: WebController?
+    private weak static var currentController: LegacyWebController?
 
     class func start(withUrl url: String) -> SessionError? {
 
-        VK.Log.put("WebPresenter", "start")
-        let presenter = WebPresenter()
+        VK.Log.put("LegacyWebPresenter", "start")
+        let presenter = LegacyWebPresenter()
 
-        guard let controller = WebController.create(withDelegate: presenter) else {
+        guard let controller = LegacyWebController.create(withDelegate: presenter) else {
             return SessionError.nilParentView
         }
-
+        
         currentController = controller
         presenter.controller = controller
         presenter.controller.load(url: url)
         presenter.semaphore.wait()
-        VK.Log.put("WebPresenter", "finish")
+        VK.Log.put("LegacyWebPresenter", "finish")
 
         return presenter.error
     }
 
     class func cancel() {
-        VK.Log.put("WebPresenter", "cancel")
+        VK.Log.put("LegacyWebPresenter", "cancel")
         currentController?.hide()
     }
 
@@ -64,7 +64,7 @@ final class WebPresenter {
     }
 
     func handle(error: SessionError) {
-        VK.Log.put("WebPresenter", "handle \(error)")
+        VK.Log.put("LegacyWebPresenter", "handle \(error)")
 
         if fails <= 3 {
             self.error = error
