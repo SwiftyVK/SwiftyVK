@@ -10,6 +10,7 @@ public protocol Session: class {
 }
 
 protocol SessionInternalRepr: Session {
+    var token: Token? { get }
     func destroy()
 }
 
@@ -32,7 +33,7 @@ public final class SessionImpl: SessionInternalRepr {
     }
     
     public var id: String
-    private var token: Token?
+    private(set) var token: Token?
 
     private let taskSheduler: TaskSheduler
     private let attemptSheduler: AttemptSheduler
@@ -74,7 +75,12 @@ public final class SessionImpl: SessionInternalRepr {
     
     @discardableResult
     public func send(request: Request, callbacks: Callbacks) -> Task {
-        let task = taskMaker.task(request: request, callbacks: callbacks, attemptSheduler: attemptSheduler)
+        let task = taskMaker.task(
+            request: request,
+            callbacks: callbacks,
+            token: token,
+            attemptSheduler: attemptSheduler
+        )
         
         do {
             try throwIfDestroyed()

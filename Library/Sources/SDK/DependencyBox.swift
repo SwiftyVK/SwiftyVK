@@ -9,7 +9,7 @@ protocol SessionMaker {
 }
 
 protocol TaskMaker {
-    func task(request: Request, callbacks: Callbacks, attemptSheduler: AttemptSheduler) -> Task
+    func task(request: Request, callbacks: Callbacks, token: Token?, attemptSheduler: AttemptSheduler) -> Task
 }
 
 protocol AttemptMaker {
@@ -57,10 +57,11 @@ final class DependencyBoxImpl: DependencyBox {
         )
     }()
     
-    func task(request: Request, callbacks: Callbacks, attemptSheduler: AttemptSheduler) -> Task {
+    func task(request: Request, callbacks: Callbacks, token: Token?, attemptSheduler: AttemptSheduler) -> Task {
         return TaskImpl(
             request: request,
             callbacks: callbacks,
+            token: token,
             attemptSheduler: attemptSheduler,
             urlRequestBuilder: urlRequestBuilder(),
             attemptMaker: self

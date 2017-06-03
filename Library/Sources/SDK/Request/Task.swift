@@ -25,6 +25,7 @@ final class TaskImpl: Operation, Task {
     
     private var request: Request
     private let callbacks: Callbacks
+    private let token: Token?
     private let semaphore = DispatchSemaphore(value: 0)
     private var sendAttempts = 0
     private let attemptSheduler: AttemptSheduler
@@ -47,6 +48,7 @@ final class TaskImpl: Operation, Task {
     init(
         request: Request,
         callbacks: Callbacks,
+        token: Token?,
         attemptSheduler: AttemptSheduler,
         urlRequestBuilder: UrlRequestBuilder,
         attemptMaker: AttemptMaker
@@ -54,6 +56,7 @@ final class TaskImpl: Operation, Task {
         self.id = IdGenerator.next()
         self.request  = request
         self.callbacks = callbacks
+        self.token = token
         self.attemptSheduler = attemptSheduler
         self.urlRequestBuilder = urlRequestBuilder
         self.attemptMaker = attemptMaker
@@ -111,7 +114,8 @@ final class TaskImpl: Operation, Task {
             from: request.rawRequest,
             httpMethod: request.config.httpMethod,
             config: request.config,
-            capthca: makeCaptcha()
+            capthca: makeCaptcha(),
+            token: token
         )
         
         let newAttempt = attemptMaker.attempt(
@@ -122,7 +126,6 @@ final class TaskImpl: Operation, Task {
         
         try attemptSheduler.shedule(attempt: newAttempt, concurrent: request.rawRequest.canSentConcurrently)
         currentAttempt = newAttempt
-        
     }
     
     private func makeCaptcha() -> Captcha? {
@@ -195,10 +198,10 @@ final class TaskImpl: Operation, Task {
         
         switch error.errorCode {
         case 5:
-            if let error = LegacyAuthorizator.authorize() {
-                handleResult(.error(error))
-                break
-            }
+//            if let error = LegacyAuthorizator.authorize() {
+//                handleResult(.error(error))
+//                break
+//            }
             resendWith(error: error)
         case 14:
             guard
@@ -215,12 +218,12 @@ final class TaskImpl: Operation, Task {
             }
             resendWith(error: error)
         case 17:
-            if
-                let url = error.errorUserInfo["redirect_uri"] as? String,
-                let error = LegacyAuthorizator.validate(withUrl: url) {
-                handleResult(.error(error))
-                break
-            }
+//            if
+//                let url = error.errorUserInfo["redirect_uri"] as? String,
+//                let error = LegacyAuthorizator.validate(withUrl: url) {
+//                handleResult(.error(error))
+//                break
+//            }
             resendWith(error: error)
         default:
             execute(error: error)

@@ -1,12 +1,17 @@
 typealias Captcha = (sid: String, key: String)
 
 protocol QueryBuilder {
-    func makeQuery(from parameters: Parameters, config: Config, captcha: Captcha?) -> String
+    func makeQuery(parameters: Parameters, config: Config, captcha: Captcha?, token: Token?) -> String
 }
 
 final class QueryBuilderImpl: QueryBuilder {
     
-    func makeQuery(from parameters: Parameters, config: Config = .default, captcha: Captcha? = nil) -> String {
+    func makeQuery(
+        parameters: Parameters,
+        config: Config = .default,
+        captcha: Captcha? = nil,
+        token: Token?
+        ) -> String {
         let paramArray = NSMutableArray()
         
         var rawParameters = [String: String]()
@@ -20,8 +25,8 @@ final class QueryBuilderImpl: QueryBuilder {
         rawParameters["lang"] = config.language.rawValue
         rawParameters["https"] = "1"
         
-        if let token = LegacyToken.get() {
-             rawParameters["access_token"] = token
+        if let token = token?.get() {
+            rawParameters["access_token"] = token
         }
         
         if let captcha = captcha {

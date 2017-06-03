@@ -1,7 +1,7 @@
 import Foundation
 
 protocol UrlRequestBuilder {
-    func make(from request: Request.Raw, httpMethod: HttpMethod, config: Config, capthca: Captcha?)
+    func make(from request: Request.Raw, httpMethod: HttpMethod, config: Config, capthca: Captcha?, token: Token?)
         throws -> URLRequest
 }
 
@@ -24,7 +24,8 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         from request: Request.Raw,
         httpMethod: HttpMethod,
         config: Config,
-        capthca: Captcha?
+        capthca: Captcha?,
+        token: Token?
         )
         throws -> URLRequest
     {
@@ -37,7 +38,8 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
                 parameters: parameters,
                 httpMethod: httpMethod,
                 config: config,
-                capthca: capthca
+                capthca: capthca,
+                token: token
             )
         case .upload(let url, let media, let partType):
             urlRequest = try make(from: media, url: url, partType: partType)
@@ -55,11 +57,12 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         parameters: Parameters,
         httpMethod: HttpMethod,
         config: Config,
-        capthca: Captcha?
+        capthca: Captcha?,
+        token: Token?
         ) throws -> URLRequest {
         var req: URLRequest
         
-        let query = queryBuilder.makeQuery(from: parameters, config: config, captcha: capthca)
+        let query = queryBuilder.makeQuery(parameters: parameters, config: config, captcha: capthca, token: token)
         
         switch httpMethod {
         case .GET:

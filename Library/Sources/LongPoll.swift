@@ -26,10 +26,10 @@ extension VKLongPoll {
         ///Starting receiving updates from the long pool server
         public static func start() {
             lpQueue.async {
-                guard VK.state == .authorized && !isActive else {
-                    VK.Log.put("LongPoll", "User is not authorized or LongPoll is active yet")
-                    return
-                }
+//                guard VK.state == .authorized && !isActive else {
+//                    VK.Log.put("LongPoll", "User is not authorized or LongPoll is active yet")
+//                    return
+//                }
                 isActive = true
                 keyIsExpired = true
                 getServer()
