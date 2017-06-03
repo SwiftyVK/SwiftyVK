@@ -1,5 +1,7 @@
 import Foundation
 
+let sheetQueue = DispatchQueue(label: "SwiftyVK.sheetQueue")
+
 final class CaptchaPresenter {
     private let semaphore = DispatchSemaphore(value: 0)
     private var controller: CaptchaController!

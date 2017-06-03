@@ -5,27 +5,27 @@ private class ResourceTestClass {}
 struct Resources {
     private static let pathSuffix: String = {
         #if os(OSX)
-            return "-OSX"
+            return "_macOS"
         #elseif os(iOS)
-            return "-iOS"
+            return "_iOS"
         #elseif os(tvOS)
-            return "-tvOS"
+            return "_tvOS"
         #elseif os(watchOS)
-            return "-watchOS"
+            return "_watchOS"
         #endif
     }()
     
     static let bundle: Bundle = {
-        let name = "SwiftyVKResources" + pathSuffix
-        let `extension` = "bundle"
+        let name = "SwiftyVK_resources" + pathSuffix
+        let bundleType = "bundle"
         
         if
-            let path = Bundle.main.path(forResource: name, ofType: `extension`),
+            let path = Bundle.main.path(forResource: name, ofType: bundleType),
             let bundle = Bundle(path:path) {
             return bundle
         }
         else if
-            let path = Bundle(for:object_getClass(ResourceTestClass())).path(forResource: name, ofType: `extension`),
+            let path = Bundle(for:object_getClass(ResourceTestClass())).path(forResource: name, ofType: bundleType),
             let bundle = Bundle(path:path) {
             return bundle
         }

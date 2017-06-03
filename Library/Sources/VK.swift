@@ -1,10 +1,10 @@
 import Foundation
 #if os(iOS)
     import UIKit
-    public typealias Displayer = UIWindow
+    public typealias VkViewController = UIViewController
 #elseif os(OSX)
     import Cocoa
-    public typealias Displayer = NSWindow
+    public typealias VkViewController = NSViewController
 #endif
 
 ///Delegate to the SwiftyVK
@@ -39,7 +39,7 @@ public protocol LegacyVKDelegate: class {
 //
 //
 public protocol SwiftyVKDelegate: class {
-    func vkWillPresentView() -> Displayer?
+    func vkNeedToPresent(viewController: VkViewController)
     func vkWillLogIn(in session: Session) -> Scopes
     func vkDidLogOut(in session: Session)
 }
@@ -97,6 +97,8 @@ public struct VK {
         LegacyAuthorizator.recieveTokenURL(url: url, fromApp: app)
     }
     #endif
+    
+    static var hhh: WebPresenter?
 
     public static func logOut() {
         LP.stop()

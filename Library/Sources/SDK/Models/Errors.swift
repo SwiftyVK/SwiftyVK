@@ -14,6 +14,7 @@ public enum SessionError: Int, CustomNSError, CustomStringConvertible {
     case authCalledFromMainThread   = 11
     case webPresenterResultIsNil    = 12
     case wrongAuthUrl               = 13
+    case webPresenterTimedOut       = 14
 
     public static let errorDomain = "SwiftyVKSessionError"
     public var errorCode: Int {return rawValue}

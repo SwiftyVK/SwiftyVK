@@ -1,10 +1,10 @@
 protocol WebPresenter: class {
-    func presentWith(url: URL) throws -> String
+    func presentWith(urlRequest: URLRequest) throws -> String
     func dismiss()
 }
 
 protocol WebHandler: class {
-    func handle(url: URL)
+    func handle(url: URL?)
     func handle(error: Error)
 }
 
@@ -20,9 +20,15 @@ final class WebPresenterImpl: WebPresenter, WebHandler {
         self.controller = controller
     }
     
-    func presentWith(url: URL) throws -> String {
-        controller.load(url: url, handler: self)
-        semaphore.wait()
+    func presentWith(urlRequest: URLRequest) throws -> String {
+        controller.load(urlRequest: urlRequest, handler: self)
+        
+        switch semaphore.wait(timeout: .now() + 60) {
+        case .success:
+            break
+        case .timedOut:
+            throw SessionError.webPresenterTimedOut
+        }
         
         switch result {
         case .response(let response)?:
@@ -34,7 +40,13 @@ final class WebPresenterImpl: WebPresenter, WebHandler {
         }
     }
     
-    func handle(url: URL) {
+    func handle(url: URL?) {
+        
+        guard let url = url else {
+            finishWith(.error(SessionError.wrongAuthUrl))
+            return
+        }
+        
         let host = url.host ?? ""
         let query = url.query ?? ""
         let fragment = url.fragment ?? ""
@@ -56,13 +68,6 @@ final class WebPresenterImpl: WebPresenter, WebHandler {
         }
         else if fragment.contains("fail=1") {
             finishWith(.error(SessionError.failedAuthorization))
-        }
-        else if host.contains("vk.com") && (
-            url.path == "/authorize" ||
-            url.path == "/login" ||
-            query.contains("act=security_check") ||
-            query.contains("api_validation_test")) {
-            controller.expand()
         }
         else {
             controller.goBack()

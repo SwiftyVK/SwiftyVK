@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="12120"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="WebController_macOS" customModule="SwiftyVK">
+            <connections>
+                <outlet property="preloader" destination="Zns-3x-kAU" id="qI8-kA-HDx"/>
+                <outlet property="view" destination="c22-O7-iKe" id="RDV-vd-nQT"/>
+                <outlet property="webView" destination="lhV-Wc-Fsb" id="dA6-1v-Jci"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lhV-Wc-Fsb">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+                    <wkWebViewConfiguration key="configuration">
+                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                        <wkPreferences key="preferences"/>
+                    </wkWebViewConfiguration>
+                </wkWebView>
+                <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Zns-3x-kAU">
+                    <rect key="frame" x="224" y="120" width="32" height="32"/>
+                </progressIndicator>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="lhV-Wc-Fsb" secondAttribute="bottom" id="0be-LA-nCd"/>
+                <constraint firstItem="Zns-3x-kAU" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="UeS-R7-6Yh"/>
+                <constraint firstAttribute="trailing" secondItem="lhV-Wc-Fsb" secondAttribute="trailing" id="ZKg-B2-zoO"/>
+                <constraint firstItem="Zns-3x-kAU" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="ghj-hK-Yd1"/>
+                <constraint firstItem="lhV-Wc-Fsb" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="kE8-Hs-VRM"/>
+                <constraint firstItem="lhV-Wc-Fsb" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="piW-aF-o9k"/>
+            </constraints>
+        </customView>
+    </objects>
+</document>

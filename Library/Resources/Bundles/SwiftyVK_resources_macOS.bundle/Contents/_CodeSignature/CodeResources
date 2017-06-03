@@ -4,82 +4,82 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Base.lproj/CaptchaView_iOS.nib</key>
+		<key>Resources/Base.lproj/CaptchaView_OSX.nib</key>
 		<data>
-		OJ8VVZ1cbNy2nM4eLilKdxhOxHM=
+		3icvBWZSRTgEKDNfoWj531FtbME=
 		</data>
-		<key>Base.lproj/WebView_iOS.nib</key>
+		<key>Resources/WebView_macOS.nib</key>
 		<data>
-		untR8tIA2neuM3LLavctNkv/pGo=
+		DsTRPenXPtMRIqVRlLi1UN7TlEY=
 		</data>
-		<key>be.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/be.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5c6dBCFO6zgnMPpiUU1ZqDvglUI=
+			+Gw8wvTNGUtiI7QaUE2ygVtUQ6A=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>de.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/de.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			DSGtLgLYevU/gv+BUO5GruSzQno=
+			zk2Ldpy4f1WSf5NV0sSfZDqzn9o=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>en.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/en.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			u2QZlWWLJsT4Q0n/gLtGsSqVGeY=
+			n9FpQnLPSkylQf775j2fkGgHn48=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>es.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/es.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			2fCDGpwopGEZEvFXMGXYE7wr93U=
+			avfZUUF6Ug0Vf5pzOHtV11fEbFo=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>fi.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/fi.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			28xDO8aW5k2hV9pTZsIlHw8w/34=
+			a46OtLjBLaXbOzfi8FQTnITyCo0=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>it.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/it.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9WBlgovoA7sa3bRLq0L6hO8RL4g=
+			1ag2uJWp8o51XB5jV1sUzmWmdNo=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>ru.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/ru.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7dt8R04UebXGnp2X0+fkHX4XYxk=
+			5rVSPW2SKkdIwPjiRYsltI3TBe0=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>uk.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/uk.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			u2QZlWWLJsT4Q0n/gLtGsSqVGeY=
+			yDZHBEjymFw4fBrpaOWdMOX4ryo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -87,128 +87,128 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Base.lproj/CaptchaView_iOS.nib</key>
+		<key>Resources/Base.lproj/CaptchaView_OSX.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OJ8VVZ1cbNy2nM4eLilKdxhOxHM=
+			3icvBWZSRTgEKDNfoWj531FtbME=
 			</data>
 			<key>hash2</key>
 			<data>
-			cs3A9WaDPDBrcSJ9SRdfNkqUvkAHAQ4jRasjig/QdXo=
+			qy+LG+zi9c0lfTSNzQ01hB5GwVjtc97srTcZDITBAy8=
 			</data>
 		</dict>
-		<key>Base.lproj/WebView_iOS.nib</key>
+		<key>Resources/WebView_macOS.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			untR8tIA2neuM3LLavctNkv/pGo=
+			DsTRPenXPtMRIqVRlLi1UN7TlEY=
 			</data>
 			<key>hash2</key>
 			<data>
-			aIeG/T+8bTyE7qwonbbdfYeWNAp++JZsX2J0F0kB6ag=
+			69L7XiNyle/xyUn4KGVkxhSZ7B7HBCk/iTdFhVy0pl4=
 			</data>
 		</dict>
-		<key>be.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/be.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5c6dBCFO6zgnMPpiUU1ZqDvglUI=
+			+Gw8wvTNGUtiI7QaUE2ygVtUQ6A=
 			</data>
 			<key>hash2</key>
 			<data>
-			CG+ULURYF429MlUWw1oaRogLHg21C6I9iHmw3+9oZWk=
+			mXMKirTBTXUN74QLDAyl5hjQOJu8wfWbXNJoReDOpkM=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>de.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/de.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			DSGtLgLYevU/gv+BUO5GruSzQno=
+			zk2Ldpy4f1WSf5NV0sSfZDqzn9o=
 			</data>
 			<key>hash2</key>
 			<data>
-			iOO/ViaSadzMUGlkhtW5mQ1ZBxfFHTGNmOlDCqUvgH8=
+			ysq/mL2elAbT46qKjiroErKs7KwNRx2Ud6+/QYZqVmM=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>en.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/en.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			u2QZlWWLJsT4Q0n/gLtGsSqVGeY=
+			n9FpQnLPSkylQf775j2fkGgHn48=
 			</data>
 			<key>hash2</key>
 			<data>
-			RXYq3tDHkJX5kuaEaoScRwNEtVUZazRTjgxsTA5sz+U=
+			gxPvzWZjZbwDyPzdYflzaW88GBVnub08+1lpICJXtkU=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>es.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/es.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			2fCDGpwopGEZEvFXMGXYE7wr93U=
+			avfZUUF6Ug0Vf5pzOHtV11fEbFo=
 			</data>
 			<key>hash2</key>
 			<data>
-			SEQAeq2d0IQIFJALLnXS+M1oxIRgP2EAB06uRLNkVk8=
+			33Tx1qSnfPMqXSw1tDpcoEHIkL+iDdbY/HSCqG3YKZo=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>fi.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/fi.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			28xDO8aW5k2hV9pTZsIlHw8w/34=
+			a46OtLjBLaXbOzfi8FQTnITyCo0=
 			</data>
 			<key>hash2</key>
 			<data>
-			KzKIVT3hi1KIJVvrbSySzYVKQ9WqS9OY+dK9jxQyWko=
+			au60b73bCcLhnQ7p5PrmAODidSfhjjP8I7VZ1HSk7xE=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>it.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/it.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9WBlgovoA7sa3bRLq0L6hO8RL4g=
+			1ag2uJWp8o51XB5jV1sUzmWmdNo=
 			</data>
 			<key>hash2</key>
 			<data>
-			C4JgnWymnM1FdBCyCxOonbJK8TW0bYRg5p4GVp63tx8=
+			47bBnGbvbmW4l6NB+InNV7QpXp0tcq6+r1VRC2ja8Vc=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>ru.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/ru.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7dt8R04UebXGnp2X0+fkHX4XYxk=
+			5rVSPW2SKkdIwPjiRYsltI3TBe0=
 			</data>
 			<key>hash2</key>
 			<data>
-			9kXC1/s6lRKQ5lNpC7X+wOEjAk+bthcedd3KJQ3tmFI=
+			QhDGKnxY2Q8Lif+qbeG1R3u7cy49/jXYNTRtjU8IoY0=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>uk.lproj/CaptchaView_iOS.strings</key>
+		<key>Resources/uk.lproj/CaptchaView_OSX.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			u2QZlWWLJsT4Q0n/gLtGsSqVGeY=
+			yDZHBEjymFw4fBrpaOWdMOX4ryo=
 			</data>
 			<key>hash2</key>
 			<data>
-			RXYq3tDHkJX5kuaEaoScRwNEtVUZazRTjgxsTA5sz+U=
+			INGPPqvYVJ6FhC5Ccte1D2zQ++0+PXrbuzzSFh7C0tk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -216,23 +216,23 @@
 	</dict>
 	<key>rules</key>
 	<dict>
-		<key>^</key>
+		<key>^Resources/</key>
 		<true/>
-		<key>^.*\.lproj/</key>
+		<key>^Resources/.*\.lproj/</key>
 		<dict>
 			<key>optional</key>
 			<true/>
 			<key>weight</key>
 			<real>1000</real>
 		</dict>
-		<key>^.*\.lproj/locversion.plist$</key>
+		<key>^Resources/.*\.lproj/locversion.plist$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
 		</dict>
-		<key>^Base\.lproj/</key>
+		<key>^Resources/Base\.lproj/</key>
 		<dict>
 			<key>weight</key>
 			<real>1010</real>
@@ -246,11 +246,6 @@
 		<dict>
 			<key>weight</key>
 			<real>11</real>
-		</dict>
-		<key>^</key>
-		<dict>
-			<key>weight</key>
-			<real>20</real>
 		</dict>
 		<key>^(.*/)?\.DS_Store$</key>
 		<dict>
@@ -268,25 +263,6 @@
 		</dict>
 		<key>^.*</key>
 		<true/>
-		<key>^.*\.lproj/</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>1000</real>
-		</dict>
-		<key>^.*\.lproj/locversion.plist$</key>
-		<dict>
-			<key>omit</key>
-			<true/>
-			<key>weight</key>
-			<real>1100</real>
-		</dict>
-		<key>^Base\.lproj/</key>
-		<dict>
-			<key>weight</key>
-			<real>1010</real>
-		</dict>
 		<key>^Info\.plist$</key>
 		<dict>
 			<key>omit</key>
@@ -300,6 +276,30 @@
 			<true/>
 			<key>weight</key>
 			<real>20</real>
+		</dict>
+		<key>^Resources/</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^Resources/.*\.lproj/</key>
+		<dict>
+			<key>optional</key>
+			<true/>
+			<key>weight</key>
+			<real>1000</real>
+		</dict>
+		<key>^Resources/.*\.lproj/locversion.plist$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>1100</real>
+		</dict>
+		<key>^Resources/Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^[^/]+$</key>
 		<dict>
