@@ -13,8 +13,6 @@ class VKDelegateExample: SwiftyVKDelegate {
     let appId = "4994842"
     let scopes: Scopes = [.messages,.offline,.friends,.wall,.photos,.audio,.video,.docs,.market,.email]
     
-    
-    
     init() {
         VK.prepareForUse(appId: appId, delegate: self)
     }
@@ -26,8 +24,6 @@ class VKDelegateExample: SwiftyVKDelegate {
             }
         #elseif os(iOS)
             if let rootController = UIApplication.shared.keyWindow?.rootViewController {
-                viewController.modalPresentationStyle = .overFullScreen
-                viewController.modalTransitionStyle = .crossDissolve
                 rootController.present(viewController, animated: true, completion: nil)
             }
         #endif

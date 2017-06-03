@@ -8,26 +8,30 @@ protocol Authorizator: class {
 final class AuthorizatorImpl: Authorizator {
     
     private let queue = DispatchQueue(label: "SwiftyVK.authorizatorQueue")
-    private let redirectUrl = "https://oauth.vk.com/blank.html"
     private let webAuthorizeUrl = "https://oauth.vk.com/authorize?"
+    private let webRedirectUrl = "https://oauth.vk.com/blank.html"
     
     private weak var delegate: SwiftyVKDelegate?
     private let appId: String
     private let tokenStorage: TokenStorage
     private let tokenMaker: TokenMaker
     private let vkAppProxy: VkAppProxy
+    private let webPresenterMaker: WebPresenterMaker
     
     init(
         appId: String,
         delegate: SwiftyVKDelegate?,
         tokenStorage: TokenStorage,
         tokenMaker: TokenMaker,
-        vkAppProxy: VkAppProxy
+        vkAppProxy: VkAppProxy,
+        webPresenterMaker: WebPresenterMaker
         ) {
         self.appId = appId
+        self.delegate = delegate
         self.tokenStorage = tokenStorage
         self.tokenMaker = tokenMaker
         self.vkAppProxy = vkAppProxy
+        self.webPresenterMaker = webPresenterMaker
     }
     
     func authorize(session: Session, revoke: Bool) throws -> Token {
@@ -41,11 +45,35 @@ final class AuthorizatorImpl: Authorizator {
                 return token
             }
             
-            try vkAppProxy.authorizeWith(
+            let canAuthWithApp = try vkAppProxy.authorizeWith(
                 query: makeAuthQuery(session: session, redirectUrl: nil, revoke: revoke)
             )
             
-            Thread.sleep(forTimeInterval: 1)
+            if canAuthWithApp {
+                Thread.sleep(forTimeInterval: 1)
+            }
+            
+            let webQuery = try makeAuthQuery(
+                session: session,
+                redirectUrl: webRedirectUrl,
+                revoke: revoke
+            )
+            
+            guard let url = URL(string: webAuthorizeUrl + webQuery) else {
+                throw SessionError.cantBuildUrlForWebView
+            }
+            
+            let urlRequest = URLRequest(
+                url: url,
+                cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData,
+                timeoutInterval: 10
+            )
+            
+            guard let webPresenter = webPresenterMaker.webPresenter() else {
+                throw SessionError.cantMakeWebViewController
+            }
+            
+            let tokenInfo = try webPresenter.presentWith(urlRequest: urlRequest)
             
             let token = tokenMaker.token(token: "", expires: 0, info: [:])
             try tokenStorage.save(token: token, for:  session.id)

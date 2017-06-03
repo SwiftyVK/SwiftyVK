@@ -1,80 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WebController_iOS" customModule="SwiftyVK">
             <connections>
-                <outlet property="activity" destination="T6r-ub-hfe" id="5R5-N5-Apg"/>
-                <outlet property="view" destination="iN0-l3-epB" id="s3M-Cn-IlB"/>
-                <outlet property="webView" destination="h8N-Ch-Xvn" id="Qk6-fS-FLm"/>
+                <outlet property="preloader" destination="T6r-ub-hfe" id="aMq-Md-hMl"/>
+                <outlet property="view" destination="iN0-l3-epB" id="OXM-PC-KHV"/>
+                <outlet property="webView" destination="PHn-Ey-7Qe" id="4tc-Qr-ceE"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <visualEffectView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IRK-sl-Rxa">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <view key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="9EE-u4-Fbk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <visualEffectView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EYz-J3-bz0">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="p4M-jl-L0X">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
                     <blurEffect style="light"/>
                 </visualEffectView>
-                <webView contentMode="scaleToFill" scalesPageToFit="YES" allowsInlineMediaPlayback="NO" mediaPlaybackRequiresUserAction="NO" mediaPlaybackAllowsAirPlay="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8N-Ch-Xvn">
-                    <rect key="frame" x="10" y="22" width="356" height="634"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <dataDetectorType key="dataDetectorTypes"/>
-                </webView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PHn-Ey-7Qe" customClass="VKWebView" customModule="SwiftyVK">
+                    <rect key="frame" x="20" y="30" width="280" height="430"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="T6r-ub-hfe">
-                    <rect key="frame" x="169" y="315" width="37" height="37"/>
+                    <rect key="frame" x="141.5" y="221.5" width="37" height="37"/>
                     <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="IRK-sl-Rxa" secondAttribute="bottom" id="1Ht-Rb-kpw"/>
-                <constraint firstAttribute="trailing" secondItem="IRK-sl-Rxa" secondAttribute="trailing" id="2hf-Qo-kOw"/>
-                <constraint firstItem="IRK-sl-Rxa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LAn-cB-EAD"/>
-                <constraint firstItem="IRK-sl-Rxa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="NCC-Kf-DhB"/>
+                <constraint firstAttribute="bottom" secondItem="EYz-J3-bz0" secondAttribute="bottom" id="9EQ-sd-gYp"/>
+                <constraint firstItem="EYz-J3-bz0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="CCx-eR-35T"/>
+                <constraint firstAttribute="trailing" secondItem="PHn-Ey-7Qe" secondAttribute="trailing" constant="20" id="NHC-lA-m79"/>
                 <constraint firstItem="T6r-ub-hfe" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="OaC-eX-ekG"/>
-                <constraint firstItem="h8N-Ch-Xvn" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="5" id="Pes-es-Viy"/>
-                <constraint firstItem="h8N-Ch-Xvn" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.95" id="bVA-Dj-yPQ"/>
-                <constraint firstItem="h8N-Ch-Xvn" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.95" id="kmh-tn-jF4"/>
-                <constraint firstItem="h8N-Ch-Xvn" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="t4d-Ux-ay8"/>
+                <constraint firstItem="PHn-Ey-7Qe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="QKP-HS-yhu"/>
+                <constraint firstAttribute="bottom" secondItem="PHn-Ey-7Qe" secondAttribute="bottom" constant="20" id="UDl-FV-dsO"/>
+                <constraint firstItem="PHn-Ey-7Qe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="aLB-ZC-WeD"/>
+                <constraint firstItem="EYz-J3-bz0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cf8-iO-yos"/>
+                <constraint firstAttribute="trailing" secondItem="EYz-J3-bz0" secondAttribute="trailing" id="pGZ-D1-ofb"/>
                 <constraint firstItem="T6r-ub-hfe" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="vh8-3j-Sgx"/>
-                <constraint firstItem="h8N-Ch-Xvn" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="w7D-du-lsU"/>
             </constraints>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="Pes-es-Viy"/>
-                </mask>
-            </variation>
-            <variation key="heightClass=compact">
-                <mask key="constraints">
-                    <include reference="t4d-Ux-ay8"/>
-                </mask>
-            </variation>
-            <variation key="heightClass=regular-widthClass=compact">
-                <mask key="constraints">
-                    <include reference="Pes-es-Viy"/>
-                    <exclude reference="t4d-Ux-ay8"/>
-                </mask>
-            </variation>
-            <variation key="heightClass=regular-widthClass=regular">
-                <mask key="constraints">
-                    <include reference="t4d-Ux-ay8"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="265" y="200"/>
         </view>
     </objects>

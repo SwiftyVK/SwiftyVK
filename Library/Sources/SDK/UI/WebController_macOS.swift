@@ -8,7 +8,7 @@ final class WebController_macOS: NSViewController, WKNavigationDelegate, WebCont
     
     private weak var handler: WebHandler?
     private var currentRequest: URLRequest?
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.styleMask.remove(.resizable)

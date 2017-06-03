@@ -10,7 +10,7 @@ protocol UrlOpener {
 }
 
 #if os(OSX)
-    final class MacOsApplication: UrlOpener {
+    final class UrlOpener_macOS: UrlOpener {
         func canOpenURL(_ url: URL) -> Bool {
             return false
         }

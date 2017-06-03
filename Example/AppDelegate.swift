@@ -52,11 +52,3 @@ var vkDelegateReference : SwiftyVKDelegate?
         }
     }
 #endif
-
-
-
-extension AppDelegate {
-    @IBAction func buttonDown(_ sender: AnyObject) {
-        APIWorker.action(sender.tag)
-    }
-}

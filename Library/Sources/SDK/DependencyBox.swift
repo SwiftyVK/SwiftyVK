@@ -20,7 +20,11 @@ protocol TokenMaker {
     func token(token: String, expires: TimeInterval, info: [String : String]) -> Token
 }
 
-protocol DependencyBox: SessionMaker, TaskMaker, AttemptMaker, TokenMaker {
+protocol WebPresenterMaker {
+    func webPresenter() -> WebPresenter?
+}
+
+protocol DependencyBox: SessionMaker, TaskMaker, AttemptMaker, TokenMaker, WebPresenterMaker {
     var sessionStorage: SessionStorage { get }
     func session() -> Session
 }
@@ -34,7 +38,7 @@ final class DependencyBoxImpl: DependencyBox {
         self.appId = appId
         self.delegate = delegate
     }
-
+    
     lazy public var sessionStorage: SessionStorage = {
         return SessionStorageImpl(sessionMaker: self)
     }()
@@ -55,7 +59,7 @@ final class DependencyBoxImpl: DependencyBox {
         #if os(iOS)
             urlOpener = UIApplication.shared
         #elseif os(macOS)
-            urlOpener = MacOsApplication()
+            urlOpener = UrlOpener_macOS()
         #endif
         
         let vkAppProxy = VkAppProxyImpl(
@@ -68,9 +72,37 @@ final class DependencyBoxImpl: DependencyBox {
             delegate: self.delegate,
             tokenStorage: TokenStorageImpl(),
             tokenMaker: self,
-            vkAppProxy: vkAppProxy
+            vkAppProxy: vkAppProxy,
+            webPresenterMaker: self
         )
     }()
+    
+    func webPresenter() -> WebPresenter? {
+        
+        #if os(iOS)
+            let webController = WebController_iOS(
+                nibName: Resources.withSuffix("WebView"),
+                bundle: Resources.bundle
+            )
+        #elseif os(macOS)
+            guard let webController = WebController_macOS(
+                nibName: Resources.withSuffix("WebView"),
+                bundle: Resources.bundle
+                ) else {
+                    return nil
+            }
+        #endif
+        
+        let webPresenter = WebPresenterImpl(
+            controller: webController
+        )
+        
+        DispatchQueue.main.sync {
+            self.delegate?.vkNeedToPresent(viewController: webController)
+        }
+        
+        return webPresenter
+    }
     
     func task(request: Request, callbacks: Callbacks, token: Token?, attemptSheduler: AttemptSheduler) -> Task {
         return TaskImpl(
