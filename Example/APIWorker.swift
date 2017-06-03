@@ -28,16 +28,19 @@ final class APIWorker {
     
     
     class func authorize() {
-        VK.logOut()
+        VK.sessions?.default.logOut()
         print("SwiftyVK: LogOut")
-        VK.logIn()
-        print("SwiftyVK: authorize")
+        
+        DispatchQueue.global().async {
+            _ = try? VK.sessions?.default.logIn()
+            print("SwiftyVK: authorize")
+        }
     }
     
     
     
     class func logout() {
-        VK.logOut()
+        VK.sessions?.default.logOut()
         print("SwiftyVK: LogOut")
     }
     

@@ -27,6 +27,14 @@ protocol DependencyBox: SessionMaker, TaskMaker, AttemptMaker, TokenMaker {
 
 final class DependencyBoxImpl: DependencyBox {
     
+    private let appId: String
+    private weak var delegate: SwiftyVKDelegate?
+    
+    init(appId: String, delegate: SwiftyVKDelegate?) {
+        self.appId = appId
+        self.delegate = delegate
+    }
+
     lazy public var sessionStorage: SessionStorage = {
         return SessionStorageImpl(sessionMaker: self)
     }()
@@ -50,10 +58,17 @@ final class DependencyBoxImpl: DependencyBox {
             urlOpener = MacOsApplication()
         #endif
         
+        let vkAppProxy = VkAppProxyImpl(
+            appId: self.appId,
+            urlOpener: urlOpener
+        )
+        
         return AuthorizatorImpl(
+            appId: self.appId,
+            delegate: self.delegate,
             tokenStorage: TokenStorageImpl(),
             tokenMaker: self,
-            vkAppProxy: VkAppProxyImpl(urlOpener: urlOpener)
+            vkAppProxy: vkAppProxy
         )
     }()
     

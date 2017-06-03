@@ -6,9 +6,14 @@ protocol VkAppProxy: class {
 final class VkAppProxyImpl: VkAppProxy {
     
     private let baseUrl = "vkauthorize://authorize?"
+    private let appId: String
     private let urlOpener: UrlOpener
     
-    init(urlOpener: UrlOpener) {
+    init(
+        appId: String,
+        urlOpener: UrlOpener
+        ) {
+        self.appId = appId
         self.urlOpener = urlOpener
     }
     
@@ -25,7 +30,7 @@ final class VkAppProxyImpl: VkAppProxy {
     }
     
     private func canOpenUrl() throws -> Bool {
-        guard let url = VK.appId.flatMap({ URL(string: "vk\($0)://") }) else {
+        guard let url = URL(string: "vk\(appId)://") else {
             throw SessionError.cantBuildUrlForVkApp
         }
         
@@ -33,10 +38,6 @@ final class VkAppProxyImpl: VkAppProxy {
     }
     
     func recieveFrom(url: URL, app: String?) -> String? {
-        guard let appId = VK.appId else {
-            return nil
-        }
-        
         guard (app == "com.vk.vkclient" || app == "com.vk.vkhd") && url.scheme == "vk\(appId)" else {
             return nil
         }

@@ -5,6 +5,7 @@ public protocol Session: class {
     @discardableResult
     func logIn() throws -> [String : String]
     func logInWith(rawToken: String, expires: TimeInterval) throws
+    func logOut()
     @discardableResult
     func send(request: Request, callbacks: Callbacks) -> Task
 }
@@ -116,6 +117,10 @@ public final class SessionImpl: SessionInternalRepr {
         config.onAttemptsPerSecLimitChange = { [weak attemptSheduler] newLimit in
             attemptSheduler?.setLimit(to: newLimit)
         }
+    }
+    
+    deinit {
+        logOut()
     }
 }
 

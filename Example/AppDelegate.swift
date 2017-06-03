@@ -2,7 +2,7 @@ import SwiftyVK
 
 
 
-var vkDelegateReference : LegacyVKDelegate?
+var vkDelegateReference : SwiftyVKDelegate?
 
 
 #if os(iOS)

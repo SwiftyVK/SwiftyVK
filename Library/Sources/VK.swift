@@ -43,30 +43,25 @@ public protocol SwiftyVKDelegate: class {
     func vkWillLogIn(in session: Session) -> Scopes
     func vkDidLogOut(in session: Session)
 }
-/**
- Library to connect to the social network "VKontakte"
- * To use, you must call configure() specifying the application ID and a delegate
- * For user authentication you must call authorize()
- */
-public struct VK {
+
+
+public final class VK {
     
     public struct Api {
         private init() {}
     }
     
-    public internal(set) static var sessions: SessionStorage = {
-        assert(appId != nil, "You should initialize SwiftyVK first with VK.initializeWith(_:_:)")
-        return DependencyBoxImpl().sessionStorage
-    }()
-    
-    static var delegate: SwiftyVKDelegate?
-    weak static var legacyDelegate: LegacyVKDelegate?
-    public private(set) static var appId: String?
-
-    public static func initializeWith(appId: String, delegate: SwiftyVKDelegate) {
-        self.appId = appId
-        self.delegate = delegate
+    public static func prepareForUse(appId: String, delegate: SwiftyVKDelegate) {
+        dependencyBox = DependencyBoxImpl(appId: appId, delegate: delegate)
     }
+    
+    public static var sessions: SessionStorage? {
+        return dependencyBox?.sessionStorage
+    }
+    
+    weak static var legacyDelegate: LegacyVKDelegate?
+
+    private static var dependencyBox: DependencyBox?
  
     #if os(iOS)
     public static func process(url: URL, sourceApplication app: String?) {

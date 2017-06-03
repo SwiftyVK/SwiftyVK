@@ -8,58 +8,36 @@ import SwiftyVK
 
 
 
-class VKDelegateExample: LegacyVKDelegate {
-    let appID = "4994842"
-    let scope: Set<VK.Scope> = [.messages,.offline,.friends,.wall,.photos,.audio,.video,.docs,.market,.email]
+class VKDelegateExample: SwiftyVKDelegate {
+
+    let appId = "4994842"
+    let scopes: Scopes = [.messages,.offline,.friends,.wall,.photos,.audio,.video,.docs,.market,.email]
     
     
     
     init() {
-        VK.configure(withAppId: appID, delegate: self)
+        VK.prepareForUse(appId: appId, delegate: self)
+    }
+
+    func vkNeedToPresent(viewController: VkViewController) {
+        #if os(OSX)
+            if let contentController = NSApplication.shared().keyWindow?.contentViewController {
+                contentController.presentViewControllerAsSheet(viewController)
+            }
+        #elseif os(iOS)
+            if let rootController = UIApplication.shared.keyWindow?.rootViewController {
+                viewController.modalPresentationStyle = .overFullScreen
+                viewController.modalTransitionStyle = .crossDissolve
+                rootController.present(viewController, animated: true, completion: nil)
+            }
+        #endif
     }
     
-    
-    
-    func vkWillAuthorize() -> Set<VK.Scope> {
-        return scope
+    func vkWillLogIn(in session: Session) -> Scopes {
+        return scopes
     }
     
-    
-    
-    func vkDidAuthorizeWith(parameters: Dictionary<String, String>) {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "TestVkDidAuthorize"), object: nil)
+    func vkDidLogOut(in session: Session) {
+        print("logout in", session.id)
     }
-    
-    
-    
-    
-    func vkAutorizationFailedWith(error: SessionError) {
-        print("Autorization failed with error: \n\(error)")
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "TestVkDidNotAuthorize"), object: nil)
-    }
-    
-    
-    
-    func vkDidUnauthorize() {}
-    
-    
-    
-    func vkShouldUseTokenPath() -> String? {
-        return nil
-    }
-    
-    
-    
-    #if os(OSX)
-    func vkWillPresentView() -> NSWindow? {
-        return NSApplication.shared().windows[0]
-    }
-    
-    
-    
-    #elseif os(iOS)
-    func vkWillPresentView() -> UIViewController {
-        return UIApplication.shared.delegate!.window!!.rootViewController!
-    }
-    #endif
 }

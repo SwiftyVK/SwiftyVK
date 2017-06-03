@@ -11,11 +11,20 @@ final class AuthorizatorImpl: Authorizator {
     private let redirectUrl = "https://oauth.vk.com/blank.html"
     private let webAuthorizeUrl = "https://oauth.vk.com/authorize?"
     
+    private weak var delegate: SwiftyVKDelegate?
+    private let appId: String
     private let tokenStorage: TokenStorage
     private let tokenMaker: TokenMaker
     private let vkAppProxy: VkAppProxy
     
-    init(tokenStorage: TokenStorage, tokenMaker: TokenMaker, vkAppProxy: VkAppProxy) {
+    init(
+        appId: String,
+        delegate: SwiftyVKDelegate?,
+        tokenStorage: TokenStorage,
+        tokenMaker: TokenMaker,
+        vkAppProxy: VkAppProxy
+        ) {
+        self.appId = appId
         self.tokenStorage = tokenStorage
         self.tokenMaker = tokenMaker
         self.vkAppProxy = vkAppProxy
@@ -45,11 +54,8 @@ final class AuthorizatorImpl: Authorizator {
     }
     
     func makeAuthQuery(session: Session, redirectUrl: String?, revoke: Bool) throws -> String {
-        guard let appId = VK.appId else {
-            throw SessionError.notConfigured
-        }
         
-        guard let scopes = VK.delegate?.vkWillLogIn(in: session).toInt() else {
+        guard let scopes = delegate?.vkWillLogIn(in: session).toInt() else {
             throw SessionError.delegateNotFound
         }
         
@@ -81,7 +87,7 @@ final class AuthorizatorImpl: Authorizator {
     
     func reset(session: Session) -> Token? {
         tokenStorage.removeFor(sessionId: session.id)
-        VK.delegate?.vkDidLogOut(in: session)
+        delegate?.vkDidLogOut(in: session)
         return nil
     }
 }
