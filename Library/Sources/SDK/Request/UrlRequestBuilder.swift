@@ -1,7 +1,7 @@
 import Foundation
 
 protocol UrlRequestBuilder {
-    func make(from request: Request.Raw, httpMethod: HttpMethod, config: Config, capthca: Captcha?, token: Token?)
+    func build(request: Request.Raw, httpMethod: HttpMethod, config: Config, capthca: Captcha?, token: Token?)
         throws -> URLRequest
 }
 
@@ -20,8 +20,8 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         self.bodyBuilder = bodyBuilder
     }
     
-    func make(
-        from request: Request.Raw,
+    func build(
+        request: Request.Raw,
         httpMethod: HttpMethod,
         config: Config,
         capthca: Captcha?,

@@ -20,7 +20,7 @@ final class QueryBuilderTests: BaseTestCase {
     
     func test_apiVersion() {
         // When
-        let sample = parameters(from: builder.makeQuery(from: .empty))
+        let sample = parameters(from: builder.makeQuery(parameters: .empty))
 
         // Then
         XCTAssertEqual(sample["v"], SessionConfig.apiVersion)
@@ -28,7 +28,7 @@ final class QueryBuilderTests: BaseTestCase {
 
     func test_language() {
         // When
-        let sample = parameters(from: builder.makeQuery(from: .empty))
+        let sample = parameters(from: builder.makeQuery(parameters: .empty))
         
         // Then
         XCTAssertEqual(sample["lang"], SessionConfig.default.language.rawValue)
@@ -36,7 +36,7 @@ final class QueryBuilderTests: BaseTestCase {
 
     func test_httpsFlag() {
         // When
-        let sample = parameters(from: builder.makeQuery(from: .empty))
+        let sample = parameters(from: builder.makeQuery(parameters: .empty))
         
         // Then
         XCTAssertEqual(sample["https"], "1")
@@ -44,7 +44,7 @@ final class QueryBuilderTests: BaseTestCase {
 
     func test_apiGetRequestParameters() {
         // When
-        let sample = parameters(from: builder.makeQuery(from: [.userId: "test"]))
+        let sample = parameters(from: builder.makeQuery(parameters: [.userId: "test"]))
         
         // Then
         XCTAssertEqual(sample[VK.Arg.userId.rawValue], "test")
@@ -52,7 +52,7 @@ final class QueryBuilderTests: BaseTestCase {
     
     func test_ignoreNullParameter() {
         // When
-        let sample = parameters(from: builder.makeQuery(from: [.userId: nil]))
+        let sample = parameters(from: builder.makeQuery(parameters: [.userId: nil]))
         
         // Then
         XCTAssertFalse(sample.keys.contains(VK.Arg.userId.rawValue))
@@ -60,7 +60,7 @@ final class QueryBuilderTests: BaseTestCase {
     
     func test_addCaptchaParameters() {
         // When
-        let sample = parameters(from: builder.makeQuery(from: [.userId: nil], captcha: (sid: "sid", key: "key")))
+        let sample = parameters(from: builder.makeQuery(parameters: [.userId: nil], captcha: (sid: "sid", key: "key")))
         
         // Then
         XCTAssertEqual(sample["captcha_sid"], "sid")
@@ -72,7 +72,7 @@ final class QueryBuilderTests: BaseTestCase {
         let rawMessage = " !#$&'()*+,./:;=?@[]"
         
         // When
-        let encodedQuery = builder.makeQuery(from: [.message: rawMessage])
+        let encodedQuery = builder.makeQuery(parameters: [.message: rawMessage])
         let encodedMesage = encodedQuery.components(separatedBy: "&")[1].components(separatedBy: "=")[1]
         
         // Then

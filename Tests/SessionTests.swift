@@ -3,16 +3,23 @@ import XCTest
 
 final class SessionTests: BaseTestCase {
     
+    class TaskMakerMock: TaskMaker {
+        func task(request: Request, callbacks: Callbacks, token: Token?, attemptSheduler: AttemptSheduler) -> Task {
+            return TaskMock()
+        }
+    }
+    
     var sessionObjects: (SessionImpl, TaskShedulerMock, AttemptShedulerMock, AuthorizatorMock) {
         let taskSheduler = TaskShedulerMock()
         let attemptSheduler = AttemptShedulerMock()
         let authorizator = AuthorizatorMock()
+        let taskMaker = TaskMakerMock()
         
         let session = SessionImpl(
             taskSheduler: taskSheduler,
             attemptSheduler: attemptSheduler,
             authorizator: authorizator,
-            taskMaker: dependencyBoxMock
+            taskMaker: taskMaker
         )
         
         return (session, taskSheduler, attemptSheduler, authorizator)

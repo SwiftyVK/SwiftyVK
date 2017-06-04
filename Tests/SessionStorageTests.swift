@@ -4,7 +4,7 @@ import XCTest
 final class SessionStorageTests: BaseTestCase {
     
     var storage: SessionStorageImpl {
-        return SessionStorageImpl(sessionMaker: dependencyBoxMock)
+        return SessionStorageImpl(sessionMaker: SessionMakerMock())
     }
     
     func test_makeNewSession() {

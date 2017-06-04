@@ -3,9 +3,11 @@ import XCTest
 
 final class VKProxyTests: BaseTestCase {
     
+    private let appId = "1234567890"
+    
     var proxyObjects: (UrlOpenerMock, VkAppProxyImpl) {
         let urlOpener = UrlOpenerMock()
-        let vkProxy = VkAppProxyImpl(urlOpener: urlOpener)
+        let vkProxy = VkAppProxyImpl(appId: appId, urlOpener: urlOpener)
         return (urlOpener, vkProxy)
     }
     
@@ -15,7 +17,7 @@ final class VKProxyTests: BaseTestCase {
         // When
         urlOpener.allowCanOpenUrl = true
         urlOpener.allowOpenURL = true
-        let result = try! vkProxy.authorizeWith(query: "test")
+        let result = try! vkProxy.send(query: "test")
         // Then
         XCTAssertTrue(result)
     }
@@ -26,7 +28,7 @@ final class VKProxyTests: BaseTestCase {
         // When
         urlOpener.allowCanOpenUrl = false
         urlOpener.allowOpenURL = true
-        let result = try! vkProxy.authorizeWith(query: "test")
+        let result = try! vkProxy.send(query: "test")
         // Then
         XCTAssertFalse(result)
     }
@@ -35,8 +37,8 @@ final class VKProxyTests: BaseTestCase {
         // Given
         let (_, vkProxy) = proxyObjects
         // When
-        let url = URL(string: "vk\(VK.appId!)://test/test#access_token=1234567890")!
-        let result = vkProxy.recieveFrom(url: url, app: "com.vk.vkclient")
+        let url = URL(string: "vk\(appId)://test/test#access_token=1234567890")!
+        let result = vkProxy.handle(url: url, app: "com.vk.vkclient")
         // Then
         XCTAssertEqual(result, "access_token=1234567890")
     }
@@ -45,8 +47,8 @@ final class VKProxyTests: BaseTestCase {
         // Given
         let (_, vkProxy) = proxyObjects
         // When
-        let url = URL(string: "vk\(VK.appId!)://test/test#access_token=1234567890")!
-        let result = vkProxy.recieveFrom(url: url, app: "com.vk.vkhd")
+        let url = URL(string: "vk\(appId)://test/test#access_token=1234567890")!
+        let result = vkProxy.handle(url: url, app: "com.vk.vkhd")
         // Then
         XCTAssertEqual(result, "access_token=1234567890")
     }
@@ -55,8 +57,8 @@ final class VKProxyTests: BaseTestCase {
         // Given
         let (_, vkProxy) = proxyObjects
         // When
-        let url = URL(string: "vk\(VK.appId!)://test/test#access_token=1234567890")!
-        let result = vkProxy.recieveFrom(url: url, app: "com.vk.wrongClient")
+        let url = URL(string: "vk\(appId)://test/test#access_token=1234567890")!
+        let result = vkProxy.handle(url: url, app: "com.vk.wrongClient")
         // Then
         XCTAssertNil(result)
     }
@@ -66,7 +68,7 @@ final class VKProxyTests: BaseTestCase {
         let (_, vkProxy) = proxyObjects
         // When
         let url = URL(string: "vkWrongScheme://test/test#access_token=1234567890")!
-        let result = vkProxy.recieveFrom(url: url, app: "com.vk.vkclient")
+        let result = vkProxy.handle(url: url, app: "com.vk.vkclient")
         // Then
         XCTAssertNil(result)
     }
@@ -75,8 +77,8 @@ final class VKProxyTests: BaseTestCase {
         // Given
         let (_, vkProxy) = proxyObjects
         // When
-        let url = URL(string: "vk\(VK.appId!)://test/test?access_token=1234567890")!
-        let result = vkProxy.recieveFrom(url: url, app: "com.vk.vkclient")
+        let url = URL(string: "vk\(appId)://test/test?access_token=1234567890")!
+        let result = vkProxy.handle(url: url, app: "com.vk.vkclient")
         // Then
         XCTAssertNil(result)
     }

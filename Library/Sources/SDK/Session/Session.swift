@@ -11,7 +11,6 @@ public protocol Session: class {
 }
 
 protocol SessionInternalRepr: Session {
-    var token: Token? { get }
     func destroy()
 }
 
@@ -34,7 +33,7 @@ public final class SessionImpl: SessionInternalRepr {
     }
     
     public var id: String
-    private(set) var token: Token?
+    private var token: Token?
 
     private let taskSheduler: TaskSheduler
     private let attemptSheduler: AttemptSheduler

@@ -10,7 +10,7 @@ final class QueryBuilderImpl: QueryBuilder {
         parameters: Parameters,
         config: Config = .default,
         captcha: Captcha? = nil,
-        token: Token?
+        token: Token? = nil
         ) -> String {
         let paramArray = NSMutableArray()
         

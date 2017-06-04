@@ -28,4 +28,8 @@ final class AuthorizatorMock: Authorizator {
     func reset(session: Session) -> Token? {
         return nil
     }
+    
+    func handle(url: URL, app: String?) {
+        
+    }
 }

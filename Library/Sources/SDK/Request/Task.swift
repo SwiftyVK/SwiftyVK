@@ -110,8 +110,8 @@ final class TaskImpl: Operation, Task {
         sendAttempts += 1
         VK.Log.put(self, "send \(sendAttempts) of \(request.config.maxAttemptsLimit.count) times")
         
-        let urlRequest = try urlRequestBuilder.make(
-            from: request.rawRequest,
+        let urlRequest = try urlRequestBuilder.build(
+            request: request.rawRequest,
             httpMethod: request.config.httpMethod,
             config: request.config,
             capthca: makeCaptcha(),

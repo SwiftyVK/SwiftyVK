@@ -5,8 +5,15 @@ final class WebPresenterTests: BaseTestCase {
     
     var objects: (WebPresenter & WebHandler, WebControllerMock) {
         let controller = WebControllerMock()
-        let presenter = WebPresenterImpl(controller: controller)
+        let presenter = WebPresenterImpl(
+            uiSyncQueue: DispatchQueue.global(),
+            controller: controller
+        )
         return (presenter, controller)
+    }
+    
+    private func urlRequest(string: String) -> URLRequest? {
+        return URL(string: string).flatMap { URLRequest(url: $0) }
     }
     
     func test_load_whenTokenRecieved() {
@@ -17,7 +24,7 @@ final class WebPresenterTests: BaseTestCase {
             presenter.handle(url: url)
         }
         // When
-        let result = try! presenter.presentWith(url: URL(string: "http://vk.com#access_token=test")!)
+        let result = try! presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_token=test")!)
         // Then
         XCTAssertEqual(result, "access_token=test")
     }
@@ -31,7 +38,7 @@ final class WebPresenterTests: BaseTestCase {
         }
         // When
         do {
-            _ = try presenter.presentWith(url: URL(string: "http://vk.com#access_denied")!)
+            _ = try presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_denied")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
@@ -48,7 +55,7 @@ final class WebPresenterTests: BaseTestCase {
         }
         // When
         do {
-            _ = try presenter.presentWith(url: URL(string: "http://vk.com#cancel=1")!)
+            _ = try presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#cancel=1")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
@@ -65,7 +72,7 @@ final class WebPresenterTests: BaseTestCase {
         }
         // When
         do {
-            _ = try presenter.presentWith(url: URL(string: "http://vk.com#fail=1")!)
+            _ = try presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#fail=1")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
@@ -81,7 +88,7 @@ final class WebPresenterTests: BaseTestCase {
             presenter.handle(url: url)
         }
         // When
-        let result = try! presenter.presentWith(url: URL(string: "http://vk.com#success=1")!)
+        let result = try! presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#success=1")!)
         // Then
         XCTAssertEqual(result, "success=1")
     }
@@ -95,95 +102,11 @@ final class WebPresenterTests: BaseTestCase {
         }
         // When
         do {
-            _ = try presenter.presentWith(url: URL(string: "http://vk.com#")!)
+            _ = try presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
             XCTAssertEqual(error as? SessionError, .wrongAuthUrl)
-        }
-    }
-    
-    func test_expand_withAuthorize() {
-        // Given
-        let (presenter, controller) = objects
-        
-        controller.onLoad = { url in
-            presenter.handle(url: url)
-        }
-        
-        controller.onExpand = {
-            presenter.dismiss()
-        }
-        // When
-        do {
-            _ = try presenter.presentWith(url: URL(string: "http://vk.com/authorize?test=test")!)
-            XCTFail("Expression should throw error")
-        } catch let error {
-            // Then
-            XCTAssertEqual(error as? SessionError, .webPresenterResultIsNil)
-        }
-    }
-    
-    func test_expand_withLogin() {
-        // Given
-        let (presenter, controller) = objects
-        
-        controller.onLoad = { url in
-            presenter.handle(url: url)
-        }
-        
-        controller.onExpand = {
-            presenter.dismiss()
-        }
-        // When
-        do {
-            _ = try presenter.presentWith(url: URL(string: "http://vk.com/login?test=test")!)
-            XCTFail("Expression should throw error")
-        } catch let error {
-            // Then
-            XCTAssertEqual(error as? SessionError, .webPresenterResultIsNil)
-        }
-    }
-    
-    func test_expand_withSecurityCheck() {
-        // Given
-        let (presenter, controller) = objects
-        
-        controller.onLoad = { url in
-            presenter.handle(url: url)
-        }
-        
-        controller.onExpand = {
-            presenter.dismiss()
-        }
-        // When
-        do {
-            _ = try presenter.presentWith(url: URL(string: "http://vk.com?act=security_check")!)
-            XCTFail("Expression should throw error")
-        } catch let error {
-            // Then
-            XCTAssertEqual(error as? SessionError, .webPresenterResultIsNil)
-        }
-    }
-    
-    func test_expand_withValidationTest() {
-        // Given
-        let (presenter, controller) = objects
-        
-        controller.onLoad = { url in
-            presenter.handle(url: url)
-        }
-        
-        controller.onExpand = {
-            presenter.dismiss()
-        }
-        // When
-        do {
-            _ = try presenter.presentWith(url: URL(string: "http://vk.com?api_validation_test")!)
-            XCTFail("Expression should throw error")
-        } catch let error {
-            // Then
-            XCTAssertEqual(error as? SessionError, .webPresenterResultIsNil)
         }
     }
     
@@ -200,7 +123,7 @@ final class WebPresenterTests: BaseTestCase {
         }
         // When
         do {
-            _ = try presenter.presentWith(url: URL(string: "http://vk.com?api_validation_test")!)
+            _ = try presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com?api_validation_test")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
@@ -222,7 +145,7 @@ final class WebPresenterTests: BaseTestCase {
             dismissCounter += 1
         }
         // When
-        let result = try? presenter.presentWith(url: URL(string: "http://vk.com#access_token=test")!)
+        let result = try? presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_token=test")!)
         // Then
         XCTAssertEqual(result, "access_token=test")
     }
@@ -242,7 +165,7 @@ final class WebPresenterTests: BaseTestCase {
         }
         // When
         do {
-            _ = try presenter.presentWith(url: URL(string: "http://vk.com#access_token=test")!)
+            _ = try presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_token=test")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
@@ -257,7 +180,7 @@ final class WebPresenterTests: BaseTestCase {
         exp.isInverted = true
         // When
         DispatchQueue.global().async {
-            _ = try? presenter.presentWith(url: URL(string: "http://vk.com?api_validation_test")!)
+            _ = try? presenter.presentWith(urlRequest: self.urlRequest(string: "http://vk.com?api_validation_test")!)
             exp.fulfill()
         }
         

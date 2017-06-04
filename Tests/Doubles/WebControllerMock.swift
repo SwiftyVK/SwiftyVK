@@ -2,23 +2,18 @@
 
 final class WebControllerMock: WebController {
     
-    var onLoad: ((URL) -> ())?
+    var onLoad: ((URL?) -> ())?
     var onReload: (() -> ())?
-    var onExpand: (() -> ())?
     var onGoBack: (() -> ())?
     var onDismiss: (() -> ())?
 
     
-    func load(url: URL, handler: WebHandler) {        
-        onLoad?(url)
+    func load(urlRequest: URLRequest, handler: WebHandler) {
+        onLoad?(urlRequest.url)
     }
     
     func reload() {
         onReload?()
-    }
-    
-    func expand() {
-        onExpand?()
     }
     
     func goBack() {

@@ -1,25 +1,26 @@
 import XCTest
 @testable import SwiftyVK
 
-final class DependencyBoxTests: BaseTestCase {
+final class DependencyFactoryTests: BaseTestCase {
     
-    private var box: DependencyBox {
-        return DependencyBoxImpl()
+    private var factory: DependencyFactory {
+        return DependencyFactoryImpl(appId: "1234567890", delegate: SwiftyVKDelegateMock())
     }
 
     func test_SessionStorageType() {
-        XCTAssertTrue(box.sessionStorage is SessionStorageImpl)
+        XCTAssertTrue(factory.sessionStorage is SessionStorageImpl)
     }
     
     func test_SessionImplType() {
-        XCTAssertTrue(box.session() is SessionImpl)
+        XCTAssertTrue(factory.session() is SessionImpl)
     }
     
     func test_TaskType() {
         // When
-        let task = box.task(
+        let task = factory.task(
             request: Request.init(of: .url("")),
             callbacks: .empty,
+            token: TokenMock(),
             attemptSheduler: AttemptShedulerMock()
         )
         
@@ -29,7 +30,7 @@ final class DependencyBoxTests: BaseTestCase {
     
     func test_TokenType() {
         // When
-        let token = box.token(token: "", expires: 0, info: [:])
+        let token = factory.token(token: "", expires: 0, info: [:])
         // Then
         XCTAssertTrue(token is TokenImpl)
     }
