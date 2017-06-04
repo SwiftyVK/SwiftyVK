@@ -29,7 +29,7 @@ final class WebPresenterImpl: WebPresenter, WebHandler {
         return try uiSyncQueue.sync {
             self.controller.load(urlRequest: urlRequest, handler: self)
             
-            switch semaphore.wait(timeout: .now() + 60) {
+            switch semaphore.wait(timeout: .now() + 300) {
             case .success:
                 break
             case .timedOut:
