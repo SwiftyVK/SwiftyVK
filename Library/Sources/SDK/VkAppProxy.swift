@@ -1,6 +1,6 @@
 protocol VkAppProxy: class {
     func authorizeWith(query: String) throws -> Bool
-    func recieveFrom(url: URL, app: String?) -> String?
+    func handleFromVkApp(url: URL, app: String?) -> String?
 }
 
 final class VkAppProxyImpl: VkAppProxy {
@@ -37,7 +37,7 @@ final class VkAppProxyImpl: VkAppProxy {
         return urlOpener.canOpenURL(url)
     }
     
-    func recieveFrom(url: URL, app: String?) -> String? {
+    func handleFromVkApp(url: URL, app: String?) -> String? {
         guard (app == "com.vk.vkclient" || app == "com.vk.vkhd") && url.scheme == "vk\(appId)" else {
             return nil
         }

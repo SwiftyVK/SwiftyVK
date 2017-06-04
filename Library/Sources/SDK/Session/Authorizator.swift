@@ -17,6 +17,7 @@ final class AuthorizatorImpl: Authorizator {
     private let tokenMaker: TokenMaker
     private let vkAppProxy: VkAppProxy
     private let webPresenterMaker: WebPresenterMaker
+    private weak var currentWebPresenter: WebPresenter?
     
     init(
         appId: String,
@@ -73,6 +74,8 @@ final class AuthorizatorImpl: Authorizator {
                 throw SessionError.cantMakeWebViewController
             }
             
+            currentWebPresenter = webPresenter
+            
             let tokenInfo = try webPresenter.presentWith(urlRequest: urlRequest)
             
             let token = tokenMaker.token(token: "", expires: 0, info: [:])
@@ -103,6 +106,14 @@ final class AuthorizatorImpl: Authorizator {
             + "\(redirect)&"
             + "response_type=token&"
             + "revoke=\(revoke ? 1 : 0)"
+    }
+    
+    func handleFromVkApp(url: URL, app: String?) {
+        guard let tokenInfo = vkAppProxy.handleFromVkApp(url: url, app: app) else {
+            return
+        }
+        
+        currentWebPresenter?.dismiss()
     }
     
     func authorize(session: Session, rawToken: String, expires: TimeInterval) -> Token {

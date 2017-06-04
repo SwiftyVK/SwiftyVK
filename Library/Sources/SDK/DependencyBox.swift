@@ -33,6 +33,7 @@ final class DependencyBoxImpl: DependencyBox {
     
     private let appId: String
     private weak var delegate: SwiftyVKDelegate?
+    private let uiSyncQueue = DispatchQueue(label: "SwiftyVK.uiSyncQueue")
     
     init(appId: String, delegate: SwiftyVKDelegate?) {
         self.appId = appId
@@ -94,6 +95,7 @@ final class DependencyBoxImpl: DependencyBox {
         #endif
         
         let webPresenter = WebPresenterImpl(
+            uiSyncQueue: uiSyncQueue,
             controller: webController
         )
         

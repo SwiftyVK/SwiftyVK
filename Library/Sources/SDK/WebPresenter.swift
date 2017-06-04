@@ -14,29 +14,36 @@ final class WebPresenterImpl: WebPresenter, WebHandler {
     private var canFinish = Atomic(true)
     private var fails: Int = 0
     
+    private let uiSyncQueue: DispatchQueue
     private let controller: WebController
 
-    init(controller: WebController) {
+    init(
+        uiSyncQueue: DispatchQueue,
+        controller: WebController
+        ) {
+        self.uiSyncQueue = uiSyncQueue
         self.controller = controller
     }
     
     func presentWith(urlRequest: URLRequest) throws -> String {
-        controller.load(urlRequest: urlRequest, handler: self)
-        
-        switch semaphore.wait(timeout: .now() + 60) {
-        case .success:
-            break
-        case .timedOut:
-            throw SessionError.webPresenterTimedOut
-        }
-        
-        switch result {
-        case .response(let response)?:
-            return response
-        case .error(let error)?:
-            throw error
-        case nil:
-            throw SessionError.webPresenterResultIsNil
+        return try uiSyncQueue.sync {
+            self.controller.load(urlRequest: urlRequest, handler: self)
+            
+            switch semaphore.wait(timeout: .now() + 60) {
+            case .success:
+                break
+            case .timedOut:
+                throw SessionError.webPresenterTimedOut
+            }
+            
+            switch result {
+            case .response(let response)?:
+                return response
+            case .error(let error)?:
+                throw error
+            case nil:
+                throw SessionError.webPresenterResultIsNil
+            }
         }
     }
     
