@@ -24,19 +24,20 @@ On this page:
 * [Upload files](#upload-files)
 * [Longpoll](#longpoll)
 
-##**Requirements**
+## **Requirements**
 * Swift 3.0+
 * iOS 8.0+ / OSX 10.10+
 * Xcode 8.0+
 
-##**Integration**
-###Manually
+## **Integration**
+
+### Manually
 1. Just drag **SwiftyVK.framework** or include the whole **SwiftyVK.xcodeproj** to project
 2. Link SwiftyVK.framework to application in **Target preferences -> General -> Embedded binaries**.
 
 
 
-###CocoaPods
+### CocoaPods
 You can use [CocoaPods](https://github.com/CocoaPods/CocoaPods) to install `SwiftyVK` by adding it to `Podfile`:
 
 ```ruby
@@ -47,14 +48,14 @@ pod 'SwiftyVK', :git => 'https://github.com/WE-St0r/SwiftyVK.git'
 end
 ```
 
-###Carthage
+### Carthage
 You can use [Carthage](https://github.com/Carthage/Carthage) to install `SwiftyVK` by adding it to `Cartfile`:
 ```
 github "WE-St0r/SwiftyVK"
 ```
 
-##**Getting started**
-###Import and implementation
+## **Getting started**
+### Import and implementation
 
 Import **SviftyVK** to Swift file:
 ```swift
@@ -105,7 +106,7 @@ class YourClass: Superclass, VKDelegate {
 ```
 *See full implementation in Example project*
 
-###**Initialization**
+### **Initialization**
 
 1. [Create new standalone application](https://vk.com/editapp?act=create) and get `application ID`
 2. Init **SwiftyVK** with `application ID` and `VKDelegate` object:
@@ -114,7 +115,7 @@ class YourClass: Superclass, VKDelegate {
 VK.configure(withAppId: applicationID, delegate: <VKDelegate_OBJECT>)
 ```
 
-###**User authorization**
+### **User authorization**
 * Implement `vkWillAuthorize()` function in `VKDelegate` and return [application  permissions](https://vk.com/dev/permissions).
 * Just call:
 
@@ -131,7 +132,7 @@ VK.state // will be unknown, configured, authorized
 
 And if state == authorized, send your requests to API (:
 
-###**Authorization with VK App**
+### **Authorization with VK App**
 For authorization with official VK application for iOS, you need:
 
 *1. In Xcode -> Target -> Info*
@@ -163,8 +164,8 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpe
 ***If user deny authorization with VK App, SwiftyVK show standart authorization WebView in your app.***
 
 
-##**API Requests**
-###Syntax
+## **API Requests**
+### Syntax
 The call requests is as follows **VK.methodGroup.methodName**.
 
 For example, send request with parameters and response processing:
@@ -202,7 +203,7 @@ VK.API.Users.get([VK.Arg.userId : "1"]).send(
     onError: {error in print(error)}
 )
 ```
-###Custom requests
+### Custom requests
 You may also send special requests, such as:
 
 * Request with custom method path:
@@ -217,7 +218,7 @@ VK.API.execute("return \"Hello World\"")
 ```swift
 VK.API.remote(method: "YourRemoteMethodName")
 ```
-###Request properties
+### Request properties
 
 The requests have several properties that control their behavior. Their names speak for themselves, but just in case I describe them:
 
@@ -230,7 +231,7 @@ Property | Default | Description
 `catchErrors` | true | Whether to attempt **SwiftyVK** to handle some query errors automatically. Among these errors include the required authentication, captcha, exceeding the limit of requests per second.
 `logToConsole`| false | Allows print log messages on this request to console
 
-###Default properties
+### Default properties
 
 In addition to the settings of each individual request, you can set global settings for **SwiftyVK**. You need to contact structure `VK.config`. Some fields completely duplicate the properties of requests and will be assigned to the request when it is initialized, and the other presented only in a global context.
 
@@ -241,7 +242,7 @@ Property | Default | Description
 `sendLimit` | 3 | The maximum number of requests that can be sent per second. Here you can [read more](https://vk.com/dev/api_requests) in the section "Limitations and recommendations".
 `language`| system | This language will be used in responses from VK
 
-##**Parsing response**
+## **Parsing response**
 
 Responses to requests come in the form of text in [JSON](https://en.wikipedia.org/wiki/JSON) format. To present the data as objects, **SwiftyVK** uses the [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) library. You can refer to the documentation of the library. Here I'll describe only a short example.
 
@@ -264,7 +265,7 @@ var lastName = response[0,"last_name"].stringValue //Durov
 ```
 And that's all You need. If You want to learn more, check out the [SwiftyJSON documentation](https://github.com/SwiftyJSON/SwiftyJSON).
 
-##**Error handling**
+## **Error handling**
 
 In the process of request execution something can go wrong, as expected. In this case, an error is generated. **SwiftyVK** offers two ways of working with errors:
 
@@ -274,7 +275,7 @@ But sometimes it so happens that the query is executed when the user is **not au
 
 * `catchErrors == true`: SwiftyVK **first try to handle the error**. If it contains [codes](https://vk.com/dev/errors) 5, 14, 17, which arise in the above cases, the **user will see a dialogue** offering to authorize, validate, or enter the captcha. If the error persists, and the number of resends of request more than `maxAttempts`, it will **call the error block**.
 
-##**Upload files**
+## **Upload files**
 
 **SwiftyVK** allows you to easily upload files in one request by combining standard requests to VK API. Use methods in `VK.Upload` section. Let's see how you can quickly upload photos to an album:
 
@@ -295,7 +296,7 @@ This way you can download all the other supported Vkontakte file types. Can see 
 
 Keep in mind that in some cases, such as uploading photos to a message, using this method, you just load the file to the server and get its ID. To send a message with photo, you need to add photo ID to the message.
 
-##**Longpoll**
+## **Longpoll**
 
 If you want to use Longpoll to receive updates, **SwiftyVK** allows you to easily do this, as it contains tool for working with Longpoll.
 
