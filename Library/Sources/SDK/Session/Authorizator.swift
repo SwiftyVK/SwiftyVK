@@ -47,7 +47,7 @@ final class AuthorizatorImpl: Authorizator {
                 return token
             }
             
-            let canAuthWithApp = try vkAppProxy.authorizeWith(
+            let canAuthWithApp = try vkAppProxy.send(
                 query: makeAuthQuery(session: session, redirectUrl: nil, revoke: revoke)
             )
             

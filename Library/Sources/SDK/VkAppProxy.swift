@@ -1,5 +1,5 @@
 protocol VkAppProxy: class {
-    func authorizeWith(query: String) throws -> Bool
+    func send(query: String) throws -> Bool
     func handle(url: URL, app: String?) -> String?
 }
 
@@ -17,24 +17,17 @@ final class VkAppProxyImpl: VkAppProxy {
         self.urlOpener = urlOpener
     }
     
-    func authorizeWith(query: String) throws -> Bool {
-        guard try canOpenUrl() else {
-            return false
-        }
+    func send(query: String) throws -> Bool {
         
         guard let url = URL(string: baseUrl + query) else {
             throw SessionError.cantBuildUrlForVkApp
         }
         
-        return urlOpener.openURL(url)
-    }
-    
-    private func canOpenUrl() throws -> Bool {
-        guard let url = URL(string: "vk\(appId)://") else {
-            throw SessionError.cantBuildUrlForVkApp
+        guard urlOpener.canOpenURL(url) else {
+            return false
         }
         
-        return urlOpener.canOpenURL(url)
+        return urlOpener.openURL(url)
     }
     
     func handle(url: URL, app: String?) -> String? {
