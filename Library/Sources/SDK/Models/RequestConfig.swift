@@ -54,7 +54,7 @@ public struct Config {
         self.sessionConfig = sessionConfig
     }
     
-    func mutated(
+    func overriden(
         apiVersion: String? = nil,
         language: Language? = nil,
         attemptLimit: AttemptLimit? = nil,
