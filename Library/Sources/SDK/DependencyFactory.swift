@@ -4,6 +4,24 @@
     import UIKit
 #endif
 
+protocol DependencyFactory:
+    SessionStorageHolder,
+    AuthorizatorHolder,
+    SessionMaker,
+    TaskMaker,
+    AttemptMaker,
+    TokenMaker,
+    WebPresenterMaker
+{}
+
+protocol SessionStorageHolder {
+    var sessionStorage: SessionStorage { get }
+}
+
+protocol AuthorizatorHolder {
+    var authorizator: Authorizator { get }
+}
+
 protocol SessionMaker {
     func session() -> Session
 }
@@ -24,12 +42,7 @@ protocol WebPresenterMaker {
     func webPresenter() -> WebPresenter?
 }
 
-protocol DependencyBox: SessionMaker, TaskMaker, AttemptMaker, TokenMaker, WebPresenterMaker {
-    var sessionStorage: SessionStorage { get }
-    func session() -> Session
-}
-
-final class DependencyBoxImpl: DependencyBox {
+final class DependencyFactoryImpl: DependencyFactory {
     
     private let appId: String
     private weak var delegate: SwiftyVKDelegate?
@@ -51,6 +64,10 @@ final class DependencyBoxImpl: DependencyBox {
             authorizator: sharedAuthorizator,
             taskMaker: self
         )
+    }
+    
+    var authorizator: Authorizator {
+        return sharedAuthorizator
     }
     
     private lazy var sharedAuthorizator: Authorizator = {

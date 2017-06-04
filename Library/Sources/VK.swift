@@ -52,20 +52,20 @@ public final class VK {
     }
     
     public static func prepareForUse(appId: String, delegate: SwiftyVKDelegate) {
-        dependencyBox = DependencyBoxImpl(appId: appId, delegate: delegate)
+        dependencyHolder = DependencyFactoryImpl(appId: appId, delegate: delegate)
     }
     
     public static var sessions: SessionStorage? {
-        return dependencyBox?.sessionStorage
+        return dependencyHolder?.sessionStorage
     }
-    
-    weak static var legacyDelegate: LegacyVKDelegate?
 
-    private static var dependencyBox: DependencyBox?
+    private static var dependencyHolder: (SessionStorageHolder & AuthorizatorHolder)?
  
     #if os(iOS)
     public static func process(url: URL, sourceApplication app: String?) {
 //        LegacyAuthorizator.recieveTokenURL(url: url, fromApp: app)
     }
     #endif
+    
+    weak static var legacyDelegate: LegacyVKDelegate?
 }

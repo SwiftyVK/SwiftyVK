@@ -76,8 +76,8 @@
 		A27015DA1EC1F6D100B9C5C2 /* SessionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27015D81EC1F6D100B9C5C2 /* SessionState.swift */; };
 		A28368EC1D9D742700EEBE2A /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* Attempt.swift */; };
 		A28368ED1D9D742D00EEBE2A /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* Attempt.swift */; };
-		A2838DA31E9AA0DA00FE5BE2 /* DependencyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2838DA21E9AA0DA00FE5BE2 /* DependencyBox.swift */; };
-		A2838DA41E9AA0DA00FE5BE2 /* DependencyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2838DA21E9AA0DA00FE5BE2 /* DependencyBox.swift */; };
+		A2838DA31E9AA0DA00FE5BE2 /* DependencyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2838DA21E9AA0DA00FE5BE2 /* DependencyFactory.swift */; };
+		A2838DA41E9AA0DA00FE5BE2 /* DependencyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2838DA21E9AA0DA00FE5BE2 /* DependencyFactory.swift */; };
 		A29508841EBBA24B00981EC0 /* RequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29508831EBBA24B00981EC0 /* RequestConfig.swift */; };
 		A29508851EBBA24B00981EC0 /* RequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29508831EBBA24B00981EC0 /* RequestConfig.swift */; };
 		A2967E741CBBC4A700B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
@@ -359,7 +359,7 @@
 		A25A3A2C1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartBodyBuilderTests.swift; sourceTree = "<group>"; };
 		A27015D81EC1F6D100B9C5C2 /* SessionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionState.swift; sourceTree = "<group>"; };
 		A28368EB1D9D742700EEBE2A /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
-		A2838DA21E9AA0DA00FE5BE2 /* DependencyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyBox.swift; sourceTree = "<group>"; };
+		A2838DA21E9AA0DA00FE5BE2 /* DependencyFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyFactory.swift; sourceTree = "<group>"; };
 		A29508831EBBA24B00981EC0 /* RequestConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestConfig.swift; sourceTree = "<group>"; };
 		A2967E731CBBC4A700B7D48F /* Gifts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gifts.swift; sourceTree = "<group>"; };
 		A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskSheduler.swift; sourceTree = "<group>"; };
@@ -586,7 +586,7 @@
 		A2527D801BD12FD200F65412 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				A2838DA21E9AA0DA00FE5BE2 /* DependencyBox.swift */,
+				A2838DA21E9AA0DA00FE5BE2 /* DependencyFactory.swift */,
 				A24DDAE91EB73A2C002EA273 /* Logic */,
 				A2527D811BD12FD200F65412 /* Models */,
 				A2527D8D1BD12FD200F65412 /* UI */,
@@ -1011,7 +1011,7 @@
 				A2B805541EDDAFD2004DA7EB /* WebController.swift in Sources */,
 				A29508851EBBA24B00981EC0 /* RequestConfig.swift in Sources */,
 				A2EB6EFA1BD18394008E7D86 /* Pages.swift in Sources */,
-				A2838DA41E9AA0DA00FE5BE2 /* DependencyBox.swift in Sources */,
+				A2838DA41E9AA0DA00FE5BE2 /* DependencyFactory.swift in Sources */,
 				A2EB6EFB1BD18394008E7D86 /* Photos.swift in Sources */,
 				A2EB6EFC1BD18394008E7D86 /* Places.swift in Sources */,
 				A24390571DA2BA1D00B9D047 /* Errors.swift in Sources */,
@@ -1084,7 +1084,7 @@
 				A2EB6EC81BD18389008E7D86 /* Likes.swift in Sources */,
 				A2EB6EC91BD18389008E7D86 /* Messages.swift in Sources */,
 				A24DDAE41EB737C7002EA273 /* QueryBuilder.swift in Sources */,
-				A2838DA31E9AA0DA00FE5BE2 /* DependencyBox.swift in Sources */,
+				A2838DA31E9AA0DA00FE5BE2 /* DependencyFactory.swift in Sources */,
 				A2D2713C1EC4D0BA00B24D09 /* SessionStorage.swift in Sources */,
 				A22179D41EBA57AF006B71FD /* SessionConfig.swift in Sources */,
 				A2EB6ECA1BD18389008E7D86 /* Newsfeed.swift in Sources */,
