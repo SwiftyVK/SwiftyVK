@@ -5,14 +5,17 @@
 #endif
 
 protocol DependencyFactory:
-    SessionStorageHolder,
-    AuthorizatorHolder,
+    DependencyHolder,
     SessionMaker,
     TaskMaker,
     AttemptMaker,
     TokenMaker,
     WebPresenterMaker
 {}
+
+protocol DependencyHolder: SessionStorageHolder, AuthorizatorHolder {
+    init(appId: String, delegate: SwiftyVKDelegate?)
+}
 
 protocol SessionStorageHolder {
     var sessionStorage: SessionStorage { get }

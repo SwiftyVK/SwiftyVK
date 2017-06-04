@@ -52,14 +52,19 @@ public final class VK {
     }
     
     public static func prepareForUse(appId: String, delegate: SwiftyVKDelegate) {
-        dependencyHolder = DependencyFactoryImpl(appId: appId, delegate: delegate)
+        guard dependencyHolder == nil else {
+            return
+        }
+        
+        dependencyHolder = dependencyHolderInstanceType.init(appId: appId, delegate: delegate)
     }
     
     public static var sessions: SessionStorage? {
         return dependencyHolder?.sessionStorage
     }
 
-    private static var dependencyHolder: (SessionStorageHolder & AuthorizatorHolder)?
+    static var dependencyHolderInstanceType: DependencyHolder.Type = DependencyFactoryImpl.self
+    private static var dependencyHolder: DependencyHolder?
  
     #if os(iOS)
     public static func handle(url: URL, sourceApplication app: String?) {

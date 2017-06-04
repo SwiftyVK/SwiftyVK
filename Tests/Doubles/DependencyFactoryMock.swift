@@ -12,3 +12,16 @@ final class SessionMakerMock: SessionMaker {
         return SessionMock()
     }
 }
+
+final class DependencyHolderMock: DependencyHolder {
+    
+    init(appId: String, delegate: SwiftyVKDelegate?) {}
+    
+    var sessionStorage: SessionStorage {
+        return SessionStorageMock()
+    }
+    
+    var authorizator: Authorizator {
+        return AuthorizatorMock()
+    }
+}
