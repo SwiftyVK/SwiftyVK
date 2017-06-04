@@ -24,7 +24,10 @@ final class WebController_iOS: UIViewController, WKNavigationDelegate, WebContro
         super.viewWillAppear(animated)
         webView?.layer.cornerRadius = 15
         webView?.clipsToBounds = true
+        webView?.layer.borderWidth = 1 / UIScreen.main.nativeScale
+        webView?.layer.borderColor = UIColor.lightGray.cgColor
         webView?.navigationDelegate = self
+        preloader?.color = .lightGray
         preloader?.hidesWhenStopped = true
     }
     
