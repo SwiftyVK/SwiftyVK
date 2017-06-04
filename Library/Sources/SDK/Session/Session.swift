@@ -66,7 +66,7 @@ public final class SessionImpl: SessionInternalRepr {
     
     public func logInWith(rawToken: String, expires: TimeInterval) throws {
         try throwIfDestroyed()
-        token = authorizator.authorize(session: self, rawToken: rawToken, expires: expires)
+        token = try authorizator.authorize(session: self, rawToken: rawToken, expires: expires)
     }
     
     public func logOut() {

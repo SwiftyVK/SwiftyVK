@@ -93,6 +93,7 @@ final class DependencyFactoryImpl: DependencyFactory {
             delegate: self.delegate,
             tokenStorage: TokenStorageImpl(),
             tokenMaker: self,
+            tokenParser: TokenParserImpl(),
             vkAppProxy: vkAppProxy,
             webPresenterMaker: self
         )
