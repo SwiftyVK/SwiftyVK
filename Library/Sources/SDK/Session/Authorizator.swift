@@ -3,6 +3,7 @@ protocol Authorizator: class {
     func authorize(session: Session, rawToken: String, expires: TimeInterval) -> Token
     func validate(with url: URL) throws
     func reset(session: Session) -> Token?
+    func handle(url: URL, app: String?)
 }
 
 final class AuthorizatorImpl: Authorizator {
@@ -108,14 +109,6 @@ final class AuthorizatorImpl: Authorizator {
             + "revoke=\(revoke ? 1 : 0)"
     }
     
-    func handleFromVkApp(url: URL, app: String?) {
-        guard let tokenInfo = vkAppProxy.handleFromVkApp(url: url, app: app) else {
-            return
-        }
-        
-        currentWebPresenter?.dismiss()
-    }
-    
     func authorize(session: Session, rawToken: String, expires: TimeInterval) -> Token {
         return tokenMaker.token(token: rawToken, expires: expires, info: [:])
     }
@@ -128,5 +121,13 @@ final class AuthorizatorImpl: Authorizator {
         tokenStorage.removeFor(sessionId: session.id)
         delegate?.vkDidLogOut(in: session)
         return nil
+    }
+    
+    func handle(url: URL, app: String?) {
+        guard let tokenInfo = vkAppProxy.handle(url: url, app: app) else {
+            return
+        }
+        
+        currentWebPresenter?.dismiss()
     }
 }

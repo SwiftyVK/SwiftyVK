@@ -62,8 +62,8 @@ public final class VK {
     private static var dependencyHolder: (SessionStorageHolder & AuthorizatorHolder)?
  
     #if os(iOS)
-    public static func process(url: URL, sourceApplication app: String?) {
-//        LegacyAuthorizator.recieveTokenURL(url: url, fromApp: app)
+    public static func handle(url: URL, sourceApplication app: String?) {
+        dependencyHolder?.authorizator.handle(url: url, app: app)
     }
     #endif
     
