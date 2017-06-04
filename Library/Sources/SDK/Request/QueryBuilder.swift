@@ -21,7 +21,7 @@ final class QueryBuilderImpl: QueryBuilder {
             rawParameters[name.rawValue] = value
         }
         
-        rawParameters["v"] = SessionConfig.apiVersion
+        rawParameters["v"] = config.apiVersion
         rawParameters["lang"] = config.language.rawValue
         rawParameters["https"] = "1"
         
