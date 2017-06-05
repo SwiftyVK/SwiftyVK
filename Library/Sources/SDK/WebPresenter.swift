@@ -27,13 +27,18 @@ final class WebPresenterImpl: WebPresenter, WebHandler {
     
     func presentWith(urlRequest: URLRequest) throws -> String {
         return try uiSyncQueue.sync {
+            
+            defer {
+                self.controller.dismiss()
+            }
+            
             self.controller.load(urlRequest: urlRequest, handler: self)
             
-            switch semaphore.wait(timeout: .now() + 300) {
-            case .success:
-                break
+            switch semaphore.wait(timeout: .now() + 600) {
             case .timedOut:
                 throw SessionError.webPresenterTimedOut
+            case .success:
+                break
             }
             
             switch result {
@@ -102,7 +107,6 @@ final class WebPresenterImpl: WebPresenter, WebHandler {
             }
             
             self.result = result
-            self.controller.dismiss()
             self.semaphore.signal()
             return false
         }

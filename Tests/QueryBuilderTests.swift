@@ -23,7 +23,7 @@ final class QueryBuilderTests: BaseTestCase {
         let sample = parameters(from: builder.makeQuery(parameters: .empty))
 
         // Then
-        XCTAssertEqual(sample["v"], SessionConfig.apiVersion)
+        XCTAssertEqual(sample["v"], nil)
     }
 
     func test_language() {
@@ -73,7 +73,7 @@ final class QueryBuilderTests: BaseTestCase {
         
         // When
         let encodedQuery = builder.makeQuery(parameters: [.message: rawMessage])
-        let encodedMesage = encodedQuery.components(separatedBy: "&")[1].components(separatedBy: "=")[1]
+        let encodedMesage = encodedQuery.components(separatedBy: "&")[2].components(separatedBy: "=")[1]
         
         // Then
         XCTAssertEqual(rawMessage, encodedMesage.removingPercentEncoding)

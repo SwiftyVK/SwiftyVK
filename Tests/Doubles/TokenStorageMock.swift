@@ -2,21 +2,19 @@
 
 final class TokenStorageMock: TokenStorage {
     
-    var token: Token?
-    
-    var saveCallCount = 0
+    var onSave: ((Token, String) -> ())?
+    var onGet: ((String) -> Token?)?
+    var onRemove: ((String) -> ())?
     
     func save(token: Token, for sessionId: String) {
-        saveCallCount += 1
+        onSave?(token, sessionId)
     }
     
     func getFor(sessionId: String) -> Token? {
-        return token
+        return onGet?(sessionId)
     }
     
-    var removeCallCount = 0
-    
     func removeFor(sessionId: String) {
-        removeCallCount += 1
+        onRemove?(sessionId)
     }
 }

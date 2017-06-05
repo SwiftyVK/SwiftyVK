@@ -1,7 +1,7 @@
 protocol Authorizator: class {
     func authorize(session: Session, revoke: Bool) throws -> Token
     func authorize(session: Session, rawToken: String, expires: TimeInterval) throws -> Token
-    func validate(with url: URL) throws
+    func validate(session: Session, url: URL) throws -> Token
     func reset(session: Session) -> Token?
     func handle(url: URL, app: String?)
 }
@@ -21,7 +21,8 @@ final class AuthorizatorImpl: Authorizator {
     private let webPresenterMaker: WebPresenterMaker
     private weak var currentWebPresenter: WebPresenter?
     
-    private var handledToken: Token?
+    private(set) var handledToken: Token?
+    private var requestTimeout: TimeInterval = 10
     
     init(
         appId: String,
@@ -42,18 +43,7 @@ final class AuthorizatorImpl: Authorizator {
     }
     
     func authorize(session: Session, revoke: Bool) throws -> Token {
-        guard !Thread.isMainThread else {
-            assertionFailure("Never call this code from main thread!")
-            throw SessionError.authCalledFromMainThread
-        }
-        
         return try queue.sync {
-            
-            defer {
-                handledToken = nil
-                currentWebPresenter = nil
-            }
-            
             if let token = tokenStorage.getFor(sessionId: session.id) {
                 return token
             }
@@ -64,30 +54,68 @@ final class AuthorizatorImpl: Authorizator {
                 Thread.sleep(forTimeInterval: 1)
             }
             
-            guard let webPresenter = webPresenterMaker.webPresenter() else {
-                throw SessionError.cantMakeWebViewController
-            }
-            
-            currentWebPresenter = webPresenter
-            
             let webAuthRequest = try makeWebAuthRequest(session: session, revoke: revoke)
+            return try getTokenFromWeb(session: session, request: webAuthRequest)
+        }
+    }
+    
+    func validate(session: Session, url: URL) throws -> Token {
+        return try queue.sync {
+            let validationRequest = URLRequest(
+                url: url,
+                cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
+                timeoutInterval: requestTimeout
+            )
             
-            let token: Token
-            
-            do {
-                let tokenInfo = try webPresenter.presentWith(urlRequest: webAuthRequest)
-                token = try makeToken(from: tokenInfo)
-            } catch let error {
-                guard let handledToken = handledToken else {
-                    throw error
-                }
-                
-                token = handledToken
+            return try getTokenFromWeb(session: session, request: validationRequest)
+        }
+    }
+    
+    private func getTokenFromWeb(session: Session, request: URLRequest) throws -> Token {
+        defer {
+            handledToken = nil
+            currentWebPresenter = nil
+        }
+        
+        guard let webPresenter = webPresenterMaker.webPresenter() else {
+            throw SessionError.cantMakeWebViewController
+        }
+        
+        currentWebPresenter = webPresenter
+        
+        let token: Token
+        
+        do {
+            let tokenInfo = try webPresenter.presentWith(urlRequest: request)
+            token = try makeToken(from: tokenInfo)
+        } catch let error {
+            guard let handledToken = handledToken else {
+                throw error
             }
             
-            try tokenStorage.save(token: token, for:  session.id)
-            return token
+            token = handledToken
         }
+        
+        try tokenStorage.save(token: token, for:  session.id)
+        return token
+    }
+    
+    private func makeWebAuthRequest(session: Session, revoke: Bool) throws -> URLRequest {
+        let webQuery = try makeAuthQuery(
+            session: session,
+            redirectUrl: webRedirectUrl,
+            revoke: revoke
+        )
+        
+        guard let url = URL(string: webAuthorizeUrl + webQuery) else {
+            throw SessionError.cantBuildUrlForWebView
+        }
+        
+        return URLRequest(
+            url: url,
+            cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
+            timeoutInterval: requestTimeout
+        )
     }
     
     private func makeAuthQuery(session: Session, redirectUrl: String?, revoke: Bool) throws -> String {
@@ -114,24 +142,6 @@ final class AuthorizatorImpl: Authorizator {
             + "revoke=\(revoke ? 1 : 0)"
     }
     
-    private func makeWebAuthRequest(session: Session, revoke: Bool) throws -> URLRequest {
-        let webQuery = try makeAuthQuery(
-            session: session,
-            redirectUrl: webRedirectUrl,
-            revoke: revoke
-        )
-        
-        guard let url = URL(string: webAuthorizeUrl + webQuery) else {
-            throw SessionError.cantBuildUrlForWebView
-        }
-        
-        return URLRequest(
-            url: url,
-            cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData,
-            timeoutInterval: 10
-        )
-    }
-    
     private func makeToken(from tokenInfo: String) throws -> Token {
         guard let parsingResult = tokenParser.parse(tokenInfo: tokenInfo) else {
             throw SessionError.cantParseToken
@@ -148,10 +158,6 @@ final class AuthorizatorImpl: Authorizator {
         let token = tokenMaker.token(token: rawToken, expires: expires, info: [:])
         try tokenStorage.save(token: token, for:  session.id)
         return token
-    }
-    
-    func validate(with url: URL) throws {
-        
     }
     
     func reset(session: Session) -> Token? {

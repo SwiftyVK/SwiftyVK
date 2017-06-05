@@ -23,7 +23,9 @@ final class AuthorizatorMock: Authorizator {
         return TokenMock()
     }
     
-    func validate(with url: URL) throws {}
+    func validate(session: Session, url: URL) throws -> Token {
+        return TokenMock()
+    }
     
     func reset(session: Session) -> Token? {
         return nil

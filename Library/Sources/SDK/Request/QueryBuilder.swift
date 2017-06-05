@@ -24,10 +24,7 @@ final class QueryBuilderImpl: QueryBuilder {
         rawParameters["v"] = config.apiVersion
         rawParameters["lang"] = config.language.rawValue
         rawParameters["https"] = "1"
-        
-        if let token = token?.get() {
-            rawParameters["access_token"] = token
-        }
+        rawParameters["access_token"] = token?.get()
         
         if let captcha = captcha {
             rawParameters["captcha_sid"] = captcha.sid

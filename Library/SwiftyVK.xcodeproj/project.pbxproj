@@ -73,6 +73,10 @@
 		A25A19CD1EE41BA700CF13AF /* TokenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19CC1EE41BA700CF13AF /* TokenParser.swift */; };
 		A25A19CE1EE41BA700CF13AF /* TokenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19CC1EE41BA700CF13AF /* TokenParser.swift */; };
 		A25A19D01EE4233D00CF13AF /* TokenParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19CF1EE4233D00CF13AF /* TokenParserTests.swift */; };
+		A25A19D31EE438FB00CF13AF /* AuthorizatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19D21EE438FB00CF13AF /* AuthorizatorTests.swift */; };
+		A25A19D51EE43E8100CF13AF /* TokenParserMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19D41EE43E8100CF13AF /* TokenParserMock.swift */; };
+		A25A19D71EE4405E00CF13AF /* VkAppProxyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19D61EE4405E00CF13AF /* VkAppProxyMock.swift */; };
+		A25A19DA1EE5198600CF13AF /* WebPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19D91EE5198600CF13AF /* WebPresenterMock.swift */; };
 		A25A3A2D1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A3A2C1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift */; };
 		A26F8B811E3A78DB00273E35 /* SwiftyVK_resources_macOS.bundle in Copy Bundle Resources For Cocoapods */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVK_resources_macOS.bundle */; };
 		A26F8B831E3A78F400273E35 /* SwiftyVK_resources_iOS.bundle in Copy Bundle Resources For Cocoapods */ = {isa = PBXBuildFile; fileRef = A2527D551BD1134500F65412 /* SwiftyVK_resources_iOS.bundle */; };
@@ -363,6 +367,10 @@
 		A25A19CA1EE4126E00CF13AF /* DependencyFactoryMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyFactoryMock.swift; sourceTree = "<group>"; };
 		A25A19CC1EE41BA700CF13AF /* TokenParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenParser.swift; sourceTree = "<group>"; };
 		A25A19CF1EE4233D00CF13AF /* TokenParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenParserTests.swift; sourceTree = "<group>"; };
+		A25A19D21EE438FB00CF13AF /* AuthorizatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizatorTests.swift; sourceTree = "<group>"; };
+		A25A19D41EE43E8100CF13AF /* TokenParserMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenParserMock.swift; sourceTree = "<group>"; };
+		A25A19D61EE4405E00CF13AF /* VkAppProxyMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VkAppProxyMock.swift; sourceTree = "<group>"; };
+		A25A19D91EE5198600CF13AF /* WebPresenterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPresenterMock.swift; sourceTree = "<group>"; };
 		A25A3A2C1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartBodyBuilderTests.swift; sourceTree = "<group>"; };
 		A27015D81EC1F6D100B9C5C2 /* SessionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionState.swift; sourceTree = "<group>"; };
 		A28368EB1D9D742700EEBE2A /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
@@ -431,6 +439,7 @@
 			children = (
 				A2433A421EA5331A0058BB6D /* Doubles */,
 				A22179D11EBA5393006B71FD /* BaseTestCase.swift */,
+				A25A19D21EE438FB00CF13AF /* AuthorizatorTests.swift */,
 				A25A19CF1EE4233D00CF13AF /* TokenParserTests.swift */,
 				A23708C61EA5309700103212 /* TaskShedulerTests.swift */,
 				A2433A451EA542100058BB6D /* AttemptShedulerTests.swift */,
@@ -468,6 +477,9 @@
 				A2B805551EDDB01C004DA7EB /* WebControllerMock.swift */,
 				A25A19C81EE4112700CF13AF /* SwiftyVKDelegateMock.swift */,
 				A25A19CA1EE4126E00CF13AF /* DependencyFactoryMock.swift */,
+				A25A19D41EE43E8100CF13AF /* TokenParserMock.swift */,
+				A25A19D61EE4405E00CF13AF /* VkAppProxyMock.swift */,
+				A25A19D91EE5198600CF13AF /* WebPresenterMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -960,6 +972,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2E34DC11ED1FB2F0041E663 /* TokenStorageTests.swift in Sources */,
+				A25A19DA1EE5198600CF13AF /* WebPresenterMock.swift in Sources */,
 				A25A19CB1EE4126E00CF13AF /* DependencyFactoryMock.swift in Sources */,
 				A2F6F8E51EDDF00400933DBC /* Atomic-Tests.swift in Sources */,
 				A2AF167D1ED1CCA900485716 /* AuthorizatorMock.swift in Sources */,
@@ -967,6 +980,7 @@
 				A2B805581EDDB313004DA7EB /* WebPresenterTests.swift in Sources */,
 				A22179CA1EBA4059006B71FD /* SessionTests.swift in Sources */,
 				A2E5C5D91ECCAD4800652262 /* SessionStorageMock.swift in Sources */,
+				A25A19D51EE43E8100CF13AF /* TokenParserMock.swift in Sources */,
 				A2433A461EA542100058BB6D /* AttemptShedulerTests.swift in Sources */,
 				A2E5C5DB1ECCAFC800652262 /* SessionStorageTests.swift in Sources */,
 				A25A19C91EE4112700CF13AF /* SwiftyVKDelegateMock.swift in Sources */,
@@ -975,6 +989,7 @@
 				A2AF16791ED1AD2E00485716 /* TokenTests.swift in Sources */,
 				A22179CC1EBA5009006B71FD /* TaskShedulerMock.swift in Sources */,
 				A24DDAF21EB73E3F002EA273 /* QueryBuilderTests.swift in Sources */,
+				A25A19D31EE438FB00CF13AF /* AuthorizatorTests.swift in Sources */,
 				A22179C81EBA3DBD006B71FD /* AttemptShedulerMock.swift in Sources */,
 				A24DDAEE1EB73CA3002EA273 /* QueryBuilderMock.swift in Sources */,
 				A25A3A2D1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift in Sources */,
@@ -983,6 +998,7 @@
 				A23708C81EA532B900103212 /* TaskShedulerTests.swift in Sources */,
 				A22179C51EBA3BBA006B71FD /* DependencyFactoryTests.swift in Sources */,
 				A2B805561EDDB01C004DA7EB /* WebControllerMock.swift in Sources */,
+				A25A19D71EE4405E00CF13AF /* VkAppProxyMock.swift in Sources */,
 				A22179D01EBA530C006B71FD /* SessionMock.swift in Sources */,
 				A2B40DFD1EA693B700106AE3 /* UrlRequestBuilderTests.swift in Sources */,
 				A25A19D01EE4233D00CF13AF /* TokenParserTests.swift in Sources */,

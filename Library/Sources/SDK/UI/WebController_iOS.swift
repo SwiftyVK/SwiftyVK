@@ -73,8 +73,7 @@ final class WebController_iOS: UIViewController, WKNavigationDelegate, WebContro
     }
 }
 
-
-// Little hack to represent WKWebView in XIB
+// Hack to represent WKWebView in XIB :)
 class VKWebView: WKWebView {
     
     required init?(coder: NSCoder) {
