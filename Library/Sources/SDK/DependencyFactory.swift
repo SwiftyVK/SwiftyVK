@@ -10,7 +10,8 @@ protocol DependencyFactory:
     TaskMaker,
     AttemptMaker,
     TokenMaker,
-    WebPresenterMaker
+    WebPresenterMaker,
+    CaptchaPresenterMaker
 {}
 
 protocol DependencyHolder: SessionStorageHolder, AuthorizatorHolder {
@@ -43,6 +44,10 @@ protocol TokenMaker {
 
 protocol WebPresenterMaker {
     func webPresenter() -> WebPresenter?
+}
+
+protocol CaptchaPresenterMaker {
+    func captchaPresenter() -> CaptchaPresenter?
 }
 
 final class DependencyFactoryImpl: DependencyFactory {
@@ -125,6 +130,34 @@ final class DependencyFactoryImpl: DependencyFactory {
         }
         
         return webPresenter
+    }
+    
+    func captchaPresenter() -> CaptchaPresenter? {
+        
+        #if os(iOS)
+            let captchaController = WebController_iOS(
+                nibName: Resources.withSuffix("CaptchaView"),
+                bundle: Resources.bundle
+            )
+        #elseif os(macOS)
+            guard let captchaController = CaptchaController_macOS(
+                nibName: Resources.withSuffix("CaptchaView"),
+                bundle: Resources.bundle
+                ) else {
+                    return nil
+            }
+        #endif
+        
+        let captchaPresenter = CaptchaPresenterImpl(
+            uiSyncQueue: uiSyncQueue,
+            controller: captchaController
+        )
+        
+        DispatchQueue.main.sync {
+            self.delegate?.vkNeedToPresent(viewController: captchaController)
+        }
+        
+        return captchaPresenter
     }
     
     func task(request: Request, callbacks: Callbacks, token: Token?, attemptSheduler: AttemptSheduler) -> Task {

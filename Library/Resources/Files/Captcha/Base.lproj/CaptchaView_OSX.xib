@@ -1,56 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="CaptchaController" customModule="SwiftyVK">
+        <customObject id="-2" userLabel="File's Owner" customClass="CaptchaController_macOS" customModule="SwiftyVK">
             <connections>
-                <outlet property="ImageView" destination="iOA-ux-78V" id="X1h-x6-W1w"/>
-                <outlet property="imageView" destination="iOA-ux-78V" id="aSa-C2-hHf"/>
-                <outlet property="textField" destination="Yw8-Z2-YdE" id="UBl-NS-NxJ"/>
-                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+                <outlet property="imageView" destination="xVy-m8-BYx" id="hEa-sT-vPv"/>
+                <outlet property="textField" destination="LR2-F3-oFw" id="hlD-Ml-Rz2"/>
+                <outlet property="view" destination="gcj-hG-w7f" id="5Sz-rv-N8D"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="SwiftyVK" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5">
-            <windowStyleMask key="styleMask" titled="YES"/>
-            <rect key="contentRect" x="196" y="240" width="280" height="140"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
-            <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="280" height="140"/>
-                <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iOA-ux-78V">
-                        <rect key="frame" x="0.0" y="30" width="280" height="110"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="phW-7B-p0O"/>
-                    </imageView>
-                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yw8-Z2-YdE">
-                        <rect key="frame" x="1" y="5" width="281" height="24"/>
-                        <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" alignment="center" placeholderString="Enter code from the image" id="10o-ia-P0q">
-                            <font key="font" metaFont="system" size="20"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                </subviews>
-                <constraints>
-                    <constraint firstAttribute="bottom" secondItem="Yw8-Z2-YdE" secondAttribute="bottom" constant="5" id="9f5-Ku-aBL"/>
-                    <constraint firstItem="iOA-ux-78V" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="D3Q-ow-OH1"/>
-                    <constraint firstItem="Yw8-Z2-YdE" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="3" id="Quh-HH-qOm"/>
-                    <constraint firstItem="Yw8-Z2-YdE" firstAttribute="top" secondItem="iOA-ux-78V" secondAttribute="bottom" constant="1" id="SEa-kh-BuY"/>
-                    <constraint firstItem="iOA-ux-78V" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="bpU-vH-nFi"/>
-                    <constraint firstAttribute="trailing" secondItem="iOA-ux-78V" secondAttribute="trailing" id="f54-uW-nnq"/>
-                    <constraint firstItem="Yw8-Z2-YdE" firstAttribute="centerX" secondItem="iOA-ux-78V" secondAttribute="centerX" constant="1.5" id="jP8-Y5-hCY"/>
-                </constraints>
-            </view>
-            <connections>
-                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
-            </connections>
-            <point key="canvasLocation" x="-6" y="142.5"/>
-        </window>
+        <view id="gcj-hG-w7f">
+            <rect key="frame" x="0.0" y="0.0" width="280" height="140"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xVy-m8-BYx">
+                    <rect key="frame" x="0.0" y="30" width="280" height="110"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="mv2-i5-4Lr"/>
+                </imageView>
+                <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LR2-F3-oFw">
+                    <rect key="frame" x="1" y="5" width="281" height="24"/>
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" alignment="center" placeholderString="Enter code from the image" id="gfV-Hx-soZ">
+                        <font key="font" metaFont="system" size="20"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="LR2-F3-oFw" firstAttribute="centerX" secondItem="xVy-m8-BYx" secondAttribute="centerX" constant="1.5" id="0dm-Do-l6H"/>
+                <constraint firstItem="xVy-m8-BYx" firstAttribute="top" secondItem="gcj-hG-w7f" secondAttribute="top" id="BGh-lS-ecR"/>
+                <constraint firstItem="xVy-m8-BYx" firstAttribute="leading" secondItem="gcj-hG-w7f" secondAttribute="leading" id="g9t-S5-uDF"/>
+                <constraint firstAttribute="bottom" secondItem="LR2-F3-oFw" secondAttribute="bottom" constant="5" id="sGG-N6-25h"/>
+                <constraint firstItem="LR2-F3-oFw" firstAttribute="leading" secondItem="gcj-hG-w7f" secondAttribute="leading" constant="3" id="sYs-VE-iyx"/>
+                <constraint firstAttribute="trailing" secondItem="xVy-m8-BYx" secondAttribute="trailing" id="ujt-gZ-l6A"/>
+                <constraint firstItem="LR2-F3-oFw" firstAttribute="top" secondItem="xVy-m8-BYx" secondAttribute="bottom" constant="1" id="zoB-EQ-t32"/>
+            </constraints>
+        </view>
     </objects>
 </document>

@@ -1,69 +1,62 @@
-import Foundation
+protocol CaptchaPresenter {
+    func present(captchaUrlString: String) throws -> String
+}
 
-let sheetQueue = DispatchQueue(label: "SwiftyVK.sheetQueue")
-
-final class CaptchaPresenter {
-    private let semaphore = DispatchSemaphore(value: 0)
-    private var controller: CaptchaController!
-    private var sid: String
-    private var answer: String?
+final class CaptchaPresenterImpl: CaptchaPresenter {
+    private let uiSyncQueue: DispatchQueue
+    private let controller: CaptchaController
     
-    static func present(sid: String, imageUrl: String, request: Task) -> RequestError? {
+    init(
+        uiSyncQueue: DispatchQueue,
+        controller: CaptchaController
+        ) {
+        self.uiSyncQueue = uiSyncQueue
+        self.controller = controller
+    }
+    
+    func present(captchaUrlString: String) throws -> String {
+        let canFinish = Atomic(true)
+        let semaphore = DispatchSemaphore(value: 0)
         
-        guard let url = URL(string: imageUrl) else {
-            return RequestError.captchaFailed
-        }
-        
-        let presenter = CaptchaPresenter(sid: sid)
-        
-        return sheetQueue.sync {
-            var data: Data
+        return try uiSyncQueue.sync {
             
-            do {
-                let req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 5)
-                data = try NSURLConnection.sendSynchronousRequest(req, returning: nil)}
-catch {
-                return RequestError.captchaFailed
+            let imageData = try downloadCaptchaImageData(string: captchaUrlString)
+            
+            var result: String?
+            
+            controller.present(imageData: imageData) { [controller] answer in
+                canFinish >< { canFinish in
+                    guard canFinish else {
+                        return false
+                    }
+                    
+                    result = answer
+                    controller.dismiss()
+                    semaphore.signal()
+                    return false
+                }
             }
             
-            guard let controller = CaptchaController.create(data: data, delegate: presenter) else {
-                return RequestError.captchaFailed
+            switch semaphore.wait(timeout: .now() + 600) {
+            case .timedOut:
+                throw SessionError.captchaPresenterTimedOut
+            case .success:
+                break
             }
             
-            presenter.controller = controller
-            presenter.semaphore.wait()
-            
-            guard presenter.answer != nil else {
-                return RequestError.captchaFailed
+            guard let unwrappedResult = result else {
+                throw RequestError.captchaFailed
             }
             
-            return nil
+            return unwrappedResult
         }
     }
     
-    private init(sid: String) {
-        self.sid = sid
-    }
-    
-    func didAppear() {
-        NotificationCenter.default.post(
-            name: NSNotification.Name(rawValue: "TestCaptchaDidLoad"),
-            object: nil,
-            userInfo: ["captcha": controller]
-        )
-    }
-    
-    func finish(answer: String?) {
-        self.answer = answer
-        
-        if let answer = answer {
-            sharedCaptchaAnswer = [
-                "captcha_sid": sid,
-                "captcha_key": answer
-            ]
+    private func downloadCaptchaImageData(string: String) throws -> Data {
+        guard let request = URL(string: string).flatMap({ URLRequest(url: $0) }) else {
+            throw SessionError.cantLoadCaptchaImage
         }
         
-        semaphore.signal()
+        return try NSURLConnection.sendSynchronousRequest(request, returning: nil)
     }
-    
 }

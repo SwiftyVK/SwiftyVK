@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Base.lproj/CaptchaView_OSX.nib</key>
 		<data>
-		3icvBWZSRTgEKDNfoWj531FtbME=
+		zGu5hDRkYlWxUPReNcyfsVkzr1o=
 		</data>
 		<key>Resources/WebView_macOS.nib</key>
 		<data>
@@ -91,11 +91,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3icvBWZSRTgEKDNfoWj531FtbME=
+			zGu5hDRkYlWxUPReNcyfsVkzr1o=
 			</data>
 			<key>hash2</key>
 			<data>
-			qy+LG+zi9c0lfTSNzQ01hB5GwVjtc97srTcZDITBAy8=
+			eHU8t52AGK+0EVFct5Kv07CF+Ds3TF0ba1jhFP+cMw8=
 			</data>
 		</dict>
 		<key>Resources/WebView_macOS.nib</key>

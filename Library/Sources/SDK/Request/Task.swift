@@ -204,18 +204,18 @@ final class TaskImpl: Operation, Task {
 //            }
             resendWith(error: error)
         case 14:
-            guard
-                let sid = error.errorUserInfo["captcha_sid"] as? String,
-                let imgUrl = error.errorUserInfo["captcha_img"] as? String
-                else {
-                    execute(error: error)
-                    return
-            }
-            
-            if let error = CaptchaPresenter.present(sid: sid, imageUrl: imgUrl, request: self) {
-                handleResult(.error(error))
-                return
-            }
+//            guard
+//                let sid = error.errorUserInfo["captcha_sid"] as? String,
+//                let imgUrl = error.errorUserInfo["captcha_img"] as? String
+//                else {
+//                    execute(error: error)
+//                    return
+//            }
+//            
+//            if let error = CaptchaPresenter.present(sid: sid, imageUrl: imgUrl, request: self) {
+//                handleResult(.error(error))
+//                return
+//            }
             resendWith(error: error)
         case 17:
 //            if
