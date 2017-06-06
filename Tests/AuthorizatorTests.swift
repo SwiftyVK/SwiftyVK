@@ -2,7 +2,7 @@ import XCTest
 @testable import SwiftyVK
 
 class AuthorizatorTests: BaseTestCase {
-
+    
     func makeContext() -> (
         authorizator: AuthorizatorImpl,
         delegate: SwiftyVKDelegateMock,
@@ -13,31 +13,32 @@ class AuthorizatorTests: BaseTestCase {
         webPresenterMaker: WebPresenterMakerMock,
         session: SessionMock
         ) {
-        let delegate = SwiftyVKDelegateMock()
-        let storage = TokenStorageMock()
-        let tokenMaker = TokenMakerMock()
-        let parser = TokenParserMock()
-        let vkApp = VkAppProxyMock()
-        let webPresenterMaker = WebPresenterMakerMock()
-        let session = SessionMock()
-        
-        let authorizator = AuthorizatorImpl(
-            appId: "1234567890",
-            delegate: delegate,
-            tokenStorage: storage,
-            tokenMaker: tokenMaker,
-            tokenParser: parser,
-            vkAppProxy: vkApp,
-            webPresenterMaker: webPresenterMaker
-        )
-        
-        return (authorizator, delegate, storage, tokenMaker, parser, vkApp, webPresenterMaker, session)
+            let delegate = SwiftyVKDelegateMock()
+            let storage = TokenStorageMock()
+            let tokenMaker = TokenMakerMock()
+            let parser = TokenParserMock()
+            let vkApp = VkAppProxyMock()
+            let webPresenterMaker = WebPresenterMakerMock()
+            let session = SessionMock()
+            
+            let authorizator = AuthorizatorImpl(
+                appId: "1234567890",
+                delegate: delegate,
+                tokenStorage: storage,
+                tokenMaker: tokenMaker,
+                tokenParser: parser,
+                vkAppProxy: vkApp,
+                webPresenterMaker: webPresenterMaker
+            )
+            
+            return (authorizator, delegate, storage, tokenMaker, parser, vkApp, webPresenterMaker, session)
     }
     
     
     func test_authorize_withTokenfromStorage() {
         // Given
         let context = makeContext()
+        let exp = expectation(description: "")
         
         context.storage.onGet = { _ in
             return TokenMock()
@@ -48,46 +49,64 @@ class AuthorizatorTests: BaseTestCase {
             return false
         }
         // When
-        let token = try? context.authorizator.authorize(session: context.session, revoke: false)
-        // Then
-        XCTAssertNotNil(token)
+        DispatchQueue.global().async {
+            let token = try? context.authorizator.authorize(session: context.session, revoke: false)
+            // Then
+            XCTAssertNotNil(token)
+            exp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10)
     }
     
     func test_authorize_withErrorOnCreatePresenter() {
         // Given
         let context = makeContext()
+        let exp = expectation(description: "")
         
         context.webPresenterMaker.onMake = nil
         // When
-        do {
-            _ = try context.authorizator.authorize(session: context.session, revoke: false)
-            // Then
-            XCTFail("Code above should throw error")
-        } catch let error {
-            XCTAssertEqual(error as? SessionError, SessionError.cantMakeWebViewController)
+        DispatchQueue.global().async {
+            do {
+                _ = try context.authorizator.authorize(session: context.session, revoke: false)
+                // Then
+                XCTFail("Code above should throw error")
+            } catch let error {
+                XCTAssertEqual(error as? SessionError, SessionError.cantMakeWebViewController)
+            }
+            exp.fulfill()
         }
+        
+        waitForExpectations(timeout: 10)
     }
     
     func test_authorize_errorOnParseToken() {
         // Given
         let context = makeContext()
+        let exp = expectation(description: "")
         
         context.webPresenterMaker.onMake = {
             return WebPresenterMock()
         }
         // When
-        do {
-            _ = try context.authorizator.authorize(session: context.session, revoke: false)
-            // Then
-            XCTFail("Code above should throw error")
-        } catch let error {
-            XCTAssertEqual(error as? SessionError, SessionError.cantParseToken)
+        DispatchQueue.global().async {
+            do {
+                _ = try context.authorizator.authorize(session: context.session, revoke: false)
+                // Then
+                XCTFail("Code above should throw error")
+            } catch let error {
+                XCTAssertEqual(error as? SessionError, SessionError.cantParseToken)
+            }
+            exp.fulfill()
         }
+        
+        waitForExpectations(timeout: 10)
     }
     
     func test_authorize_withSucessfullCreatedToken() {
         // Given
         let context = makeContext()
+        let exp = expectation(description: "")
         
         context.webPresenterMaker.onMake = {
             return WebPresenterMock()
@@ -97,24 +116,37 @@ class AuthorizatorTests: BaseTestCase {
             return ("token", expires: 123, [:])
         }
         // When
-        let token = try? context.authorizator.authorize(session: context.session, revoke: false)
-        // Then
-        XCTAssertNotNil(token)
+        DispatchQueue.global().async {
+            let token = try? context.authorizator.authorize(session: context.session, revoke: false)
+            // Then
+            XCTAssertNotNil(token)
+            exp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10)
     }
     
     func test_authorize_withDelegateWillLoginCallCount() {
         // Given
         let context = makeContext()
+        let exp = expectation(description: "")
         var delegateCallCount = 0
         
         context.delegate.onVkWillLogIn = { _ in
             delegateCallCount += 1
             return []
         }
+        
         // When
-        _ = try? context.authorizator.authorize(session: context.session, revoke: true)
-        // Then
-        XCTAssertEqual(delegateCallCount, 2)
+        DispatchQueue.global().async {
+            _ = try? context.authorizator.authorize(session: context.session, revoke: true)
+            
+            // Then
+            XCTAssertEqual(delegateCallCount, 2)
+            exp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10)
     }
     
     func test_authorize_withRawToken_tokenMakerShouldCalledOnce() {
@@ -133,12 +165,13 @@ class AuthorizatorTests: BaseTestCase {
         // When
         _ = try? context.authorizator.authorize(session: context.session, rawToken: "1234567890", expires: 123)
         // Then
-        XCTAssertEqual(delegateCallCount, 1)
+        XCTAssertEqual(delegateCallCount, 10)
     }
     
     func test_authoriz_withRawToken_storageShoulSevedOnce() {
         // Given
         let context = makeContext()
+        let exp = expectation(description: "")
         var saveCallCount = 0
         
         context.tokenMaker.onMake = { token, expires, info in
@@ -148,13 +181,18 @@ class AuthorizatorTests: BaseTestCase {
         context.storage.onSave = { token, sessionId in
             XCTAssertEqual(token.get(), "1234567890")
             XCTAssertEqual(context.session.id, sessionId)
-
+            
             saveCallCount += 1
         }
         // When
-        _ = try? context.authorizator.authorize(session: context.session, rawToken: "1234567890", expires: 123)
-        // Then
-        XCTAssertEqual(saveCallCount, 1)
+        DispatchQueue.global().async {
+            _ = try? context.authorizator.authorize(session: context.session, rawToken: "1234567890", expires: 123)
+            // Then
+            XCTAssertEqual(saveCallCount, 1)
+            exp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10)
     }
     
     func test_reset_returnedTokenShouldBeNil() {
@@ -212,6 +250,7 @@ class AuthorizatorTests: BaseTestCase {
     func test_authorize_withHandledToken_shouldBeAuthorized() {
         // Given
         let context = makeContext()
+        let exp = expectation(description: "")
         
         context.vkApp.onSend = { _ in
             return true
@@ -236,18 +275,22 @@ class AuthorizatorTests: BaseTestCase {
             return ("token", expires: 123, [:])
         }
         // When
-        do {
-            DispatchQueue.global().async {
+        DispatchQueue.global().async {
+            do {
                 Thread.sleep(forTimeInterval: 0.1)
                 context.authorizator.handle(url: URL(string: "http://examp.le")!, app: "")
+                
+                let token = try context.authorizator.authorize(session: context.session, revoke: false)
+                // Then
+                XCTAssertNotNil(token)
+            } catch let error {
+                XCTFail("Code above should sucessful execute insted \(error)")
             }
             
-            let token = try context.authorizator.authorize(session: context.session, revoke: false)
-            // Then
-            XCTAssertNotNil(token)
-        } catch let error {
-            XCTFail("Code above should sucessful execute insted \(error)")
+            exp.fulfill()
         }
+        
+        waitForExpectations(timeout: 10)
     }
     
     func test_validate() {

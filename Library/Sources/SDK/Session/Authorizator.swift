@@ -43,6 +43,11 @@ final class AuthorizatorImpl: Authorizator {
     }
     
     func authorize(session: Session, revoke: Bool) throws -> Token {
+        guard !Thread.isMainThread else {
+            assertionFailure("Never call this code from main thread!")
+            throw SessionError.authCalledFromMainThread
+        }
+        
         return try queue.sync {
             if let token = tokenStorage.getFor(sessionId: session.id) {
                 return token
@@ -55,7 +60,7 @@ final class AuthorizatorImpl: Authorizator {
             }
             
             let webAuthRequest = try makeWebAuthRequest(session: session, revoke: revoke)
-            return try getTokenFromWeb(session: session, request: webAuthRequest)
+            return try tryToMakeToken(session: session, request: webAuthRequest)
         }
     }
     
@@ -67,11 +72,11 @@ final class AuthorizatorImpl: Authorizator {
                 timeoutInterval: requestTimeout
             )
             
-            return try getTokenFromWeb(session: session, request: validationRequest)
+            return try tryToMakeToken(session: session, request: validationRequest)
         }
     }
     
-    private func getTokenFromWeb(session: Session, request: URLRequest) throws -> Token {
+    private func tryToMakeToken(session: Session, request: URLRequest) throws -> Token {
         defer {
             handledToken = nil
             currentWebPresenter = nil
