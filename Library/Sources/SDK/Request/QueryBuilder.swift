@@ -16,20 +16,17 @@ final class QueryBuilderImpl: QueryBuilder {
         
         var rawParameters = [String: String]()
         
+        rawParameters["captcha_sid"] = captcha?.sid
+        rawParameters["captcha_key"] = captcha?.key
+        
         for (name, value) in parameters {
-            guard let value = value else { continue }
             rawParameters[name.rawValue] = value
         }
         
+        rawParameters["https"] = "1"
         rawParameters["v"] = config.apiVersion
         rawParameters["lang"] = config.language.rawValue
-        rawParameters["https"] = "1"
         rawParameters["access_token"] = token?.get()
-        
-        if let captcha = captcha {
-            rawParameters["captcha_sid"] = captcha.sid
-            rawParameters["captcha_key"] = captcha.key
-        }
         
         for (name, value) in rawParameters {
             if let encodedValue = value.addingPercentEncoding(withAllowedCharacters: .urlQueryParametersAllowed) {

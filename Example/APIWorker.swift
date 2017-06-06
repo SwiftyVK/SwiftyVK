@@ -31,12 +31,11 @@ final class APIWorker {
         VK.sessions?.default.logOut()
         print("SwiftyVK: LogOut")
         
-        DispatchQueue.global().async {
-            do {
-                let params = try VK.sessions?.default.logIn()
-                print("SwiftyVK: success authorize with", params ?? [:])
-                
-            } catch let error {
+        VK.sessions?.default.logIn { result in
+            switch result {
+            case .result(let result):
+                print("SwiftyVK: success authorize with", result)
+            case .error(let error):
                 print("SwiftyVK: authorize failed with", error)
             }
         }

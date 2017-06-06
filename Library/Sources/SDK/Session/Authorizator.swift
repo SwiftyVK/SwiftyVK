@@ -1,8 +1,8 @@
 protocol Authorizator: class {
-    func authorize(session: Session, revoke: Bool) throws -> Token
-    func authorize(session: Session, rawToken: String, expires: TimeInterval) throws -> Token
-    func validate(session: Session, url: URL) throws -> Token
-    func reset(session: Session) -> Token?
+    func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Token
+    func authorize(sessionId: String, rawToken: String, expires: TimeInterval) throws -> Token
+    func validate(sessionId: String, url: URL) throws -> Token
+    func reset(sessionId: String) -> Token?
     func handle(url: URL, app: String?)
 }
 
@@ -12,13 +12,13 @@ final class AuthorizatorImpl: Authorizator {
     private let webAuthorizeUrl = "https://oauth.vk.com/authorize?"
     private let webRedirectUrl = "https://oauth.vk.com/blank.html"
     
-    private weak var delegate: SwiftyVKDelegate?
     private let appId: String
     private let tokenStorage: TokenStorage
     private let tokenMaker: TokenMaker
     private let tokenParser: TokenParser
     private let vkAppProxy: VkAppProxy
     private let webPresenterMaker: WebPresenterMaker
+    private weak var delegate: SwiftyVKDelegate?    
     private weak var currentWebPresenter: WebPresenter?
     
     private(set) var handledToken: Token?
@@ -42,29 +42,49 @@ final class AuthorizatorImpl: Authorizator {
         self.webPresenterMaker = webPresenterMaker
     }
     
-    func authorize(session: Session, revoke: Bool) throws -> Token {
-        guard !Thread.isMainThread else {
-            assertionFailure("Never call this code from main thread!")
-            throw SessionError.authCalledFromMainThread
-        }
-        
+    func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Token {
         return try queue.sync {
-            if let token = tokenStorage.getFor(sessionId: session.id) {
+            if let token = tokenStorage.getFor(sessionId: sessionId) {
                 return token
             }
             
-            let vkAppAuthQuery = try makeAuthQuery(session: session, redirectUrl: nil, revoke: revoke)
+            guard let scopes = delegate?.vkNeedsScopes(for: sessionId).toInt() else {
+                throw SessionError.delegateNotFound
+            }
+            
+            let vkAppAuthQuery = try makeAuthQuery(
+                sessionId: sessionId,
+                config: config,
+                scopes: scopes,
+                redirectUrl: nil,
+                revoke: revoke
+            )
             
             if try vkAppProxy.send(query: vkAppAuthQuery) {
                 Thread.sleep(forTimeInterval: 1)
             }
             
-            let webAuthRequest = try makeWebAuthRequest(session: session, revoke: revoke)
-            return try tryToMakeToken(session: session, request: webAuthRequest)
+            let webAuthRequest = try makeWebAuthRequest(
+                sessionId: sessionId,
+                config: config,
+                scopes: scopes,
+                revoke: revoke
+            )
+            
+            return try getToken(sessionId: sessionId, request: webAuthRequest)
         }
     }
     
-    func validate(session: Session, url: URL) throws -> Token {
+    func authorize(sessionId: String, rawToken: String, expires: TimeInterval) throws -> Token {
+        return try queue.sync {
+            let token = tokenMaker.token(token: rawToken, expires: expires, info: [:])
+            try tokenStorage.save(token: token, for:  sessionId)
+            delegate?.vkTokenUpdated(for: sessionId, info: [:])
+            return token
+        }
+    }
+    
+    func validate(sessionId: String, url: URL) throws -> Token {
         return try queue.sync {
             let validationRequest = URLRequest(
                 url: url,
@@ -72,11 +92,31 @@ final class AuthorizatorImpl: Authorizator {
                 timeoutInterval: requestTimeout
             )
             
-            return try tryToMakeToken(session: session, request: validationRequest)
+            return try getToken(sessionId: sessionId, request: validationRequest)
         }
     }
     
-    private func tryToMakeToken(session: Session, request: URLRequest) throws -> Token {
+    func reset(sessionId: String) -> Token? {
+        return queue.sync {
+            tokenStorage.removeFor(sessionId: sessionId)
+            delegate?.vkDidLogOut(for: sessionId)
+            return nil
+        }
+    }
+    
+    func handle(url: URL, app: String?) {
+        guard
+            let tokenInfo = vkAppProxy.handle(url: url, app: app),
+            let handledToken = try? makeToken(tokenInfo: tokenInfo) else
+        {
+            return
+        }
+        
+        self.handledToken = handledToken
+        currentWebPresenter?.dismiss()
+    }
+    
+    private func getToken(sessionId: String, request: URLRequest) throws -> Token {
         defer {
             handledToken = nil
             currentWebPresenter = nil
@@ -92,7 +132,7 @@ final class AuthorizatorImpl: Authorizator {
         
         do {
             let tokenInfo = try webPresenter.presentWith(urlRequest: request)
-            token = try makeToken(from: tokenInfo)
+            token = try makeToken(tokenInfo: tokenInfo)
         } catch let error {
             guard let handledToken = handledToken else {
                 throw error
@@ -101,13 +141,33 @@ final class AuthorizatorImpl: Authorizator {
             token = handledToken
         }
         
-        try tokenStorage.save(token: token, for:  session.id)
+        try tokenStorage.save(token: token, for:  sessionId)
+        delegate?.vkTokenUpdated(for: sessionId, info: token.info)
         return token
     }
     
-    private func makeWebAuthRequest(session: Session, revoke: Bool) throws -> URLRequest {
+    private func makeToken(tokenInfo: String) throws -> Token {
+        guard let parsingResult = tokenParser.parse(tokenInfo: tokenInfo) else {
+            throw SessionError.cantParseToken
+        }
+        
+        return tokenMaker.token(
+            token: parsingResult.token,
+            expires: parsingResult.expires,
+            info: parsingResult.info
+        )
+    }
+    
+    private func makeWebAuthRequest(
+        sessionId: String,
+        config: SessionConfig,
+        scopes: Int,
+        revoke: Bool
+        ) throws -> URLRequest {
         let webQuery = try makeAuthQuery(
-            session: session,
+            sessionId: sessionId,
+            config: config,
+            scopes: scopes,
             redirectUrl: webRedirectUrl,
             revoke: revoke
         )
@@ -123,12 +183,13 @@ final class AuthorizatorImpl: Authorizator {
         )
     }
     
-    private func makeAuthQuery(session: Session, redirectUrl: String?, revoke: Bool) throws -> String {
-        
-        guard let scopes = delegate?.vkWillLogIn(in: session).toInt() else {
-            throw SessionError.delegateNotFound
-        }
-        
+    private func makeAuthQuery(
+        sessionId: String,
+        config: SessionConfig,
+        scopes: Int,
+        redirectUrl: String?,
+        revoke: Bool
+        ) throws -> String {
         let redirect: String
         
         if let url = redirectUrl, !url.isEmpty {
@@ -140,46 +201,10 @@ final class AuthorizatorImpl: Authorizator {
         return "client_id=\(appId)&"
             + "scope=\(scopes)&"
             + "display=mobile&"
-            + "v\(session.config.apiVersion)&"
-            + "sdk_version=\(session.config.sdkVersion)"
+            + "v\(config.apiVersion)&"
+            + "sdk_version=\(config.sdkVersion)"
             + "\(redirect)&"
             + "response_type=token&"
             + "revoke=\(revoke ? 1 : 0)"
-    }
-    
-    private func makeToken(from tokenInfo: String) throws -> Token {
-        guard let parsingResult = tokenParser.parse(tokenInfo: tokenInfo) else {
-            throw SessionError.cantParseToken
-        }
-        
-        return tokenMaker.token(
-            token: parsingResult.token,
-            expires: parsingResult.expires,
-            info: parsingResult.info
-        )
-    }
-    
-    func authorize(session: Session, rawToken: String, expires: TimeInterval) throws -> Token {
-        let token = tokenMaker.token(token: rawToken, expires: expires, info: [:])
-        try tokenStorage.save(token: token, for:  session.id)
-        return token
-    }
-    
-    func reset(session: Session) -> Token? {
-        tokenStorage.removeFor(sessionId: session.id)
-        delegate?.vkDidLogOut(in: session)
-        return nil
-    }
-    
-    func handle(url: URL, app: String?) {
-        guard
-            let tokenInfo = vkAppProxy.handle(url: url, app: app),
-            let handledToken = try? makeToken(from: tokenInfo) else
-        {
-            return
-        }
-        
-        self.handledToken = handledToken
-        currentWebPresenter?.dismiss()
     }
 }

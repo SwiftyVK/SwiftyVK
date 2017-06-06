@@ -11,7 +11,8 @@ class AuthorizatorTests: BaseTestCase {
         parser: TokenParserMock,
         vkApp: VkAppProxyMock,
         webPresenterMaker: WebPresenterMakerMock,
-        session: SessionMock
+        sessionId: String,
+        sessionConfig: SessionConfig
         ) {
             let delegate = SwiftyVKDelegateMock()
             let storage = TokenStorageMock()
@@ -31,14 +32,23 @@ class AuthorizatorTests: BaseTestCase {
                 webPresenterMaker: webPresenterMaker
             )
             
-            return (authorizator, delegate, storage, tokenMaker, parser, vkApp, webPresenterMaker, session)
+            return (
+                authorizator,
+                delegate,
+                storage,
+                tokenMaker,
+                parser,
+                vkApp,
+                webPresenterMaker,
+                session.id,
+                session.config
+            )
     }
     
     
     func test_authorize_withTokenfromStorage() {
         // Given
         let context = makeContext()
-        let exp = expectation(description: "")
         
         context.storage.onGet = { _ in
             return TokenMock()
@@ -49,64 +59,58 @@ class AuthorizatorTests: BaseTestCase {
             return false
         }
         // When
-        DispatchQueue.global().async {
-            let token = try? context.authorizator.authorize(session: context.session, revoke: false)
-            // Then
-            XCTAssertNotNil(token)
-            exp.fulfill()
-        }
-        
-        waitForExpectations(timeout: 10)
+        let token = try? context.authorizator.authorize(
+            sessionId: context.sessionId,
+            config: context.sessionConfig,
+            revoke: false
+        )
+        // Then
+        XCTAssertNotNil(token)
     }
     
     func test_authorize_withErrorOnCreatePresenter() {
         // Given
         let context = makeContext()
-        let exp = expectation(description: "")
         
         context.webPresenterMaker.onMake = nil
         // When
-        DispatchQueue.global().async {
-            do {
-                _ = try context.authorizator.authorize(session: context.session, revoke: false)
-                // Then
-                XCTFail("Code above should throw error")
-            } catch let error {
-                XCTAssertEqual(error as? SessionError, SessionError.cantMakeWebViewController)
-            }
-            exp.fulfill()
+        do {
+            _ = try context.authorizator.authorize(
+                sessionId: context.sessionId,
+                config: context.sessionConfig,
+                revoke: false
+            )
+            // Then
+            XCTFail("Code above should throw error")
+        } catch let error {
+            XCTAssertEqual(error as? SessionError, SessionError.cantMakeWebViewController)
         }
-        
-        waitForExpectations(timeout: 10)
     }
     
     func test_authorize_errorOnParseToken() {
         // Given
         let context = makeContext()
-        let exp = expectation(description: "")
         
         context.webPresenterMaker.onMake = {
             return WebPresenterMock()
         }
         // When
-        DispatchQueue.global().async {
-            do {
-                _ = try context.authorizator.authorize(session: context.session, revoke: false)
-                // Then
-                XCTFail("Code above should throw error")
-            } catch let error {
-                XCTAssertEqual(error as? SessionError, SessionError.cantParseToken)
-            }
-            exp.fulfill()
+        do {
+            _ = try context.authorizator.authorize(
+                sessionId: context.sessionId,
+                config: context.sessionConfig,
+                revoke: false
+            )
+            // Then
+            XCTFail("Code above should throw error")
+        } catch let error {
+            XCTAssertEqual(error as? SessionError, SessionError.cantParseToken)
         }
-        
-        waitForExpectations(timeout: 10)
     }
     
     func test_authorize_withSucessfullCreatedToken() {
         // Given
         let context = makeContext()
-        let exp = expectation(description: "")
         
         context.webPresenterMaker.onMake = {
             return WebPresenterMock()
@@ -116,37 +120,33 @@ class AuthorizatorTests: BaseTestCase {
             return ("token", expires: 123, [:])
         }
         // When
-        DispatchQueue.global().async {
-            let token = try? context.authorizator.authorize(session: context.session, revoke: false)
-            // Then
-            XCTAssertNotNil(token)
-            exp.fulfill()
-        }
-        
-        waitForExpectations(timeout: 10)
+        let token = try? context.authorizator.authorize(
+            sessionId: context.sessionId,
+            config: context.sessionConfig,
+            revoke: false
+        )
+        // Then
+        XCTAssertNotNil(token)
     }
     
     func test_authorize_withDelegateWillLoginCallCount() {
         // Given
         let context = makeContext()
-        let exp = expectation(description: "")
         var delegateCallCount = 0
         
-        context.delegate.onVkWillLogIn = { _ in
+        context.delegate.onVkNeedsScopes = { _ in
             delegateCallCount += 1
             return []
         }
         
         // When
-        DispatchQueue.global().async {
-            _ = try? context.authorizator.authorize(session: context.session, revoke: true)
-            
-            // Then
-            XCTAssertEqual(delegateCallCount, 2)
-            exp.fulfill()
-        }
-        
-        waitForExpectations(timeout: 10)
+        _ = try? context.authorizator.authorize(
+            sessionId: context.sessionId,
+            config: context.sessionConfig,
+            revoke: true
+        )
+        // Then
+        XCTAssertEqual(delegateCallCount, 1)
     }
     
     func test_authorize_withRawToken_tokenMakerShouldCalledOnce() {
@@ -163,15 +163,18 @@ class AuthorizatorTests: BaseTestCase {
             return TokenMock(token: "1234567890")
         }
         // When
-        _ = try? context.authorizator.authorize(session: context.session, rawToken: "1234567890", expires: 123)
+        _ = try? context.authorizator.authorize(
+            sessionId: context.sessionId,
+            rawToken: "1234567890",
+            expires: 123
+        )
         // Then
-        XCTAssertEqual(delegateCallCount, 10)
+        XCTAssertEqual(delegateCallCount, 1)
     }
     
     func test_authoriz_withRawToken_storageShoulSevedOnce() {
         // Given
         let context = makeContext()
-        let exp = expectation(description: "")
         var saveCallCount = 0
         
         context.tokenMaker.onMake = { token, expires, info in
@@ -180,26 +183,25 @@ class AuthorizatorTests: BaseTestCase {
         
         context.storage.onSave = { token, sessionId in
             XCTAssertEqual(token.get(), "1234567890")
-            XCTAssertEqual(context.session.id, sessionId)
+            XCTAssertEqual(context.sessionId, sessionId)
             
             saveCallCount += 1
         }
         // When
-        DispatchQueue.global().async {
-            _ = try? context.authorizator.authorize(session: context.session, rawToken: "1234567890", expires: 123)
-            // Then
-            XCTAssertEqual(saveCallCount, 1)
-            exp.fulfill()
-        }
-        
-        waitForExpectations(timeout: 10)
+        _ = try? context.authorizator.authorize(
+            sessionId: context.sessionId,
+            rawToken: "1234567890",
+            expires: 123
+        )
+        // Then
+        XCTAssertEqual(saveCallCount, 1)
     }
     
     func test_reset_returnedTokenShouldBeNil() {
         // Given
         let context = makeContext()
         // When
-        let token = context.authorizator.reset(session: context.session)
+        let token = context.authorizator.reset(sessionId: context.sessionId)
         // Then
         XCTAssertNil(token)
     }
@@ -210,11 +212,11 @@ class AuthorizatorTests: BaseTestCase {
         var removeCallCount = 0
         
         context.storage.onRemove = { sessionId in
-            XCTAssertEqual(context.session.id, sessionId)
+            XCTAssertEqual(context.sessionId, sessionId)
             removeCallCount += 1
         }
         // When
-        _ = context.authorizator.reset(session: context.session)
+        _ = context.authorizator.reset(sessionId: context.sessionId)
         // Then
         XCTAssertEqual(removeCallCount, 1)
     }
@@ -224,12 +226,12 @@ class AuthorizatorTests: BaseTestCase {
         let context = makeContext()
         var delegateCallCount = 0
         
-        context.delegate.onVkDidLogOut = { session in
-            XCTAssertEqual(context.session.id, session.id)
+        context.delegate.onVkDidLogOut = { sessionId in
+            XCTAssertEqual(context.sessionId, sessionId)
             delegateCallCount += 1
         }
         // When
-        _ = context.authorizator.reset(session: context.session)
+        _ = context.authorizator.reset(sessionId: context.sessionId)
         // Then
         XCTAssertEqual(delegateCallCount, 1)
     }
@@ -280,7 +282,11 @@ class AuthorizatorTests: BaseTestCase {
                 Thread.sleep(forTimeInterval: 0.1)
                 context.authorizator.handle(url: URL(string: "http://examp.le")!, app: "")
                 
-                let token = try context.authorizator.authorize(session: context.session, revoke: false)
+                let token = try context.authorizator.authorize(
+                    sessionId: context.sessionId,
+                    config: context.sessionConfig,
+                    revoke: false
+                )
                 // Then
                 XCTAssertNotNil(token)
             } catch let error {
@@ -297,7 +303,9 @@ class AuthorizatorTests: BaseTestCase {
         // Given
         let context = makeContext()
         // When
-        let token = try? context.authorizator.validate(session: context.session, url: URL(string: "http://examp.le")!)
+        let token = try? context.authorizator.validate(
+            sessionId: context.sessionId, url: URL(string: "http://examp.le")!
+        )
         // Then
         XCTAssertNil(token)
     }

@@ -135,7 +135,7 @@ final class DependencyFactoryImpl: DependencyFactory {
     func captchaPresenter() -> CaptchaPresenter? {
         
         #if os(iOS)
-            let captchaController = WebController_iOS(
+            let captchaController = CaptchaController_iOS(
                 nibName: Resources.withSuffix("CaptchaView"),
                 bundle: Resources.bundle
             )

@@ -9,7 +9,7 @@ import SwiftyVK
 
 
 class VKDelegateExample: SwiftyVKDelegate {
-
+    
     let appId = "4994842"
     let scopes: Scopes = [.messages,.offline,.friends,.wall,.photos,.audio,.video,.docs,.market,.email]
     
@@ -29,7 +29,11 @@ class VKDelegateExample: SwiftyVKDelegate {
         #endif
     }
     
-    func vkWillLogIn(in session: Session) -> Scopes {
+    func vkTokenUpdated(in session: Session, info: [String : String]) {
+        
+    }
+    
+    func vkNeedsScopes(in session: Session) -> Scopes {
         return scopes
     }
     

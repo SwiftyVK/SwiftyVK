@@ -1,17 +1,19 @@
 @testable import SwiftyVK
 
-final class SessionMock: SessionInternalRepr {
+final class SessionMock: Session, SessionDestroyable {
     
     let id = String.random(20)
     var config = SessionConfig()
     var state = SessionState.initiated
     var isDefault = false
     
-    func logIn() throws -> [String : String] {
-        return [:]
+    func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (Error) -> ()) {
+        
     }
     
-    func logInWith(rawToken: String, expires: TimeInterval) throws {}
+    func logIn(rawToken: String, expires: TimeInterval) throws {
+        
+    }
     
     func logOut() {}
     

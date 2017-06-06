@@ -25,6 +25,27 @@ final class SessionTests: BaseTestCase {
         return (session, taskSheduler, attemptSheduler, authorizator)
     }
     
+    private func syncLogIn(
+        session: Session,
+        onSuccess: @escaping ([String : String]) -> (),
+        onError: @escaping (Error)-> ()
+        ) {
+        let exp = expectation(description: "")
+        
+        session.logIn(
+            onSuccess: { info in
+                onSuccess(info)
+                exp.fulfill()
+            },
+            onError: { error in
+                onError(error)
+                exp.fulfill()
+            }
+        )
+        
+        waitForExpectations(timeout: 10)
+    }
+    
     func test_sheduleTask() {
         // Given
         let (session, taskSheduler, _, _) = sessionObjects
@@ -77,11 +98,15 @@ final class SessionTests: BaseTestCase {
         // Given
         let (session, _, _, authorizator) = sessionObjects
         // When
-        do {
-            try session.logIn()
-        } catch let error {
-            XCTFail("\(error)")
-        }
+        syncLogIn(
+            session: session,
+            onSuccess: { info in
+            },
+            onError: { error in
+                XCTFail("\(error)")
+            }
+        )
+        
         // Then
         XCTAssertEqual(session.state, .authorized)
         XCTAssertEqual(authorizator.authorizeCallCount, 1)
@@ -93,13 +118,16 @@ final class SessionTests: BaseTestCase {
         // When
         authorizator.authorizeShouldThrows = true
         
-        do {
-            try session.logIn()
-            XCTFail("Log in sould be fail")
-        } catch let error {
-            XCTAssertEqual(error as? SessionError, .failedAuthorization)
-        }
-        // Then
+        syncLogIn(
+            session: session,
+            onSuccess: { info in
+                XCTFail("Log in sould be fail")
+            },
+            onError: { error in
+                XCTAssertEqual(error as? SessionError, .failedAuthorization)
+            }
+        )
+        
         XCTAssertEqual(session.state, .initiated)
         XCTAssertEqual(authorizator.authorizeCallCount, 1)
     }
@@ -110,12 +138,15 @@ final class SessionTests: BaseTestCase {
         // When
         session.destroy()
         
-        do {
-            try session.logIn()
-            XCTFail("Log in sould be fail")
-        } catch let error {
-            XCTAssertEqual(error as? SessionError, .sessionDestroyed)
-        }
+        syncLogIn(
+            session: session,
+            onSuccess: { info in
+                XCTFail("Log in sould be fail")
+            },
+            onError: { error in
+                XCTAssertEqual(error as? SessionError, .sessionDestroyed)
+            }
+        )
         // Then
         XCTAssertEqual(session.state, .destroyed)
     }
@@ -127,7 +158,7 @@ final class SessionTests: BaseTestCase {
         session.destroy()
         
         do {
-            try session.logIn()
+            try session.logIn(rawToken: "", expires: 0)
             XCTFail("Log in sould be fail")
         } catch let error {
             XCTAssertEqual(error as? SessionError, .sessionDestroyed)
@@ -142,7 +173,7 @@ final class SessionTests: BaseTestCase {
         // When
         
         do {
-            try session.logInWith(rawToken: "", expires: 0)
+            try session.logIn(rawToken: "", expires: 0)
         } catch let error {
             XCTFail("\(error)")
         }
@@ -155,11 +186,14 @@ final class SessionTests: BaseTestCase {
         // Given
         let (session, _, _, _) = sessionObjects
         // When
-        do {
-            try session.logInWith(rawToken: "", expires: 0)
-        } catch let error {
-            XCTFail("\(error)")
-        }
+        syncLogIn(
+            session: session,
+            onSuccess: { info in
+            },
+            onError: { error in
+                XCTFail("\(error)")
+            }
+        )
         
         session.logOut()
         // Then

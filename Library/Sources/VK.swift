@@ -40,10 +40,10 @@ public protocol LegacyVKDelegate: class {
 //
 public protocol SwiftyVKDelegate: class {
     func vkNeedToPresent(viewController: VkViewController)
-    func vkWillLogIn(in session: Session) -> Scopes
-    func vkDidLogOut(in session: Session)
+    func vkNeedsScopes(for sessionId: String) -> Scopes
+    func vkDidLogOut(for sessionId: String)
+    func vkTokenUpdated(for sessionId: String, info: [String : String])
 }
-
 
 public final class VK {
     
