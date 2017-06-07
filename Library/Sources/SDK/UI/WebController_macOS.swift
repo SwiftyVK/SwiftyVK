@@ -24,8 +24,10 @@ final class WebController_macOS: NSViewController, WKNavigationDelegate, WebCont
         self.handler = handler
         self.currentRequest = urlRequest
         
-        preloader?.startAnimation(nil)
-        loadCurrentRequest()
+        DispatchQueue.main.sync {
+            preloader?.startAnimation(nil)
+            loadCurrentRequest()
+        }
     }
     
     func reload() {

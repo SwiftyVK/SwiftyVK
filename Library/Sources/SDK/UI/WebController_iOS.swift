@@ -38,9 +38,11 @@ final class WebController_iOS: UIViewController, WKNavigationDelegate, WebContro
     func load(urlRequest: URLRequest, handler: WebHandler) {
         self.handler = handler
         self.currentRequest = urlRequest
-    
-        preloader?.startAnimating()
-        loadCurrentRequest()
+        
+        DispatchQueue.main.sync {
+            preloader?.startAnimating()
+            loadCurrentRequest()
+        }
     }
     
     func reload() {
