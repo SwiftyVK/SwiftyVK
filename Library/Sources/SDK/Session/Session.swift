@@ -5,7 +5,6 @@ public protocol Session: class {
     func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (Error) -> ())
     func logIn(rawToken: String, expires: TimeInterval) throws
     func logOut()
-    func validate(redirectUrl: URL) throws
     @discardableResult
     func send(request: Request, callbacks: Callbacks) -> Task
 }
@@ -50,6 +49,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     private let attemptSheduler: AttemptSheduler
     private let authorizator: Authorizator
     private let taskMaker: TaskMaker
+    private let captchaPresenter: CaptchaPresenter
     private let gateQueue = DispatchQueue(label: "SwiftyVK.sessionQueue")
     
     init(
@@ -57,7 +57,8 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         taskSheduler: TaskSheduler,
         attemptSheduler: AttemptSheduler,
         authorizator: Authorizator,
-        taskMaker: TaskMaker
+        taskMaker: TaskMaker,
+        captchaPresenter: CaptchaPresenter
         ) {
         self.id = String.random(20)
         self.config = config
@@ -65,6 +66,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         self.attemptSheduler = attemptSheduler
         self.authorizator = authorizator
         self.taskMaker = taskMaker
+        self.captchaPresenter = captchaPresenter
         
         updateShedulerLimit()
     }
@@ -118,7 +120,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     
     func captcha(rawUrlToImage: String, dismissOnFinish: Bool) throws -> String {
         try throwIfDestroyed()
-        return "" // TODO: Implement it!
+        return try captchaPresenter.present(rawCaptchaUrl: rawUrlToImage, dismissOnFinish: dismissOnFinish)
     }
     
     @discardableResult

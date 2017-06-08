@@ -66,11 +66,18 @@ final class DependencyFactoryImpl: DependencyFactory {
     }()
     
     func session() -> Session {
+        
+        let captchaPresenter = CaptchaPresenterImpl(
+            uiSyncQueue: uiSyncQueue,
+            controllerMaker: self
+        )
+        
         return SessionImpl(
             taskSheduler: TaskShedulerImpl(),
             attemptSheduler: AttemptShedulerImpl(limit: .limited(3)),
             authorizator: sharedAuthorizator,
-            taskMaker: self
+            taskMaker: self,
+            captchaPresenter: captchaPresenter
         )
     }
     

@@ -1,5 +1,5 @@
 protocol CaptchaPresenter {
-    func present(rawCaptchaUrl: String) throws -> String
+    func present(rawCaptchaUrl: String, dismissOnFinish: Bool) throws -> String
     func dismiss()
 }
 
@@ -17,7 +17,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
         self.controllerMaker = controllerMaker
     }
     
-    func present(rawCaptchaUrl: String) throws -> String {
+    func present(rawCaptchaUrl: String, dismissOnFinish: Bool) throws -> String {
         let canFinish = Atomic(true)
         let semaphore = DispatchSemaphore(value: 0)
         let imageData = try downloadCaptchaImageData(rawUrl: rawCaptchaUrl)
@@ -33,6 +33,10 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
                 canFinish >< { canFinish in
                     guard canFinish else {
                         return false
+                    }
+                    
+                    if dismissOnFinish {
+                        controller.dismiss()
                     }
                     
                     result = answer
