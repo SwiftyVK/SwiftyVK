@@ -24,6 +24,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A20259491EE9AED00014B0BE /* ApiErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20259481EE9AED00014B0BE /* ApiErrorHandler.swift */; };
+		A202594A1EE9AED00014B0BE /* ApiErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20259481EE9AED00014B0BE /* ApiErrorHandler.swift */; };
 		A204446A1EE2D92300612E57 /* WebView_macOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20444691EE2D92300612E57 /* WebView_macOS.xib */; };
 		A2066AEA1D9C388F0065A4D7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2066AE91D9C388F0065A4D7 /* Task.swift */; };
 		A2066AEB1D9C388F0065A4D7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2066AE91D9C388F0065A4D7 /* Task.swift */; };
@@ -280,6 +282,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A20259481EE9AED00014B0BE /* ApiErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorHandler.swift; sourceTree = "<group>"; };
 		A20444691EE2D92300612E57 /* WebView_macOS.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebView_macOS.xib; sourceTree = "<group>"; };
 		A2066AE91D9C388F0065A4D7 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		A217DAA71E9924DE00EA1430 /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
@@ -434,6 +437,7 @@
 			children = (
 				A2D2713B1EC4D0BA00B24D09 /* SessionStorage.swift */,
 				A217DAAB1E9926A500EA1430 /* Session.swift */,
+				A20259481EE9AED00014B0BE /* ApiErrorHandler.swift */,
 				A22179D31EBA57AF006B71FD /* SessionConfig.swift */,
 				A27015D81EC1F6D100B9C5C2 /* SessionState.swift */,
 			);
@@ -852,11 +856,12 @@
 					A23708B91EA52F0D00103212 = {
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = 842SSJ357W;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					A2527D4A1BD1130D00F65412 = {
 						CreatedOnToolsVersion = 7.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					A2527D541BD1134500F65412 = {
 						CreatedOnToolsVersion = 7.1;
@@ -871,7 +876,7 @@
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = 842SSJ357W;
 						DevelopmentTeamName = "Алексей Кудрявцев (Personal Team)";
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 				};
 			};
@@ -1070,6 +1075,7 @@
 				A2E5C5D71ECCAAB600652262 /* String+Extensions.swift in Sources */,
 				A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */,
 				A2CF0D431E98EF0900EAFF30 /* Request.swift in Sources */,
+				A202594A1EE9AED00014B0BE /* ApiErrorHandler.swift in Sources */,
 				A2E34DBD1ED1F1260041E663 /* TokenStorage.swift in Sources */,
 				A21E815A1E2A8303008E81E7 /* UrlCharactesSet.swift in Sources */,
 				A2EB6F051BD18395008E7D86 /* Video.swift in Sources */,
@@ -1118,6 +1124,7 @@
 				A2AF16731ED19AEB00485716 /* Authorizator.swift in Sources */,
 				A2EB6EC41BD18389008E7D86 /* Docs.swift in Sources */,
 				A2EB6EC51BD18389008E7D86 /* Fave.swift in Sources */,
+				A20259491EE9AED00014B0BE /* ApiErrorHandler.swift in Sources */,
 				A25A19DF1EE58FCC00CF13AF /* CaptchaController_macOS.swift in Sources */,
 				A2EB6EC61BD18389008E7D86 /* Friends.swift in Sources */,
 				A2EB6EC71BD18389008E7D86 /* Groups.swift in Sources */,
