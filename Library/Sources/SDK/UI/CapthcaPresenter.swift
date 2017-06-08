@@ -1,8 +1,10 @@
 protocol CaptchaPresenter {
-    func present(captchaUrlString: String) throws -> String
+    func present(rawCaptchaUrl: String) throws -> String
+    func dismiss()
 }
 
 final class CaptchaPresenterImpl: CaptchaPresenter {
+    
     private let uiSyncQueue: DispatchQueue
     private let controller: CaptchaController
     
@@ -14,24 +16,21 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
         self.controller = controller
     }
     
-    func present(captchaUrlString: String) throws -> String {
+    func present(rawCaptchaUrl: String) throws -> String {
         let canFinish = Atomic(true)
         let semaphore = DispatchSemaphore(value: 0)
+        let imageData = try downloadCaptchaImageData(rawUrl: rawCaptchaUrl)
         
         return try uiSyncQueue.sync {
-            
-            let imageData = try downloadCaptchaImageData(string: captchaUrlString)
-            
             var result: String?
             
-            controller.present(imageData: imageData) { [controller] answer in
+            controller.present(imageData: imageData) { answer in
                 canFinish >< { canFinish in
                     guard canFinish else {
                         return false
                     }
                     
                     result = answer
-                    controller.dismiss()
                     semaphore.signal()
                     return false
                 }
@@ -52,8 +51,12 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
         }
     }
     
-    private func downloadCaptchaImageData(string: String) throws -> Data {
-        guard let request = URL(string: string).flatMap({ URLRequest(url: $0) }) else {
+    func dismiss() {
+        controller.dismiss()
+    }
+    
+    private func downloadCaptchaImageData(rawUrl: String) throws -> Data {
+        guard let request = URL(string: rawUrl).flatMap({ URLRequest(url: $0) }) else {
             throw SessionError.cantLoadCaptchaImage
         }
         

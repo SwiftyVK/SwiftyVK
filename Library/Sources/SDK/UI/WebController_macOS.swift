@@ -47,7 +47,9 @@ final class WebController_macOS: NSViewController, WKNavigationDelegate, WebCont
     }
     
     func dismiss() {
-        dismiss(nil)
+        DispatchQueue.main.sync {
+            dismiss(nil)
+        }
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

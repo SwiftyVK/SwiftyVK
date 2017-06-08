@@ -29,15 +29,15 @@ class VKDelegateExample: SwiftyVKDelegate {
         #endif
     }
     
-    func vkTokenUpdated(in session: Session, info: [String : String]) {
+    func vkTokenUpdated(for sessionId: String, info: [String : String]) {
         
     }
     
-    func vkNeedsScopes(in session: Session) -> Scopes {
+    func vkNeedsScopes(for sessionId: String) -> Scopes {
         return scopes
     }
     
-    func vkDidLogOut(in session: Session) {
-        print("logout in", session.id)
+    func vkDidLogOut(for sessionId: String) {
+        print("logout in", sessionId)
     }
 }

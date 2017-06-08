@@ -31,7 +31,7 @@ protocol SessionMaker {
 }
 
 protocol TaskMaker {
-    func task(request: Request, callbacks: Callbacks, token: Token?, attemptSheduler: AttemptSheduler) -> Task
+    func task(request: Request, callbacks: Callbacks, session: TaskSession) -> Task
 }
 
 protocol AttemptMaker {
@@ -160,12 +160,11 @@ final class DependencyFactoryImpl: DependencyFactory {
         return captchaPresenter
     }
     
-    func task(request: Request, callbacks: Callbacks, token: Token?, attemptSheduler: AttemptSheduler) -> Task {
+    func task(request: Request, callbacks: Callbacks, session: TaskSession) -> Task {
         return TaskImpl(
             request: request,
             callbacks: callbacks,
-            token: token,
-            attemptSheduler: attemptSheduler,
+            session: session,
             urlRequestBuilder: urlRequestBuilder(),
             attemptMaker: self
         )

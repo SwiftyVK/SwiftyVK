@@ -50,7 +50,7 @@ public final class SessionStorageImpl: SessionStorage {
             throw SessionError.sessionDestroyed
         }
         
-        (session as? SessionDestroyable)?.destroy()
+        (session as? DestroyableSession)?.destroy()
         sessions.remove(session)
     }
     

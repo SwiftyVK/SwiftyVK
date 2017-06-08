@@ -20,7 +20,9 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
     }
     
     func dismiss() {
-        dismiss(animated: true, completion: nil)
+        DispatchQueue.main.sync {
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

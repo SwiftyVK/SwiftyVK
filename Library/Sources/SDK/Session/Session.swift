@@ -5,15 +5,27 @@ public protocol Session: class {
     func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (Error) -> ())
     func logIn(rawToken: String, expires: TimeInterval) throws
     func logOut()
+    func validate(redirectUrl: URL) throws
     @discardableResult
     func send(request: Request, callbacks: Callbacks) -> Task
 }
 
-protocol SessionDestroyable {
+protocol TaskSession {
+    var token: Token? { get }
+    func shedule(attempt: Attempt, concurrent: Bool) throws
+}
+
+protocol DestroyableSession: Session {
     func destroy()
 }
 
-public final class SessionImpl: Session, SessionDestroyable {
+protocol ApiErrorExecutor {
+    func logIn(revoke: Bool) throws -> [String : String]
+    func validate(redirectUrl: URL) throws
+    func captcha(rawUrlToImage: String, dismissOnFinish: Bool) throws -> String
+}
+
+public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErrorExecutor {
 
     public var config: SessionConfig {
         didSet {
@@ -32,13 +44,13 @@ public final class SessionImpl: Session, SessionDestroyable {
     }
     
     public var id: String
-    private var token: Token?
+    var token: Token?
 
     private let taskSheduler: TaskSheduler
     private let attemptSheduler: AttemptSheduler
     private let authorizator: Authorizator
     private let taskMaker: TaskMaker
-    private let queue = DispatchQueue(label: "SwiftyVK.sessionQueue")
+    private let gateQueue = DispatchQueue(label: "SwiftyVK.sessionQueue")
     
     init(
         config: SessionConfig = .default,
@@ -57,22 +69,27 @@ public final class SessionImpl: Session, SessionDestroyable {
         updateShedulerLimit()
     }
     
-    public func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (Error)-> ()) {
-         queue.async {
+    public func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (Error) -> ()) {
+         gateQueue.async {
             do {
-                try self.throwIfDestroyed()
-                try self.throwIfAuthorized()
-                
-                self.token = try self.authorizator.authorize(sessionId: self.id, config: self.config, revoke: true)
-                onSuccess(self.token?.info ?? [:])
+                let info = try self.logIn(revoke: true)
+                onSuccess(info)
             } catch let error {
                 onError(error)
             }
         }
     }
     
+    func logIn(revoke: Bool) throws -> [String : String] {
+        try self.throwIfDestroyed()
+        try self.throwIfAuthorized()
+        
+        self.token = try self.authorizator.authorize(sessionId: self.id, config: self.config, revoke: revoke)
+        return self.token?.info ?? [:]
+    }
+    
     public func logIn(rawToken: String, expires: TimeInterval) throws {
-        try queue.sync {
+        try gateQueue.sync {
             try throwIfDestroyed()
             try throwIfAuthorized()
             
@@ -81,9 +98,27 @@ public final class SessionImpl: Session, SessionDestroyable {
     }
     
     public func logOut() {
-        queue.sync {
+        gateQueue.sync {
             token = authorizator.reset(sessionId: id)
         }
+    }
+    
+    public func validate(redirectUrl: URL) throws {
+        try gateQueue.sync {
+            try throwIfDestroyed()
+            token = try authorizator.validate(sessionId: id, url: redirectUrl)
+        }
+    }
+    
+    func captcha(rawUrlToImage: String) throws -> String {
+        return try gateQueue.sync {
+            return try captcha(rawUrlToImage: rawUrlToImage, dismissOnFinish: true)
+        }
+    }
+    
+    func captcha(rawUrlToImage: String, dismissOnFinish: Bool) throws -> String {
+        try throwIfDestroyed()
+        return "" // TODO: Implement it!
     }
     
     @discardableResult
@@ -91,8 +126,7 @@ public final class SessionImpl: Session, SessionDestroyable {
         let task = taskMaker.task(
             request: request,
             callbacks: callbacks,
-            token: token,
-            attemptSheduler: attemptSheduler
+            session: self
         )
         
         do {
@@ -106,22 +140,16 @@ public final class SessionImpl: Session, SessionDestroyable {
     }
     
     func shedule(task: Task, concurrent: Bool) throws {
-        try queue.sync {
+        try gateQueue.sync {
             try throwIfDestroyed()
             try taskSheduler.shedule(task: task, concurrent: concurrent)
         }
     }
     
     func shedule(attempt: Attempt, concurrent: Bool) throws {
-        try queue.sync {
+        try gateQueue.sync {
             try throwIfDestroyed()
             try attemptSheduler.shedule(attempt: attempt, concurrent: concurrent)
-        }
-    }
-    
-    func destroy() {
-        queue.sync {
-            id = ""
         }
     }
     
@@ -142,6 +170,12 @@ public final class SessionImpl: Session, SessionDestroyable {
         
         config.onAttemptsPerSecLimitChange = { [weak attemptSheduler] newLimit in
             attemptSheduler?.setLimit(to: newLimit)
+        }
+    }
+    
+    func destroy() {
+        gateQueue.sync {
+            id = ""
         }
     }
     

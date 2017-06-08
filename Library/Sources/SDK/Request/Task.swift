@@ -25,10 +25,9 @@ final class TaskImpl: Operation, Task {
     
     private var request: Request
     private let callbacks: Callbacks
-    private let token: Token?
+    private let session: TaskSession
     private let semaphore = DispatchSemaphore(value: 0)
     private var sendAttempts = 0
-    private let attemptSheduler: AttemptSheduler
     private let urlRequestBuilder: UrlRequestBuilder
     private let attemptMaker: AttemptMaker
     private weak var currentAttempt: Attempt?
@@ -48,16 +47,14 @@ final class TaskImpl: Operation, Task {
     init(
         request: Request,
         callbacks: Callbacks,
-        token: Token?,
-        attemptSheduler: AttemptSheduler,
+        session: TaskSession,
         urlRequestBuilder: UrlRequestBuilder,
         attemptMaker: AttemptMaker
         ) {
         self.id = IdGenerator.next()
         self.request  = request
         self.callbacks = callbacks
-        self.token = token
-        self.attemptSheduler = attemptSheduler
+        self.session = session
         self.urlRequestBuilder = urlRequestBuilder
         self.attemptMaker = attemptMaker
         super.init()
@@ -115,7 +112,7 @@ final class TaskImpl: Operation, Task {
             httpMethod: request.config.httpMethod,
             config: request.config,
             capthca: makeCaptcha(),
-            token: token
+            token: session.token
         )
         
         let newAttempt = attemptMaker.attempt(
@@ -124,7 +121,7 @@ final class TaskImpl: Operation, Task {
             callbacks: AttemptCallbacks(onFinish: handleResult, onSent: handleSended, onRecive: handleReceived)
         )
         
-        try attemptSheduler.shedule(attempt: newAttempt, concurrent: request.rawRequest.canSentConcurrently)
+        try session.shedule(attempt: newAttempt, concurrent: request.rawRequest.canSentConcurrently)
         currentAttempt = newAttempt
     }
     

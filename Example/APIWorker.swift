@@ -31,14 +31,12 @@ final class APIWorker {
         VK.sessions?.default.logOut()
         print("SwiftyVK: LogOut")
         
-        VK.sessions?.default.logIn { result in
-            switch result {
-            case .result(let result):
-                print("SwiftyVK: success authorize with", result)
-            case .error(let error):
-                print("SwiftyVK: authorize failed with", error)
+        VK.sessions?.default.logIn(onSuccess: { info in
+            print("SwiftyVK: success authorize with", info)
+            }, onError: { error in
+            print("SwiftyVK: authorize failed with", error)
             }
-        }
+        )
     }
     
     

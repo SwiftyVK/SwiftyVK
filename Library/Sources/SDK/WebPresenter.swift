@@ -29,9 +29,7 @@ final class WebPresenterImpl: WebPresenter, WebHandler {
         return try uiSyncQueue.sync {
             
             defer {
-                DispatchQueue.main.async {
-                    self.controller.dismiss()
-                }
+                self.controller.dismiss()
             }
             
             self.controller.load(urlRequest: urlRequest, handler: self)

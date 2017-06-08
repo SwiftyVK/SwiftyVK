@@ -62,7 +62,9 @@ final class WebController_iOS: UIViewController, WKNavigationDelegate, WebContro
     }
     
     func dismiss() {
-        dismiss(animated: true, completion: nil)
+        DispatchQueue.main.sync {
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

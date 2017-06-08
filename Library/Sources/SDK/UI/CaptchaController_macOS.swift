@@ -17,7 +17,9 @@ final class CaptchaController_macOS: NSViewController, NSTextFieldDelegate, Capt
     }
     
     func dismiss() {
-        dismiss(nil)
+        DispatchQueue.main.sync {
+            dismiss(nil)
+        }
     }
     
     override func controlTextDidEndEditing(_ obj: Notification) {
