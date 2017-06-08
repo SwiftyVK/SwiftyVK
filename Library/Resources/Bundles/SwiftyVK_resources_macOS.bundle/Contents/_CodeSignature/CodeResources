@@ -4,7 +4,7 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Resources/Base.lproj/CaptchaView_OSX.nib</key>
+		<key>Resources/Base.lproj/CaptchaView_macOS.nib</key>
 		<data>
 		zGu5hDRkYlWxUPReNcyfsVkzr1o=
 		</data>
@@ -13,6 +13,15 @@
 		SaKQCOk80VVlovlAToU8MOhY1UQ=
 		</data>
 		<key>Resources/be.lproj/CaptchaView_OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+Gw8wvTNGUtiI7QaUE2ygVtUQ6A=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/be.lproj/CaptchaView_macOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -30,7 +39,25 @@
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>Resources/de.lproj/CaptchaView_macOS.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			zk2Ldpy4f1WSf5NV0sSfZDqzn9o=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 		<key>Resources/en.lproj/CaptchaView_OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			n9FpQnLPSkylQf775j2fkGgHn48=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/en.lproj/CaptchaView_macOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -48,7 +75,25 @@
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>Resources/es.lproj/CaptchaView_macOS.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			avfZUUF6Ug0Vf5pzOHtV11fEbFo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 		<key>Resources/fi.lproj/CaptchaView_OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			a46OtLjBLaXbOzfi8FQTnITyCo0=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/fi.lproj/CaptchaView_macOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -66,7 +111,25 @@
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>Resources/it.lproj/CaptchaView_macOS.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			1ag2uJWp8o51XB5jV1sUzmWmdNo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 		<key>Resources/ru.lproj/CaptchaView_OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			5rVSPW2SKkdIwPjiRYsltI3TBe0=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/ru.lproj/CaptchaView_macOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -84,10 +147,19 @@
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>Resources/uk.lproj/CaptchaView_macOS.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yDZHBEjymFw4fBrpaOWdMOX4ryo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Resources/Base.lproj/CaptchaView_OSX.nib</key>
+		<key>Resources/Base.lproj/CaptchaView_macOS.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -122,7 +194,33 @@
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>Resources/be.lproj/CaptchaView_macOS.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+Gw8wvTNGUtiI7QaUE2ygVtUQ6A=
+			</data>
+			<key>hash2</key>
+			<data>
+			mXMKirTBTXUN74QLDAyl5hjQOJu8wfWbXNJoReDOpkM=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 		<key>Resources/de.lproj/CaptchaView_OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			zk2Ldpy4f1WSf5NV0sSfZDqzn9o=
+			</data>
+			<key>hash2</key>
+			<data>
+			ysq/mL2elAbT46qKjiroErKs7KwNRx2Ud6+/QYZqVmM=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/de.lproj/CaptchaView_macOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -148,7 +246,33 @@
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>Resources/en.lproj/CaptchaView_macOS.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			n9FpQnLPSkylQf775j2fkGgHn48=
+			</data>
+			<key>hash2</key>
+			<data>
+			gxPvzWZjZbwDyPzdYflzaW88GBVnub08+1lpICJXtkU=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 		<key>Resources/es.lproj/CaptchaView_OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			avfZUUF6Ug0Vf5pzOHtV11fEbFo=
+			</data>
+			<key>hash2</key>
+			<data>
+			33Tx1qSnfPMqXSw1tDpcoEHIkL+iDdbY/HSCqG3YKZo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/CaptchaView_macOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -174,7 +298,33 @@
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>Resources/fi.lproj/CaptchaView_macOS.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			a46OtLjBLaXbOzfi8FQTnITyCo0=
+			</data>
+			<key>hash2</key>
+			<data>
+			au60b73bCcLhnQ7p5PrmAODidSfhjjP8I7VZ1HSk7xE=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 		<key>Resources/it.lproj/CaptchaView_OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			1ag2uJWp8o51XB5jV1sUzmWmdNo=
+			</data>
+			<key>hash2</key>
+			<data>
+			47bBnGbvbmW4l6NB+InNV7QpXp0tcq6+r1VRC2ja8Vc=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/it.lproj/CaptchaView_macOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -200,7 +350,33 @@
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>Resources/ru.lproj/CaptchaView_macOS.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			5rVSPW2SKkdIwPjiRYsltI3TBe0=
+			</data>
+			<key>hash2</key>
+			<data>
+			QhDGKnxY2Q8Lif+qbeG1R3u7cy49/jXYNTRtjU8IoY0=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 		<key>Resources/uk.lproj/CaptchaView_OSX.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yDZHBEjymFw4fBrpaOWdMOX4ryo=
+			</data>
+			<key>hash2</key>
+			<data>
+			INGPPqvYVJ6FhC5Ccte1D2zQ++0+PXrbuzzSFh7C0tk=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/uk.lproj/CaptchaView_macOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>

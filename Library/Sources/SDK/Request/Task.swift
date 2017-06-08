@@ -10,14 +10,10 @@ final class TaskImpl: Operation, Task {
     let id: Int64
     var state: TaskState = .created {
         willSet {
-            if case .finished = newValue {
-                willChangeValue(forKey: "isFinished")
-            }
+            willChangeValue(forKey: "isFinished")
         }
         didSet {
-            if case .finished = state {
-                didChangeValue(forKey: "isFinished")
-            }
+            didChangeValue(forKey: "isFinished")
         }
     }
     
@@ -30,18 +26,20 @@ final class TaskImpl: Operation, Task {
     private var sendAttempts = 0
     private let urlRequestBuilder: UrlRequestBuilder
     private let attemptMaker: AttemptMaker
+    private let apiErrorHandler: ApiErrorHandler
     private weak var currentAttempt: Attempt?
     
     override var isFinished: Bool {
-        if case .finished = state {
+        switch state {
+        case .finished, .failed, .cancelled:
             return true
+        case .created, .sended:
+            return false
         }
-        
-        return false
     }
     
     override var description: String {
-        return "task #\(id)"
+        return "task #\(id), state: \(state)\n"
     }
     
     init(
@@ -49,7 +47,8 @@ final class TaskImpl: Operation, Task {
         callbacks: Callbacks,
         session: TaskSession,
         urlRequestBuilder: UrlRequestBuilder,
-        attemptMaker: AttemptMaker
+        attemptMaker: AttemptMaker,
+        apiErrorHandler: ApiErrorHandler
         ) {
         self.id = IdGenerator.next()
         self.request  = request
@@ -57,6 +56,7 @@ final class TaskImpl: Operation, Task {
         self.session = session
         self.urlRequestBuilder = urlRequestBuilder
         self.attemptMaker = attemptMaker
+        self.apiErrorHandler = apiErrorHandler
         super.init()
     }
     
@@ -65,17 +65,18 @@ final class TaskImpl: Operation, Task {
         trySend()
         state = .sended
         semaphore.wait()
+        session.dismissCaptcha()
     }
     
     override func cancel() {
         currentAttempt?.cancel()
-        state = .cancelled
         super.cancel()
+        state = .cancelled
         semaphore.signal()
         VK.Log.put(self, "cancelled")
     }
     
-    private func resendWith(error: Error?) {
+    private func resendWith(error: Error?, captcha: Captcha?) {
         guard !self.isCancelled else {return}
         
         guard sendAttempts < request.config.maxAttemptsLimit.count else {
@@ -89,19 +90,18 @@ final class TaskImpl: Operation, Task {
             return
         }
         
-        trySend()
+        trySend(captcha: captcha)
     }
     
-    private func trySend() {
+    private func trySend(captcha: Captcha? = nil) {
         do {
-            try send()
-        }
-        catch let error {
+            try send(captcha: captcha)
+        } catch let error {
             execute(error: error)
         }
     }
     
-    private func send() throws {
+    private func send(captcha: Captcha?) throws {
         guard !self.isCancelled else {return}
         
         sendAttempts += 1
@@ -111,7 +111,7 @@ final class TaskImpl: Operation, Task {
             request: request.rawRequest,
             httpMethod: request.config.httpMethod,
             config: request.config,
-            capthca: makeCaptcha(),
+            capthca: captcha,
             token: session.token
         )
         
@@ -123,17 +123,6 @@ final class TaskImpl: Operation, Task {
         
         try session.shedule(attempt: newAttempt, concurrent: request.rawRequest.canSentConcurrently)
         currentAttempt = newAttempt
-    }
-    
-    private func makeCaptcha() -> Captcha? {
-        var captcha: Captcha?
-        
-        if let sid = sharedCaptchaAnswer?["captcha_sid"], let key = sharedCaptchaAnswer?["captcha_key"] {
-            captcha = (sid: sid, key: key)
-            sharedCaptchaAnswer = nil
-        }
-        
-        return captcha
     }
     
     private func handleSended(_ total: Int64, of expected: Int64) {
@@ -193,36 +182,18 @@ final class TaskImpl: Operation, Task {
                 return
         }
         
-        switch error.errorCode {
-        case 5:
-//            if let error = LegacyAuthorizator.authorize() {
-//                handleResult(.error(error))
-//                break
-//            }
-            resendWith(error: error)
-        case 14:
-//            guard
-//                let sid = error.errorUserInfo["captcha_sid"] as? String,
-//                let imgUrl = error.errorUserInfo["captcha_img"] as? String
-//                else {
-//                    execute(error: error)
-//                    return
-//            }
-//            
-//            if let error = CaptchaPresenter.present(sid: sid, imageUrl: imgUrl, request: self) {
-//                handleResult(.error(error))
-//                return
-//            }
-            resendWith(error: error)
-        case 17:
-//            if
-//                let url = error.errorUserInfo["redirect_uri"] as? String,
-//                let error = LegacyAuthorizator.validate(withUrl: url) {
-//                handleResult(.error(error))
-//                break
-//            }
-            resendWith(error: error)
-        default:
+        do {
+            let result = try apiErrorHandler.handle(error: error)
+            
+            switch result {
+            case .none:
+                resendWith(error: error, captcha: nil)
+            case .captcha(let captcha):
+                sendAttempts -= 1
+                resendWith(error: error, captcha: captcha)
+            }
+        }
+        catch let error {
             execute(error: error)
         }
     }

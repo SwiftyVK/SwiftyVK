@@ -31,7 +31,7 @@ protocol SessionMaker: class {
 }
 
 protocol TaskMaker: class {
-    func task(request: Request, callbacks: Callbacks, session: TaskSession) -> Task
+    func task(request: Request, callbacks: Callbacks, session: TaskSession & ApiErrorExecutor) -> Task
 }
 
 protocol AttemptMaker: class {
@@ -160,13 +160,14 @@ final class DependencyFactoryImpl: DependencyFactory {
         return captchaController
     }
     
-    func task(request: Request, callbacks: Callbacks, session: TaskSession) -> Task {
+    func task(request: Request, callbacks: Callbacks, session: TaskSession & ApiErrorExecutor) -> Task {
         return TaskImpl(
             request: request,
             callbacks: callbacks,
             session: session,
             urlRequestBuilder: urlRequestBuilder(),
-            attemptMaker: self
+            attemptMaker: self,
+            apiErrorHandler: ApiErrorHandlerImpl(session: session)
         )
     }
     

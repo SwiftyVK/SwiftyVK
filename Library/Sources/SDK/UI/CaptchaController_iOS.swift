@@ -6,6 +6,17 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
     @IBOutlet private weak var textField: UITextField?
     private var onFinish: ((String) -> ())?
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        modalPresentationStyle = .overFullScreen
+        modalTransitionStyle = .coverVertical
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         imageView?.layer.cornerRadius = 15
@@ -15,7 +26,10 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
     }
     
     func present(imageData: Data, onFinish: @escaping (String) -> ()) {
-        self.imageView?.image = UIImage(data: imageData)
+        DispatchQueue.main.sync {
+            imageView?.image = UIImage(data: imageData)
+            textField?.text = nil
+        }
         self.onFinish = onFinish
     }
     

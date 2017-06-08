@@ -25,18 +25,19 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
         return try uiSyncQueue.sync {
             var result: String?
             
-            guard let controller = currentController ?? controllerMaker.captchaController() else {
+            guard
+                let controller = currentController ?? controllerMaker.captchaController() else {
                 throw SessionError.cantMakeCaptchaController
             }
             
-            controller.present(imageData: imageData) { answer in
+            controller.present(imageData: imageData) { [weak self] answer in
                 canFinish >< { canFinish in
                     guard canFinish else {
                         return false
                     }
                     
                     if dismissOnFinish {
-                        controller.dismiss()
+                        self?.dismiss()
                     }
                     
                     result = answer
@@ -64,6 +65,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
     
     func dismiss() {
         currentController?.dismiss()
+        currentController = nil
     }
     
     private func downloadCaptchaImageData(rawUrl: String) throws -> Data {

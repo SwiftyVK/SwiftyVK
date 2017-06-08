@@ -1,8 +1,5 @@
 import Foundation
 
-var sharedCaptchaIsRun = false
-var sharedCaptchaAnswer: [String : String]?
-
 public final class Request {
     
     let rawRequest: Raw

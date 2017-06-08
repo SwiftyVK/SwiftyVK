@@ -12,6 +12,7 @@ public protocol Session: class {
 protocol TaskSession {
     var token: Token? { get }
     func shedule(attempt: Attempt, concurrent: Bool) throws
+    func dismissCaptcha()
 }
 
 protocol DestroyableSession: Session {
@@ -121,6 +122,10 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     func captcha(rawUrlToImage: String, dismissOnFinish: Bool) throws -> String {
         try throwIfDestroyed()
         return try captchaPresenter.present(rawCaptchaUrl: rawUrlToImage, dismissOnFinish: dismissOnFinish)
+    }
+    
+    func dismissCaptcha() {
+        captchaPresenter.dismiss()
     }
     
     @discardableResult

@@ -12,7 +12,10 @@ final class CaptchaController_macOS: NSViewController, NSTextFieldDelegate, Capt
     }
     
     func present(imageData: Data, onFinish: @escaping (String) -> ()) {
-        self.imageView?.image = NSImage(data: imageData)
+        DispatchQueue.main.sync {
+            self.imageView?.image = NSImage(data: imageData)
+            textField?.stringValue = ""
+        }
         self.onFinish = onFinish
     }
     

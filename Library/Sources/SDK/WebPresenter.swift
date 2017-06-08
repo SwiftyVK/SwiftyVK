@@ -34,6 +34,7 @@ final class WebPresenterImpl: WebPresenter, WebHandler {
             
             defer {
                 currentController?.dismiss()
+                currentController = nil
             }
             
             guard let controller = controllerMaker.webController() else {
