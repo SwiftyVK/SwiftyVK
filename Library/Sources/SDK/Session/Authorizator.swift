@@ -17,9 +17,8 @@ final class AuthorizatorImpl: Authorizator {
     private let tokenMaker: TokenMaker
     private let tokenParser: TokenParser
     private let vkAppProxy: VkAppProxy
-    private let webPresenterMaker: WebPresenterMaker
+    private let webPresenter: WebPresenter
     private weak var delegate: SwiftyVKDelegate?    
-    private weak var currentWebPresenter: WebPresenter?
     
     private(set) var handledToken: Token?
     private var requestTimeout: TimeInterval = 10
@@ -31,7 +30,7 @@ final class AuthorizatorImpl: Authorizator {
         tokenMaker: TokenMaker,
         tokenParser: TokenParser,
         vkAppProxy: VkAppProxy,
-        webPresenterMaker: WebPresenterMaker
+        webPresenter: WebPresenter
         ) {
         self.appId = appId
         self.delegate = delegate
@@ -39,7 +38,7 @@ final class AuthorizatorImpl: Authorizator {
         self.tokenMaker = tokenMaker
         self.tokenParser = tokenParser
         self.vkAppProxy = vkAppProxy
-        self.webPresenterMaker = webPresenterMaker
+        self.webPresenter = webPresenter
     }
     
     func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Token {
@@ -113,20 +112,14 @@ final class AuthorizatorImpl: Authorizator {
         }
         
         self.handledToken = handledToken
-        currentWebPresenter?.dismiss()
+        webPresenter.dismiss()
     }
     
     private func getToken(sessionId: String, request: URLRequest) throws -> Token {
         defer {
             handledToken = nil
-            currentWebPresenter = nil
+            webPresenter.dismiss()
         }
-        
-        guard let webPresenter = webPresenterMaker.webPresenter() else {
-            throw SessionError.cantMakeWebViewController
-        }
-        
-        currentWebPresenter = webPresenter
         
         let token: Token
         

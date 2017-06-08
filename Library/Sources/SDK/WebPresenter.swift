@@ -15,24 +15,34 @@ final class WebPresenterImpl: WebPresenter, WebHandler {
     private var fails: Int = 0
     
     private let uiSyncQueue: DispatchQueue
-    private let controller: WebController
+    private let controllerMaker: WebControllerMaker
+    private weak var currentController: WebController?
 
     init(
         uiSyncQueue: DispatchQueue,
-        controller: WebController
+        controllerMaker: WebControllerMaker
         ) {
         self.uiSyncQueue = uiSyncQueue
-        self.controller = controller
+        self.controllerMaker = controllerMaker
     }
     
     func presentWith(urlRequest: URLRequest) throws -> String {
         return try uiSyncQueue.sync {
             
+            canFinish |< true
+            fails = 0
+            
             defer {
-                self.controller.dismiss()
+                currentController?.dismiss()
             }
             
-            self.controller.load(urlRequest: urlRequest, handler: self)
+            guard let controller = controllerMaker.webController() else {
+                throw SessionError.cantMakeWebViewController
+            }
+            
+            currentController = controller
+            
+            controller.load(urlRequest: urlRequest, handler: self)
             
             switch semaphore.wait(timeout: .now() + 600) {
             case .timedOut:
@@ -82,14 +92,14 @@ final class WebPresenterImpl: WebPresenter, WebHandler {
             finishWith(.error(SessionError.failedAuthorization))
         }
         else {
-            controller.goBack()
+            currentController?.goBack()
         }
     }
     
     func handle(error: Error) {
         guard fails > 3 else {
             fails += 1
-            controller.reload()
+            currentController?.reload()
             return
         }
         

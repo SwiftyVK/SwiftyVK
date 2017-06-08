@@ -6,14 +6,15 @@ protocol CaptchaPresenter {
 final class CaptchaPresenterImpl: CaptchaPresenter {
     
     private let uiSyncQueue: DispatchQueue
-    private let controller: CaptchaController
+    private let controllerMaker: CaptchaControllerMaker
+    private weak var currentController: CaptchaController?
     
     init(
         uiSyncQueue: DispatchQueue,
-        controller: CaptchaController
+        controllerMaker: CaptchaControllerMaker
         ) {
         self.uiSyncQueue = uiSyncQueue
-        self.controller = controller
+        self.controllerMaker = controllerMaker
     }
     
     func present(rawCaptchaUrl: String) throws -> String {
@@ -23,6 +24,10 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
         
         return try uiSyncQueue.sync {
             var result: String?
+            
+            guard let controller = currentController ?? controllerMaker.captchaController() else {
+                throw SessionError.cantMakeCaptchaController
+            }
             
             controller.present(imageData: imageData) { answer in
                 canFinish >< { canFinish in
@@ -35,6 +40,8 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
                     return false
                 }
             }
+            
+            currentController = controller
             
             switch semaphore.wait(timeout: .now() + 600) {
             case .timedOut:
@@ -52,7 +59,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
     }
     
     func dismiss() {
-        controller.dismiss()
+        currentController?.dismiss()
     }
     
     private func downloadCaptchaImageData(rawUrl: String) throws -> Data {

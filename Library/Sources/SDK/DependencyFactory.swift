@@ -10,44 +10,44 @@ protocol DependencyFactory:
     TaskMaker,
     AttemptMaker,
     TokenMaker,
-    WebPresenterMaker,
-    CaptchaPresenterMaker
+    WebControllerMaker,
+    CaptchaControllerMaker
 {}
 
 protocol DependencyHolder: SessionStorageHolder, AuthorizatorHolder {
     init(appId: String, delegate: SwiftyVKDelegate?)
 }
 
-protocol SessionStorageHolder {
+protocol SessionStorageHolder: class {
     var sessionStorage: SessionStorage { get }
 }
 
-protocol AuthorizatorHolder {
+protocol AuthorizatorHolder: class {
     var authorizator: Authorizator { get }
 }
 
-protocol SessionMaker {
+protocol SessionMaker: class {
     func session() -> Session
 }
 
-protocol TaskMaker {
+protocol TaskMaker: class {
     func task(request: Request, callbacks: Callbacks, session: TaskSession) -> Task
 }
 
-protocol AttemptMaker {
+protocol AttemptMaker: class {
     func attempt(request: URLRequest, timeout: TimeInterval, callbacks: AttemptCallbacks) -> Attempt
 }
 
-protocol TokenMaker {
+protocol TokenMaker: class {
     func token(token: String, expires: TimeInterval, info: [String : String]) -> Token
 }
 
-protocol WebPresenterMaker {
-    func webPresenter() -> WebPresenter?
+protocol WebControllerMaker: class {
+    func webController() -> WebController?
 }
 
-protocol CaptchaPresenterMaker {
-    func captchaPresenter() -> CaptchaPresenter?
+protocol CaptchaControllerMaker {
+    func captchaController() -> CaptchaController?
 }
 
 final class DependencyFactoryImpl: DependencyFactory {
@@ -93,6 +93,11 @@ final class DependencyFactoryImpl: DependencyFactory {
             urlOpener: urlOpener
         )
         
+        let webPresenter = WebPresenterImpl(
+            uiSyncQueue: self.uiSyncQueue,
+            controllerMaker: self
+        )
+        
         return AuthorizatorImpl(
             appId: self.appId,
             delegate: self.delegate,
@@ -100,12 +105,11 @@ final class DependencyFactoryImpl: DependencyFactory {
             tokenMaker: self,
             tokenParser: TokenParserImpl(),
             vkAppProxy: vkAppProxy,
-            webPresenterMaker: self
+            webPresenter: webPresenter
         )
     }()
     
-    func webPresenter() -> WebPresenter? {
-        
+    func webController() -> WebController? {
         #if os(iOS)
             let webController = WebController_iOS(
                 nibName: Resources.withSuffix("WebView"),
@@ -120,20 +124,14 @@ final class DependencyFactoryImpl: DependencyFactory {
             }
         #endif
         
-        let webPresenter = WebPresenterImpl(
-            uiSyncQueue: uiSyncQueue,
-            controller: webController
-        )
-        
         DispatchQueue.main.sync {
             self.delegate?.vkNeedToPresent(viewController: webController)
         }
         
-        return webPresenter
+        return webController
     }
     
-    func captchaPresenter() -> CaptchaPresenter? {
-        
+    func captchaController() -> CaptchaController? {
         #if os(iOS)
             let captchaController = CaptchaController_iOS(
                 nibName: Resources.withSuffix("CaptchaView"),
@@ -148,16 +146,11 @@ final class DependencyFactoryImpl: DependencyFactory {
             }
         #endif
         
-        let captchaPresenter = CaptchaPresenterImpl(
-            uiSyncQueue: uiSyncQueue,
-            controller: captchaController
-        )
-        
         DispatchQueue.main.sync {
             self.delegate?.vkNeedToPresent(viewController: captchaController)
         }
         
-        return captchaPresenter
+        return captchaController
     }
     
     func task(request: Request, callbacks: Callbacks, session: TaskSession) -> Task {

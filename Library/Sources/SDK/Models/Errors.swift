@@ -21,6 +21,7 @@ public enum SessionError: Int, CustomNSError, CustomStringConvertible {
     case captchaPresenterTimedOut   = 18
     case cantLoadCaptchaImage       = 19
     case alreadyAuthorized          = 20
+    case cantMakeCaptchaController  = 21
 
     public static let errorDomain = "SwiftyVKSessionError"
     public var errorCode: Int {return rawValue}
