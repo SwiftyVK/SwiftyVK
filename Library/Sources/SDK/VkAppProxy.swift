@@ -18,16 +18,17 @@ final class VkAppProxyImpl: VkAppProxy {
     }
     
     func send(query: String) throws -> Bool {
-        
-        guard let url = URL(string: baseUrl + query) else {
-            throw SessionError.cantBuildUrlForVkApp
+        return try DispatchQueue.main.sync {
+            guard let url = URL(string: baseUrl + query) else {
+                throw SessionError.cantBuildUrlForVkApp
+            }
+            
+            guard urlOpener.canOpenURL(url) else {
+                return false
+            }
+            
+            return urlOpener.openURL(url)
         }
-        
-        guard urlOpener.canOpenURL(url) else {
-            return false
-        }
-        
-        return urlOpener.openURL(url)
     }
     
     func handle(url: URL, app: String?) -> String? {
