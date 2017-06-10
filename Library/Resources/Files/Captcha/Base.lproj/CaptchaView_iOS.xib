@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptchaController_iOS" customModule="SwiftyVK">
             <connections>
                 <outlet property="imageView" destination="rIQ-X4-w7B" id="dMl-Vr-PRw"/>
+                <outlet property="preloader" destination="QRl-90-3VD" id="Hbz-Aj-3m1"/>
                 <outlet property="textField" destination="1Ip-NS-jpV" id="370-fb-hbl"/>
                 <outlet property="view" destination="iN0-l3-epB" id="RtX-bA-bLa"/>
             </connections>
@@ -67,15 +68,21 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="QRl-90-3VD">
+                                        <rect key="frame" x="106.5" y="31.5" width="37" height="37"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="rIQ-X4-w7B" secondAttribute="trailing" id="04S-uk-I20"/>
                                     <constraint firstAttribute="trailing" secondItem="1Ip-NS-jpV" secondAttribute="trailing" id="2Fm-xT-LWH"/>
                                     <constraint firstItem="1Ip-NS-jpV" firstAttribute="leading" secondItem="LgM-FU-1xP" secondAttribute="leading" id="AaT-8d-ZUq"/>
+                                    <constraint firstItem="QRl-90-3VD" firstAttribute="centerX" secondItem="rIQ-X4-w7B" secondAttribute="centerX" id="Lpl-Lk-TZP"/>
                                     <constraint firstItem="rIQ-X4-w7B" firstAttribute="leading" secondItem="LgM-FU-1xP" secondAttribute="leading" id="fsX-4m-9Vr"/>
                                     <constraint firstItem="rIQ-X4-w7B" firstAttribute="top" secondItem="LgM-FU-1xP" secondAttribute="top" id="kd6-0R-Vb0"/>
                                     <constraint firstItem="1Ip-NS-jpV" firstAttribute="top" secondItem="rIQ-X4-w7B" secondAttribute="bottom" constant="10" id="moA-UW-ooW"/>
                                     <constraint firstAttribute="bottom" secondItem="1Ip-NS-jpV" secondAttribute="bottom" id="npK-HD-Lur"/>
+                                    <constraint firstItem="QRl-90-3VD" firstAttribute="centerY" secondItem="rIQ-X4-w7B" secondAttribute="centerY" id="vsD-MJ-3e3"/>
                                 </constraints>
                             </view>
                         </subviews>

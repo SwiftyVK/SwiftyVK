@@ -20,7 +20,6 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
     func present(rawCaptchaUrl: String, dismissOnFinish: Bool) throws -> String {
         let canFinish = Atomic(true)
         let semaphore = DispatchSemaphore(value: 0)
-        let imageData = try downloadCaptchaImageData(rawUrl: rawCaptchaUrl)
         
         return try uiSyncQueue.sync {
             var result: String?
@@ -29,6 +28,10 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
                 let controller = currentController ?? controllerMaker.captchaController() else {
                 throw SessionError.cantMakeCaptchaController
             }
+            
+            controller.prepareForPresent()
+            
+            let imageData = try downloadCaptchaImageData(rawUrl: rawCaptchaUrl)
             
             controller.present(imageData: imageData) { [weak self] answer in
                 canFinish >< { canFinish in
@@ -65,7 +68,6 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
     
     func dismiss() {
         currentController?.dismiss()
-        currentController = nil
     }
     
     private func downloadCaptchaImageData(rawUrl: String) throws -> Data {
