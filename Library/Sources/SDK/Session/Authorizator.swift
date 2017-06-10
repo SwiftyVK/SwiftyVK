@@ -60,7 +60,7 @@ final class AuthorizatorImpl: Authorizator {
             )
             
             if try vkAppProxy.send(query: vkAppAuthQuery) {
-                Thread.sleep(forTimeInterval: 1)
+                Thread.sleep(forTimeInterval: 0.1)
             }
             
             let webAuthRequest = try makeWebAuthRequest(
