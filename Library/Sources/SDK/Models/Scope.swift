@@ -89,12 +89,12 @@ extension VK {
 extension Set where Element == VK.Scope {
     
     public func toInt() -> Int {
-        return self.reduce(0) { $0.0 + $0.1.rawValue }
+        return self.reduce(0) { $0 + $1.rawValue }
     }
     
     public func toString() -> String {
         return self.reduce("") {
-            $0.0 + (Mirror(reflecting: $0.1).children.first?.label.flatMap { $0 + "," } ?? String())
+            $0 + (Mirror(reflecting: $1).children.first?.label.flatMap { $0 + "," } ?? String())
         }
     }
 }

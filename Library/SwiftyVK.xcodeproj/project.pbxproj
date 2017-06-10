@@ -870,7 +870,7 @@
 					A2EB6E9A1BD180DD008E7D86 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = 842SSJ357W;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					A2EB6EA71BD180E9008E7D86 = {
 						CreatedOnToolsVersion = 7.1;
@@ -1658,7 +1658,8 @@
 				PRODUCT_NAME = SwiftyVK;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1710,7 +1711,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";

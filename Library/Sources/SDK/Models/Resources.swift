@@ -25,7 +25,7 @@ struct Resources {
             return bundle
         }
         else if
-            let path = Bundle(for:object_getClass(ResourceTestClass())).path(forResource: name, ofType: bundleType),
+            let path = Bundle(for: ResourceTestClass.self).path(forResource: name, ofType: bundleType),
             let bundle = Bundle(path:path) {
             return bundle
         }

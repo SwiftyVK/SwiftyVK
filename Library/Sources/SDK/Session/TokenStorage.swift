@@ -19,7 +19,7 @@ class TokenStorageImpl: TokenStorage {
         
         let keychainCode = SecItemAdd(keychainQuery, nil)
         
-        guard keychainCode == .allZeros else {
+        guard keychainCode == 0 else {
             throw SessionError.tokenNotSavedInStorage
         }
     }
@@ -32,7 +32,7 @@ class TokenStorageImpl: TokenStorage {
         
         var keychainResult: AnyObject?
         
-        guard SecItemCopyMatching(keychainQuery, &keychainResult) == .allZeros else {
+        guard SecItemCopyMatching(keychainQuery, &keychainResult) == 0 else {
             return nil
         }
         
