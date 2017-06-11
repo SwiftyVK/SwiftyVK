@@ -1,7 +1,9 @@
 #if os(OSX)
     import Cocoa
+    typealias VKStoryboard = NSStoryboard
 #elseif os(iOS)
     import UIKit
+    typealias VKStoryboard = UIStoryboard
 #endif
 
 protocol DependencyFactory:
@@ -117,22 +119,22 @@ final class DependencyFactoryImpl: DependencyFactory {
     }()
     
     func webController() -> WebController? {
-        #if os(iOS)
-            let webController = WebController_iOS(
-                nibName: Resources.withSuffix("WebView"),
-                bundle: Resources.bundle
-            )
-        #elseif os(macOS)
-            guard let webController = WebController_macOS(
-                nibName: Resources.withSuffix("WebView"),
-                bundle: Resources.bundle
-                ) else {
-                    return nil
-            }
-        #endif
+        var webController: WebController?
         
         DispatchQueue.main.sync {
-            self.delegate?.vkNeedToPresent(viewController: webController)
+            #if os(iOS)
+                webController = storyboard().instantiateViewController(withIdentifier: "Web") as? WebController_iOS
+                
+            #elseif os(macOS)
+                webController = WebController_macOS(
+                    nibName: Resources.withSuffix("WebView"),
+                    bundle: Resources.bundle
+                )
+            #endif
+            
+            if let webController = webController as? VkViewController {
+                self.delegate?.vkNeedToPresent(viewController: webController)
+            }
         }
         
         return webController
@@ -140,10 +142,10 @@ final class DependencyFactoryImpl: DependencyFactory {
     
     func captchaController() -> CaptchaController? {
         #if os(iOS)
-            let captchaController = CaptchaController_iOS(
-                nibName: Resources.withSuffix("CaptchaView"),
-                bundle: Resources.bundle
-            )
+            guard let captchaController = storyboard()
+                .instantiateViewController(withIdentifier: "Captcha") as? CaptchaController_iOS else {
+                    return nil
+            }
         #elseif os(macOS)
             guard let captchaController = CaptchaController_macOS(
                 nibName: Resources.withSuffix("CaptchaView"),
@@ -158,6 +160,13 @@ final class DependencyFactoryImpl: DependencyFactory {
         }
         
         return captchaController
+    }
+    
+    func storyboard() -> VKStoryboard {
+        return VKStoryboard(
+            name: Resources.withSuffix("Storyboard"),
+            bundle: Resources.bundle
+        )
     }
     
     func task(request: Request, callbacks: Callbacks, session: TaskSession & ApiErrorExecutor) -> Task {

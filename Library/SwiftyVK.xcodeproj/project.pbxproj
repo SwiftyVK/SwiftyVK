@@ -113,6 +113,7 @@
 		A2B40DFD1EA693B700106AE3 /* UrlRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B40DFC1EA693B700106AE3 /* UrlRequestBuilderTests.swift */; };
 		A2B4ECAC1DCA4F6B009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
 		A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
+		A2B7278F1EEC7267005B17AE /* Storyboard_iOS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B7278D1EEC6F74005B17AE /* Storyboard_iOS.storyboard */; };
 		A2B805531EDDAFD2004DA7EB /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B805521EDDAFD2004DA7EB /* WebController.swift */; };
 		A2B805541EDDAFD2004DA7EB /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B805521EDDAFD2004DA7EB /* WebController.swift */; };
 		A2B805561EDDB01C004DA7EB /* WebControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B805551EDDB01C004DA7EB /* WebControllerMock.swift */; };
@@ -398,6 +399,7 @@
 		A2B254821EDF43E900DEECC7 /* WebController_macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebController_macOS.swift; sourceTree = "<group>"; };
 		A2B40DFC1EA693B700106AE3 /* UrlRequestBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlRequestBuilderTests.swift; sourceTree = "<group>"; };
 		A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapthcaPresenter.swift; sourceTree = "<group>"; };
+		A2B7278D1EEC6F74005B17AE /* Storyboard_iOS.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard_iOS.storyboard; sourceTree = "<group>"; };
 		A2B805521EDDAFD2004DA7EB /* WebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebController.swift; path = ../WebController.swift; sourceTree = "<group>"; };
 		A2B805551EDDB01C004DA7EB /* WebControllerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebControllerMock.swift; sourceTree = "<group>"; };
 		A2B805571EDDB313004DA7EB /* WebPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPresenterTests.swift; sourceTree = "<group>"; };
@@ -685,6 +687,7 @@
 			children = (
 				A2527E181BD1343F00F65412 /* CaptchaView_iOS.xib */,
 				A2527E231BD1343F00F65412 /* WebView_iOS.xib */,
+				A2B7278D1EEC6F74005B17AE /* Storyboard_iOS.storyboard */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -925,6 +928,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2B7278F1EEC7267005B17AE /* Storyboard_iOS.storyboard in Resources */,
 				A2527E3D1BD1357000F65412 /* CaptchaView_iOS.xib in Resources */,
 				A2527E3E1BD1357000F65412 /* WebView_iOS.xib in Resources */,
 			);

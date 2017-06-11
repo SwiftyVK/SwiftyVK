@@ -9,19 +9,9 @@ final class WebController_iOS: UIViewController, WKNavigationDelegate, WebContro
     private weak var handler: WebHandler?
     private var currentRequest: URLRequest?
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        
-        modalPresentationStyle = .overFullScreen
-        modalTransitionStyle = .coverVertical
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        view.backgroundColor = .clear
         webView?.layer.cornerRadius = 15
         webView?.clipsToBounds = true
         webView?.layer.borderWidth = 1 / UIScreen.main.nativeScale
