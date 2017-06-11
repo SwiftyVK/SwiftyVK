@@ -113,8 +113,8 @@
 		A2B40DFD1EA693B700106AE3 /* UrlRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B40DFC1EA693B700106AE3 /* UrlRequestBuilderTests.swift */; };
 		A2B4ECAC1DCA4F6B009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
 		A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
-		A2B7278F1EEC7267005B17AE /* Storyboard_iOS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B7278D1EEC6F74005B17AE /* Storyboard_iOS.storyboard */; };
-		A2B727911EED63A4005B17AE /* Storyboard_macOS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B727901EED63A4005B17AE /* Storyboard_macOS.storyboard */; };
+		A2B727921EED682E005B17AE /* Storyboard_iOS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B727941EED682E005B17AE /* Storyboard_iOS.storyboard */; };
+		A2B727A51EED68EF005B17AE /* Storyboard_macOS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B727A71EED68EF005B17AE /* Storyboard_macOS.storyboard */; };
 		A2B805531EDDAFD2004DA7EB /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B805521EDDAFD2004DA7EB /* WebController.swift */; };
 		A2B805541EDDAFD2004DA7EB /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B805521EDDAFD2004DA7EB /* WebController.swift */; };
 		A2B805561EDDB01C004DA7EB /* WebControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B805551EDDB01C004DA7EB /* WebControllerMock.swift */; };
@@ -400,8 +400,24 @@
 		A2B254821EDF43E900DEECC7 /* WebController_macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebController_macOS.swift; sourceTree = "<group>"; };
 		A2B40DFC1EA693B700106AE3 /* UrlRequestBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlRequestBuilderTests.swift; sourceTree = "<group>"; };
 		A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapthcaPresenter.swift; sourceTree = "<group>"; };
-		A2B7278D1EEC6F74005B17AE /* Storyboard_iOS.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard_iOS.storyboard; sourceTree = "<group>"; };
-		A2B727901EED63A4005B17AE /* Storyboard_macOS.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard_macOS.storyboard; sourceTree = "<group>"; };
+		A2B727931EED682E005B17AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard_iOS.storyboard; sourceTree = "<group>"; };
+		A2B727961EED686C005B17AE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Storyboard_iOS.strings; sourceTree = "<group>"; };
+		A2B727981EED686D005B17AE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Storyboard_iOS.strings; sourceTree = "<group>"; };
+		A2B7279A1EED686E005B17AE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Storyboard_iOS.strings; sourceTree = "<group>"; };
+		A2B7279C1EED6870005B17AE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Storyboard_iOS.strings; sourceTree = "<group>"; };
+		A2B7279E1EED6871005B17AE /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Storyboard_iOS.strings; sourceTree = "<group>"; };
+		A2B727A01EED6872005B17AE /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Storyboard_iOS.strings; sourceTree = "<group>"; };
+		A2B727A21EED6873005B17AE /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Storyboard_iOS.strings; sourceTree = "<group>"; };
+		A2B727A41EED6874005B17AE /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/Storyboard_iOS.strings; sourceTree = "<group>"; };
+		A2B727A61EED68EF005B17AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard_macOS.storyboard; sourceTree = "<group>"; };
+		A2B727A91EED68F1005B17AE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Storyboard_macOS.strings; sourceTree = "<group>"; };
+		A2B727AB1EED68F2005B17AE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Storyboard_macOS.strings; sourceTree = "<group>"; };
+		A2B727AD1EED68F3005B17AE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Storyboard_macOS.strings; sourceTree = "<group>"; };
+		A2B727AF1EED68F4005B17AE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Storyboard_macOS.strings; sourceTree = "<group>"; };
+		A2B727B11EED68F5005B17AE /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Storyboard_macOS.strings; sourceTree = "<group>"; };
+		A2B727B31EED68F6005B17AE /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Storyboard_macOS.strings; sourceTree = "<group>"; };
+		A2B727B51EED68F7005B17AE /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Storyboard_macOS.strings; sourceTree = "<group>"; };
+		A2B727B71EED68F8005B17AE /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/Storyboard_macOS.strings; sourceTree = "<group>"; };
 		A2B805521EDDAFD2004DA7EB /* WebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebController.swift; path = ../WebController.swift; sourceTree = "<group>"; };
 		A2B805551EDDB01C004DA7EB /* WebControllerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebControllerMock.swift; sourceTree = "<group>"; };
 		A2B805571EDDB313004DA7EB /* WebPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPresenterTests.swift; sourceTree = "<group>"; };
@@ -680,7 +696,7 @@
 			children = (
 				A2527E1A1BD1343F00F65412 /* CaptchaView_macOS.xib */,
 				A20444691EE2D92300612E57 /* WebView_macOS.xib */,
-				A2B727901EED63A4005B17AE /* Storyboard_macOS.storyboard */,
+				A2B727A71EED68EF005B17AE /* Storyboard_macOS.storyboard */,
 			);
 			name = OSX;
 			sourceTree = "<group>";
@@ -690,7 +706,7 @@
 			children = (
 				A2527E181BD1343F00F65412 /* CaptchaView_iOS.xib */,
 				A2527E231BD1343F00F65412 /* WebView_iOS.xib */,
-				A2B7278D1EEC6F74005B17AE /* Storyboard_iOS.storyboard */,
+				A2B727941EED682E005B17AE /* Storyboard_iOS.storyboard */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -894,6 +910,12 @@
 				en,
 				Base,
 				ru,
+				de,
+				es,
+				fi,
+				it,
+				uk,
+				be,
 			);
 			mainGroup = A2527D251BD1123E00F65412;
 			productRefGroup = A2527D321BD1129500F65412 /* Products */;
@@ -923,7 +945,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A204446A1EE2D92300612E57 /* WebView_macOS.xib in Resources */,
-				A2B727911EED63A4005B17AE /* Storyboard_macOS.storyboard in Resources */,
+				A2B727A51EED68EF005B17AE /* Storyboard_macOS.storyboard in Resources */,
 				A2527E3B1BD1356C00F65412 /* CaptchaView_macOS.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -932,7 +954,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2B7278F1EEC7267005B17AE /* Storyboard_iOS.storyboard in Resources */,
+				A2B727921EED682E005B17AE /* Storyboard_iOS.storyboard in Resources */,
 				A2527E3D1BD1357000F65412 /* CaptchaView_iOS.xib in Resources */,
 				A2527E3E1BD1357000F65412 /* WebView_iOS.xib in Resources */,
 			);
@@ -1262,6 +1284,38 @@
 			);
 			name = WebView_iOS.xib;
 			path = WebView;
+			sourceTree = "<group>";
+		};
+		A2B727941EED682E005B17AE /* Storyboard_iOS.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A2B727931EED682E005B17AE /* Base */,
+				A2B727961EED686C005B17AE /* en */,
+				A2B727981EED686D005B17AE /* de */,
+				A2B7279A1EED686E005B17AE /* ru */,
+				A2B7279C1EED6870005B17AE /* es */,
+				A2B7279E1EED6871005B17AE /* fi */,
+				A2B727A01EED6872005B17AE /* it */,
+				A2B727A21EED6873005B17AE /* uk */,
+				A2B727A41EED6874005B17AE /* be */,
+			);
+			name = Storyboard_iOS.storyboard;
+			sourceTree = "<group>";
+		};
+		A2B727A71EED68EF005B17AE /* Storyboard_macOS.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A2B727A61EED68EF005B17AE /* Base */,
+				A2B727A91EED68F1005B17AE /* en */,
+				A2B727AB1EED68F2005B17AE /* ru */,
+				A2B727AD1EED68F3005B17AE /* de */,
+				A2B727AF1EED68F4005B17AE /* es */,
+				A2B727B11EED68F5005B17AE /* fi */,
+				A2B727B31EED68F6005B17AE /* it */,
+				A2B727B51EED68F7005B17AE /* uk */,
+				A2B727B71EED68F8005B17AE /* be */,
+			);
+			name = Storyboard_macOS.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
