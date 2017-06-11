@@ -26,7 +26,6 @@
 /* Begin PBXBuildFile section */
 		A20259491EE9AED00014B0BE /* ApiErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20259481EE9AED00014B0BE /* ApiErrorHandler.swift */; };
 		A202594A1EE9AED00014B0BE /* ApiErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20259481EE9AED00014B0BE /* ApiErrorHandler.swift */; };
-		A204446A1EE2D92300612E57 /* WebView_macOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20444691EE2D92300612E57 /* WebView_macOS.xib */; };
 		A2066AEA1D9C388F0065A4D7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2066AE91D9C388F0065A4D7 /* Task.swift */; };
 		A2066AEB1D9C388F0065A4D7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2066AE91D9C388F0065A4D7 /* Task.swift */; };
 		A217DAA81E9924DE00EA1430 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAA71E9924DE00EA1430 /* Method.swift */; };
@@ -64,9 +63,6 @@
 		A24DDAEE1EB73CA3002EA273 /* QueryBuilderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24DDAEB1EB73C9E002EA273 /* QueryBuilderMock.swift */; };
 		A24DDAF01EB73CB6002EA273 /* BodyBuilderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24DDAEF1EB73CB6002EA273 /* BodyBuilderMock.swift */; };
 		A24DDAF21EB73E3F002EA273 /* QueryBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24DDAF11EB73E3F002EA273 /* QueryBuilderTests.swift */; };
-		A2527E3B1BD1356C00F65412 /* CaptchaView_macOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E1A1BD1343F00F65412 /* CaptchaView_macOS.xib */; };
-		A2527E3D1BD1357000F65412 /* CaptchaView_iOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E181BD1343F00F65412 /* CaptchaView_iOS.xib */; };
-		A2527E3E1BD1357000F65412 /* WebView_iOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2527E231BD1343F00F65412 /* WebView_iOS.xib */; };
 		A254C0C81E9904CB001A5456 /* Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254C0C71E9904CB001A5456 /* Custom.swift */; };
 		A254C0C91E9904CB001A5456 /* Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254C0C71E9904CB001A5456 /* Custom.swift */; };
 		A25A19C11EE2F01800CF13AF /* WebController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19BF1EE2EFCD00CF13AF /* WebController_iOS.swift */; };
@@ -285,7 +281,6 @@
 
 /* Begin PBXFileReference section */
 		A20259481EE9AED00014B0BE /* ApiErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorHandler.swift; sourceTree = "<group>"; };
-		A20444691EE2D92300612E57 /* WebView_macOS.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebView_macOS.xib; sourceTree = "<group>"; };
 		A2066AE91D9C388F0065A4D7 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		A217DAA71E9924DE00EA1430 /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		A217DAAB1E9926A500EA1430 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -297,18 +292,6 @@
 		A22179CF1EBA530C006B71FD /* SessionMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionMock.swift; sourceTree = "<group>"; };
 		A22179D11EBA5393006B71FD /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		A22179D31EBA57AF006B71FD /* SessionConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConfig.swift; sourceTree = "<group>"; };
-		A234A40A1BE34F6800856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CaptchaView_macOS.strings; sourceTree = "<group>"; };
-		A234A40C1BE34F6900856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CaptchaView_iOS.strings; sourceTree = "<group>"; };
-		A234A40D1BE34FA100856CA5 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/CaptchaView_macOS.strings; sourceTree = "<group>"; };
-		A234A40F1BE34FA100856CA5 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/CaptchaView_iOS.strings; sourceTree = "<group>"; };
-		A234A4101BE34FAC00856CA5 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/CaptchaView_macOS.strings; sourceTree = "<group>"; };
-		A234A4121BE34FAC00856CA5 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/CaptchaView_iOS.strings; sourceTree = "<group>"; };
-		A234A4131BE34FBD00856CA5 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/CaptchaView_macOS.strings; sourceTree = "<group>"; };
-		A234A4151BE34FBD00856CA5 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/CaptchaView_iOS.strings; sourceTree = "<group>"; };
-		A234A4161BE34FD400856CA5 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/CaptchaView_macOS.strings; sourceTree = "<group>"; };
-		A234A4181BE34FD400856CA5 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/CaptchaView_iOS.strings; sourceTree = "<group>"; };
-		A234A4191BE34FE000856CA5 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/CaptchaView_macOS.strings; sourceTree = "<group>"; };
-		A234A41B1BE34FE000856CA5 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/CaptchaView_iOS.strings; sourceTree = "<group>"; };
 		A23708BA1EA52F0D00103212 /* SwiftyVK-Tests-OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftyVK-Tests-OSX.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A23708C61EA5309700103212 /* TaskShedulerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskShedulerTests.swift; sourceTree = "<group>"; };
 		A23E692B1EDAEC5800AA3B3B /* VKProxyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKProxyTests.swift; sourceTree = "<group>"; };
@@ -363,13 +346,6 @@
 		A2527D8A1BD12FD200F65412 /* UrlRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UrlRequestBuilder.swift; path = Request/UrlRequestBuilder.swift; sourceTree = "<group>"; };
 		A2527D901BD12FD200F65412 /* SwiftyVK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyVK.h; sourceTree = "<group>"; };
 		A2527D911BD12FD200F65412 /* VK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VK.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		A2527E191BD1343F00F65412 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CaptchaView_iOS.xib; sourceTree = "<group>"; };
-		A2527E1B1BD1343F00F65412 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CaptchaView_macOS.xib; sourceTree = "<group>"; };
-		A2527E241BD1343F00F65412 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/WebView_iOS.xib; sourceTree = "<group>"; };
-		A2527E2E1BD134BA00F65412 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CaptchaView_iOS.strings; sourceTree = "<group>"; };
-		A2527E301BD134BD00F65412 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/CaptchaView_iOS.strings; sourceTree = "<group>"; };
-		A2527E321BD134D800F65412 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CaptchaView_macOS.strings; sourceTree = "<group>"; };
-		A2527E341BD134D900F65412 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/CaptchaView_macOS.strings; sourceTree = "<group>"; };
 		A254C0C71E9904CB001A5456 /* Custom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Custom.swift; sourceTree = "<group>"; };
 		A25A19BF1EE2EFCD00CF13AF /* WebController_iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebController_iOS.swift; sourceTree = "<group>"; };
 		A25A19C81EE4112700CF13AF /* SwiftyVKDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyVKDelegateMock.swift; sourceTree = "<group>"; };
@@ -684,31 +660,11 @@
 		A2527DF01BD133E100F65412 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A2527E391BD1354500F65412 /* OSX */,
-				A2527E3A1BD1355A00F65412 /* iOS */,
+				A2B727941EED682E005B17AE /* Storyboard_iOS.storyboard */,
+				A2B727A71EED68EF005B17AE /* Storyboard_macOS.storyboard */,
 			);
 			name = Resources;
 			path = Resources/Files;
-			sourceTree = "<group>";
-		};
-		A2527E391BD1354500F65412 /* OSX */ = {
-			isa = PBXGroup;
-			children = (
-				A2527E1A1BD1343F00F65412 /* CaptchaView_macOS.xib */,
-				A20444691EE2D92300612E57 /* WebView_macOS.xib */,
-				A2B727A71EED68EF005B17AE /* Storyboard_macOS.storyboard */,
-			);
-			name = OSX;
-			sourceTree = "<group>";
-		};
-		A2527E3A1BD1355A00F65412 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				A2527E181BD1343F00F65412 /* CaptchaView_iOS.xib */,
-				A2527E231BD1343F00F65412 /* WebView_iOS.xib */,
-				A2B727941EED682E005B17AE /* Storyboard_iOS.storyboard */,
-			);
-			name = iOS;
 			sourceTree = "<group>";
 		};
 		A2B4ECAA1DCA4F54009435B6 /* Capthca */ = {
@@ -944,9 +900,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A204446A1EE2D92300612E57 /* WebView_macOS.xib in Resources */,
 				A2B727A51EED68EF005B17AE /* Storyboard_macOS.storyboard in Resources */,
-				A2527E3B1BD1356C00F65412 /* CaptchaView_macOS.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -955,8 +909,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2B727921EED682E005B17AE /* Storyboard_iOS.storyboard in Resources */,
-				A2527E3D1BD1357000F65412 /* CaptchaView_iOS.xib in Resources */,
-				A2527E3E1BD1357000F65412 /* WebView_iOS.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1243,49 +1195,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A2527E181BD1343F00F65412 /* CaptchaView_iOS.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A2527E191BD1343F00F65412 /* Base */,
-				A2527E2E1BD134BA00F65412 /* en */,
-				A2527E301BD134BD00F65412 /* ru */,
-				A234A40C1BE34F6900856CA5 /* de */,
-				A234A40F1BE34FA100856CA5 /* es */,
-				A234A4121BE34FAC00856CA5 /* fi */,
-				A234A4151BE34FBD00856CA5 /* it */,
-				A234A4181BE34FD400856CA5 /* uk */,
-				A234A41B1BE34FE000856CA5 /* be */,
-			);
-			name = CaptchaView_iOS.xib;
-			path = Captcha;
-			sourceTree = "<group>";
-		};
-		A2527E1A1BD1343F00F65412 /* CaptchaView_macOS.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A2527E1B1BD1343F00F65412 /* Base */,
-				A2527E321BD134D800F65412 /* en */,
-				A2527E341BD134D900F65412 /* ru */,
-				A234A40A1BE34F6800856CA5 /* de */,
-				A234A40D1BE34FA100856CA5 /* es */,
-				A234A4101BE34FAC00856CA5 /* fi */,
-				A234A4131BE34FBD00856CA5 /* it */,
-				A234A4161BE34FD400856CA5 /* uk */,
-				A234A4191BE34FE000856CA5 /* be */,
-			);
-			name = CaptchaView_macOS.xib;
-			path = Captcha;
-			sourceTree = "<group>";
-		};
-		A2527E231BD1343F00F65412 /* WebView_iOS.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A2527E241BD1343F00F65412 /* Base */,
-			);
-			name = WebView_iOS.xib;
-			path = WebView;
-			sourceTree = "<group>";
-		};
 		A2B727941EED682E005B17AE /* Storyboard_iOS.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
