@@ -114,6 +114,7 @@
 		A2B4ECAC1DCA4F6B009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
 		A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */; };
 		A2B7278F1EEC7267005B17AE /* Storyboard_iOS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B7278D1EEC6F74005B17AE /* Storyboard_iOS.storyboard */; };
+		A2B727911EED63A4005B17AE /* Storyboard_macOS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B727901EED63A4005B17AE /* Storyboard_macOS.storyboard */; };
 		A2B805531EDDAFD2004DA7EB /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B805521EDDAFD2004DA7EB /* WebController.swift */; };
 		A2B805541EDDAFD2004DA7EB /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B805521EDDAFD2004DA7EB /* WebController.swift */; };
 		A2B805561EDDB01C004DA7EB /* WebControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B805551EDDB01C004DA7EB /* WebControllerMock.swift */; };
@@ -400,6 +401,7 @@
 		A2B40DFC1EA693B700106AE3 /* UrlRequestBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlRequestBuilderTests.swift; sourceTree = "<group>"; };
 		A2B4ECAB1DCA4F6B009435B6 /* CapthcaPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapthcaPresenter.swift; sourceTree = "<group>"; };
 		A2B7278D1EEC6F74005B17AE /* Storyboard_iOS.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard_iOS.storyboard; sourceTree = "<group>"; };
+		A2B727901EED63A4005B17AE /* Storyboard_macOS.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard_macOS.storyboard; sourceTree = "<group>"; };
 		A2B805521EDDAFD2004DA7EB /* WebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebController.swift; path = ../WebController.swift; sourceTree = "<group>"; };
 		A2B805551EDDB01C004DA7EB /* WebControllerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebControllerMock.swift; sourceTree = "<group>"; };
 		A2B805571EDDB313004DA7EB /* WebPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPresenterTests.swift; sourceTree = "<group>"; };
@@ -678,6 +680,7 @@
 			children = (
 				A2527E1A1BD1343F00F65412 /* CaptchaView_macOS.xib */,
 				A20444691EE2D92300612E57 /* WebView_macOS.xib */,
+				A2B727901EED63A4005B17AE /* Storyboard_macOS.storyboard */,
 			);
 			name = OSX;
 			sourceTree = "<group>";
@@ -920,6 +923,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A204446A1EE2D92300612E57 /* WebView_macOS.xib in Resources */,
+				A2B727911EED63A4005B17AE /* Storyboard_macOS.storyboard in Resources */,
 				A2527E3B1BD1356C00F65412 /* CaptchaView_macOS.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

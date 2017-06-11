@@ -2,6 +2,7 @@ import Cocoa
 
 final class CaptchaController_macOS: NSViewController, NSTextFieldDelegate, CaptchaController {
     
+    
     @IBOutlet private weak var imageView: NSImageView?
     @IBOutlet private weak var textField: NSTextField?
     private var onFinish: ((String) -> ())?
@@ -9,6 +10,10 @@ final class CaptchaController_macOS: NSViewController, NSTextFieldDelegate, Capt
     override func viewWillAppear() {
         super.viewWillAppear()
         textField?.delegate = self
+    }
+    
+    func prepareForPresent() {
+        
     }
     
     func present(imageData: Data, onFinish: @escaping (String) -> ()) {

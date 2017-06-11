@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="13122.17"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Web Controller macOS-->
+        <scene sceneID="Rku-He-er5">
+            <objects>
+                <viewController storyboardIdentifier="Web" id="2x6-4U-608" customClass="WebController_macOS" customModule="SwiftyVK" sceneMemberID="viewController">
+                    <customView key="view" id="fL7-e2-4bl">
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="350"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S7H-UH-Oaf">
+                                <rect key="frame" x="0.0" y="0.0" width="500" height="350"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="cbM-PG-J1h"/>
+                                    <constraint firstAttribute="width" constant="500" id="xpF-gE-5LB"/>
+                                </constraints>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="4L5-mP-HPw">
+                                <rect key="frame" x="234" y="159" width="32" height="32"/>
+                            </progressIndicator>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="S7H-UH-Oaf" firstAttribute="leading" secondItem="fL7-e2-4bl" secondAttribute="leading" id="27k-e2-lqT"/>
+                            <constraint firstItem="4L5-mP-HPw" firstAttribute="centerY" secondItem="fL7-e2-4bl" secondAttribute="centerY" id="9Oq-QQ-1ws"/>
+                            <constraint firstAttribute="trailing" secondItem="S7H-UH-Oaf" secondAttribute="trailing" id="FCB-ji-ar3"/>
+                            <constraint firstItem="4L5-mP-HPw" firstAttribute="centerX" secondItem="fL7-e2-4bl" secondAttribute="centerX" id="WrN-Gn-8Zp"/>
+                            <constraint firstAttribute="bottom" secondItem="S7H-UH-Oaf" secondAttribute="bottom" id="ZFg-8C-DxP"/>
+                            <constraint firstItem="S7H-UH-Oaf" firstAttribute="top" secondItem="fL7-e2-4bl" secondAttribute="top" id="ix8-Nq-ICo"/>
+                        </constraints>
+                    </customView>
+                    <connections>
+                        <outlet property="preloader" destination="4L5-mP-HPw" id="g5u-4X-vFV"/>
+                        <outlet property="webView" destination="S7H-UH-Oaf" id="q8K-fp-0j9"/>
+                    </connections>
+                </viewController>
+                <customObject id="tPu-ny-o1w" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="419" y="84"/>
+        </scene>
+        <!--Captcha Controller macOS-->
+        <scene sceneID="EPR-9A-kFp">
+            <objects>
+                <viewController storyboardIdentifier="Captcha" id="r5f-06-Ldu" customClass="CaptchaController_macOS" customModule="SwiftyVK" sceneMemberID="viewController">
+                    <view key="view" id="s8e-Dt-oLw">
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="140"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r20-OG-mXJ">
+                                <rect key="frame" x="0.0" y="30" width="280" height="110"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="4pV-wb-xyZ"/>
+                                    <constraint firstAttribute="width" constant="280" id="mTj-gU-9fZ"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="kKB-4Z-5Xc"/>
+                            </imageView>
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M80-Jn-UUP">
+                                <rect key="frame" x="1" y="5" width="281" height="24"/>
+                                <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" alignment="center" placeholderString="Enter code from the image" id="hXf-ia-qTL">
+                                    <font key="font" metaFont="system" size="20"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="M80-Jn-UUP" firstAttribute="leading" secondItem="s8e-Dt-oLw" secondAttribute="leading" constant="3" id="8Gf-ni-JH4"/>
+                            <constraint firstAttribute="trailing" secondItem="r20-OG-mXJ" secondAttribute="trailing" id="Cmp-sb-dDl"/>
+                            <constraint firstItem="r20-OG-mXJ" firstAttribute="top" secondItem="s8e-Dt-oLw" secondAttribute="top" id="P5u-Gu-VTG"/>
+                            <constraint firstAttribute="bottom" secondItem="M80-Jn-UUP" secondAttribute="bottom" constant="5" id="RBQ-Ud-O3o"/>
+                            <constraint firstItem="r20-OG-mXJ" firstAttribute="leading" secondItem="s8e-Dt-oLw" secondAttribute="leading" id="V1u-q3-0LJ"/>
+                            <constraint firstItem="M80-Jn-UUP" firstAttribute="centerX" secondItem="r20-OG-mXJ" secondAttribute="centerX" constant="1.5" id="fEC-13-GkR"/>
+                            <constraint firstItem="M80-Jn-UUP" firstAttribute="top" secondItem="r20-OG-mXJ" secondAttribute="bottom" constant="1" id="saH-ql-yqM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="r20-OG-mXJ" id="Xzs-UP-Ieu"/>
+                        <outlet property="textField" destination="M80-Jn-UUP" id="bY5-pQ-TfZ"/>
+                    </connections>
+                </viewController>
+                <customObject id="7j2-em-ZNp" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="868" y="84"/>
+        </scene>
+    </scenes>
+</document>

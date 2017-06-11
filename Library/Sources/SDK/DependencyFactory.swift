@@ -121,42 +121,38 @@ final class DependencyFactoryImpl: DependencyFactory {
     func webController() -> WebController? {
         var webController: WebController?
         
+        #if os(iOS)
+            webController = storyboard().instantiateViewController(withIdentifier: "Web") as? WebController_iOS
+        #elseif os(macOS)
+            webController = storyboard().instantiateController(withIdentifier: "Web") as? WebController_macOS
+        #endif
+        
+        guard let controller = webController as? VkViewController else {
+            return nil
+        }
+        
         DispatchQueue.main.sync {
-            #if os(iOS)
-                webController = storyboard().instantiateViewController(withIdentifier: "Web") as? WebController_iOS
-                
-            #elseif os(macOS)
-                webController = WebController_macOS(
-                    nibName: Resources.withSuffix("WebView"),
-                    bundle: Resources.bundle
-                )
-            #endif
-            
-            if let webController = webController as? VkViewController {
-                self.delegate?.vkNeedToPresent(viewController: webController)
-            }
+            self.delegate?.vkNeedToPresent(viewController: controller)
         }
         
         return webController
     }
     
     func captchaController() -> CaptchaController? {
+        var captchaController: CaptchaController?
+        
         #if os(iOS)
-            guard let captchaController = storyboard()
-                .instantiateViewController(withIdentifier: "Captcha") as? CaptchaController_iOS else {
-                    return nil
-            }
+            captchaController = storyboard().instantiateViewController(withIdentifier: "Captcha") as? CaptchaController_iOS
         #elseif os(macOS)
-            guard let captchaController = CaptchaController_macOS(
-                nibName: Resources.withSuffix("CaptchaView"),
-                bundle: Resources.bundle
-                ) else {
-                    return nil
-            }
+            captchaController = storyboard().instantiateController(withIdentifier: "Captcha") as? CaptchaController_macOS
         #endif
         
+        guard let controller = captchaController as? VkViewController else {
+            return nil
+        }
+        
         DispatchQueue.main.sync {
-            self.delegate?.vkNeedToPresent(viewController: captchaController)
+            self.delegate?.vkNeedToPresent(viewController: controller)
         }
         
         return captchaController
