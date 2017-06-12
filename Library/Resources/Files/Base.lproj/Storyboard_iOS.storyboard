@@ -75,6 +75,7 @@
                                                 </activityIndicatorView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXS-iZ-I9E">
                                                     <rect key="frame" x="-8" y="-8" width="22" height="22"/>
+                                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <state key="normal" image="CloseButton"/>
                                                     <connections>
                                                         <action selector="dismissByButton:" destination="QO6-eV-iRy" eventType="touchUpInside" id="5Ed-eH-LgI"/>

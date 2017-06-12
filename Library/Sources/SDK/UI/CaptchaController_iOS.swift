@@ -12,13 +12,14 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        imageView?.backgroundColor = .white
+        imageView?.layer.backgroundColor = UIColor.white.withAlphaComponent(0.75).cgColor
         imageView?.layer.cornerRadius = 15
         imageView?.layer.masksToBounds = true
         imageView?.layer.borderColor = UIColor.lightGray.cgColor
         imageView?.layer.borderWidth = 1 / UIScreen.main.nativeScale
         
         textField?.delegate = self
+        textField?.becomeFirstResponder()
         
         preloader?.color = .lightGray
         
@@ -33,6 +34,11 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
         )
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        textField?.resignFirstResponder()
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         onDismiss?()
@@ -41,12 +47,8 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
     func prepareForPresent() {
         DispatchQueue.main.async {
             self.imageView?.image = nil
-            self.imageView?.alpha = 0.75
-            
-            self.textField?.isEnabled = false
             self.textField?.text = nil
             self.textField?.alpha = 0.75
-            
             self.preloader?.startAnimating()
         }
     }
@@ -54,12 +56,7 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
     func present(imageData: Data, onResult: @escaping (String) -> (), onDismiss: @escaping () -> ()) {
         DispatchQueue.main.sync {
             imageView?.image = UIImage(data: imageData)
-            imageView?.alpha = 1
-            
-            textField?.isEnabled = true
             textField?.alpha = 1
-            textField?.becomeFirstResponder()
-            
             preloader?.stopAnimating()
         }
         
@@ -78,12 +75,15 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let result = textField.text, !result.isEmpty else {
-            return false
+        guard
+            imageView?.image != nil,
+            let result = textField.text,
+            !result.isEmpty
+            else {
+                return false
         }
         
         onResult?(result)
-        textField.resignFirstResponder()
         return true
     }
 }

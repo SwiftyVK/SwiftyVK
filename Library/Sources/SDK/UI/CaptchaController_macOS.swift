@@ -72,7 +72,6 @@ import Cocoa
                 return
         }
         
-        
         onResult?(result)
     }
 }
