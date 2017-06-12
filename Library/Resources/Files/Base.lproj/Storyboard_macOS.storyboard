@@ -76,14 +76,17 @@
                                 </textFieldCell>
                             </textField>
                             <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IHw-mS-mIc">
-                                <rect key="frame" x="4" y="116" width="33" height="32"/>
+                                <rect key="frame" x="5" y="127" width="22" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="h7Z-nn-bxm"/>
-                                    <constraint firstAttribute="width" constant="21" id="xtE-Bt-s2I"/>
+                                    <constraint firstAttribute="height" constant="22" id="h7Z-nn-bxm"/>
+                                    <constraint firstAttribute="width" constant="22" id="xtE-Bt-s2I"/>
                                 </constraints>
-                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSStopProgressTemplate" imagePosition="only" alignment="center" borderStyle="border" focusRingType="none" inset="2" id="7QQ-D0-g6h">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="CloseButton" imagePosition="only" alternateImage="CloseButtonPressed" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="7QQ-D0-g6h">
+                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="cellTitle"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="dismissByButtonTap:" target="r5f-06-Ldu" id="J8T-Vn-LID"/>
@@ -93,8 +96,8 @@
                         <constraints>
                             <constraint firstItem="M80-Jn-UUP" firstAttribute="top" secondItem="r20-OG-mXJ" secondAttribute="bottom" constant="10" id="2p1-cU-fh0"/>
                             <constraint firstItem="r20-OG-mXJ" firstAttribute="top" secondItem="s8e-Dt-oLw" secondAttribute="top" constant="10" id="3uZ-SQ-ghg"/>
-                            <constraint firstItem="IHw-mS-mIc" firstAttribute="leading" secondItem="s8e-Dt-oLw" secondAttribute="leading" constant="10" id="6yb-Ik-iRw"/>
-                            <constraint firstItem="IHw-mS-mIc" firstAttribute="top" secondItem="s8e-Dt-oLw" secondAttribute="top" constant="10" id="961-E7-752"/>
+                            <constraint firstItem="IHw-mS-mIc" firstAttribute="leading" secondItem="s8e-Dt-oLw" secondAttribute="leading" constant="5" id="6yb-Ik-iRw"/>
+                            <constraint firstItem="IHw-mS-mIc" firstAttribute="top" secondItem="s8e-Dt-oLw" secondAttribute="top" constant="5" id="961-E7-752"/>
                             <constraint firstItem="HZT-MJ-hF0" firstAttribute="centerX" secondItem="r20-OG-mXJ" secondAttribute="centerX" id="DU5-rW-hdI"/>
                             <constraint firstAttribute="bottom" secondItem="M80-Jn-UUP" secondAttribute="bottom" constant="10" id="RBQ-Ud-O3o"/>
                             <constraint firstItem="HZT-MJ-hF0" firstAttribute="centerY" secondItem="r20-OG-mXJ" secondAttribute="centerY" id="Ujm-Yy-kb9"/>
@@ -117,6 +120,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSStopProgressTemplate" width="11" height="11"/>
+        <image name="CloseButton" width="22" height="22"/>
+        <image name="CloseButtonPressed" width="22" height="22"/>
     </resources>
 </document>

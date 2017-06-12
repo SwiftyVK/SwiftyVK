@@ -4,25 +4,29 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Resources/Assets.car</key>
+		<data>
+		GeQhYXI0dwrYUbfYys9sDypWLvk=
+		</data>
 		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/2x6-4U-608-view-fL7-e2-4bl.nib</key>
 		<data>
-		j0I2/ZeDMFkojMI23Z2K8a6NRLA=
+		MFU44aoITsR4ZoEdsBCfgCHYlqk=
 		</data>
 		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/Captcha.nib</key>
 		<data>
-		rmNiW3d83iJXnuXfX/qrMqG+FnQ=
+		1hYCannS0n3sbrPRz6M8jFxvmPw=
 		</data>
 		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/Info.plist</key>
 		<data>
-		t0mZPgztnl6hPjtXA3o34rgtvN0=
+		3ceKtWaFiNn/JkPsp45mvFVO3fk=
 		</data>
 		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/Web.nib</key>
 		<data>
-		+YVx/e2DQ1sbLV7H6lABPh1jyrc=
+		p2ZOtH4yCVTUlqxXCRvu7eW3h/U=
 		</data>
 		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/r5f-06-Ldu-view-s8e-Dt-oLw.nib</key>
 		<data>
-		RQhSIyqNSQq4w54JX+zoADRu6U0=
+		UW4tEfbaVFt1sq2lTfIugo7rkoo=
 		</data>
 		<key>Resources/be.lproj/Storyboard_macOS.strings</key>
 		<dict>
@@ -99,59 +103,70 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Resources/Assets.car</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			GeQhYXI0dwrYUbfYys9sDypWLvk=
+			</data>
+			<key>hash2</key>
+			<data>
+			A7ABpcINlrv+MhGJVNx/PPRnb/VZ2RqhEsqJekDRceI=
+			</data>
+		</dict>
 		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/2x6-4U-608-view-fL7-e2-4bl.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			j0I2/ZeDMFkojMI23Z2K8a6NRLA=
+			MFU44aoITsR4ZoEdsBCfgCHYlqk=
 			</data>
 			<key>hash2</key>
 			<data>
-			jt6APKzfmKDT5JqIf23AqrGsml2h10QVR7G75F0dV04=
+			7DXQ4bcCqthIMWxw31vqawIofblk8tO8Jyjz3UBSrUQ=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/Captcha.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rmNiW3d83iJXnuXfX/qrMqG+FnQ=
+			1hYCannS0n3sbrPRz6M8jFxvmPw=
 			</data>
 			<key>hash2</key>
 			<data>
-			1GwieJ9nJ4pQuAh1Fofn0VS0p0TlY/RQAgM69l9OTvM=
+			hjduAFzEUn8jhiZ4pz5Cp9HBLz4WCHBEQBF2iN9pVmQ=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			t0mZPgztnl6hPjtXA3o34rgtvN0=
+			3ceKtWaFiNn/JkPsp45mvFVO3fk=
 			</data>
 			<key>hash2</key>
 			<data>
-			pGrPcWLu9hGNBunjpO6/+VAQvaOjthC1Rj/XP79C7Xg=
+			W4l5Rjvs1g/ZudSFUj7qshi2xLYVDNL/9+HYbRxkGJ8=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/Web.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+YVx/e2DQ1sbLV7H6lABPh1jyrc=
+			p2ZOtH4yCVTUlqxXCRvu7eW3h/U=
 			</data>
 			<key>hash2</key>
 			<data>
-			UPTa6JQUcVv6GD0QcchjAGD4JrfLNWpxt5EefDz3sEw=
+			O4PHGyO95RNOngEMFqNz6h8oNG/7O4VonzjqaU/mDI4=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/r5f-06-Ldu-view-s8e-Dt-oLw.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			RQhSIyqNSQq4w54JX+zoADRu6U0=
+			UW4tEfbaVFt1sq2lTfIugo7rkoo=
 			</data>
 			<key>hash2</key>
 			<data>
-			yJcmFFLYj1vbBn69XZHKB1tRXcqumUqPQ+mj6w5bc28=
+			8sF1n+7v/Fn3QuB4ts0WweCoP+EZPEh5t4gIbHNuWmY=
 			</data>
 		</dict>
 		<key>Resources/be.lproj/Storyboard_macOS.strings</key>

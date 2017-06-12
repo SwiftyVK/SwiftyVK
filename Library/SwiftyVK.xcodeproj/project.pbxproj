@@ -124,6 +124,8 @@
 		A2CF0D441E98EF0900EAFF30 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF0D411E98EF0900EAFF30 /* Result.swift */; };
 		A2CF0D451E98EF0900EAFF30 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF0D411E98EF0900EAFF30 /* Result.swift */; };
 		A2D1369B1DA00E9000C487C1 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D1369A1DA00E9000C487C1 /* Errors.swift */; };
+		A2D15A941EEE96840063D6F2 /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2D15A931EEE96840063D6F2 /* Asset.xcassets */; };
+		A2D15A951EEE96840063D6F2 /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2D15A931EEE96840063D6F2 /* Asset.xcassets */; };
 		A2D2713C1EC4D0BA00B24D09 /* SessionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionStorage.swift */; };
 		A2D2713D1EC4D0BA00B24D09 /* SessionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionStorage.swift */; };
 		A2E34DBC1ED1F1260041E663 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBB1ED1F1260041E663 /* TokenStorage.swift */; };
@@ -402,6 +404,7 @@
 		A2CF0D401E98EF0900EAFF30 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		A2CF0D411E98EF0900EAFF30 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		A2D1369A1DA00E9000C487C1 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		A2D15A931EEE96840063D6F2 /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
 		A2D2713B1EC4D0BA00B24D09 /* SessionStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionStorage.swift; sourceTree = "<group>"; };
 		A2E34DBB1ED1F1260041E663 /* TokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TokenStorage.swift; path = Session/TokenStorage.swift; sourceTree = "<group>"; };
 		A2E34DBE1ED1F6FE0041E663 /* TokenStorageMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorageMock.swift; sourceTree = "<group>"; };
@@ -662,6 +665,7 @@
 			children = (
 				A2B727941EED682E005B17AE /* Storyboard_iOS.storyboard */,
 				A2B727A71EED68EF005B17AE /* Storyboard_macOS.storyboard */,
+				A2D15A931EEE96840063D6F2 /* Asset.xcassets */,
 			);
 			name = Resources;
 			path = Resources/Files;
@@ -900,6 +904,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2D15A941EEE96840063D6F2 /* Asset.xcassets in Resources */,
 				A2B727A51EED68EF005B17AE /* Storyboard_macOS.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -908,6 +913,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2D15A951EEE96840063D6F2 /* Asset.xcassets in Resources */,
 				A2B727921EED682E005B17AE /* Storyboard_iOS.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

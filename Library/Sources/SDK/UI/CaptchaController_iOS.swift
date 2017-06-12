@@ -5,11 +5,22 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
     @IBOutlet private weak var imageView: UIImageView?
     @IBOutlet private weak var textField: UITextField?
     @IBOutlet weak var preloader: UIActivityIndicatorView?
+    @IBOutlet weak var closeButton: UIButton?
     private var onResult: ((String) -> ())?
     private var onDismiss: (() -> ())?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        closeButton?.setImage(
+            UIImage(named: "CloseButton", in: Resources.bundle, compatibleWith: nil),
+            for: .normal
+        )
+        
+        closeButton?.setImage(
+            UIImage(named: "CloseButtonPressed", in: Resources.bundle, compatibleWith: nil),
+            for: .highlighted
+        )
+        
         imageView?.backgroundColor = .white
         imageView?.layer.cornerRadius = 15
         imageView?.layer.masksToBounds = true
@@ -51,6 +62,10 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
         
         self.onResult = onResult
         self.onDismiss = onDismiss
+    }
+    
+    @IBAction func dismissByButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     func dismiss() {

@@ -73,14 +73,23 @@
                                                     <rect key="frame" x="106" y="31.5" width="37" height="37"/>
                                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </activityIndicatorView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXS-iZ-I9E">
+                                                    <rect key="frame" x="-8" y="-8" width="22" height="22"/>
+                                                    <state key="normal" image="CloseButton"/>
+                                                    <connections>
+                                                        <action selector="dismissByButton:" destination="QO6-eV-iRy" eventType="touchUpInside" id="5Ed-eH-LgI"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="90p-tK-28B" firstAttribute="top" secondItem="hlH-7w-m3N" secondAttribute="top" id="2dL-P4-TEE"/>
                                                 <constraint firstAttribute="trailing" secondItem="dIf-ga-Ltm" secondAttribute="trailing" id="CO2-fc-uXQ"/>
                                                 <constraint firstAttribute="bottom" secondItem="dIf-ga-Ltm" secondAttribute="bottom" id="Fuy-at-kjz"/>
                                                 <constraint firstItem="dIf-ga-Ltm" firstAttribute="top" secondItem="90p-tK-28B" secondAttribute="bottom" constant="10" id="Hrx-Zf-Cix"/>
+                                                <constraint firstItem="YXS-iZ-I9E" firstAttribute="leading" secondItem="hlH-7w-m3N" secondAttribute="leading" constant="-8" id="ICI-He-IsI"/>
                                                 <constraint firstItem="b3i-0k-lRs" firstAttribute="centerY" secondItem="90p-tK-28B" secondAttribute="centerY" id="Tj3-7X-7dB"/>
                                                 <constraint firstAttribute="trailing" secondItem="90p-tK-28B" secondAttribute="trailing" id="bSh-fu-7hj"/>
+                                                <constraint firstItem="YXS-iZ-I9E" firstAttribute="top" secondItem="hlH-7w-m3N" secondAttribute="top" constant="-8" id="byE-3D-g1r"/>
                                                 <constraint firstItem="b3i-0k-lRs" firstAttribute="centerX" secondItem="90p-tK-28B" secondAttribute="centerX" id="hCb-Xw-gVP"/>
                                                 <constraint firstItem="90p-tK-28B" firstAttribute="leading" secondItem="hlH-7w-m3N" secondAttribute="leading" id="rwB-ti-iqu"/>
                                                 <constraint firstItem="dIf-ga-Ltm" firstAttribute="leading" secondItem="hlH-7w-m3N" secondAttribute="leading" id="zLQ-Uw-fWc"/>
@@ -99,8 +108,8 @@
                                     </variation>
                                     <variation key="heightClass=compact-widthClass=compact">
                                         <mask key="constraints">
-                                            <include reference="Pge-wD-6Hi"/>
                                             <exclude reference="KfB-hL-BlI"/>
+                                            <include reference="Pge-wD-6Hi"/>
                                         </mask>
                                     </variation>
                                 </view>
@@ -116,6 +125,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="YXS-iZ-I9E" id="1IU-bf-uuT"/>
                         <outlet property="imageView" destination="90p-tK-28B" id="Hsf-Df-1r9"/>
                         <outlet property="preloader" destination="b3i-0k-lRs" id="4VZ-bM-qqe"/>
                         <outlet property="textField" destination="dIf-ga-Ltm" id="Ldw-ax-Dvy"/>
@@ -124,7 +134,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDK-MO-rXP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="652" y="189"/>
+            <point key="canvasLocation" x="651.5625" y="188.87262079062955"/>
         </scene>
         <!--Web Controller iOS-->
         <scene sceneID="EYA-W4-wfb">
@@ -184,4 +194,7 @@
             <point key="canvasLocation" x="-115" y="190"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="CloseButton" width="22" height="22"/>
+    </resources>
 </document>
