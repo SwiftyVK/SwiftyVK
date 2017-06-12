@@ -4,102 +4,94 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Base.lproj/CaptchaView_iOS.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/5iw-hV-gmH-view-Ope-bS-Fva.nib</key>
 		<data>
-		e5bCTFB1eXgkYXi4UPgVPseYejw=
+		HdCANn5PAa+sZ+hWfu/CjFBMlCA=
 		</data>
-		<key>Base.lproj/WebView_iOS.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/Captcha.nib</key>
 		<data>
-		0bj44bfU0Jh7u7yCjWRVd0c/GNM=
+		pzMBV5hCgBqYwm+pfq3y+OOghWE=
 		</data>
-		<key>Storyboard_iOS.storyboardc/5iw-hV-gmH-view-Ope-bS-Fva.nib</key>
-		<data>
-		dr2JyUv36HWbtA4a3GlIEnkK1Zk=
-		</data>
-		<key>Storyboard_iOS.storyboardc/Captcha.nib</key>
-		<data>
-		q5Uvi12K3sBTmS6GzqsrcbbJhjM=
-		</data>
-		<key>Storyboard_iOS.storyboardc/Info.plist</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/Info.plist</key>
 		<data>
 		5VKUu8YJBIblSy9lw/1d8Aazi30=
 		</data>
-		<key>Storyboard_iOS.storyboardc/QO6-eV-iRy-view-OaR-C0-QIp.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/QO6-eV-iRy-view-OaR-C0-QIp.nib</key>
 		<data>
-		ZKRmGgACsYgx5BhTBOiOp9OCN0c=
+		ClQPwRHuYXqWgJrSocX0EeqM9uk=
 		</data>
-		<key>Storyboard_iOS.storyboardc/Web.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/Web.nib</key>
 		<data>
-		PL4tTeADp3nIuSP//xXZE8xE6+M=
+		l2PIyj+N+lAxxgAm0XSpw/5+j80=
 		</data>
-		<key>be.lproj/CaptchaView_iOS.strings</key>
+		<key>be.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5c6dBCFO6zgnMPpiUU1ZqDvglUI=
+			vmWNMM4yYgXr8nrTB1F00VZr3is=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>de.lproj/CaptchaView_iOS.strings</key>
+		<key>de.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			DSGtLgLYevU/gv+BUO5GruSzQno=
+			rly3I4OpP24YBm/McTJKaEEw6sg=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>en.lproj/CaptchaView_iOS.strings</key>
+		<key>en.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			u2QZlWWLJsT4Q0n/gLtGsSqVGeY=
+			URg3kBLyG2qZanBz57HxIcuVOXs=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>es.lproj/CaptchaView_iOS.strings</key>
+		<key>es.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			2fCDGpwopGEZEvFXMGXYE7wr93U=
+			adkArQvoRaxLI6EiMTXwEb4oAPg=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>fi.lproj/CaptchaView_iOS.strings</key>
+		<key>fi.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			28xDO8aW5k2hV9pTZsIlHw8w/34=
+			AiSuvPOgUcQbJpKlop7tlI2Dw8U=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>it.lproj/CaptchaView_iOS.strings</key>
+		<key>it.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9WBlgovoA7sa3bRLq0L6hO8RL4g=
+			F3F5niTBL98lX6btRmEC+eNU85A=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>ru.lproj/CaptchaView_iOS.strings</key>
+		<key>ru.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7dt8R04UebXGnp2X0+fkHX4XYxk=
+			vmWNMM4yYgXr8nrTB1F00VZr3is=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>uk.lproj/CaptchaView_iOS.strings</key>
+		<key>uk.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			u2QZlWWLJsT4Q0n/gLtGsSqVGeY=
+			vmWNMM4yYgXr8nrTB1F00VZr3is=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -107,51 +99,29 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Base.lproj/CaptchaView_iOS.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/5iw-hV-gmH-view-Ope-bS-Fva.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			e5bCTFB1eXgkYXi4UPgVPseYejw=
+			HdCANn5PAa+sZ+hWfu/CjFBMlCA=
 			</data>
 			<key>hash2</key>
 			<data>
-			f4gUAvjtnnfF47/6sHdPuPl7L8fNgyy5LN0/cKyArgo=
+			2IPHNQFMeaNdRq+QWVNhpsGDhT5+379kzOQp9GiVy1k=
 			</data>
 		</dict>
-		<key>Base.lproj/WebView_iOS.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/Captcha.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0bj44bfU0Jh7u7yCjWRVd0c/GNM=
+			pzMBV5hCgBqYwm+pfq3y+OOghWE=
 			</data>
 			<key>hash2</key>
 			<data>
-			xGfP1me8BYt7OKti3Tv4+Pd5U5dOGQcQJNQScEv8nXQ=
+			hdtjJM72dGyEff6O2toLFV5s5KgjvyrZSiU1GsvMLiQ=
 			</data>
 		</dict>
-		<key>Storyboard_iOS.storyboardc/5iw-hV-gmH-view-Ope-bS-Fva.nib</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			dr2JyUv36HWbtA4a3GlIEnkK1Zk=
-			</data>
-			<key>hash2</key>
-			<data>
-			7Pi0uznbAacmGPn+qtgqEe4VAhWf7paoWKpCRhqqtuE=
-			</data>
-		</dict>
-		<key>Storyboard_iOS.storyboardc/Captcha.nib</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			q5Uvi12K3sBTmS6GzqsrcbbJhjM=
-			</data>
-			<key>hash2</key>
-			<data>
-			uWbQGKkHC8OEDsl/JmzBQIkbwu8B4dVd7fFmQDI1BKs=
-			</data>
-		</dict>
-		<key>Storyboard_iOS.storyboardc/Info.plist</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -162,128 +132,128 @@
 			njKrOingc5UtEkc4dPqJK1zraBTvBE9SB8ky09CuB2I=
 			</data>
 		</dict>
-		<key>Storyboard_iOS.storyboardc/QO6-eV-iRy-view-OaR-C0-QIp.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/QO6-eV-iRy-view-OaR-C0-QIp.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZKRmGgACsYgx5BhTBOiOp9OCN0c=
+			ClQPwRHuYXqWgJrSocX0EeqM9uk=
 			</data>
 			<key>hash2</key>
 			<data>
-			IzLCs/cTdlvOsJSVprOvBHvnfOjEwyqmDCvxNdS5T/c=
+			16sDxjvCaDuM9Q+rizcqoHGoZmnAkVvUKdjS98Ccv0g=
 			</data>
 		</dict>
-		<key>Storyboard_iOS.storyboardc/Web.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/Web.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			PL4tTeADp3nIuSP//xXZE8xE6+M=
+			l2PIyj+N+lAxxgAm0XSpw/5+j80=
 			</data>
 			<key>hash2</key>
 			<data>
-			VRYLs789HoUfPPNO9U2OnJa6yqZ4dN2d3qpK7fySnqg=
+			97/2U4esSJMTtyYOvWVgpEVGpjVNQaMHj7a/QKHf+Js=
 			</data>
 		</dict>
-		<key>be.lproj/CaptchaView_iOS.strings</key>
+		<key>be.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5c6dBCFO6zgnMPpiUU1ZqDvglUI=
+			vmWNMM4yYgXr8nrTB1F00VZr3is=
 			</data>
 			<key>hash2</key>
 			<data>
-			CG+ULURYF429MlUWw1oaRogLHg21C6I9iHmw3+9oZWk=
+			l3TrZ1GJ4Bt8U+szy2ELkaGXPREOrHwo9Mi+Ci+GA6U=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>de.lproj/CaptchaView_iOS.strings</key>
+		<key>de.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			DSGtLgLYevU/gv+BUO5GruSzQno=
+			rly3I4OpP24YBm/McTJKaEEw6sg=
 			</data>
 			<key>hash2</key>
 			<data>
-			iOO/ViaSadzMUGlkhtW5mQ1ZBxfFHTGNmOlDCqUvgH8=
+			TGcisE3c9bRPzJVgG1BAIIHub5HWAWwV6NAnVVulRmA=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>en.lproj/CaptchaView_iOS.strings</key>
+		<key>en.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			u2QZlWWLJsT4Q0n/gLtGsSqVGeY=
+			URg3kBLyG2qZanBz57HxIcuVOXs=
 			</data>
 			<key>hash2</key>
 			<data>
-			RXYq3tDHkJX5kuaEaoScRwNEtVUZazRTjgxsTA5sz+U=
+			8cQBMRYj2AJkhxVU9EHbs2l1P1+BRvNItALaTj6UYCY=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>es.lproj/CaptchaView_iOS.strings</key>
+		<key>es.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			2fCDGpwopGEZEvFXMGXYE7wr93U=
+			adkArQvoRaxLI6EiMTXwEb4oAPg=
 			</data>
 			<key>hash2</key>
 			<data>
-			SEQAeq2d0IQIFJALLnXS+M1oxIRgP2EAB06uRLNkVk8=
+			AUw57jFtjljHpR4op1iXmYbNJ6mOR2SLXdBW7LzgU9M=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>fi.lproj/CaptchaView_iOS.strings</key>
+		<key>fi.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			28xDO8aW5k2hV9pTZsIlHw8w/34=
+			AiSuvPOgUcQbJpKlop7tlI2Dw8U=
 			</data>
 			<key>hash2</key>
 			<data>
-			KzKIVT3hi1KIJVvrbSySzYVKQ9WqS9OY+dK9jxQyWko=
+			OxeJazXIIH6uZhD2ua0tSaHC8t6iYjgqqIkJfU0ql2c=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>it.lproj/CaptchaView_iOS.strings</key>
+		<key>it.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9WBlgovoA7sa3bRLq0L6hO8RL4g=
+			F3F5niTBL98lX6btRmEC+eNU85A=
 			</data>
 			<key>hash2</key>
 			<data>
-			C4JgnWymnM1FdBCyCxOonbJK8TW0bYRg5p4GVp63tx8=
+			meieZMO93Dz/yRnz2eiS5SGtY71kannXY5hHObTMn0g=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>ru.lproj/CaptchaView_iOS.strings</key>
+		<key>ru.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7dt8R04UebXGnp2X0+fkHX4XYxk=
+			vmWNMM4yYgXr8nrTB1F00VZr3is=
 			</data>
 			<key>hash2</key>
 			<data>
-			9kXC1/s6lRKQ5lNpC7X+wOEjAk+bthcedd3KJQ3tmFI=
+			l3TrZ1GJ4Bt8U+szy2ELkaGXPREOrHwo9Mi+Ci+GA6U=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>uk.lproj/CaptchaView_iOS.strings</key>
+		<key>uk.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			u2QZlWWLJsT4Q0n/gLtGsSqVGeY=
+			vmWNMM4yYgXr8nrTB1F00VZr3is=
 			</data>
 			<key>hash2</key>
 			<data>
-			RXYq3tDHkJX5kuaEaoScRwNEtVUZazRTjgxsTA5sz+U=
+			l3TrZ1GJ4Bt8U+szy2ELkaGXPREOrHwo9Mi+Ci+GA6U=
 			</data>
 			<key>optional</key>
 			<true/>

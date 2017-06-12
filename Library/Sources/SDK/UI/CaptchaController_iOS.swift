@@ -5,7 +5,8 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
     @IBOutlet private weak var imageView: UIImageView?
     @IBOutlet private weak var textField: UITextField?
     @IBOutlet weak var preloader: UIActivityIndicatorView?
-    private var onFinish: ((String) -> ())?
+    private var onResult: ((String) -> ())?
+    private var onDismiss: (() -> ())?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -16,6 +17,11 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
         imageView?.layer.borderWidth = 1 / UIScreen.main.nativeScale
         textField?.delegate = self
         preloader?.color = .lightGray
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        onDismiss?()
     }
     
     func prepareForPresent() {
@@ -31,7 +37,7 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
         }
     }
     
-    func present(imageData: Data, onFinish: @escaping (String) -> ()) {
+    func present(imageData: Data, onResult: @escaping (String) -> (), onDismiss: @escaping () -> ()) {
         DispatchQueue.main.sync {
             imageView?.image = UIImage(data: imageData)
             imageView?.alpha = 1
@@ -42,7 +48,9 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
             
             preloader?.stopAnimating()
         }
-        self.onFinish = onFinish
+        
+        self.onResult = onResult
+        self.onDismiss = onDismiss
     }
     
     func dismiss() {
@@ -56,7 +64,7 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
             return false
         }
         
-        onFinish?(result)
+        onResult?(result)
         textField.resignFirstResponder()
         return true
     }

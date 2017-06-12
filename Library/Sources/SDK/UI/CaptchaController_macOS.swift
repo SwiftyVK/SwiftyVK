@@ -2,12 +2,12 @@ import Cocoa
 
 final class CaptchaController_macOS: NSViewController, NSTextFieldDelegate, CaptchaController {
     
-    
     @IBOutlet private weak var imageView: NSImageView?
     @IBOutlet private weak var textField: NSTextField?
     @IBOutlet weak var preloader: NSProgressIndicator?
     @IBOutlet weak var closeButton: NSButton?
-    private var onFinish: ((String) -> ())?
+    private var onResult: ((String) -> ())?
+    private var onDismiss: (() -> ())?
     
     override func viewWillAppear() {
         super.viewWillAppear()
@@ -30,6 +30,11 @@ final class CaptchaController_macOS: NSViewController, NSTextFieldDelegate, Capt
         closeButton?.wantsLayer = true
     }
     
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+        onDismiss?()
+    }
+    
     func prepareForPresent() {
         DispatchQueue.main.async {
             self.imageView?.image = nil
@@ -37,13 +42,14 @@ final class CaptchaController_macOS: NSViewController, NSTextFieldDelegate, Capt
         }
     }
     
-    func present(imageData: Data, onFinish: @escaping (String) -> ()) {
+    func present(imageData: Data, onResult: @escaping (String) -> (), onDismiss: @escaping () -> ()) {
         DispatchQueue.main.sync {
             imageView?.image = NSImage(data: imageData)
             textField?.stringValue = ""
             preloader?.stopAnimation(nil)
         }
-        self.onFinish = onFinish
+        self.onResult = onResult
+        self.onDismiss = onDismiss
     }
     
     @IBAction func dismissByButtonTap(_ sender: Any) {
@@ -65,6 +71,6 @@ final class CaptchaController_macOS: NSViewController, NSTextFieldDelegate, Capt
                 return
         }
         
-        onFinish?(result)
+        onResult?(result)
     }
 }

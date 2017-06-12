@@ -18,7 +18,6 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
     }
     
     func present(rawCaptchaUrl: String, dismissOnFinish: Bool) throws -> String {
-        let canFinish = Atomic(true)
         let semaphore = DispatchSemaphore(value: 0)
         
         return try uiSyncQueue.sync {
@@ -33,21 +32,19 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
             
             let imageData = try downloadCaptchaImageData(rawUrl: rawCaptchaUrl)
             
-            controller.present(imageData: imageData) { [weak self] answer in
-                canFinish >< { canFinish in
-                    guard canFinish else {
-                        return false
-                    }
-                    
+            controller.present(
+                imageData: imageData,
+                onResult: { [weak self] givenResult in
                     if dismissOnFinish {
                         self?.dismiss()
                     }
                     
-                    result = answer
+                    result = givenResult
+                },
+                onDismiss: {
                     semaphore.signal()
-                    return false
                 }
-            }
+            )
             
             currentController = controller
             
