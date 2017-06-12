@@ -1,6 +1,6 @@
 import Cocoa
 
-final class CaptchaController_macOS: NSViewController, NSTextFieldDelegate, CaptchaController {
+@objc final class CaptchaController_macOS: NSViewController, NSTextFieldDelegate, CaptchaController {
     
     @IBOutlet private weak var imageView: NSImageView?
     @IBOutlet private weak var textField: NSTextField?
@@ -46,6 +46,7 @@ final class CaptchaController_macOS: NSViewController, NSTextFieldDelegate, Capt
         DispatchQueue.main.sync {
             imageView?.image = NSImage(data: imageData)
             textField?.stringValue = ""
+            textField?.becomeFirstResponder()
             preloader?.stopAnimation(nil)
         }
         self.onResult = onResult
@@ -62,7 +63,7 @@ final class CaptchaController_macOS: NSViewController, NSTextFieldDelegate, Capt
         }
     }
     
-    override func controlTextDidEndEditing(_ obj: Notification) {
+    @objc override func controlTextDidEndEditing(_ obj: Notification) {
         guard
             imageView?.image != nil,
             let result = textField?.stringValue,
@@ -70,6 +71,7 @@ final class CaptchaController_macOS: NSViewController, NSTextFieldDelegate, Capt
             else {
                 return
         }
+        
         
         onResult?(result)
     }

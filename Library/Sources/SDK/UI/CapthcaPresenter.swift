@@ -35,11 +35,13 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
             controller.present(
                 imageData: imageData,
                 onResult: { [weak self] givenResult in
+                    result = givenResult
+                    
                     if dismissOnFinish {
                         self?.dismiss()
+                    } else {
+                        semaphore.signal()
                     }
-                    
-                    result = givenResult
                 },
                 onDismiss: {
                     semaphore.signal()

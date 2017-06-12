@@ -11,6 +11,17 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        imageView?.backgroundColor = .white
+        imageView?.layer.cornerRadius = 15
+        imageView?.layer.masksToBounds = true
+        imageView?.layer.borderColor = UIColor.lightGray.cgColor
+        imageView?.layer.borderWidth = 1 / UIScreen.main.nativeScale
+        
+        textField?.delegate = self
+        
+        preloader?.color = .lightGray
+        
         closeButton?.setImage(
             UIImage(named: "CloseButton", in: Resources.bundle, compatibleWith: nil),
             for: .normal
@@ -20,14 +31,6 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
             UIImage(named: "CloseButtonPressed", in: Resources.bundle, compatibleWith: nil),
             for: .highlighted
         )
-        
-        imageView?.backgroundColor = .white
-        imageView?.layer.cornerRadius = 15
-        imageView?.layer.masksToBounds = true
-        imageView?.layer.borderColor = UIColor.lightGray.cgColor
-        imageView?.layer.borderWidth = 1 / UIScreen.main.nativeScale
-        textField?.delegate = self
-        preloader?.color = .lightGray
     }
     
     override func viewDidDisappear(_ animated: Bool) {
