@@ -160,7 +160,7 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8mo-Su-QDT" customClass="VKWebView" customModule="SwiftyVK">
-                                <rect key="frame" x="176" y="35" width="672" height="1316"/>
+                                <rect key="frame" x="176" y="273" width="672" height="820"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="gGk-nH-7dO">
@@ -175,12 +175,28 @@
                             <constraint firstItem="gGk-nH-7dO" firstAttribute="centerY" secondItem="Ope-bS-Fva" secondAttribute="centerY" id="BPy-b1-mpK"/>
                             <constraint firstItem="idF-k7-oeq" firstAttribute="leading" secondItem="Ope-bS-Fva" secondAttribute="leading" id="IT5-oS-mC1"/>
                             <constraint firstItem="JG6-X0-sew" firstAttribute="top" secondItem="idF-k7-oeq" secondAttribute="bottomMargin" constant="8" id="Neb-8M-sgS"/>
+                            <constraint firstItem="8mo-Su-QDT" firstAttribute="height" secondItem="Ope-bS-Fva" secondAttribute="height" multiplier="0.6" id="OOK-d2-gMu"/>
                             <constraint firstItem="8mo-Su-QDT" firstAttribute="leading" secondItem="Ope-bS-Fva" secondAttribute="leadingMargin" id="PpN-DM-vch"/>
                             <constraint firstItem="gGk-nH-7dO" firstAttribute="centerX" secondItem="Ope-bS-Fva" secondAttribute="centerX" id="YsY-0O-3MR"/>
+                            <constraint firstItem="8mo-Su-QDT" firstAttribute="centerY" secondItem="Ope-bS-Fva" secondAttribute="centerY" id="aYG-t8-oCC"/>
                             <constraint firstItem="8mo-Su-QDT" firstAttribute="top" secondItem="uJx-Uw-KGX" secondAttribute="bottom" constant="15" id="bIV-jx-2yA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8mo-Su-QDT" secondAttribute="trailing" id="kM8-OG-nuy"/>
                             <constraint firstAttribute="trailing" secondItem="idF-k7-oeq" secondAttribute="trailing" id="zV2-jC-fMG"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="OOK-d2-gMu"/>
+                                <exclude reference="aYG-t8-oCC"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="OOK-d2-gMu"/>
+                                <include reference="aYG-t8-oCC"/>
+                                <exclude reference="bIV-jx-2yA"/>
+                                <exclude reference="0JM-Jb-CGb"/>
+                            </mask>
+                        </variation>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
