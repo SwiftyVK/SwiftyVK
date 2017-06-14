@@ -6,8 +6,10 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
     @IBOutlet private weak var textField: UITextField?
     @IBOutlet weak var preloader: UIActivityIndicatorView?
     @IBOutlet weak var closeButton: UIButton?
+    @IBOutlet weak var containerBottomConstraint: NSLayoutConstraint?
     private var onResult: ((String) -> ())?
     private var onDismiss: (() -> ())?
+    private var appeared = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -32,11 +34,25 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
             UIImage(named: "CloseButtonPressed", in: Resources.bundle, compatibleWith: nil),
             for: .highlighted
         )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillChange),
+            name: .UIKeyboardWillChangeFrame,
+            object: nil
+        )
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        appeared = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         textField?.resignFirstResponder()
+        NotificationCenter.default.removeObserver(self)
+        appeared = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -85,5 +101,27 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
         
         onResult?(result)
         return true
+    }
+    
+    @objc private func keyboardWillChange(notification: Notification) {
+        guard
+            let info = (notification as NSNotification).userInfo,
+            let animationDuration = (info[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
+            let keyboardFrameEnd = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+            let viewAnimationCurveValue = (info[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.intValue,
+            let viewAnimationCurve = UIViewAnimationCurve(rawValue: viewAnimationCurveValue)
+            else {
+                return
+        }
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(animationDuration)
+        UIView.setAnimationCurve(viewAnimationCurve)
+        UIView.setAnimationBeginsFromCurrentState(false)
+        
+        containerBottomConstraint?.constant = keyboardFrameEnd.height
+        appeared ? view.layoutIfNeeded() : ()
+        
+        UIView.commitAnimations()
     }
 }
