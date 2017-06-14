@@ -14,7 +14,7 @@ final class DependencyHolderMock: DependencyHolder {
 }
 
 final class TaskMakerMock: TaskMaker {
-    func task(request: Request, callbacks: Callbacks, token: Token?, attemptSheduler: AttemptSheduler) -> Task {
+    func task(request: Request, callbacks: Callbacks, session: ApiErrorExecutor & TaskSession) -> Task {
         return TaskMock()
     }
 }
@@ -35,11 +35,11 @@ final class TokenMakerMock: TokenMaker {
     }
 }
 
-final class WebPresenterMakerMock: WebPresenterMaker {
+final class WebControllerMakerMock: WebControllerMaker {
     
-    var onMake: (() -> WebPresenter?)?
+    var onMake: (() -> WebController?)?
     
-    func webPresenter() -> WebPresenter? {
-        return onMake?()
+    func webController() -> WebController? {
+        return WebControllerMock()
     }
 }

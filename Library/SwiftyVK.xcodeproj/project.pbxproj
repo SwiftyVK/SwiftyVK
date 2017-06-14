@@ -216,6 +216,7 @@
 		A2F632331ED9DC7D0063C9E0 /* VkAppProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F632321ED9DC7D0063C9E0 /* VkAppProxy.swift */; };
 		A2F632341ED9DC7D0063C9E0 /* VkAppProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F632321ED9DC7D0063C9E0 /* VkAppProxy.swift */; };
 		A2F6F8E51EDDF00400933DBC /* Atomic-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6F8E41EDDF00400933DBC /* Atomic-Tests.swift */; };
+		A2F7B5551EF18C5C006AF76C /* CaptchaPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -417,6 +418,7 @@
 		A2F6322B1ED9C88D0063C9E0 /* UrlOpener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UrlOpener.swift; path = ../Extensions/UrlOpener.swift; sourceTree = "<group>"; };
 		A2F632321ED9DC7D0063C9E0 /* VkAppProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VkAppProxy.swift; sourceTree = "<group>"; };
 		A2F6F8E41EDDF00400933DBC /* Atomic-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Atomic-Tests.swift"; sourceTree = "<group>"; };
+		A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaPresenterMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -489,6 +491,7 @@
 				A25A19D41EE43E8100CF13AF /* TokenParserMock.swift */,
 				A25A19D61EE4405E00CF13AF /* VkAppProxyMock.swift */,
 				A25A19D91EE5198600CF13AF /* WebPresenterMock.swift */,
+				A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1001,6 +1004,7 @@
 				A2B805561EDDB01C004DA7EB /* WebControllerMock.swift in Sources */,
 				A25A19D71EE4405E00CF13AF /* VkAppProxyMock.swift in Sources */,
 				A22179D01EBA530C006B71FD /* SessionMock.swift in Sources */,
+				A2F7B5551EF18C5C006AF76C /* CaptchaPresenterMock.swift in Sources */,
 				A2B40DFD1EA693B700106AE3 /* UrlRequestBuilderTests.swift in Sources */,
 				A25A19D01EE4233D00CF13AF /* TokenParserTests.swift in Sources */,
 				A2E34DBF1ED1F6FE0041E663 /* TokenStorageMock.swift in Sources */,

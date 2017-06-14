@@ -1,6 +1,7 @@
 @testable import SwiftyVK
 
-final class SessionMock: Session, SessionDestroyable {
+final class SessionMock: Session, TaskSession, DestroyableSession {
+    var token: Token?
     
     let id = String.random(20)
     var config = SessionConfig()
@@ -20,6 +21,14 @@ final class SessionMock: Session, SessionDestroyable {
     @discardableResult
     func send(request: Request, callbacks: Callbacks) -> Task {
         return TaskMock()
+    }
+    
+    func shedule(attempt: Attempt, concurrent: Bool) throws {
+        
+    }
+    
+    func dismissCaptcha() {
+        
     }
     
     func destroy() {

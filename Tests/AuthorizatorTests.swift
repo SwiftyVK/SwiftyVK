@@ -10,7 +10,7 @@ class AuthorizatorTests: BaseTestCase {
         tokenMaker: TokenMakerMock,
         parser: TokenParserMock,
         vkApp: VkAppProxyMock,
-        webPresenterMaker: WebPresenterMakerMock,
+        webPresenter: WebPresenterMock,
         sessionId: String,
         sessionConfig: SessionConfig
         ) {
@@ -19,7 +19,7 @@ class AuthorizatorTests: BaseTestCase {
             let tokenMaker = TokenMakerMock()
             let parser = TokenParserMock()
             let vkApp = VkAppProxyMock()
-            let webPresenterMaker = WebPresenterMakerMock()
+            let webPresenter = WebPresenterMock()
             let session = SessionMock()
             
             let authorizator = AuthorizatorImpl(
@@ -29,7 +29,7 @@ class AuthorizatorTests: BaseTestCase {
                 tokenMaker: tokenMaker,
                 tokenParser: parser,
                 vkAppProxy: vkApp,
-                webPresenterMaker: webPresenterMaker
+                webPresenter: webPresenter
             )
             
             return (
@@ -39,7 +39,7 @@ class AuthorizatorTests: BaseTestCase {
                 tokenMaker,
                 parser,
                 vkApp,
-                webPresenterMaker,
+                webPresenter,
                 session.id,
                 session.config
             )
@@ -68,32 +68,9 @@ class AuthorizatorTests: BaseTestCase {
         XCTAssertNotNil(token)
     }
     
-    func test_authorize_withErrorOnCreatePresenter() {
-        // Given
-        let context = makeContext()
-        
-        context.webPresenterMaker.onMake = nil
-        // When
-        do {
-            _ = try context.authorizator.authorize(
-                sessionId: context.sessionId,
-                config: context.sessionConfig,
-                revoke: false
-            )
-            // Then
-            XCTFail("Code above should throw error")
-        } catch let error {
-            XCTAssertEqual(error as? SessionError, SessionError.cantMakeWebViewController)
-        }
-    }
-    
     func test_authorize_errorOnParseToken() {
         // Given
         let context = makeContext()
-        
-        context.webPresenterMaker.onMake = {
-            return WebPresenterMock()
-        }
         // When
         do {
             _ = try context.authorizator.authorize(
@@ -111,10 +88,6 @@ class AuthorizatorTests: BaseTestCase {
     func test_authorize_withSucessfullCreatedToken() {
         // Given
         let context = makeContext()
-        
-        context.webPresenterMaker.onMake = {
-            return WebPresenterMock()
-        }
         
         context.parser.onParse = { _ in
             return ("token", expires: 123, [:])
@@ -258,15 +231,9 @@ class AuthorizatorTests: BaseTestCase {
             return true
         }
         
-        context.webPresenterMaker.onMake = {
+        context.webPresenter.onPresesent = { _ in
             Thread.sleep(forTimeInterval: 0.2)
-            let presenter = WebPresenterMock()
-            
-            presenter.onPresesent = { _ in
-                throw SessionError.cantMakeWebViewController
-            }
-            
-            return presenter
+            throw SessionError.cantMakeWebViewController
         }
         
         context.vkApp.onHandle = { url, string in

@@ -4,7 +4,7 @@ import XCTest
 final class SessionTests: BaseTestCase {
     
     class TaskMakerMock: TaskMaker {
-        func task(request: Request, callbacks: Callbacks, token: Token?, attemptSheduler: AttemptSheduler) -> Task {
+        func task(request: Request, callbacks: Callbacks, session: ApiErrorExecutor & TaskSession) -> Task {
             return TaskMock()
         }
     }
@@ -14,12 +14,14 @@ final class SessionTests: BaseTestCase {
         let attemptSheduler = AttemptShedulerMock()
         let authorizator = AuthorizatorMock()
         let taskMaker = TaskMakerMock()
+        let captchaPresenter = CaptchaPresenterMock()
         
         let session = SessionImpl(
             taskSheduler: taskSheduler,
             attemptSheduler: attemptSheduler,
             authorizator: authorizator,
-            taskMaker: taskMaker
+            taskMaker: taskMaker,
+            captchaPresenter: captchaPresenter
         )
         
         return (session, taskSheduler, attemptSheduler, authorizator)
