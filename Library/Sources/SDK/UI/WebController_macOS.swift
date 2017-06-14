@@ -6,8 +6,9 @@ final class WebController_macOS: NSViewController, WKNavigationDelegate, WebCont
     @IBOutlet private weak var webView: WKWebView?
     @IBOutlet private weak var preloader: NSProgressIndicator?
     
-    private weak var handler: WebHandler?
     private var currentRequest: URLRequest?
+    private var onResult: ((WebControllerResult) -> ())?
+    private var onDismiss: (() -> ())?
 
     override func viewDidAppear() {
         super.viewDidAppear()
@@ -18,11 +19,13 @@ final class WebController_macOS: NSViewController, WKNavigationDelegate, WebCont
     
     override func viewDidDisappear() {
         super.viewDidDisappear()
+        onDismiss?()
     }
     
-    func load(urlRequest: URLRequest, handler: WebHandler) {
-        self.handler = handler
+    func load(urlRequest: URLRequest, onResult: @escaping (WebControllerResult) -> (), onDismiss: @escaping () -> ()) {
         self.currentRequest = urlRequest
+        self.onResult = onResult
+        self.onDismiss = onDismiss
         
         DispatchQueue.main.sync {
             preloader?.startAnimation(nil)
@@ -47,17 +50,17 @@ final class WebController_macOS: NSViewController, WKNavigationDelegate, WebCont
     }
     
     func dismiss() {
-        DispatchQueue.main.sync {
-            dismiss(nil)
+        DispatchQueue.main.async {
+            self.dismiss(nil)
         }
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         preloader?.stopAnimation(nil)
-        handler?.handle(url: webView.url)
+        onResult?(.response(webView.url))
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        handler?.handle(error: error)
+        onResult?(.error(error))
     }
 }

@@ -58,8 +58,8 @@ import Cocoa
     }
     
     func dismiss() {
-        DispatchQueue.main.sync {
-            dismiss(nil)
+        DispatchQueue.main.async {
+            self.dismiss(nil)
         }
     }
     

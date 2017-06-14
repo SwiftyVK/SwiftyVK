@@ -6,8 +6,9 @@ final class WebController_iOS: UIViewController, WKNavigationDelegate, WebContro
     @IBOutlet private weak var webView: VKWebView?
     @IBOutlet private weak var preloader: UIActivityIndicatorView?
     
-    private weak var handler: WebHandler?
     private var currentRequest: URLRequest?
+    private var onResult: ((WebControllerResult) -> ())?
+    private var onDismiss: (() -> ())?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -23,11 +24,13 @@ final class WebController_iOS: UIViewController, WKNavigationDelegate, WebContro
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        onDismiss?()
     }
     
-    func load(urlRequest: URLRequest, handler: WebHandler) {
-        self.handler = handler
+    func load(urlRequest: URLRequest, onResult: @escaping (WebControllerResult) -> (), onDismiss: @escaping () -> ()) {
         self.currentRequest = urlRequest
+        self.onResult = onResult
+        self.onDismiss = onDismiss
         
         DispatchQueue.main.sync {
             preloader?.startAnimating()
@@ -52,18 +55,18 @@ final class WebController_iOS: UIViewController, WKNavigationDelegate, WebContro
     }
     
     func dismiss() {
-        DispatchQueue.main.sync {
-            dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         preloader?.stopAnimating()
-        handler?.handle(url: webView.url)
+        onResult?(.response(webView.url))
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        handler?.handle(error: error)
+        onResult?(.error(error))
     }
 }
 
