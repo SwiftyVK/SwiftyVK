@@ -40,6 +40,6 @@ final class WebControllerMakerMock: WebControllerMaker {
     var onMake: (() -> WebController?)?
     
     func webController() -> WebController? {
-        return WebControllerMock()
+        return onMake?()
     }
 }

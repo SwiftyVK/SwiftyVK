@@ -3,106 +3,73 @@ import XCTest
 
 final class WebPresenterTests: BaseTestCase {
     
-    var objects: (WebPresenter & WebHandler, WebControllerMock) {
-        let controller = WebControllerMock()
+    func makeContext() -> (presenter: WebPresenter, webControllerMaker: WebControllerMakerMock) {
+        let controllerMaker = WebControllerMakerMock()
         let presenter = WebPresenterImpl(
             uiSyncQueue: DispatchQueue.global(),
-            controller: controller
+            controllerMaker: controllerMaker
         )
-        return (presenter, controller)
+        return (presenter, controllerMaker)
     }
     
     private func urlRequest(string: String) -> URLRequest? {
         return URL(string: string).flatMap { URLRequest(url: $0) }
     }
     
-    func test_load_whenTokenRecieved() {
+    func test_load_returnToken_whenTokenRecieved() {
         // Given
-        let (presenter, controller) = objects
+        let context = makeContext()
         
-        controller.onLoad = { url in
-            presenter.handle(url: url)
+        context.webControllerMaker.onMake = {
+            let controller = WebControllerMock()
+            
+            controller.onLoad = { url, onResult, onDismiss in
+                onResult(.response(url))
+            }
+            
+            return controller
         }
         // When
-        let result = try! presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_token=test")!)
+        let result = try? context.presenter.presentWith(
+            urlRequest: urlRequest(string: "http://vk.com#access_token=test")!
+        )
         // Then
         XCTAssertEqual(result, "access_token=test")
     }
     
-    func test_load_whenAccessDenied() {
+    func test_load_throwCantMakeWebViewController_whenControllerDontMake() {
         // Given
-        let (presenter, controller) = objects
+        let context = makeContext()
         
-        controller.onLoad = { url in
-            presenter.handle(url: url)
+        context.webControllerMaker.onMake = {
+            return nil
         }
         // When
         do {
-            _ = try presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_denied")!)
+            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#cancel=1")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error as? SessionError, .deniedFromUser)
+            XCTAssertEqual(error as? SessionError, .cantMakeWebViewController)
         }
     }
     
-    func test_load_whenFlowCancelled() {
+    func test_load_throwWrongAuthUrl_whenUrlIsNil() {
         // Given
-        let (presenter, controller) = objects
+        let context = makeContext()
         
-        controller.onLoad = { url in
-            presenter.handle(url: url)
+        context.webControllerMaker.onMake = {
+            let controller = WebControllerMock()
+            
+            controller.onLoad = { url, onResult, onDismiss in
+                onResult(.response(nil))
+            }
+            
+            return controller
         }
         // When
         do {
-            _ = try presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#cancel=1")!)
-            XCTFail("Expression should throw error")
-        } catch let error {
-            // Then
-            XCTAssertEqual(error as? SessionError, .deniedFromUser)
-        }
-    }
-    
-    func test_load_whenFlowFailed() {
-        // Given
-        let (presenter, controller) = objects
-        
-        controller.onLoad = { url in
-            presenter.handle(url: url)
-        }
-        // When
-        do {
-            _ = try presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#fail=1")!)
-            XCTFail("Expression should throw error")
-        } catch let error {
-            // Then
-            XCTAssertEqual(error as? SessionError, .failedAuthorization)
-        }
-    }
-    
-    func test_load_whenValidationSuccess() {
-        // Given
-        let (presenter, controller) = objects
-        
-        controller.onLoad = { url in
-            presenter.handle(url: url)
-        }
-        // When
-        let result = try! presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#success=1")!)
-        // Then
-        XCTAssertEqual(result, "success=1")
-    }
-    
-    func test_load_withWrongUrl() {
-        // Given
-        let (presenter, controller) = objects
-        
-        controller.onLoad = { url in
-            presenter.handle(url: url)
-        }
-        // When
-        do {
-            _ = try presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#")!)
+            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_denied")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
@@ -110,20 +77,68 @@ final class WebPresenterTests: BaseTestCase {
         }
     }
     
-    func test_handleThreeTimesError() {
+    func test_load_throwDeniedfromUser_whenAccessDenied() {
         // Given
-        let (presenter, controller) = objects
+        let context = makeContext()
         
-        controller.onLoad = { url in
-            presenter.handle(error: SessionError.failedAuthorization)
-        }
-        
-        controller.onReload = {
-           presenter.handle(error: SessionError.failedAuthorization)
+        context.webControllerMaker.onMake = {
+            let controller = WebControllerMock()
+            
+            controller.onLoad = { url, onResult, onDismiss in
+                onResult(.response(url))
+            }
+            
+            return controller
         }
         // When
         do {
-            _ = try presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com?api_validation_test")!)
+            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_denied")!)
+            XCTFail("Expression should throw error")
+        } catch let error {
+            // Then
+            XCTAssertEqual(error as? SessionError, .deniedFromUser)
+        }
+    }
+    
+    func test_load_throwDeniedfromUser_whenFlowCancelled() {
+        // Given
+        let context = makeContext()
+        
+        context.webControllerMaker.onMake = {
+            let controller = WebControllerMock()
+            
+            controller.onLoad = { url, onResult, onDismiss in
+                onResult(.response(url))
+            }
+            
+            return controller
+        }
+        // When
+        do {
+            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#cancel=1")!)
+            XCTFail("Expression should throw error")
+        } catch let error {
+            // Then
+            XCTAssertEqual(error as? SessionError, .deniedFromUser)
+        }
+    }
+    
+    func test_load_throwFailedAuthorization_whenFlowFailed() {
+        // Given
+        let context = makeContext()
+        
+        context.webControllerMaker.onMake = {
+            let controller = WebControllerMock()
+            
+            controller.onLoad = { url, onResult, onDismiss in
+                onResult(.response(url))
+            }
+            
+            return controller
+        }
+        // When
+        do {
+            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#fail=1")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
@@ -131,60 +146,147 @@ final class WebPresenterTests: BaseTestCase {
         }
     }
     
-    func test_dismiss_whenCalledTwice_shouldReturnResult() {
+    func test_load_returnSuccess_whenValidationSuccess() {
         // Given
-        let (presenter, controller) = objects
-        var dismissCounter = 0
+        let context = makeContext()
         
-        controller.onLoad = { url in
-            presenter.handle(url: url)
-            presenter.dismiss()
-        }
-        
-        controller.onDismiss = {
-            dismissCounter += 1
+        context.webControllerMaker.onMake = {
+            let controller = WebControllerMock()
+            
+            controller.onLoad = { url, onResult, onDismiss in
+                onResult(.response(url))
+            }
+            
+            return controller
         }
         // When
-        let result = try? presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_token=test")!)
+        let result = try? context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#success=1")!)
+        // Then
+        XCTAssertEqual(result, "success=1")
+    }
+    
+    func test_load_callGoBackOnce_whenLoadWrongUrl() {
+        // Given
+        let context = makeContext()
+        var goBackCallCount = 0
+        
+        context.webControllerMaker.onMake = {
+            let controller = WebControllerMock()
+            var onResultBlock: ((WebControllerResult) -> ())?
+            
+            controller.onLoad = { url, onResult, onDismiss in
+                onResultBlock = onResult
+                onResultBlock?(.response(url))
+            }
+            
+            controller.onGoBack = {
+                goBackCallCount += 1
+                DispatchQueue.global().async {
+                    onResultBlock?(.response(URL(string: "http://vk.com#success=1")!))
+                }
+            }
+            
+            return controller
+        }
+        // When
+        let result = try? context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com/id1")!)
+        // Then
+        XCTAssertEqual(result, "success=1")
+        XCTAssertEqual(goBackCallCount, 1)
+    }
+    
+    func test_throwFailedAuthorization_whenLoadFailtThreeTimes() {
+        // Given
+        let context = makeContext()
+        var loadCount = 0
+        
+        context.webControllerMaker.onMake = {
+            let controller = WebControllerMock()
+            var onResultBlock: ((WebControllerResult) -> ())?
+            
+            controller.onLoad = { url, onResult, onDismiss in
+                loadCount += 1
+                onResultBlock = onResult
+                onResultBlock?(.error(SessionError.failedAuthorization))
+            }
+            
+            controller.onReload = {
+                loadCount += 1
+                onResultBlock?(.error(SessionError.failedAuthorization))
+            }
+            
+            return controller
+        }
+        // When
+        do {
+            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com?api_validation_test")!)
+            XCTFail("Expression should throw error")
+        } catch let error {
+            // Then
+            XCTAssertEqual(error as? SessionError, .failedAuthorization)
+            XCTAssertEqual(loadCount, 3)
+        }
+    }
+    
+    func test_dismiss_returnsResult_whenCalledAfterGiveResult() {
+        // Given
+        let context = makeContext()
+        var dismissCounter = 0
+        
+        context.webControllerMaker.onMake = {
+            let controller = WebControllerMock()
+            
+            controller.onLoad = { url, onResult, onDismiss in
+                onResult(.response(url))
+                
+                DispatchQueue.global().async {
+                    context.presenter.dismiss()
+                }
+            }
+            
+            controller.onDismiss = {
+                dismissCounter += 1
+            }
+            
+            return controller
+        }
+        // When
+        let result = try? context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_token=test")!)
         // Then
         XCTAssertEqual(result, "access_token=test")
     }
     
-    func test_dismiss_whenCalledTwice_shouldThrowError() {
+    func test_dismiss_returnsResult_whenCalledBeforeGiveResult() {
         // Given
-        let (presenter, controller) = objects
+        let context = makeContext()
         var dismissCounter = 0
         
-        controller.onLoad = { url in
-            presenter.dismiss()
-            presenter.handle(url: url)
-        }
-        
-        controller.onDismiss = {
-            dismissCounter += 1
+        context.webControllerMaker.onMake = {
+            let controller = WebControllerMock()
+            
+            controller.onLoad = { url, onResult, onDismiss in
+                context.presenter.dismiss()
+                
+                DispatchQueue.global().async {
+                    onResult(.response(url))
+                }
+            }
+            
+            controller.onDismiss = {
+                dismissCounter += 1
+            }
+            
+            return controller
         }
         // When
         do {
-            _ = try presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_token=test")!)
+            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_token=test")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
             XCTAssertEqual(error as? SessionError, .webPresenterResultIsNil)
         }
     }
-    
-    func test_waitOfUnhandledResponse() {
-        // Given
-        let (presenter, _) = objects
-        let exp = expectation(description: "X")
-        exp.isInverted = true
-        // When
-        DispatchQueue.global().async {
-            _ = try? presenter.presentWith(urlRequest: self.urlRequest(string: "http://vk.com?api_validation_test")!)
-            exp.fulfill()
-        }
-        
-        // Then
-        waitForExpectations(timeout: 0.1)
-    }
 }
+
+

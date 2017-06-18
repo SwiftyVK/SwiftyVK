@@ -92,13 +92,7 @@ final class WebPresenterImpl: WebPresenter {
             throw SessionError.wrongAuthUrl
         }
         
-        let host = url.host ?? ""
-        let query = url.query ?? ""
         let fragment = url.fragment ?? ""
-        
-        guard !host.isEmpty && (!query.isEmpty || !fragment.isEmpty) else {
-            throw SessionError.wrongAuthUrl
-        }
 
         if fragment.contains("access_token=") {
             return fragment
@@ -120,8 +114,9 @@ final class WebPresenterImpl: WebPresenter {
     }
     
     private func handle(error: Error, fails: inout Int) throws {
-        guard fails > 3 else {
-            fails += 1
+        fails += 1
+
+        guard fails >= 3 else {
             currentController?.reload()
             return
         }
