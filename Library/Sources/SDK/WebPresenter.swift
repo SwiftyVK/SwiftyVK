@@ -17,13 +17,16 @@ final class WebPresenterImpl: WebPresenter {
     private let uiSyncQueue: DispatchQueue
     private let controllerMaker: WebControllerMaker
     private weak var currentController: WebController?
+    private let maxFails: Int
 
     init(
         uiSyncQueue: DispatchQueue,
-        controllerMaker: WebControllerMaker
+        controllerMaker: WebControllerMaker,
+        maxFails: Int
         ) {
         self.uiSyncQueue = uiSyncQueue
         self.controllerMaker = controllerMaker
+        self.maxFails = maxFails
     }
     
     func presentWith(urlRequest: URLRequest) throws -> String {
@@ -116,7 +119,7 @@ final class WebPresenterImpl: WebPresenter {
     private func handle(error: Error, fails: inout Int) throws {
         fails += 1
 
-        guard fails >= 3 else {
+        guard fails >= maxFails else {
             currentController?.reload()
             return
         }
