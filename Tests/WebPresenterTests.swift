@@ -7,7 +7,9 @@ final class WebPresenterTests: BaseTestCase {
         let controllerMaker = WebControllerMakerMock()
         let presenter = WebPresenterImpl(
             uiSyncQueue: DispatchQueue.global(),
-            controllerMaker: controllerMaker
+            controllerMaker: controllerMaker,
+            maxFails: 3,
+            timeout: 1
         )
         return (presenter, controllerMaker)
     }
@@ -74,6 +76,23 @@ final class WebPresenterTests: BaseTestCase {
         } catch let error {
             // Then
             XCTAssertEqual(error as? SessionError, .wrongAuthUrl)
+        }
+    }
+    
+    func test_load_throwWebPresenterTimedOut_whenTimeOut() {
+        // Given
+        let context = makeContext()
+        
+        context.webControllerMaker.onMake = {
+            return WebControllerMock()
+        }
+        // When
+        do {
+            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_denied")!)
+            XCTFail("Expression should throw error")
+        } catch let error {
+            // Then
+            XCTAssertEqual(error as? SessionError, .webPresenterTimedOut)
         }
     }
     
