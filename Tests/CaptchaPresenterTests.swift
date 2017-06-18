@@ -127,4 +127,29 @@ class CaptchaPresenterTests: XCTestCase {
         // Then
         XCTAssertEqual(dismissCallCount, 0)
     }
+    
+    func test_present_dismissCalledOnce_whenDismissOnFinishIsTrue() {
+        // Given
+        let context = makeContext()
+        var dismissCallCount = 0
+        
+        context.webControllerMaker.onMake = {
+            let controller = CaptchaControllerMock()
+            
+            controller.onPresent = { data, onResult, onDismiss in
+                onResult("test")
+            }
+            
+            controller.onDismiss = {
+                dismissCallCount += 1
+            }
+            
+            return controller
+            
+        }
+        // When
+        _ = try? context.presenter.present(rawCaptchaUrl: "http://vk.com", dismissOnFinish: true)
+        // Then
+        XCTAssertEqual(dismissCallCount, 1)
+    }
 }
