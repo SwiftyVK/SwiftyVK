@@ -30,17 +30,19 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
                 throw SessionError.cantMakeCaptchaController
             }
             
+            currentController = controller
+            
             controller.prepareForPresent()
             
             let imageData = try downloadCaptchaImageData(rawUrl: rawCaptchaUrl)
             
             controller.present(
                 imageData: imageData,
-                onResult: { [weak self] givenResult in
+                onResult: { [weak currentController] givenResult in
                     result = givenResult
                     
                     if dismissOnFinish {
-                        self?.dismiss()
+                        currentController?.dismiss()
                     } else {
                         semaphore.signal()
                     }
@@ -49,8 +51,6 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
                     semaphore.signal()
                 }
             )
-            
-            currentController = controller
             
             switch semaphore.wait(timeout: .now() + timeout) {
             case .timedOut:

@@ -12,6 +12,7 @@ final class CaptchaControllerMock: CaptchaController {
     }
     
     func present(imageData: Data, onResult: @escaping (String) -> (), onDismiss: @escaping () -> ()) {
+        onRealDismiss = onDismiss
         onPresent?(imageData, onResult, onDismiss)
     }
     
