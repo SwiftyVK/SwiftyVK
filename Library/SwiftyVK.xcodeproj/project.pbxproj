@@ -29,6 +29,7 @@
 		A2066AEA1D9C388F0065A4D7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2066AE91D9C388F0065A4D7 /* Task.swift */; };
 		A2066AEB1D9C388F0065A4D7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2066AE91D9C388F0065A4D7 /* Task.swift */; };
 		A20CDD941EF667B000271276 /* CaptchaPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDD931EF667B000271276 /* CaptchaPresenterTests.swift */; };
+		A20CDD961EF66AEC00271276 /* CaptchaControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDD951EF66AEC00271276 /* CaptchaControllerMock.swift */; };
 		A217DAA81E9924DE00EA1430 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAA71E9924DE00EA1430 /* Method.swift */; };
 		A217DAA91E9924DE00EA1430 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAA71E9924DE00EA1430 /* Method.swift */; };
 		A217DAAC1E9926A500EA1430 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAAB1E9926A500EA1430 /* Session.swift */; };
@@ -287,6 +288,7 @@
 		A20259481EE9AED00014B0BE /* ApiErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorHandler.swift; sourceTree = "<group>"; };
 		A2066AE91D9C388F0065A4D7 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		A20CDD931EF667B000271276 /* CaptchaPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaPresenterTests.swift; sourceTree = "<group>"; };
+		A20CDD951EF66AEC00271276 /* CaptchaControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaControllerMock.swift; sourceTree = "<group>"; };
 		A217DAA71E9924DE00EA1430 /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		A217DAAB1E9926A500EA1430 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		A21E81581E2A7E68008E81E7 /* UrlCharactesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlCharactesSet.swift; sourceTree = "<group>"; };
@@ -495,6 +497,7 @@
 				A25A19D61EE4405E00CF13AF /* VkAppProxyMock.swift */,
 				A25A19D91EE5198600CF13AF /* WebPresenterMock.swift */,
 				A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */,
+				A20CDD951EF66AEC00271276 /* CaptchaControllerMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -980,6 +983,7 @@
 			files = (
 				A2E34DC11ED1FB2F0041E663 /* TokenStorageTests.swift in Sources */,
 				A25A19DA1EE5198600CF13AF /* WebPresenterMock.swift in Sources */,
+				A20CDD961EF66AEC00271276 /* CaptchaControllerMock.swift in Sources */,
 				A25A19CB1EE4126E00CF13AF /* DependencyFactoryMock.swift in Sources */,
 				A2F6F8E51EDDF00400933DBC /* AtomicTests.swift in Sources */,
 				A2AF167D1ED1CCA900485716 /* AuthorizatorMock.swift in Sources */,

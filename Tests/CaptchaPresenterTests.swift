@@ -28,4 +28,24 @@ class CaptchaPresenterTests: XCTestCase {
             XCTAssertEqual(error as? SessionError, .cantMakeCaptchaController)
         }
     }
+    
+    func test_present_controllerPrepareCalledOnce() {
+        // Given
+        let context = makeContext()
+        var prepareForPresentCallCount = 0
+        
+        context.webControllerMaker.onMake = {
+            let controller = CaptchaControllerMock()
+            
+            controller.onPrepareForPresent = {
+                prepareForPresentCallCount += 1
+            }
+            
+            return controller
+        }
+        // When
+        _ = try? context.presenter.present(rawCaptchaUrl: "", dismissOnFinish: false)
+        // Then
+        XCTAssertEqual(prepareForPresentCallCount, 1)
+    }
 }
