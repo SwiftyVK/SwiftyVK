@@ -5,6 +5,7 @@ final class CaptchaControllerMock: CaptchaController {
     var onPrepareForPresent: (() -> ())?
     var onPresent: ((Data, (String) -> (), () -> ()) -> ())?
     var onDismiss: (() -> ())?
+    private var onRealDismiss: (() -> ())?
     
     func prepareForPresent() {
         onPrepareForPresent?()
@@ -16,5 +17,6 @@ final class CaptchaControllerMock: CaptchaController {
     
     func dismiss() {
         onDismiss?()
+        onRealDismiss?()
     }
 }

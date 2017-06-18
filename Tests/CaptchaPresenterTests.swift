@@ -82,4 +82,24 @@ class CaptchaPresenterTests: XCTestCase {
             XCTAssertEqual(error as? SessionError, .captchaPresenterTimedOut)
         }
     }
+    
+    func test_present_returnsResult_whenGiveResult() {
+        // Given
+        let context = makeContext()
+        
+        context.webControllerMaker.onMake = {
+            let controller = CaptchaControllerMock()
+            
+            controller.onPresent = { data, onResult, onDismiss in
+                onResult("test")
+            }
+            
+            return controller
+            
+        }
+        // When
+        let result = try? context.presenter.present(rawCaptchaUrl: "http://vk.com", dismissOnFinish: false)
+        // Then
+        XCTAssertEqual(result, "test")
+    }
 }
