@@ -15,4 +15,17 @@ class CaptchaPresenterTests: XCTestCase {
         return (presenter, controllerMaker)
     }
     
+    
+    func test_present_throwCantMakeCaptchaController() {
+        // Given
+        let context = makeContext()
+        // When
+        do {
+            _ = try context.presenter.present(rawCaptchaUrl: "", dismissOnFinish: false)
+            XCTFail("Expression should throw error")
+        } catch let error {
+            // Then
+            XCTAssertEqual(error as? SessionError, .cantMakeCaptchaController)
+        }
+    }
 }

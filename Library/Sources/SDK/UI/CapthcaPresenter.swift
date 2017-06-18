@@ -26,8 +26,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
         return try uiSyncQueue.sync {
             var result: String?
             
-            guard
-                let controller = currentController ?? controllerMaker.captchaController() else {
+            guard let controller = currentController ?? controllerMaker.captchaController() else {
                 throw SessionError.cantMakeCaptchaController
             }
             
