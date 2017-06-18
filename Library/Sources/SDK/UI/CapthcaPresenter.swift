@@ -8,13 +8,16 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
     private let uiSyncQueue: DispatchQueue
     private let controllerMaker: CaptchaControllerMaker
     private weak var currentController: CaptchaController?
+    private let timeout: TimeInterval
     
     init(
         uiSyncQueue: DispatchQueue,
-        controllerMaker: CaptchaControllerMaker
+        controllerMaker: CaptchaControllerMaker,
+        timeout: TimeInterval
         ) {
         self.uiSyncQueue = uiSyncQueue
         self.controllerMaker = controllerMaker
+        self.timeout = timeout
     }
     
     func present(rawCaptchaUrl: String, dismissOnFinish: Bool) throws -> String {
@@ -50,7 +53,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
             
             currentController = controller
             
-            switch semaphore.wait(timeout: .now() + 600) {
+            switch semaphore.wait(timeout: .now() + timeout) {
             case .timedOut:
                 throw SessionError.captchaPresenterTimedOut
             case .success:

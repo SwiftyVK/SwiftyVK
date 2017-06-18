@@ -71,7 +71,8 @@ final class DependencyFactoryImpl: DependencyFactory {
         
         let captchaPresenter = CaptchaPresenterImpl(
             uiSyncQueue: uiSyncQueue,
-            controllerMaker: self
+            controllerMaker: self,
+            timeout: 600
         )
         
         return SessionImpl(
