@@ -43,3 +43,12 @@ final class WebControllerMakerMock: WebControllerMaker {
         return onMake?()
     }
 }
+
+final class CaptchaControllerMakerMock: CaptchaControllerMaker {
+    
+    var onMake: (() -> CaptchaController?)?
+    
+    func captchaController() -> CaptchaController? {
+        return onMake?()
+    }
+}
