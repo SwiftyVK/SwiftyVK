@@ -105,7 +105,8 @@ final class DependencyFactoryImpl: DependencyFactory {
         let webPresenter = WebPresenterImpl(
             uiSyncQueue: self.uiSyncQueue,
             controllerMaker: self,
-            maxFails: 3
+            maxFails: 3,
+            timeout: 600
         )
         
         return AuthorizatorImpl(

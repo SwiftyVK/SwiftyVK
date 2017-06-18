@@ -18,15 +18,18 @@ final class WebPresenterImpl: WebPresenter {
     private let controllerMaker: WebControllerMaker
     private weak var currentController: WebController?
     private let maxFails: Int
+    private let timeout: TimeInterval
 
     init(
         uiSyncQueue: DispatchQueue,
         controllerMaker: WebControllerMaker,
-        maxFails: Int
+        maxFails: Int,
+        timeout: TimeInterval
         ) {
         self.uiSyncQueue = uiSyncQueue
         self.controllerMaker = controllerMaker
         self.maxFails = maxFails
+        self.timeout = timeout
     }
     
     func presentWith(urlRequest: URLRequest) throws -> String {
@@ -62,7 +65,7 @@ final class WebPresenterImpl: WebPresenter {
                 }
             )
             
-            switch semaphore.wait(timeout: .now() + 600) {
+            switch semaphore.wait(timeout: .now() + timeout) {
             case .timedOut:
                 throw SessionError.webPresenterTimedOut
             case .success:
