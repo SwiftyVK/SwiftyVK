@@ -65,4 +65,21 @@ class CaptchaPresenterTests: XCTestCase {
             XCTAssertEqual(error as? SessionError, .cantLoadCaptchaImage)
         }
     }
+    
+    func test_present_throwCantCaptchaPresenterTimedOut() {
+        // Given
+        let context = makeContext()
+        
+        context.webControllerMaker.onMake = {
+            return CaptchaControllerMock()
+        }
+        // When
+        do {
+            _ = try context.presenter.present(rawCaptchaUrl: "http://vk.com", dismissOnFinish: false)
+            XCTFail("Expression should throw error")
+        } catch let error {
+            // Then
+            XCTAssertEqual(error as? SessionError, .captchaPresenterTimedOut)
+        }
+    }
 }
