@@ -152,4 +152,28 @@ class CaptchaPresenterTests: XCTestCase {
         // Then
         XCTAssertEqual(dismissCallCount, 1)
     }
+    
+    func test_present_throwCaptchaFailed_whenControllerDismissed() {
+        // Given
+        let context = makeContext()
+        
+        context.webControllerMaker.onMake = {
+            let controller = CaptchaControllerMock()
+            
+            controller.onPresent = { data, onResult, onDismiss in
+                context.presenter.dismiss()
+            }
+            
+            return controller
+            
+        }
+        // When
+        do {
+            _ = try context.presenter.present(rawCaptchaUrl: "http://vk.com", dismissOnFinish: false)
+            XCTFail("Expression should throw error")
+        } catch let error {
+            // Then
+            XCTAssertEqual(error as? RequestError, .captchaFailed)
+        }
+    }
 }
