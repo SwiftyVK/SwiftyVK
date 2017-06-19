@@ -262,8 +262,8 @@ final class LPObserver: NSObject {
         VK.Log.put("LongPoll", "Init observer")
         
         #if os(OSX)
-            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(connectionLostForce), name:NSNotification.Name.NSWorkspaceScreensDidSleep, object: nil)
-            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(connectionRestoreForce), name:NSNotification.Name.NSWorkspaceScreensDidWake, object: nil)
+            NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(connectionLostForce), name: NSWorkspace.screensDidSleepNotification, object: nil)
+            NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(connectionRestoreForce), name: NSWorkspace.screensDidWakeNotification, object: nil)
         #elseif os(iOS)
             let reachability = Reachability()
             NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged), name: ReachabilityChangedNotification, object: nil)

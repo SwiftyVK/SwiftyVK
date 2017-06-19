@@ -127,7 +127,7 @@ final class DependencyFactoryImpl: DependencyFactory {
         #if os(iOS)
             webController = storyboard().instantiateViewController(withIdentifier: "Web") as? WebController_iOS
         #elseif os(macOS)
-            webController = storyboard().instantiateController(withIdentifier: "Web") as? WebController_macOS
+            webController = storyboard().instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Web")) as? WebController_macOS
         #endif
         
         guard let controller = webController as? VkViewController else {
@@ -147,7 +147,7 @@ final class DependencyFactoryImpl: DependencyFactory {
         #if os(iOS)
             captchaController = storyboard().instantiateViewController(withIdentifier: "Captcha") as? CaptchaController_iOS
         #elseif os(macOS)
-            captchaController = storyboard().instantiateController(withIdentifier: "Captcha") as? CaptchaController_macOS
+            captchaController = storyboard().instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Captcha")) as? CaptchaController_macOS
         #endif
         
         guard let controller = captchaController as? VkViewController else {
@@ -162,8 +162,14 @@ final class DependencyFactoryImpl: DependencyFactory {
     }
     
     func storyboard() -> VKStoryboard {
+        #if os(OSX)
+            let name = NSStoryboard.Name(rawValue: Resources.withSuffix("Storyboard"))
+        #elseif os(iOS)
+            let name = Resources.withSuffix("Storyboard")
+        #endif
+        
         return VKStoryboard(
-            name: Resources.withSuffix("Storyboard"),
+            name: name,
             bundle: Resources.bundle
         )
     }

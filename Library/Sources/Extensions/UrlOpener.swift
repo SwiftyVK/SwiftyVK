@@ -16,7 +16,7 @@ protocol UrlOpener {
         }
         
         func openURL(_ url: URL) -> Bool {
-            return NSWorkspace.shared().open(url)
+            return NSWorkspace.shared.open(url)
         }
     }
 #elseif os(iOS)

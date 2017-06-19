@@ -19,7 +19,7 @@ class VKDelegateExample: SwiftyVKDelegate {
 
     func vkNeedToPresent(viewController: VkViewController) {
         #if os(OSX)
-            if let contentController = NSApplication.shared().keyWindow?.contentViewController {
+            if let contentController = NSApplication.shared.keyWindow?.contentViewController {
                 contentController.presentViewControllerAsSheet(viewController)
             }
         #elseif os(iOS)
