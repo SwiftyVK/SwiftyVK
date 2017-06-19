@@ -527,7 +527,7 @@
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = 842SSJ357W;
 						DevelopmentTeamName = "Алексей Кудрявцев (Personal Team)";
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					A2527E791BD13A5300F65412 = {
 						CreatedOnToolsVersion = 7.1;
@@ -547,7 +547,7 @@
 					};
 					A2EB712C1BD27639008E7D86 = {
 						CreatedOnToolsVersion = 7.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						TestTargetID = A2527E671BD13A3B00F65412;
 					};
 					A2EB713A1BD27652008E7D86 = {
@@ -959,7 +959,8 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1004,7 +1005,8 @@
 				PRODUCT_NAME = "~SwiftyVK~";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1174,7 +1176,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "../Tests/SwiftyVK-Tests-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/~SwiftyVK~.app/Contents/MacOS/~SwiftyVK~";
 			};
 			name = Debug;
@@ -1223,7 +1226,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "../Tests/SwiftyVK-Tests-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/~SwiftyVK~.app/Contents/MacOS/~SwiftyVK~";
 			};
 			name = Release;
