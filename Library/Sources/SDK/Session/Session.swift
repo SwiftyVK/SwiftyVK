@@ -19,13 +19,17 @@ protocol DestroyableSession: Session {
     func destroy()
 }
 
+protocol encodableSession: Session {
+    func encode() -> EncodedSession
+}
+
 protocol ApiErrorExecutor {
     func logIn(revoke: Bool) throws -> [String : String]
     func validate(redirectUrl: URL) throws
     func captcha(rawUrlToImage: String, dismissOnFinish: Bool) throws -> String
 }
 
-public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErrorExecutor {
+public final class SessionImpl: Session, TaskSession, DestroyableSession, encodableSession, ApiErrorExecutor {
 
     public var config: SessionConfig {
         didSet {
@@ -72,6 +76,25 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         updateShedulerLimit()
     }
     
+    init(
+        encodedSession: EncodedSession,
+        taskSheduler: TaskSheduler,
+        attemptSheduler: AttemptSheduler,
+        authorizator: Authorizator,
+        taskMaker: TaskMaker,
+        captchaPresenter: CaptchaPresenter
+        ) {
+        self.id = encodedSession.id
+        self.config = encodedSession.config
+        self.taskSheduler = taskSheduler
+        self.attemptSheduler = attemptSheduler
+        self.authorizator = authorizator
+        self.taskMaker = taskMaker
+        self.captchaPresenter = captchaPresenter
+        
+        updateShedulerLimit()
+    }
+    
     public func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (Error) -> ()) {
          gateQueue.async {
             do {
@@ -102,7 +125,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     
     public func logOut() {
         gateQueue.sync {
-            token = authorizator.reset(sessionId: id)
+            self.token = self.authorizator.reset(sessionId: self.id)
         }
     }
     
@@ -176,9 +199,15 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         attemptSheduler.setLimit(to: config.attemptsPerSecLimit)
     }
     
+    func encode() -> EncodedSession {
+        return EncodedSession(id: id, config: config)
+    }
+    
     func destroy() {
+        self.logOut()
+        
         gateQueue.sync {
-            id = ""
+            self.id = ""
         }
     }
     
