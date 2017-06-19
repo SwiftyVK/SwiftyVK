@@ -16,12 +16,12 @@ protocol DependencyFactory:
     CaptchaControllerMaker
 {}
 
-protocol DependencyHolder: SessionStorageHolder, AuthorizatorHolder {
+protocol DependencyHolder: SessionsHolderHolder, AuthorizatorHolder {
     init(appId: String, delegate: SwiftyVKDelegate?)
 }
 
-protocol SessionStorageHolder: class {
-    var sessionStorage: SessionStorage { get }
+protocol SessionsHolderHolder: class {
+    var sessionsHolder: SessionsHolder { get }
 }
 
 protocol AuthorizatorHolder: class {
@@ -29,7 +29,7 @@ protocol AuthorizatorHolder: class {
 }
 
 protocol SessionMaker: class {
-    func session() -> Session
+    func session(id: String, config: SessionConfig) -> Session
 }
 
 protocol TaskMaker: class {
@@ -63,11 +63,11 @@ final class DependencyFactoryImpl: DependencyFactory {
         self.delegate = delegate
     }
     
-    lazy public var sessionStorage: SessionStorage = {
-        return SessionStorageImpl(sessionMaker: self)
+    lazy var sessionsHolder: SessionsHolder = {
+        return SessionsHolderImpl(sessionMaker: self)
     }()
     
-    func session() -> Session {
+    func session(id: String, config: SessionConfig) -> Session {
         
         let captchaPresenter = CaptchaPresenterImpl(
             uiSyncQueue: uiSyncQueue,
@@ -76,6 +76,8 @@ final class DependencyFactoryImpl: DependencyFactory {
         )
         
         return SessionImpl(
+            id: id,
+            config: config,
             taskSheduler: TaskShedulerImpl(),
             attemptSheduler: AttemptShedulerImpl(limit: .limited(3)),
             authorizator: sharedAuthorizator,

@@ -1,41 +1,42 @@
 import XCTest
 @testable import SwiftyVK
 
-final class SessionStorageTests: BaseTestCase {
+final class SessionsHolderTests: BaseTestCase {
     
-    var storage: SessionStorageImpl {
-        return SessionStorageImpl(sessionMaker: SessionMakerMock())
+    func makeHolder() -> SessionsHolderImpl {
+        return SessionsHolderImpl(sessionMaker: SessionMakerMock())
     }
     
     func test_makeNewSession() {
-        XCTAssertTrue(storage.make() is SessionMock)
+        XCTAssertTrue(makeHolder().make() is SessionMock)
     }
     
     func test_markAsDefault() {
         // Given
-        let storage = self.storage
-        let oldSession = storage.default
-        let newSession = storage.make()
+        let holder = makeHolder()
+        let oldSession = holder.default
+        let newSession = holder.make()
         // When
-        try? storage.markAsDefault(session: newSession)
+        try? holder.markAsDefault(session: newSession)
         // Then
-        XCTAssertFalse(storage.default === oldSession)
-        XCTAssertTrue(storage.default === newSession)
+        XCTAssertFalse(holder.default === oldSession)
+        XCTAssertTrue(holder.default === newSession)
     }
     
     func test_destroySession() {
         // Given
-        let newSession = storage.make()
+        let holder = makeHolder()
+        let newSession = holder.make()
         // When
-        try? storage.destroy(session: newSession)
+        try? holder.destroy(session: newSession)
         // Then
         XCTAssertEqual(newSession.state, .destroyed)
     }
     
     func test_autoDestroyAllSessions() {
         // Given
-        let defaultSession = storage.default
-        let newSession = storage.make()
+        let defaultSession = makeHolder().default
+        let newSession = makeHolder().make()
         // Then
         XCTAssertEqual(defaultSession.state, .destroyed)
         XCTAssertEqual(newSession.state, .destroyed)
@@ -43,10 +44,10 @@ final class SessionStorageTests: BaseTestCase {
     
     func test_destroyDefaultSession_shouldBeFail() {
         // Given
-        let storage = self.storage
+        let holder = makeHolder()
         // When
         do {
-            try storage.destroy(session: storage.default)
+            try holder.destroy(session: holder.default)
         } catch let error {
             // Then
             XCTAssertEqual(error as? SessionError, .cantDestroyDefaultSession)
@@ -56,11 +57,11 @@ final class SessionStorageTests: BaseTestCase {
     
     func test_destroyDeadSession_shouldBeFail() {
         // Given
-        let storage = self.storage
-        let session = storage.make()
+        let holder = makeHolder()
+        let session = holder.make()
         // When
         do {
-            try storage.destroy(session: session)
+            try holder.destroy(session: session)
         } catch let error {
             // Then
             XCTAssertEqual(error as? SessionError, .sessionDestroyed)
@@ -70,12 +71,10 @@ final class SessionStorageTests: BaseTestCase {
     
     func test_getAllSessions() {
         // Given
-        let storage = self.storage
+        let holder = makeHolder()
         // When
-        let sessions = [storage.make(), storage.make(), storage.make(), storage.make()]
+        let sessions = [holder.make(), holder.make(), holder.make(), holder.make()]
         // Then
-        XCTAssertEqual(storage.all.count, sessions.count)
+        XCTAssertEqual(holder.all.count, sessions.count)
     }
-    
-    
 }

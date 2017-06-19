@@ -7,8 +7,8 @@
 //        return DependencyFactoryImpl(appId: "1234567890", delegate: SwiftyVKDelegateMock())
 //    }
 //
-//    func test_SessionStorageType() {
-//        XCTAssertTrue(factory.sessionStorage is SessionStorageImpl)
+//    func test_SessionsHolderType() {
+//        XCTAssertTrue(factory.sessionsHolder is SessionsHolderImpl)
 //    }
 //    
 //    func test_SessionImplType() {

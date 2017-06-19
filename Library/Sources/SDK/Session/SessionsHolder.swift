@@ -1,24 +1,24 @@
 import Foundation
 
-public protocol SessionStorage: class {
+public protocol SessionsHolder: class {
     var `default`: Session { get }
     var all: [Session] { get }
-    func make(with config: SessionConfig) -> Session
+    func make(config: SessionConfig) -> Session
     func destroy(session: Session) throws
     func markAsDefault(session: Session) throws
 }
 
-extension SessionStorage {
+extension SessionsHolder {
     
     func make() -> Session {
-        return make(with: .default)
+        return make(config: .default)
     }
 }
 
-public final class SessionStorageImpl: SessionStorage {
+public final class SessionsHolderImpl: SessionsHolder {
 
     private let sessionMaker: SessionMaker
-    private var sessions = NSHashTable<AnyObject>(options: .strongMemory)
+    private var sessions = NSHashTable<AnyObject>(options: .weakMemory)
     private var canKillDefaultSessions = false
     
     lazy public var `default`: Session = {
@@ -33,8 +33,8 @@ public final class SessionStorageImpl: SessionStorage {
         self.sessionMaker = sessionMaker
     }
     
-    public func make(with config: SessionConfig) -> Session {
-        let session = sessionMaker.session()
+    public func make(config: SessionConfig) -> Session {
+        let session = sessionMaker.session(id: .random(20), config: config)
         session.config = config
 
         sessions.add(session)

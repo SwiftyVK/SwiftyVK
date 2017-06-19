@@ -17,6 +17,8 @@ final class SessionTests: BaseTestCase {
         let captchaPresenter = CaptchaPresenterMock()
         
         let session = SessionImpl(
+            id: .random(20),
+            config: .default,
             taskSheduler: taskSheduler,
             attemptSheduler: attemptSheduler,
             authorizator: authorizator,

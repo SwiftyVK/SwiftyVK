@@ -1,6 +1,6 @@
 @testable import SwiftyVK
 
-final class SessionStorageMock: SessionStorage {
+final class SessionsHolderMock: SessionsHolder {
     
     let `default`: Session = SessionMock()
     
@@ -8,7 +8,7 @@ final class SessionStorageMock: SessionStorage {
         return [`default`]
     }
     
-    func make(with config: SessionConfig) -> Session {
+    func make(config: SessionConfig) -> Session {
         return `default`
     }
     

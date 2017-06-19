@@ -59,8 +59,8 @@ public final class VK {
         dependencyHolder = dependencyHolderInstanceType.init(appId: appId, delegate: delegate)
     }
     
-    public static var sessions: SessionStorage? {
-        return dependencyHolder?.sessionStorage
+    public static var sessions: SessionsHolder? {
+        return dependencyHolder?.sessionsHolder
     }
 
     static var dependencyHolderInstanceType: DependencyHolder.Type = DependencyFactoryImpl.self

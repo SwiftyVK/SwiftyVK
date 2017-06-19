@@ -19,21 +19,17 @@ protocol DestroyableSession: Session {
     func destroy()
 }
 
-protocol encodableSession: Session {
-    func encode() -> EncodedSession
-}
-
 protocol ApiErrorExecutor {
     func logIn(revoke: Bool) throws -> [String : String]
     func validate(redirectUrl: URL) throws
     func captcha(rawUrlToImage: String, dismissOnFinish: Bool) throws -> String
 }
 
-public final class SessionImpl: Session, TaskSession, DestroyableSession, encodableSession, ApiErrorExecutor {
+public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErrorExecutor {
 
     public var config: SessionConfig {
         didSet {
-            updateShedulerLimit()
+            onConfigChange()
         }
     }
     
@@ -58,14 +54,15 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, encoda
     private let gateQueue = DispatchQueue(label: "SwiftyVK.sessionQueue")
     
     init(
-        config: SessionConfig = .default,
+        id: String,
+        config: SessionConfig,
         taskSheduler: TaskSheduler,
         attemptSheduler: AttemptSheduler,
         authorizator: Authorizator,
         taskMaker: TaskMaker,
         captchaPresenter: CaptchaPresenter
         ) {
-        self.id = String.random(20)
+        self.id = id
         self.config = config
         self.taskSheduler = taskSheduler
         self.attemptSheduler = attemptSheduler
@@ -73,26 +70,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, encoda
         self.taskMaker = taskMaker
         self.captchaPresenter = captchaPresenter
         
-        updateShedulerLimit()
-    }
-    
-    init(
-        encodedSession: EncodedSession,
-        taskSheduler: TaskSheduler,
-        attemptSheduler: AttemptSheduler,
-        authorizator: Authorizator,
-        taskMaker: TaskMaker,
-        captchaPresenter: CaptchaPresenter
-        ) {
-        self.id = encodedSession.id
-        self.config = encodedSession.config
-        self.taskSheduler = taskSheduler
-        self.attemptSheduler = attemptSheduler
-        self.authorizator = authorizator
-        self.taskMaker = taskMaker
-        self.captchaPresenter = captchaPresenter
-        
-        updateShedulerLimit()
+        onConfigChange()
     }
     
     public func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (Error) -> ()) {
@@ -195,12 +173,8 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, encoda
         }
     }
     
-    private func updateShedulerLimit() {
+    private func onConfigChange() {
         attemptSheduler.setLimit(to: config.attemptsPerSecLimit)
-    }
-    
-    func encode() -> EncodedSession {
-        return EncodedSession(id: id, config: config)
     }
     
     func destroy() {

@@ -130,16 +130,16 @@
 		A2D1369B1DA00E9000C487C1 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D1369A1DA00E9000C487C1 /* Errors.swift */; };
 		A2D15A941EEE96840063D6F2 /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2D15A931EEE96840063D6F2 /* Asset.xcassets */; };
 		A2D15A951EEE96840063D6F2 /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2D15A931EEE96840063D6F2 /* Asset.xcassets */; };
-		A2D2713C1EC4D0BA00B24D09 /* SessionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionStorage.swift */; };
-		A2D2713D1EC4D0BA00B24D09 /* SessionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionStorage.swift */; };
+		A2D2713C1EC4D0BA00B24D09 /* SessionsHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionsHolder.swift */; };
+		A2D2713D1EC4D0BA00B24D09 /* SessionsHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionsHolder.swift */; };
 		A2E34DBC1ED1F1260041E663 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBB1ED1F1260041E663 /* TokenStorage.swift */; };
 		A2E34DBD1ED1F1260041E663 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBB1ED1F1260041E663 /* TokenStorage.swift */; };
 		A2E34DBF1ED1F6FE0041E663 /* TokenStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBE1ED1F6FE0041E663 /* TokenStorageMock.swift */; };
 		A2E34DC11ED1FB2F0041E663 /* TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DC01ED1FB2F0041E663 /* TokenStorageTests.swift */; };
 		A2E5C5D61ECCAA5400652262 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */; };
 		A2E5C5D71ECCAAB600652262 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */; };
-		A2E5C5D91ECCAD4800652262 /* SessionStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D81ECCAD4800652262 /* SessionStorageMock.swift */; };
-		A2E5C5DB1ECCAFC800652262 /* SessionStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5DA1ECCAFC800652262 /* SessionStorageTests.swift */; };
+		A2E5C5D91ECCAD4800652262 /* SessionsHilderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D81ECCAD4800652262 /* SessionsHilderMock.swift */; };
+		A2E5C5DB1ECCAFC800652262 /* SessionsHolderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5DA1ECCAFC800652262 /* SessionsHolderTests.swift */; };
 		A2EB6EB71BD182E3008E7D86 /* SwiftyVK_resources_macOS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2527D4B1BD1130D00F65412 /* SwiftyVK_resources_macOS.bundle */; };
 		A2EB6EB91BD18343008E7D86 /* SwiftyVK_resources_iOS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2527D551BD1134500F65412 /* SwiftyVK_resources_iOS.bundle */; };
 		A2EB6EBD1BD18389008E7D86 /* VK.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D911BD12FD200F65412 /* VK.swift */; };
@@ -413,13 +413,13 @@
 		A2CF0D411E98EF0900EAFF30 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		A2D1369A1DA00E9000C487C1 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		A2D15A931EEE96840063D6F2 /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
-		A2D2713B1EC4D0BA00B24D09 /* SessionStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionStorage.swift; sourceTree = "<group>"; };
+		A2D2713B1EC4D0BA00B24D09 /* SessionsHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionsHolder.swift; sourceTree = "<group>"; };
 		A2E34DBB1ED1F1260041E663 /* TokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TokenStorage.swift; path = Session/TokenStorage.swift; sourceTree = "<group>"; };
 		A2E34DBE1ED1F6FE0041E663 /* TokenStorageMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorageMock.swift; sourceTree = "<group>"; };
 		A2E34DC01ED1FB2F0041E663 /* TokenStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorageTests.swift; sourceTree = "<group>"; };
 		A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
-		A2E5C5D81ECCAD4800652262 /* SessionStorageMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionStorageMock.swift; sourceTree = "<group>"; };
-		A2E5C5DA1ECCAFC800652262 /* SessionStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionStorageTests.swift; sourceTree = "<group>"; };
+		A2E5C5D81ECCAD4800652262 /* SessionsHilderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionsHilderMock.swift; sourceTree = "<group>"; };
+		A2E5C5DA1ECCAFC800652262 /* SessionsHolderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionsHolderTests.swift; sourceTree = "<group>"; };
 		A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F6322B1ED9C88D0063C9E0 /* UrlOpener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UrlOpener.swift; path = ../Extensions/UrlOpener.swift; sourceTree = "<group>"; };
@@ -443,7 +443,7 @@
 		A217DAAA1E99266100EA1430 /* Session */ = {
 			isa = PBXGroup;
 			children = (
-				A2D2713B1EC4D0BA00B24D09 /* SessionStorage.swift */,
+				A2D2713B1EC4D0BA00B24D09 /* SessionsHolder.swift */,
 				A217DAAB1E9926A500EA1430 /* Session.swift */,
 				A27052881EF8138A00C05936 /* EncodedSession.swift */,
 				A20259481EE9AED00014B0BE /* ApiErrorHandler.swift */,
@@ -467,7 +467,7 @@
 				A25A3A2C1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift */,
 				A22179C41EBA3BBA006B71FD /* DependencyFactoryTests.swift */,
 				A22179C91EBA4059006B71FD /* SessionTests.swift */,
-				A2E5C5DA1ECCAFC800652262 /* SessionStorageTests.swift */,
+				A2E5C5DA1ECCAFC800652262 /* SessionsHolderTests.swift */,
 				A2AF16781ED1AD2E00485716 /* TokenTests.swift */,
 				A2E34DC01ED1FB2F0041E663 /* TokenStorageTests.swift */,
 				A23E692B1EDAEC5800AA3B3B /* VKProxyTests.swift */,
@@ -489,7 +489,7 @@
 				A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */,
 				A22179CB1EBA5009006B71FD /* TaskShedulerMock.swift */,
 				A22179CF1EBA530C006B71FD /* SessionMock.swift */,
-				A2E5C5D81ECCAD4800652262 /* SessionStorageMock.swift */,
+				A2E5C5D81ECCAD4800652262 /* SessionsHilderMock.swift */,
 				A2AF167A1ED1CC9B00485716 /* TokenMock.swift */,
 				A2AF167C1ED1CCA900485716 /* AuthorizatorMock.swift */,
 				A2E34DBE1ED1F6FE0041E663 /* TokenStorageMock.swift */,
@@ -994,10 +994,10 @@
 				A23E692C1EDAEC5800AA3B3B /* VKProxyTests.swift in Sources */,
 				A2B805581EDDB313004DA7EB /* WebPresenterTests.swift in Sources */,
 				A22179CA1EBA4059006B71FD /* SessionTests.swift in Sources */,
-				A2E5C5D91ECCAD4800652262 /* SessionStorageMock.swift in Sources */,
+				A2E5C5D91ECCAD4800652262 /* SessionsHilderMock.swift in Sources */,
 				A25A19D51EE43E8100CF13AF /* TokenParserMock.swift in Sources */,
 				A2433A461EA542100058BB6D /* AttemptShedulerTests.swift in Sources */,
-				A2E5C5DB1ECCAFC800652262 /* SessionStorageTests.swift in Sources */,
+				A2E5C5DB1ECCAFC800652262 /* SessionsHolderTests.swift in Sources */,
 				A25A19C91EE4112700CF13AF /* SwiftyVKDelegateMock.swift in Sources */,
 				A2433A481EA542620058BB6D /* AttemptMock.swift in Sources */,
 				A22179D21EBA5393006B71FD /* BaseTestCase.swift in Sources */,
@@ -1044,7 +1044,7 @@
 				A2AF16741ED19AEB00485716 /* Authorizator.swift in Sources */,
 				A2EB6EF31BD18394008E7D86 /* Friends.swift in Sources */,
 				A2EB6EF41BD18394008E7D86 /* Groups.swift in Sources */,
-				A2D2713D1EC4D0BA00B24D09 /* SessionStorage.swift in Sources */,
+				A2D2713D1EC4D0BA00B24D09 /* SessionsHolder.swift in Sources */,
 				A2EB6EF51BD18394008E7D86 /* Likes.swift in Sources */,
 				A2EB6EF61BD18394008E7D86 /* Messages.swift in Sources */,
 				A22179D51EBA57AF006B71FD /* SessionConfig.swift in Sources */,
@@ -1138,7 +1138,7 @@
 				A2EB6EC91BD18389008E7D86 /* Messages.swift in Sources */,
 				A24DDAE41EB737C7002EA273 /* QueryBuilder.swift in Sources */,
 				A2838DA31E9AA0DA00FE5BE2 /* DependencyFactory.swift in Sources */,
-				A2D2713C1EC4D0BA00B24D09 /* SessionStorage.swift in Sources */,
+				A2D2713C1EC4D0BA00B24D09 /* SessionsHolder.swift in Sources */,
 				A22179D41EBA57AF006B71FD /* SessionConfig.swift in Sources */,
 				A2EB6ECA1BD18389008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6ECB1BD18389008E7D86 /* Notes.swift in Sources */,
