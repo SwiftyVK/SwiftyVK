@@ -64,8 +64,16 @@ final class DependencyFactoryImpl: DependencyFactory {
     }
     
     lazy var sessionsHolder: SessionsHolder = {
-        return SessionsHolderImpl(sessionMaker: self)
+        return SessionsHolderImpl(
+            sessionMaker: self,
+            sessionsStorage: self.sessionsStorage
+        )
     }()
+    
+    lazy var sessionsStorage: SessionsStorage = {
+        return SessionsStorageImpl(configName: "SwiftyVKConfiguration")
+    }()
+    
     
     func session(id: String, config: SessionConfig) -> Session {
         

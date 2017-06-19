@@ -16,9 +16,10 @@ extension SessionsHolder {
 }
 
 public final class SessionsHolderImpl: SessionsHolder {
-
+    
     private let sessionMaker: SessionMaker
-    private var sessions = NSHashTable<AnyObject>(options: .weakMemory)
+    private let sessionsStorage: SessionsStorage
+    private var sessions = NSHashTable<AnyObject>(options: .strongMemory)
     private var canKillDefaultSessions = false
     
     lazy public var `default`: Session = {
@@ -29,14 +30,35 @@ public final class SessionsHolderImpl: SessionsHolder {
         return sessions.allObjects.flatMap { $0 as? Session }
     }
     
-    init(sessionMaker: SessionMaker) {
+    init(
+        sessionMaker: SessionMaker,
+        sessionsStorage: SessionsStorage
+        ) {
         self.sessionMaker = sessionMaker
+        self.sessionsStorage = sessionsStorage
+        
+        try? restoreFromStorage()
+    }
+    
+    private func restoreFromStorage() throws {
+        let decodedSessions = try sessionsStorage.restore()
+            .filter { !$0.id.isEmpty }
+        
+        decodedSessions
+            .map { sessionMaker.session(id: $0.id, config: $0.config ) }
+            .forEach { sessions.add($0) }
+        
+        if let defaultSession = decodedSessions
+            .first(where: { $0.isDefault })
+            .map({ sessionMaker.session(id: $0.id, config: $0.config ) }) {
+            `default` = defaultSession
+        }
     }
     
     public func make(config: SessionConfig) -> Session {
         let session = sessionMaker.session(id: .random(20), config: config)
         session.config = config
-
+        
         sessions.add(session)
         return session
     }
