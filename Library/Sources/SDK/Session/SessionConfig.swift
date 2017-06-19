@@ -1,4 +1,4 @@
-public final class SessionConfig {
+public struct SessionConfig: Codable {
     
     public static let `default` = SessionConfig()
     
@@ -6,17 +6,10 @@ public final class SessionConfig {
     public let sdkVersion = "1.3.17"
     public var language: Language
     public var attemptsMaxLimit: AttemptLimit
+    public var attemptsPerSecLimit: AttemptLimit
     public var attemptTimeout: TimeInterval
     public var handleErrors: Bool
     public var enableLogging: Bool
-    
-    public var attemptsPerSecLimit: AttemptLimit {
-        didSet {
-            onAttemptsPerSecLimitChange?(attemptsPerSecLimit)
-        }
-    }
-    
-    var onAttemptsPerSecLimitChange: ((AttemptLimit) -> ())?
     
     public init(
         language: Language = .default,
@@ -35,7 +28,7 @@ public final class SessionConfig {
     }
 }
 
-public enum Language: String {
+public enum Language: String, Codable {
     case ru
     case ua
     case be
@@ -60,7 +53,8 @@ public enum Language: String {
     }
 }
 
-public enum AttemptLimit {
+public enum AttemptLimit: Codable {
+    
     static let `default` = AttemptLimit.limited(3)
     
     case unlimited
@@ -73,5 +67,30 @@ public enum AttemptLimit {
         case .limited(let limit):
             return limit
         }
+    }
+    
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        let value = try container.decodeIfPresent(Int.self)
+        
+        if let value = value {
+            self = .limited(value)
+        } else {
+            self = .unlimited
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        var value: Int?
+        
+        switch self {
+        case .limited(let limit):
+            value = limit
+        case .unlimited:
+            break
+        }
+        
+        try container.encode(value)
     }
 }

@@ -174,10 +174,6 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     
     private func updateShedulerLimit() {
         attemptSheduler.setLimit(to: config.attemptsPerSecLimit)
-        
-        config.onAttemptsPerSecLimitChange = { [weak attemptSheduler] newLimit in
-            attemptSheduler?.setLimit(to: newLimit)
-        }
     }
     
     func destroy() {
