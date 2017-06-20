@@ -74,7 +74,7 @@ final class DependencyFactoryImpl: DependencyFactory {
         return SessionsStorageImpl(
             fileManager: FileManager(),
             bundleName: self.bundleName,
-            configName: "SwiftyVkState"
+            configName: "SwiftyVKState"
         )
     }()
     
