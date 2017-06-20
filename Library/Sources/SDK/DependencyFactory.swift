@@ -151,7 +151,7 @@ final class DependencyFactoryImpl: DependencyFactory {
             webController = storyboard().instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Web")) as? WebController_macOS
         #endif
         
-        guard let controller = webController as? VkViewController else {
+        guard let controller = webController as? VKViewController else {
             return nil
         }
         
@@ -171,7 +171,7 @@ final class DependencyFactoryImpl: DependencyFactory {
             captchaController = storyboard().instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Captcha")) as? CaptchaController_macOS
         #endif
         
-        guard let controller = captchaController as? VkViewController else {
+        guard let controller = captchaController as? VKViewController else {
             return nil
         }
         

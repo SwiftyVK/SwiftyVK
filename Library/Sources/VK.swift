@@ -1,12 +1,3 @@
-import Foundation
-#if os(iOS)
-    import UIKit
-    public typealias VkViewController = UIViewController
-#elseif os(OSX)
-    import Cocoa
-    public typealias VkViewController = NSViewController
-#endif
-
 public final class VK {
     
     public struct Api {

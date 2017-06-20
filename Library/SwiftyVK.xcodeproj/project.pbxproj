@@ -105,6 +105,8 @@
 		A296C6421EF9896200029D7D /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A296C6401EF9896200029D7D /* FileManager+Extensions.swift */; };
 		A296C6441EF9963900029D7D /* SwiftyVKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A296C6431EF9963900029D7D /* SwiftyVKDelegate.swift */; };
 		A296C6451EF9963900029D7D /* SwiftyVKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A296C6431EF9963900029D7D /* SwiftyVKDelegate.swift */; };
+		A296C6471EF9984A00029D7D /* VKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A296C6461EF9984A00029D7D /* VKViewController.swift */; };
+		A296C6481EF9984A00029D7D /* VKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A296C6461EF9984A00029D7D /* VKViewController.swift */; };
 		A29F1CD41E95674A00BE5369 /* TaskSheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */; };
 		A29F1CD51E95674A00BE5369 /* TaskSheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */; };
 		A2A3E6351EAFC1C70029FA44 /* Numbers+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A3E6341EAFC1C70029FA44 /* Numbers+Extensions.swift */; };
@@ -387,6 +389,7 @@
 		A2967E731CBBC4A700B7D48F /* Gifts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gifts.swift; sourceTree = "<group>"; };
 		A296C6401EF9896200029D7D /* FileManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
 		A296C6431EF9963900029D7D /* SwiftyVKDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyVKDelegate.swift; sourceTree = "<group>"; };
+		A296C6461EF9984A00029D7D /* VKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKViewController.swift; sourceTree = "<group>"; };
 		A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskSheduler.swift; sourceTree = "<group>"; };
 		A2A3E6341EAFC1C70029FA44 /* Numbers+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Numbers+Extensions.swift"; sourceTree = "<group>"; };
 		A2AF16721ED19AEB00485716 /* Authorizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authorizator.swift; path = Session/Authorizator.swift; sourceTree = "<group>"; };
@@ -638,6 +641,7 @@
 				A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */,
 				A25A19E61EE6941D00CF13AF /* GenericResult.swift */,
 				A296C6401EF9896200029D7D /* FileManager+Extensions.swift */,
+				A296C6461EF9984A00029D7D /* VKViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1055,6 +1059,7 @@
 				A2EB6EF01BD18394008E7D86 /* Database.swift in Sources */,
 				A2AF16771ED19E2300485716 /* Token.swift in Sources */,
 				A28368ED1D9D742D00EEBE2A /* Attempt.swift in Sources */,
+				A296C6481EF9984A00029D7D /* VKViewController.swift in Sources */,
 				A2EB6EF11BD18394008E7D86 /* Docs.swift in Sources */,
 				A2EB6EF21BD18394008E7D86 /* Fave.swift in Sources */,
 				A217DAAD1E9926A500EA1430 /* Session.swift in Sources */,
@@ -1181,6 +1186,7 @@
 				A2EB6ED41BD18389008E7D86 /* Storage.swift in Sources */,
 				A23E69331EDB49FB00AA3B3B /* WebPresenter.swift in Sources */,
 				A2EB6ED51BD18389008E7D86 /* Upload.swift in Sources */,
+				A296C6471EF9984A00029D7D /* VKViewController.swift in Sources */,
 				A2EB6ED61BD18389008E7D86 /* Users.swift in Sources */,
 				A2EB6ED71BD18389008E7D86 /* Utils.swift in Sources */,
 				A2EB6ED81BD18389008E7D86 /* Video.swift in Sources */,

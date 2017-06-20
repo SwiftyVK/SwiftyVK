@@ -1,7 +1,7 @@
 public typealias SwiftyVKDelegate = SwiftyVKPresenterDelegate & SwiftyVKSessionDelegate & SwiftyVKAuthorizatorDelegate
 
 public protocol SwiftyVKPresenterDelegate: class {
-    func vkNeedToPresent(viewController: VkViewController)
+    func vkNeedToPresent(viewController: VKViewController)
 }
 
 public protocol SwiftyVKSessionDelegate: class {
