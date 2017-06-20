@@ -1,4 +1,5 @@
 protocol Authorizator: class {
+    func getSavedToken(sessionId: String) -> Token?
     func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Token
     func authorize(sessionId: String, rawToken: String, expires: TimeInterval) throws -> Token
     func validate(sessionId: String, url: URL) throws -> Token
@@ -43,7 +44,7 @@ final class AuthorizatorImpl: Authorizator {
     
     func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Token {
         return try queue.sync {
-            if let token = tokenStorage.getFor(sessionId: sessionId) {
+            if let token = getSavedToken(sessionId: sessionId) {
                 return token
             }
             
@@ -72,6 +73,10 @@ final class AuthorizatorImpl: Authorizator {
             
             return try getToken(sessionId: sessionId, request: webAuthRequest)
         }
+    }
+    
+    func getSavedToken(sessionId: String) -> Token? {
+        return tokenStorage.getFor(sessionId: sessionId)
     }
     
     func authorize(sessionId: String, rawToken: String, expires: TimeInterval) throws -> Token {

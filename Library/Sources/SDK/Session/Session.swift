@@ -78,6 +78,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         self.taskMaker = taskMaker
         self.captchaPresenter = captchaPresenter
         self.sessionSaver = sessionSaver
+        self.token = authorizator.getSavedToken(sessionId: id)
         
         attemptSheduler.setLimit(to: config.attemptsPerSecLimit)
     }
