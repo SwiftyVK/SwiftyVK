@@ -98,7 +98,8 @@ final class DependencyFactoryImpl: DependencyFactory {
             authorizator: sharedAuthorizator,
             taskMaker: self,
             captchaPresenter: captchaPresenter,
-            sessionSaver: sessionSaver
+            sessionSaver: sessionSaver,
+            delegate: delegate
         )
     }
     

@@ -103,7 +103,6 @@ final class AuthorizatorImpl: Authorizator {
     func reset(sessionId: String) -> Token? {
         return queue.sync {
             tokenStorage.removeFor(sessionId: sessionId)
-            delegate?.vkDidLogOut(for: sessionId)
             return nil
         }
     }
@@ -140,7 +139,6 @@ final class AuthorizatorImpl: Authorizator {
         }
         
         try tokenStorage.save(token: token, for:  sessionId)
-        delegate?.vkTokenUpdated(for: sessionId, info: token.info)
         return token
     }
     

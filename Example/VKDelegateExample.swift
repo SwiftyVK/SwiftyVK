@@ -30,7 +30,7 @@ class VKDelegateExample: SwiftyVKDelegate {
     }
     
     func vkTokenUpdated(for sessionId: String, info: [String : String]) {
-        
+        print("token updated in session \(sessionId) with info \(info)")
     }
     
     func vkNeedsScopes(for sessionId: String) -> Scopes {

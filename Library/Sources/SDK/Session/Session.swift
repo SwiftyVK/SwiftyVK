@@ -50,7 +50,11 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         }
     }
     
-    var token: Token?
+    var token: Token? {
+        didSet {
+            sendTokenUdpatedEvent(from: oldValue)
+        }
+    }
 
     private let taskSheduler: TaskSheduler
     private let attemptSheduler: AttemptSheduler
@@ -58,6 +62,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     private let taskMaker: TaskMaker
     private let captchaPresenter: CaptchaPresenter
     private weak var sessionSaver: SessionSaver?
+    private weak var delegate: SwiftyVKDelegate?
     private let gateQueue = DispatchQueue(label: "SwiftyVK.sessionQueue")
     
     init(
@@ -68,7 +73,8 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         authorizator: Authorizator,
         taskMaker: TaskMaker,
         captchaPresenter: CaptchaPresenter,
-        sessionSaver: SessionSaver
+        sessionSaver: SessionSaver,
+        delegate: SwiftyVKDelegate?
         ) {
         self.id = id
         self.config = config
@@ -78,7 +84,10 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         self.taskMaker = taskMaker
         self.captchaPresenter = captchaPresenter
         self.sessionSaver = sessionSaver
+        self.delegate = delegate
+        
         self.token = authorizator.getSavedToken(sessionId: id)
+        sendTokenUdpatedEvent(from: nil)
         
         attemptSheduler.setLimit(to: config.attemptsPerSecLimit)
     }
@@ -168,6 +177,14 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         try gateQueue.sync {
             try throwIfDestroyed()
             try attemptSheduler.shedule(attempt: attempt, concurrent: concurrent)
+        }
+    }
+    
+    private func sendTokenUdpatedEvent(from oldToken: Token?) {
+        if let info = token?.info {
+            delegate?.vkTokenUpdated(for: id, info: info)
+        } else if oldToken != nil {
+            delegate?.vkDidLogOut(for: id)
         }
     }
     
