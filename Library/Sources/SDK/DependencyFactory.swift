@@ -21,7 +21,7 @@ protocol DependencyHolder: SessionsHolderHolder, AuthorizatorHolder {
 }
 
 protocol SessionsHolderHolder: class {
-    var sessionsHolder: SessionsHolder { get }
+    var sessionsHolder: SessionsHolder & SessionSaver { get }
 }
 
 protocol AuthorizatorHolder: class {
@@ -29,7 +29,7 @@ protocol AuthorizatorHolder: class {
 }
 
 protocol SessionMaker: class {
-    func session(id: String, config: SessionConfig) -> Session
+    func session(id: String, config: SessionConfig, sessionSaver: SessionSaver) -> Session
 }
 
 protocol TaskMaker: class {
@@ -63,7 +63,7 @@ final class DependencyFactoryImpl: DependencyFactory {
         self.delegate = delegate
     }
     
-    lazy var sessionsHolder: SessionsHolder = {
+    lazy var sessionsHolder: SessionsHolder & SessionSaver = {
         return SessionsHolderImpl(
             sessionMaker: self,
             sessionsStorage: self.sessionsStorage
@@ -71,11 +71,16 @@ final class DependencyFactoryImpl: DependencyFactory {
     }()
     
     lazy var sessionsStorage: SessionsStorage = {
-        return SessionsStorageImpl(configName: "SwiftyVKConfiguration")
+        let bundleName = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String
+        
+        return SessionsStorageImpl(
+            fileManager: FileManager(),
+            bundleName: bundleName ?? "UntitledApplication",
+            configName: "SwiftyVkState"
+        )
     }()
     
-    
-    func session(id: String, config: SessionConfig) -> Session {
+    func session(id: String, config: SessionConfig, sessionSaver: SessionSaver) -> Session {
         
         let captchaPresenter = CaptchaPresenterImpl(
             uiSyncQueue: uiSyncQueue,
@@ -90,7 +95,8 @@ final class DependencyFactoryImpl: DependencyFactory {
             attemptSheduler: AttemptShedulerImpl(limit: .limited(3)),
             authorizator: sharedAuthorizator,
             taskMaker: self,
-            captchaPresenter: captchaPresenter
+            captchaPresenter: captchaPresenter,
+            sessionSaver: sessionSaver
         )
     }
     

@@ -235,6 +235,8 @@
 		A29B14DA1D8F25C700997817 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		A2A647E61D8D7F1900B9C2FF /* Captcha_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Captcha_Tests.swift; sourceTree = "<group>"; };
 		A2BBAD891D8EBBF300F9A94A /* error.need.captcha.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = error.need.captcha.json; sourceTree = "<group>"; };
+		A2DDB6F31EF84A85007287A1 /* ~SwiftyVK~.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "~SwiftyVK~.entitlements"; sourceTree = "<absolute>"; };
+		A2DDB6F41EF84A89007287A1 /* ~SwiftyVK~.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "~SwiftyVK~.entitlements"; sourceTree = "<absolute>"; };
 		A2E993E91D91A2EA001FF2B1 /* success.getUploadServer.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.getUploadServer.json; sourceTree = "<group>"; };
 		A2EB6F2D1BD1857D008E7D86 /* testAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = testAudio.mp3; path = Example/Resources/testAudio.mp3; sourceTree = "<group>"; };
 		A2EB6F2E1BD1857D008E7D86 /* testDoc.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = testDoc.rtf; path = Example/Resources/testDoc.rtf; sourceTree = "<group>"; };
@@ -366,6 +368,8 @@
 		A2527E5A1BD139E200F65412 = {
 			isa = PBXGroup;
 			children = (
+				A2DDB6F41EF84A89007287A1 /* ~SwiftyVK~.entitlements */,
+				A2DDB6F31EF84A85007287A1 /* ~SwiftyVK~.entitlements */,
 				A21CD49B1D98143300FF2D88 /* AppDelegate.swift */,
 				A227371C1CF462F60042868A /* VKDelegateExample.swift */,
 				A2527EBC1BD13F7E00F65412 /* APIWorker.swift */,
@@ -528,6 +532,11 @@
 						DevelopmentTeam = 842SSJ357W;
 						DevelopmentTeamName = "Алексей Кудрявцев (Personal Team)";
 						LastSwiftMigration = 0900;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					A2527E791BD13A5300F65412 = {
 						CreatedOnToolsVersion = 7.1;

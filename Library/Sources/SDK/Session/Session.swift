@@ -29,7 +29,8 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
 
     public var config: SessionConfig {
         didSet {
-            onConfigChange()
+            sessionSaver?.saveState()
+            attemptSheduler.setLimit(to: config.attemptsPerSecLimit)
         }
     }
     
@@ -43,7 +44,12 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         }
     }
     
-    public var id: String
+    public var id: String {
+        didSet {
+            sessionSaver?.saveState()
+        }
+    }
+    
     var token: Token?
 
     private let taskSheduler: TaskSheduler
@@ -51,6 +57,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     private let authorizator: Authorizator
     private let taskMaker: TaskMaker
     private let captchaPresenter: CaptchaPresenter
+    private weak var sessionSaver: SessionSaver?
     private let gateQueue = DispatchQueue(label: "SwiftyVK.sessionQueue")
     
     init(
@@ -60,7 +67,8 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         attemptSheduler: AttemptSheduler,
         authorizator: Authorizator,
         taskMaker: TaskMaker,
-        captchaPresenter: CaptchaPresenter
+        captchaPresenter: CaptchaPresenter,
+        sessionSaver: SessionSaver
         ) {
         self.id = id
         self.config = config
@@ -69,8 +77,9 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         self.authorizator = authorizator
         self.taskMaker = taskMaker
         self.captchaPresenter = captchaPresenter
+        self.sessionSaver = sessionSaver
         
-        onConfigChange()
+        attemptSheduler.setLimit(to: config.attemptsPerSecLimit)
     }
     
     public func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (Error) -> ()) {
@@ -171,10 +180,6 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         guard state < .authorized else {
             throw SessionError.alreadyAuthorized
         }
-    }
-    
-    private func onConfigChange() {
-        attemptSheduler.setLimit(to: config.attemptsPerSecLimit)
     }
     
     func destroy() {

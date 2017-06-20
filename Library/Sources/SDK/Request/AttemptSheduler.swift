@@ -1,3 +1,4 @@
+
 import Foundation
 
 protocol AttemptSheduler: class {
@@ -69,7 +70,7 @@ private class AttemptApiQueue: OperationQueue {
             )
             timer.tolerance = 0.01
             RunLoop.current.add(timer, forMode: .defaultRunLoopMode)
-            CFRunLoopRun()
+            RunLoop.current.run()
         }
     }
     

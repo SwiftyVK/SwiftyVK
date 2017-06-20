@@ -8,6 +8,10 @@ public protocol SessionsHolder: class {
     func markAsDefault(session: Session) throws
 }
 
+protocol SessionSaver: class {
+    func saveState()
+}
+
 extension SessionsHolder {
     
     func make() -> Session {
@@ -15,7 +19,7 @@ extension SessionsHolder {
     }
 }
 
-public final class SessionsHolderImpl: SessionsHolder {
+public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     
     private let sessionMaker: SessionMaker
     private let sessionsStorage: SessionsStorage
@@ -37,29 +41,14 @@ public final class SessionsHolderImpl: SessionsHolder {
         self.sessionMaker = sessionMaker
         self.sessionsStorage = sessionsStorage
         
-        try? restoreFromStorage()
-    }
-    
-    private func restoreFromStorage() throws {
-        let decodedSessions = try sessionsStorage.restore()
-            .filter { !$0.id.isEmpty }
-        
-        decodedSessions
-            .map { sessionMaker.session(id: $0.id, config: $0.config ) }
-            .forEach { sessions.add($0) }
-        
-        if let defaultSession = decodedSessions
-            .first(where: { $0.isDefault })
-            .map({ sessionMaker.session(id: $0.id, config: $0.config ) }) {
-            `default` = defaultSession
-        }
+        restoreState()
     }
     
     public func make(config: SessionConfig) -> Session {
-        let session = sessionMaker.session(id: .random(20), config: config)
-        session.config = config
+        let session = sessionMaker.session(id: .random(20), config: config, sessionSaver: self)
         
         sessions.add(session)
+        saveState()
         return session
     }
     
@@ -82,6 +71,41 @@ public final class SessionsHolderImpl: SessionsHolder {
         }
         
         self.default = session
+    }
+    
+    func saveState() {
+        DispatchQueue.global().async {
+            let encodedSessions = self.all.map {
+                EncodedSession(isDefault: $0 == self.default, id: $0.id, config: $0.config)
+            }
+            
+            do {
+                try self.sessionsStorage.save(sessions: encodedSessions)
+            } catch let error {
+                print("Sessions not saved with error: \(error)")
+            }
+        }
+    }
+    
+    private func restoreState() {
+        do {
+            let decodedSessions = try sessionsStorage.restore()
+                .filter { !$0.id.isEmpty }
+            
+            decodedSessions
+                .map { sessionMaker.session(id: $0.id, config: $0.config, sessionSaver: self) }
+                .forEach { sessions.add($0) }
+            
+            if let defaultSession = decodedSessions
+                .first(where: { $0.isDefault })
+                .map({ sessionMaker.session(id: $0.id, config: $0.config, sessionSaver: self) }) {
+                `default` = defaultSession
+            }
+            
+            
+        } catch let error {
+            print("Restore sessions failed with error: \(error)")
+        }
     }
     
     deinit {
