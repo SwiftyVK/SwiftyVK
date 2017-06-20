@@ -8,6 +8,12 @@ protocol TokenStorage: class {
 
 class TokenStorageImpl: TokenStorage {
     
+    let serviceKey: String
+    
+    init(serviceKey: String) {
+        self.serviceKey = serviceKey
+    }
+    
     func save(token: Token, for sessionId: String) throws {
         let keychainQuery = keychainParamsFor(sessionId: sessionId)
         
@@ -55,8 +61,8 @@ class TokenStorageImpl: TokenStorage {
         return [
             kSecAttrAccessible: kSecAttrAccessibleWhenUnlocked,
             kSecClass: kSecClassGenericPassword,
-            kSecAttrService: "SwiftyVK",
-            kSecAttrAccount: sessionId
+            kSecAttrService: serviceKey,
+            kSecAttrAccount: "SVK" + sessionId
             ] as NSMutableDictionary
     }
 }

@@ -71,13 +71,15 @@ final class DependencyFactoryImpl: DependencyFactory {
     }()
     
     lazy var sessionsStorage: SessionsStorage = {
-        let bundleName = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String
-        
         return SessionsStorageImpl(
             fileManager: FileManager(),
-            bundleName: bundleName ?? "UntitledApplication",
+            bundleName: self.bundleName,
             configName: "SwiftyVkState"
         )
+    }()
+    
+    private lazy var bundleName: String = {
+        return Bundle.main.infoDictionary?[String(kCFBundleNameKey)] as? String ?? "SwiftyVK"
     }()
     
     func session(id: String, config: SessionConfig, sessionSaver: SessionSaver) -> Session {
@@ -114,6 +116,8 @@ final class DependencyFactoryImpl: DependencyFactory {
             urlOpener = UrlOpener_macOS()
         #endif
         
+        let tokenStorge = TokenStorageImpl(serviceKey: self.bundleName)
+        
         let vkAppProxy = VkAppProxyImpl(
             appId: self.appId,
             urlOpener: urlOpener
@@ -129,7 +133,7 @@ final class DependencyFactoryImpl: DependencyFactory {
         return AuthorizatorImpl(
             appId: self.appId,
             delegate: self.delegate,
-            tokenStorage: TokenStorageImpl(),
+            tokenStorage: tokenStorge,
             tokenMaker: self,
             tokenParser: TokenParserImpl(),
             vkAppProxy: vkAppProxy,
