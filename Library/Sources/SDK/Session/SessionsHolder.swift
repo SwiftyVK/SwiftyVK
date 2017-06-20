@@ -93,12 +93,14 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
                 .filter { !$0.id.isEmpty }
             
             decodedSessions
+                .filter { !$0.isDefault }
                 .map { sessionMaker.session(id: $0.id, config: $0.config, sessionSaver: self) }
                 .forEach { sessions.add($0) }
             
             if let defaultSession = decodedSessions
                 .first(where: { $0.isDefault })
                 .map({ sessionMaker.session(id: $0.id, config: $0.config, sessionSaver: self) }) {
+                sessions.add(defaultSession)
                 `default` = defaultSession
             }
             
