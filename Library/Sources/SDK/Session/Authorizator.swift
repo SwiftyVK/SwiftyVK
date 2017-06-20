@@ -19,14 +19,14 @@ final class AuthorizatorImpl: Authorizator {
     private let tokenParser: TokenParser
     private let vkAppProxy: VkAppProxy
     private let webPresenter: WebPresenter
-    private weak var delegate: SwiftyVKDelegate?    
+    private weak var delegate: SwiftyVKAuthorizatorDelegate?
     
     private(set) var handledToken: Token?
     private var requestTimeout: TimeInterval = 10
     
     init(
         appId: String,
-        delegate: SwiftyVKDelegate?,
+        delegate: SwiftyVKAuthorizatorDelegate?,
         tokenStorage: TokenStorage,
         tokenMaker: TokenMaker,
         tokenParser: TokenParser,
@@ -83,7 +83,6 @@ final class AuthorizatorImpl: Authorizator {
         return try queue.sync {
             let token = tokenMaker.token(token: rawToken, expires: expires, info: [:])
             try tokenStorage.save(token: token, for:  sessionId)
-            delegate?.vkTokenUpdated(for: sessionId, info: [:])
             return token
         }
     }

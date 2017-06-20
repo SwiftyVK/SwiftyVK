@@ -103,6 +103,8 @@
 		A2967E751CBBC51600B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
 		A296C6411EF9896200029D7D /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A296C6401EF9896200029D7D /* FileManager+Extensions.swift */; };
 		A296C6421EF9896200029D7D /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A296C6401EF9896200029D7D /* FileManager+Extensions.swift */; };
+		A296C6441EF9963900029D7D /* SwiftyVKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A296C6431EF9963900029D7D /* SwiftyVKDelegate.swift */; };
+		A296C6451EF9963900029D7D /* SwiftyVKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A296C6431EF9963900029D7D /* SwiftyVKDelegate.swift */; };
 		A29F1CD41E95674A00BE5369 /* TaskSheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */; };
 		A29F1CD51E95674A00BE5369 /* TaskSheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */; };
 		A2A3E6351EAFC1C70029FA44 /* Numbers+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A3E6341EAFC1C70029FA44 /* Numbers+Extensions.swift */; };
@@ -384,6 +386,7 @@
 		A29508831EBBA24B00981EC0 /* RequestConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestConfig.swift; sourceTree = "<group>"; };
 		A2967E731CBBC4A700B7D48F /* Gifts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gifts.swift; sourceTree = "<group>"; };
 		A296C6401EF9896200029D7D /* FileManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
+		A296C6431EF9963900029D7D /* SwiftyVKDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyVKDelegate.swift; sourceTree = "<group>"; };
 		A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskSheduler.swift; sourceTree = "<group>"; };
 		A2A3E6341EAFC1C70029FA44 /* Numbers+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Numbers+Extensions.swift"; sourceTree = "<group>"; };
 		A2AF16721ED19AEB00485716 /* Authorizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authorizator.swift; path = Session/Authorizator.swift; sourceTree = "<group>"; };
@@ -576,6 +579,7 @@
 			children = (
 				A2527D901BD12FD200F65412 /* SwiftyVK.h */,
 				A2527D911BD12FD200F65412 /* VK.swift */,
+				A296C6431EF9963900029D7D /* SwiftyVKDelegate.swift */,
 				A2527D7F1BD12FD200F65412 /* LongPoll.swift */,
 				A2527D801BD12FD200F65412 /* SDK */,
 				A2527D5D1BD12FD200F65412 /* API */,
@@ -1072,6 +1076,7 @@
 				A270528A1EF8138A00C05936 /* EncodedSession.swift in Sources */,
 				A2838DA41E9AA0DA00FE5BE2 /* DependencyFactory.swift in Sources */,
 				A2EB6EFB1BD18394008E7D86 /* Photos.swift in Sources */,
+				A296C6451EF9963900029D7D /* SwiftyVKDelegate.swift in Sources */,
 				A2EB6EFC1BD18394008E7D86 /* Places.swift in Sources */,
 				A24390571DA2BA1D00B9D047 /* Errors.swift in Sources */,
 				A2EB6EFD1BD18394008E7D86 /* Polls.swift in Sources */,
@@ -1136,6 +1141,7 @@
 				A2B805531EDDAFD2004DA7EB /* WebController.swift in Sources */,
 				A2BDF36F1EDC9EB200E9263A /* Lock.swift in Sources */,
 				A2066AEA1D9C388F0065A4D7 /* Task.swift in Sources */,
+				A296C6441EF9963900029D7D /* SwiftyVKDelegate.swift in Sources */,
 				A24A29491E96B2F8006152E6 /* AttemptSheduler.swift in Sources */,
 				A2EB6EC21BD18389008E7D86 /* Board.swift in Sources */,
 				A217DAA81E9924DE00EA1430 /* Method.swift in Sources */,

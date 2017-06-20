@@ -38,13 +38,6 @@ public protocol LegacyVKDelegate: class {
 //
 //
 //
-public protocol SwiftyVKDelegate: class {
-    func vkNeedToPresent(viewController: VkViewController)
-    func vkNeedsScopes(for sessionId: String) -> Scopes
-    func vkDidLogOut(for sessionId: String)
-    func vkTokenUpdated(for sessionId: String, info: [String : String])
-}
-
 public final class VK {
     
     public struct Api {

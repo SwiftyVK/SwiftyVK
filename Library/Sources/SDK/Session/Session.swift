@@ -62,7 +62,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     private let taskMaker: TaskMaker
     private let captchaPresenter: CaptchaPresenter
     private weak var sessionSaver: SessionSaver?
-    private weak var delegate: SwiftyVKDelegate?
+    private weak var delegate: SwiftyVKSessionDelegate?
     private let gateQueue = DispatchQueue(label: "SwiftyVK.sessionQueue")
     
     init(
@@ -74,7 +74,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         taskMaker: TaskMaker,
         captchaPresenter: CaptchaPresenter,
         sessionSaver: SessionSaver,
-        delegate: SwiftyVKDelegate?
+        delegate: SwiftyVKSessionDelegate?
         ) {
         self.id = id
         self.config = config
