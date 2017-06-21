@@ -5,8 +5,9 @@ public protocol SwiftyVKPresenterDelegate: class {
 }
 
 public protocol SwiftyVKSessionDelegate: class {
-    func vkDidLogOut(for sessionId: String)
+    func vkTokenCreated(for sessionId: String, info: [String : String])
     func vkTokenUpdated(for sessionId: String, info: [String : String])
+    func vkTokenRemoved(for sessionId: String)
 }
 
 public protocol SwiftyVKAuthorizatorDelegate: class {

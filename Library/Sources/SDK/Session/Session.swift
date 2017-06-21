@@ -52,7 +52,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     
     var token: Token? {
         didSet {
-            sendTokenUdpatedEvent(from: oldValue)
+            sendTokenChangeEvent(from: oldValue, to: token)
         }
     }
 
@@ -87,7 +87,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         self.delegate = delegate
         
         self.token = authorizator.getSavedToken(sessionId: id)
-        sendTokenUdpatedEvent(from: nil)
+        sendTokenChangeEvent(from: nil, to: token)
         
         attemptSheduler.setLimit(to: config.attemptsPerSecLimit)
     }
@@ -180,11 +180,13 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         }
     }
     
-    private func sendTokenUdpatedEvent(from oldToken: Token?) {
-        if let info = token?.info {
-            delegate?.vkTokenUpdated(for: id, info: info)
+    private func sendTokenChangeEvent(from oldToken: Token?, to newToken: Token?) {
+        if oldToken != nil, let newToken = newToken {
+            delegate?.vkTokenUpdated(for: id, info: newToken.info)
+        } else if let newToken = newToken {
+            delegate?.vkTokenCreated(for: id, info: newToken.info)
         } else if oldToken != nil {
-            delegate?.vkDidLogOut(for: id)
+            delegate?.vkTokenRemoved(for: id)
         }
     }
     

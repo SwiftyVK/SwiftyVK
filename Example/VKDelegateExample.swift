@@ -29,8 +29,16 @@ class VKDelegateExample: SwiftyVKDelegate {
         #endif
     }
     
+    func vkTokenCreated(for sessionId: String, info: [String : String]) {
+        print("token created in session \(sessionId) with info \(info)")
+    }
+    
     func vkTokenUpdated(for sessionId: String, info: [String : String]) {
         print("token updated in session \(sessionId) with info \(info)")
+    }
+    
+    func vkTokenRemoved(for sessionId: String) {
+        print("token removed in session \(sessionId)")
     }
     
     func vkNeedsScopes(for sessionId: String) -> Scopes {

@@ -72,7 +72,7 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
         
         self.default = session
     }
-    
+
     func saveState() {
         DispatchQueue.global().async {
             let encodedSessions = self.all.map {
