@@ -5,7 +5,7 @@ final class TokenStorageTests: BaseTestCase {
     
     func test_getSaved() {
         // Given
-        let repository = TokenStorageImpl()
+        let repository = TokenStorageImpl(serviceKey: "")
         let id = "testId"
         // When
         let token = TokenMock()
@@ -23,7 +23,7 @@ final class TokenStorageTests: BaseTestCase {
     
     func test_getRemoved() {
         // Given
-        let repository = TokenStorageImpl()
+        let repository = TokenStorageImpl(serviceKey: "")
         let id = "testId"
         // When
         repository.removeFor(sessionId: id)

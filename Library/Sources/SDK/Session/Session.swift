@@ -209,10 +209,6 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
             self.id = ""
         }
     }
-    
-    deinit {
-        logOut()
-    }
 }
 
 public func ==(lhs: Session, rhs: Session) -> Bool {

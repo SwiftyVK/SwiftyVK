@@ -15,6 +15,8 @@ final class SessionTests: BaseTestCase {
         let authorizator = AuthorizatorMock()
         let taskMaker = TaskMakerMock()
         let captchaPresenter = CaptchaPresenterMock()
+        let sessionSaver = SessionsHolderMock()
+        let delegate = SwiftyVKDelegateMock()
         
         let session = SessionImpl(
             id: .random(20),
@@ -23,7 +25,9 @@ final class SessionTests: BaseTestCase {
             attemptSheduler: attemptSheduler,
             authorizator: authorizator,
             taskMaker: taskMaker,
-            captchaPresenter: captchaPresenter
+            captchaPresenter: captchaPresenter,
+            sessionSaver: sessionSaver,
+            delegate: delegate
         )
         
         return (session, taskSheduler, attemptSheduler, authorizator)

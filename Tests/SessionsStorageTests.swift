@@ -5,7 +5,7 @@ import XCTest
 class SessionStorageTests: XCTestCase {
     
     func makeStorage() -> SessionsStorageImpl {
-        return SessionsStorageImpl(configName: "test")
+        return SessionsStorageImpl(fileManager: FileManager(), bundleName: "", configName: "")
     }
     
     override func setUp() {

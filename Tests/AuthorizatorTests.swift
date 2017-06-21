@@ -194,21 +194,6 @@ class AuthorizatorTests: BaseTestCase {
         XCTAssertEqual(removeCallCount, 1)
     }
     
-    func test_reset_delegeteShouldCallLogoutOnce() {
-        // Given
-        let context = makeContext()
-        var delegateCallCount = 0
-        
-        context.delegate.onVkDidLogOut = { sessionId in
-            XCTAssertEqual(context.sessionId, sessionId)
-            delegateCallCount += 1
-        }
-        // When
-        _ = context.authorizator.reset(sessionId: context.sessionId)
-        // Then
-        XCTAssertEqual(delegateCallCount, 1)
-    }
-    
     func test_handle_withNilResponse_shouldCantHandle() {
         // Given
         let context = makeContext()

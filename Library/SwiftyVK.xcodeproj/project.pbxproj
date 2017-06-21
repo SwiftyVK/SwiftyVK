@@ -141,6 +141,7 @@
 		A2D15A951EEE96840063D6F2 /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2D15A931EEE96840063D6F2 /* Asset.xcassets */; };
 		A2D2713C1EC4D0BA00B24D09 /* SessionsHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionsHolder.swift */; };
 		A2D2713D1EC4D0BA00B24D09 /* SessionsHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2713B1EC4D0BA00B24D09 /* SessionsHolder.swift */; };
+		A2D355F21EFAD4C300395E61 /* SessionStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D355F11EFAD4C300395E61 /* SessionStorageMock.swift */; };
 		A2E34DBC1ED1F1260041E663 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBB1ED1F1260041E663 /* TokenStorage.swift */; };
 		A2E34DBD1ED1F1260041E663 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBB1ED1F1260041E663 /* TokenStorage.swift */; };
 		A2E34DBF1ED1F6FE0041E663 /* TokenStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBE1ED1F6FE0041E663 /* TokenStorageMock.swift */; };
@@ -428,6 +429,7 @@
 		A2D1369A1DA00E9000C487C1 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		A2D15A931EEE96840063D6F2 /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
 		A2D2713B1EC4D0BA00B24D09 /* SessionsHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionsHolder.swift; sourceTree = "<group>"; };
+		A2D355F11EFAD4C300395E61 /* SessionStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStorageMock.swift; sourceTree = "<group>"; };
 		A2E34DBB1ED1F1260041E663 /* TokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TokenStorage.swift; path = Session/TokenStorage.swift; sourceTree = "<group>"; };
 		A2E34DBE1ED1F6FE0041E663 /* TokenStorageMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorageMock.swift; sourceTree = "<group>"; };
 		A2E34DC01ED1FB2F0041E663 /* TokenStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorageTests.swift; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 				A25A19D91EE5198600CF13AF /* WebPresenterMock.swift */,
 				A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */,
 				A20CDD951EF66AEC00271276 /* CaptchaControllerMock.swift */,
+				A2D355F11EFAD4C300395E61 /* SessionStorageMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1041,6 +1044,7 @@
 				A25A19D01EE4233D00CF13AF /* TokenParserTests.swift in Sources */,
 				A2E34DBF1ED1F6FE0041E663 /* TokenStorageMock.swift in Sources */,
 				A2433A441EA533500058BB6D /* TaskMock.swift in Sources */,
+				A2D355F21EFAD4C300395E61 /* SessionStorageMock.swift in Sources */,
 				A24DDAF01EB73CB6002EA273 /* BodyBuilderMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

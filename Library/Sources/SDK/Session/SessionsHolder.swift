@@ -23,11 +23,11 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     
     private let sessionMaker: SessionMaker
     private let sessionsStorage: SessionsStorage
-    private var sessions = NSHashTable<AnyObject>(options: .strongMemory)
+    private var sessions = NSHashTable<AnyObject>(options: .weakMemory)
     private var canKillDefaultSessions = false
     
     lazy public var `default`: Session = {
-        return self.make()
+        return self.sessionMaker.session(id: .random(20), config: .default, sessionSaver: self)
     }()
     
     public var all: [Session] {
@@ -42,6 +42,8 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
         self.sessionsStorage = sessionsStorage
         
         restoreState()
+        self.sessions.add(`default`)
+        saveState()
     }
     
     public func make(config: SessionConfig) -> Session {
@@ -72,18 +74,16 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
         
         self.default = session
     }
-
+    
     func saveState() {
-        DispatchQueue.global().async {
-            let encodedSessions = self.all.map {
-                EncodedSession(isDefault: $0 == self.default, id: $0.id, config: $0.config)
-            }
-            
-            do {
-                try self.sessionsStorage.save(sessions: encodedSessions)
-            } catch let error {
-                print("Sessions not saved with error: \(error)")
-            }
+        let encodedSessions = self.all.map {
+            EncodedSession(isDefault: $0 == self.`default`, id: $0.id, config: $0.config)
+        }
+        
+        do {
+            try self.sessionsStorage.save(sessions: encodedSessions)
+        } catch let error {
+            print("Sessions not saved with error: \(error)")
         }
     }
     
@@ -108,10 +108,5 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
         } catch let error {
             print("Restore sessions failed with error: \(error)")
         }
-    }
-    
-    deinit {
-        canKillDefaultSessions = true
-        sessions.allObjects.flatMap { $0 as? Session } .forEach { try? destroy(session: $0) }
     }
 }

@@ -4,7 +4,10 @@ import XCTest
 final class SessionsHolderTests: BaseTestCase {
     
     func makeHolder() -> SessionsHolderImpl {
-        return SessionsHolderImpl(sessionMaker: SessionMakerMock())
+        return SessionsHolderImpl(
+            sessionMaker: SessionMakerMock(),
+            sessionsStorage: SessionsStorageMock()
+        )
     }
     
     func test_makeNewSession() {
@@ -30,15 +33,6 @@ final class SessionsHolderTests: BaseTestCase {
         // When
         try? holder.destroy(session: newSession)
         // Then
-        XCTAssertEqual(newSession.state, .destroyed)
-    }
-    
-    func test_autoDestroyAllSessions() {
-        // Given
-        let defaultSession = makeHolder().default
-        let newSession = makeHolder().make()
-        // Then
-        XCTAssertEqual(defaultSession.state, .destroyed)
         XCTAssertEqual(newSession.state, .destroyed)
     }
     
@@ -73,7 +67,7 @@ final class SessionsHolderTests: BaseTestCase {
         // Given
         let holder = makeHolder()
         // When
-        let sessions = [holder.make(), holder.make(), holder.make(), holder.make()]
+        let sessions = [holder.make(), holder.make(), holder.make(), holder.make(), holder.default]
         // Then
         XCTAssertEqual(holder.all.count, sessions.count)
     }

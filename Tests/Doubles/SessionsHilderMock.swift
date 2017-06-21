@@ -1,6 +1,6 @@
 @testable import SwiftyVK
 
-final class SessionsHolderMock: SessionsHolder {
+final class SessionsHolderMock: SessionSaver, SessionsHolder {
     
     let `default`: Session = SessionMock()
     
@@ -15,4 +15,6 @@ final class SessionsHolderMock: SessionsHolder {
     func destroy(session: Session) throws {}
     
     func markAsDefault(session: Session) {}
+    
+    func saveState() {}
 }

@@ -4,7 +4,7 @@ final class DependencyHolderMock: DependencyHolder {
     
     init(appId: String, delegate: SwiftyVKDelegate?) {}
     
-    var sessionsHolder: SessionsHolder {
+    var sessionsHolder: SessionSaver & SessionsHolder {
         return SessionsHolderMock()
     }
     
@@ -21,7 +21,8 @@ final class TaskMakerMock: TaskMaker {
 
 
 final class SessionMakerMock: SessionMaker {
-    func session(id: String, config: SessionConfig) -> Session {
+    
+    func session(id: String, config: SessionConfig, sessionSaver: SessionSaver) -> Session {
         return SessionMock()
     }
 }

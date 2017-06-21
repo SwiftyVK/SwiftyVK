@@ -8,6 +8,10 @@ final class SessionMock: Session, TaskSession, DestroyableSession {
     var state = SessionState.initiated
     var isDefault = false
     
+    init() {
+        
+    }
+    
     func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (Error) -> ()) {
         
     }

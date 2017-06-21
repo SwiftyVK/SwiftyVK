@@ -66,7 +66,7 @@ class CaptchaPresenterTests: XCTestCase {
         }
     }
     
-    func test_present_throwCantCaptchaPresenterTimedOut() {
+    func test_present_throwCaptchaPresenterTimedOut() {
         // Given
         let context = makeContext()
         
