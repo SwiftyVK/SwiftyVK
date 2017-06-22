@@ -23,7 +23,7 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     
     private let sessionMaker: SessionMaker
     private let sessionsStorage: SessionsStorage
-    private var sessions = NSHashTable<AnyObject>(options: .weakMemory)
+    private var sessions = NSHashTable<AnyObject>(options: .strongMemory)
     private var canKillDefaultSessions = false
     
     lazy public var `default`: Session = {
