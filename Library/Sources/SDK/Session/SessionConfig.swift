@@ -55,7 +55,7 @@ public enum Language: String, Codable {
 
 public enum AttemptLimit: Codable {
     
-    static let `default` = AttemptLimit.limited(3)
+    public static let `default` = AttemptLimit.limited(3)
     
     case unlimited
     case limited(Int)

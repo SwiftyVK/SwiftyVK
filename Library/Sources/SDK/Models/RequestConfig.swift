@@ -2,7 +2,7 @@ import Foundation
 
 public struct Config {
     
-    static let `default` = Config()
+    public static let `default` = Config()
     
     let httpMethod: HttpMethod
     
