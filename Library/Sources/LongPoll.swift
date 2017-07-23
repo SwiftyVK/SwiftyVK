@@ -21,7 +21,7 @@ extension VKLongPoll {
         
         ///Starting receiving updates from the long pool server
         public static func start() {
-            lpQueue.async {
+            lpQueue.sync {
                 guard !isActive else {
                     VK.Log.put("LongPoll", "LongPoll is already active")
                     return
@@ -50,7 +50,7 @@ extension VKLongPoll {
         
         ///Pause receiving updates from the long pool server
         public static func stop() {
-            lpQueue.async {
+            lpQueue.sync {
                 updateQueue.cancelAllOperations()
                 connectionObserver = nil
                 isActive = false
