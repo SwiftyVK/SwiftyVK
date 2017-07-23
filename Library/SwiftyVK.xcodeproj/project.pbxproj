@@ -139,6 +139,8 @@
 		A2EB6F171BD18395008E7D86 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7E1BD12FD200F65412 /* SwiftyJSON.swift */; };
 		A2EB6F181BD183A4008E7D86 /* SwiftyVK.h in Headers */ = {isa = PBXBuildFile; fileRef = A2527D901BD12FD200F65412 /* SwiftyVK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A2EB6F191BD183A5008E7D86 /* SwiftyVK.h in Headers */ = {isa = PBXBuildFile; fileRef = A2527D901BD12FD200F65412 /* SwiftyVK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D41F6F6E1F2397A4008F84F8 /* LongPollUpdatingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F6F6D1F2397A4008F84F8 /* LongPollUpdatingOperation.swift */; };
+		D41F6F6F1F2397A4008F84F8 /* LongPollUpdatingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F6F6D1F2397A4008F84F8 /* LongPollUpdatingOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -286,6 +288,7 @@
 		A2D1369A1DA00E9000C487C1 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D41F6F6D1F2397A4008F84F8 /* LongPollUpdatingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LongPollUpdatingOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -316,6 +319,7 @@
 				A2527D911BD12FD200F65412 /* VK.swift */,
 				A25AE9381D9AD57E008C0AA9 /* Config.swift */,
 				A2527D7F1BD12FD200F65412 /* LongPoll.swift */,
+				D41F6F6D1F2397A4008F84F8 /* LongPollUpdatingOperation.swift */,
 				A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */,
 				A2527D801BD12FD200F65412 /* SDK */,
 				A2527D5D1BD12FD200F65412 /* API */,
@@ -698,6 +702,7 @@
 				A2EB6EF21BD18394008E7D86 /* Fave.swift in Sources */,
 				A2EB6EF31BD18394008E7D86 /* Friends.swift in Sources */,
 				A2EB6EF41BD18394008E7D86 /* Groups.swift in Sources */,
+				D41F6F6F1F2397A4008F84F8 /* LongPollUpdatingOperation.swift in Sources */,
 				A26D88BB1DC124C200AD63CD /* WebController-iOS.swift in Sources */,
 				A2EB6EF51BD18394008E7D86 /* Likes.swift in Sources */,
 				A2EB6EF61BD18394008E7D86 /* Messages.swift in Sources */,
@@ -787,6 +792,7 @@
 				A2EB6ED91BD18389008E7D86 /* Wall.swift in Sources */,
 				A2EB6EDA1BD18389008E7D86 /* Arg.swift in Sources */,
 				A2EB6EDC1BD18389008E7D86 /* Media.swift in Sources */,
+				D41F6F6E1F2397A4008F84F8 /* LongPollUpdatingOperation.swift in Sources */,
 				A2B4ECAC1DCA4F6B009435B6 /* CapthcaPresenter.swift in Sources */,
 				A2EB6EDD1BD18389008E7D86 /* Resources.swift in Sources */,
 				A2EB6EDE1BD18389008E7D86 /* Scope.swift in Sources */,
