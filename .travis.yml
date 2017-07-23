@@ -11,7 +11,7 @@ env:
   - MAC_SCHEME="SwiftyVK-Example-OSX"
 
   - IOS_SCHEME="SwiftyVK-Example-iOS"
-  - IOS_DESTANATION="platform=iOS Simulator,OS=10.3,name=iPhone 7 Plus"
+  - IOS_DESTANATION="platform=iOS Simulator,OS=10.3.1,name=iPhone 7 Plus"
 
 before_install:
   - pwd
