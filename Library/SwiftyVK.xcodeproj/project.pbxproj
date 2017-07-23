@@ -141,6 +141,8 @@
 		A2EB6F191BD183A5008E7D86 /* SwiftyVK.h in Headers */ = {isa = PBXBuildFile; fileRef = A2527D901BD12FD200F65412 /* SwiftyVK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D41F6F6E1F2397A4008F84F8 /* LongPollUpdatingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F6F6D1F2397A4008F84F8 /* LongPollUpdatingOperation.swift */; };
 		D41F6F6F1F2397A4008F84F8 /* LongPollUpdatingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F6F6D1F2397A4008F84F8 /* LongPollUpdatingOperation.swift */; };
+		D41F6F721F24EEBE008F84F8 /* ConnectionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F6F711F24EEBE008F84F8 /* ConnectionObserver.swift */; };
+		D41F6F731F24EEBE008F84F8 /* ConnectionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F6F711F24EEBE008F84F8 /* ConnectionObserver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -289,6 +291,7 @@
 		A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D41F6F6D1F2397A4008F84F8 /* LongPollUpdatingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LongPollUpdatingOperation.swift; sourceTree = "<group>"; };
+		D41F6F711F24EEBE008F84F8 /* ConnectionObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -318,9 +321,8 @@
 				A2527D901BD12FD200F65412 /* SwiftyVK.h */,
 				A2527D911BD12FD200F65412 /* VK.swift */,
 				A25AE9381D9AD57E008C0AA9 /* Config.swift */,
-				A2527D7F1BD12FD200F65412 /* LongPoll.swift */,
-				D41F6F6D1F2397A4008F84F8 /* LongPollUpdatingOperation.swift */,
 				A20FF1191BEB6BB5009FBE3D /* Authorizator.swift */,
+				D41F6F701F24EE9F008F84F8 /* LongPoll */,
 				A2527D801BD12FD200F65412 /* SDK */,
 				A2527D5D1BD12FD200F65412 /* API */,
 				A2527D791BD12FD200F65412 /* Extensions */,
@@ -467,6 +469,16 @@
 				A26D88BA1DC124C200AD63CD /* WebController-iOS.swift */,
 			);
 			name = Web;
+			sourceTree = "<group>";
+		};
+		D41F6F701F24EE9F008F84F8 /* LongPoll */ = {
+			isa = PBXGroup;
+			children = (
+				A2527D7F1BD12FD200F65412 /* LongPoll.swift */,
+				D41F6F6D1F2397A4008F84F8 /* LongPollUpdatingOperation.swift */,
+				D41F6F711F24EEBE008F84F8 /* ConnectionObserver.swift */,
+			);
+			name = LongPoll;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -728,6 +740,7 @@
 				A21E815A1E2A8303008E81E7 /* UrlCharactesSet.swift in Sources */,
 				A2EB6F051BD18395008E7D86 /* Video.swift in Sources */,
 				A2EB6F061BD18395008E7D86 /* Wall.swift in Sources */,
+				D41F6F731F24EEBE008F84F8 /* ConnectionObserver.swift in Sources */,
 				A2EB6F071BD18395008E7D86 /* Arg.swift in Sources */,
 				A2066AEB1D9C388F0065A4D7 /* RequestInstance.swift in Sources */,
 				A2EB6F091BD18395008E7D86 /* Media.swift in Sources */,
@@ -760,6 +773,7 @@
 				A2B4ECAF1DCA4FA5009435B6 /* CaptchaController-OSX.swift in Sources */,
 				A2EB6EC11BD18389008E7D86 /* Audio.swift in Sources */,
 				A2066AEA1D9C388F0065A4D7 /* RequestInstance.swift in Sources */,
+				D41F6F721F24EEBE008F84F8 /* ConnectionObserver.swift in Sources */,
 				A2EB6EC21BD18389008E7D86 /* Board.swift in Sources */,
 				A2EB6EC31BD18389008E7D86 /* Database.swift in Sources */,
 				A2EB6EC41BD18389008E7D86 /* Docs.swift in Sources */,

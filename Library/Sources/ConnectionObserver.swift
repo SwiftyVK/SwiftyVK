@@ -1,0 +1,73 @@
+import Foundation
+
+internal final class ConnectionObserver: NSObject {
+    
+    private var connected = true
+    private let onConnect: () -> ()
+    private let onDisconnect: () -> ()
+    
+    private override init() {
+        fatalError()
+    }
+    
+    init(
+        onConnect: @escaping () -> (),
+        onDisconnect: @escaping () -> ()
+        ) {
+        self.onConnect = onConnect
+        self.onDisconnect = onDisconnect
+        
+        super.init()
+        
+        #if os(OSX)
+            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(disconnect), name: .NSWorkspaceScreensDidSleep, object: nil)
+            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(connect), name: .NSWorkspaceScreensDidWake, object: nil)
+        #elseif os(iOS)
+            NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: .UIApplicationWillResignActive, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(connect), name: .UIApplicationDidBecomeActive, object: nil)
+        #endif
+        
+        let reachability = Reachability()
+        NotificationCenter.default.addObserver(self, selector: #selector(onReachabilityChange), name: ReachabilityChangedNotification, object: nil)
+        _ = try? reachability?.startNotifier()
+        
+        VK.Log.put("Connection", "Start observing")
+    }
+    
+    @objc
+    private func onReachabilityChange(notification: NSNotification) {
+        guard let reachability = notification.object as? Reachability else { return }
+        
+        if reachability.isReachable {
+            onConnect()
+        } else {
+            onDisconnect()
+        }
+    }
+    
+    @objc
+    private func connect() {
+        if connected == false {
+            connected = true
+            onConnect()
+            NotificationCenter.default.post(name: VK.LP.notifications.connectinDidRestore, object: nil)
+            VK.Log.put("Connection", "restored")
+        }
+    }
+    
+    @objc
+    private func disconnect() {
+        if connected == true {
+            connected = false
+            onDisconnect()
+            NotificationCenter.default.post(name: VK.LP.notifications.connectinDidLost, object: nil)
+            VK.Log.put("Connection", "lost")
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        VK.Log.put("Connection", "Stop observing")
+    }
+}
+
