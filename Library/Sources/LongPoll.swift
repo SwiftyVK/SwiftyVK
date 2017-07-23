@@ -1,15 +1,6 @@
 import Foundation
-#if os(iOS)
-    import UIKit
-#elseif os(OSX)
-    import Cocoa
-#endif
-
-
 
 private var lpQueue = DispatchQueue(label: "VKLongPollQueue")
-
-
 
 private typealias VKLongPoll = VK
 extension VKLongPoll {
@@ -41,11 +32,15 @@ extension VKLongPoll {
                 connectionObserver = ConnectionObserver(
                     onConnect: {
                         if isActive {
+                            NotificationCenter.default.post(name: VK.LP.notifications.connectinDidRestore, object: nil)
                             startUpdating()
                         }
                     },
                     onDisconnect: {
-                        updateQueue.cancelAllOperations()
+                        if isActive {
+                            NotificationCenter.default.post(name: VK.LP.notifications.connectinDidLost, object: nil)
+                            updateQueue.cancelAllOperations()
+                        }
                     }
                 )
                 

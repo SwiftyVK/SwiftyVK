@@ -143,6 +143,7 @@
 		D41F6F6F1F2397A4008F84F8 /* LongPollUpdatingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F6F6D1F2397A4008F84F8 /* LongPollUpdatingOperation.swift */; };
 		D41F6F721F24EEBE008F84F8 /* ConnectionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F6F711F24EEBE008F84F8 /* ConnectionObserver.swift */; };
 		D41F6F731F24EEBE008F84F8 /* ConnectionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F6F711F24EEBE008F84F8 /* ConnectionObserver.swift */; };
+		D41F6F771F24F0F5008F84F8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7C1BD12FD200F65412 /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -782,6 +783,7 @@
 				A2EB6EC71BD18389008E7D86 /* Groups.swift in Sources */,
 				A2EB6EC81BD18389008E7D86 /* Likes.swift in Sources */,
 				A2EB6EC91BD18389008E7D86 /* Messages.swift in Sources */,
+				D41F6F771F24F0F5008F84F8 /* Reachability.swift in Sources */,
 				A2EB6ECA1BD18389008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6ECB1BD18389008E7D86 /* Notes.swift in Sources */,
 				A236B2B91DB68E4F002376C8 /* WebController-OSX.swift in Sources */,

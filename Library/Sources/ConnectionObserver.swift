@@ -1,5 +1,11 @@
 import Foundation
 
+#if os(iOS)
+    import UIKit
+#elseif os(OSX)
+    import Cocoa
+#endif
+
 internal final class ConnectionObserver: NSObject {
     
     private var connected = true
@@ -50,7 +56,6 @@ internal final class ConnectionObserver: NSObject {
         if connected == false {
             connected = true
             onConnect()
-            NotificationCenter.default.post(name: VK.LP.notifications.connectinDidRestore, object: nil)
             VK.Log.put("Connection", "restored")
         }
     }
@@ -60,7 +65,6 @@ internal final class ConnectionObserver: NSObject {
         if connected == true {
             connected = false
             onDisconnect()
-            NotificationCenter.default.post(name: VK.LP.notifications.connectinDidLost, object: nil)
             VK.Log.put("Connection", "lost")
         }
     }
