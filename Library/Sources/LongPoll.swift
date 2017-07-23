@@ -20,106 +20,127 @@ extension VKLongPoll {
      * To subscribe to notifications, use NSNotificationCenter using the names of VK.LP.notifications
      */
     public struct LP {
-        public fileprivate(set) static var isActive: Bool = false
-        private static var observer: LPObserver?
-        private static var lpKey = String()
-        private static var keyIsExpired = false
-        private static var server = String()
-        private static var ts = String()
-        
+        public private(set) static var isActive: Bool = false
+        private static var connectionObserver: ConnectionObserver?
+        private static let updateQueue: OperationQueue = {
+            let queue = OperationQueue()
+            queue.maxConcurrentOperationCount = 1
+            return queue
+        }()
         
         ///Starting receiving updates from the long pool server
         public static func start() {
             lpQueue.async {
-                guard VK.state == .authorized && !isActive else {
-                    VK.Log.put("LongPoll", "User is not authorized or LongPoll is active yet")
+                guard !isActive else {
+                    VK.Log.put("LongPoll", "LongPoll is already active")
                     return
                 }
+                
                 isActive = true
-                keyIsExpired = true
-                getServer()
-                observer = LPObserver()
+                
+                connectionObserver = ConnectionObserver(
+                    onConnect: {
+                        if isActive {
+                            startUpdating()
+                        }
+                    },
+                    onDisconnect: {
+                        updateQueue.cancelAllOperations()
+                    }
+                )
+                
                 VK.Log.put("LongPoll", "Stared")
             }
         }
         
-        
-        
         ///Pause receiving updates from the long pool server
         public static func stop() {
             lpQueue.async {
-                observer = nil
+                updateQueue.cancelAllOperations()
+                connectionObserver = nil
                 isActive = false
                 VK.Log.put("LongPoll", "Stopped")
             }
         }
         
-        
-        
-        private static func getServer() {
+        private static func getConnectionInfo() -> (server: String, lpKey: String, ts: String)? {
+            guard VK.state == .authorized else {
+                VK.Log.put("LongPoll", "User is not authorized")
+                return nil
+            }
+            
+            let semaphore = DispatchSemaphore(value: 0)
+            var result: (server: String, lpKey: String, ts: String)?
+            
             var req = VK.API.Messages.getLongPollServer([VK.Arg.useSsl: "0", VK.Arg.needPts: "1"])
             req.catchErrors = false
             req.maxAttempts = 1
             
-            VK.Log.put("LongPoll", "Getting server with \(req)")
+            VK.Log.put("LongPoll", "Getting server info with \(req)")
             req.send(
                 onSuccess: {response in
-                    VK.Log.put("LongPoll", "get server with \(req)")
-                    lpKey = response["key"].stringValue
-                    server = response["server"].stringValue
-                    ts = response["ts"].stringValue
-                    keyIsExpired = false
-                    update()
-            },
+                    defer {
+                        semaphore.signal()
+                    }
+                    
+                    VK.Log.put("LongPoll", "get server info with \(req)")
+                    
+                    guard
+                        let server = response["server"].string,
+                        let lpKey = response["key"].string else {
+                            return
+                    }
+                    
+                    let ts = response["ts"].stringValue
+                    
+                    result = (server, lpKey, ts)
+                },
                 onError: {_ in
-                    VK.Log.put("LongPoll", "Error get server with \(req)")
-                    Thread.sleep(forTimeInterval: 10)
-                    getServer()
-            }
+                    VK.Log.put("LongPoll", "Error get server info with \(req)")
+                    semaphore.signal()
+                }
             )
+            
+            semaphore.wait()
+            
+            if let result = result {
+                return result
+            } else {
+                Thread.sleep(forTimeInterval: 10)
+                return getConnectionInfo()
+            }
         }
         
-        
-        
-        fileprivate static func update() {
-            lpQueue.async {
-                guard isActive else {return}
-                
-                guard !keyIsExpired && !server.isEmpty && !lpKey.isEmpty && !ts.isEmpty else {
-                    observer?.connectionLost()
-                    getServer()
+        private static func startUpdating() {
+            lpQueue.sync {
+                guard isActive else {
+                    VK.Log.put("LongPoll", "Long poll not active")
                     return
                 }
                 
-                var req = RequestConfig(url: "https://\(server)?act=a_check&key=\(lpKey)&ts=\(ts)&wait=25&mode=106")
-                req.catchErrors = false
-                req.timeout = 30
-                req.maxAttempts = 1
-                
-                VK.Log.put("LongPoll", "Send with \(req)")
-                req.send(
-                    onSuccess: {response in
-                        VK.Log.put("LongPoll", "Received response with \(req)")
-                        
-                        ts = response["ts"].stringValue
-                        parse(response["updates"].array)
-                        
-                        _ = (response["failed"].intValue > 0)
-                            ? (keyIsExpired = true)
-                            : observer?.connectionRestore()
-                        update()
-                },
-                    onError: {_ in
-                        VK.Log.put("LongPoll", "Received error with \(req)")
-                        
-                        observer?.connectionLost()
-                        Thread.sleep(forTimeInterval: 10)
-                        update()
+                guard let connectionInfo = getConnectionInfo() else {
+                    VK.Log.put("LongPoll", "Fail to get connection info")
+                    return
                 }
+                
+                VK.Log.put("LongPoll", "Start updating")
+                
+                let updateOperation = LongPollUpdatingOperation(
+                    server: connectionInfo.server,
+                    lpKey: connectionInfo.lpKey,
+                    startTs: connectionInfo.ts,
+                    onResponse: { updates in
+                        parse(updates)
+                    },
+                    onKeyExpired: {
+                        updateQueue.cancelAllOperations()
+                        startUpdating()
+                    }
                 )
+            
+                updateQueue.addOperation(updateOperation)
             }
         }
-        
         
         // swiftlint:disable cyclomatic_complexity
         private static func parse(_ updates: [JSON]?) {
@@ -266,80 +287,73 @@ public final class JSONWrapper {
 //
 //
 //
-internal final class LPObserver: NSObject {
-    private var connected = true
+internal final class ConnectionObserver: NSObject {
     
-    internal override init() {
+    private var connected = true
+    private let onConnect: () -> ()
+    private let onDisconnect: () -> ()
+    
+    private override init() {
+        fatalError()
+    }
+    
+    init(
+        onConnect: @escaping () -> (),
+        onDisconnect: @escaping () -> ()
+        ) {
+        self.onConnect = onConnect
+        self.onDisconnect = onDisconnect
+        
         super.init()
         
-        VK.Log.put("LongPoll", "Init observer")
-        
         #if os(OSX)
-            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(connectionLostForce), name:NSNotification.Name.NSWorkspaceScreensDidSleep, object: nil)
-            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(connectionRestoreForce), name:NSNotification.Name.NSWorkspaceScreensDidWake, object: nil)
+            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(disconnect), name: .NSWorkspaceScreensDidSleep, object: nil)
+            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(connect), name: .NSWorkspaceScreensDidWake, object: nil)
         #elseif os(iOS)
-            let reachability = Reachability()
-            NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged), name: ReachabilityChangedNotification, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(connectionLostForce), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(connectionRestoreForce), name:NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-            _ = try? reachability?.startNotifier()
+            NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: .UIApplicationWillResignActive, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(connect), name: .UIApplicationDidBecomeActive, object: nil)
         #endif
-    }
-    
-    
-    
-    #if os(iOS)
-    @objc
-    private func reachabilityChanged(note: NSNotification) {
-        if let reachability = note.object as? Reachability {
-            reachability.isReachable ? connectionRestore() : connectionLost()
-        }
-    }
-    #endif
-    
-    
-    
-    @objc
-    private func connectionRestoreForce() {
-        lpQueue.async {
-            VK.LP.isActive = true
-            VK.LP.update()
-        }
-    }
-    
-    
-    @objc
-    private func connectionLostForce() {
-        lpQueue.async {
-            VK.LP.isActive = false
-            self.connectionLost()
-        }
-    }
-    
-    
-    
-    fileprivate func connectionLost() {
         
-        if connected == true {
-            connected = false
-            VK.Log.put("LongPoll", "Connection lost")
-            NotificationCenter.default.post(name: VK.LP.notifications.connectinDidLost, object: nil)
+        let reachability = Reachability()
+        NotificationCenter.default.addObserver(self, selector: #selector(onReachabilityChange), name: ReachabilityChangedNotification, object: nil)
+        _ = try? reachability?.startNotifier()
+        
+        VK.Log.put("Connection", "Start observing")
+    }
+    
+    @objc
+    private func onReachabilityChange(notification: NSNotification) {
+        guard let reachability = notification.object as? Reachability else { return }
+        
+        if reachability.isReachable {
+            onConnect()
+        } else {
+            onDisconnect()
         }
     }
     
-    
-    
-    fileprivate func connectionRestore() {
-        
+    @objc
+    private func connect() {
         if connected == false {
             connected = true
-            VK.Log.put("LongPoll", "Connection restored")
+            onConnect()
             NotificationCenter.default.post(name: VK.LP.notifications.connectinDidRestore, object: nil)
+            VK.Log.put("Connection", "restored")
         }
     }
     
+    @objc
+    private func disconnect() {
+        if connected == true {
+            connected = false
+            onDisconnect()
+            NotificationCenter.default.post(name: VK.LP.notifications.connectinDidLost, object: nil)
+            VK.Log.put("Connection", "lost")
+        }
+    }
     
     deinit {
-        VK.Log.put("LongPoll", "Deinit observer")
+        NotificationCenter.default.removeObserver(self)
+        VK.Log.put("Connection", "Stop observing")
     }
 }
