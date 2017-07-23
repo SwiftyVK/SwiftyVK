@@ -58,6 +58,7 @@ extension VKLongPoll {
             }
         }
         
+        // swiftlint:disable:next large_tuple
         private static func getConnectionInfo() -> (server: String, lpKey: String, ts: String)? {
             guard VK.state == .authorized else {
                 VK.Log.put("LongPoll", "User is not authorized")
@@ -100,7 +101,8 @@ extension VKLongPoll {
             
             if let result = result {
                 return result
-            } else {
+            }
+            else {
                 Thread.sleep(forTimeInterval: 10)
                 return getConnectionInfo()
             }

@@ -66,7 +66,8 @@ final class LongPollUpdatingOperation: Operation {
                 if response["failed"].intValue > 0 {
                     self.onKeyExpired()
                     self.canFinish = true
-                } else {
+                }
+                else {
                     let newTs = response["ts"].stringValue
                     self.onResponse(response["updates"].array)
                     self.update(ts: newTs)

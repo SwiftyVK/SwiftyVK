@@ -46,7 +46,8 @@ internal final class ConnectionObserver: NSObject {
         
         if reachability.isReachable {
             onConnect()
-        } else {
+        }
+        else {
             onDisconnect()
         }
     }
@@ -74,4 +75,3 @@ internal final class ConnectionObserver: NSObject {
         VK.Log.put("Connection", "Stop observing")
     }
 }
-
