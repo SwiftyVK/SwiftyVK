@@ -49,7 +49,7 @@ final class WebPresenterImpl: WebPresenter {
                 urlRequest: urlRequest,
                 onResult: { [weak self] controllerResult in
                     do {
-                        if let handledResult = try self?.handle(result: controllerResult, fails: &fails) {
+                        if let handledResult = try self?.handle(result: controllerResult, fails: fails) {
                             result = .response(handledResult)
                         }
                     } catch let error {
@@ -58,6 +58,9 @@ final class WebPresenterImpl: WebPresenter {
                     
                     if result != nil {
                         self?.currentController?.dismiss()
+                    } else {
+                        fails += 1
+                        self?.currentController?.reload()
                     }
                 },
                 onDismiss: {
@@ -83,12 +86,12 @@ final class WebPresenterImpl: WebPresenter {
         }
     }
     
-    private func handle(result: WebControllerResult, fails: inout Int) throws -> String? {
+    private func handle(result: WebControllerResult, fails: Int) throws -> String? {
         switch result {
         case .response(let url):
             return try handle(url: url)
         case .error(let error):
-            try handle(error: error, fails: &fails)
+            try handle(error: error, fails: fails)
             return nil
         }
     }
@@ -119,11 +122,8 @@ final class WebPresenterImpl: WebPresenter {
         }
     }
     
-    private func handle(error: Error, fails: inout Int) throws {
-        fails += 1
-
-        guard fails >= maxFails else {
-            currentController?.reload()
+    private func handle(error: Error, fails: Int) throws {
+        guard fails >= maxFails - 1 else {
             return
         }
         
