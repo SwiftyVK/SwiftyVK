@@ -231,7 +231,15 @@
 		A2F632341ED9DC7D0063C9E0 /* VkAppProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F632321ED9DC7D0063C9E0 /* VkAppProxy.swift */; };
 		A2F6F8E51EDDF00400933DBC /* AtomicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6F8E41EDDF00400933DBC /* AtomicTests.swift */; };
 		A2F7B5551EF18C5C006AF76C /* CaptchaPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */; };
+		D47601161F2E219A005356E5 /* response.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601141F2E218B005356E5 /* response.empty.json */; };
+		D47601191F2E21E2005356E5 /* apiError.withoutCode.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601181F2E21DD005356E5 /* apiError.withoutCode.json */; };
+		D476011B1F2E2229005356E5 /* apiError.withoutMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */; };
+		D476011D1F2E22CA005356E5 /* empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D476011C1F2E22C6005356E5 /* empty.json */; };
+		D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */; };
 		D4F49D421F2DF5B10037B875 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D411F2DF5B10037B875 /* JsonReader.swift */; };
+		D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
+		D4F49D471F2E0FE50037B875 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D461F2E0FE50037B875 /* ApiError.swift */; };
+		D4F49D481F2E0FE50037B875 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D461F2E0FE50037B875 /* ApiError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -443,7 +451,14 @@
 		A2F632321ED9DC7D0063C9E0 /* VkAppProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VkAppProxy.swift; sourceTree = "<group>"; };
 		A2F6F8E41EDDF00400933DBC /* AtomicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicTests.swift; sourceTree = "<group>"; };
 		A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaPresenterMock.swift; sourceTree = "<group>"; };
+		D47601141F2E218B005356E5 /* response.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.empty.json; sourceTree = "<group>"; };
+		D47601181F2E21DD005356E5 /* apiError.withoutCode.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutCode.json; sourceTree = "<group>"; };
+		D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutMessage.json; sourceTree = "<group>"; };
+		D476011C1F2E22C6005356E5 /* empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = empty.json; sourceTree = "<group>"; };
+		D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorTests.swift; sourceTree = "<group>"; };
 		D4F49D411F2DF5B10037B875 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
+		D4F49D441F2E0EF60037B875 /* apiError.correct.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.correct.json; sourceTree = "<group>"; };
+		D4F49D461F2E0FE50037B875 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -475,6 +490,7 @@
 		A23708C51EA52F9C00103212 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				D4F49D431F2E0EA30037B875 /* Data */,
 				D4F49D401F2DF5950037B875 /* Utils */,
 				A2433A421EA5331A0058BB6D /* Doubles */,
 				A22179D11EBA5393006B71FD /* BaseTestCase.swift */,
@@ -495,6 +511,7 @@
 				A2F6F8E41EDDF00400933DBC /* AtomicTests.swift */,
 				A20CDD931EF667B000271276 /* CaptchaPresenterTests.swift */,
 				A270528E1EF834FF00C05936 /* SessionsStorageTests.swift */,
+				D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */,
 			);
 			name = Tests;
 			path = ../Tests;
@@ -675,6 +692,7 @@
 				A2527D841BD12FD200F65412 /* Media.swift */,
 				A2527D861BD12FD200F65412 /* Scope.swift */,
 				A2527D851BD12FD200F65412 /* Resources.swift */,
+				D4F49D461F2E0FE50037B875 /* ApiError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -757,6 +775,18 @@
 				D4F49D411F2DF5B10037B875 /* JsonReader.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		D4F49D431F2E0EA30037B875 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				D476011C1F2E22C6005356E5 /* empty.json */,
+				D47601141F2E218B005356E5 /* response.empty.json */,
+				D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */,
+				D47601181F2E21DD005356E5 /* apiError.withoutCode.json */,
+				D4F49D441F2E0EF60037B875 /* apiError.correct.json */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -943,6 +973,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D47601191F2E21E2005356E5 /* apiError.withoutCode.json in Resources */,
+				D476011D1F2E22CA005356E5 /* empty.json in Resources */,
+				D47601161F2E219A005356E5 /* response.empty.json in Resources */,
+				D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */,
+				D476011B1F2E2229005356E5 /* apiError.withoutMessage.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1048,6 +1083,7 @@
 				A23708C81EA532B900103212 /* TaskShedulerTests.swift in Sources */,
 				A20CDD941EF667B000271276 /* CaptchaPresenterTests.swift in Sources */,
 				A22179C51EBA3BBA006B71FD /* DependencyFactoryTests.swift in Sources */,
+				D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */,
 				A2B805561EDDB01C004DA7EB /* WebControllerMock.swift in Sources */,
 				A25A19D71EE4405E00CF13AF /* VkAppProxyMock.swift in Sources */,
 				A22179D01EBA530C006B71FD /* SessionMock.swift in Sources */,
@@ -1078,6 +1114,7 @@
 				A296C6481EF9984A00029D7D /* VKViewController.swift in Sources */,
 				A2EB6EF11BD18394008E7D86 /* Docs.swift in Sources */,
 				A2EB6EF21BD18394008E7D86 /* Fave.swift in Sources */,
+				D4F49D481F2E0FE50037B875 /* ApiError.swift in Sources */,
 				A217DAAD1E9926A500EA1430 /* Session.swift in Sources */,
 				A2AF16741ED19AEB00485716 /* Authorizator.swift in Sources */,
 				A2EB6EF31BD18394008E7D86 /* Friends.swift in Sources */,
@@ -1184,6 +1221,7 @@
 				A2EB6ECA1BD18389008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6ECB1BD18389008E7D86 /* Notes.swift in Sources */,
 				A2CF0D441E98EF0900EAFF30 /* LegacyResult.swift in Sources */,
+				D4F49D471F2E0FE50037B875 /* ApiError.swift in Sources */,
 				A2EB6ECC1BD18389008E7D86 /* Notifacations.swift in Sources */,
 				A2EB6ECD1BD18389008E7D86 /* Pages.swift in Sources */,
 				A2EB6ECE1BD18389008E7D86 /* Photos.swift in Sources */,
