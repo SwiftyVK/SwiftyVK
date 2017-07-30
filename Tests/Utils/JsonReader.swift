@@ -3,7 +3,7 @@ import XCTest
 
 class JsonReader {
     
-    func read(name: String, file: StaticString = #file, line: UInt = #line) -> Data? {
+    static func read(_ name: String, file: StaticString = #file, line: UInt = #line) -> Data? {
         let bundle = Bundle(for: JsonReader.self)
         
         guard let filePath = bundle.path(forResource: name, ofType: "json") else {
