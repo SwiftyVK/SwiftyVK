@@ -22,7 +22,7 @@ enum LegacyResult: CustomStringConvertible {
             self = .data(json)
         }
         else {
-            self = .error(RequestError.responseParsingFailed)
+            self = .error(LegacyRequestError.responseParsingFailed)
         }
     }
 

@@ -1,6 +1,6 @@
 import Foundation
 
-public enum SessionError: Int, CustomNSError, CustomStringConvertible {
+public enum LegacySessionError: Int, CustomNSError, CustomStringConvertible {
     case nilParentView              = 1
     case deniedFromUser             = 2
     case failedValidation           = 3
@@ -28,11 +28,11 @@ public enum SessionError: Int, CustomNSError, CustomStringConvertible {
     public var errorUserInfo: [String : Any] {return [:]}
 
     public var description: String {
-        return String(format: "error %@[%d]: %@", SessionError.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
+        return String(format: "error %@[%d]: %@", LegacySessionError.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
     }
 }
 
-public enum RequestError: Int, CustomNSError, CustomStringConvertible {
+public enum LegacyRequestError: Int, CustomNSError, CustomStringConvertible {
     case unexpectedResponse         = 1
     case timeoutExpired             = 2
     case maximumAttemptsExceeded    = 3
@@ -48,7 +48,7 @@ public enum RequestError: Int, CustomNSError, CustomStringConvertible {
     public var errorUserInfo: [String : Any] {return [:]}
 
     public var description: String {
-        return String(format: "error %@[%d]: %@", RequestError.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
+        return String(format: "error %@[%d]: %@", LegacyRequestError.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
     }
 }
 

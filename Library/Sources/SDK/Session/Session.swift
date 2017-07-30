@@ -192,13 +192,13 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     
     private func throwIfDestroyed() throws {
         guard state > .destroyed else {
-            throw SessionError.sessionDestroyed
+            throw LegacySessionError.sessionDestroyed
         }
     }
     
     private func throwIfAuthorized() throws {
         guard state < .authorized else {
-            throw SessionError.alreadyAuthorized
+            throw LegacySessionError.alreadyAuthorized
         }
     }
     

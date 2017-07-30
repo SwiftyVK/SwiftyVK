@@ -44,7 +44,7 @@ final class SessionsHolderTests: BaseTestCase {
             try holder.destroy(session: holder.default)
         } catch let error {
             // Then
-            XCTAssertEqual(error as? SessionError, .cantDestroyDefaultSession)
+            XCTAssertEqual(error as? LegacySessionError, .cantDestroyDefaultSession)
             
         }
     }
@@ -58,7 +58,7 @@ final class SessionsHolderTests: BaseTestCase {
             try holder.destroy(session: session)
         } catch let error {
             // Then
-            XCTAssertEqual(error as? SessionError, .sessionDestroyed)
+            XCTAssertEqual(error as? LegacySessionError, .sessionDestroyed)
             
         }
     }

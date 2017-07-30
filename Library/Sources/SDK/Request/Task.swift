@@ -84,7 +84,7 @@ final class TaskImpl: Operation, Task {
                 execute(error: error)
             }
             else {
-                execute(error: RequestError.maximumAttemptsExceeded)
+                execute(error: LegacyRequestError.maximumAttemptsExceeded)
             }
             
             return

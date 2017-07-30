@@ -46,7 +46,7 @@ final class WebPresenterImpl: WebPresenter {
         return try uiSyncQueue.sync {
             
             guard let controller = controllerMaker.webController() else {
-                throw SessionError.cantMakeWebViewController
+                throw LegacySessionError.cantMakeWebViewController
             }
             
             let originalPath = urlRequest.url?.path ?? ""
@@ -85,7 +85,7 @@ final class WebPresenterImpl: WebPresenter {
             
             switch semaphore.wait(timeout: .now() + timeout) {
             case .timedOut:
-                throw SessionError.webPresenterTimedOut
+                throw LegacySessionError.webPresenterTimedOut
             case .success:
                 break
             }
@@ -96,7 +96,7 @@ final class WebPresenterImpl: WebPresenter {
             case .error(let error)?:
                 throw error
             case nil:
-                throw SessionError.webPresenterResultIsNil
+                throw LegacySessionError.webPresenterResultIsNil
             }
         }
     }
@@ -112,7 +112,7 @@ final class WebPresenterImpl: WebPresenter {
     
     private func handle(url: URL?, originalPath: String) throws -> HandledResult {
         guard let url = url else {
-            throw SessionError.wrongAuthUrl
+            throw LegacySessionError.wrongAuthUrl
         }
         
         let fragment = url.fragment ?? ""
@@ -125,10 +125,10 @@ final class WebPresenterImpl: WebPresenter {
         }
         else if fragment.contains("access_denied") ||
             fragment.contains("cancel=1") {
-            throw SessionError.deniedFromUser
+            throw LegacySessionError.deniedFromUser
         }
         else if fragment.contains("fail=1") {
-            throw SessionError.failedAuthorization
+            throw LegacySessionError.failedAuthorization
         }
         else if url.path == originalPath {
             return .nothing

@@ -42,7 +42,7 @@ final class AttemptImpl: Operation, Attempt {
                 self.callbacks.onFinish(LegacyResult(from: data))
             }
             else {
-                self.callbacks.onFinish(.error(RequestError.unexpectedResponse))
+                self.callbacks.onFinish(.error(LegacyRequestError.unexpectedResponse))
             }
             
             self.taskIsFinished = true

@@ -27,7 +27,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
             var result: String?
             
             guard let controller = currentController ?? controllerMaker.captchaController() else {
-                throw SessionError.cantMakeCaptchaController
+                throw LegacySessionError.cantMakeCaptchaController
             }
             
             currentController = controller
@@ -54,13 +54,13 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
             
             switch semaphore.wait(timeout: .now() + timeout) {
             case .timedOut:
-                throw SessionError.captchaPresenterTimedOut
+                throw LegacySessionError.captchaPresenterTimedOut
             case .success:
                 break
             }
             
             guard let unwrappedResult = result else {
-                throw RequestError.captchaFailed
+                throw LegacyRequestError.captchaFailed
             }
             
             return unwrappedResult
@@ -73,7 +73,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
     
     private func downloadCaptchaImageData(rawUrl: String) throws -> Data {
         guard let request = URL(string: rawUrl).flatMap({ URLRequest(url: $0) }) else {
-            throw SessionError.cantLoadCaptchaImage
+            throw LegacySessionError.cantLoadCaptchaImage
         }
         
         return try NSURLConnection.sendSynchronousRequest(request, returning: nil)

@@ -98,7 +98,7 @@ final class AttemptShedulerTests: BaseTestCase {
             XCTFail("Wrong attempt should cause exception")
         } catch let error {
             // Then
-            XCTAssertEqual(error as? RequestError, .wrongAttemptType)
+            XCTAssertEqual(error as? LegacyRequestError, .wrongAttemptType)
         }
     }
     
