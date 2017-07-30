@@ -52,13 +52,13 @@ public enum RequestError: Int, CustomNSError, CustomStringConvertible {
     }
 }
 
-public struct ApiError: CustomNSError, CustomStringConvertible {
+public struct LegacyApiError: CustomNSError, CustomStringConvertible {
     public static let errorDomain = "SwiftyVKApiError"
     public private(set) var errorCode: Int = 0
     public var errorUserInfo = [String: Any]()
 
     public var description: String {
-        return String(format: "error %@[%d]: %@", ApiError.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
+        return String(format: "error %@[%d]: %@", LegacyApiError.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
     }
 
     init(json: JSON) {

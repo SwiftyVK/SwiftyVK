@@ -176,7 +176,7 @@ final class TaskImpl: Operation, Task {
             !isCancelled,
             sendAttempts < request.config.maxAttemptsLimit.count,
             request.config.handleErrors == true,
-            let error = rawError as? ApiError
+            let error = rawError as? LegacyApiError
             else {
                 execute(error: rawError)
                 return

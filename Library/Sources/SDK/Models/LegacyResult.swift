@@ -13,7 +13,7 @@ enum LegacyResult: CustomStringConvertible {
             self = .error(parsingError)
         }
         else if json["error"].exists() {
-            self = .error(ApiError(json: json["error"]))
+            self = .error(LegacyApiError(json: json["error"]))
         }
         else if json["response"].exists() {
             self = .data(json["response"])

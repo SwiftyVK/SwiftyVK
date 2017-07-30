@@ -1,5 +1,5 @@
 protocol ApiErrorHandler {
-    func handle(error: ApiError) throws -> ApiErrorHandlerResult
+    func handle(error: LegacyApiError) throws -> ApiErrorHandlerResult
 }
 
 final class ApiErrorHandlerImpl: ApiErrorHandler {
@@ -10,7 +10,7 @@ final class ApiErrorHandlerImpl: ApiErrorHandler {
         self.session = session
     }
     
-    func handle(error: ApiError) throws -> ApiErrorHandlerResult {
+    func handle(error: LegacyApiError) throws -> ApiErrorHandlerResult {
         switch error.errorCode {
         case 5:
             _ = try session.logIn(revoke: false)
