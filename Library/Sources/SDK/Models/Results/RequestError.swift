@@ -1,5 +1,6 @@
 import Foundation
 
-public enum RequestError {
+public enum RequestError: Error {
+    case unexpectedResponse
     case jsonNotParsed(Error)
 }

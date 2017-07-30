@@ -246,12 +246,6 @@
 		D476012D1F2E260B005356E5 /* SessionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D476012C1F2E260B005356E5 /* SessionError.swift */; };
 		D476012E1F2E260B005356E5 /* SessionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D476012C1F2E260B005356E5 /* SessionError.swift */; };
 		D476012F1F2E260B005356E5 /* SessionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D476012C1F2E260B005356E5 /* SessionError.swift */; };
-		D49EC32D1F2E3A0C0070B283 /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EC32C1F2E3A0C0070B283 /* ResponseParser.swift */; };
-		D49EC32E1F2E3A0C0070B283 /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EC32C1F2E3A0C0070B283 /* ResponseParser.swift */; };
-		D49EC3311F2E3A1F0070B283 /* SwiftyVkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EC3301F2E3A1F0070B283 /* SwiftyVkParser.swift */; };
-		D49EC3321F2E3A1F0070B283 /* SwiftyVkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EC3301F2E3A1F0070B283 /* SwiftyVkParser.swift */; };
-		D49EC3341F2E3A780070B283 /* DefaultParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EC3331F2E3A780070B283 /* DefaultParser.swift */; };
-		D49EC3351F2E3A780070B283 /* DefaultParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EC3331F2E3A780070B283 /* DefaultParser.swift */; };
 		D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */; };
 		D4F49D421F2DF5B10037B875 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D411F2DF5B10037B875 /* JsonReader.swift */; };
 		D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
@@ -477,9 +471,6 @@
 		D47601231F2E2450005356E5 /* VkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkError.swift; sourceTree = "<group>"; };
 		D47601281F2E2602005356E5 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		D476012C1F2E260B005356E5 /* SessionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionError.swift; sourceTree = "<group>"; };
-		D49EC32C1F2E3A0C0070B283 /* ResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseParser.swift; sourceTree = "<group>"; };
-		D49EC3301F2E3A1F0070B283 /* SwiftyVkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyVkParser.swift; sourceTree = "<group>"; };
-		D49EC3331F2E3A780070B283 /* DefaultParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultParser.swift; sourceTree = "<group>"; };
 		D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorTests.swift; sourceTree = "<group>"; };
 		D4F49D411F2DF5B10037B875 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		D4F49D441F2E0EF60037B875 /* apiError.correct.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.correct.json; sourceTree = "<group>"; };
@@ -798,7 +789,6 @@
 		D47601271F2E25E2005356E5 /* Results */ = {
 			isa = PBXGroup;
 			children = (
-				D49EC32F1F2E3A100070B283 /* Parsers */,
 				D476011E1F2E2318005356E5 /* Response.swift */,
 				D47601231F2E2450005356E5 /* VkError.swift */,
 				D4F49D461F2E0FE50037B875 /* ApiError.swift */,
@@ -806,16 +796,6 @@
 				D476012C1F2E260B005356E5 /* SessionError.swift */,
 			);
 			path = Results;
-			sourceTree = "<group>";
-		};
-		D49EC32F1F2E3A100070B283 /* Parsers */ = {
-			isa = PBXGroup;
-			children = (
-				D49EC32C1F2E3A0C0070B283 /* ResponseParser.swift */,
-				D49EC3301F2E3A1F0070B283 /* SwiftyVkParser.swift */,
-				D49EC3331F2E3A780070B283 /* DefaultParser.swift */,
-			);
-			path = Parsers;
 			sourceTree = "<group>";
 		};
 		D4F49D401F2DF5950037B875 /* Utils */ = {
@@ -1212,14 +1192,12 @@
 				D47601201F2E2318005356E5 /* Response.swift in Sources */,
 				A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */,
 				A2CF0D431E98EF0900EAFF30 /* Request.swift in Sources */,
-				D49EC3321F2E3A1F0070B283 /* SwiftyVkParser.swift in Sources */,
 				A202594A1EE9AED00014B0BE /* ApiErrorHandler.swift in Sources */,
 				A2E34DBD1ED1F1260041E663 /* TokenStorage.swift in Sources */,
 				A21E815A1E2A8303008E81E7 /* UrlCharactesSet.swift in Sources */,
 				A2EB6F051BD18395008E7D86 /* Video.swift in Sources */,
 				A2EB6F061BD18395008E7D86 /* Wall.swift in Sources */,
 				A24DDAE81EB73810002EA273 /* MultipartBodyBuilder.swift in Sources */,
-				D49EC3351F2E3A780070B283 /* DefaultParser.swift in Sources */,
 				A2EB6F071BD18395008E7D86 /* Arg.swift in Sources */,
 				A2F632341ED9DC7D0063C9E0 /* VkAppProxy.swift in Sources */,
 				A217DAA91E9924DE00EA1430 /* Method.swift in Sources */,
@@ -1235,7 +1213,6 @@
 				A2EB6F0E1BD18395008E7D86 /* UrlRequestBuilder.swift in Sources */,
 				A25A19C11EE2F01800CF13AF /* WebController_iOS.swift in Sources */,
 				A254C0C91E9904CB001A5456 /* Custom.swift in Sources */,
-				D49EC32E1F2E3A0C0070B283 /* ResponseParser.swift in Sources */,
 				A24DDAE51EB737C7002EA273 /* QueryBuilder.swift in Sources */,
 				A2EB6F141BD18395008E7D86 /* Log.swift in Sources */,
 				A2EB6F151BD18395008E7D86 /* Reachability.swift in Sources */,
@@ -1266,7 +1243,6 @@
 				A217DAA81E9924DE00EA1430 /* Method.swift in Sources */,
 				A2EB6EC31BD18389008E7D86 /* Database.swift in Sources */,
 				A25A19E71EE6941D00CF13AF /* GenericResult.swift in Sources */,
-				D49EC3311F2E3A1F0070B283 /* SwiftyVkParser.swift in Sources */,
 				A2AF16731ED19AEB00485716 /* Authorizator.swift in Sources */,
 				A2EB6EC41BD18389008E7D86 /* Docs.swift in Sources */,
 				A2EB6EC51BD18389008E7D86 /* Fave.swift in Sources */,
@@ -1331,8 +1307,6 @@
 				A2EB6EE71BD18389008E7D86 /* Log.swift in Sources */,
 				A2EB6EE91BD18389008E7D86 /* SwiftyJSON.swift in Sources */,
 				A24D108F1C56A49E008263B0 /* Market.swift in Sources */,
-				D49EC3341F2E3A780070B283 /* DefaultParser.swift in Sources */,
-				D49EC32D1F2E3A0C0070B283 /* ResponseParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

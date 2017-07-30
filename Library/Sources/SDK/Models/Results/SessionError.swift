@@ -1,5 +1,5 @@
 import Foundation
 
-public enum SessionError {
+public enum SessionError: Error {
     
 }
