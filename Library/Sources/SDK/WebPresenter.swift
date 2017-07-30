@@ -13,6 +13,12 @@ private enum WebPresenterResult {
     case error(Error)
 }
 
+private enum HandledResult {
+    case response(String)
+    case fail
+    case nothing
+}
+
 final class WebPresenterImpl: WebPresenter {
     private let uiSyncQueue: DispatchQueue
     private let controllerMaker: WebControllerMaker
@@ -35,7 +41,7 @@ final class WebPresenterImpl: WebPresenter {
     func presentWith(urlRequest: URLRequest) throws -> String {
         let semaphore = DispatchSemaphore(value: 0)
         var fails: Int = 0
-        var result: WebPresenterResult?
+        var finalResult: WebPresenterResult?
         
         return try uiSyncQueue.sync {
             
@@ -43,24 +49,33 @@ final class WebPresenterImpl: WebPresenter {
                 throw SessionError.cantMakeWebViewController
             }
             
+            let originalPath = urlRequest.url?.path ?? ""
             currentController = controller
             
             controller.load(
                 urlRequest: urlRequest,
-                onResult: { [weak self] controllerResult in
+                onResult: { [weak self] result in
+                    guard let `self` = self else { return }
+                    
                     do {
-                        if let handledResult = try self?.handle(result: controllerResult, fails: fails) {
-                            result = .response(handledResult)
+                        let handledResult = try self.handle(result: result ,fails: fails, originalPath: originalPath)
+                        
+                        switch handledResult {
+                        case let .response(value):
+                            finalResult = .response(value)
+                        case .fail:
+                            fails += 1
+                            self.currentController?.reload()
+                        case .nothing:
+                            break
                         }
+                        
                     } catch let error {
-                        result = .error(error)
+                        finalResult = .error(error)
                     }
                     
-                    if result != nil {
-                        self?.currentController?.dismiss()
-                    } else {
-                        fails += 1
-                        self?.currentController?.reload()
+                    if finalResult != nil {
+                        self.currentController?.dismiss()
                     }
                 },
                 onDismiss: {
@@ -75,7 +90,7 @@ final class WebPresenterImpl: WebPresenter {
                 break
             }
             
-            switch result {
+            switch finalResult {
             case .response(let response)?:
                 return response
             case .error(let error)?:
@@ -86,17 +101,16 @@ final class WebPresenterImpl: WebPresenter {
         }
     }
     
-    private func handle(result: WebControllerResult, fails: Int) throws -> String? {
+    private func handle(result: WebControllerResult, fails: Int, originalPath: String) throws -> HandledResult {
         switch result {
         case .response(let url):
-            return try handle(url: url)
+            return try handle(url: url, originalPath: originalPath)
         case .error(let error):
-            try handle(error: error, fails: fails)
-            return nil
+            return try handle(error: error, fails: fails)
         }
     }
     
-    private func handle(url: URL?) throws -> String? {
+    private func handle(url: URL?, originalPath: String) throws -> HandledResult {
         guard let url = url else {
             throw SessionError.wrongAuthUrl
         }
@@ -104,10 +118,10 @@ final class WebPresenterImpl: WebPresenter {
         let fragment = url.fragment ?? ""
 
         if fragment.contains("access_token=") {
-            return fragment
+            return .response(fragment)
         }
         else if fragment.contains("success=1") {
-            return fragment
+            return .response(fragment)
         }
         else if fragment.contains("access_denied") ||
             fragment.contains("cancel=1") {
@@ -116,15 +130,18 @@ final class WebPresenterImpl: WebPresenter {
         else if fragment.contains("fail=1") {
             throw SessionError.failedAuthorization
         }
+        else if url.path == originalPath {
+            return .nothing
+        }
         else {
             currentController?.goBack()
-            return nil
+            return .nothing
         }
     }
     
-    private func handle(error: Error, fails: Int) throws {
+    private func handle(error: Error, fails: Int) throws -> HandledResult {
         guard fails >= maxFails - 1 else {
-            return
+            return .fail
         }
         
         throw error

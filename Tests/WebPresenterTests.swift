@@ -184,7 +184,7 @@ final class WebPresenterTests: BaseTestCase {
         XCTAssertEqual(result, "success=1")
     }
     
-    func test_load_callGoBackOnce_whenLoadWrongUrl() {
+    func test_load_callGoBackOnce_whenRedirect() {
         // Given
         let context = makeContext()
         var goBackCallCount = 0
@@ -195,7 +195,14 @@ final class WebPresenterTests: BaseTestCase {
             
             controller.onLoad = { url, onResult, onDismiss in
                 onResultBlock = onResult
-                onResultBlock?(.response(url))
+                
+                var nerUrl = url
+                
+                if url?.path == "/test1" {
+                    nerUrl = URL(string: "http://vk.com/test2")!
+                }
+                
+                onResultBlock?(.response(nerUrl))
             }
             
             controller.onGoBack = {
@@ -208,7 +215,7 @@ final class WebPresenterTests: BaseTestCase {
             return controller
         }
         // When
-        let result = try? context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com/id1")!)
+        let result = try? context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com/test1")!)
         // Then
         XCTAssertEqual(result, "success=1")
         XCTAssertEqual(goBackCallCount, 1)
