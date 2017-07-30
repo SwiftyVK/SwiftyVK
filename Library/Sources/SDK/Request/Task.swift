@@ -136,7 +136,7 @@ final class TaskImpl: Operation, Task {
         callbacks.onProgress?(total, expected)
     }
     
-    private func handleResult(_ result: Result) {
+    private func handleResult(_ result: LegacyResult) {
         guard !isCancelled else { return }
         
         switch result {

@@ -1,6 +1,6 @@
 import Foundation
 
-enum Result: CustomStringConvertible {
+enum LegacyResult: CustomStringConvertible {
 
     case data(JSON)
     case error(Error)

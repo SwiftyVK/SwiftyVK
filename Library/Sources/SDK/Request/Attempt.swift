@@ -39,7 +39,7 @@ final class AttemptImpl: Operation, Attempt {
                 self.callbacks.onFinish(.error(error))
             }
             else if let data = data {
-                self.callbacks.onFinish(Result(from: data))
+                self.callbacks.onFinish(LegacyResult(from: data))
             }
             else {
                 self.callbacks.onFinish(.error(RequestError.unexpectedResponse))
@@ -91,7 +91,7 @@ final class AttemptImpl: Operation, Attempt {
 }
 
 struct AttemptCallbacks {
-    let onFinish: (Result) -> ()
+    let onFinish: (LegacyResult) -> ()
     let onSent: (_ total: Int64, _ of: Int64) -> ()
     let onRecive: (_ total: Int64, _ of: Int64) -> ()
 }
