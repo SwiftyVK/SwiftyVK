@@ -37,7 +37,7 @@ final class TaskMock: Operation, Task {
     }
     
     private func finish() {
-        state = .finished(JSON(true))
+        state = .finished(Data())
     }
     
     override func cancel() {

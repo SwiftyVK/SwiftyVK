@@ -136,11 +136,11 @@ final class TaskImpl: Operation, Task {
         callbacks.onProgress?(total, expected)
     }
     
-    private func handleResult(_ result: LegacyResult) {
+    private func handleResult(_ result: Response) {
         guard !isCancelled else { return }
         
         switch result {
-        case .data(let response):
+        case .success(let response):
             if let next = request.nexts.popLast()?(response) {
                 VK.Log.put(self, "=== prepare next task ===")
                 request = next
@@ -155,7 +155,7 @@ final class TaskImpl: Operation, Task {
         }
     }
     
-    private func execute(response: JSON) {
+    private func execute(response: Data) {
         guard !isCancelled else { return }
         VK.Log.put(self, "execute success block")
         state = .finished(response)
@@ -202,7 +202,7 @@ final class TaskImpl: Operation, Task {
 public enum TaskState {
     case created
     case sended
-    case finished(JSON)
+    case finished(Data)
     case failed(Error)
     case cancelled
 }

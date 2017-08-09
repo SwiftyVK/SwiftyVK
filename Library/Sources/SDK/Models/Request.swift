@@ -4,7 +4,7 @@ public final class Request {
     
     let rawRequest: Raw
     var config: Config
-    var nexts = [((JSON) -> Request)]()
+    var nexts = [((Data) -> Request)]()
     
     init(
         of rawRequest: Raw,
@@ -15,7 +15,7 @@ public final class Request {
     }
     
     @discardableResult
-    public func next(_ next: @escaping ((JSON) -> Request)) -> Request {
+    public func next(_ next: @escaping ((Data) -> Request)) -> Request {
         nexts = [next] + nexts
         return self
     }
@@ -52,12 +52,12 @@ public struct Callbacks {
     
     public static let empty = Callbacks()
     
-    let onSuccess: ((JSON) -> ())?
+    let onSuccess: ((Data) -> ())?
     let onError: ((Error) -> ())?
     let onProgress: ((Int64, Int64) -> ())?
     
     public init(
-        onSuccess: ((JSON) -> ())? = nil,
+        onSuccess: ((Data) -> ())? = nil,
         onError: ((Error) -> ())? = nil,
         onProgress: ((Int64, Int64) -> ())? = nil
         ) {

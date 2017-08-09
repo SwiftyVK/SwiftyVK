@@ -36,13 +36,13 @@ final class AttemptImpl: Operation, Attempt {
             guard let `self` = self, !self.isCancelled else { return }
 
             if let error = error {
-                self.callbacks.onFinish(.error(error))
+                self.callbacks.onFinish(.error(.request(.urlRequestError(error))))
             }
             else if let data = data {
-                self.callbacks.onFinish(LegacyResult(from: data))
+                self.callbacks.onFinish(Response(data))
             }
             else {
-                self.callbacks.onFinish(.error(LegacyRequestError.unexpectedResponse))
+                self.callbacks.onFinish(.error(.request(.unexpectedResponse)))
             }
             
             self.taskIsFinished = true
@@ -91,7 +91,7 @@ final class AttemptImpl: Operation, Attempt {
 }
 
 struct AttemptCallbacks {
-    let onFinish: (LegacyResult) -> ()
+    let onFinish: (Response) -> ()
     let onSent: (_ total: Int64, _ of: Int64) -> ()
     let onRecive: (_ total: Int64, _ of: Int64) -> ()
 }
