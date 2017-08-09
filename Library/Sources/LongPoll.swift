@@ -110,77 +110,77 @@ extension VKLongPoll {
         }
         
         // swiftlint:disable cyclomatic_complexity
-        private static func parse(_ updates: [JSON]?) {
-            guard let updates = updates else {return}
-            
-            var all = [JSON]()
-            var updates0 = [JSON]()
-            var updates1 = [JSON]()
-            var updates2 = [JSON]()
-            var updates3 = [JSON]()
-            var updates4 = [JSON]()
-            var updates6 = [JSON]()
-            var updates7 = [JSON]()
-            var updates8 = [JSON]()
-            var updates9 = [JSON]()
-            var updates51 = [JSON]()
-            var updates61 = [JSON]()
-            var updates62 = [JSON]()
-            var updates70 = [JSON]()
-            var updates80 = [JSON]()
-            
-            for update in updates {
-                all.append(update)
-                switch update[0].intValue {
-                case 0:
-                    updates0.append(update)
-                case 1:
-                    updates1.append(update)
-                case 2:
-                    updates2.append(update)
-                case 3:
-                    updates3.append(update)
-                case 4:
-                    updates4.append(update)
-                case 6:
-                    updates6.append(update)
-                case 7:
-                    updates7.append(update)
-                case 8:
-                    updates8.append(update)
-                case 9:
-                    updates9.append(update)
-                case 51:
-                    updates51.append(update)
-                case 61:
-                    updates61.append(update)
-                case 62:
-                    updates62.append(update)
-                case 70:
-                    updates70.append(update)
-                case 80:
-                    updates80.append(update)
-                default:
-                    break
-                }
-            }
-            
-            !updates0.isEmpty ? NotificationCenter.default.post(name: notifications.type0, object: JSONWrapper(updates0)) : ()
-            !updates1.isEmpty ? NotificationCenter.default.post(name: notifications.type1, object: JSONWrapper(updates1)) : ()
-            !updates2.isEmpty ? NotificationCenter.default.post(name: notifications.type2, object: JSONWrapper(updates2)) : ()
-            !updates3.isEmpty ? NotificationCenter.default.post(name: notifications.type3, object: JSONWrapper(updates3)) : ()
-            !updates4.isEmpty ? NotificationCenter.default.post(name: notifications.type4, object: JSONWrapper(updates4)) : ()
-            !updates6.isEmpty ? NotificationCenter.default.post(name: notifications.type6, object: JSONWrapper(updates6)) : ()
-            !updates7.isEmpty ? NotificationCenter.default.post(name: notifications.type7, object: JSONWrapper(updates7)) : ()
-            !updates8.isEmpty ? NotificationCenter.default.post(name: notifications.type8, object: JSONWrapper(updates8)) : ()
-            !updates9.isEmpty ? NotificationCenter.default.post(name: notifications.type9, object: JSONWrapper(updates9)) : ()
-            !updates51.isEmpty ? NotificationCenter.default.post(name: notifications.type51, object: JSONWrapper(updates51)) : ()
-            !updates61.isEmpty ? NotificationCenter.default.post(name: notifications.type61, object: JSONWrapper(updates61)) : ()
-            !updates62.isEmpty ? NotificationCenter.default.post(name: notifications.type62, object: JSONWrapper(updates62)) : ()
-            !updates70.isEmpty ? NotificationCenter.default.post(name: notifications.type70, object: JSONWrapper(updates70)) : ()
-            !updates80.isEmpty ? NotificationCenter.default.post(name: notifications.type80, object: JSONWrapper(updates80)) : ()
-            !all.isEmpty ? NotificationCenter.default.post(name: notifications.typeAll, object: JSONWrapper(all)) : ()
-        }
+//        private static func parse(_ updates: [JSON]?) {
+//            guard let updates = updates else {return}
+//            
+//            var all = [JSON]()
+//            var updates0 = [JSON]()
+//            var updates1 = [JSON]()
+//            var updates2 = [JSON]()
+//            var updates3 = [JSON]()
+//            var updates4 = [JSON]()
+//            var updates6 = [JSON]()
+//            var updates7 = [JSON]()
+//            var updates8 = [JSON]()
+//            var updates9 = [JSON]()
+//            var updates51 = [JSON]()
+//            var updates61 = [JSON]()
+//            var updates62 = [JSON]()
+//            var updates70 = [JSON]()
+//            var updates80 = [JSON]()
+//            
+//            for update in updates {
+//                all.append(update)
+//                switch update[0].intValue {
+//                case 0:
+//                    updates0.append(update)
+//                case 1:
+//                    updates1.append(update)
+//                case 2:
+//                    updates2.append(update)
+//                case 3:
+//                    updates3.append(update)
+//                case 4:
+//                    updates4.append(update)
+//                case 6:
+//                    updates6.append(update)
+//                case 7:
+//                    updates7.append(update)
+//                case 8:
+//                    updates8.append(update)
+//                case 9:
+//                    updates9.append(update)
+//                case 51:
+//                    updates51.append(update)
+//                case 61:
+//                    updates61.append(update)
+//                case 62:
+//                    updates62.append(update)
+//                case 70:
+//                    updates70.append(update)
+//                case 80:
+//                    updates80.append(update)
+//                default:
+//                    break
+//                }
+//            }
+//            
+//            !updates0.isEmpty ? NotificationCenter.default.post(name: notifications.type0, object: JSONWrapper(updates0)) : ()
+//            !updates1.isEmpty ? NotificationCenter.default.post(name: notifications.type1, object: JSONWrapper(updates1)) : ()
+//            !updates2.isEmpty ? NotificationCenter.default.post(name: notifications.type2, object: JSONWrapper(updates2)) : ()
+//            !updates3.isEmpty ? NotificationCenter.default.post(name: notifications.type3, object: JSONWrapper(updates3)) : ()
+//            !updates4.isEmpty ? NotificationCenter.default.post(name: notifications.type4, object: JSONWrapper(updates4)) : ()
+//            !updates6.isEmpty ? NotificationCenter.default.post(name: notifications.type6, object: JSONWrapper(updates6)) : ()
+//            !updates7.isEmpty ? NotificationCenter.default.post(name: notifications.type7, object: JSONWrapper(updates7)) : ()
+//            !updates8.isEmpty ? NotificationCenter.default.post(name: notifications.type8, object: JSONWrapper(updates8)) : ()
+//            !updates9.isEmpty ? NotificationCenter.default.post(name: notifications.type9, object: JSONWrapper(updates9)) : ()
+//            !updates51.isEmpty ? NotificationCenter.default.post(name: notifications.type51, object: JSONWrapper(updates51)) : ()
+//            !updates61.isEmpty ? NotificationCenter.default.post(name: notifications.type61, object: JSONWrapper(updates61)) : ()
+//            !updates62.isEmpty ? NotificationCenter.default.post(name: notifications.type62, object: JSONWrapper(updates62)) : ()
+//            !updates70.isEmpty ? NotificationCenter.default.post(name: notifications.type70, object: JSONWrapper(updates70)) : ()
+//            !updates80.isEmpty ? NotificationCenter.default.post(name: notifications.type80, object: JSONWrapper(updates80)) : ()
+//            !all.isEmpty ? NotificationCenter.default.post(name: notifications.typeAll, object: JSONWrapper(all)) : ()
+//        }
         // swiftlint:enable cyclomatic_complexity
         
         // swiftlint:disable type_name
@@ -236,13 +236,13 @@ extension VKLongPoll {
 //
 //
 ///The wrapper for a variety of objects such as JSON to be compatible with NSObject. Access to the property is via an unwrap array
-public final class JSONWrapper {
-    public let unwrap: [JSON]
-    
-    public init(_ value: [JSON]) {
-        self.unwrap = value
-    }
-}
+//public final class JSONWrapper {
+//    public let unwrap: [JSON]
+//
+//    public init(_ value: [JSON]) {
+//        self.unwrap = value
+//    }
+//}
 //
 //
 //

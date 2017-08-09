@@ -63,24 +63,24 @@ public struct LegacyApiError: CustomNSError, CustomStringConvertible {
 
     init(json: JSON) {
         
-        if let message = json["error_msg"].string {
-            errorCode  = json["error_code"].intValue
-            errorUserInfo[NSLocalizedDescriptionKey] = message
-        }
-        else if let message = json.string {
-            errorUserInfo[NSLocalizedDescriptionKey] = message
-        }
-        else {
-            errorUserInfo[NSLocalizedDescriptionKey] = "unknown error"
-        }
-        
-        for param in json["request_params"].arrayValue {
-            errorUserInfo[param["key"].stringValue] = param["value"].stringValue
-        }
-        
-        for (key, value) in json.dictionaryValue where key != "request_params" && key != "error_code" && key != "error_msg" {
-            errorUserInfo[key] = value.stringValue
-        }
+//        if let message = json["error_msg"].string {
+//            errorCode  = json["error_code"].intValue
+//            errorUserInfo[NSLocalizedDescriptionKey] = message
+//        }
+//        else if let message = json.string {
+//            errorUserInfo[NSLocalizedDescriptionKey] = message
+//        }
+//        else {
+//            errorUserInfo[NSLocalizedDescriptionKey] = "unknown error"
+//        }
+//        
+//        for param in json["request_params"].arrayValue {
+//            errorUserInfo[param["key"].stringValue] = param["value"].stringValue
+//        }
+//        
+//        for (key, value) in json.dictionaryValue where key != "request_params" && key != "error_code" && key != "error_msg" {
+//            errorUserInfo[key] = value.stringValue
+//        }
     }
 }
 
