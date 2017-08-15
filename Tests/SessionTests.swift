@@ -132,7 +132,7 @@ final class SessionTests: BaseTestCase {
                 XCTFail("Log in sould be fail")
             },
             onError: { error in
-                XCTAssertEqual(error as? LegacySessionError, .failedAuthorization)
+                XCTAssertEqual(error.asVk, SessionError.authorizationFailed.asVk)
             }
         )
         
@@ -152,7 +152,7 @@ final class SessionTests: BaseTestCase {
                 XCTFail("Log in sould be fail")
             },
             onError: { error in
-                XCTAssertEqual(error as? LegacySessionError, .sessionDestroyed)
+                XCTAssertEqual(error.asVk, SessionError.sessionAlreadyDestroyed(session).asVk)
             }
         )
         // Then
@@ -169,7 +169,7 @@ final class SessionTests: BaseTestCase {
             try session.logIn(rawToken: "", expires: 0)
             XCTFail("Log in sould be fail")
         } catch let error {
-            XCTAssertEqual(error as? LegacySessionError, .sessionDestroyed)
+            XCTAssertEqual(error.asVk, SessionError.sessionAlreadyDestroyed(session).asVk)
         }
         // Then
         XCTAssertEqual(session.state, .destroyed)
@@ -229,7 +229,7 @@ final class SessionTests: BaseTestCase {
             callbacks: Callbacks(
                 onError: { error in
                     // Then
-                    XCTAssertEqual(error as? LegacySessionError, .sessionDestroyed)
+                    XCTAssertEqual(error.asVk, SessionError.sessionAlreadyDestroyed(session).asVk)
             })
         )
     }
@@ -246,7 +246,7 @@ final class SessionTests: BaseTestCase {
             callbacks: Callbacks(
                 onError: { error in
                     // Then
-                    XCTAssertEqual(error as? LegacyRequestError, .wrongTaskType)
+                    XCTAssertEqual(error.asVk, RequestError.wrongTaskType.asVk)
             })
         )
     }

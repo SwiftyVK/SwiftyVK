@@ -223,6 +223,9 @@
 		A2F632341ED9DC7D0063C9E0 /* VkAppProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F632321ED9DC7D0063C9E0 /* VkAppProxy.swift */; };
 		A2F6F8E51EDDF00400933DBC /* AtomicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6F8E41EDDF00400933DBC /* AtomicTests.swift */; };
 		A2F7B5551EF18C5C006AF76C /* CaptchaPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */; };
+		D41C704F1F45F22E00EA454C /* SessionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C704D1F45F21100EA454C /* SessionError.swift */; };
+		D41C70521F45F2B500EA454C /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C70501F45F2AF00EA454C /* RequestError.swift */; };
+		D41C70551F45F34400EA454C /* VkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C70531F45F33F00EA454C /* VkError.swift */; };
 		D44348F91F3B71F5008B2B50 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44348F71F3B70F4008B2B50 /* JSONTests.swift */; };
 		D47601161F2E219A005356E5 /* response.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601141F2E218B005356E5 /* response.empty.json */; };
 		D47601191F2E21E2005356E5 /* apiError.withoutCode.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601181F2E21DD005356E5 /* apiError.withoutCode.json */; };
@@ -460,6 +463,9 @@
 		A2F632321ED9DC7D0063C9E0 /* VkAppProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VkAppProxy.swift; sourceTree = "<group>"; };
 		A2F6F8E41EDDF00400933DBC /* AtomicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicTests.swift; sourceTree = "<group>"; };
 		A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaPresenterMock.swift; sourceTree = "<group>"; };
+		D41C704D1F45F21100EA454C /* SessionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionError.swift; sourceTree = "<group>"; };
+		D41C70501F45F2AF00EA454C /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
+		D41C70531F45F33F00EA454C /* VkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkError.swift; sourceTree = "<group>"; };
 		D44348F71F3B70F4008B2B50 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		D47601141F2E218B005356E5 /* response.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.empty.json; sourceTree = "<group>"; };
 		D47601181F2E21DD005356E5 /* apiError.withoutCode.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutCode.json; sourceTree = "<group>"; };
@@ -510,6 +516,7 @@
 		A23708C51EA52F9C00103212 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				D41C704C1F45F1C600EA454C /* Extensions */,
 				D4F49D431F2E0EA30037B875 /* Data */,
 				D4F49D401F2DF5950037B875 /* Utils */,
 				A2433A421EA5331A0058BB6D /* Doubles */,
@@ -783,6 +790,16 @@
 				A25A19CC1EE41BA700CF13AF /* TokenParser.swift */,
 			);
 			name = Token;
+			sourceTree = "<group>";
+		};
+		D41C704C1F45F1C600EA454C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D41C704D1F45F21100EA454C /* SessionError.swift */,
+				D41C70501F45F2AF00EA454C /* RequestError.swift */,
+				D41C70531F45F33F00EA454C /* VkError.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D47601271F2E25E2005356E5 /* Results */ = {
@@ -1117,6 +1134,7 @@
 				A2B805581EDDB313004DA7EB /* WebPresenterTests.swift in Sources */,
 				A22179CA1EBA4059006B71FD /* SessionTests.swift in Sources */,
 				A2E5C5D91ECCAD4800652262 /* SessionsHilderMock.swift in Sources */,
+				D41C70551F45F34400EA454C /* VkError.swift in Sources */,
 				A25A19D51EE43E8100CF13AF /* TokenParserMock.swift in Sources */,
 				A2433A461EA542100058BB6D /* AttemptShedulerTests.swift in Sources */,
 				A2E5C5DB1ECCAFC800652262 /* SessionsHolderTests.swift in Sources */,
@@ -1130,6 +1148,7 @@
 				A22179C81EBA3DBD006B71FD /* AttemptShedulerMock.swift in Sources */,
 				D4F49D421F2DF5B10037B875 /* JsonReader.swift in Sources */,
 				A24DDAEE1EB73CA3002EA273 /* QueryBuilderMock.swift in Sources */,
+				D41C70521F45F2B500EA454C /* RequestError.swift in Sources */,
 				A25A3A2D1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift in Sources */,
 				A2AF167B1ED1CC9B00485716 /* TokenMock.swift in Sources */,
 				A23E692E1EDAEC6400AA3B3B /* UrlOpenerMock.swift in Sources */,
@@ -1139,6 +1158,7 @@
 				D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */,
 				A2B805561EDDB01C004DA7EB /* WebControllerMock.swift in Sources */,
 				A25A19D71EE4405E00CF13AF /* VkAppProxyMock.swift in Sources */,
+				D41C704F1F45F22E00EA454C /* SessionError.swift in Sources */,
 				A22179D01EBA530C006B71FD /* SessionMock.swift in Sources */,
 				A2F7B5551EF18C5C006AF76C /* CaptchaPresenterMock.swift in Sources */,
 				A2B40DFD1EA693B700106AE3 /* UrlRequestBuilderTests.swift in Sources */,

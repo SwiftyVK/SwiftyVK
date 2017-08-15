@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ApiError {
+public struct ApiError: Equatable {
     public let code: Int
     public let message: String
     public private(set) var requestParams = [String : String]()
@@ -51,5 +51,9 @@ public struct ApiError {
         }
         
         return infoDict
+    }
+    
+    public static func ==(lhs: ApiError, rhs: ApiError) -> Bool {
+        return lhs.code == rhs.code
     }
 }

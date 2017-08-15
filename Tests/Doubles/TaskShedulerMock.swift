@@ -7,7 +7,7 @@ final class TaskShedulerMock: TaskSheduler {
 
     func shedule(task: Task, concurrent: Bool) throws {
         if shouldThrows {
-            throw LegacyRequestError.wrongTaskType
+            throw RequestError.wrongTaskType.asVk
         }
         
         sheduleCallCount += 1

@@ -9,7 +9,7 @@ final class AuthorizatorMock: Authorizator {
         authorizeCallCount += 1
         
         if authorizeShouldThrows {
-            throw LegacySessionError.failedAuthorization
+            throw SessionError.authorizationFailed.asVk
         }
         
         return TokenMock()

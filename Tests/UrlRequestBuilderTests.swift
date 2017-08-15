@@ -118,7 +118,7 @@ final class UrlRequestBuilderTests: BaseTestCase {
             XCTFail("Test should be failed")
         } catch let error {
             // Then
-            XCTAssertEqual(error as! LegacyRequestError, .wrongUrl)
+            XCTAssertEqual(error.asVk, RequestError.wrongUrl.asVk)
         }
     }
     
@@ -167,7 +167,7 @@ final class UrlRequestBuilderTests: BaseTestCase {
             XCTFail("Test should be failed")
         } catch let error {
             // Then
-            XCTAssertEqual(error as! LegacyRequestError, .wrongUrl)
+            XCTAssertEqual(error.asVk, RequestError.wrongUrl.asVk)
         }
     }
     

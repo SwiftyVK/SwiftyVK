@@ -52,7 +52,7 @@ final class WebPresenterTests: BaseTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error as? LegacySessionError, .cantMakeWebViewController)
+            XCTAssertEqual(error.asVk, SessionError.cantMakeWebController.asVk)
         }
     }
     
@@ -75,7 +75,7 @@ final class WebPresenterTests: BaseTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error as? LegacySessionError, .wrongAuthUrl)
+            XCTAssertEqual(error.asVk, SessionError.authorizationUrlIsNil.asVk)
         }
     }
     
@@ -92,7 +92,7 @@ final class WebPresenterTests: BaseTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error as? LegacySessionError, .webPresenterTimedOut)
+            XCTAssertEqual(error.asVk, SessionError.webPresenterTimedOut.asVk)
         }
     }
     
@@ -115,11 +115,11 @@ final class WebPresenterTests: BaseTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error as? LegacySessionError, .deniedFromUser)
+            XCTAssertEqual(error.asVk, SessionError.authorizationDenied.asVk)
         }
     }
     
-    func test_load_throwDeniedfromUser_whenFlowCancelled() {
+    func test_load_throwCancelled_whenFlowCancelled() {
         // Given
         let context = makeContext()
         
@@ -138,7 +138,7 @@ final class WebPresenterTests: BaseTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error as? LegacySessionError, .deniedFromUser)
+            XCTAssertEqual(error.asVk, SessionError.authorizationCancelled.asVk)
         }
     }
     
@@ -161,7 +161,7 @@ final class WebPresenterTests: BaseTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error as? LegacySessionError, .failedAuthorization)
+            XCTAssertEqual(error.asVk, SessionError.authorizationFailed.asVk)
         }
     }
     
@@ -233,12 +233,12 @@ final class WebPresenterTests: BaseTestCase {
             controller.onLoad = { url, onResult, onDismiss in
                 loadCount += 1
                 onResultBlock = onResult
-                onResultBlock?(.error(LegacySessionError.failedAuthorization))
+                onResultBlock?(.error(SessionError.authorizationFailed.asVk))
             }
             
             controller.onReload = {
                 loadCount += 1
-                onResultBlock?(.error(LegacySessionError.failedAuthorization))
+                onResultBlock?(.error(SessionError.authorizationFailed.asVk))
             }
             
             return controller
@@ -249,7 +249,7 @@ final class WebPresenterTests: BaseTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error as? LegacySessionError, .failedAuthorization)
+            XCTAssertEqual(error.asVk, SessionError.authorizationFailed.asVk)
             XCTAssertEqual(loadCount, 3)
         }
     }
@@ -310,7 +310,7 @@ final class WebPresenterTests: BaseTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error as? LegacySessionError, .webPresenterResultIsNil)
+            XCTAssertEqual(error.asVk, SessionError.webPresenterResultIsNil.asVk)
         }
     }
 }

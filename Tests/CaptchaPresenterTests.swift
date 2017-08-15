@@ -25,7 +25,7 @@ class CaptchaPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error as? LegacySessionError, .cantMakeCaptchaController)
+            XCTAssertEqual(error.asVk, SessionError.cantMakeCaptchaController.asVk)
         }
     }
     
@@ -62,7 +62,7 @@ class CaptchaPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error as? LegacySessionError, .cantLoadCaptchaImage)
+            XCTAssertEqual(error.asVk, SessionError.cantLoadCaptchaImage.asVk)
         }
     }
     
@@ -79,7 +79,7 @@ class CaptchaPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error as? LegacySessionError, .captchaPresenterTimedOut)
+            XCTAssertEqual(error.asVk, SessionError.captchaPresenterTimedOut.asVk)
         }
     }
     
@@ -173,7 +173,7 @@ class CaptchaPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error as? LegacyRequestError, .captchaFailed)
+            XCTAssertEqual(error.asVk, RequestError.captchaResultIsNil.asVk)
         }
     }
 }

@@ -14,3 +14,9 @@ public enum VkError: Error {
         }
     }
 }
+
+extension Error {
+    var asVk: VkError? {
+        return self as? VkError
+    }
+}
