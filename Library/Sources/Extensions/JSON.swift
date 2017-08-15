@@ -1,61 +1,92 @@
-class JSON: JSONContainer {
-    let value: Any?
+class JSON: JSONContainer, CustomStringConvertible {
     
-    init(data: Data?) {
-        guard let data = data else {
-            self.value = nil
-            return
-        }
-        
-        guard let value = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) else {
-            self.value = nil
-            return
-        }
-        
-        self.value = value
+    var description: String {
+        return "JSON: \(String(describing: value))"
     }
     
-    subscript<T>(_ path: String) -> T? {
+    private let value: Any?
+    
+    init(data: Data?) throws {
+        self.value = try JSONSerialization.jsonObject(with: data ?? Data(), options: .allowFragments)
+    }
+    
+    func value<T>(_ path: String) -> T? {
         let components = path.components(separatedBy: ",")
         return parsed(value: value, components: components, isRoot: true)
     }
     
-    subscript(_ path: String) -> Data {
-        let anyValue: Any? = self[path]
+    func any(_ path: String) -> Any? {
+        return value(path)
+    }
+    
+    func forcedData(_ path: String) -> Data {
+        return data(path) ?? Data()
+    }
+    
+    func data(_ path: String) -> Data? {
+        let anyValue: Any? = value(path)
         
         guard anyValue is NSArray || anyValue is NSDictionary else {
-            return Data()
+            return nil
         }
         
-        return (try? JSONSerialization.data(withJSONObject: anyValue as Any, options: .prettyPrinted)) ?? Data()
+        return try? JSONSerialization.data(withJSONObject: anyValue as Any, options: [])
     }
     
-    subscript<T>(_ path: String) -> Array<T> {
-        return self[path] ?? []
+    func forcedArray<T>(_ path: String) -> [T] {
+        return array(path) ?? []
     }
     
-    subscript<T>(_ path: String) -> Dictionary<String, T> {
-        return self[path] ?? [:]
+    func array<T>(_ path: String) -> [T]? {
+        return value(path)
     }
     
-    subscript(_ path: String) -> Bool {
-        return self[path] ?? false
+    func forcedDictionary<T>(_ path: String) -> [String : T] {
+        return dictionary(path) ?? [:]
     }
     
-    subscript(_ path: String) -> String {
-        return self[path] ?? ""
+    func dictionary<T>(_ path: String) -> [String : T]? {
+        return value(path)
     }
     
-    subscript(_ path: String) -> Int {
-        return self[path] ?? 0
+    func forcedBool(_ path: String) -> Bool {
+        return bool(path) ?? false
     }
     
-    subscript(_ path: String) -> Double {
-        return self[path] ?? 0
+    func bool(_ path: String) -> Bool? {
+        return value(path)
     }
     
-    subscript(_ path: String) -> Float {
-        return self[path] ?? 0
+    func forcedString(_ path: String) -> String {
+        return string(path) ?? ""
+    }
+    
+    func string(_ path: String) -> String? {
+        return value(path)
+    }
+    
+    func forcedInt(_ path: String) -> Int {
+        return int(path) ?? 0
+    }
+    
+    func int(_ path: String) -> Int? {
+        return value(path)
+    }
+    
+    func forcedDouble(_ path: String) -> Double {
+        return double(path) ?? 0
+    }
+    
+    func double(_ path: String) -> Double? {
+        return value(path)
+    }
+    
+    func forcedFloat(_ path: String) -> Float {
+        return float(path) ?? 0
+    }
+    
+    func float(_ path: String) -> Float? {
+        return value(path)
     }
 }
 
@@ -64,11 +95,7 @@ extension NSArray: JSONContainer {
     func json<T>(_ components: [String]) -> T? {
         let component = firstComponent(from: components)
         
-        guard let index = Int(component) else {
-            return nil
-        }
-        
-        guard index >= 0 && index < count else {
+        guard let index = Int(component), index >= 0 && index < count else {
             return nil
         }
         

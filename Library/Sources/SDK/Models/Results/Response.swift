@@ -6,20 +6,20 @@ public enum Response {
     
     init(_ data: Data) {
         do {
-            let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            let json = try JSON(data: data)
             
             if let apiError = ApiError(json) {
                 self = .error(.api(apiError))
                 return
             }
             
-            if let root = json as? [String: Any], let success = root["success"] {
-                let successData = try JSONSerialization.data(withJSONObject: success, options: [])
-                self = .success(successData)
-                return
-            }
+            let successData = json.forcedData("success")
             
-            self = .success(data)
+            if successData.isEmpty {
+                self = .success(data)
+            } else {
+                self = .success(successData)
+            }
         } catch let error {
             self = .error(.request(.jsonNotParsed(error)))
             return

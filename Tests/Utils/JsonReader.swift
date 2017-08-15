@@ -1,5 +1,6 @@
 import Foundation
 import XCTest
+@testable import SwiftyVK
 
 class JsonReader {
     
@@ -24,9 +25,9 @@ class JsonReader {
 
 extension Data {
     
-    func toJson(file: StaticString = #file, line: UInt = #line) -> Any? {
+    func toJson(file: StaticString = #file, line: UInt = #line) -> JSON? {
         do {
-            let json = try JSONSerialization.jsonObject(with: self, options: .allowFragments)
+            let json = try JSON(data: self)
             return json
         } catch let error {
             XCTFail("JSON not parsed with error: \(error)", file: file, line: line)

@@ -6,33 +6,26 @@ public struct ApiError {
     public private(set) var requestParams = [String : String]()
     public private(set) var otherInfo = [String : String]()
     
-    init?(_ json: Any) {
-        guard let rootDict = json as? [String: Any] else {
+    init?(_ json: JSON) {
+        
+        guard let errorCode = json.int("error, error_code") else {
             return nil
         }
         
-        guard let errorDict = rootDict["error"] as? [String: Any] else {
-            return nil
-        }
-        
-        guard let errorCode = errorDict["error_code"] as? Int else {
-            return nil
-        }
-        
-        guard let errorMessage = errorDict["error_msg"] as? String else {
+        guard let errorMessage = json.string("error, error_msg") else {
             return nil
         }
         
         code = errorCode
         message = errorMessage
-        requestParams = makeRequestParams(from: errorDict)
-        otherInfo = makeOtherInfo(from: errorDict)
+        requestParams = makeRequestParams(from: json)
+        otherInfo = makeOtherInfo(from: json.forcedDictionary("error"))
     }
     
-    private func makeRequestParams(from errorDict: [String: Any]) -> [String : String] {
+    private func makeRequestParams(from error: JSON) -> [String : String] {
         var paramsDict = [String : String]()
         
-        if let paramsArray = errorDict["request_params"] as? [[String: String]] {
+        if let paramsArray: [[String: String]] = error.array("error, request_params") {
             for param in paramsArray {
                 if let key = param["key"], let value = param["value"] {
                     paramsDict.updateValue(value, forKey: key)
