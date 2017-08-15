@@ -30,7 +30,7 @@ final class AttemptShedulerImpl: AttemptSheduler {
     
     func shedule(attempt: Attempt, concurrent: Bool) throws {
         guard let attempt = attempt as? Operation else {
-            throw LegacyRequestError.wrongAttemptType
+            throw RequestError.wrongAttemptType.toError()
         }
         
         if concurrent {

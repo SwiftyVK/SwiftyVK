@@ -32,26 +32,6 @@ public enum LegacySessionError: Int, CustomNSError, CustomStringConvertible {
     }
 }
 
-public enum LegacyRequestError: Int, CustomNSError, CustomStringConvertible {
-    case unexpectedResponse         = 1
-    case timeoutExpired             = 2
-    case maximumAttemptsExceeded    = 3
-    case responseParsingFailed      = 4
-    case captchaFailed              = 5
-    case notConfigured              = 6
-    case wrongTaskType              = 7
-    case wrongAttemptType           = 8
-    case wrongUrl                   = 9
-
-    public static let errorDomain = "SwiftyVKRequestError"
-    public var errorCode: Int {return rawValue}
-    public var errorUserInfo: [String : Any] {return [:]}
-
-    public var description: String {
-        return String(format: "error %@[%d]: %@", LegacyRequestError.errorDomain, errorCode, errorUserInfo[NSLocalizedDescriptionKey] as? String ?? "nil")
-    }
-}
-
 extension NSError {
     override open var description: String {
         return String(format: "error %@[%d]: %@", domain, code, userInfo[NSLocalizedDescriptionKey] as? String ?? "nil")

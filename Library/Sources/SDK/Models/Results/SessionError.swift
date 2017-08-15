@@ -1,6 +1,6 @@
 import Foundation
 
-public enum SessionError: Error {
+public enum SessionError {
     case unknown(Error)
     
     

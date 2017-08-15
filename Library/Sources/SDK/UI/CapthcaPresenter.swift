@@ -60,7 +60,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
             }
             
             guard let unwrappedResult = result else {
-                throw LegacyRequestError.captchaFailed
+                throw RequestError.captchaResultIsNil.toError()
             }
             
             return unwrappedResult
