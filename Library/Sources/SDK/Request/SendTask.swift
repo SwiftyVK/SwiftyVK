@@ -9,7 +9,7 @@ private let sendTaskQueue = DispatchQueue(label: "SwiftyVK.SendTaskQueue")
 internal final class SendTask: Operation {
     unowned private let delegate: RequestInstance
     private let config: RequestConfig
-    private var task: URLSessionTask!
+    private var task: URLSessionTask?
     private let id: Int
     private let reqId: Int64
 
@@ -69,10 +69,10 @@ internal final class SendTask: Operation {
             let urlRequest = UrlFabric.createWith(config: config)
             self.task = session.dataTask(with: urlRequest, completionHandler: completeon)
             
-            task.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived), options: .new, context: nil)
-            task.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesSent), options: .new, context: nil)
+            task?.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived), options: .new, context: nil)
+            task?.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesSent), options: .new, context: nil)
             
-            task.resume()
+            task?.resume()
         }
         
         semaphore.wait()
@@ -82,6 +82,7 @@ internal final class SendTask: Operation {
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard let keyPath = keyPath else {return}
+        guard let task = task else {return}
 
         switch keyPath {
         case (#keyPath(URLSessionTask.countOfBytesReceived)):
@@ -95,7 +96,7 @@ internal final class SendTask: Operation {
 
 
     override func cancel() {
-        task.cancel()
+        task?.cancel()
         super.cancel()
         VK.Log.put(delegate, "cancel \(self)")
     }
@@ -104,7 +105,7 @@ internal final class SendTask: Operation {
 
     deinit {
 //        VK.Log.put("Life", "deinit \(self)")
-        task.removeObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived))
-        task.removeObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesSent))
+        task?.removeObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived))
+        task?.removeObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesSent))
     }
 }
