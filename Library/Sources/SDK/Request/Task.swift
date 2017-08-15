@@ -84,7 +84,7 @@ final class TaskImpl: Operation, Task {
                 execute(error: error)
             }
             else {
-                execute(error: RequestError.maximumAttemptsExceeded.toError())
+                execute(error: RequestError.maximumAttemptsExceeded.asVk)
             }
             
             return
@@ -171,7 +171,7 @@ final class TaskImpl: Operation, Task {
         }
         
         guard let vkError = error as? VkError else {
-            state = .failed(RequestError.unknown(error).toError())
+            state = .failed(RequestError.unknown(error).asVk)
             return
         }
         
@@ -196,10 +196,10 @@ final class TaskImpl: Operation, Task {
             
             switch result {
             case .none:
-                resendWith(error: apiError.toError(), captcha: nil)
+                resendWith(error: apiError.asVk, captcha: nil)
             case .captcha(let captcha):
                 sendAttempts -= 1
-                resendWith(error: apiError.toError(), captcha: captcha)
+                resendWith(error: apiError.asVk, captcha: captcha)
             }
         }
         catch let error {

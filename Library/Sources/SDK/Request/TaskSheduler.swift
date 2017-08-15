@@ -18,7 +18,7 @@ final class TaskShedulerImpl: TaskSheduler {
     
     func shedule(task: Task, concurrent: Bool) throws {
         guard let task = task as? Operation else {
-            throw RequestError.wrongTaskType.toError()
+            throw RequestError.wrongTaskType.asVk
         }
         
         if concurrent {

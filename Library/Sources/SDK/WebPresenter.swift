@@ -46,7 +46,7 @@ final class WebPresenterImpl: WebPresenter {
         return try uiSyncQueue.sync {
             
             guard let controller = controllerMaker.webController() else {
-                throw SessionError.cantMakeWebController.toError()
+                throw SessionError.cantMakeWebController.asVk
             }
             
             let originalPath = urlRequest.url?.path ?? ""
@@ -85,7 +85,7 @@ final class WebPresenterImpl: WebPresenter {
             
             switch semaphore.wait(timeout: .now() + timeout) {
             case .timedOut:
-                throw SessionError.webPresenterTimedOut.toError()
+                throw SessionError.webPresenterTimedOut.asVk
             case .success:
                 break
             }
@@ -96,7 +96,7 @@ final class WebPresenterImpl: WebPresenter {
             case .error(let error)?:
                 throw error
             case nil:
-                throw SessionError.webPresenterResultIsNil.toError()
+                throw SessionError.webPresenterResultIsNil.asVk
             }
         }
     }
@@ -112,7 +112,7 @@ final class WebPresenterImpl: WebPresenter {
     
     private func handle(url _url: URL?, originalPath: String) throws -> HandledResult {
         guard let url = _url else {
-            throw SessionError.authorizationUrlIsNil.toError()
+            throw SessionError.authorizationUrlIsNil.asVk
         }
         
         let fragment = url.fragment ?? ""
@@ -124,13 +124,13 @@ final class WebPresenterImpl: WebPresenter {
             return .response(fragment)
         }
         else if fragment.contains("access_denied") {
-            throw SessionError.authorizationDenied.toError()
+            throw SessionError.authorizationDenied.asVk
         }
         else if fragment.contains("cancel=1") {
-            throw SessionError.authorizationCancelled.toError()
+            throw SessionError.authorizationCancelled.asVk
         }
         else if fragment.contains("fail=1") {
-            throw SessionError.authorizationFailed.toError()
+            throw SessionError.authorizationFailed.asVk
         }
         else if url.path == originalPath {
             return .nothing

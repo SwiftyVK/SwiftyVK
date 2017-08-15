@@ -22,7 +22,7 @@ public struct ApiError {
         otherInfo = makeOtherInfo(from: json.forcedDictionary("error"))
     }
     
-    func toError() -> VkError {
+    var asVk: VkError {
         return .api(self)
     }
     

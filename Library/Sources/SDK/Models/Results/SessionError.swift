@@ -21,7 +21,7 @@ public enum SessionError {
     case authorizationCancelled
     case authorizationFailed
     
-    func toError() -> VkError {
+    var asVk: VkError {
         return .session(self)
     }
 }

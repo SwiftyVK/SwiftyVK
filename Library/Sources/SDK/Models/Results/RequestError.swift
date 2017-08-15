@@ -11,7 +11,7 @@ public enum RequestError {
     case captchaResultIsNil
     case wrongUrl
     
-    func toError() -> VkError {
+    var asVk: VkError {
         return .request(self)
     }
 }

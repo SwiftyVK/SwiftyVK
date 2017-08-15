@@ -162,7 +162,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         } catch let error as VkError {
             callbacks.onError?(error)
         } catch let error {
-            callbacks.onError?(SessionError.unknown(error).toError())
+            callbacks.onError?(SessionError.unknown(error).asVk)
         }
         
         return task
@@ -194,13 +194,13 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     
     private func throwIfDestroyed() throws {
         guard state > .destroyed else {
-            throw SessionError.sessionAlreadyDestroyed(self).toError()
+            throw SessionError.sessionAlreadyDestroyed(self).asVk
         }
     }
     
     private func throwIfAuthorized() throws {
         guard state < .authorized else {
-            throw SessionError.sessionAlreadyAuthorized(self).toError()
+            throw SessionError.sessionAlreadyAuthorized(self).asVk
         }
     }
     

@@ -49,7 +49,7 @@ final class AuthorizatorImpl: Authorizator {
             }
             
             guard let scopes = delegate?.vkNeedsScopes(for: sessionId).toInt() else {
-                throw SessionError.vkDelegateNotFound.toError()
+                throw SessionError.vkDelegateNotFound.asVk
             }
             
             let vkAppAuthQuery = try makeAuthQuery(
@@ -143,7 +143,7 @@ final class AuthorizatorImpl: Authorizator {
     
     private func makeToken(tokenInfo: String) throws -> Token {
         guard let parsingResult = tokenParser.parse(tokenInfo: tokenInfo) else {
-            throw SessionError.cantParseTokenInfo(tokenInfo).toError()
+            throw SessionError.cantParseTokenInfo(tokenInfo).asVk
         }
         
         return tokenMaker.token(
@@ -168,7 +168,7 @@ final class AuthorizatorImpl: Authorizator {
         )
         
         guard let url = URL(string: webAuthorizeUrl + webQuery) else {
-            throw SessionError.cantBuildWebViewUrl(webAuthorizeUrl + webQuery).toError()
+            throw SessionError.cantBuildWebViewUrl(webAuthorizeUrl + webQuery).asVk
         }
         
         return URLRequest(

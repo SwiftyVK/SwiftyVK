@@ -78,7 +78,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
     
     private func makeGetRequest(from apiMethod: String, query: String) throws -> URLRequest {
         guard let url = URL(string: baseUrl + apiMethod + "?" + query) else {
-            throw RequestError.wrongUrl.toError()
+            throw RequestError.wrongUrl.asVk
         }
         
         return URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
@@ -86,7 +86,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
     
     private func makePostRequest(from apiMethod: String, query: String) throws -> URLRequest {
         guard let url = URL(string: baseUrl + apiMethod) else {
-            throw RequestError.wrongUrl.toError()
+            throw RequestError.wrongUrl.asVk
         }
         
         var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
@@ -105,7 +105,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
     
     private func make(from media: [Media], url: String, partType: PartType) throws -> URLRequest {
         guard let url = URL(string: url) else {
-            throw RequestError.wrongUrl.toError()
+            throw RequestError.wrongUrl.asVk
         }
         
         var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
@@ -120,7 +120,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
     
     private func make(from url: String) throws -> URLRequest {
         guard let url = URL(string: url) else {
-            throw RequestError.wrongUrl.toError()
+            throw RequestError.wrongUrl.asVk
         }
         
         var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
