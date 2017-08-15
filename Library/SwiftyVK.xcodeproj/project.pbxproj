@@ -916,9 +916,9 @@
 			productReference = A2527D551BD1134500F65412 /* SwiftyVK_resources_iOS.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		A2EB6E9A1BD180DD008E7D86 /* SwiftyVK-iOS */ = {
+		A2EB6E9A1BD180DD008E7D86 /* SwiftyVK_iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A2EB6EA01BD180DD008E7D86 /* Build configuration list for PBXNativeTarget "SwiftyVK-iOS" */;
+			buildConfigurationList = A2EB6EA01BD180DD008E7D86 /* Build configuration list for PBXNativeTarget "SwiftyVK_iOS" */;
 			buildPhases = (
 				A2EB6E961BD180DD008E7D86 /* Sources */,
 				A2EB6E981BD180DD008E7D86 /* Headers */,
@@ -930,14 +930,14 @@
 			dependencies = (
 				A2EB6EB61BD182D4008E7D86 /* PBXTargetDependency */,
 			);
-			name = "SwiftyVK-iOS";
+			name = SwiftyVK_iOS;
 			productName = "SwiftyVK-iOS";
 			productReference = A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		A2EB6EA71BD180E9008E7D86 /* SwiftyVK-OSX */ = {
+		A2EB6EA71BD180E9008E7D86 /* SwiftyVK_macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A2EB6EAD1BD180EA008E7D86 /* Build configuration list for PBXNativeTarget "SwiftyVK-OSX" */;
+			buildConfigurationList = A2EB6EAD1BD180EA008E7D86 /* Build configuration list for PBXNativeTarget "SwiftyVK_macOS" */;
 			buildPhases = (
 				A2EB6EA31BD180E9008E7D86 /* Sources */,
 				A2EB6EA51BD180E9008E7D86 /* Headers */,
@@ -949,7 +949,7 @@
 			dependencies = (
 				A2EB6EB21BD182C7008E7D86 /* PBXTargetDependency */,
 			);
-			name = "SwiftyVK-OSX";
+			name = SwiftyVK_macOS;
 			productName = "SwiftyVK-OSX";
 			productReference = A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1016,8 +1016,8 @@
 			projectRoot = "";
 			targets = (
 				A21F10B81DCDFCF6003EFDDC /* LintAllTargets */,
-				A2EB6EA71BD180E9008E7D86 /* SwiftyVK-OSX */,
-				A2EB6E9A1BD180DD008E7D86 /* SwiftyVK-iOS */,
+				A2EB6EA71BD180E9008E7D86 /* SwiftyVK_macOS */,
+				A2EB6E9A1BD180DD008E7D86 /* SwiftyVK_iOS */,
 				A2527D4A1BD1130D00F65412 /* SwiftyVK_resources_macOS */,
 				A2527D541BD1134500F65412 /* SwiftyVK_resources_iOS */,
 				A23708B91EA52F0D00103212 /* SwiftyVK-Tests-OSX */,
@@ -1349,17 +1349,17 @@
 /* Begin PBXTargetDependency section */
 		A21F10BD1DCDFCFE003EFDDC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A2EB6EA71BD180E9008E7D86 /* SwiftyVK-OSX */;
+			target = A2EB6EA71BD180E9008E7D86 /* SwiftyVK_macOS */;
 			targetProxy = A21F10BC1DCDFCFE003EFDDC /* PBXContainerItemProxy */;
 		};
 		A21F10BF1DCDFD01003EFDDC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A2EB6E9A1BD180DD008E7D86 /* SwiftyVK-iOS */;
+			target = A2EB6E9A1BD180DD008E7D86 /* SwiftyVK_iOS */;
 			targetProxy = A21F10BE1DCDFD01003EFDDC /* PBXContainerItemProxy */;
 		};
 		A23708C11EA52F0D00103212 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A2EB6EA71BD180E9008E7D86 /* SwiftyVK-OSX */;
+			target = A2EB6EA71BD180E9008E7D86 /* SwiftyVK_macOS */;
 			targetProxy = A23708C01EA52F0D00103212 /* PBXContainerItemProxy */;
 		};
 		A2EB6EB21BD182C7008E7D86 /* PBXTargetDependency */ = {
@@ -2036,7 +2036,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A2EB6EA01BD180DD008E7D86 /* Build configuration list for PBXNativeTarget "SwiftyVK-iOS" */ = {
+		A2EB6EA01BD180DD008E7D86 /* Build configuration list for PBXNativeTarget "SwiftyVK_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A2EB6EA11BD180DD008E7D86 /* Debug */,
@@ -2045,7 +2045,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A2EB6EAD1BD180EA008E7D86 /* Build configuration list for PBXNativeTarget "SwiftyVK-OSX" */ = {
+		A2EB6EAD1BD180EA008E7D86 /* Build configuration list for PBXNativeTarget "SwiftyVK_macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A2EB6EAE1BD180EA008E7D86 /* Debug */,

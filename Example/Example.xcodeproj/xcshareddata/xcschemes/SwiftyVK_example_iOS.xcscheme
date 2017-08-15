@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A2527E671BD13A3B00F65412"
+               BlueprintIdentifier = "A2527E791BD13A5300F65412"
                BuildableName = "~SwiftyVK~.app"
-               BlueprintName = "SwiftyVK-Example-OSX"
+               BlueprintName = "SwiftyVK-Example-iOS"
                ReferencedContainer = "container:Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,6 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
       <Testables>
@@ -33,9 +34,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A2EB712C1BD27639008E7D86"
-               BuildableName = "SwiftyVK-Tests-OSX.xctest"
-               BlueprintName = "SwiftyVK-Tests-OSX"
+               BlueprintIdentifier = "A2EB713A1BD27652008E7D86"
+               BuildableName = "SwiftyVK-Tests-iOS.xctest"
+               BlueprintName = "SwiftyVK-Tests-iOS"
                ReferencedContainer = "container:Example.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,9 +44,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A2527E671BD13A3B00F65412"
+            BlueprintIdentifier = "A2527E791BD13A5300F65412"
             BuildableName = "~SwiftyVK~.app"
-            BlueprintName = "SwiftyVK-Example-OSX"
+            BlueprintName = "SwiftyVK-Example-iOS"
             ReferencedContainer = "container:Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -56,6 +57,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -66,12 +68,19 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A2527E671BD13A3B00F65412"
+            BlueprintIdentifier = "A2527E791BD13A5300F65412"
             BuildableName = "~SwiftyVK~.app"
-            BlueprintName = "SwiftyVK-Example-OSX"
+            BlueprintName = "SwiftyVK-Example-iOS"
             ReferencedContainer = "container:Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OS_ACTIVITY_MODE"
+            value = "disable"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -85,9 +94,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A2527E671BD13A3B00F65412"
+            BlueprintIdentifier = "A2527E791BD13A5300F65412"
             BuildableName = "~SwiftyVK~.app"
-            BlueprintName = "SwiftyVK-Example-OSX"
+            BlueprintName = "SwiftyVK-Example-iOS"
             ReferencedContainer = "container:Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

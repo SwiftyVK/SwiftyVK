@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A2EB6E9A1BD180DD008E7D86"
+               BlueprintIdentifier = "A2EB6EA71BD180E9008E7D86"
                BuildableName = "SwiftyVK.framework"
-               BlueprintName = "SwiftyVK-iOS"
+               BlueprintName = "SwiftyVK_macOS"
+               ReferencedContainer = "container:SwiftyVK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A23708B91EA52F0D00103212"
+               BuildableName = "SwiftyVK-Tests-OSX.xctest"
+               BlueprintName = "SwiftyVK-Tests-OSX"
                ReferencedContainer = "container:SwiftyVK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,10 +40,38 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A23708B91EA52F0D00103212"
+               BuildableName = "SwiftyVK-Tests-OSX.xctest"
+               BlueprintName = "SwiftyVK-Tests-OSX"
+               ReferencedContainer = "container:SwiftyVK.xcodeproj">
+            </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "VKProxyTests/test_openUrl_shoudBeSuccess()">
+               </Test>
+               <Test
+                  Identifier = "VKProxyTests/test_openUrl_withCantOpenUrl_shouldBeFail()">
+               </Test>
+            </SkippedTests>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "A2EB6EA71BD180E9008E7D86"
+            BuildableName = "SwiftyVK.framework"
+            BlueprintName = "SwiftyVK_macOS"
+            ReferencedContainer = "container:SwiftyVK.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -37,6 +79,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -46,9 +89,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A2EB6E9A1BD180DD008E7D86"
+            BlueprintIdentifier = "A2EB6EA71BD180E9008E7D86"
             BuildableName = "SwiftyVK.framework"
-            BlueprintName = "SwiftyVK-iOS"
+            BlueprintName = "SwiftyVK_macOS"
             ReferencedContainer = "container:SwiftyVK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,9 +107,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A2EB6E9A1BD180DD008E7D86"
+            BlueprintIdentifier = "A2EB6EA71BD180E9008E7D86"
             BuildableName = "SwiftyVK.framework"
-            BlueprintName = "SwiftyVK-iOS"
+            BlueprintName = "SwiftyVK_macOS"
             ReferencedContainer = "container:SwiftyVK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
