@@ -76,7 +76,7 @@ final class TaskImpl: Operation, Task {
         VK.Log.put(self, "cancelled")
     }
     
-    private func resendWith(error: Error?, captcha: Captcha?) {
+    private func resendWith(error: VkError?, captcha: Captcha?) {
         guard !self.isCancelled else {return}
         
         guard sendAttempts < request.config.maxAttemptsLimit.count else {
@@ -171,26 +171,26 @@ final class TaskImpl: Operation, Task {
         semaphore.signal()
     }
     
-    private func `catch`(error rawError: Error) {
+    private func `catch`(error vkError: VkError) {
         guard
             !isCancelled,
             sendAttempts < request.config.maxAttemptsLimit.count,
             request.config.handleErrors == true,
-            let error = rawError as? LegacyApiError
+            let apiError = vkError.toApi()
             else {
-                execute(error: rawError)
+                execute(error: vkError)
                 return
         }
         
         do {
-            let result = try apiErrorHandler.handle(error: error)
+            let result = try apiErrorHandler.handle(error: apiError)
             
             switch result {
             case .none:
-                resendWith(error: error, captcha: nil)
+                resendWith(error: apiError.toError(), captcha: nil)
             case .captcha(let captcha):
                 sendAttempts -= 1
-                resendWith(error: error, captcha: captcha)
+                resendWith(error: apiError.toError(), captcha: captcha)
             }
         }
         catch let error {
