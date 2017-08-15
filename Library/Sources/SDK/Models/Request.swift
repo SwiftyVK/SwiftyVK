@@ -53,7 +53,7 @@ public struct Callbacks {
     public static let empty = Callbacks()
     
     let onSuccess: ((Data) -> ())?
-    let onError: ((Error) -> ())?
+    let onError: ((VkError) -> ())?
     let onProgress: ((Int64, Int64) -> ())?
     
     public init(

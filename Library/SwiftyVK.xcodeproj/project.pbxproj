@@ -237,10 +237,8 @@
 		D47601251F2E2450005356E5 /* VkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47601231F2E2450005356E5 /* VkError.swift */; };
 		D47601291F2E2602005356E5 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47601281F2E2602005356E5 /* RequestError.swift */; };
 		D476012A1F2E2602005356E5 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47601281F2E2602005356E5 /* RequestError.swift */; };
-		D476012B1F2E2602005356E5 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47601281F2E2602005356E5 /* RequestError.swift */; };
 		D476012D1F2E260B005356E5 /* SessionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D476012C1F2E260B005356E5 /* SessionError.swift */; };
 		D476012E1F2E260B005356E5 /* SessionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D476012C1F2E260B005356E5 /* SessionError.swift */; };
-		D476012F1F2E260B005356E5 /* SessionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D476012C1F2E260B005356E5 /* SessionError.swift */; };
 		D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */; };
 		D4F49D421F2DF5B10037B875 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D411F2DF5B10037B875 /* JsonReader.swift */; };
 		D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
@@ -1146,11 +1144,9 @@
 				A2B805561EDDB01C004DA7EB /* WebControllerMock.swift in Sources */,
 				A25A19D71EE4405E00CF13AF /* VkAppProxyMock.swift in Sources */,
 				A22179D01EBA530C006B71FD /* SessionMock.swift in Sources */,
-				D476012F1F2E260B005356E5 /* SessionError.swift in Sources */,
 				A2F7B5551EF18C5C006AF76C /* CaptchaPresenterMock.swift in Sources */,
 				A2B40DFD1EA693B700106AE3 /* UrlRequestBuilderTests.swift in Sources */,
 				A25A19D01EE4233D00CF13AF /* TokenParserTests.swift in Sources */,
-				D476012B1F2E2602005356E5 /* RequestError.swift in Sources */,
 				A2E34DBF1ED1F6FE0041E663 /* TokenStorageMock.swift in Sources */,
 				A2433A441EA533500058BB6D /* TaskMock.swift in Sources */,
 				A2D355F21EFAD4C300395E61 /* SessionStorageMock.swift in Sources */,

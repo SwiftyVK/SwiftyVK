@@ -84,7 +84,7 @@ final class TaskImpl: Operation, Task {
                 execute(error: error)
             }
             else {
-                execute(error: LegacyRequestError.maximumAttemptsExceeded)
+                execute(error: RequestError.maximumAttemptsExceeded.toError())
             }
             
             return
@@ -102,7 +102,7 @@ final class TaskImpl: Operation, Task {
     }
     
     private func send(captcha: Captcha?) throws {
-        guard !self.isCancelled else {return}
+        guard !self.isCancelled else { return }
         
         sendAttempts += 1
         VK.Log.put(self, "send \(sendAttempts) of \(request.config.maxAttemptsLimit.count) times")
@@ -165,10 +165,19 @@ final class TaskImpl: Operation, Task {
     
     private func execute(error: Error) {
         guard !isCancelled else { return }
+        
+        defer {
+            semaphore.signal()
+        }
+        
+        guard let vkError = error as? VkError else {
+            state = .failed(RequestError.unknown(error).toError())
+            return
+        }
+        
         VK.Log.put(self, "execute error block")
-        state = .failed(error)
-        callbacks.onError?(error)
-        semaphore.signal()
+        state = .failed(vkError)
+        callbacks.onError?(vkError)
     }
     
     private func `catch`(error vkError: VkError) {
@@ -203,7 +212,7 @@ public enum TaskState {
     case created
     case sended
     case finished(Data)
-    case failed(Error)
+    case failed(VkError)
     case cancelled
 }
 

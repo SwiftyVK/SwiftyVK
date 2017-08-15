@@ -23,7 +23,7 @@ public struct ApiError {
     }
     
     func toError() -> VkError {
-        return VkError.api(self)
+        return .api(self)
     }
     
     private func makeRequestParams(from error: JSON) -> [String : String] {

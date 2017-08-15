@@ -159,8 +159,10 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         do {
             try throwIfDestroyed()
             try shedule(task: task, concurrent: request.rawRequest.canSentConcurrently)
-        } catch let error {
+        } catch let error as VkError {
             callbacks.onError?(error)
+        } catch let error {
+            callbacks.onError?(SessionError.unknown(error).toError())
         }
         
         return task
