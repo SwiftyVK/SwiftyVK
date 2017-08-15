@@ -6,12 +6,14 @@ import XCTest
 class LongPool_Tests: VKTestCase {
     
     func test_longPoll() {
+        Stubs.LongPoll.normalFlow()
+
         VK.logOut()
-        VK.LP.start()
         XCTAssertFalse(VK.LP.isActive)
+        VK.LP.start()
+        XCTAssertTrue(VK.LP.isActive)
         
         VK.logInWith(rawToken: "1234567890", expiresIn: 9_999_999_999)
-        Stubs.LongPoll.normalFlow()
         
         expectation(forNotification: VK.LP.notifications.type0.rawValue, object: nil, handler: nil)
         expectation(forNotification: VK.LP.notifications.type1.rawValue, object: nil, handler: nil)
@@ -34,6 +36,7 @@ class LongPool_Tests: VKTestCase {
         
         XCTAssertTrue(VK.LP.isActive)
         VK.LP.stop()
+        XCTAssertFalse(VK.LP.isActive)
         
         VK.logOut()
     }
