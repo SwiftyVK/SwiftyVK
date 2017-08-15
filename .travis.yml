@@ -12,9 +12,9 @@ env:
   - LANG=en_US.UTF-8
   - WORKSPACE=SwiftyVK.xcworkspace
 
-  - MAC_SCHEME="SwiftyVK-Example-OSX"
+  - MAC_SCHEME="SwiftyVK_macOS"
 
-  - IOS_SCHEME="SwiftyVK-Example-iOS"
+  - IOS_SCHEME="SwiftyVK_iOS"
   - IOS_DESTANATION="platform=iOS Simulator,OS=10.3.1,name=iPhone 7 Plus"
 
 before_install:
@@ -32,8 +32,8 @@ install:
   
 script:
   - set -o pipefail
-  - xcodebuild -workspace SwiftyVK.xcworkspace -scheme "$IOS_SCHEME" -destination "$IOS_DESTANATION" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" -enableCodeCoverage YES build-for-testing test-without-building | xcpretty -f `xcpretty-travis-formatter`
-  - xcodebuild -workspace "$WORKSPACE" -scheme "$MAC_SCHEME" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_TESTABILITY=YES -enableCodeCoverage YES build-for-testing test-without-building | xcpretty -f `xcpretty-travis-formatter`
+  - xcodebuild -workspace SwiftyVK.xcworkspace -scheme "$IOS_SCHEME" -destination "$IOS_DESTANATION" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" -enableCodeCoverage YES build | xcpretty -f `xcpretty-travis-formatter`
+  - xcodebuild -workspace "$WORKSPACE" -scheme "$MAC_SCHEME" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_TESTABILITY=YES -enableCodeCoverage YES test | xcpretty -f `xcpretty-travis-formatter`
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
