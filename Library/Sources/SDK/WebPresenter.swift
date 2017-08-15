@@ -46,7 +46,7 @@ final class WebPresenterImpl: WebPresenter {
         return try uiSyncQueue.sync {
             
             guard let controller = controllerMaker.webController() else {
-                throw LegacySessionError.cantMakeWebViewController
+                throw SessionError.cantMakeWebController.toError()
             }
             
             let originalPath = urlRequest.url?.path ?? ""
@@ -85,7 +85,7 @@ final class WebPresenterImpl: WebPresenter {
             
             switch semaphore.wait(timeout: .now() + timeout) {
             case .timedOut:
-                throw LegacySessionError.webPresenterTimedOut
+                throw SessionError.webPresenterTimedOut.toError()
             case .success:
                 break
             }
@@ -96,7 +96,7 @@ final class WebPresenterImpl: WebPresenter {
             case .error(let error)?:
                 throw error
             case nil:
-                throw LegacySessionError.webPresenterResultIsNil
+                throw SessionError.webPresenterResultIsNil.toError()
             }
         }
     }
@@ -110,9 +110,9 @@ final class WebPresenterImpl: WebPresenter {
         }
     }
     
-    private func handle(url: URL?, originalPath: String) throws -> HandledResult {
-        guard let url = url else {
-            throw LegacySessionError.wrongAuthUrl
+    private func handle(url _url: URL?, originalPath: String) throws -> HandledResult {
+        guard let url = _url else {
+            throw SessionError.authorizationUrlIsNil.toError()
         }
         
         let fragment = url.fragment ?? ""
@@ -123,12 +123,14 @@ final class WebPresenterImpl: WebPresenter {
         else if fragment.contains("success=1") {
             return .response(fragment)
         }
-        else if fragment.contains("access_denied") ||
-            fragment.contains("cancel=1") {
-            throw LegacySessionError.deniedFromUser
+        else if fragment.contains("access_denied") {
+            throw SessionError.authorizationDenied.toError()
+        }
+        else if fragment.contains("cancel=1") {
+            throw SessionError.authorizationCancelled.toError()
         }
         else if fragment.contains("fail=1") {
-            throw LegacySessionError.failedAuthorization
+            throw SessionError.authorizationFailed.toError()
         }
         else if url.path == originalPath {
             return .nothing

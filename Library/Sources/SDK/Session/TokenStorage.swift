@@ -26,7 +26,7 @@ class TokenStorageImpl: TokenStorage {
         let keychainCode = SecItemAdd(keychainQuery, nil)
         
         guard keychainCode == 0 else {
-            throw LegacySessionError.tokenNotSavedInStorage
+            throw SessionError.tokenNotSavedInStorage.toError()
         }
     }
     
