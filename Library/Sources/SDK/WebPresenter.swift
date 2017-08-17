@@ -5,12 +5,12 @@ protocol WebPresenter: class {
 
 enum WebControllerResult {
     case response(URL?)
-    case error(Error)
+    case error(VkError)
 }
 
 private enum WebPresenterResult {
     case response(String)
-    case error(Error)
+    case error(VkError)
 }
 
 private enum HandledResult {
@@ -46,7 +46,7 @@ final class WebPresenterImpl: WebPresenter {
         return try uiSyncQueue.sync {
             
             guard let controller = controllerMaker.webController() else {
-                throw SessionError.cantMakeWebController.asVk
+                throw VkError.cantMakeWebController
             }
             
             let originalPath = urlRequest.url?.path ?? ""
@@ -70,8 +70,10 @@ final class WebPresenterImpl: WebPresenter {
                             break
                         }
                         
-                    } catch let error {
+                    } catch let error as VkError {
                         finalResult = .error(error)
+                    } catch let error {
+                        finalResult = .error(.unknown(error))
                     }
                     
                     if finalResult != nil {
@@ -85,7 +87,7 @@ final class WebPresenterImpl: WebPresenter {
             
             switch semaphore.wait(timeout: .now() + timeout) {
             case .timedOut:
-                throw SessionError.webPresenterTimedOut.asVk
+                throw VkError.webPresenterTimedOut
             case .success:
                 break
             }
@@ -96,7 +98,7 @@ final class WebPresenterImpl: WebPresenter {
             case .error(let error)?:
                 throw error
             case nil:
-                throw SessionError.webPresenterResultIsNil.asVk
+                throw VkError.webPresenterResultIsNil
             }
         }
     }
@@ -112,7 +114,7 @@ final class WebPresenterImpl: WebPresenter {
     
     private func handle(url _url: URL?, originalPath: String) throws -> HandledResult {
         guard let url = _url else {
-            throw SessionError.authorizationUrlIsNil.asVk
+            throw VkError.authorizationUrlIsNil
         }
         
         let fragment = url.fragment ?? ""
@@ -124,13 +126,13 @@ final class WebPresenterImpl: WebPresenter {
             return .response(fragment)
         }
         else if fragment.contains("access_denied") {
-            throw SessionError.authorizationDenied.asVk
+            throw VkError.authorizationDenied
         }
         else if fragment.contains("cancel=1") {
-            throw SessionError.authorizationCancelled.asVk
+            throw VkError.authorizationCancelled
         }
         else if fragment.contains("fail=1") {
-            throw SessionError.authorizationFailed.asVk
+            throw VkError.authorizationFailed
         }
         else if url.path == originalPath {
             return .nothing
@@ -141,7 +143,7 @@ final class WebPresenterImpl: WebPresenter {
         }
     }
     
-    private func handle(error: Error, fails: Int) throws -> HandledResult {
+    private func handle(error: VkError, fails: Int) throws -> HandledResult {
         guard fails >= maxFails - 1 else {
             return .fail
         }

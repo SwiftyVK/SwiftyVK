@@ -21,7 +21,7 @@ public enum Response {
                 self = .success(successData)
             }
         } catch let error {
-            self = .error(.request(.jsonNotParsed(error)))
+            self = .error(.jsonNotParsed(error))
             return
         }
     }

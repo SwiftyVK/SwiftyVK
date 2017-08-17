@@ -47,7 +47,7 @@ class ResponseTests: XCTestCase {
         let result = Response(Data())
 
         switch result {
-        case let .error(.request(.jsonNotParsed(error))):
+        case let .error(.jsonNotParsed(error)):
             XCTAssertEqual((error as NSError).code, 3840)
         default:
             XCTFail()

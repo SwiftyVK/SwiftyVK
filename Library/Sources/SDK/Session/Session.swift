@@ -2,7 +2,7 @@ public protocol Session: class {
     var id: String { get }
     var config: SessionConfig { get set }
     var state: SessionState { get }
-    func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (Error) -> ())
+    func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (VkError) -> ())
     func logIn(rawToken: String, expires: TimeInterval) throws
     func logOut()
     @discardableResult
@@ -92,13 +92,15 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         attemptSheduler.setLimit(to: config.attemptsPerSecLimit)
     }
     
-    public func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (Error) -> ()) {
+    public func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (VkError) -> ()) {
          gateQueue.async {
             do {
                 let info = try self.logIn(revoke: true)
                 onSuccess(info)
-            } catch let error {
+            } catch let error as VkError {
                 onError(error)
+            } catch let error {
+                onError(.unknown(error))
             }
         }
     }
@@ -162,7 +164,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         } catch let error as VkError {
             callbacks.onError?(error)
         } catch let error {
-            callbacks.onError?(SessionError.unknown(error).asVk)
+            callbacks.onError?(.unknown(error))
         }
         
         return task
@@ -194,13 +196,13 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     
     private func throwIfDestroyed() throws {
         guard state > .destroyed else {
-            throw SessionError.sessionAlreadyDestroyed(self).asVk
+            throw VkError.sessionAlreadyDestroyed(self)
         }
     }
     
     private func throwIfAuthorized() throws {
         guard state < .authorized else {
-            throw SessionError.sessionAlreadyAuthorized(self).asVk
+            throw VkError.sessionAlreadyAuthorized(self)
         }
     }
     

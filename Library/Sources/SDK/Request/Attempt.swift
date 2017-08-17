@@ -36,13 +36,13 @@ final class AttemptImpl: Operation, Attempt {
             guard let `self` = self, !self.isCancelled else { return }
 
             if let error = error {
-                self.callbacks.onFinish(.error(.request(.urlRequestError(error))))
+                self.callbacks.onFinish(.error(.urlRequestError(error)))
             }
             else if let data = data {
                 self.callbacks.onFinish(Response(data))
             }
             else {
-                self.callbacks.onFinish(.error(.request(.unexpectedResponse)))
+                self.callbacks.onFinish(.error(.unexpectedResponse))
             }
             
             self.taskIsFinished = true

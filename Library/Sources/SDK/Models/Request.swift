@@ -58,7 +58,7 @@ public struct Callbacks {
     
     public init(
         onSuccess: ((Data) -> ())? = nil,
-        onError: ((Error) -> ())? = nil,
+        onError: ((VkError) -> ())? = nil,
         onProgress: ((Int64, Int64) -> ())? = nil
         ) {
         self.onSuccess = onSuccess

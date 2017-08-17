@@ -81,7 +81,7 @@ class AuthorizatorTests: BaseTestCase {
             // Then
             XCTFail("Code above should throw error")
         } catch let error {
-            XCTAssertEqual(error.asVk, SessionError.cantParseTokenInfo("").asVk)
+            XCTAssertEqual(error.asVk, VkError.cantParseTokenInfo(""))
         }
     }
     
@@ -218,7 +218,7 @@ class AuthorizatorTests: BaseTestCase {
         
         context.webPresenter.onPresesent = { _ in
             Thread.sleep(forTimeInterval: 0.2)
-            throw SessionError.cantMakeWebController.asVk
+            throw VkError.cantMakeWebController
         }
         
         context.vkApp.onHandle = { url, string in

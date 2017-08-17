@@ -44,7 +44,7 @@ final class SessionsHolderTests: BaseTestCase {
             try holder.destroy(session: holder.default)
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVk, SessionError.cantDestroyDefaultSession.asVk)
+            XCTAssertEqual(error.asVk, VkError.cantDestroyDefaultSession)
             
         }
     }
@@ -58,7 +58,7 @@ final class SessionsHolderTests: BaseTestCase {
             try holder.destroy(session: session)
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVk, SessionError.sessionAlreadyDestroyed(session).asVk)
+            XCTAssertEqual(error.asVk, VkError.sessionAlreadyDestroyed(session))
             
         }
     }

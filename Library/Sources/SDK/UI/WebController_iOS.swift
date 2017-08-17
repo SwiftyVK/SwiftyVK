@@ -66,7 +66,7 @@ final class WebController_iOS: UIViewController, WKNavigationDelegate, WebContro
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        onResult?(.error(error))
+        onResult?(.error(.webControllerError(error)))
     }
 }
 

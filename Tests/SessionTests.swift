@@ -36,7 +36,7 @@ final class SessionTests: BaseTestCase {
     private func syncLogIn(
         session: Session,
         onSuccess: @escaping ([String : String]) -> (),
-        onError: @escaping (Error)-> ()
+        onError: @escaping (VkError)-> ()
         ) {
         let exp = expectation(description: "")
         
@@ -132,7 +132,7 @@ final class SessionTests: BaseTestCase {
                 XCTFail("Log in sould be fail")
             },
             onError: { error in
-                XCTAssertEqual(error.asVk, SessionError.authorizationFailed.asVk)
+                XCTAssertEqual(error.asVk, VkError.authorizationFailed)
             }
         )
         
@@ -152,7 +152,7 @@ final class SessionTests: BaseTestCase {
                 XCTFail("Log in sould be fail")
             },
             onError: { error in
-                XCTAssertEqual(error.asVk, SessionError.sessionAlreadyDestroyed(session).asVk)
+                XCTAssertEqual(error.asVk, VkError.sessionAlreadyDestroyed(session))
             }
         )
         // Then
@@ -169,7 +169,7 @@ final class SessionTests: BaseTestCase {
             try session.logIn(rawToken: "", expires: 0)
             XCTFail("Log in sould be fail")
         } catch let error {
-            XCTAssertEqual(error.asVk, SessionError.sessionAlreadyDestroyed(session).asVk)
+            XCTAssertEqual(error.asVk, VkError.sessionAlreadyDestroyed(session))
         }
         // Then
         XCTAssertEqual(session.state, .destroyed)
@@ -229,7 +229,7 @@ final class SessionTests: BaseTestCase {
             callbacks: Callbacks(
                 onError: { error in
                     // Then
-                    XCTAssertEqual(error.asVk, SessionError.sessionAlreadyDestroyed(session).asVk)
+                    XCTAssertEqual(error.asVk, VkError.sessionAlreadyDestroyed(session))
             })
         )
     }
@@ -246,7 +246,7 @@ final class SessionTests: BaseTestCase {
             callbacks: Callbacks(
                 onError: { error in
                     // Then
-                    XCTAssertEqual(error.asVk, RequestError.wrongTaskType.asVk)
+                    XCTAssertEqual(error.asVk, VkError.wrongTaskType)
             })
         )
     }

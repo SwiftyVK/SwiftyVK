@@ -84,7 +84,7 @@ final class TaskImpl: Operation, Task {
                 execute(error: error)
             }
             else {
-                execute(error: RequestError.maximumAttemptsExceeded.asVk)
+                execute(error: VkError.maximumAttemptsExceeded)
             }
             
             return
@@ -96,8 +96,11 @@ final class TaskImpl: Operation, Task {
     private func trySend(captcha: Captcha? = nil) {
         do {
             try send(captcha: captcha)
-        } catch let error {
+        }
+        catch let error as VkError {
             execute(error: error)
+        } catch let error {
+            execute(error: VkError.unknown(error))
         }
     }
     
@@ -163,21 +166,16 @@ final class TaskImpl: Operation, Task {
         semaphore.signal()
     }
     
-    private func execute(error: Error) {
+    private func execute(error: VkError) {
         guard !isCancelled else { return }
         
         defer {
             semaphore.signal()
         }
         
-        guard let vkError = error as? VkError else {
-            state = .failed(RequestError.unknown(error).asVk)
-            return
-        }
-        
         VK.Log.put(self, "execute error block")
-        state = .failed(vkError)
-        callbacks.onError?(vkError)
+        state = .failed(error)
+        callbacks.onError?(error)
     }
     
     private func `catch`(error vkError: VkError) {
@@ -196,14 +194,16 @@ final class TaskImpl: Operation, Task {
             
             switch result {
             case .none:
-                resendWith(error: apiError.asVk, captcha: nil)
+                resendWith(error: apiError.toVk, captcha: nil)
             case .captcha(let captcha):
                 sendAttempts -= 1
-                resendWith(error: apiError.asVk, captcha: captcha)
+                resendWith(error: apiError.toVk, captcha: captcha)
             }
         }
-        catch let error {
+        catch let error as VkError {
             execute(error: error)
+        } catch let error {
+            execute(error: VkError.unknown(error))
         }
     }
 }

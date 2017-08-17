@@ -1,3 +1,5 @@
+import Foundation
+
 protocol CaptchaPresenter {
     func present(rawCaptchaUrl: String, dismissOnFinish: Bool) throws -> String
     func dismiss()
@@ -27,7 +29,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
             var result: String?
             
             guard let controller = currentController ?? controllerMaker.captchaController() else {
-                throw SessionError.cantMakeCaptchaController.asVk
+                throw VkError.cantMakeCaptchaController
             }
             
             currentController = controller
@@ -54,13 +56,13 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
             
             switch semaphore.wait(timeout: .now() + timeout) {
             case .timedOut:
-                throw SessionError.captchaPresenterTimedOut.asVk
+                throw VkError.captchaPresenterTimedOut
             case .success:
                 break
             }
             
             guard let unwrappedResult = result else {
-                throw RequestError.captchaResultIsNil.asVk
+                throw VkError.captchaResultIsNil
             }
             
             return unwrappedResult
@@ -72,10 +74,18 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
     }
     
     private func downloadCaptchaImageData(rawUrl: String) throws -> Data {
-        guard let request = URL(string: rawUrl).flatMap({ URLRequest(url: $0) }) else {
-            throw SessionError.cantLoadCaptchaImage.asVk
+        guard let url = URL(string: rawUrl) else {
+            throw VkError.cantMakeCapthaImageUrl(rawUrl)
         }
         
-        return try NSURLConnection.sendSynchronousRequest(request, returning: nil)
+        let result = URLSession.shared.synchronousDataTaskWithURL(url: url)
+        
+        if let error = result.error {
+            throw VkError.cantLoadCaptchaImage(error)
+        } else if let data = result.data {
+            return data
+        }
+        
+        throw VkError.cantLoadCaptchaImageWithUnknownReason
     }
 }
