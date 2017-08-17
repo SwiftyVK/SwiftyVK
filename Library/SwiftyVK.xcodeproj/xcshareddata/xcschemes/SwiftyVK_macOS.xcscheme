@@ -29,8 +29,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A23708B91EA52F0D00103212"
-               BuildableName = "SwiftyVK-Tests-OSX.xctest"
-               BlueprintName = "SwiftyVK-Tests-OSX"
+               BuildableName = "SwiftyVK_tests_macOS.xctest"
+               BlueprintName = "SwiftyVK_tests_macOS"
                ReferencedContainer = "container:SwiftyVK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -49,8 +49,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A23708B91EA52F0D00103212"
-               BuildableName = "SwiftyVK-Tests-OSX.xctest"
-               BlueprintName = "SwiftyVK-Tests-OSX"
+               BuildableName = "SwiftyVK_tests_macOS.xctest"
+               BlueprintName = "SwiftyVK_tests_macOS"
                ReferencedContainer = "container:SwiftyVK.xcodeproj">
             </BuildableReference>
             <SkippedTests>

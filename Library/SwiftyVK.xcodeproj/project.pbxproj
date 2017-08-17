@@ -328,7 +328,7 @@
 		A22179CF1EBA530C006B71FD /* SessionMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionMock.swift; sourceTree = "<group>"; };
 		A22179D11EBA5393006B71FD /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		A22179D31EBA57AF006B71FD /* SessionConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConfig.swift; sourceTree = "<group>"; };
-		A23708BA1EA52F0D00103212 /* SwiftyVK-Tests-OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftyVK-Tests-OSX.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A23708BA1EA52F0D00103212 /* SwiftyVK_tests_macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyVK_tests_macOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A23708C61EA5309700103212 /* TaskShedulerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskShedulerTests.swift; sourceTree = "<group>"; };
 		A23E692B1EDAEC5800AA3B3B /* VKProxyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKProxyTests.swift; sourceTree = "<group>"; };
 		A23E692D1EDAEC6400AA3B3B /* UrlOpenerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlOpenerMock.swift; sourceTree = "<group>"; };
@@ -611,7 +611,7 @@
 				A2527D551BD1134500F65412 /* SwiftyVK_resources_iOS.bundle */,
 				A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */,
 				A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */,
-				A23708BA1EA52F0D00103212 /* SwiftyVK-Tests-OSX.xctest */,
+				A23708BA1EA52F0D00103212 /* SwiftyVK_tests_macOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -861,9 +861,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		A23708B91EA52F0D00103212 /* SwiftyVK-Tests-OSX */ = {
+		A23708B91EA52F0D00103212 /* SwiftyVK_tests_macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A23708C41EA52F0D00103212 /* Build configuration list for PBXNativeTarget "SwiftyVK-Tests-OSX" */;
+			buildConfigurationList = A23708C41EA52F0D00103212 /* Build configuration list for PBXNativeTarget "SwiftyVK_tests_macOS" */;
 			buildPhases = (
 				A23708B61EA52F0D00103212 /* Sources */,
 				A23708B71EA52F0D00103212 /* Frameworks */,
@@ -874,9 +874,9 @@
 			dependencies = (
 				A23708C11EA52F0D00103212 /* PBXTargetDependency */,
 			);
-			name = "SwiftyVK-Tests-OSX";
+			name = SwiftyVK_tests_macOS;
 			productName = "SwiftyVK-OSX-Tests";
-			productReference = A23708BA1EA52F0D00103212 /* SwiftyVK-Tests-OSX.xctest */;
+			productReference = A23708BA1EA52F0D00103212 /* SwiftyVK_tests_macOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		A2527D4A1BD1130D00F65412 /* SwiftyVK_resources_macOS */ = {
@@ -1013,7 +1013,7 @@
 				A2EB6E9A1BD180DD008E7D86 /* SwiftyVK_iOS */,
 				A2527D4A1BD1130D00F65412 /* SwiftyVK_resources_macOS */,
 				A2527D541BD1134500F65412 /* SwiftyVK_resources_iOS */,
-				A23708B91EA52F0D00103212 /* SwiftyVK-Tests-OSX */,
+				A23708B91EA52F0D00103212 /* SwiftyVK_tests_macOS */,
 			);
 		};
 /* End PBXProject section */
@@ -1984,7 +1984,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A23708C41EA52F0D00103212 /* Build configuration list for PBXNativeTarget "SwiftyVK-Tests-OSX" */ = {
+		A23708C41EA52F0D00103212 /* Build configuration list for PBXNativeTarget "SwiftyVK_tests_macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A23708C21EA52F0D00103212 /* Debug */,
