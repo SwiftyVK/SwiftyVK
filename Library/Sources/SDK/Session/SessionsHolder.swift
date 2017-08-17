@@ -27,7 +27,7 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     private var canKillDefaultSessions = false
     
     lazy public var `default`: Session = {
-        return self.sessionMaker.session(id: .random(20), config: .default, sessionSaver: self)
+        self.sessionMaker.session(id: .random(20), config: .default, sessionSaver: self)
     }()
     
     public var all: [Session] {
@@ -82,7 +82,8 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
         
         do {
             try self.sessionsStorage.save(sessions: encodedSessions)
-        } catch let error {
+        }
+        catch let error {
             print("Sessions not saved with error: \(error)")
         }
     }
@@ -104,8 +105,8 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
                 `default` = defaultSession
             }
             
-            
-        } catch let error {
+        }
+        catch let error {
             print("Restore sessions failed with error: \(error)")
         }
     }

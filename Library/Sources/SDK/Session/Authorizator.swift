@@ -129,7 +129,8 @@ final class AuthorizatorImpl: Authorizator {
         do {
             let tokenInfo = try webPresenter.presentWith(urlRequest: request)
             token = try makeToken(tokenInfo: tokenInfo)
-        } catch let error {
+        }
+        catch let error {
             guard let handledToken = handledToken else {
                 throw error
             }
@@ -189,7 +190,8 @@ final class AuthorizatorImpl: Authorizator {
         
         if let url = redirectUrl, !url.isEmpty {
             redirect = "&redirect_uri=\(url)"
-        } else {
+        }
+        else {
             redirect = ""
         }
         

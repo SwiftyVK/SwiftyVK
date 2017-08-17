@@ -1,40 +1,66 @@
 import Foundation
 
-class Lock {
-    
-    private var unfairLock: os_unfair_lock_s?
-    private var spinLock: Int32?
+protocol Lock {
+    func lock()
+    func unlock()
+}
+
+extension Lock {
+    func performCritical<T> (scope: () throws -> (T)) rethrows -> T {
+        lock()
+        defer { unlock() }
+        return try scope()
+    }
+}
+
+class MultiplatrormLock {
+    private let lockRef: Lock
     
     init() {
         if #available(OSX 10.12, *, iOS 10, *, tvOS 10.0, *) {
-            unfairLock = os_unfair_lock_s()
+            lockRef = UnfairLock()
         }
         else {
-            spinLock = OS_SPINLOCK_INIT
+            lockRef = SpinLock()
         }
     }
     
     func lock() {
-        if #available(OSX 10.12, *, iOS 10, *, tvOS 10.0, *) {
-            os_unfair_lock_lock(&unfairLock!)
-        }
-        else {
-            OSSpinLockLock(&spinLock!)
-        }
+        lockRef.lock()
     }
     
     func unlock() {
-        if #available(OSX 10.12, *, iOS 10, *, tvOS 10.0, *) {
-            os_unfair_lock_unlock(&unfairLock!)
-        }
-        else {
-            OSSpinLockUnlock(&spinLock!)
-        }
+        lockRef.unlock()
     }
     
     func performCritical<T> (scope: () throws -> (T)) rethrows -> T {
         lock()
-        defer {unlock()}
+        defer { unlock() }
         return try scope()
+    }
+}
+
+class SpinLock: Lock {
+    private var lockRef = OS_SPINLOCK_INIT
+    
+    func lock() {
+        OSSpinLockLock(&lockRef)
+    }
+    
+    func unlock() {
+        OSSpinLockUnlock(&lockRef)
+    }
+}
+
+@available(OSX 10.12, *, iOS 10, *, tvOS 10.0, *)
+class UnfairLock: Lock {
+    var lockRer = os_unfair_lock_s()
+    
+    func lock() {
+        os_unfair_lock_lock(&lockRer)
+    }
+    
+    func unlock() {
+        os_unfair_lock_unlock(&lockRer)
     }
 }

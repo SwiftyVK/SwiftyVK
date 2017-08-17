@@ -27,8 +27,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         capthca: Captcha?,
         token: Token?
         )
-        throws -> URLRequest
-    {
+        throws -> URLRequest {
         var urlRequest: URLRequest
         
         switch request {
@@ -52,6 +51,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         return urlRequest
     }
     
+    // swiftlint:disable function_parameter_count next
     private func make(
         from apiMethod: String,
         parameters: Parameters,

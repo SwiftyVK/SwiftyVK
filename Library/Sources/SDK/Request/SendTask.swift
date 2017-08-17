@@ -1,10 +1,8 @@
 import Foundation
 
-
 private let sessionConfig = URLSessionConfiguration.default
 private let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
 private let sendTaskQueue = DispatchQueue(label: "SwiftyVK.SendTaskQueue")
-
 
 internal final class SendTask: Operation {
     unowned private let delegate: RequestInstance
@@ -13,13 +11,9 @@ internal final class SendTask: Operation {
     private let id: Int
     private let reqId: Int64
 
-
-
     override var description: String {
         return "task #\(delegate.id)-\(id)"
     }
-
-
 
     static func createWith(id: Int, config: RequestConfig, delegate: RequestInstance) -> SendTask {
         let operation = SendTask(id: id, config: config, delegate: delegate)
@@ -27,18 +21,14 @@ internal final class SendTask: Operation {
         return operation
     }
 
-
-
     private init(id: Int, config: RequestConfig, delegate: RequestInstance) {
-        self.id         = id
-        self.reqId      = delegate.id
-        self.config     = config
-        self.delegate   = delegate
+        self.id = id
+        self.reqId = delegate.id
+        self.config = config
+        self.delegate = delegate
         super.init()
 //        VK.Log.put("Life", "init \(self)")
     }
-
-
 
     override func main() {
         let semaphore = DispatchSemaphore(value: 0)
@@ -49,7 +39,7 @@ internal final class SendTask: Operation {
                 semaphore.signal()
             }
             
-            guard !self.isCancelled else {return}
+            guard !self.isCancelled else { return }
 
             if let error = error {
                 self.delegate.handle(error: error)
@@ -78,11 +68,9 @@ internal final class SendTask: Operation {
         semaphore.wait()
     }
 
-
-
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        guard let keyPath = keyPath else {return}
-        guard let task = task else {return}
+        guard let keyPath = keyPath else { return }
+        guard let task = task else { return }
 
         switch keyPath {
         case (#keyPath(URLSessionTask.countOfBytesReceived)):
@@ -94,14 +82,11 @@ internal final class SendTask: Operation {
         }
     }
 
-
     override func cancel() {
         task?.cancel()
         super.cancel()
         VK.Log.put(delegate, "cancel \(self)")
     }
-
-
 
     deinit {
 //        VK.Log.put("Life", "deinit \(self)")

@@ -1,13 +1,13 @@
 excluded:
   - Carthage
   - Pods
-  - Sources/Extensions/SwiftyJSON.swift
-  - Sources/Extensions/Reachability.swift
+  - Sources/Utils/Reachability.swift
 
 disabled_rules:
   - nesting
   - void_return
   - unused_optional_binding
+  - notification_center_detachment
 
 opt_in_rules:
   - attributes
@@ -30,10 +30,11 @@ opt_in_rules:
   - unused_optional_binding
   # - implicitly_unwrapped_optional
   # - explicit_type_interface
-  # - operator_usage_whitespace
+  - operator_usage_whitespace
   # - number_separator
   # - missing_docs
-  # - closure_spacing
+  - closure_spacing
+  - implicit_return
   # - conditional_returns_on_newline
 
 file_length:
@@ -66,3 +67,6 @@ trailing_whitespace:
   ignores_comments: true
 colon:
   flexible_right_spacing: true
+large_tuple:
+  warning: 5
+  error: 8

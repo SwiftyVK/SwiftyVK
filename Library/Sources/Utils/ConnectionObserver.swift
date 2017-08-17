@@ -13,7 +13,7 @@ internal final class ConnectionObserver: NSObject {
     private let onDisconnect: () -> ()
     
     private override init() {
-        fatalError()
+        fatalError("Do not use init()")
     }
     
     init(

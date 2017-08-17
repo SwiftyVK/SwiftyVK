@@ -1,11 +1,12 @@
 import Cocoa
 
-@objc final class CaptchaController_macOS: NSViewController, NSTextFieldDelegate, CaptchaController {
+@objc
+final class CaptchaControllerMacOS: NSViewController, NSTextFieldDelegate, CaptchaController {
     
     @IBOutlet private weak var imageView: NSImageView?
     @IBOutlet private weak var textField: NSTextField?
-    @IBOutlet weak var preloader: NSProgressIndicator?
-    @IBOutlet weak var closeButton: NSButton?
+    @IBOutlet private weak var preloader: NSProgressIndicator?
+    @IBOutlet private weak var closeButton: NSButton?
     private var onResult: ((String) -> ())?
     private var onDismiss: (() -> ())?
     
@@ -63,7 +64,8 @@ import Cocoa
         }
     }
     
-    @objc override func controlTextDidEndEditing(_ obj: Notification) {
+    @objc
+    override func controlTextDidEndEditing(_ obj: Notification) {
         guard
             imageView?.image != nil,
             let result = textField?.stringValue,

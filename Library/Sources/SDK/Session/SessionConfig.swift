@@ -75,7 +75,8 @@ public enum AttemptLimit: Codable {
         
         if let value = value {
             self = .limited(value)
-        } else {
+        }
+        else {
             self = .unlimited
         }
     }

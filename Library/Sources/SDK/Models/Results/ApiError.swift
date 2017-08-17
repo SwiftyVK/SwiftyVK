@@ -3,8 +3,8 @@ import Foundation
 public struct ApiError: Equatable {
     public let code: Int
     public let message: String
-    public private(set) var requestParams = [String : String]()
-    public private(set) var otherInfo = [String : String]()
+    public private(set) var requestParams = [String: String]()
+    public private(set) var otherInfo = [String: String]()
     
     init?(_ json: JSON) {
         
@@ -27,7 +27,7 @@ public struct ApiError: Equatable {
     }
     
     private func makeRequestParams(from error: JSON) -> [String : String] {
-        var paramsDict = [String : String]()
+        var paramsDict = [String: String]()
         
         if let paramsArray: [[String: String]] = error.array("error, request_params") {
             for param in paramsArray {
@@ -41,7 +41,7 @@ public struct ApiError: Equatable {
     }
     
     private func makeOtherInfo(from errorDict: [String: Any]) -> [String : String] {
-        var infoDict = [String : String]()
+        var infoDict = [String: String]()
         let ignoredKeys = ["error_code", "error_msg", "request_params"]
         
         for (key, value) in errorDict {
@@ -53,7 +53,7 @@ public struct ApiError: Equatable {
         return infoDict
     }
     
-    public static func ==(lhs: ApiError, rhs: ApiError) -> Bool {
+    public static func == (lhs: ApiError, rhs: ApiError) -> Bool {
         return lhs.code == rhs.code
     }
 }

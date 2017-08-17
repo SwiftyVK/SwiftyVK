@@ -67,7 +67,7 @@ final class AttemptImpl: Operation, Attempt {
         change: [NSKeyValueChangeKey : Any]?,
         context: UnsafeMutableRawPointer?
         ) {
-        guard let keyPath = keyPath else {return}
+        guard let keyPath = keyPath else { return }
         
         switch keyPath {
         case (#keyPath(URLSessionTask.countOfBytesSent)):

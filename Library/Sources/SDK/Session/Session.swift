@@ -37,9 +37,11 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     public var state: SessionState {
         if id.isEmpty {
             return .destroyed
-        } else if token != nil {
+        }
+        else if token != nil {
             return .authorized
-        } else {
+        }
+        else {
             return .initiated
         }
     }
@@ -93,13 +95,15 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     }
     
     public func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (VkError) -> ()) {
-         gateQueue.async {
+        gateQueue.async {
             do {
                 let info = try self.logIn(revoke: true)
                 onSuccess(info)
-            } catch let error as VkError {
+            }
+            catch let error as VkError {
                 onError(error)
-            } catch let error {
+            }
+            catch let error {
                 onError(.unknown(error))
             }
         }
@@ -137,7 +141,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     
     func captcha(rawUrlToImage: String) throws -> String {
         return try gateQueue.sync {
-            return try captcha(rawUrlToImage: rawUrlToImage, dismissOnFinish: true)
+            try captcha(rawUrlToImage: rawUrlToImage, dismissOnFinish: true)
         }
     }
     
@@ -161,9 +165,11 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         do {
             try throwIfDestroyed()
             try shedule(task: task, concurrent: request.rawRequest.canSentConcurrently)
-        } catch let error as VkError {
+        }
+        catch let error as VkError {
             callbacks.onError?(error)
-        } catch let error {
+        }
+        catch let error {
             callbacks.onError?(.unknown(error))
         }
         
@@ -187,9 +193,11 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     private func sendTokenChangeEvent(from oldToken: Token?, to newToken: Token?) {
         if oldToken != nil, let newToken = newToken {
             delegate?.vkTokenUpdated(for: id, info: newToken.info)
-        } else if let newToken = newToken {
+        }
+        else if let newToken = newToken {
             delegate?.vkTokenCreated(for: id, info: newToken.info)
-        } else if oldToken != nil {
+        }
+        else if oldToken != nil {
             delegate?.vkTokenRemoved(for: id)
         }
     }
@@ -215,6 +223,6 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     }
 }
 
-public func ==(lhs: Session, rhs: Session) -> Bool {
+public func == (lhs: Session, rhs: Session) -> Bool {
     return lhs.id == rhs.id
 }

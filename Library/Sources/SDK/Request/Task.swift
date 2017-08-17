@@ -1,7 +1,7 @@
 import Foundation
 
 public protocol Task {
-    var state: TaskState {get}
+    var state: TaskState { get }
     func cancel()
 }
 
@@ -51,7 +51,7 @@ final class TaskImpl: Operation, Task {
         apiErrorHandler: ApiErrorHandler
         ) {
         self.id = IdGenerator.next()
-        self.request  = request
+        self.request = request
         self.callbacks = callbacks
         self.session = session
         self.urlRequestBuilder = urlRequestBuilder
@@ -77,7 +77,7 @@ final class TaskImpl: Operation, Task {
     }
     
     private func resendWith(error: VkError?, captcha: Captcha?) {
-        guard !self.isCancelled else {return}
+        guard !self.isCancelled else { return }
         
         guard sendAttempts < request.config.maxAttemptsLimit.count else {
             if let error = error {
@@ -99,7 +99,8 @@ final class TaskImpl: Operation, Task {
         }
         catch let error as VkError {
             execute(error: error)
-        } catch let error {
+        }
+        catch let error {
             execute(error: VkError.unknown(error))
         }
     }
@@ -129,12 +130,12 @@ final class TaskImpl: Operation, Task {
     }
     
     private func handleSended(_ total: Int64, of expected: Int64) {
-        guard !isCancelled else {return}
+        guard !isCancelled else { return }
         VK.Log.put(self, "send \(total) of \(expected) bytes")
     }
     
     private func handleReceived(_ total: Int64, of expected: Int64) {
-        guard !isCancelled else {return}
+        guard !isCancelled else { return }
         VK.Log.put(self, "receive \(total) of \(expected) bytes")
         callbacks.onProgress?(total, expected)
     }
@@ -202,7 +203,8 @@ final class TaskImpl: Operation, Task {
         }
         catch let error as VkError {
             execute(error: error)
-        } catch let error {
+        }
+        catch let error {
             execute(error: VkError.unknown(error))
         }
     }

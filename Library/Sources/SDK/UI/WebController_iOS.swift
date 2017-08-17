@@ -1,7 +1,7 @@
 import UIKit
 import WebKit
 
-final class WebController_iOS: UIViewController, WKNavigationDelegate, WebController {
+final class WebControllerIOS: UIViewController, WKNavigationDelegate, WebController {
     
     @IBOutlet private weak var webView: VKWebView?
     @IBOutlet private weak var preloader: UIActivityIndicatorView?
@@ -77,7 +77,8 @@ class VKWebView: WKWebView {
         if let _view = UIView(coder: coder) {
             super.init(frame: _view.frame, configuration: WKWebViewConfiguration())
             self.translatesAutoresizingMaskIntoConstraints = false
-        } else {
+        }
+        else {
             return nil
         }
     }

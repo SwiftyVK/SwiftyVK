@@ -64,14 +64,14 @@ final class DependencyFactoryImpl: DependencyFactory {
     }
     
     lazy var sessionsHolder: SessionsHolder & SessionSaver = {
-        return SessionsHolderImpl(
+        SessionsHolderImpl(
             sessionMaker: self,
             sessionsStorage: self.sessionsStorage
         )
     }()
     
     lazy var sessionsStorage: SessionsStorage = {
-        return SessionsStorageImpl(
+        SessionsStorageImpl(
             fileManager: FileManager(),
             bundleName: self.bundleName,
             configName: "SwiftyVKState"
@@ -79,7 +79,7 @@ final class DependencyFactoryImpl: DependencyFactory {
     }()
     
     private lazy var bundleName: String = {
-        return Bundle.main.infoDictionary?[String(kCFBundleNameKey)] as? String ?? "SwiftyVK"
+        Bundle.main.infoDictionary?[String(kCFBundleNameKey)] as? String ?? "SwiftyVK"
     }()
     
     func session(id: String, config: SessionConfig, sessionSaver: SessionSaver) -> Session {
@@ -114,7 +114,7 @@ final class DependencyFactoryImpl: DependencyFactory {
         #if os(iOS)
             urlOpener = UIApplication.shared
         #elseif os(macOS)
-            urlOpener = UrlOpener_macOS()
+            urlOpener = UrlOpenerMacOS()
         #endif
         
         let tokenStorge = TokenStorageImpl(serviceKey: self.bundleName)
@@ -146,9 +146,9 @@ final class DependencyFactoryImpl: DependencyFactory {
         var webController: WebController?
         
         #if os(iOS)
-            webController = storyboard().instantiateViewController(withIdentifier: "Web") as? WebController_iOS
+            webController = storyboard().instantiateViewController(withIdentifier: "Web") as? WebControllerIOS
         #elseif os(macOS)
-            webController = storyboard().instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Web")) as? WebController_macOS
+            webController = storyboard().instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Web")) as? WebControllerMacOS
         #endif
         
         guard let controller = webController as? VKViewController else {
@@ -166,9 +166,9 @@ final class DependencyFactoryImpl: DependencyFactory {
         var captchaController: CaptchaController?
         
         #if os(iOS)
-            captchaController = storyboard().instantiateViewController(withIdentifier: "Captcha") as? CaptchaController_iOS
+            captchaController = storyboard().instantiateViewController(withIdentifier: "Captcha") as? CaptchaControllerIOS
         #elseif os(macOS)
-            captchaController = storyboard().instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Captcha")) as? CaptchaController_macOS
+            captchaController = storyboard().instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Captcha")) as? CaptchaControllerMacOS
         #endif
         
         guard let controller = captchaController as? VKViewController else {

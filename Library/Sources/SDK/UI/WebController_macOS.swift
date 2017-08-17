@@ -1,7 +1,7 @@
 import Cocoa
 import WebKit
 
-final class WebController_macOS: NSViewController, WKNavigationDelegate, WebController {
+final class WebControllerMacOS: NSViewController, WKNavigationDelegate, WebController {
     
     @IBOutlet private weak var webView: WKWebView?
     @IBOutlet private weak var preloader: NSProgressIndicator?

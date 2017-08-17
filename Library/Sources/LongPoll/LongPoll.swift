@@ -213,7 +213,6 @@ extension VKLongPoll {
 //        }
         // swiftlint:enable cyclomatic_complexity
         
-        
         // swiftlint:disable type_name
         public enum notifications {
             // swiftlint:enable type_name
@@ -274,4 +273,3 @@ extension VKLongPoll {
 //        self.unwrap = value
 //    }
 //}
-

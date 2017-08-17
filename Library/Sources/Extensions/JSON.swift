@@ -133,11 +133,14 @@ extension JSONContainer {
         
         if components.isEmpty {
             return value as? T
-        } else if let array = value as? NSArray {
+        }
+        else if let array = value as? NSArray {
             return array.json(components)
-        } else if let dict = value as? NSDictionary {
+        }
+        else if let dict = value as? NSDictionary {
             return dict.json(components)
-        } else if isRoot && components.first == "*" {
+        }
+        else if isRoot && components.first == "*" {
             return value as? T
         }
         

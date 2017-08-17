@@ -73,18 +73,18 @@ private enum Expires {
     init(expires: TimeInterval) {
         if expires == 0 {
             self = .never
-        } else {
+        }
+        else {
             self = .during(created: Date().timeIntervalSince1970, expires: expires)
         }
     }
-    
 
     var isExpired: Bool {
         switch self {
         case .never:
             return false
         case .during(let created, let expires):
-            let deadline = Date.init(timeIntervalSince1970: created).addingTimeInterval(expires)
+            let deadline = Date(timeIntervalSince1970: created).addingTimeInterval(expires)
             return Date() > deadline
         }
     }

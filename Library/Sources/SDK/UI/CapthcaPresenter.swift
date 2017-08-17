@@ -45,7 +45,8 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
                     
                     if dismissOnFinish {
                         currentController?.dismiss()
-                    } else {
+                    }
+                    else {
                         semaphore.signal()
                     }
                 },
@@ -82,7 +83,8 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
         
         if let error = result.error {
             throw VkError.cantLoadCaptchaImage(error)
-        } else if let data = result.data {
+        }
+        else if let data = result.data {
             return data
         }
         

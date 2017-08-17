@@ -1,12 +1,12 @@
 import UIKit
 
-final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, CaptchaController {
+final class CaptchaControllerIOS: UIViewController, UITextFieldDelegate, CaptchaController {
     
     @IBOutlet private weak var imageView: UIImageView?
     @IBOutlet private weak var textField: UITextField?
-    @IBOutlet weak var preloader: UIActivityIndicatorView?
-    @IBOutlet weak var closeButton: UIButton?
-    @IBOutlet weak var containerBottomConstraint: NSLayoutConstraint?
+    @IBOutlet private weak var preloader: UIActivityIndicatorView?
+    @IBOutlet private weak var closeButton: UIButton?
+    @IBOutlet private weak var containerBottomConstraint: NSLayoutConstraint?
     private var onResult: ((String) -> ())?
     private var onDismiss: (() -> ())?
     private var appeared = false
@@ -103,7 +103,8 @@ final class CaptchaController_iOS: UIViewController, UITextFieldDelegate, Captch
         return true
     }
     
-    @objc private func keyboardWillChange(notification: Notification) {
+    @objc
+    private func keyboardWillChange(notification: Notification) {
         guard
             let info = (notification as NSNotification).userInfo,
             let animationDuration = (info[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,

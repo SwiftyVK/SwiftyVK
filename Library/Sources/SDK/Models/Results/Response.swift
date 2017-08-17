@@ -17,10 +17,12 @@ public enum Response {
             
             if successData.isEmpty {
                 self = .success(data)
-            } else {
+            }
+            else {
                 self = .success(successData)
             }
-        } catch let error {
+        }
+        catch let error {
             self = .error(.jsonNotParsed(error))
             return
         }

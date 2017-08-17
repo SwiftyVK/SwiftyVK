@@ -38,6 +38,7 @@ final class WebPresenterImpl: WebPresenter {
         self.timeout = timeout
     }
     
+    // swiftlint:disable cyclomatic_complexity next
     func presentWith(urlRequest: URLRequest) throws -> String {
         let semaphore = DispatchSemaphore(value: 0)
         var fails: Int = 0
@@ -58,7 +59,7 @@ final class WebPresenterImpl: WebPresenter {
                     guard let `self` = self else { return }
                     
                     do {
-                        let handledResult = try self.handle(result: result ,fails: fails, originalPath: originalPath)
+                        let handledResult = try self.handle(result: result, fails: fails, originalPath: originalPath)
                         
                         switch handledResult {
                         case let .response(value):
@@ -70,9 +71,11 @@ final class WebPresenterImpl: WebPresenter {
                             break
                         }
                         
-                    } catch let error as VkError {
+                    }
+                    catch let error as VkError {
                         finalResult = .error(error)
-                    } catch let error {
+                    }
+                    catch let error {
                         finalResult = .error(.unknown(error))
                     }
                     
@@ -80,6 +83,7 @@ final class WebPresenterImpl: WebPresenter {
                         self.currentController?.dismiss()
                     }
                 },
+                
                 onDismiss: {
                     semaphore.signal()
                 }
@@ -112,8 +116,8 @@ final class WebPresenterImpl: WebPresenter {
         }
     }
     
-    private func handle(url _url: URL?, originalPath: String) throws -> HandledResult {
-        guard let url = _url else {
+    private func handle(url maybeUrl: URL?, originalPath: String) throws -> HandledResult {
+        guard let url = maybeUrl else {
             throw VkError.authorizationUrlIsNil
         }
         
