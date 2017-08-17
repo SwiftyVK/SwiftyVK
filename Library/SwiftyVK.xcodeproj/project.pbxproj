@@ -249,8 +249,6 @@
 		D4F84BDE1F435F6400DA7127 /* VKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD81F435F3E00DA7127 /* VKViewController.swift */; };
 		D4F84BDF1F43608100DA7127 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD71F435F2B00DA7127 /* JSON.swift */; };
 		D4F84BE01F43608200DA7127 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD71F435F2B00DA7127 /* JSON.swift */; };
-		D4F84BE11F43608500DA7127 /* GenericResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD91F435F4600DA7127 /* GenericResult.swift */; };
-		D4F84BE21F43608500DA7127 /* GenericResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD91F435F4600DA7127 /* GenericResult.swift */; };
 		D4F84BE31F43608900DA7127 /* ConnectionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD31F435EFC00DA7127 /* ConnectionObserver.swift */; };
 		D4F84BE41F43608900DA7127 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7C1BD12FD200F65412 /* Reachability.swift */; };
 		D4F84BE51F43608A00DA7127 /* ConnectionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD31F435EFC00DA7127 /* ConnectionObserver.swift */; };
@@ -481,7 +479,6 @@
 		D4F84BD31F435EFC00DA7127 /* ConnectionObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectionObserver.swift; path = Sources/Utils/ConnectionObserver.swift; sourceTree = SOURCE_ROOT; };
 		D4F84BD71F435F2B00DA7127 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = Sources/Extensions/JSON.swift; sourceTree = SOURCE_ROOT; };
 		D4F84BD81F435F3E00DA7127 /* VKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VKViewController.swift; path = Sources/Extensions/VKViewController.swift; sourceTree = SOURCE_ROOT; };
-		D4F84BD91F435F4600DA7127 /* GenericResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GenericResult.swift; path = Sources/Extensions/GenericResult.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -843,7 +840,6 @@
 			isa = PBXGroup;
 			children = (
 				D4F84BD31F435EFC00DA7127 /* ConnectionObserver.swift */,
-				D4F84BD91F435F4600DA7127 /* GenericResult.swift */,
 				D4F84BD71F435F2B00DA7127 /* JSON.swift */,
 				A2BDF36B1EDC9D8E00E9263A /* Atomic.swift */,
 				A2BDF36E1EDC9EB200E9263A /* Lock.swift */,
@@ -1219,7 +1215,6 @@
 				A2EB6F001BD18394008E7D86 /* Status.swift in Sources */,
 				A2EB6F011BD18394008E7D86 /* Storage.swift in Sources */,
 				A2EB6F021BD18394008E7D86 /* Upload.swift in Sources */,
-				D4F84BE21F43608500DA7127 /* GenericResult.swift in Sources */,
 				A2EB6F031BD18395008E7D86 /* Users.swift in Sources */,
 				A2EB6F041BD18395008E7D86 /* Utils.swift in Sources */,
 				A2F6322D1ED9CB780063C9E0 /* UrlOpener.swift in Sources */,
@@ -1318,7 +1313,6 @@
 				A2EB6ED51BD18389008E7D86 /* Upload.swift in Sources */,
 				D47601291F2E2602005356E5 /* RequestError.swift in Sources */,
 				D47601241F2E2450005356E5 /* VkError.swift in Sources */,
-				D4F84BE11F43608500DA7127 /* GenericResult.swift in Sources */,
 				A2EB6ED61BD18389008E7D86 /* Users.swift in Sources */,
 				A2EB6ED71BD18389008E7D86 /* Utils.swift in Sources */,
 				A2EB6ED81BD18389008E7D86 /* Video.swift in Sources */,
