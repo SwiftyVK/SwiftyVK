@@ -11,7 +11,6 @@ final class VKProxyTests: BaseTestCase {
         return (urlOpener, vkProxy)
     }
     
-    // MARK: Disabled bacause crash all tests on Swift 4 and Xcode 9 betas
     func test_openUrl_shoudBeSuccess() {
         // Given
         let (urlOpener, vkProxy) = proxyObjects
@@ -23,7 +22,6 @@ final class VKProxyTests: BaseTestCase {
         XCTAssertTrue(result ?? false)
     }
     
-    // MARK: Disabled bacause crash all tests on Swift 4 and Xcode 9 betas
     func test_openUrl_withCantOpenUrl_shouldBeFail() {
         // Given
         let (urlOpener, vkProxy) = proxyObjects
