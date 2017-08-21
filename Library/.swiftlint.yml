@@ -6,8 +6,8 @@ excluded:
 disabled_rules:
   - nesting
   - void_return
-  - unused_optional_binding
   - notification_center_detachment
+  - block_based_kvo
 
 opt_in_rules:
   - attributes
@@ -27,8 +27,7 @@ opt_in_rules:
   - first_where
   - prohibited_super_call
   - fatal_error_message
-  - unused_optional_binding
-  # - implicitly_unwrapped_optional
+  - implicitly_unwrapped_optional
   # - explicit_type_interface
   - operator_usage_whitespace
   # - number_separator
@@ -36,6 +35,13 @@ opt_in_rules:
   - closure_spacing
   - implicit_return
   # - conditional_returns_on_newline
+  - unneeded_parentheses_in_closure_argument
+  - let_var_whitespace
+  # - extension_access_modifier
+  # - explicit_top_level_acl
+  - vertical_parameter_alignment_on_call
+  - unused_optional_binding
+  - multiline_parameters
 
 file_length:
   warning: 500
