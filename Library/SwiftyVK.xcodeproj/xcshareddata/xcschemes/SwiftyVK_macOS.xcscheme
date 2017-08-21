@@ -53,14 +53,6 @@
                BlueprintName = "SwiftyVK_tests_macOS"
                ReferencedContainer = "container:SwiftyVK.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "VKProxyTests/test_openUrl_shoudBeSuccess()">
-               </Test>
-               <Test
-                  Identifier = "VKProxyTests/test_openUrl_withCantOpenUrl_shouldBeFail()">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

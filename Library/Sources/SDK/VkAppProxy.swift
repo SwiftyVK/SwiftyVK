@@ -18,7 +18,8 @@ final class VkAppProxyImpl: VkAppProxy {
     }
     
     func send(query: String) throws -> Bool {
-        return try DispatchQueue.main.sync {
+        
+        return try DispatchQueue.performOnMainIfNeeded {
             guard let url = URL(string: baseUrl + query) else {
                 throw VkError.cantBuildVkAppUrl(baseUrl + query)
             }

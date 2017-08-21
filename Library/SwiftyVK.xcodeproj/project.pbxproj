@@ -239,6 +239,7 @@
 		D484C9381F4B393B00C9651C /* VKURLSessionTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9361F4B393B00C9651C /* VKURLSessionTask.swift */; };
 		D484C93A1F4B3B3800C9651C /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9391F4B3B3800C9651C /* ObservableObject.swift */; };
 		D484C93B1F4B3B3800C9651C /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9391F4B3B3800C9651C /* ObservableObject.swift */; };
+		D484C9471F4B58F900C9651C /* GCD+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9421F4B44A300C9651C /* GCD+Extensions.swift */; };
 		D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */; };
 		D4F49D421F2DF5B10037B875 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D411F2DF5B10037B875 /* JsonReader.swift */; };
 		D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
@@ -472,6 +473,7 @@
 		D484C9331F4B363E00C9651C /* VKURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKURLSession.swift; sourceTree = "<group>"; };
 		D484C9361F4B393B00C9651C /* VKURLSessionTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKURLSessionTask.swift; sourceTree = "<group>"; };
 		D484C9391F4B3B3800C9651C /* ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
+		D484C9421F4B44A300C9651C /* GCD+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GCD+Extensions.swift"; sourceTree = "<group>"; };
 		D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorTests.swift; sourceTree = "<group>"; };
 		D4F49D411F2DF5B10037B875 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		D4F49D441F2E0EF60037B875 /* apiError.correct.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.correct.json; sourceTree = "<group>"; };
@@ -681,6 +683,7 @@
 			isa = PBXGroup;
 			children = (
 				D484C9331F4B363E00C9651C /* VKURLSession.swift */,
+				D484C9421F4B44A300C9651C /* GCD+Extensions.swift */,
 				D484C9361F4B393B00C9651C /* VKURLSessionTask.swift */,
 				D484C9391F4B3B3800C9651C /* ObservableObject.swift */,
 				D4F84BD81F435F3E00DA7127 /* VKViewController.swift */,
@@ -1166,6 +1169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D484C9471F4B58F900C9651C /* GCD+Extensions.swift in Sources */,
 				A270528D1EF82DA600C05936 /* SessionsStorage.swift in Sources */,
 				A2EB6EEA1BD18394008E7D86 /* VK.swift in Sources */,
 				D484C9351F4B363E00C9651C /* VKURLSession.swift in Sources */,
@@ -1257,6 +1261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D484C9461F4B58F900C9651C /* GCD+Extensions.swift in Sources */,
 				A2EB6EBD1BD18389008E7D86 /* VK.swift in Sources */,
 				A21E81591E2A7E68008E81E7 /* UrlCharactesSet.swift in Sources */,
 				D484C9341F4B363E00C9651C /* VKURLSession.swift in Sources */,
