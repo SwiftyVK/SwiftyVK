@@ -110,4 +110,12 @@ struct AttemptCallbacks {
     let onFinish: (Response) -> ()
     let onSent: (_ total: Int64, _ of: Int64) -> ()
     let onRecive: (_ total: Int64, _ of: Int64) -> ()
+    
+    static var `default`: AttemptCallbacks {
+        return AttemptCallbacks(
+            onFinish: { _ in },
+            onSent: { _, _ in },
+            onRecive: { _, _ in }
+        )
+    }
 }
