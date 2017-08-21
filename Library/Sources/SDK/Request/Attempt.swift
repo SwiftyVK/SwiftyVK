@@ -18,7 +18,7 @@ final class AttemptImpl: Operation, Attempt {
     private let timeout: TimeInterval
     private var task: VKURLSessionTask?
     private let urlSession: VKURLSession
-    private let attemptQueue: DispatchQueue
+    private let configurationChangeQueue: DispatchQueue
     private let callbacks: AttemptCallbacks
     
     private var taskIsFinished = false {
@@ -40,7 +40,7 @@ final class AttemptImpl: Operation, Attempt {
         self.request = request
         self.timeout = timeout
         self.urlSession = session
-        self.attemptQueue = queue
+        self.configurationChangeQueue = queue
         self.callbacks = callbacks
         super.init()
     }
@@ -63,7 +63,7 @@ final class AttemptImpl: Operation, Attempt {
             self.taskIsFinished = true
         }
         
-        attemptQueue.sync {
+        configurationChangeQueue.sync {
             urlSession.configuration.timeoutIntervalForRequest = self.timeout
             urlSession.configuration.timeoutIntervalForResource = self.timeout
 
