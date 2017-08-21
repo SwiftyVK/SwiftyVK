@@ -60,12 +60,12 @@ final class WebControllerIOS: UIViewController, WKNavigationDelegate, WebControl
         }
     }
     
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation?) {
         preloader?.stopAnimating()
         onResult?(.response(webView.url))
     }
     
-    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation?, withError error: Error) {
         onResult?(.error(.webControllerError(error)))
     }
 }

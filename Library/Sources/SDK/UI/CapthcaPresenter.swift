@@ -11,15 +11,18 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
     private let controllerMaker: CaptchaControllerMaker
     private weak var currentController: CaptchaController?
     private let timeout: TimeInterval
+    private let urlSession: VKURLSession
     
     init(
         uiSyncQueue: DispatchQueue,
         controllerMaker: CaptchaControllerMaker,
-        timeout: TimeInterval
+        timeout: TimeInterval,
+        urlSession: VKURLSession
         ) {
         self.uiSyncQueue = uiSyncQueue
         self.controllerMaker = controllerMaker
         self.timeout = timeout
+        self.urlSession = urlSession
     }
     
     func present(rawCaptchaUrl: String, dismissOnFinish: Bool) throws -> String {
@@ -79,7 +82,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
             throw VkError.cantMakeCapthaImageUrl(rawUrl)
         }
         
-        let result = URLSession.shared.synchronousDataTaskWithURL(url: url)
+        let result = urlSession.synchronousDataTaskWithURL(url: url)
         
         if let error = result.error {
             throw VkError.cantLoadCaptchaImage(error)

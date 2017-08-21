@@ -1,6 +1,7 @@
 protocol Token: class, NSCoding {
-    func get() -> String?
     var info: [String : String] { get }
+
+    func get() -> String?
 }
 
 class TokenImpl: NSObject, Token {

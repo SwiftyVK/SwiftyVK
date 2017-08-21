@@ -56,7 +56,11 @@ final class DependencyFactoryImpl: DependencyFactory {
     
     private let appId: String
     private weak var delegate: SwiftyVKDelegate?
+
+    private let foregroundSession = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
+    
     private let uiSyncQueue = DispatchQueue(label: "SwiftyVK.uiSyncQueue")
+    private let attemptsQueue = DispatchQueue(label: "SwiftyVK.AttemptQueue")
     
     init(appId: String, delegate: SwiftyVKDelegate?) {
         self.appId = appId
@@ -87,7 +91,8 @@ final class DependencyFactoryImpl: DependencyFactory {
         let captchaPresenter = CaptchaPresenterImpl(
             uiSyncQueue: uiSyncQueue,
             controllerMaker: self,
-            timeout: 600
+            timeout: 600,
+            urlSession: foregroundSession
         )
         
         return SessionImpl(
@@ -207,7 +212,13 @@ final class DependencyFactoryImpl: DependencyFactory {
     }
     
     func attempt(request: URLRequest, timeout: TimeInterval, callbacks: AttemptCallbacks) -> Attempt {
-        return AttemptImpl(request: request, timeout: timeout, callbacks: callbacks)
+        return AttemptImpl(
+            request: request,
+            timeout: timeout,
+            session: foregroundSession,
+            queue: attemptsQueue,
+            callbacks: callbacks
+        )
     }
     
     func token(token: String, expires: TimeInterval, info: [String : String]) -> Token {

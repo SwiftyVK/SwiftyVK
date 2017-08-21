@@ -1,5 +1,6 @@
 protocol MultipartBodyBuilder {
     var boundary: String { get }
+    
     func makeBody(from media: [Media], partType: PartType) -> Data
 }
 

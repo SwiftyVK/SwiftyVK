@@ -2,6 +2,7 @@ public protocol Session: class {
     var id: String { get }
     var config: SessionConfig { get set }
     var state: SessionState { get }
+    
     func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (VkError) -> ())
     func logIn(rawToken: String, expires: TimeInterval) throws
     func logOut()
@@ -11,6 +12,7 @@ public protocol Session: class {
 
 protocol TaskSession {
     var token: Token? { get }
+    
     func shedule(attempt: Attempt, concurrent: Bool) throws
     func dismissCaptcha()
 }

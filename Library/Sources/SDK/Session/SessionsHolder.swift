@@ -3,6 +3,7 @@ import Foundation
 public protocol SessionsHolder: class {
     var `default`: Session { get }
     var all: [Session] { get }
+    
     func make(config: SessionConfig) -> Session
     func destroy(session: Session) throws
     func markAsDefault(session: Session) throws

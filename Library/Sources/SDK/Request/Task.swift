@@ -2,6 +2,7 @@ import Foundation
 
 public protocol Task {
     var state: TaskState { get }
+    
     func cancel()
 }
 
