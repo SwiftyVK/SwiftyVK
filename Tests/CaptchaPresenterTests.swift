@@ -4,15 +4,17 @@ import XCTest
 
 class CaptchaPresenterTests: XCTestCase {
     
-    func makeContext() -> (presenter: CaptchaPresenter, webControllerMaker: CaptchaControllerMakerMock) {
+    func makeContext() -> (presenter: CaptchaPresenter, webControllerMaker: CaptchaControllerMakerMock, urlSession: URLSessionMock) {
         let controllerMaker = CaptchaControllerMakerMock()
+        let urlSession = URLSessionMock()
         
         let presenter = CaptchaPresenterImpl(
             uiSyncQueue: DispatchQueue.global(),
             controllerMaker: controllerMaker,
-            timeout: 1
+            timeout: 1,
+            urlSession: urlSession
         )
-        return (presenter, controllerMaker)
+        return (presenter, controllerMaker, urlSession)
     }
     
     
@@ -73,6 +75,10 @@ class CaptchaPresenterTests: XCTestCase {
         context.webControllerMaker.onMake = {
             return CaptchaControllerMock()
         }
+        
+        context.urlSession.onSynchronousDataTaskWithURL = {
+            return (data: Data(), response: nil, error: nil)
+        }
         // When
         do {
             _ = try context.presenter.present(rawCaptchaUrl: "http://vk.com", dismissOnFinish: false)
@@ -95,7 +101,10 @@ class CaptchaPresenterTests: XCTestCase {
             }
             
             return controller
-            
+        }
+        
+        context.urlSession.onSynchronousDataTaskWithURL = {
+            return (data: Data(), response: nil, error: nil)
         }
         // When
         let result = try? context.presenter.present(rawCaptchaUrl: "http://vk.com", dismissOnFinish: false)
@@ -145,7 +154,10 @@ class CaptchaPresenterTests: XCTestCase {
             }
             
             return controller
-            
+        }
+        
+        context.urlSession.onSynchronousDataTaskWithURL = {
+            return (data: Data(), response: nil, error: nil)
         }
         // When
         _ = try? context.presenter.present(rawCaptchaUrl: "http://vk.com", dismissOnFinish: true)
@@ -166,6 +178,10 @@ class CaptchaPresenterTests: XCTestCase {
             
             return controller
             
+        }
+        
+        context.urlSession.onSynchronousDataTaskWithURL = {
+            return (data: Data(), response: nil, error: nil)
         }
         // When
         do {

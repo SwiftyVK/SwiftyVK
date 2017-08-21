@@ -1,6 +1,7 @@
 @testable import SwiftyVK
 
 final class AttemptMock: Operation, Attempt {
+    
     private var isReallyFinished = false {
         willSet { willChangeValue(forKey: "isFinished") }
         didSet { didChangeValue(forKey: "isFinished") }
@@ -12,9 +13,13 @@ final class AttemptMock: Operation, Attempt {
     }
     
     convenience override init() {
+        
         self.init(
             request: URLRequest(url: URL(string: "http://test")!),
-            timeout: 0, callbacks: AttemptCallbacks(
+            timeout: 0,
+            session: URLSessionMock(),
+            queue: DispatchQueue.global(qos: .background),
+            callbacks: AttemptCallbacks(
                 onFinish: { _ in },
                 onSent: { _ in },
                 onRecive: { _ in }
@@ -22,7 +27,7 @@ final class AttemptMock: Operation, Attempt {
         )
     }
     
-    init(request: URLRequest, timeout: TimeInterval, callbacks: AttemptCallbacks) {
+    init(request: URLRequest, timeout: TimeInterval, session: VKURLSession, queue: DispatchQueue, callbacks: AttemptCallbacks) {
         super.init()
     }
     
@@ -38,7 +43,10 @@ final class WrongAttemptMock: Attempt {
     convenience init() {
         self.init(
             request: URLRequest(url: URL(string: "http://test")!),
-            timeout: 0, callbacks: AttemptCallbacks(
+            timeout: 0,
+            session: URLSessionMock(),
+            queue: DispatchQueue.global(qos: .background),
+            callbacks: AttemptCallbacks(
                 onFinish: { _ in },
                 onSent: { _ in },
                 onRecive: { _ in }
@@ -46,6 +54,7 @@ final class WrongAttemptMock: Attempt {
         )
     }
     
-    init(request: URLRequest, timeout: TimeInterval, callbacks: AttemptCallbacks) {}
+    init(request: URLRequest, timeout: TimeInterval, session: VKURLSession, queue: DispatchQueue, callbacks: AttemptCallbacks) {}
+    
     func cancel() {}
 }
