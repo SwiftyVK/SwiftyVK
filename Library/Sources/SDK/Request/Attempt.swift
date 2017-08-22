@@ -21,15 +21,6 @@ final class AttemptImpl: Operation, Attempt {
     private let configurationChangeQueue: DispatchQueue
     private let callbacks: AttemptCallbacks
     
-    private var taskIsFinished = false {
-        willSet { willChangeValue(forKey: "isFinished") }
-        didSet { didChangeValue(forKey: "isFinished") }
-    }
-    
-    override var isFinished: Bool {
-        return taskIsFinished
-    }
-    
     init(
         request: URLRequest,
         timeout: TimeInterval,
@@ -46,8 +37,13 @@ final class AttemptImpl: Operation, Attempt {
     }
 
     override func main() {
+        let semaphore = DispatchSemaphore(value: 0)
 
         let completion: (Data?, URLResponse?, Error?) -> () = { [weak self] data, response, error in
+            defer {
+                semaphore.signal()
+            }
+            
             guard let `self` = self, !self.isCancelled else { return }
 
             if let error = error {
@@ -59,8 +55,6 @@ final class AttemptImpl: Operation, Attempt {
             else {
                 self.callbacks.onFinish(.error(.unexpectedResponse))
             }
-            
-            self.taskIsFinished = true
         }
         
         configurationChangeQueue.sync {
@@ -74,6 +68,8 @@ final class AttemptImpl: Operation, Attempt {
             
             task?.resume()
         }
+        
+        semaphore.wait()
     }
     
     override func observeValue(
@@ -91,7 +87,7 @@ final class AttemptImpl: Operation, Attempt {
         case(#keyPath(URLSessionTask.countOfBytesReceived)):
             callbacks.onRecive(task.countOfBytesReceived, task.countOfBytesExpectedToReceive)
         default:
-            break
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
 
