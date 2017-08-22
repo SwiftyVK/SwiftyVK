@@ -13,10 +13,4 @@ protocol ObservableObject {
         _ observer: NSObject,
         forKeyPath keyPath: String
     )
-    
-    func removeObserver(
-        _ observer: NSObject,
-        forKeyPath keyPath: String,
-        context: UnsafeMutableRawPointer?
-    )
 }
