@@ -57,7 +57,7 @@ final class DependencyFactoryImpl: DependencyFactory {
     private let appId: String
     private weak var delegate: SwiftyVKDelegate?
 
-    private let foregroundSession = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
+    private let foregroundSession = URLSession.shared
     
     private let uiSyncQueue = DispatchQueue(label: "SwiftyVK.uiSyncQueue")
     private let attemptsQueue = DispatchQueue(label: "SwiftyVK.AttemptQueue")
