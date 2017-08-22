@@ -1,6 +1,6 @@
 import Foundation
 
-protocol VKURLSessionTask: ObservableObject {
+@objc protocol VKURLSessionTask: ObservableObject {
     var countOfBytesReceived: Int64 { get }
     var countOfBytesSent: Int64 { get }
     var countOfBytesExpectedToSend: Int64 { get }

@@ -35,17 +35,17 @@ final class AttemptImpl: Operation, Attempt {
         self.callbacks = callbacks
         super.init()
     }
-
+    
     override func main() {
         let semaphore = DispatchSemaphore(value: 0)
-
+        
         let completion: (Data?, URLResponse?, Error?) -> () = { [weak self] data, response, error in
             defer {
                 semaphore.signal()
             }
             
             guard let `self` = self, !self.isCancelled else { return }
-
+            
             if let error = error {
                 self.callbacks.onFinish(.error(.urlRequestError(error)))
             }
@@ -60,7 +60,7 @@ final class AttemptImpl: Operation, Attempt {
         configurationChangeQueue.sync {
             urlSession.configuration.timeoutIntervalForRequest = self.timeout
             urlSession.configuration.timeoutIntervalForResource = self.timeout
-
+            
             self.task = urlSession.dataTask(with: request, completionHandler: completion)
             
             task?.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived), options: .new, context: nil)
@@ -90,12 +90,12 @@ final class AttemptImpl: Operation, Attempt {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
-
+    
     override func cancel() {
-        task?.cancel()
         super.cancel()
+        task?.cancel()
     }
-
+    
     deinit {
         task?.removeObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived))
         task?.removeObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesSent))
@@ -107,11 +107,17 @@ struct AttemptCallbacks {
     let onSent: (_ total: Int64, _ of: Int64) -> ()
     let onRecive: (_ total: Int64, _ of: Int64) -> ()
     
+    init(
+        onFinish: @escaping ((Response) -> ()) = { _ in },
+        onSent: @escaping ((_ total: Int64, _ of: Int64) -> ()) = { _, _ in },
+        onRecive: @escaping ((_ total: Int64, _ of: Int64) -> ()) = { _, _ in }
+        ) {
+        self.onFinish = onFinish
+        self.onSent = onSent
+        self.onRecive = onRecive
+    }
+    
     static var `default`: AttemptCallbacks {
-        return AttemptCallbacks(
-            onFinish: { _ in },
-            onSent: { _, _ in },
-            onRecive: { _, _ in }
-        )
+        return AttemptCallbacks()
     }
 }
