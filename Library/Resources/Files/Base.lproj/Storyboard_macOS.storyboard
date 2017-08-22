@@ -1,57 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="13122.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13189.4"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Web Controller macOS-->
+        <!--Web Controller MacOS-->
         <scene sceneID="Rku-He-er5">
             <objects>
-                <viewController storyboardIdentifier="Web" id="2x6-4U-608" customClass="WebController_macOS" customModule="SwiftyVK" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Web" id="2x6-4U-608" customClass="WebControllerMacOS" customModule="SwiftyVK" sceneMemberID="viewController">
                     <customView key="view" id="fL7-e2-4bl">
                         <rect key="frame" x="0.0" y="0.0" width="500" height="350"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S7H-UH-Oaf">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="s7g-ar-psG" customClass="WebViewWrapperMacOs" customModule="SwiftyVK">
                                 <rect key="frame" x="0.0" y="0.0" width="500" height="350"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="350" id="cbM-PG-J1h"/>
-                                    <constraint firstAttribute="width" constant="500" id="xpF-gE-5LB"/>
+                                    <constraint firstAttribute="height" constant="350" id="1vR-Rb-RIx"/>
+                                    <constraint firstAttribute="width" constant="500" id="jF7-JJ-Kst"/>
                                 </constraints>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
+                            </customView>
                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="4L5-mP-HPw">
                                 <rect key="frame" x="234" y="159" width="32" height="32"/>
                             </progressIndicator>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="S7H-UH-Oaf" firstAttribute="leading" secondItem="fL7-e2-4bl" secondAttribute="leading" id="27k-e2-lqT"/>
                             <constraint firstItem="4L5-mP-HPw" firstAttribute="centerY" secondItem="fL7-e2-4bl" secondAttribute="centerY" id="9Oq-QQ-1ws"/>
-                            <constraint firstAttribute="trailing" secondItem="S7H-UH-Oaf" secondAttribute="trailing" id="FCB-ji-ar3"/>
                             <constraint firstItem="4L5-mP-HPw" firstAttribute="centerX" secondItem="fL7-e2-4bl" secondAttribute="centerX" id="WrN-Gn-8Zp"/>
-                            <constraint firstAttribute="bottom" secondItem="S7H-UH-Oaf" secondAttribute="bottom" id="ZFg-8C-DxP"/>
-                            <constraint firstItem="S7H-UH-Oaf" firstAttribute="top" secondItem="fL7-e2-4bl" secondAttribute="top" id="ix8-Nq-ICo"/>
+                            <constraint firstItem="s7g-ar-psG" firstAttribute="top" secondItem="fL7-e2-4bl" secondAttribute="top" id="hw0-x4-Ijy"/>
+                            <constraint firstItem="s7g-ar-psG" firstAttribute="leading" secondItem="fL7-e2-4bl" secondAttribute="leading" id="wjC-wv-F0l"/>
+                            <constraint firstAttribute="trailing" secondItem="s7g-ar-psG" secondAttribute="trailing" id="x3B-yl-qsK"/>
+                            <constraint firstAttribute="bottom" secondItem="s7g-ar-psG" secondAttribute="bottom" id="yzx-AW-iOi"/>
                         </constraints>
                     </customView>
                     <connections>
                         <outlet property="preloader" destination="4L5-mP-HPw" id="g5u-4X-vFV"/>
-                        <outlet property="webView" destination="S7H-UH-Oaf" id="q8K-fp-0j9"/>
+                        <outlet property="webWrapper" destination="s7g-ar-psG" id="bzI-Ns-XuQ"/>
                     </connections>
                 </viewController>
                 <customObject id="tPu-ny-o1w" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="419" y="84"/>
         </scene>
-        <!--Captcha Controller macOS-->
+        <!--Captcha Controller MacOS-->
         <scene sceneID="EPR-9A-kFp">
             <objects>
-                <viewController storyboardIdentifier="Captcha" id="r5f-06-Ldu" customClass="CaptchaController_macOS" customModule="SwiftyVK" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Captcha" id="r5f-06-Ldu" customClass="CaptchaControllerMacOS" customModule="SwiftyVK" sceneMemberID="viewController">
                     <view key="view" id="s8e-Dt-oLw">
                         <rect key="frame" x="0.0" y="0.0" width="270" height="154"/>
                         <autoresizingMask key="autoresizingMask"/>

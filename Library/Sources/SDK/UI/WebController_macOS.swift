@@ -3,7 +3,7 @@ import WebKit
 
 final class WebControllerMacOS: NSViewController, WKNavigationDelegate, WebController {
     
-    @IBOutlet private weak var webView: WKWebView?
+    @IBOutlet private weak var webWrapper: WebViewWrapperMacOs?
     @IBOutlet private weak var preloader: NSProgressIndicator?
     
     private var currentRequest: URLRequest?
@@ -13,7 +13,7 @@ final class WebControllerMacOS: NSViewController, WKNavigationDelegate, WebContr
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.styleMask.remove(.resizable)
-        webView?.navigationDelegate = self
+        webWrapper?.webView.navigationDelegate = self
         preloader?.isDisplayedWhenStopped = false
     }
     
@@ -42,11 +42,11 @@ final class WebControllerMacOS: NSViewController, WKNavigationDelegate, WebContr
             return
         }
         
-        webView?.load(currentRequest)
+        webWrapper?.webView.load(currentRequest)
     }
     
     func goBack() {
-        webView?.goBack()
+        webWrapper?.webView.goBack()
     }
     
     func dismiss() {
@@ -64,3 +64,4 @@ final class WebControllerMacOS: NSViewController, WKNavigationDelegate, WebContr
         onResult?(.error(.webControllerError(error)))
     }
 }
+

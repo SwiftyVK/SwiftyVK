@@ -3,7 +3,7 @@ import WebKit
 
 final class WebControllerIOS: UIViewController, WKNavigationDelegate, WebController {
     
-    @IBOutlet private weak var webView: VKWebView?
+    @IBOutlet private weak var webView: WebViewWrapperIOS?
     @IBOutlet private weak var preloader: UIActivityIndicatorView?
     
     private var currentRequest: URLRequest?
@@ -17,7 +17,7 @@ final class WebControllerIOS: UIViewController, WKNavigationDelegate, WebControl
         webView?.clipsToBounds = true
         webView?.layer.borderWidth = 1 / UIScreen.main.nativeScale
         webView?.layer.borderColor = UIColor.lightGray.cgColor
-        webView?.navigationDelegate = self
+        webView?.webView.navigationDelegate = self
         preloader?.color = .lightGray
         preloader?.hidesWhenStopped = true
     }
@@ -47,11 +47,11 @@ final class WebControllerIOS: UIViewController, WKNavigationDelegate, WebControl
             return
         }
         
-        webView?.load(currentRequest)
+        webView?.webView.load(currentRequest)
     }
     
     func goBack() {
-        webView?.goBack()
+        webView?.webView.goBack()
     }
     
     func dismiss() {
@@ -67,19 +67,5 @@ final class WebControllerIOS: UIViewController, WKNavigationDelegate, WebControl
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation?, withError error: Error) {
         onResult?(.error(.webControllerError(error)))
-    }
-}
-
-// Hack to represent WKWebView in XIB :)
-class VKWebView: WKWebView {
-    
-    required init?(coder: NSCoder) {
-        if let _view = UIView(coder: coder) {
-            super.init(frame: _view.frame, configuration: WKWebViewConfiguration())
-            self.translatesAutoresizingMaskIntoConstraints = false
-        }
-        else {
-            return nil
-        }
     }
 }

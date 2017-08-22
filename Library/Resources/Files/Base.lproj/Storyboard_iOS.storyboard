@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -16,7 +16,7 @@
         <!--Captcha Controller iOS-->
         <scene sceneID="10n-Ej-Gtq">
             <objects>
-                <viewController storyboardIdentifier="Captcha" modalPresentationStyle="overCurrentContext" id="QO6-eV-iRy" customClass="CaptchaController_iOS" customModule="SwiftyVK" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Captcha" modalPresentationStyle="overCurrentContext" id="QO6-eV-iRy" customClass="CaptchaControllerIOS" customModule="SwiftyVK" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yXH-7r-o29"/>
                         <viewControllerLayoutGuide type="bottom" id="P2T-2x-qru"/>
@@ -122,7 +122,7 @@
         <!--Web Controller iOS-->
         <scene sceneID="EYA-W4-wfb">
             <objects>
-                <viewController storyboardIdentifier="Web" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="overCurrentContext" id="5iw-hV-gmH" customClass="WebController_iOS" customModule="SwiftyVK" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Web" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="overCurrentContext" id="5iw-hV-gmH" customClass="WebControllerIOS" customModule="SwiftyVK" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uJx-Uw-KGX"/>
                         <viewControllerLayoutGuide type="bottom" id="JG6-X0-sew"/>
@@ -141,7 +141,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8mo-Su-QDT" customClass="VKWebView" customModule="SwiftyVK">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8mo-Su-QDT" customClass="WebViewWrapperIOS" customModule="SwiftyVK">
                                 <rect key="frame" x="16" y="35" width="288" height="430"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
