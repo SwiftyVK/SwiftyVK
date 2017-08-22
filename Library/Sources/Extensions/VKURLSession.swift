@@ -14,18 +14,18 @@ extension URLSession: VKURLSession {
     
     func synchronousDataTaskWithURL(url: URL) -> (data: Data?, response: URLResponse?, error: Error?) {
         var data: Data?, response: URLResponse?, error: Error?
-        
         let semaphore = DispatchSemaphore(value: 0)
         
-        dataTask(with: url) {
+        let task: URLSessionTask = URLSession(configuration: configuration).dataTask(with: URLRequest(url: url)) {
             data = $0
             response = $1
             error = $2
             semaphore.signal()
-            }.resume()
+        }
         
-        _ = semaphore.wait(timeout: .distantFuture)
-        
+        task.resume()
+        _ = semaphore.wait(timeout: .now() + 30)
         return (data, response, error)
     }
 }
+
