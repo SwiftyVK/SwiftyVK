@@ -6,5 +6,7 @@ coverage:
   ignore:
     - Example
     - Tests
-    - Library/Sources/API
-    - Library/Sources/Extensions
+    - Library/Sources/Utils/WebViewWrapper*
+    - Library/Sources/Utils/Reachability.swift
+    - Library/Sources/SDK/UI/CaptchaController*
+    - Library/Sources/SDK/UI/WebController*
