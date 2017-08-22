@@ -64,4 +64,3 @@ final class WebControllerMacOS: NSViewController, WKNavigationDelegate, WebContr
         onResult?(.error(.webControllerError(error)))
     }
 }
-

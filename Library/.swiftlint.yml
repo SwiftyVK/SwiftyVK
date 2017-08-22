@@ -41,7 +41,7 @@ opt_in_rules:
   # - explicit_top_level_acl
   - vertical_parameter_alignment_on_call
   - unused_optional_binding
-  - multiline_parameters
+  # - multiline_parameters
 
 file_length:
   warning: 500

@@ -28,4 +28,3 @@ extension URLSession: VKURLSession {
         return (data, response, error)
     }
 }
-

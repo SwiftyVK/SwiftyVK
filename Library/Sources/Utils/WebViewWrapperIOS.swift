@@ -15,4 +15,3 @@ class WebViewWrapperIOS: UIView {
         webView.frame = bounds
     }
 }
-

@@ -5,9 +5,10 @@ extension DispatchQueue {
     static func performOnMainIfNeeded<T>(_ clousure: () throws -> T) rethrows -> T {
         if Thread.isMainThread {
             return try clousure()
-        } else {
+        }
+        else {
             return try DispatchQueue.main.sync {
-                return try clousure()
+                try clousure()
             }
         }
     }
