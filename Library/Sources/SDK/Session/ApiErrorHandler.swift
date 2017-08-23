@@ -4,16 +4,16 @@ protocol ApiErrorHandler {
 
 final class ApiErrorHandlerImpl: ApiErrorHandler {
     
-    private let session: ApiErrorExecutor
+    private let executor: ApiErrorExecutor
     
-    init(session: ApiErrorExecutor) {
-        self.session = session
+    init(executor: ApiErrorExecutor) {
+        self.executor = executor
     }
     
     func handle(error: ApiError) throws -> ApiErrorHandlerResult {
         switch error.code {
         case 5:
-            _ = try session.logIn(revoke: false)
+            _ = try executor.logIn(revoke: false)
             return .none
         case 14:
             guard
@@ -23,7 +23,7 @@ final class ApiErrorHandlerImpl: ApiErrorHandler {
                     throw VkError.api(error)
             }
             
-            let key = try session.captcha(rawUrlToImage: imgRawUrl, dismissOnFinish: false)
+            let key = try executor.captcha(rawUrlToImage: imgRawUrl, dismissOnFinish: false)
             return .captcha(Captcha(sid, key))
         case 17:
             guard
@@ -33,7 +33,7 @@ final class ApiErrorHandlerImpl: ApiErrorHandler {
                     throw VkError.api(error)
             }
             
-            try session.validate(redirectUrl: url)
+            try executor.validate(redirectUrl: url)
             return .none
         default:
             throw VkError.api(error)

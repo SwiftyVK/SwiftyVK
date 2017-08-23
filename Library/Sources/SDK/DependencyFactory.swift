@@ -207,7 +207,7 @@ final class DependencyFactoryImpl: DependencyFactory {
             session: session,
             urlRequestBuilder: urlRequestBuilder(),
             attemptMaker: self,
-            apiErrorHandler: ApiErrorHandlerImpl(session: session)
+            apiErrorHandler: ApiErrorHandlerImpl(executor: session)
         )
     }
     
