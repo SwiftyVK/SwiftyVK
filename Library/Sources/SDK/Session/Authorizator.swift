@@ -48,7 +48,7 @@ final class AuthorizatorImpl: Authorizator {
                 return token
             }
             
-            guard let scopes = delegate?.vkNeedsScopes(for: sessionId).toInt() else {
+            guard let scopes = delegate?.vkNeedsScopes(for: sessionId).rawValue else {
                 throw VkError.vkDelegateNotFound
             }
             

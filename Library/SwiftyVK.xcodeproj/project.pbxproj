@@ -173,7 +173,7 @@
 		A2EB6EDA1BD18389008E7D86 /* Arg.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D821BD12FD200F65412 /* Arg.swift */; };
 		A2EB6EDC1BD18389008E7D86 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D841BD12FD200F65412 /* Media.swift */; };
 		A2EB6EDD1BD18389008E7D86 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D851BD12FD200F65412 /* Resources.swift */; };
-		A2EB6EDE1BD18389008E7D86 /* Scope.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D861BD12FD200F65412 /* Scope.swift */; };
+		A2EB6EDE1BD18389008E7D86 /* Scopes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D861BD12FD200F65412 /* Scopes.swift */; };
 		A2EB6EE11BD18389008E7D86 /* UrlRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8A1BD12FD200F65412 /* UrlRequestBuilder.swift */; };
 		A2EB6EE71BD18389008E7D86 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7B1BD12FD200F65412 /* Log.swift */; };
 		A2EB6EEA1BD18394008E7D86 /* VK.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D911BD12FD200F65412 /* VK.swift */; };
@@ -207,7 +207,7 @@
 		A2EB6F071BD18395008E7D86 /* Arg.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D821BD12FD200F65412 /* Arg.swift */; };
 		A2EB6F091BD18395008E7D86 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D841BD12FD200F65412 /* Media.swift */; };
 		A2EB6F0A1BD18395008E7D86 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D851BD12FD200F65412 /* Resources.swift */; };
-		A2EB6F0B1BD18395008E7D86 /* Scope.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D861BD12FD200F65412 /* Scope.swift */; };
+		A2EB6F0B1BD18395008E7D86 /* Scopes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D861BD12FD200F65412 /* Scopes.swift */; };
 		A2EB6F0E1BD18395008E7D86 /* UrlRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D8A1BD12FD200F65412 /* UrlRequestBuilder.swift */; };
 		A2EB6F141BD18395008E7D86 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7B1BD12FD200F65412 /* Log.swift */; };
 		A2EB6F151BD18395008E7D86 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527D7C1BD12FD200F65412 /* Reachability.swift */; };
@@ -386,7 +386,7 @@
 		A2527D821BD12FD200F65412 /* Arg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arg.swift; sourceTree = "<group>"; };
 		A2527D841BD12FD200F65412 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		A2527D851BD12FD200F65412 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
-		A2527D861BD12FD200F65412 /* Scope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scope.swift; sourceTree = "<group>"; };
+		A2527D861BD12FD200F65412 /* Scopes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scopes.swift; sourceTree = "<group>"; };
 		A2527D8A1BD12FD200F65412 /* UrlRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UrlRequestBuilder.swift; path = Request/UrlRequestBuilder.swift; sourceTree = "<group>"; };
 		A2527D901BD12FD200F65412 /* SwiftyVK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyVK.h; sourceTree = "<group>"; };
 		A2527D911BD12FD200F65412 /* VK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VK.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -723,7 +723,7 @@
 				A29508831EBBA24B00981EC0 /* RequestConfig.swift */,
 				A2527D821BD12FD200F65412 /* Arg.swift */,
 				A2527D841BD12FD200F65412 /* Media.swift */,
-				A2527D861BD12FD200F65412 /* Scope.swift */,
+				A2527D861BD12FD200F65412 /* Scopes.swift */,
 				A2527D851BD12FD200F65412 /* Resources.swift */,
 				D47601271F2E25E2005356E5 /* Results */,
 			);
@@ -1261,7 +1261,7 @@
 				A2BDF36D1EDC9D8E00E9263A /* Atomic.swift in Sources */,
 				A25A19DD1EE58CC900CF13AF /* CaptchaController.swift in Sources */,
 				D4F84BE51F43608A00DA7127 /* ConnectionObserver.swift in Sources */,
-				A2EB6F0B1BD18395008E7D86 /* Scope.swift in Sources */,
+				A2EB6F0B1BD18395008E7D86 /* Scopes.swift in Sources */,
 				A24D10901C56A49E008263B0 /* Market.swift in Sources */,
 				A2EB6F0E1BD18395008E7D86 /* UrlRequestBuilder.swift in Sources */,
 				A25A19C11EE2F01800CF13AF /* WebController_iOS.swift in Sources */,
@@ -1355,7 +1355,7 @@
 				A2EB6EDD1BD18389008E7D86 /* Resources.swift in Sources */,
 				A25A19CD1EE41BA700CF13AF /* TokenParser.swift in Sources */,
 				A2E34DBC1ED1F1260041E663 /* TokenStorage.swift in Sources */,
-				A2EB6EDE1BD18389008E7D86 /* Scope.swift in Sources */,
+				A2EB6EDE1BD18389008E7D86 /* Scopes.swift in Sources */,
 				A2EB6EE11BD18389008E7D86 /* UrlRequestBuilder.swift in Sources */,
 				A29F1CD41E95674A00BE5369 /* TaskSheduler.swift in Sources */,
 				A270528C1EF82DA600C05936 /* SessionsStorage.swift in Sources */,
