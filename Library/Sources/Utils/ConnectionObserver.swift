@@ -37,7 +37,6 @@ internal final class ConnectionObserver: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(onReachabilityChange), name: ReachabilityChangedNotification, object: nil)
         _ = try? reachability?.startNotifier()
         
-        VK.Log.put("Connection", "Start observing")
     }
     
     @objc
@@ -57,7 +56,6 @@ internal final class ConnectionObserver: NSObject {
         if connected == false {
             connected = true
             onConnect()
-            VK.Log.put("Connection", "restored")
         }
     }
     
@@ -66,12 +64,10 @@ internal final class ConnectionObserver: NSObject {
         if connected == true {
             connected = false
             onDisconnect()
-            VK.Log.put("Connection", "lost")
         }
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        VK.Log.put("Connection", "Stop observing")
     }
 }

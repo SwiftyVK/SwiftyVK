@@ -62,7 +62,6 @@ final class TaskImpl: Operation, Task {
     }
     
     override func main() {
-        VK.Log.put(self, "started", atNewLine: true)
         trySend()
         state = .sended
         semaphore.wait()
@@ -74,7 +73,6 @@ final class TaskImpl: Operation, Task {
         super.cancel()
         state = .cancelled
         semaphore.signal()
-        VK.Log.put(self, "cancelled")
     }
     
     private func resendWith(error: VkError?, captcha: Captcha?) {
@@ -110,7 +108,6 @@ final class TaskImpl: Operation, Task {
         guard !self.isCancelled else { return }
         
         sendAttempts += 1
-        VK.Log.put(self, "send \(sendAttempts) of \(request.config.maxAttemptsLimit.count) times")
         
         let urlRequest = try urlRequestBuilder.build(
             request: request.rawRequest,
@@ -132,12 +129,10 @@ final class TaskImpl: Operation, Task {
     
     private func handleSended(_ total: Int64, of expected: Int64) {
         guard !isCancelled else { return }
-        VK.Log.put(self, "send \(total) of \(expected) bytes")
     }
     
     private func handleReceived(_ total: Int64, of expected: Int64) {
         guard !isCancelled else { return }
-        VK.Log.put(self, "receive \(total) of \(expected) bytes")
         callbacks.onProgress?(total, expected)
     }
     
@@ -147,7 +142,6 @@ final class TaskImpl: Operation, Task {
         switch result {
         case .success(let response):
             if let next = request.nexts.popLast()?(response) {
-                VK.Log.put(self, "=== prepare next task ===")
                 request = next
                 sendAttempts = 0
                 trySend()
@@ -162,7 +156,6 @@ final class TaskImpl: Operation, Task {
     
     private func execute(response: Data) {
         guard !isCancelled else { return }
-        VK.Log.put(self, "execute success block")
         state = .finished(response)
         callbacks.onSuccess?(response)
         semaphore.signal()
@@ -175,7 +168,6 @@ final class TaskImpl: Operation, Task {
             semaphore.signal()
         }
         
-        VK.Log.put(self, "execute error block")
         state = .failed(error)
         callbacks.onError?(error)
     }
