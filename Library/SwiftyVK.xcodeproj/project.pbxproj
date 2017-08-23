@@ -34,7 +34,6 @@
 		A217DAAD1E9926A500EA1430 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAAB1E9926A500EA1430 /* Session.swift */; };
 		A21E81591E2A7E68008E81E7 /* UrlCharactesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E81581E2A7E68008E81E7 /* UrlCharactesSet.swift */; };
 		A21E815A1E2A8303008E81E7 /* UrlCharactesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E81581E2A7E68008E81E7 /* UrlCharactesSet.swift */; };
-		A22179C51EBA3BBA006B71FD /* DependencyFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179C41EBA3BBA006B71FD /* DependencyFactoryTests.swift */; };
 		A22179C81EBA3DBD006B71FD /* AttemptShedulerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */; };
 		A22179CA1EBA4059006B71FD /* SessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179C91EBA4059006B71FD /* SessionTests.swift */; };
 		A22179CC1EBA5009006B71FD /* TaskShedulerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179CB1EBA5009006B71FD /* TaskShedulerMock.swift */; };
@@ -336,7 +335,6 @@
 		A217DAA71E9924DE00EA1430 /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		A217DAAB1E9926A500EA1430 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		A21E81581E2A7E68008E81E7 /* UrlCharactesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlCharactesSet.swift; sourceTree = "<group>"; };
-		A22179C41EBA3BBA006B71FD /* DependencyFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyFactoryTests.swift; sourceTree = "<group>"; };
 		A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptShedulerMock.swift; sourceTree = "<group>"; };
 		A22179C91EBA4059006B71FD /* SessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTests.swift; sourceTree = "<group>"; };
 		A22179CB1EBA5009006B71FD /* TaskShedulerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskShedulerMock.swift; sourceTree = "<group>"; };
@@ -546,7 +544,6 @@
 				A2B40DFC1EA693B700106AE3 /* UrlRequestBuilderTests.swift */,
 				A24DDAF11EB73E3F002EA273 /* QueryBuilderTests.swift */,
 				A25A3A2C1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift */,
-				A22179C41EBA3BBA006B71FD /* DependencyFactoryTests.swift */,
 				A22179C91EBA4059006B71FD /* SessionTests.swift */,
 				A2E5C5DA1ECCAFC800652262 /* SessionsHolderTests.swift */,
 				A2AF16781ED1AD2E00485716 /* TokenTests.swift */,
@@ -1191,7 +1188,6 @@
 				A23E692E1EDAEC6400AA3B3B /* UrlOpenerMock.swift in Sources */,
 				A23708C81EA532B900103212 /* TaskShedulerTests.swift in Sources */,
 				A20CDD941EF667B000271276 /* CaptchaPresenterTests.swift in Sources */,
-				A22179C51EBA3BBA006B71FD /* DependencyFactoryTests.swift in Sources */,
 				D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */,
 				A2B805561EDDB01C004DA7EB /* WebControllerMock.swift in Sources */,
 				A25A19D71EE4405E00CF13AF /* VkAppProxyMock.swift in Sources */,
