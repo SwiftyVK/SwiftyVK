@@ -26,7 +26,6 @@ class AtomicTests: XCTestCase {
         
         let cycle: () -> () = {
             DispatchQueue(label: "").async {
-                group.enter()
                 
                 for _ in 0..<10 {
                     _ = atomic >< {value in
@@ -36,6 +35,10 @@ class AtomicTests: XCTestCase {
                 
                 group.leave()
             }
+        }
+        
+        for _ in 0..<100 {
+            group.enter()
         }
         
         for _ in 0..<100 {
@@ -55,7 +58,6 @@ class AtomicTests: XCTestCase {
         
         let cycle: () -> () = {
             DispatchQueue(label: "").async {
-                group.enter()
                 
                 for _ in 0..<10 {
                     atomic <> {value in
@@ -65,6 +67,10 @@ class AtomicTests: XCTestCase {
                 
                 group.leave()
             }
+        }
+        
+        for _ in 0..<100 {
+            group.enter()
         }
         
         for _ in 0..<100 {

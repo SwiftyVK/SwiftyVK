@@ -44,7 +44,7 @@ final class AttemptShedulerTests: BaseTestCase {
             "Operations should be executed serially"
         )
         
-        Thread.sleep(forTimeInterval: Double(count/shedulerLimit.count))
+        Thread.sleep(forTimeInterval: Double(count/shedulerLimit.count*2))
         
         XCTAssertEqual(
             samples.filter { $0.isFinished }.count,
@@ -72,17 +72,13 @@ final class AttemptShedulerTests: BaseTestCase {
             "Operations should be executed serially"
         )
         
-        XCTAssertEqual(
-            concurrent.map {$0.isFinished},
-            (0..<count).map { _ in true },
+        XCTAssertEqual(concurrent.map {$0.isFinished}, (0..<count).map { _ in true },
             "All concurrent operations should be executed"
         )
         
-        Thread.sleep(forTimeInterval: Double(count/shedulerLimit.count))
+        Thread.sleep(forTimeInterval: Double(count/shedulerLimit.count*2))
         
-        XCTAssertEqual(
-            serial.filter { $0.isFinished }.count,
-            count,
+        XCTAssertEqual(serial.filter { $0.isFinished }.count, count,
             "All serial operations should be executed"
         )
     }
