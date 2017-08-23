@@ -243,6 +243,8 @@
 		D484C9411F4B3E8300C9651C /* VKURLSessionTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9401F4B3E8300C9651C /* VKURLSessionTaskMock.swift */; };
 		D484C9461F4B58F900C9651C /* GCD+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9421F4B44A300C9651C /* GCD+Extensions.swift */; };
 		D484C9471F4B58F900C9651C /* GCD+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9421F4B44A300C9651C /* GCD+Extensions.swift */; };
+		D497959F1F4DE40900921A21 /* ApiErrorHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D497959E1F4DE40900921A21 /* ApiErrorHandlerTests.swift */; };
+		D49795A11F4DE57100921A21 /* ApiErrorExecutorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795A01F4DE57100921A21 /* ApiErrorExecutorMock.swift */; };
 		D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */; };
 		D4F49D421F2DF5B10037B875 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D411F2DF5B10037B875 /* JsonReader.swift */; };
 		D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
@@ -481,6 +483,8 @@
 		D484C93C1F4B3E2F00C9651C /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		D484C9401F4B3E8300C9651C /* VKURLSessionTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKURLSessionTaskMock.swift; sourceTree = "<group>"; };
 		D484C9421F4B44A300C9651C /* GCD+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GCD+Extensions.swift"; sourceTree = "<group>"; };
+		D497959E1F4DE40900921A21 /* ApiErrorHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorHandlerTests.swift; sourceTree = "<group>"; };
+		D49795A01F4DE57100921A21 /* ApiErrorExecutorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorExecutorMock.swift; sourceTree = "<group>"; };
 		D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorTests.swift; sourceTree = "<group>"; };
 		D4F49D411F2DF5B10037B875 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		D4F49D441F2E0EF60037B875 /* apiError.correct.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.correct.json; sourceTree = "<group>"; };
@@ -546,6 +550,7 @@
 				D47601211F2E236E005356E5 /* ResponseTests.swift */,
 				D44348F71F3B70F4008B2B50 /* JSONTests.swift */,
 				D484C9311F4B337E00C9651C /* AttemptTests.swift */,
+				D497959E1F4DE40900921A21 /* ApiErrorHandlerTests.swift */,
 			);
 			name = Tests;
 			path = ../Tests;
@@ -577,6 +582,7 @@
 				A2D355F11EFAD4C300395E61 /* SessionStorageMock.swift */,
 				D484C93C1F4B3E2F00C9651C /* URLSessionMock.swift */,
 				D484C9401F4B3E8300C9651C /* VKURLSessionTaskMock.swift */,
+				D49795A01F4DE57100921A21 /* ApiErrorExecutorMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1156,10 +1162,12 @@
 				A22179CC1EBA5009006B71FD /* TaskShedulerMock.swift in Sources */,
 				A24DDAF21EB73E3F002EA273 /* QueryBuilderTests.swift in Sources */,
 				A25A19D31EE438FB00CF13AF /* AuthorizatorTests.swift in Sources */,
+				D497959F1F4DE40900921A21 /* ApiErrorHandlerTests.swift in Sources */,
 				A22179C81EBA3DBD006B71FD /* AttemptShedulerMock.swift in Sources */,
 				D4F49D421F2DF5B10037B875 /* JsonReader.swift in Sources */,
 				A24DDAEE1EB73CA3002EA273 /* QueryBuilderMock.swift in Sources */,
 				A25A3A2D1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift in Sources */,
+				D49795A11F4DE57100921A21 /* ApiErrorExecutorMock.swift in Sources */,
 				A2AF167B1ED1CC9B00485716 /* TokenMock.swift in Sources */,
 				A23E692E1EDAEC6400AA3B3B /* UrlOpenerMock.swift in Sources */,
 				A23708C81EA532B900103212 /* TaskShedulerTests.swift in Sources */,

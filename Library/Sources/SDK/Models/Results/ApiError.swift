@@ -3,8 +3,8 @@ import Foundation
 public struct ApiError: Equatable {
     public let code: Int
     public let message: String
-    public private(set) var requestParams = [String: String]()
-    public private(set) var otherInfo = [String: String]()
+    public internal(set) var requestParams = [String: String]()
+    public internal(set) var otherInfo = [String: String]()
     
     init?(_ json: JSON) {
         
