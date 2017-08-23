@@ -22,8 +22,11 @@ final class SessionMock: Session, TaskSession, DestroyableSession {
     
     func logOut() {}
     
+    var onSend: ((Request) -> ())?
+    
     @discardableResult
     func send(request: Request, callbacks: Callbacks) -> Task {
+        onSend?(request)
         return TaskMock()
     }
     

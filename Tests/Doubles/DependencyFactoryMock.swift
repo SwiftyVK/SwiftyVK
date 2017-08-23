@@ -4,12 +4,16 @@ final class DependencyHolderMock: DependencyHolder {
     
     init(appId: String, delegate: SwiftyVKDelegate?) {}
     
+    private let sessionsHolderMock = SessionsHolderMock()
+    
     var sessionsHolder: SessionSaver & SessionsHolder {
-        return SessionsHolderMock()
+        return sessionsHolderMock
     }
     
+    private let authorizatorMock = AuthorizatorMock()
+    
     var authorizator: Authorizator {
-        return AuthorizatorMock()
+        return authorizatorMock
     }
 }
 

@@ -25,7 +25,7 @@ public final class Request {
         guard let session = session ?? VK.sessions?.default else {
             fatalError("You must call VK.prepareForUse function to start using SwiftyVK!")
         }
-        
+
         config.inject(sessionConfig: session.config)
         return session.send(request: self, callbacks: callbacks)
     }
