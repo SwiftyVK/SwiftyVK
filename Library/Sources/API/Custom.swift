@@ -1,7 +1,7 @@
 public extension VK.Api {
     public struct Custom {
-        public static func method(name: String) -> CustomMethod {
-            return CustomMethod(method: name)
+        public static func method(name: String, parameters: Parameters = .empty) -> CustomMethod {
+            return CustomMethod(method: name, parameters: parameters)
         }
         
         public static func remote(method: String) -> CustomMethod {

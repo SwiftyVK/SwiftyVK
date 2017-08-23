@@ -124,12 +124,3 @@ private func makeContext() -> (executor: ApiErrorExecutorMock, handler: ApiError
     let handler = ApiErrorHandlerImpl(executor: executor)
     return (executor, handler)
 }
-
-private extension ApiError {
-    init(code: Int, otherInfo: [String: String] = [:]) {
-        self.code = code
-        self.message = ""
-        self.requestParams = [:]
-        self.otherInfo = otherInfo
-    }
-}
