@@ -28,6 +28,7 @@ class ApiMethodTests: BaseTestCase {
     
     func test_callSessionSend_whenMethodSended() {
         // Given
+        VKStack.mock()
         var sendCallCount = 0
         
         (VK.sessions?.default as? SessionMock)?.onSend = { request in
