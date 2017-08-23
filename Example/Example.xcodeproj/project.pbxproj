@@ -306,7 +306,7 @@
 				A2087A581D8580940076BB5E /* SwiftyVK.framework */,
 				A2087A5A1D8580940076BB5E /* SwiftyVK_resources_macOS.bundle */,
 				A2087A5C1D8580940076BB5E /* SwiftyVK_resources_iOS.bundle */,
-				A223C8851EB8E33600EC4E4A /* SwiftyVK-Tests-OSX.xctest */,
+				A223C8851EB8E33600EC4E4A /* SwiftyVK_tests_macOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -624,10 +624,10 @@
 			remoteRef = A2087A5B1D8580940076BB5E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A223C8851EB8E33600EC4E4A /* SwiftyVK-Tests-OSX.xctest */ = {
+		A223C8851EB8E33600EC4E4A /* SwiftyVK_tests_macOS.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "SwiftyVK-Tests-OSX.xctest";
+			path = SwiftyVK_tests_macOS.xctest;
 			remoteRef = A223C8841EB8E33600EC4E4A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

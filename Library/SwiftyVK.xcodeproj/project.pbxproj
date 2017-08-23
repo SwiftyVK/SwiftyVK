@@ -15,8 +15,6 @@
 				A20C36471DE04A16004AA642 /* NeedLess */,
 			);
 			dependencies = (
-				A21F10BF1DCDFD01003EFDDC /* PBXTargetDependency */,
-				A21F10BD1DCDFCFE003EFDDC /* PBXTargetDependency */,
 			);
 			name = LintAllTargets;
 			productName = SwiftyVK;
@@ -262,20 +260,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A21F10BC1DCDFCFE003EFDDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A2527D261BD1123E00F65412 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A2EB6EA71BD180E9008E7D86;
-			remoteInfo = "SwiftyVK-OSX";
-		};
-		A21F10BE1DCDFD01003EFDDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A2527D261BD1123E00F65412 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A2EB6E9A1BD180DD008E7D86;
-			remoteInfo = "SwiftyVK-iOS";
-		};
 		A23708C01EA52F0D00103212 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A2527D261BD1123E00F65412 /* Project object */;
@@ -296,6 +280,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = A2527D541BD1134500F65412;
 			remoteInfo = "SwiftyVKResources-iOS";
+		};
+		D49795941F4DDA5500921A21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2527D261BD1123E00F65412 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A21F10B81DCDFCF6003EFDDC;
+			remoteInfo = LintAllTargets;
+		};
+		D497959C1F4DDAE200921A21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2527D261BD1123E00F65412 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A21F10B81DCDFCF6003EFDDC;
+			remoteInfo = LintAllTargets;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -948,6 +946,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D497959D1F4DDAE200921A21 /* PBXTargetDependency */,
 				A2EB6EB61BD182D4008E7D86 /* PBXTargetDependency */,
 			);
 			name = SwiftyVK_iOS;
@@ -967,6 +966,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D49795951F4DDA5500921A21 /* PBXTargetDependency */,
 				A2EB6EB21BD182C7008E7D86 /* PBXTargetDependency */,
 			);
 			name = SwiftyVK_macOS;
@@ -1369,16 +1369,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A21F10BD1DCDFCFE003EFDDC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A2EB6EA71BD180E9008E7D86 /* SwiftyVK_macOS */;
-			targetProxy = A21F10BC1DCDFCFE003EFDDC /* PBXContainerItemProxy */;
-		};
-		A21F10BF1DCDFD01003EFDDC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A2EB6E9A1BD180DD008E7D86 /* SwiftyVK_iOS */;
-			targetProxy = A21F10BE1DCDFD01003EFDDC /* PBXContainerItemProxy */;
-		};
 		A23708C11EA52F0D00103212 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A2EB6EA71BD180E9008E7D86 /* SwiftyVK_macOS */;
@@ -1393,6 +1383,16 @@
 			isa = PBXTargetDependency;
 			target = A2527D541BD1134500F65412 /* SwiftyVK_resources_iOS */;
 			targetProxy = A2EB6EB51BD182D4008E7D86 /* PBXContainerItemProxy */;
+		};
+		D49795951F4DDA5500921A21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A21F10B81DCDFCF6003EFDDC /* LintAllTargets */;
+			targetProxy = D49795941F4DDA5500921A21 /* PBXContainerItemProxy */;
+		};
+		D497959D1F4DDAE200921A21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A21F10B81DCDFCF6003EFDDC /* LintAllTargets */;
+			targetProxy = D497959C1F4DDAE200921A21 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
