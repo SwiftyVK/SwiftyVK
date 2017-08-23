@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyVK
 
-class AuthorizatorTests: BaseTestCase {
+class AuthorizatorTests: XCTestCase {
     
     func makeContext() -> (
         authorizator: AuthorizatorImpl,

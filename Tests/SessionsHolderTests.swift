@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyVK
 
-final class SessionsHolderTests: BaseTestCase {
+final class SessionsHolderTests: XCTestCase {
     
     func makeHolder() -> SessionsHolderImpl {
         return SessionsHolderImpl(

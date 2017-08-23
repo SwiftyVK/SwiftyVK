@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyVK
 
-final class TokenStorageTests: BaseTestCase {
+final class TokenStorageTests: XCTestCase {
     
     func test_getSaved() {
         // Given

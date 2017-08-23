@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyVK
 
-final class QueryBuilderTests: BaseTestCase {
+final class QueryBuilderTests: XCTestCase {
     
     var builder: QueryBuilderImpl {
         return QueryBuilderImpl()

@@ -39,7 +39,6 @@
 		A22179CA1EBA4059006B71FD /* SessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179C91EBA4059006B71FD /* SessionTests.swift */; };
 		A22179CC1EBA5009006B71FD /* TaskShedulerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179CB1EBA5009006B71FD /* TaskShedulerMock.swift */; };
 		A22179D01EBA530C006B71FD /* SessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179CF1EBA530C006B71FD /* SessionMock.swift */; };
-		A22179D21EBA5393006B71FD /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179D11EBA5393006B71FD /* BaseTestCase.swift */; };
 		A22179D41EBA57AF006B71FD /* SessionConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179D31EBA57AF006B71FD /* SessionConfig.swift */; };
 		A22179D51EBA57AF006B71FD /* SessionConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179D31EBA57AF006B71FD /* SessionConfig.swift */; };
 		A23708BF1EA52F0D00103212 /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */; };
@@ -342,7 +341,6 @@
 		A22179C91EBA4059006B71FD /* SessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTests.swift; sourceTree = "<group>"; };
 		A22179CB1EBA5009006B71FD /* TaskShedulerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskShedulerMock.swift; sourceTree = "<group>"; };
 		A22179CF1EBA530C006B71FD /* SessionMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionMock.swift; sourceTree = "<group>"; };
-		A22179D11EBA5393006B71FD /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		A22179D31EBA57AF006B71FD /* SessionConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionConfig.swift; sourceTree = "<group>"; };
 		A23708BA1EA52F0D00103212 /* SwiftyVK_tests_macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyVK_tests_macOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A23708C61EA5309700103212 /* TaskShedulerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskShedulerTests.swift; sourceTree = "<group>"; };
@@ -541,7 +539,6 @@
 				D4F49D431F2E0EA30037B875 /* Data */,
 				D4F49D401F2DF5950037B875 /* Utils */,
 				A2433A421EA5331A0058BB6D /* Doubles */,
-				A22179D11EBA5393006B71FD /* BaseTestCase.swift */,
 				A25A19D21EE438FB00CF13AF /* AuthorizatorTests.swift */,
 				A25A19CF1EE4233D00CF13AF /* TokenParserTests.swift */,
 				A23708C61EA5309700103212 /* TaskShedulerTests.swift */,
@@ -1178,7 +1175,6 @@
 				A2E5C5DB1ECCAFC800652262 /* SessionsHolderTests.swift in Sources */,
 				A25A19C91EE4112700CF13AF /* SwiftyVKDelegateMock.swift in Sources */,
 				A2433A481EA542620058BB6D /* AttemptMock.swift in Sources */,
-				A22179D21EBA5393006B71FD /* BaseTestCase.swift in Sources */,
 				A2AF16791ED1AD2E00485716 /* TokenTests.swift in Sources */,
 				A22179CC1EBA5009006B71FD /* TaskShedulerMock.swift in Sources */,
 				A24DDAF21EB73E3F002EA273 /* QueryBuilderTests.swift in Sources */,

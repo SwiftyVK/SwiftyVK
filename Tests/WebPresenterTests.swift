@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyVK
 
-final class WebPresenterTests: BaseTestCase {
+final class WebPresenterTests: XCTestCase {
     
     func makeContext() -> (presenter: WebPresenter, webControllerMaker: WebControllerMakerMock) {
         let controllerMaker = WebControllerMakerMock()

@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyVK
 
-final class AttemptShedulerTests: BaseTestCase {
+final class AttemptShedulerTests: XCTestCase {
     
     let shedulerLimit = AttemptLimit.limited(30)
     let count = 100

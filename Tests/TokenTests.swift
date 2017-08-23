@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyVK
 
-final class TokenTests: BaseTestCase {
+final class TokenTests: XCTestCase {
     
     func test_validToken_isValid() {
         // When

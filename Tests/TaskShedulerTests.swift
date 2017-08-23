@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyVK
 
-final class TaskShedulerTests: BaseTestCase {
+final class TaskShedulerTests: XCTestCase {
     
     let count = 100
     var totalDelay: TimeInterval {

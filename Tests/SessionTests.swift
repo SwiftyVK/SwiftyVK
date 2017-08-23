@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyVK
 
-final class SessionTests: BaseTestCase {
+final class SessionTests: XCTestCase {
     
     class TaskMakerMock: TaskMaker {
         func task(request: Request, callbacks: Callbacks, session: ApiErrorExecutor & TaskSession) -> Task {

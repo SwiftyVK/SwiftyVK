@@ -1,7 +1,7 @@
 //import XCTest
 //@testable import SwiftyVK
 //
-//final class DependencyFactoryTests: BaseTestCase {
+//final class DependencyFactoryTests: XCTestCase {
 //    
 //    private var factory: DependencyFactory {
 //        return DependencyFactoryImpl(appId: "1234567890", delegate: SwiftyVKDelegateMock())

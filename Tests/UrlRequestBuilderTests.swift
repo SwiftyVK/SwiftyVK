@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyVK
 
-final class UrlRequestBuilderTests: BaseTestCase {
+final class UrlRequestBuilderTests: XCTestCase {
     
     private let queryBuilder = QueryBuilderMock()
     private let bodyBuilder = MultipartBodyBuilderMock()

@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyVK
 
-final class VKProxyTests: BaseTestCase {
+final class VKProxyTests: XCTestCase {
     
     private let appId = "1234567890"
     
