@@ -101,7 +101,6 @@ final class TaskImpl: Operation, Task {
         
         let urlRequest = try urlRequestBuilder.build(
             request: request.rawRequest,
-            httpMethod: request.config.httpMethod,
             config: request.config,
             capthca: captcha,
             token: session.token

@@ -1,7 +1,7 @@
 import Foundation
 
 protocol UrlRequestBuilder {
-    func build(request: Request.Raw, httpMethod: HttpMethod, config: Config, capthca: Captcha?, token: Token?)
+    func build(request: Request.Raw, config: Config, capthca: Captcha?, token: Token?)
         throws -> URLRequest
 }
 
@@ -22,7 +22,6 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
     
     func build(
         request: Request.Raw,
-        httpMethod: HttpMethod,
         config: Config,
         capthca: Captcha?,
         token: Token?
@@ -35,7 +34,6 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
             urlRequest = try make(
                 from: method,
                 parameters: parameters,
-                httpMethod: httpMethod,
                 config: config,
                 capthca: capthca,
                 token: token
@@ -55,7 +53,6 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
     private func make(
         from apiMethod: String,
         parameters: Parameters,
-        httpMethod: HttpMethod,
         config: Config,
         capthca: Captcha?,
         token: Token?
@@ -64,14 +61,14 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         
         let query = queryBuilder.makeQuery(parameters: parameters, config: config, captcha: capthca, token: token)
         
-        switch httpMethod {
+        switch config.httpMethod {
         case .GET:
             req = try makeGetRequest(from: apiMethod, query: query)
         case .POST:
             req = try makePostRequest(from: apiMethod, query: query)
         }
         
-        req.httpMethod = httpMethod.rawValue
+        req.httpMethod = config.httpMethod.rawValue
         
         return req
     }

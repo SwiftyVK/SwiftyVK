@@ -20,8 +20,7 @@ final class UrlRequestBuilderTests: XCTestCase {
         ) throws -> URLRequest {
         return try builder.build(
             request: request,
-            httpMethod: httpMethod,
-            config: Config(attemptTimeout: timeout),
+            config: Config(httpMethod: httpMethod, attemptTimeout: timeout),
             capthca: nil,
             token: nil
         )

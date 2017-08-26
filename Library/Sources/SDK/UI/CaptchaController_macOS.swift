@@ -55,7 +55,7 @@ final class CaptchaControllerMacOS: NSViewController, NSTextFieldDelegate, Captc
     }
     
     @IBAction func dismissByButtonTap(_ sender: Any) {
-            dismiss(nil)
+        dismiss(nil)
     }
     
     func dismiss() {
@@ -75,5 +75,9 @@ final class CaptchaControllerMacOS: NSViewController, NSTextFieldDelegate, Captc
         }
         
         onResult?(result)
+    }
+    
+    deinit {
+        print("captcha deinit")
     }
 }
