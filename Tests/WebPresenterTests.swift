@@ -265,7 +265,7 @@ final class WebPresenterTests: XCTestCase {
             controller.onLoad = { url, onResult, onDismiss in
                 onResult(.response(url))
                 
-                DispatchQueue.global().async {
+                DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
                     context.presenter.dismiss()
                 }
             }
@@ -282,7 +282,7 @@ final class WebPresenterTests: XCTestCase {
         XCTAssertEqual(result, "access_token=test")
     }
     
-    func test_dismiss_returnsResult_whenCalledBeforeGiveResult() {
+    func test_dismiss_throwsError_whenCalledBeforeGiveResult() {
         // Given
         let context = makeContext()
         var dismissCounter = 0
@@ -293,7 +293,7 @@ final class WebPresenterTests: XCTestCase {
             controller.onLoad = { url, onResult, onDismiss in
                 context.presenter.dismiss()
                 
-                DispatchQueue.global().async {
+                DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
                     onResult(.response(url))
                 }
             }
