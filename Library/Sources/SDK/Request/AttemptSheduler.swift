@@ -49,7 +49,7 @@ private class AttemptApiQueue: OperationQueue {
         qos: .userInitiated
     )
     
-    private var sent = 0
+    private var sended = 0
     private var waited = [Operation]()
     var limit: AttemptLimit
     
@@ -80,8 +80,8 @@ private class AttemptApiQueue: OperationQueue {
     }
     
     private func addOperationSync(_ operation: Operation) {
-        if limit.count < 1 || sent < limit.count {
-            sent += 1
+        if limit.count < 1 || sended < limit.count {
+            sended += 1
             super.addOperation(operation)
         }
         else {
@@ -95,12 +95,12 @@ private class AttemptApiQueue: OperationQueue {
     }
     
     private func dropCounterSync() {
-        guard !waited.isEmpty || sent > 0 else { return }
+        guard !waited.isEmpty || sended > 0 else { return }
         
-        self.sent = 0
+        self.sended = 0
         
-        while !waited.isEmpty && sent < limit.count {
-            sent += 1
+        while !waited.isEmpty && sended < limit.count {
+            sended += 1
             let op = waited.removeFirst()
             super.addOperation(op)
         }

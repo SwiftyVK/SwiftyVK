@@ -3,87 +3,79 @@ import XCTest
 
 final class AttemptShedulerTests: XCTestCase {
     
-    let shedulerLimit = AttemptLimit.limited(30)
-    let count = 100
-    var totalDelay: TimeInterval {
-        return AttemptMock().delay*Double(count)
-    }
-    
-    func test_concurrentShedule() {
+    func test_exeuteAllConcurrentOperations_forCertainTime() {
         // Given
-        let sheduler = AttemptShedulerImpl(limit: shedulerLimit)
-        let samples = (0..<count).map { _ in AttemptMock() }
-        
+        let group = DispatchGroup()
+        for _ in 0..<operationCount { group.enter() }
         // When
-        samples.forEach { try! sheduler.shedule(attempt: $0, concurrent: true) }
-        
+        let samples = sheduleSamples(count: operationCount, concurrent: true, completion: { group.leave() })
+        _ = group.wait(timeout: .now() + totalRunTime / 10)
         // Then
-        Thread.sleep(forTimeInterval: totalDelay/10)
-        
         XCTAssertEqual(
             samples.map {$0.isFinished},
-            (0..<count).map { _ in true },
+            (0..<operationCount).map { _ in true },
             "All concurrent operations should be executed"
         )
     }
     
-    func test_serialShedule() {
-        // Given
-        let sheduler = AttemptShedulerImpl(limit: shedulerLimit)
-        let samples = (0..<count).map { _ in AttemptMock() }
-        
+    func test_executeMinimumSerialOpearations_forOneSecond() {
         // When
-        samples.forEach { try! sheduler.shedule(attempt: $0, concurrent: false) }
-        
-        // Then
+        let samples = sheduleSamples(count: operationCount, concurrent: false)
         Thread.sleep(forTimeInterval: 1)
-        
-        XCTAssertLessThan(
+        // Then
+        XCTAssertLessThanOrEqual(
             samples.filter { $0.isFinished }.count,
-            shedulerLimit.count*2,
+            shedulerLimit.count,
             "Operations should be executed serially"
         )
-        
-        Thread.sleep(forTimeInterval: Double(count/shedulerLimit.count*3))
-        
+    }
+    
+    func test_executeAllSerialOpearations_forCertainTime() {
+        // Given
+        let group = DispatchGroup()
+        for _ in 0..<operationCount { group.enter() }
+        // When
+        let samples = sheduleSamples(count: operationCount, concurrent: false, completion: { group.leave() })
+        _ = group.wait(timeout: .now() + totalRunTime * 10)
+        // Then
         XCTAssertEqual(
             samples.filter { $0.isFinished }.count,
-            count,
+            operationCount,
             "All operations should be executed"
         )
     }
     
-    func test_randomShedule() {
+    func test_exeuteRandomOperations() {
         // Given
-        let sheduler = AttemptShedulerImpl(limit: shedulerLimit)
-        let serial = (0..<count).map { _ in AttemptMock() }
-        let concurrent = (0..<count).map { _ in AttemptMock() }
-        let samples = serial.map { ($0, false) } + concurrent.map { ($0, true) }
+        let group = DispatchGroup()
+        
+        for _ in 0..<operationCount { group.enter() }
         
         // When
-        samples.forEach { try! sheduler.shedule(attempt: $0.0, concurrent: $0.1) }
+        let serial = sheduleSamples(count: operationCount, concurrent: false, completion: { group.leave() })
+        let concurrent = sheduleSamples(count: operationCount, concurrent: true)
         
         // Then
-        Thread.sleep(forTimeInterval: 0.9)
+        Thread.sleep(forTimeInterval: 1)
         
-        XCTAssertLessThan(
+        XCTAssertLessThanOrEqual(
             serial.filter { $0.isFinished }.count,
-            shedulerLimit.count*2,
+            shedulerLimit.count,
             "Operations should be executed serially"
         )
         
-        XCTAssertEqual(concurrent.map {$0.isFinished}, (0..<count).map { _ in true },
+        XCTAssertEqual(concurrent.map {$0.isFinished}, (0..<operationCount).map { _ in true },
             "All concurrent operations should be executed"
         )
         
-        Thread.sleep(forTimeInterval: Double(count/shedulerLimit.count*3))
-        
-        XCTAssertEqual(serial.filter { $0.isFinished }.count, count,
+        _ = group.wait(timeout: .now() + totalRunTime * 10)
+
+        XCTAssertEqual(serial.filter { $0.isFinished }.count, operationCount,
             "All serial operations should be executed"
         )
     }
     
-    func test_wrongShedule() {
+    func test_executeWrongTypeOperation() {
         // Given
         let sheduler = AttemptShedulerImpl(limit: shedulerLimit)
         let sample = WrongAttemptMock()
@@ -98,10 +90,10 @@ final class AttemptShedulerTests: XCTestCase {
         }
     }
     
-    func test_setLimit() {
+    func test_executeOpration_whenShedulerLimitUpdated() {
         // Given
         let sheduler = AttemptShedulerImpl(limit: .unlimited)
-        let samples = (0..<count).map { _ in AttemptMock() }
+        let samples = (0..<operationCount).map { _ in AttemptMock() }
         
         // When
         sheduler.setLimit(to: .limited(1))
@@ -116,4 +108,24 @@ final class AttemptShedulerTests: XCTestCase {
             "Only one operation should be executed"
         )
     }
+    
+    override func tearDown() {
+        sheduler = nil
+    }
+}
+
+var sheduler: AttemptShedulerImpl?
+
+let shedulerLimit = AttemptLimit.limited(30)
+let operationCount = 100
+
+var totalRunTime: TimeInterval {
+    return AttemptMock().runTime * Double(operationCount)
+}
+
+private func sheduleSamples(count: Int, concurrent: Bool, completion: (() -> ())? = nil) -> [AttemptMock] {
+    let samples = (0..<count).map { _ in AttemptMock(completion: completion) }
+    sheduler = AttemptShedulerImpl(limit: shedulerLimit)
+    samples.forEach { try! sheduler?.shedule(attempt: $0, concurrent: concurrent) }
+    return samples
 }

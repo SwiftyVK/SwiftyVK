@@ -6,13 +6,15 @@ final class AttemptMock: Operation, Attempt {
         willSet { willChangeValue(forKey: "isFinished") }
         didSet { didChangeValue(forKey: "isFinished") }
     }
-    var delay = 0.01
+    var runTime = 0.01
     
     override var isFinished: Bool {
         return isReallyFinished
     }
     
-    convenience override init() {
+    private var completion: (() -> ())?
+    
+    convenience init(completion: (() -> ())? = nil) {
         
         self.init(
             request: URLRequest(url: URL(string: "http://test")!),
@@ -25,6 +27,8 @@ final class AttemptMock: Operation, Attempt {
                 onRecive: { _ in }
             )
         )
+        
+        self.completion = completion
     }
     
     init(request: URLRequest, timeout: TimeInterval, session: VKURLSession, queue: DispatchQueue, callbacks: AttemptCallbacks) {
@@ -32,8 +36,9 @@ final class AttemptMock: Operation, Attempt {
     }
     
     override func main() {
-        DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
-            self.isReallyFinished = true
+        DispatchQueue.global().asyncAfter(deadline: .now() + runTime) { [weak self] in
+            self?.isReallyFinished = true
+            self?.completion?()
         }
     }
 }
