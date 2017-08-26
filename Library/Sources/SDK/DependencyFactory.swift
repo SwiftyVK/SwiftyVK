@@ -82,6 +82,10 @@ final class DependencyFactoryImpl: DependencyFactory {
         )
     }()
     
+    lazy var idGenerator: IDGenerator = {
+        IDGeneratorImpl()
+    }()
+    
     private lazy var bundleName: String = {
         Bundle.main.infoDictionary?[String(kCFBundleNameKey)] as? String ?? "SwiftyVK"
     }()
@@ -202,6 +206,7 @@ final class DependencyFactoryImpl: DependencyFactory {
     
     func task(request: Request, callbacks: Callbacks, session: TaskSession & ApiErrorExecutor) -> Task {
         return TaskImpl(
+            id: idGenerator.next(),
             request: request,
             callbacks: callbacks,
             session: session,

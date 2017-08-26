@@ -9,13 +9,23 @@ public protocol Task {
 final class TaskImpl: Operation, Task {
     
     let id: Int64
+    
+    override var isFinished: Bool {
+        switch state {
+        case .finished, .failed, .cancelled:
+            return true
+        case .created, .sended:
+            return false
+        }
+    }
+    
     var state: TaskState = .created {
-        willSet {
-            willChangeValue(forKey: "isFinished")
-        }
-        didSet {
-            didChangeValue(forKey: "isFinished")
-        }
+        willSet { willChangeValue(forKey: "isFinished") }
+        didSet { didChangeValue(forKey: "isFinished") }
+    }
+    
+    override var description: String {
+        return "task #\(id), state: \(state)"
     }
     
     private var request: Request
@@ -28,20 +38,8 @@ final class TaskImpl: Operation, Task {
     private let apiErrorHandler: ApiErrorHandler
     private weak var currentAttempt: Attempt?
     
-    override var isFinished: Bool {
-        switch state {
-        case .finished, .failed, .cancelled:
-            return true
-        case .created, .sended:
-            return false
-        }
-    }
-    
-    override var description: String {
-        return "task #\(id), state: \(state)\n"
-    }
-    
     init(
+        id: Int64,
         request: Request,
         callbacks: Callbacks,
         session: TaskSession,
@@ -49,7 +47,7 @@ final class TaskImpl: Operation, Task {
         attemptMaker: AttemptMaker,
         apiErrorHandler: ApiErrorHandler
         ) {
-        self.id = IdGenerator.next()
+        self.id = id
         self.request = request
         self.callbacks = callbacks
         self.session = session
@@ -60,15 +58,15 @@ final class TaskImpl: Operation, Task {
     }
     
     override func main() {
-        trySend()
         state = .sended
+        tryToSend()
         semaphore.wait()
         session.dismissCaptcha()
     }
     
     override func cancel() {
-        currentAttempt?.cancel()
         super.cancel()
+        currentAttempt?.cancel()
         state = .cancelled
         semaphore.signal()
     }
@@ -78,27 +76,21 @@ final class TaskImpl: Operation, Task {
         
         guard sendAttempts < request.config.maxAttemptsLimit.count else {
             if let error = error {
-                execute(error: error)
+                return perform(error: error)
             }
             else {
-                execute(error: VkError.maximumAttemptsExceeded)
+                return perform(error: .maximumAttemptsExceeded)
             }
-            
-            return
         }
         
-        trySend(captcha: captcha)
+        tryToSend(captcha: captcha)
     }
     
-    private func trySend(captcha: Captcha? = nil) {
-        do {
+    private func tryToSend(captcha: Captcha? = nil) {
+        guard !self.isCancelled else { return }
+
+        tryToPerform {
             try send(captcha: captcha)
-        }
-        catch let error as VkError {
-            execute(error: error)
-        }
-        catch let error {
-            execute(error: VkError.unknown(error))
         }
     }
     
@@ -120,18 +112,19 @@ final class TaskImpl: Operation, Task {
             timeout: request.config.attemptTimeout,
             callbacks: AttemptCallbacks(onFinish: handleResult, onSent: handleSended, onRecive: handleReceived)
         )
-        
-        try session.shedule(attempt: newAttempt, concurrent: request.rawRequest.canSentConcurrently)
+
         currentAttempt = newAttempt
+        try session.shedule(attempt: newAttempt, concurrent: request.rawRequest.canSentConcurrently)
     }
     
-    private func handleSended(_ total: Int64, of expected: Int64) {
+    private func handleSended(_ current: Int64, of expected: Int64) {
         guard !isCancelled else { return }
+        callbacks.onProgress?(.sended, current, expected)
     }
     
-    private func handleReceived(_ total: Int64, of expected: Int64) {
+    private func handleReceived(_ current: Int64, of expected: Int64) {
         guard !isCancelled else { return }
-        callbacks.onProgress?(total, expected)
+        callbacks.onProgress?(.recieved, current, expected)
     }
     
     private func handleResult(_ result: Response) {
@@ -142,46 +135,28 @@ final class TaskImpl: Operation, Task {
             if let next = request.nexts.popLast()?(response) {
                 request = next
                 sendAttempts = 0
-                trySend()
+                tryToSend()
             }
             else {
-                execute(response: response)
+                perform(response: response)
             }
         case .error(let error):
-            `catch`(error: error)
+            catchApiError(error: error)
         }
     }
     
-    private func execute(response: Data) {
-        guard !isCancelled else { return }
-        state = .finished(response)
-        callbacks.onSuccess?(response)
-        semaphore.signal()
-    }
-    
-    private func execute(error: VkError) {
+    private func catchApiError(error vkError: VkError) {
         guard !isCancelled else { return }
         
-        defer {
-            semaphore.signal()
-        }
-        
-        state = .failed(error)
-        callbacks.onError?(error)
-    }
-    
-    private func `catch`(error vkError: VkError) {
         guard
-            !isCancelled,
             sendAttempts < request.config.maxAttemptsLimit.count,
             request.config.handleErrors == true,
             let apiError = vkError.toApi()
             else {
-                execute(error: vkError)
-                return
+                return perform(error: vkError)
         }
         
-        do {
+        tryToPerform {
             let result = try apiErrorHandler.handle(error: apiError)
             
             switch result {
@@ -192,12 +167,34 @@ final class TaskImpl: Operation, Task {
                 resendWith(error: apiError.toVk, captcha: captcha)
             }
         }
+    }
+    
+    private func tryToPerform(code: () throws -> ()) {
+        guard !isCancelled else { return }
+
+        do {
+            try code()
+        }
         catch let error as VkError {
-            execute(error: error)
+            perform(error: error)
         }
         catch let error {
-            execute(error: VkError.unknown(error))
+            perform(error: .unknown(error))
         }
+    }
+    
+    private func perform(error: VkError) {
+        guard !isCancelled && !isFinished else { return }
+        state = .failed(error)
+        callbacks.onError?(error)
+        semaphore.signal()
+    }
+    
+    private func perform(response: Data) {
+        guard !isCancelled && !isFinished else { return }
+        state = .finished(response)
+        callbacks.onSuccess?(response)
+        semaphore.signal()
     }
 }
 
@@ -207,16 +204,4 @@ public enum TaskState {
     case finished(Data)
     case failed(VkError)
     case cancelled
-}
-
-struct IdGenerator {
-    static let queue = DispatchQueue(label: "")
-    static var id: Int64 = 0
-    
-    static func next() -> Int64 {
-        return queue.sync {
-            id += 1
-            return id
-        }
-    }
 }

@@ -54,17 +54,22 @@ public struct Callbacks {
     
     let onSuccess: ((Data) -> ())?
     let onError: ((VkError) -> ())?
-    let onProgress: ((Int64, Int64) -> ())?
+    let onProgress: ((_ type: ProgressType, _ current: Int64, _ of: Int64) -> ())?
     
     public init(
         onSuccess: ((Data) -> ())? = nil,
         onError: ((VkError) -> ())? = nil,
-        onProgress: ((Int64, Int64) -> ())? = nil
+        onProgress: ((_ type: ProgressType, _ current: Int64, _ of: Int64) -> ())? = nil
         ) {
         self.onSuccess = onSuccess
         self.onError = onError
         self.onProgress = onProgress
     }
+}
+
+public enum ProgressType {
+    case sended
+    case recieved
 }
 
 ///HTTP prtocol methods. See - https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods
