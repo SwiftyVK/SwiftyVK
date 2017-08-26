@@ -3,90 +3,70 @@ import XCTest
 
 final class TaskShedulerTests: XCTestCase {
     
-    let count = 100
-    var totalDelay: TimeInterval {
-        return TaskMock().delay*Double(count)
-    }
-    
-    func test_concurrentShedule() {
+    func test_exeuteAllConcurrentOperations_forCertainTime() {
         // Given
-        let sheduler = TaskShedulerImpl()
-        let samples = (0..<100).map { _ in TaskMock() }
-        
+        let group = DispatchGroup()
+        for _ in 0..<operationCount { group.enter() }
         // When
-        samples.forEach { try! sheduler.shedule(task: $0, concurrent: true) }
-        
-        // Then
-        Thread.sleep(forTimeInterval: totalDelay/10)
-        
+        let samples = sheduleSamples(count: operationCount, concurrent: true, completion: { group.leave() })
+        _ = group.wait(timeout: .now() + totalRunTime)
+        // Then        
         XCTAssertEqual(
             samples.map {$0.isFinished},
-            (0..<count).map { _ in true },
+            (0..<operationCount).map { _ in true },
             "All concurrent operations should be executed"
         )
     }
     
-    func test_serialShedule() {
-        // Given
-        let sheduler = TaskShedulerImpl()
-        let samples = (0..<count).map { _ in TaskMock() }
-        
+    func test_executeMinimumSerialOpearations_forOneSecond() {
         // When
-        samples.forEach { try! sheduler.shedule(task: $0, concurrent: false) }
-        
+        let samples = sheduleSamples(count: operationCount, concurrent: false)
         // Then
-        Thread.sleep(forTimeInterval: totalDelay)
+        Thread.sleep(forTimeInterval: totalRunTime)
         
-        XCTAssertLessThan(
-            samples.filter { $0.isFinished }.count,
-            count,
+        XCTAssertLessThan(samples.filter { $0.isFinished }.count, operationCount,
             "Operations should be executed serially"
         )
-        
-        Thread.sleep(forTimeInterval: totalDelay)
-        
-        XCTAssertEqual(
-            samples.filter { $0.isFinished }.count,
-            count,
+    }
+    
+    func test_executeAllSerialOpearations_forCertainTime() {
+        // Given
+        let group = DispatchGroup()
+        for _ in 0..<operationCount { group.enter() }
+        // When
+        let samples = sheduleSamples(count: operationCount, concurrent: false, completion: { group.leave() })
+        _ = group.wait(timeout: .now() + totalRunTime * 10)
+        // Then
+        XCTAssertEqual(samples.filter { $0.isFinished }.count, operationCount,
             "All operations should be executed"
         )
     }
     
-    func test_randomShedule() {
+    func test_exeuteRandomOperations() {
         // Given
-        let sheduler = TaskShedulerImpl()
-        let serial = (0..<count).map { _ in TaskMock() }
-        let concurrent = (0..<count).map { _ in TaskMock() }
-        let samples = serial.map { ($0, false) } + concurrent.map { ($0, true) }
-        
+        let group = DispatchGroup()
+        for _ in 0..<operationCount { group.enter() }
         // When
-        samples.forEach { try! sheduler.shedule(task: $0.0, concurrent: $0.1) }
-        
+        let serial = sheduleSamples(count: operationCount, concurrent: false, completion: { group.leave() })
+        let concurrent = sheduleSamples(count: operationCount, concurrent: true)
+        Thread.sleep(forTimeInterval: totalRunTime)
         // Then
-        Thread.sleep(forTimeInterval: totalDelay)
-        
-        XCTAssertLessThan(
-            serial.filter { $0.isFinished }.count,
-            count,
+        XCTAssertLessThan( serial.filter { $0.isFinished }.count, operationCount,
             "Operations should be executed serially"
         )
         
-        XCTAssertEqual(
-            concurrent.map {$0.isFinished},
-            (0..<count).map { _ in true },
+        XCTAssertEqual(concurrent.map {$0.isFinished}, (0..<operationCount).map { _ in true },
             "All concurrent operations should be executed"
         )
         
-        Thread.sleep(forTimeInterval: totalDelay)
-        
-        XCTAssertEqual(
-            serial.filter { $0.isFinished }.count,
-            count,
+        _ = group.wait(timeout: .now() + totalRunTime * 10)
+
+        XCTAssertEqual(serial.filter { $0.isFinished }.count, operationCount,
             "All serial operations should be executed"
         )
     }
     
-    func test_wrongShedule() {
+    func test_executeWrongTypeOperation() {
         // Given
         let sheduler = TaskShedulerImpl()
         let sample = WrongTaskMock()
@@ -100,4 +80,18 @@ final class TaskShedulerTests: XCTestCase {
             XCTAssertEqual(error.asVk, VkError.wrongTaskType)
         }
     }
+}
+
+private var sheduler: TaskShedulerImpl?
+
+private let operationCount = 100
+private var totalRunTime: TimeInterval {
+    return TaskMock().runTime*Double(operationCount)
+}
+
+private func sheduleSamples(count: Int, concurrent: Bool, completion: (() -> ())? = nil) -> [TaskMock] {
+    let samples = (0..<count).map { _ in TaskMock(completion: completion) }
+    sheduler = TaskShedulerImpl()
+    samples.forEach { try! sheduler?.shedule(task: $0, concurrent: concurrent) }
+    return samples
 }

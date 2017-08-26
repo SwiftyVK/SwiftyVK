@@ -13,7 +13,7 @@ final class TaskMock: Operation, Task {
             }
         }
     }
-    var delay = 0.01
+    var runTime = 0.01
     
     override var isFinished: Bool {
         if case .finished = state {
@@ -23,7 +23,9 @@ final class TaskMock: Operation, Task {
         return false
     }
     
-    override init() {
+    private var completion: (() -> ())?
+    
+    init(completion: (() -> ())? = nil) {
         state = .created
     }
     
@@ -31,13 +33,14 @@ final class TaskMock: Operation, Task {
         super.main()
         state = .created
         
-        DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + runTime) {
             self.finish()
         }
     }
     
     private func finish() {
         state = .finished(Data())
+        completion?()
     }
     
     override func cancel() {
