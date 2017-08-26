@@ -18,8 +18,6 @@ final class TaskImpl: Operation, Task {
         }
     }
     
-    var log = [String]()
-    
     private var request: Request
     private let callbacks: Callbacks
     private let session: TaskSession
