@@ -30,12 +30,17 @@ final class SessionMock: Session, TaskSession, DestroyableSession {
         return TaskMock()
     }
     
+    var onShedule: ((Attempt) throws -> ())?
+    
     func shedule(attempt: Attempt, concurrent: Bool) throws {
-        
+        try onShedule?(attempt)
     }
     
+    var onDismissCaptcha: (() -> ())?
+
+    
     func dismissCaptcha() {
-        
+        onDismissCaptcha?()
     }
     
     func destroy() {

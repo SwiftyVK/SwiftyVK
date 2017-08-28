@@ -25,10 +25,10 @@ final class TaskMakerMock: TaskMaker {
 
 final class AttemptMakerMock: AttemptMaker {
     
-    var onMake: (() -> Attempt)?
+    var onMake: ((_ callbacks: AttemptCallbacks) -> Attempt)?
     
     func attempt(request: URLRequest, timeout: TimeInterval, callbacks: AttemptCallbacks) -> Attempt {
-        return onMake?() ?? AttemptMock()
+        return onMake?(callbacks) ?? AttemptMock()
     }
 }
 

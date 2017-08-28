@@ -1,6 +1,7 @@
 @testable import SwiftyVK
 
 final class TaskMock: Operation, Task {
+    
     var state: TaskState {
         willSet {
             if case .finished = newValue {
