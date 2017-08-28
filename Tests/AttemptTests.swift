@@ -150,23 +150,3 @@ private func configureTask(in session: URLSessionMock, configuration: @escaping 
 }
 
 private typealias CompletionHandler = (Data?, URLResponse?, Error?) -> ()
-
-private extension Response {
-    var data: Data? {
-        switch self {
-        case let .success(data):
-            return data
-        case .error:
-            return nil
-        }
-    }
-    
-    var error: VkError? {
-        switch self {
-        case .success:
-            return nil
-        case let .error(error):
-            return error
-        }
-    }
-}
