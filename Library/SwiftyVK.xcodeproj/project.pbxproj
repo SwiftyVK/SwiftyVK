@@ -252,6 +252,7 @@
 		D49795AB1F4DFC2400921A21 /* ApiMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795AA1F4DFC2400921A21 /* ApiMethod.swift */; };
 		D4C032AC1F51F650005AB59A /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AB1F51F650005AB59A /* IDGenerator.swift */; };
 		D4C032AD1F51F650005AB59A /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AB1F51F650005AB59A /* IDGenerator.swift */; };
+		D4C032AF1F520733005AB59A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AE1F520733005AB59A /* TaskTests.swift */; };
 		D4C032B11F520C1A005AB59A /* URLRequestBuilderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */; };
 		D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */; };
 		D4F49D421F2DF5B10037B875 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D411F2DF5B10037B875 /* JsonReader.swift */; };
@@ -502,6 +503,7 @@
 		D49795AC1F4DFDF200921A21 /* UrlOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UrlOpener.swift; path = Sources/Extensions/UrlOpener.swift; sourceTree = SOURCE_ROOT; };
 		D49795AD1F4DFDF700921A21 /* UrlOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UrlOpener.swift; path = Sources/Extensions/UrlOpener.swift; sourceTree = SOURCE_ROOT; };
 		D4C032AB1F51F650005AB59A /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
+		D4C032AE1F520733005AB59A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderMock.swift; sourceTree = "<group>"; };
 		D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorTests.swift; sourceTree = "<group>"; };
 		D4F49D411F2DF5B10037B875 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
@@ -571,6 +573,7 @@
 				D49795A41F4DF86400921A21 /* CustomMethodTests.swift */,
 				D49795A61F4DFB3400921A21 /* VkErrorTests.swift */,
 				D41ADB001F4DFE7000E10D41 /* ResourcesTests.swift */,
+				D4C032AE1F520733005AB59A /* TaskTests.swift */,
 			);
 			name = Tests;
 			path = ../Tests;
@@ -1186,6 +1189,7 @@
 				D4C032B11F520C1A005AB59A /* URLRequestBuilderMock.swift in Sources */,
 				A25A19C91EE4112700CF13AF /* SwiftyVKDelegateMock.swift in Sources */,
 				A2433A481EA542620058BB6D /* AttemptMock.swift in Sources */,
+				D4C032AF1F520733005AB59A /* TaskTests.swift in Sources */,
 				A2AF16791ED1AD2E00485716 /* TokenTests.swift in Sources */,
 				A22179CC1EBA5009006B71FD /* TaskShedulerMock.swift in Sources */,
 				A24DDAF21EB73E3F002EA273 /* QueryBuilderTests.swift in Sources */,
