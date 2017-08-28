@@ -32,16 +32,6 @@ final class AttemptMakerMock: AttemptMaker {
     }
 }
 
-final class CaptchaControllerMakerMock: CaptchaControllerMaker {
-    
-    var onMake: (() -> CaptchaController?)?
-    
-    func captchaController() -> CaptchaController? {
-        return onMake?()
-    }
-}
-
-
 final class SessionMakerMock: SessionMaker {
     
     func session(id: String, config: SessionConfig, sessionSaver: SessionSaver) -> Session {
