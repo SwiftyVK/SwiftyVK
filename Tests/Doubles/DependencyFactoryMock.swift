@@ -23,6 +23,24 @@ final class TaskMakerMock: TaskMaker {
     }
 }
 
+final class AttemptMakerMock: AttemptMaker {
+    
+    var onMake: (() -> Attempt)?
+    
+    func attempt(request: URLRequest, timeout: TimeInterval, callbacks: AttemptCallbacks) -> Attempt {
+        return onMake?() ?? AttemptMock()
+    }
+}
+
+final class CaptchaControllerMakerMock: CaptchaControllerMaker {
+    
+    var onMake: (() -> CaptchaController?)?
+    
+    func captchaController() -> CaptchaController? {
+        return onMake?()
+    }
+}
+
 
 final class SessionMakerMock: SessionMaker {
     
