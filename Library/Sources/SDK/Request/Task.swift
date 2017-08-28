@@ -147,12 +147,13 @@ final class TaskImpl: Operation, Task {
     private func catchApiError(error vkError: VkError) {
         guard !isCancelled else { return }
         
-        guard
-            sendAttempts < request.config.maxAttemptsLimit.count,
-            request.config.handleErrors == true,
-            let apiError = vkError.toApi()
-            else {
-                return perform(error: vkError)
+        guard request.config.handleErrors == true else {
+            return perform(error: vkError)
+            
+        }
+        
+        guard  let apiError = vkError.toApi() else {
+            return perform(error: vkError)
         }
         
         tryToPerform {
