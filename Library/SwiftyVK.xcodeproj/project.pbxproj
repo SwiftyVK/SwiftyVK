@@ -227,6 +227,7 @@
 		D44EC00B1F55D2A500F8BB4A /* VKReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0061F55C50700F8BB4A /* VKReachability.swift */; };
 		D44EC00D1F55D2C800F8BB4A /* VKNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC00C1F55D2C800F8BB4A /* VKNotificationCenter.swift */; };
 		D44EC00E1F55D2C800F8BB4A /* VKNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC00C1F55D2C800F8BB4A /* VKNotificationCenter.swift */; };
+		D44EC0121F55D4DF00F8BB4A /* VKReachabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */; };
 		D47601161F2E219A005356E5 /* response.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601141F2E218B005356E5 /* response.empty.json */; };
 		D47601191F2E21E2005356E5 /* apiError.withoutCode.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601181F2E21DD005356E5 /* apiError.withoutCode.json */; };
 		D476011B1F2E2229005356E5 /* apiError.withoutMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */; };
@@ -485,6 +486,7 @@
 		D44348F71F3B70F4008B2B50 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		D44EC0061F55C50700F8BB4A /* VKReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKReachability.swift; sourceTree = "<group>"; };
 		D44EC00C1F55D2C800F8BB4A /* VKNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNotificationCenter.swift; sourceTree = "<group>"; };
+		D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKReachabilityMock.swift; sourceTree = "<group>"; };
 		D47601141F2E218B005356E5 /* response.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.empty.json; sourceTree = "<group>"; };
 		D47601181F2E21DD005356E5 /* apiError.withoutCode.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutCode.json; sourceTree = "<group>"; };
 		D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutMessage.json; sourceTree = "<group>"; };
@@ -614,6 +616,7 @@
 				D49795A01F4DE57100921A21 /* ApiErrorExecutorMock.swift */,
 				D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */,
 				D4306B2C1F547BC70050D165 /* ApiErrorHandlerMock.swift */,
+				D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1176,6 +1179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2E34DC11ED1FB2F0041E663 /* TokenStorageTests.swift in Sources */,
+				D44EC0121F55D4DF00F8BB4A /* VKReachabilityMock.swift in Sources */,
 				A25A19DA1EE5198600CF13AF /* WebPresenterMock.swift in Sources */,
 				A270528F1EF834FF00C05936 /* SessionsStorageTests.swift in Sources */,
 				A20CDD961EF66AEC00271276 /* CaptchaControllerMock.swift in Sources */,
