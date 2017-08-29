@@ -32,7 +32,7 @@ class TaskTests: XCTestCase {
     
     func test_callbacksContainError_whenAttemptGivesError() {
         // Given
-        var givenError: VkError?
+        var givenError: VKError?
         let context = makeContext(
             configure: { $0.onFinish(.unexpectedError) },
             callbacks: Callbacks( onError: { givenError = $0 })
@@ -100,7 +100,7 @@ class TaskTests: XCTestCase {
     
     func test_resendCount_withErrorHandling() {
         // Given
-        let error = ApiError(code: 0).toVk
+        let error = ApiError(code: 0).toVK
         var sessionSheduleCallCount = 0
         let context = makeContext(configure: { $0.onFinish(.error(error)) })
         
@@ -115,7 +115,7 @@ class TaskTests: XCTestCase {
     
     func test_resendCount_withoutErrorHandling() {
         // Given
-        let error = ApiError(code: 0).toVk
+        let error = ApiError(code: 0).toVK
         var sessionSheduleCallCount = 0
         let context = makeContext(
             configure: { $0.onFinish(.error(error)) },
@@ -133,7 +133,7 @@ class TaskTests: XCTestCase {
     
     func test_errorHandlerCallCount_withErrorHandling() {
         // Given
-        let error = ApiError(code: 0).toVk
+        let error = ApiError(code: 0).toVK
         var errorHandlerCallCount = 0
         let context = makeContext(configure: { $0.onFinish(.error(error)) })
         
@@ -149,7 +149,7 @@ class TaskTests: XCTestCase {
     
     func test_errorHandlerCallCount_withoutErrorHandling() {
         // Given
-        let error = ApiError(code: 0).toVk
+        let error = ApiError(code: 0).toVK
         var errorHandlerCallCount = 0
         let context = makeContext(
             configure: { $0.onFinish(.error(error)) },
@@ -168,7 +168,7 @@ class TaskTests: XCTestCase {
     
     func test_capthchaDismissed_whenRequestContainsCaptcha() {
         // Given
-        let error = ApiError(code: 0).toVk
+        let error = ApiError(code: 0).toVK
         var errorHandlerCalled = false
         var dismissCaptchaCallCount = 0
         let context = makeContext(configure: { $0.onFinish(.error(error)) })
@@ -211,7 +211,7 @@ class TaskTests: XCTestCase {
     
     func test_catchAnyError_whenThrows() {
         // Given
-        var givenError: VkError?
+        var givenError: VKError?
         let context = makeContext(
             configure: { $0.onFinish(.emptySuccess) },
             callbacks: Callbacks( onError: { givenError = $0 })
@@ -229,14 +229,14 @@ class TaskTests: XCTestCase {
     
     func test_catchVKError_whenThrows() {
         // Given
-        var givenError: VkError?
+        var givenError: VKError?
         let context = makeContext(
             configure: { $0.onFinish(.emptySuccess) },
             callbacks: Callbacks( onError: { givenError = $0 })
         )
         
         context.requestBuilder.onBuild = {
-            throw VkError.unexpectedResponse
+            throw VKError.unexpectedResponse
         }
         
         // When

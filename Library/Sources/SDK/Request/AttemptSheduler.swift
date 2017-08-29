@@ -29,7 +29,7 @@ final class AttemptShedulerImpl: AttemptSheduler {
     
     func shedule(attempt: Attempt, concurrent: Bool) throws {
         guard let attempt = attempt as? Operation else {
-            throw VkError.wrongAttemptType
+            throw VKError.wrongAttemptType
         }
         
         if concurrent {

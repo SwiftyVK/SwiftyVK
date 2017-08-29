@@ -22,7 +22,7 @@ class Login_Tests: VKTestCase {
     
     func test_manual_login() {
         prepareForLogin()
-        expectation(forNotification: "TestVkDidAuthorize", object: nil, handler: nil)
+        expectation(forNotification: "TestVKDidAuthorize", object: nil, handler: nil)
         
         Stubs.Autorization.success()
         VK.logIn()

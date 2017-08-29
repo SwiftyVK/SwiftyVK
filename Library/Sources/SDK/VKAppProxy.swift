@@ -1,9 +1,9 @@
-protocol VkAppProxy: class {
+protocol VKAppProxy: class {
     func send(query: String) throws -> Bool
     func handle(url: URL, app: String?) -> String?
 }
 
-final class VkAppProxyImpl: VkAppProxy {
+final class VKAppProxyImpl: VKAppProxy {
     
     private let baseUrl = "vkauthorize://authorize?"
     private let appId: String
@@ -21,7 +21,7 @@ final class VkAppProxyImpl: VkAppProxy {
         
         return try DispatchQueue.performOnMainIfNeeded {
             guard let url = URL(string: baseUrl + query) else {
-                throw VkError.cantBuildVkAppUrl(baseUrl + query)
+                throw VKError.cantBuildVKAppUrl(baseUrl + query)
             }
             
             guard urlOpener.canOpenURL(url) else {

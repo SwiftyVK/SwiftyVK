@@ -52,7 +52,7 @@ final class WebPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVk, VkError.cantMakeWebController)
+            XCTAssertEqual(error.asVK, VKError.cantMakeWebController)
         }
     }
     
@@ -75,7 +75,7 @@ final class WebPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVk, VkError.authorizationUrlIsNil)
+            XCTAssertEqual(error.asVK, VKError.authorizationUrlIsNil)
         }
     }
     
@@ -92,7 +92,7 @@ final class WebPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVk, VkError.webPresenterTimedOut)
+            XCTAssertEqual(error.asVK, VKError.webPresenterTimedOut)
         }
     }
     
@@ -115,7 +115,7 @@ final class WebPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVk, VkError.authorizationDenied)
+            XCTAssertEqual(error.asVK, VKError.authorizationDenied)
         }
     }
     
@@ -138,7 +138,7 @@ final class WebPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVk, VkError.authorizationCancelled)
+            XCTAssertEqual(error.asVK, VKError.authorizationCancelled)
         }
     }
     
@@ -161,7 +161,7 @@ final class WebPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVk, VkError.authorizationFailed)
+            XCTAssertEqual(error.asVK, VKError.authorizationFailed)
         }
     }
     
@@ -249,7 +249,7 @@ final class WebPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVk, VkError.authorizationFailed)
+            XCTAssertEqual(error.asVK, VKError.authorizationFailed)
             XCTAssertEqual(loadCount, 3)
         }
     }
@@ -310,7 +310,7 @@ final class WebPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVk, VkError.webPresenterResultIsNil)
+            XCTAssertEqual(error.asVK, VKError.webPresenterResultIsNil)
         }
     }
 }

@@ -17,7 +17,7 @@ final class AuthorizatorImpl: Authorizator {
     private let tokenStorage: TokenStorage
     private let tokenMaker: TokenMaker
     private let tokenParser: TokenParser
-    private let vkAppProxy: VkAppProxy
+    private let vkAppProxy: VKAppProxy
     private let webPresenter: WebPresenter
     private weak var delegate: SwiftyVKAuthorizatorDelegate?
     
@@ -30,7 +30,7 @@ final class AuthorizatorImpl: Authorizator {
         tokenStorage: TokenStorage,
         tokenMaker: TokenMaker,
         tokenParser: TokenParser,
-        vkAppProxy: VkAppProxy,
+        vkAppProxy: VKAppProxy,
         webPresenter: WebPresenter
         ) {
         self.appId = appId
@@ -49,7 +49,7 @@ final class AuthorizatorImpl: Authorizator {
             }
             
             guard let scopes = delegate?.vkNeedsScopes(for: sessionId).rawValue else {
-                throw VkError.vkDelegateNotFound
+                throw VKError.vkDelegateNotFound
             }
             
             let vkAppAuthQuery = try makeAuthQuery(
@@ -144,7 +144,7 @@ final class AuthorizatorImpl: Authorizator {
     
     private func makeToken(tokenInfo: String) throws -> Token {
         guard let parsingResult = tokenParser.parse(tokenInfo: tokenInfo) else {
-            throw VkError.cantParseTokenInfo(tokenInfo)
+            throw VKError.cantParseTokenInfo(tokenInfo)
         }
         
         return tokenMaker.token(
@@ -169,7 +169,7 @@ final class AuthorizatorImpl: Authorizator {
         )
         
         guard let url = URL(string: webAuthorizeUrl + webQuery) else {
-            throw VkError.cantBuildWebViewUrl(webAuthorizeUrl + webQuery)
+            throw VKError.cantBuildWebViewUrl(webAuthorizeUrl + webQuery)
         }
         
         return URLRequest(

@@ -20,7 +20,7 @@ final class ApiErrorHandlerImpl: ApiErrorHandler {
                 let sid = error.otherInfo["captcha_sid"],
                 let imgRawUrl = error.otherInfo["captcha_img"]
                 else {
-                    throw VkError.api(error)
+                    throw VKError.api(error)
             }
             
             let key = try executor.captcha(rawUrlToImage: imgRawUrl, dismissOnFinish: false)
@@ -30,13 +30,13 @@ final class ApiErrorHandlerImpl: ApiErrorHandler {
                 let rawUrl = error.otherInfo["redirect_uri"],
                 let url = URL(string: rawUrl)
                 else {
-                    throw VkError.api(error)
+                    throw VKError.api(error)
             }
             
             try executor.validate(redirectUrl: url)
             return .none
         default:
-            throw VkError.api(error)
+            throw VKError.api(error)
         }
     }
 }

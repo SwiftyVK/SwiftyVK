@@ -5,9 +5,9 @@ final class VKProxyTests: XCTestCase {
     
     private let appId = "1234567890"
     
-    var proxyObjects: (UrlOpenerMock, VkAppProxyImpl) {
+    var proxyObjects: (UrlOpenerMock, VKAppProxyImpl) {
         let urlOpener = UrlOpenerMock()
-        let vkProxy = VkAppProxyImpl(appId: appId, urlOpener: urlOpener)
+        let vkProxy = VKAppProxyImpl(appId: appId, urlOpener: urlOpener)
         return (urlOpener, vkProxy)
     }
     
@@ -33,7 +33,7 @@ final class VKProxyTests: XCTestCase {
         XCTAssertFalse(result ?? false)
     }
     
-    func test_recieveUrl_withVkClient_shouldBeSuccess() {
+    func test_recieveUrl_withVKClient_shouldBeSuccess() {
         // Given
         let (_, vkProxy) = proxyObjects
         // When
@@ -43,7 +43,7 @@ final class VKProxyTests: XCTestCase {
         XCTAssertEqual(result, "access_token=1234567890")
     }
     
-    func test_recieveUrl_withVkHdClient_shouldBeSuccess() {
+    func test_recieveUrl_withVKHdClient_shouldBeSuccess() {
         // Given
         let (_, vkProxy) = proxyObjects
         // When

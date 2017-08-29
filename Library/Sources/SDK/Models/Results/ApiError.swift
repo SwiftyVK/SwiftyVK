@@ -22,7 +22,7 @@ public struct ApiError: Equatable {
         otherInfo = makeOtherInfo(from: json.forcedDictionary("error"))
     }
     
-    var toVk: VkError {
+    var toVK: VKError {
         return .api(self)
     }
     

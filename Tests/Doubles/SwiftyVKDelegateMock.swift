@@ -2,11 +2,11 @@
 
 final class SwiftyVKDelegateMock: SwiftyVKDelegate {
     var vkNeedToPresent: ((VKViewController) -> ())?
-    var onVkNeedsScopes: ((String) -> Scopes)?
-    var onVkDidLogOut: ((String) -> ())?
-    var onVkTokenCreated: ((String, [String : String]) -> ())?
-    var onVkTokenUpdated: ((String, [String : String]) -> ())?
-    var onVkTokenRemoved: ((String) -> ())?
+    var onVKNeedsScopes: ((String) -> Scopes)?
+    var onVKDidLogOut: ((String) -> ())?
+    var onVKTokenCreated: ((String, [String : String]) -> ())?
+    var onVKTokenUpdated: ((String, [String : String]) -> ())?
+    var onVKTokenRemoved: ((String) -> ())?
     
     
     func vkNeedToPresent(viewController: VKViewController) {
@@ -14,22 +14,22 @@ final class SwiftyVKDelegateMock: SwiftyVKDelegate {
     }
     
     func vkNeedsScopes(for sessionId: String) -> Scopes {
-        return onVkNeedsScopes?(sessionId) ?? Scopes()
+        return onVKNeedsScopes?(sessionId) ?? Scopes()
     }
     
     func vkDidLogOut(for sessionId: String) {
-        onVkDidLogOut?(sessionId)
+        onVKDidLogOut?(sessionId)
     }
     
     func vkTokenCreated(for sessionId: String, info: [String : String]) {
-        onVkTokenCreated?(sessionId, info)
+        onVKTokenCreated?(sessionId, info)
     }
     
     func vkTokenUpdated(for sessionId: String, info: [String : String]) {
-        onVkTokenUpdated?(sessionId, info)
+        onVKTokenUpdated?(sessionId, info)
     }
     
     func vkTokenRemoved(for sessionId: String) {
-        onVkTokenRemoved?(sessionId)
+        onVKTokenRemoved?(sessionId)
     }
 }

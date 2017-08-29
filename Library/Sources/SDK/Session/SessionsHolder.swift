@@ -57,11 +57,11 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     
     public func destroy(session: Session) throws {
         if !canKillDefaultSessions && session == `default` {
-            throw VkError.cantDestroyDefaultSession
+            throw VKError.cantDestroyDefaultSession
         }
         
         if session.state == .destroyed {
-            throw VkError.sessionAlreadyDestroyed(session)
+            throw VKError.sessionAlreadyDestroyed(session)
         }
         
         (session as? DestroyableSession)?.destroy()
@@ -70,7 +70,7 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     
     public func markAsDefault(session: Session) throws {
         if session.state == .destroyed {
-            throw VkError.sessionAlreadyDestroyed(session)
+            throw VKError.sessionAlreadyDestroyed(session)
         }
         
         self.default = session

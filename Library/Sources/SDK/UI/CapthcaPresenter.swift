@@ -32,7 +32,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
             var result: String?
             
             guard let controller = currentController ?? controllerMaker.captchaController() else {
-                throw VkError.cantMakeCaptchaController
+                throw VKError.cantMakeCaptchaController
             }
             
             currentController = controller
@@ -60,13 +60,13 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
             
             switch semaphore.wait(timeout: .now() + timeout) {
             case .timedOut:
-                throw VkError.captchaPresenterTimedOut
+                throw VKError.captchaPresenterTimedOut
             case .success:
                 break
             }
             
             guard let unwrappedResult = result else {
-                throw VkError.captchaResultIsNil
+                throw VKError.captchaResultIsNil
             }
             
             return unwrappedResult
@@ -79,18 +79,18 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
     
     private func downloadCaptchaImageData(rawUrl: String) throws -> Data {
         guard let url = URL(string: rawUrl) else {
-            throw VkError.cantMakeCapthaImageUrl(rawUrl)
+            throw VKError.cantMakeCapthaImageUrl(rawUrl)
         }
         
         let result = urlSession.synchronousDataTaskWithURL(url: url)
         
         if let error = result.error {
-            throw VkError.cantLoadCaptchaImage(error)
+            throw VKError.cantLoadCaptchaImage(error)
         }
         else if let data = result.data {
             return data
         }
         
-        throw VkError.cantLoadCaptchaImageWithUnknownReason
+        throw VKError.cantLoadCaptchaImageWithUnknownReason
     }
 }

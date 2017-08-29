@@ -77,7 +77,7 @@ final class TaskShedulerTests: XCTestCase {
             XCTFail("Wrong attempt should cause exception")
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVk, VkError.wrongTaskType)
+            XCTAssertEqual(error.asVK, VKError.wrongTaskType)
         }
     }
 }

@@ -1,7 +1,7 @@
 @testable import SwiftyVK
 
-extension VkError: Equatable {
-    public static func ==(lhs: VkError, rhs: VkError) -> Bool {
+extension VKError: Equatable {
+    public static func ==(lhs: VKError, rhs: VKError) -> Bool {
         switch (lhs, rhs) {
         case let (api(first), api(second)):
             return first == second
@@ -23,7 +23,7 @@ extension VkError: Equatable {
         (.sessionAlreadyDestroyed, .sessionAlreadyDestroyed),
         (.sessionAlreadyAuthorized, .sessionAlreadyAuthorized),
         (.cantBuildWebViewUrl, .cantBuildWebViewUrl),
-        (.cantBuildVkAppUrl, .cantBuildVkAppUrl),
+        (.cantBuildVKAppUrl, .cantBuildVKAppUrl),
         (.cantMakeWebController, .cantMakeWebController),
         (.cantMakeCaptchaController, .cantMakeCaptchaController),
         (.captchaPresenterTimedOut, .captchaPresenterTimedOut),
@@ -42,7 +42,7 @@ extension VkError: Equatable {
 }
 
 extension Error {
-    var asVk: VkError? {
-        return self as? VkError
+    var asVK: VKError? {
+        return self as? VKError
     }
 }

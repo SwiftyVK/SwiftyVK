@@ -1,6 +1,6 @@
 import Foundation
 
-public enum VkError: Error {
+public enum VKError: Error {
     // MARK: - Any error wrapper
     case unknown(Error)
     
@@ -27,7 +27,7 @@ public enum VkError: Error {
     
     // MARK: - UI Errors
     case cantBuildWebViewUrl(String)
-    case cantBuildVkAppUrl(String)
+    case cantBuildVKAppUrl(String)
     case cantMakeWebController
     case cantMakeCaptchaController
     case captchaPresenterTimedOut

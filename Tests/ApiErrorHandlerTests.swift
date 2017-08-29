@@ -61,7 +61,7 @@ class ApiErrorHandlerTests: XCTestCase {
             // Then
             XCTFail("Expression should throw error")
         } catch let throwedError {
-            XCTAssertEqual(error.toVk, throwedError.asVk)
+            XCTAssertEqual(error.toVK, throwedError.asVK)
         }
     }
     
@@ -100,7 +100,7 @@ class ApiErrorHandlerTests: XCTestCase {
             // Then
             XCTFail("Expression should throw error")
         } catch let throwedError {
-            XCTAssertEqual(error.toVk, throwedError.asVk)
+            XCTAssertEqual(error.toVK, throwedError.asVK)
         }
     }
     
@@ -114,7 +114,7 @@ class ApiErrorHandlerTests: XCTestCase {
             // Then
             XCTFail("Expression should throw error")
         } catch let throwedError {
-            XCTAssertEqual(error.toVk, throwedError.asVk)
+            XCTAssertEqual(error.toVK, throwedError.asVK)
         }
     }
 }

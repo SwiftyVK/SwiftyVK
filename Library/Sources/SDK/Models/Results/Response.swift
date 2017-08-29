@@ -2,7 +2,7 @@ import Foundation
 
 public enum Response {
     case success(Data)
-    case error(VkError)
+    case error(VKError)
     
     init(_ data: Data) {
         do {

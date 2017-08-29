@@ -19,7 +19,7 @@ extension Response {
         }
     }
     
-    var error: VkError? {
+    var error: VKError? {
         switch self {
         case .success:
             return nil

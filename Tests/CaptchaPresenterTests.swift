@@ -27,7 +27,7 @@ class CaptchaPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVk, VkError.cantMakeCaptchaController)
+            XCTAssertEqual(error.asVK, VKError.cantMakeCaptchaController)
         }
     }
     
@@ -64,7 +64,7 @@ class CaptchaPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVk, VkError.cantMakeCapthaImageUrl(""))
+            XCTAssertEqual(error.asVK, VKError.cantMakeCapthaImageUrl(""))
         }
     }
     
@@ -85,7 +85,7 @@ class CaptchaPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVk, VkError.captchaPresenterTimedOut)
+            XCTAssertEqual(error.asVK, VKError.captchaPresenterTimedOut)
         }
     }
     
@@ -189,7 +189,7 @@ class CaptchaPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVk, VkError.captchaResultIsNil)
+            XCTAssertEqual(error.asVK, VKError.captchaResultIsNil)
         }
     }
 }

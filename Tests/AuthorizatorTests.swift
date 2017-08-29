@@ -9,7 +9,7 @@ class AuthorizatorTests: XCTestCase {
         storage: TokenStorageMock,
         tokenMaker: TokenMakerMock,
         parser: TokenParserMock,
-        vkApp: VkAppProxyMock,
+        vkApp: VKAppProxyMock,
         webPresenter: WebPresenterMock,
         sessionId: String,
         sessionConfig: SessionConfig
@@ -18,7 +18,7 @@ class AuthorizatorTests: XCTestCase {
             let storage = TokenStorageMock()
             let tokenMaker = TokenMakerMock()
             let parser = TokenParserMock()
-            let vkApp = VkAppProxyMock()
+            let vkApp = VKAppProxyMock()
             let webPresenter = WebPresenterMock()
             let session = SessionMock()
             
@@ -81,7 +81,7 @@ class AuthorizatorTests: XCTestCase {
             // Then
             XCTFail("Code above should throw error")
         } catch let error {
-            XCTAssertEqual(error.asVk, VkError.cantParseTokenInfo(""))
+            XCTAssertEqual(error.asVK, VKError.cantParseTokenInfo(""))
         }
     }
     
@@ -107,7 +107,7 @@ class AuthorizatorTests: XCTestCase {
         let context = makeContext()
         var delegateCallCount = 0
         
-        context.delegate.onVkNeedsScopes = { _ in
+        context.delegate.onVKNeedsScopes = { _ in
             delegateCallCount += 1
             return []
         }
@@ -218,7 +218,7 @@ class AuthorizatorTests: XCTestCase {
         
         context.webPresenter.onPresesent = { _ in
             Thread.sleep(forTimeInterval: 0.2)
-            throw VkError.cantMakeWebController
+            throw VKError.cantMakeWebController
         }
         
         context.vkApp.onHandle = { url, string in

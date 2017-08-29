@@ -2,16 +2,16 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class VkErrorTests: XCTestCase {
+class VKErrorTests: XCTestCase {
     
     func test_errorConvertationFromApiError() {
         // When
         let apiError = ApiError(code: 0)
         // Then
-        XCTAssertEqual(VkError.api(apiError).toApi(), apiError)
+        XCTAssertEqual(VKError.api(apiError).toApi(), apiError)
     }
     
     func test_errorConvertationFromOtherError() {
-        XCTAssertNil(VkError.unexpectedResponse.toApi())
+        XCTAssertNil(VKError.unexpectedResponse.toApi())
     }
 }

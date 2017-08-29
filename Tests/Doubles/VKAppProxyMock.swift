@@ -1,6 +1,6 @@
 @testable import SwiftyVK
 
-final class VkAppProxyMock: VkAppProxy {
+final class VKAppProxyMock: VKAppProxy {
     
     var onSend: ((String) throws -> Bool)?
     var onHandle: ((URL, String?) -> String?)?

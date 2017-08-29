@@ -3,7 +3,7 @@ public protocol Session: class {
     var config: SessionConfig { get set }
     var state: SessionState { get }
     
-    func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (VkError) -> ())
+    func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (VKError) -> ())
     func logIn(rawToken: String, expires: TimeInterval) throws
     func logOut()
     @discardableResult
@@ -96,13 +96,13 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         attemptSheduler.setLimit(to: config.attemptsPerSecLimit)
     }
     
-    public func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (VkError) -> ()) {
+    public func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (VKError) -> ()) {
         gateQueue.async {
             do {
                 let info = try self.logIn(revoke: true)
                 onSuccess(info)
             }
-            catch let error as VkError {
+            catch let error as VKError {
                 onError(error)
             }
             catch let error {
@@ -168,7 +168,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
             try throwIfDestroyed()
             try shedule(task: task, concurrent: request.rawRequest.canSentConcurrently)
         }
-        catch let error as VkError {
+        catch let error as VKError {
             callbacks.onError?(error)
         }
         catch let error {
@@ -206,13 +206,13 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     
     private func throwIfDestroyed() throws {
         guard state > .destroyed else {
-            throw VkError.sessionAlreadyDestroyed(self)
+            throw VKError.sessionAlreadyDestroyed(self)
         }
     }
     
     private func throwIfAuthorized() throws {
         guard state < .authorized else {
-            throw VkError.sessionAlreadyAuthorized(self)
+            throw VKError.sessionAlreadyAuthorized(self)
         }
     }
     

@@ -71,7 +71,7 @@ final class TaskImpl: Operation, Task {
         semaphore.signal()
     }
     
-    private func resendWith(error: VkError?, captcha: Captcha?) {
+    private func resendWith(error: VKError?, captcha: Captcha?) {
         guard !self.isCancelled else { return }
         
         guard sendAttempts < request.config.maxAttemptsLimit.count else {
@@ -144,7 +144,7 @@ final class TaskImpl: Operation, Task {
         }
     }
     
-    private func catchApiError(error vkError: VkError) {
+    private func catchApiError(error vkError: VKError) {
         guard !isCancelled else { return }
         
         guard request.config.handleErrors == true else {
@@ -161,10 +161,10 @@ final class TaskImpl: Operation, Task {
             
             switch result {
             case .none:
-                resendWith(error: apiError.toVk, captcha: nil)
+                resendWith(error: apiError.toVK, captcha: nil)
             case .captcha(let captcha):
                 sendAttempts -= 1
-                resendWith(error: apiError.toVk, captcha: captcha)
+                resendWith(error: apiError.toVK, captcha: captcha)
             }
         }
     }
@@ -175,7 +175,7 @@ final class TaskImpl: Operation, Task {
         do {
             try code()
         }
-        catch let error as VkError {
+        catch let error as VKError {
             perform(error: error)
         }
         catch let error {
@@ -183,7 +183,7 @@ final class TaskImpl: Operation, Task {
         }
     }
     
-    private func perform(error: VkError) {
+    private func perform(error: VKError) {
         guard !isCancelled && !isFinished else { return }
         state = .failed(error)
         callbacks.onError?(error)
@@ -202,6 +202,6 @@ public enum TaskState {
     case created
     case sended
     case finished(Data)
-    case failed(VkError)
+    case failed(VKError)
     case cancelled
 }

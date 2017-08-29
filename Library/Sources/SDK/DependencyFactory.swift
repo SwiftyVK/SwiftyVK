@@ -128,7 +128,7 @@ final class DependencyFactoryImpl: DependencyFactory {
         
         let tokenStorge = TokenStorageImpl(serviceKey: self.bundleName)
         
-        let vkAppProxy = VkAppProxyImpl(
+        let vkAppProxy = VKAppProxyImpl(
             appId: self.appId,
             urlOpener: urlOpener
         )
