@@ -6,68 +6,136 @@ import Foundation
     import Cocoa
 #endif
 
-internal final class ConnectionObserver: NSObject {
+internal final class ConnectionObserver {
     
-    private var connected = true
-    private let onConnect: () -> ()
-    private let onDisconnect: () -> ()
+    private let defaultCenter: VKNotificationCenter?
+    private let workspaceCenter: VKNotificationCenter?
+    private let reachability: VKReachability
     
-    private override init() {
-        fatalError("Do not use init()")
-    }
+    private var appIsActive = true
+    private var onConnect: (() -> ())?
+    private var onDisconnect: (() -> ())?
+    
+    private var observers = [NSObjectProtocol?]()
     
     init(
+        defaultCenter: VKNotificationCenter?,
+        workspaceCenter: VKNotificationCenter?,
+        reachability: VKReachability
+        ) {
+        self.defaultCenter = defaultCenter
+        self.workspaceCenter = workspaceCenter
+        self.reachability = reachability
+    }
+    
+    public func setUp(
         onConnect: @escaping () -> (),
         onDisconnect: @escaping () -> ()
         ) {
+        
         self.onConnect = onConnect
         self.onDisconnect = onDisconnect
         
-        super.init()
-        
         #if os(OSX)
-            NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(disconnect), name: NSWorkspace.screensDidSleepNotification, object: nil)
-            NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(connect), name: NSWorkspace.screensDidWakeNotification, object: nil)
+            setUpMacOsObservers()
         #elseif os(iOS)
-            NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: .UIApplicationWillResignActive, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(connect), name: .UIApplicationDidBecomeActive, object: nil)
+            setUpIosObservers()
         #endif
         
-        let reachability = Reachability()
-        NotificationCenter.default.addObserver(self, selector: #selector(onReachabilityChange), name: ReachabilityChangedNotification, object: nil)
-        _ = try? reachability?.startNotifier()
-        
+        setUpReachabilityObserver()
     }
     
-    @objc
-    private func onReachabilityChange(notification: NSNotification) {
-        guard let reachability = notification.object as? Reachability else { return }
+    @available(macOS 10.0, *)
+    private func setUpMacOsObservers() {
+        let becomeActiveObserver = workspaceCenter?.addObserver(
+            forName: NSWorkspace.screensDidWakeNotification,
+            object: self,
+            queue: nil,
+            using: { [weak self] notification in
+                self?.handleAppActive(notification)
+            }
+        )
         
+        let resignActiveObserver = workspaceCenter?.addObserver(
+            forName: NSWorkspace.screensDidSleepNotification,
+            object: self,
+            queue: nil,
+            using: { [weak self] notification in
+                self?.handleAppInnactive(notification)
+            }
+        )
+        
+        observers.append(contentsOf: [becomeActiveObserver, resignActiveObserver])
+    }
+    
+    @available(iOS 1.0, *)
+    private func setUpIosObservers() {
+        let becomeActiveObserver = defaultCenter?.addObserver(
+            forName: NSWorkspace.screensDidWakeNotification,
+            object: self,
+            queue: nil,
+            using: { [weak self] notification in
+                self?.handleAppActive(notification)
+            }
+        )
+        
+        let resignActiveObserver = defaultCenter?.addObserver(
+            forName: NSWorkspace.screensDidSleepNotification,
+            object: self,
+            queue: nil,
+            using: { [weak self] notification in
+                self?.handleAppInnactive(notification)
+            }
+        )
+        
+        observers.append(contentsOf: [becomeActiveObserver, resignActiveObserver])
+    }
+    
+    private func setUpReachabilityObserver() {
+        
+        let reachabilityObserver = defaultCenter?.addObserver(
+            forName: ReachabilityChangedNotification,
+            object: self,
+            queue: nil,
+            using: { [weak self] notification in
+                self?.handleReachabilityChange(notification)
+            }
+        )
+        
+        observers.append(reachabilityObserver)
+        
+        _ = try? reachability.startNotifier()
+    }
+    
+    private func handleReachabilityChange(_ notification: Notification) {
+        guard let reachability = notification.object as? VKReachability else { return }
+        guard appIsActive == true else { return }
+
         if reachability.isReachable {
-            onConnect()
+            onConnect?()
         }
         else {
-            onDisconnect()
+            onDisconnect?()
         }
     }
     
-    @objc
-    private func connect() {
-        if connected == false {
-            connected = true
-            onConnect()
-        }
+    private func handleAppActive(_ notification: Notification) {
+        guard appIsActive == false else { return }
+        appIsActive = true
+        onConnect?()
     }
     
-    @objc
-    private func disconnect() {
-        if connected == true {
-            connected = false
-            onDisconnect()
-        }
+    private func handleAppInnactive(_ notification: Notification) {
+        guard appIsActive == true else { return }
+        appIsActive = false
+        onDisconnect?()
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        for observer in observers {
+            if let observer = observer {
+                NotificationCenter.default.removeObserver(observer)
+            }
+        }
     }
 }
