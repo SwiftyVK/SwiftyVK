@@ -512,7 +512,6 @@
 		D49795A61F4DFB3400921A21 /* VKErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKErrorTests.swift; sourceTree = "<group>"; };
 		D49795A81F4DFB9E00921A21 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		D49795AA1F4DFC2400921A21 /* ApiMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiMethod.swift; sourceTree = "<group>"; };
-		D49795AC1F4DFDF200921A21 /* UrlOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UrlOpener.swift; path = Sources/Extensions/UrlOpener.swift; sourceTree = SOURCE_ROOT; };
 		D49795AD1F4DFDF700921A21 /* UrlOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UrlOpener.swift; path = Sources/Extensions/UrlOpener.swift; sourceTree = SOURCE_ROOT; };
 		D4C032AB1F51F650005AB59A /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		D4C032AE1F520733005AB59A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
@@ -912,7 +911,6 @@
 				A2BDF36E1EDC9EB200E9263A /* Lock.swift */,
 				A2527D7C1BD12FD200F65412 /* Reachability.swift */,
 				D49795AD1F4DFDF700921A21 /* UrlOpener.swift */,
-				D49795AC1F4DFDF200921A21 /* UrlOpener.swift */,
 				D4C032AB1F51F650005AB59A /* IDGenerator.swift */,
 			);
 			path = Utils;
