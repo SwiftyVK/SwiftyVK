@@ -228,6 +228,7 @@
 		D44EC00D1F55D2C800F8BB4A /* VKNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC00C1F55D2C800F8BB4A /* VKNotificationCenter.swift */; };
 		D44EC00E1F55D2C800F8BB4A /* VKNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC00C1F55D2C800F8BB4A /* VKNotificationCenter.swift */; };
 		D44EC0121F55D4DF00F8BB4A /* VKReachabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */; };
+		D44EC0161F55D50600F8BB4A /* VKNotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */; };
 		D47601161F2E219A005356E5 /* response.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601141F2E218B005356E5 /* response.empty.json */; };
 		D47601191F2E21E2005356E5 /* apiError.withoutCode.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601181F2E21DD005356E5 /* apiError.withoutCode.json */; };
 		D476011B1F2E2229005356E5 /* apiError.withoutMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */; };
@@ -487,6 +488,7 @@
 		D44EC0061F55C50700F8BB4A /* VKReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKReachability.swift; sourceTree = "<group>"; };
 		D44EC00C1F55D2C800F8BB4A /* VKNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNotificationCenter.swift; sourceTree = "<group>"; };
 		D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKReachabilityMock.swift; sourceTree = "<group>"; };
+		D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNotificationCenterMock.swift; sourceTree = "<group>"; };
 		D47601141F2E218B005356E5 /* response.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.empty.json; sourceTree = "<group>"; };
 		D47601181F2E21DD005356E5 /* apiError.withoutCode.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutCode.json; sourceTree = "<group>"; };
 		D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutMessage.json; sourceTree = "<group>"; };
@@ -617,6 +619,7 @@
 				D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */,
 				D4306B2C1F547BC70050D165 /* ApiErrorHandlerMock.swift */,
 				D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */,
+				D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1218,6 +1221,7 @@
 				A23E692E1EDAEC6400AA3B3B /* UrlOpenerMock.swift in Sources */,
 				A23708C81EA532B900103212 /* TaskShedulerTests.swift in Sources */,
 				A20CDD941EF667B000271276 /* CaptchaPresenterTests.swift in Sources */,
+				D44EC0161F55D50600F8BB4A /* VKNotificationCenterMock.swift in Sources */,
 				D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */,
 				A2B805561EDDB01C004DA7EB /* WebControllerMock.swift in Sources */,
 				A25A19D71EE4405E00CF13AF /* VkAppProxyMock.swift in Sources */,
