@@ -4,13 +4,13 @@
     import UIKit
 #endif
 
-protocol UrlOpener {
+protocol URLOpener {
     func canOpenURL(_ url: URL) -> Bool
     func openURL(_ url: URL) -> Bool
 }
 
 #if os(OSX)
-    final class UrlOpenerMacOS: UrlOpener {
+    final class URLOpenerMacOS: URLOpener {
         func canOpenURL(_ url: URL) -> Bool {
             return false
         }
@@ -20,5 +20,5 @@ protocol UrlOpener {
         }
     }
 #elseif os(iOS)
-    extension UIApplication: UrlOpener {}
+    extension UIApplication: URLOpener {}
 #endif

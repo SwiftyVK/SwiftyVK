@@ -7,11 +7,11 @@ final class VKAppProxyImpl: VKAppProxy {
     
     private let baseUrl = "vkauthorize://authorize?"
     private let appId: String
-    private let urlOpener: UrlOpener
+    private let urlOpener: URLOpener
     
     init(
         appId: String,
-        urlOpener: UrlOpener
+        urlOpener: URLOpener
         ) {
         self.appId = appId
         self.urlOpener = urlOpener

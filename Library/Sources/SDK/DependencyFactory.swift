@@ -118,12 +118,12 @@ final class DependencyFactoryImpl: DependencyFactory {
     
     private lazy var sharedAuthorizator: Authorizator = {
         
-        let urlOpener: UrlOpener
+        let urlOpener: URLOpener
         
         #if os(iOS)
             urlOpener = UIApplication.shared
         #elseif os(macOS)
-            urlOpener = UrlOpenerMacOS()
+            urlOpener = URLOpenerMacOS()
         #endif
         
         let tokenStorge = TokenStorageImpl(serviceKey: self.bundleName)

@@ -5,8 +5,8 @@ final class VKAppProxyTests: XCTestCase {
     
     private let appId = "1234567890"
     
-    var proxyObjects: (UrlOpenerMock, VKAppProxyImpl) {
-        let urlOpener = UrlOpenerMock()
+    var proxyObjects: (URLOpenerMock, VKAppProxyImpl) {
+        let urlOpener = URLOpenerMock()
         let vkProxy = VKAppProxyImpl(appId: appId, urlOpener: urlOpener)
         return (urlOpener, vkProxy)
     }

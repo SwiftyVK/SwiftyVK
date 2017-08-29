@@ -1,6 +1,6 @@
 @testable import SwiftyVK
 
-final class UrlOpenerMock: UrlOpener {
+final class URLOpenerMock: URLOpener {
     
     var allowCanOpenUrl = true
     
