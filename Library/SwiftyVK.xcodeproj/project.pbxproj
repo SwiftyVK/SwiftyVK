@@ -223,6 +223,8 @@
 		D440A3361F4C890200F93F01 /* WebViewWrapperMacOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D440A3351F4C890200F93F01 /* WebViewWrapperMacOS.swift */; };
 		D440A3391F4C898C00F93F01 /* WebViewWrapperIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D440A3381F4C898B00F93F01 /* WebViewWrapperIOS.swift */; };
 		D44348F91F3B71F5008B2B50 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44348F71F3B70F4008B2B50 /* JSONTests.swift */; };
+		D44EC0071F55C50700F8BB4A /* VKReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0061F55C50700F8BB4A /* VKReachability.swift */; };
+		D44EC00B1F55D2A500F8BB4A /* VKReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0061F55C50700F8BB4A /* VKReachability.swift */; };
 		D47601161F2E219A005356E5 /* response.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601141F2E218B005356E5 /* response.empty.json */; };
 		D47601191F2E21E2005356E5 /* apiError.withoutCode.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601181F2E21DD005356E5 /* apiError.withoutCode.json */; };
 		D476011B1F2E2229005356E5 /* apiError.withoutMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */; };
@@ -479,6 +481,7 @@
 		D440A3351F4C890200F93F01 /* WebViewWrapperMacOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewWrapperMacOS.swift; sourceTree = "<group>"; };
 		D440A3381F4C898B00F93F01 /* WebViewWrapperIOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewWrapperIOS.swift; sourceTree = "<group>"; };
 		D44348F71F3B70F4008B2B50 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
+		D44EC0061F55C50700F8BB4A /* VKReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKReachability.swift; sourceTree = "<group>"; };
 		D47601141F2E218B005356E5 /* response.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.empty.json; sourceTree = "<group>"; };
 		D47601181F2E21DD005356E5 /* apiError.withoutCode.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutCode.json; sourceTree = "<group>"; };
 		D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutMessage.json; sourceTree = "<group>"; };
@@ -731,6 +734,7 @@
 				A2A3E6341EAFC1C70029FA44 /* Numbers+Extensions.swift */,
 				A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */,
 				A296C6401EF9896200029D7D /* FileManager+Extensions.swift */,
+				D44EC0061F55C50700F8BB4A /* VKReachability.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1257,6 +1261,7 @@
 				D4F84BD11F435EEA00DA7127 /* LongPollUpdatingOperation.swift in Sources */,
 				A2EB6EF61BD18394008E7D86 /* Messages.swift in Sources */,
 				A22179D51EBA57AF006B71FD /* SessionConfig.swift in Sources */,
+				D44EC00B1F55D2A500F8BB4A /* VKReachability.swift in Sources */,
 				A2EB6EF71BD18394008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6EF81BD18394008E7D86 /* Notes.swift in Sources */,
 				A2BDF3701EDC9EB200E9263A /* Lock.swift in Sources */,
@@ -1393,6 +1398,7 @@
 				A2EB6ED91BD18389008E7D86 /* Wall.swift in Sources */,
 				A2AF16761ED19E2300485716 /* Token.swift in Sources */,
 				A2BDF36C1EDC9D8E00E9263A /* Atomic.swift in Sources */,
+				D44EC0071F55C50700F8BB4A /* VKReachability.swift in Sources */,
 				A2B254831EDF43E900DEECC7 /* WebController_macOS.swift in Sources */,
 				A2EB6EDA1BD18389008E7D86 /* Arg.swift in Sources */,
 				A2A3E6351EAFC1C70029FA44 /* Numbers+Extensions.swift in Sources */,
