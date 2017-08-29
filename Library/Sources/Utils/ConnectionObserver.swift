@@ -56,8 +56,8 @@ internal final class ConnectionObserverImpl: ConnectionObserver {
             forName: activeNotificationName,
             object: self,
             queue: nil,
-            using: { [weak self] notification in
-                self?.handleAppActive(notification)
+            using: { [weak self] _ in
+                self?.handleAppActive()
             }
         )
         
@@ -65,8 +65,8 @@ internal final class ConnectionObserverImpl: ConnectionObserver {
             forName: inactiveNotificationName,
             object: self,
             queue: nil,
-            using: { [weak self] notification in
-                self?.handleAppInnactive(notification)
+            using: { [weak self] _ in
+                self?.handleAppInnactive()
             }
         )
         
@@ -74,23 +74,20 @@ internal final class ConnectionObserverImpl: ConnectionObserver {
     }
     
     private func setUpReachabilityObserver() {
-        
         let reachabilityObserver = appStateCenter.addObserver(
-            forName: ReachabilityChangedNotification,
+            forName: reachabilityNotificationName,
             object: self,
             queue: nil,
-            using: { [weak self] notification in
-                self?.handleReachabilityChange(notification)
+            using: { [weak self] _ in
+                self?.handleReachabilityChange()
             }
         )
         
         observers.append(reachabilityObserver)
-        
         _ = try? reachability.startNotifier()
     }
     
-    private func handleReachabilityChange(_ notification: Notification) {
-        guard let reachability = notification.object as? VKReachability else { return }
+    private func handleReachabilityChange() {
         guard appIsActive == true else { return }
 
         if reachability.isReachable {
@@ -101,13 +98,13 @@ internal final class ConnectionObserverImpl: ConnectionObserver {
         }
     }
     
-    private func handleAppActive(_ notification: Notification) {
+    private func handleAppActive() {
         guard appIsActive == false else { return }
         appIsActive = true
         onConnect?()
     }
     
-    private func handleAppInnactive(_ notification: Notification) {
+    private func handleAppInnactive() {
         guard appIsActive == true else { return }
         appIsActive = false
         onDisconnect?()
