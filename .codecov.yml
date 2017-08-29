@@ -1,12 +1,16 @@
 coverage:
   precision: 2
-  round: down
+  round: up
   range: "0...100"
 
   ignore:
     - Example
     - Tests
-    - Library/Sources/Utils/WebViewWrapper*
+    - Library/Sources/SDK/UI/*/*Controller*
+    - Library/Sources/SDK/UI/Web/WebViewWrapper*
     - Library/Sources/Utils/Reachability.swift
-    - Library/Sources/SDK/UI/CaptchaController*
-    - Library/Sources/SDK/UI/WebController*
+    - Library/Sources/Utils/IDGenerator.swift
+    - Library/Sources/Extensions/Numbers+Extensions.swift
+    - Library/Sources/Extensions/URLOpener.swift
+    - Library/Sources/Extensions/VKURLSession.swift
+
