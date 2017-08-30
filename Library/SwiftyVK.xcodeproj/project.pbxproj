@@ -239,6 +239,8 @@
 		D47601221F2E236E005356E5 /* ResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47601211F2E236E005356E5 /* ResponseTests.swift */; };
 		D47601241F2E2450005356E5 /* VKError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47601231F2E2450005356E5 /* VKError.swift */; };
 		D47601251F2E2450005356E5 /* VKError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47601231F2E2450005356E5 /* VKError.swift */; };
+		D47E92C51F5680A400F9522A /* WebViewWrapperIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92C41F55EBDC00F9522A /* WebViewWrapperIOS.swift */; };
+		D47E92C61F5680A700F9522A /* WebViewWrapperMacOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92BE1F55EB4800F9522A /* WebViewWrapperMacOS.swift */; };
 		D484C9321F4B337E00C9651C /* AttemptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9311F4B337E00C9651C /* AttemptTests.swift */; };
 		D484C9341F4B363E00C9651C /* VKURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9331F4B363E00C9651C /* VKURLSession.swift */; };
 		D484C9351F4B363E00C9651C /* VKURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9331F4B363E00C9651C /* VKURLSession.swift */; };
@@ -1263,6 +1265,7 @@
 				A28368ED1D9D742D00EEBE2A /* Attempt.swift in Sources */,
 				A2EB6EF11BD18394008E7D86 /* Docs.swift in Sources */,
 				A2EB6EF21BD18394008E7D86 /* Fave.swift in Sources */,
+				D47E92C51F5680A400F9522A /* WebViewWrapperIOS.swift in Sources */,
 				D4F49D481F2E0FE50037B875 /* ApiError.swift in Sources */,
 				A217DAAD1E9926A500EA1430 /* Session.swift in Sources */,
 				D4F84BE01F43608200DA7127 /* JSON.swift in Sources */,
@@ -1391,6 +1394,7 @@
 				A217DAAC1E9926A500EA1430 /* Session.swift in Sources */,
 				A27015D91EC1F6D100B9C5C2 /* SessionState.swift in Sources */,
 				A2EB6ED01BD18389008E7D86 /* Polls.swift in Sources */,
+				D47E92C61F5680A700F9522A /* WebViewWrapperMacOS.swift in Sources */,
 				A2EB6ED11BD18389008E7D86 /* Search.swift in Sources */,
 				A2967E741CBBC4A700B7D48F /* Gifts.swift in Sources */,
 				A2F6322C1ED9C88D0063C9E0 /* UrlOpener.swift in Sources */,
