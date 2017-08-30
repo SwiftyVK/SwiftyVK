@@ -24,12 +24,8 @@ public class CustomMethod {
         self.parameters = parameters
     }
     
-    public func request(with config: Config = .default) -> Request {
+    func request(with config: Config = .default) -> Request {
         return Request(of: .api(method: method, parameters: parameters), config: config)
     }
     
-    @discardableResult
-    public func send(with callbacks: Callbacks, in session: Session? = nil) -> Task {
-        return request().send(with: callbacks, in: session)
-    }
 }

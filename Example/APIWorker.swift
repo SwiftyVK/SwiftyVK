@@ -49,41 +49,39 @@ final class APIWorker {
     
     
     class func captcha() {
-        VK.Api.Custom.method(name: "captcha.force").send(with: Callbacks(
-            onSuccess: { response in print("SwiftyVK: captcha.force success \n \(response)") },
-            onError: { error in print("SwiftyVK: captcha.force fail \n \(error)") }
-            )
-        )
+//        VK.Api.Custom.method(name: "captcha.force").send(with: Callbacks(
+//            onSuccess: { response in print("SwiftyVK: captcha.force success \n \(response)") },
+//            onError: { error in print("SwiftyVK: captcha.force fail \n \(error)") }
+//            )
+//        )
     }
     
     
     
     class func validation() {
-        VK.Api.Custom.method(name: "account.testValidation").send(with: Callbacks(
-            onSuccess: {response in print("SwiftyVK: account.testValidation success \n \(response)")},
-            onError: {error in print("SwiftyVK: account.testValidation fail \n \(error)")}
-            )
-        )
+//        VK.Api.Custom.method(name: "account.testValidation").send(with: Callbacks(
+//            onSuccess: {response in print("SwiftyVK: account.testValidation success \n \(response)")},
+//            onError: {error in print("SwiftyVK: account.testValidation fail \n \(error)")}
+//            )
+//        )
     }
     
     
     
     class func usersGet() {
-        VK.Api.Users.get([VK.Arg.userId : "1"]).send(with: Callbacks(
-            onSuccess: {response in print("SwiftyVK: users.get success \n \(response)")},
-            onError: {error in print("SwiftyVK: users.get fail \n \(error)")}
-            )
-        )
+        VK.Api.Users.get([VK.Arg.userId : "1"])
+            .onSuccess { response in print("SwiftyVK: users.get success \n \(response)") }
+            .onError { error in print("SwiftyVK: friends.get fail \n \(error)") }
+            .send()
     }
     
     
     
     class func friendsGet() {
-        VK.Api.Friends.get([.count : "1", .fields : "city,domain"]).send(with: Callbacks(
-            onSuccess: {response in print("SwiftyVK: friends.get success \n \(response)")},
-            onError: {error in print("SwiftyVK: friends.get fail \n \(error)")}
-            )
-        )
+        VK.Api.Friends.get([.count : "1", .fields : "city,domain"])
+            .onSuccess { response in print("SwiftyVK: friends.get success \n \(response)") }
+            .onError { error in print("SwiftyVK: friends.get fail \n \(error)") }
+            .send()
     }
     
     

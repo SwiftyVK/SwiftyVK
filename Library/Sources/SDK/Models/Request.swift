@@ -48,25 +48,6 @@ extension Request {
     }
 }
 
-public struct Callbacks {
-    
-    public static let empty = Callbacks()
-    
-    let onSuccess: ((Data) -> ())?
-    let onError: ((VKError) -> ())?
-    let onProgress: ((_ type: ProgressType, _ current: Int64, _ of: Int64) -> ())?
-    
-    public init(
-        onSuccess: ((Data) -> ())? = nil,
-        onError: ((VKError) -> ())? = nil,
-        onProgress: ((_ type: ProgressType, _ current: Int64, _ of: Int64) -> ())? = nil
-        ) {
-        self.onSuccess = onSuccess
-        self.onError = onError
-        self.onProgress = onProgress
-    }
-}
-
 public enum ProgressType {
     case sended
     case recieved
