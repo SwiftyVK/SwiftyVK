@@ -1,7 +1,7 @@
 public protocol Method: SendableMethod {
-    func configure(with config: Config) -> SuccessableFailbaleMethod
-    func onSuccess(_ clousure: @escaping (Data) -> ()) -> FailableConfigurableMethod
-    func onError(_ clousure: @escaping (VKError) -> ()) -> SuccessableConfigurableMethod
+    func configure(with config: Config) -> Methods.SuccessableFailbale
+    func onSuccess(_ clousure: @escaping (Data) -> ()) -> Methods.FailableConfigurable
+    func onError(_ clousure: @escaping (VKError) -> ()) -> Methods.SuccessableConfigurable
 }
 
 public protocol SendableMethod {
@@ -23,3 +23,5 @@ public extension SendableMethod {
         return session.send(method: self)
     }
 }
+
+public struct Methods {}

@@ -26,22 +26,22 @@ public final class CustomMethod {
 }
 
 extension CustomMethod: Method {
-    public func configure(with config: Config) -> SuccessableFailbaleMethod {
+    public func configure(with config: Config) -> Methods.SuccessableFailbale {
         let request = toRequest()
         request.config = config
-        return SuccessableFailbaleMethod(request)
+        return .init(request)
     }
     
-    public func onSuccess(_ clousure: @escaping (Data) -> ()) -> FailableConfigurableMethod {
+    public func onSuccess(_ clousure: @escaping (Data) -> ()) -> Methods.FailableConfigurable {
         let request = toRequest()
         request.callbacks.onSuccess = clousure
-        return FailableConfigurableMethod(request)
+        return .init(request)
     }
     
-    public func onError(_ clousure: @escaping (VKError) -> ()) -> SuccessableConfigurableMethod {
+    public func onError(_ clousure: @escaping (VKError) -> ()) -> Methods.SuccessableConfigurable {
         let request = toRequest()
         request.callbacks.onError = clousure
-        return SuccessableConfigurableMethod(request)
+        return .init(request)
     }
     
     public func toRequest() -> Request {

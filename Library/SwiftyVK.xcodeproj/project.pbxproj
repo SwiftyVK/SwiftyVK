@@ -251,8 +251,8 @@
 		D47E92D11F572E0A00F9522A /* OneVariationsMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92CF1F572E0A00F9522A /* OneVariationsMethod.swift */; };
 		D47E92D31F572E5C00F9522A /* TwoVariationsMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D21F572E5C00F9522A /* TwoVariationsMethod.swift */; };
 		D47E92D41F572E5C00F9522A /* TwoVariationsMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D21F572E5C00F9522A /* TwoVariationsMethod.swift */; };
-		D47E92D61F572F0500F9522A /* MethodInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D51F572F0500F9522A /* MethodInstance.swift */; };
-		D47E92D71F572F0500F9522A /* MethodInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D51F572F0500F9522A /* MethodInstance.swift */; };
+		D47E92D61F572F0500F9522A /* BasicMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D51F572F0500F9522A /* BasicMethod.swift */; };
+		D47E92D71F572F0500F9522A /* BasicMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D51F572F0500F9522A /* BasicMethod.swift */; };
 		D47E92D91F5731CB00F9522A /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D81F5731CB00F9522A /* Method.swift */; };
 		D47E92DA1F5731CB00F9522A /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D81F5731CB00F9522A /* Method.swift */; };
 		D484C9321F4B337E00C9651C /* AttemptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9311F4B337E00C9651C /* AttemptTests.swift */; };
@@ -518,7 +518,7 @@
 		D47E92CB1F5729D200F9522A /* Callbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Callbacks.swift; sourceTree = "<group>"; };
 		D47E92CF1F572E0A00F9522A /* OneVariationsMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneVariationsMethod.swift; sourceTree = "<group>"; };
 		D47E92D21F572E5C00F9522A /* TwoVariationsMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoVariationsMethod.swift; sourceTree = "<group>"; };
-		D47E92D51F572F0500F9522A /* MethodInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodInstance.swift; sourceTree = "<group>"; };
+		D47E92D51F572F0500F9522A /* BasicMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicMethod.swift; sourceTree = "<group>"; };
 		D47E92D81F5731CB00F9522A /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		D484C9311F4B337E00C9651C /* AttemptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptTests.swift; sourceTree = "<group>"; };
 		D484C9331F4B363E00C9651C /* VKURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKURLSession.swift; sourceTree = "<group>"; };
@@ -899,7 +899,7 @@
 			children = (
 				A217DAA71E9924DE00EA1430 /* APIMethod.swift */,
 				D47E92D81F5731CB00F9522A /* Method.swift */,
-				D47E92D51F572F0500F9522A /* MethodInstance.swift */,
+				D47E92D51F572F0500F9522A /* BasicMethod.swift */,
 				D47E92CF1F572E0A00F9522A /* OneVariationsMethod.swift */,
 				D47E92D21F572E5C00F9522A /* TwoVariationsMethod.swift */,
 				D47E92C81F5727EA00F9522A /* ThreeVariationsMethod.swift */,
@@ -1372,7 +1372,7 @@
 				A25A19DD1EE58CC900CF13AF /* CaptchaController.swift in Sources */,
 				D4F84BE51F43608A00DA7127 /* ConnectionObserver.swift in Sources */,
 				A2EB6F0B1BD18395008E7D86 /* Scopes.swift in Sources */,
-				D47E92D71F572F0500F9522A /* MethodInstance.swift in Sources */,
+				D47E92D71F572F0500F9522A /* BasicMethod.swift in Sources */,
 				A24D10901C56A49E008263B0 /* Market.swift in Sources */,
 				A2EB6F0E1BD18395008E7D86 /* UrlRequestBuilder.swift in Sources */,
 				A25A19C11EE2F01800CF13AF /* WebController_iOS.swift in Sources */,
@@ -1474,7 +1474,7 @@
 				A2EB6EDD1BD18389008E7D86 /* Resources.swift in Sources */,
 				A25A19CD1EE41BA700CF13AF /* TokenParser.swift in Sources */,
 				A2E34DBC1ED1F1260041E663 /* TokenStorage.swift in Sources */,
-				D47E92D61F572F0500F9522A /* MethodInstance.swift in Sources */,
+				D47E92D61F572F0500F9522A /* BasicMethod.swift in Sources */,
 				A2EB6EDE1BD18389008E7D86 /* Scopes.swift in Sources */,
 				A2EB6EE11BD18389008E7D86 /* UrlRequestBuilder.swift in Sources */,
 				A29F1CD41E95674A00BE5369 /* TaskSheduler.swift in Sources */,

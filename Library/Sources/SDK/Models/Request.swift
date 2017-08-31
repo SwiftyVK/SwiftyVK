@@ -23,6 +23,10 @@ public final class Request {
         nexts.insert(next, at: 0)
         return self
     }
+    
+    func toMethod() -> Methods.Basic {
+        return Methods.Basic(self)
+    }
 }
 
 enum RequestType {
