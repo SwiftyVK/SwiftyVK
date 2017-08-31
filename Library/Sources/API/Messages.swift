@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Messages: Methods.API {
+    public enum Messages: APIMethod {
         case get(Parameters)
         case getDialogs(Parameters)
         case getById(Parameters)

@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Pages: Methods.API {
+    public enum Pages: APIMethod {
         case get(Parameters)
         case save(Parameters)
         case saveAccess(Parameters)

@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Database: Methods.API {
+    public enum Database: APIMethod {
         case getCountries(Parameters)
         case getRegions(Parameters)
         case getStreetsById(Parameters)

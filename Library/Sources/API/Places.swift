@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Places: Methods.API {
+    public enum Places: APIMethod {
         case add(Parameters)
         case getById(Parameters)
         case search(Parameters)

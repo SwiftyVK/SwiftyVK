@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Video: Methods.API {
+    public enum Video: APIMethod {
         case get(Parameters)
         case edit(Parameters)
         case add(Parameters)

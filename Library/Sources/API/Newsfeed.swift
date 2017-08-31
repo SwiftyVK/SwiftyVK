@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum NewsFeed: Methods.API {
+    public enum NewsFeed: APIMethod {
         case get(Parameters)
         case getRecommended(Parameters)
         case getComments(Parameters)

@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Friends: Methods.API {
+    public enum Friends: APIMethod {
         case get(Parameters)
         case getOnline(Parameters)
         case getMutual(Parameters)

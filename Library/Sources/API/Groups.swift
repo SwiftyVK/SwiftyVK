@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Groups: Methods.API {
+    public enum Groups: APIMethod {
         case isMember(Parameters)
         case getById(Parameters)
         case get(Parameters)

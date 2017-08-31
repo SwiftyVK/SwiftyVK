@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Wall: Methods.API {
+    public enum Wall: APIMethod {
         case get(Parameters)
         case search(Parameters)
         case getById(Parameters)

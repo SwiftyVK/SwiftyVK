@@ -780,6 +780,7 @@
 			children = (
 				A2838DA21E9AA0DA00FE5BE2 /* DependencyFactory.swift */,
 				A24DDAE91EB73A2C002EA273 /* Logic */,
+				D47E92CE1F572DD000F9522A /* Methods */,
 				A2527D811BD12FD200F65412 /* Models */,
 				A2527D8D1BD12FD200F65412 /* UI */,
 			);
@@ -789,7 +790,7 @@
 		A2527D811BD12FD200F65412 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D47E92CE1F572DD000F9522A /* Methods */,
+				D47601271F2E25E2005356E5 /* Results */,
 				A2CF0D401E98EF0900EAFF30 /* Request.swift */,
 				D47E92CB1F5729D200F9522A /* Callbacks.swift */,
 				A29508831EBBA24B00981EC0 /* RequestConfig.swift */,
@@ -797,7 +798,6 @@
 				A2527D841BD12FD200F65412 /* Media.swift */,
 				A2527D861BD12FD200F65412 /* Scopes.swift */,
 				A2527D851BD12FD200F65412 /* Resources.swift */,
-				D47601271F2E25E2005356E5 /* Results */,
 			);
 			path = Models;
 			sourceTree = "<group>";

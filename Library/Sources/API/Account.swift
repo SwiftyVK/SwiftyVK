@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Account: Methods.API {
+    public enum Account: APIMethod {
         case getCounters(Parameters)
         case setNameInMenu(Parameters)
         case setOnline(Parameters)

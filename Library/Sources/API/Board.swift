@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Board: Methods.API {
+    public enum Board: APIMethod {
         case getTopics(Parameters)
         case getComments(Parameters)
         case addTopic(Parameters)

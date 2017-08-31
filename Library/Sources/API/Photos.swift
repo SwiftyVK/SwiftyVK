@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Photos: Methods.API {
+    public enum Photos: APIMethod {
         case createAlbum(Parameters)
         case editAlbum(Parameters)
         case getAlbums(Parameters)

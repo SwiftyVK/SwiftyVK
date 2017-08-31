@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Docs: Methods.API {
+    public enum Docs: APIMethod {
         case get(Parameters)
         case getById(Parameters)
         case getUploadServer(Parameters)

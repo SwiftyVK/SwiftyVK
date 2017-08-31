@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Polls: Methods.API {
+    public enum Polls: APIMethod {
         case getById(Parameters)
         case addVote(Parameters)
         case deleteVote(Parameters)

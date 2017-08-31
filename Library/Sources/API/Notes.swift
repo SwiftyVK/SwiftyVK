@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Notes: Methods.API {
+    public enum Notes: APIMethod {
         case get(Parameters)
         case getById(Parameters)
         case getFriendsNotes(Parameters)
