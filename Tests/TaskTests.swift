@@ -22,7 +22,7 @@ class TaskTests: XCTestCase {
         var givenData: Data?
         let context = makeContext(
             configure: { $0.onFinish(.emptySuccess) },
-            callbacks: Callbacks( onSuccess: { givenData = $0 })
+            callbacks: RequestCallbacks( onSuccess: { givenData = $0 })
         )
         // When
         context.task.main()
@@ -35,7 +35,7 @@ class TaskTests: XCTestCase {
         var givenError: VKError?
         let context = makeContext(
             configure: { $0.onFinish(.unexpectedError) },
-            callbacks: Callbacks( onError: { givenError = $0 })
+            callbacks: RequestCallbacks( onError: { givenError = $0 })
         )
         // When
         context.task.main()
@@ -51,7 +51,7 @@ class TaskTests: XCTestCase {
                 $0.onRecive(100, 1000)
                 $0.onFinish(.unexpectedError)
         },
-            callbacks: Callbacks(onProgress: { progressResult = $0 })
+            callbacks: RequestCallbacks(onProgress: { progressResult = $0 })
         )
         // When
         context.task.main()
@@ -69,7 +69,7 @@ class TaskTests: XCTestCase {
                 $0.onSent(100, 1000)
                 $0.onFinish(.unexpectedError)
         },
-            callbacks: Callbacks(onProgress: { progressResult = $0 })
+            callbacks: RequestCallbacks(onProgress: { progressResult = $0 })
         )
         // When
         context.task.main()
@@ -84,7 +84,7 @@ class TaskTests: XCTestCase {
         var callbacksCalled = false
         let context = makeContext(
             configure: { $0.onFinish(.emptySuccess) },
-            callbacks: Callbacks(
+            callbacks: RequestCallbacks(
                 onSuccess: { _ in callbacksCalled = true },
                 onError: { _ in callbacksCalled = true },
                 onProgress: { _,_,_ in callbacksCalled = true }
@@ -214,7 +214,7 @@ class TaskTests: XCTestCase {
         var givenError: VKError?
         let context = makeContext(
             configure: { $0.onFinish(.emptySuccess) },
-            callbacks: Callbacks( onError: { givenError = $0 })
+            callbacks: RequestCallbacks( onError: { givenError = $0 })
         )
         
         context.requestBuilder.onBuild = {
@@ -232,7 +232,7 @@ class TaskTests: XCTestCase {
         var givenError: VKError?
         let context = makeContext(
             configure: { $0.onFinish(.emptySuccess) },
-            callbacks: Callbacks( onError: { givenError = $0 })
+            callbacks: RequestCallbacks( onError: { givenError = $0 })
         )
         
         context.requestBuilder.onBuild = {
@@ -255,7 +255,7 @@ class TaskTests: XCTestCase {
 
 private func makeContext(
     configure: ((AttemptCallbacks) -> ())? = nil,
-    callbacks: Callbacks = .empty,
+    callbacks: RequestCallbacks = .empty,
     handleErrors: Bool = true,
     shouldCancel: Bool = false,
     nextRequest: Request? = nil

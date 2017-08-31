@@ -33,7 +33,7 @@ protocol SessionMaker: class {
 }
 
 protocol TaskMaker: class {
-    func task(request: Request, callbacks: Callbacks, session: TaskSession & ApiErrorExecutor) -> Task
+    func task(request: Request, callbacks: RequestCallbacks, session: TaskSession & ApiErrorExecutor) -> Task
 }
 
 protocol AttemptMaker: class {
@@ -204,7 +204,7 @@ final class DependencyFactoryImpl: DependencyFactory {
         )
     }
     
-    func task(request: Request, callbacks: Callbacks, session: TaskSession & ApiErrorExecutor) -> Task {
+    func task(request: Request, callbacks: RequestCallbacks, session: TaskSession & ApiErrorExecutor) -> Task {
         return TaskImpl(
             id: idGenerator.next(),
             request: request,

@@ -29,7 +29,7 @@ final class TaskImpl: Operation, Task {
     }
     
     private var request: Request
-    private let callbacks: Callbacks
+    private let callbacks: RequestCallbacks
     private let session: TaskSession
     private let semaphore = DispatchSemaphore(value: 0)
     private var sendAttempts = 0
@@ -41,7 +41,7 @@ final class TaskImpl: Operation, Task {
     init(
         id: Int64,
         request: Request,
-        callbacks: Callbacks,
+        callbacks: RequestCallbacks,
         session: TaskSession,
         urlRequestBuilder: UrlRequestBuilder,
         attemptMaker: AttemptMaker,

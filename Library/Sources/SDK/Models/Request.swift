@@ -3,13 +3,13 @@ import Foundation
 public final class Request {
     let type: RequestType
     var config: Config
-    var callbacks: Callbacks
+    var callbacks: RequestCallbacks
     var nexts: [((Data) -> Request)]
     
     init(
         type: RequestType,
         config: Config = .default,
-        callbacks: Callbacks = .empty,
+        callbacks: RequestCallbacks = .empty,
         nexts: [((Data) -> Request)] = []
         ) {
         self.type = type

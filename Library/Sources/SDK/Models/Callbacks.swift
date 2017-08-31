@@ -1,9 +1,9 @@
-public struct Callbacks {
+public struct RequestCallbacks {
     public typealias Success = (Data) -> ()
     public typealias Error = (VKError) -> ()
     public typealias Progress = (_ type: ProgressType, _ current: Int64, _ of: Int64) -> ()
 
-    public static let empty = Callbacks()
+    public static let empty = RequestCallbacks()
     
     var onSuccess: Success?
     var onError: Error?

@@ -1,7 +1,7 @@
 //public final class SuccessableFailableConfigurableMethod: SendableMethod {
 //    
 //    
-//    public func onError(_ clousure: @escaping Callbacks.Error) -> ConfigurableMethod {
+//    public func onError(_ clousure: @escaping RequestCallbacks.Error) -> ConfigurableMethod {
 //        callbacks.onError = clousure
 //        return ConfigurableMethod(method, config, callbacks)
 //    }

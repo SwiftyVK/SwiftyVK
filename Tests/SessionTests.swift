@@ -4,7 +4,7 @@ import XCTest
 final class SessionTests: XCTestCase {
     
     class TaskMakerMock: TaskMaker {
-        func task(request: Request, callbacks: Callbacks, session: ApiErrorExecutor & TaskSession) -> Task {
+        func task(request: Request, callbacks: RequestCallbacks, session: ApiErrorExecutor & TaskSession) -> Task {
             return TaskMock()
         }
     }
@@ -226,7 +226,7 @@ final class SessionTests: XCTestCase {
 
         session.send(
             request: request,
-            callbacks: Callbacks(
+            callbacks: RequestCallbacks(
                 onError: { error in
                     // Then
                     XCTAssertEqual(error.asVK, VKError.sessionAlreadyDestroyed(session))
@@ -243,7 +243,7 @@ final class SessionTests: XCTestCase {
 
         session.send(
             request: request,
-            callbacks: Callbacks(
+            callbacks: RequestCallbacks(
                 onError: { error in
                     // Then
                     XCTAssertEqual(error.asVK, VKError.wrongTaskType)

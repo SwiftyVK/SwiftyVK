@@ -12,7 +12,7 @@ final class SessionMock: Session, TaskSession, DestroyableSession {
         
     }
     
-    func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping Callbacks.Error) {
+    func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping RequestCallbacks.Error) {
         
     }
     
@@ -25,7 +25,7 @@ final class SessionMock: Session, TaskSession, DestroyableSession {
     var onSend: ((Request) -> ())?
     
     @discardableResult
-    func send(request: Request, callbacks: Callbacks) -> Task {
+    func send(request: Request, callbacks: RequestCallbacks) -> Task {
         onSend?(request)
         return TaskMock()
     }

@@ -1,18 +1,18 @@
 extension Methods {
     public final class SuccessableFailbale: Basic {
-        public func onSuccess(_ clousure: @escaping Callbacks.Success) -> Failable {
+        public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> Failable {
             request.callbacks.onSuccess = clousure
             return .init(request)
         }
         
-        public func onError(_ clousure: @escaping Callbacks.Error) -> Successable {
+        public func onError(_ clousure: @escaping RequestCallbacks.Error) -> Successable {
             request.callbacks.onError = clousure
             return .init(request)
         }
     }
     
     public final class SuccessableConfigurable: Basic {
-        public func onSuccess(_ clousure: @escaping Callbacks.Success) -> Configurable {
+        public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> Configurable {
             request.callbacks.onSuccess = clousure
             return .init(request)
         }
@@ -24,7 +24,7 @@ extension Methods {
     }
     
     public final class FailableConfigurable: Basic {
-        public func onError(_ clousure: @escaping Callbacks.Error) -> Configurable {
+        public func onError(_ clousure: @escaping RequestCallbacks.Error) -> Configurable {
             request.callbacks.onError = clousure
             return .init(request)
         }
