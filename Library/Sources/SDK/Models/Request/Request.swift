@@ -1,5 +1,3 @@
-import Foundation
-
 public final class Request {
     let type: RequestType
     var config: Config
@@ -27,29 +25,4 @@ public final class Request {
     func toMethod() -> Methods.Basic {
         return Methods.Basic(self)
     }
-}
-
-enum RequestType {
-    case api(method: String, parameters: Parameters)
-    case url(String)
-    case upload(url: String, media: [Media], partType: PartType)
-    
-    var canSentConcurrently: Bool {
-        switch self {
-        case .api:
-            return false
-        case .url, .upload:
-            return true
-        }
-    }
-}
-
-public enum ProgressType {
-    case sended
-    case recieved
-}
-
-///HTTP prtocol methods. See - https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods
-public enum HttpMethod: String {
-    case GET, POST
 }

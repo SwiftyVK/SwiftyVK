@@ -19,3 +19,8 @@ public struct RequestCallbacks {
         self.onProgress = onProgress
     }
 }
+
+public enum ProgressType {
+    case sended
+    case recieved
+}
