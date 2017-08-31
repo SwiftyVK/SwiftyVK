@@ -1,8 +1,10 @@
 import Foundation
 
-public protocol APIMethod: Method {}
+extension Methods {
+    public protocol API: Method {}
+}
 
-public extension APIMethod {
+public extension Methods.API {
     public func onSuccess(_ clousure: @escaping (Data) -> ()) -> Methods.FailableConfigurable {
         let request = toRequest()
         request.callbacks.onSuccess = clousure
@@ -26,7 +28,7 @@ public extension APIMethod {
     }
 }
 
-private extension APIMethod {
+private extension Methods.API {
     var group: String {
         return String(describing: type(of: self)).lowercased()
     }

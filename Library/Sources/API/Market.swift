@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Market: APIMethod {
+    public enum Market: Methods.API {
         case get(Parameters)
         case getById(Parameters)
         case search(Parameters)

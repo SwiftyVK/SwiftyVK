@@ -789,7 +789,7 @@
 		A2527D811BD12FD200F65412 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D47E92CE1F572DD000F9522A /* Method */,
+				D47E92CE1F572DD000F9522A /* Methods */,
 				A2CF0D401E98EF0900EAFF30 /* Request.swift */,
 				D47E92CB1F5729D200F9522A /* Callbacks.swift */,
 				A29508831EBBA24B00981EC0 /* RequestConfig.swift */,
@@ -894,17 +894,17 @@
 			path = Web;
 			sourceTree = "<group>";
 		};
-		D47E92CE1F572DD000F9522A /* Method */ = {
+		D47E92CE1F572DD000F9522A /* Methods */ = {
 			isa = PBXGroup;
 			children = (
-				A217DAA71E9924DE00EA1430 /* APIMethod.swift */,
 				D47E92D81F5731CB00F9522A /* Method.swift */,
+				A217DAA71E9924DE00EA1430 /* APIMethod.swift */,
 				D47E92D51F572F0500F9522A /* BasicMethod.swift */,
 				D47E92CF1F572E0A00F9522A /* OneVariationsMethod.swift */,
 				D47E92D21F572E5C00F9522A /* TwoVariationsMethod.swift */,
 				D47E92C81F5727EA00F9522A /* ThreeVariationsMethod.swift */,
 			);
-			path = Method;
+			path = Methods;
 			sourceTree = "<group>";
 		};
 		D4F49D401F2DF5950037B875 /* Utils */ = {

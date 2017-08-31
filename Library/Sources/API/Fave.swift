@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Fave: APIMethod {
+    public enum Fave: Methods.API {
         case getUsers(Parameters)
         case getPhotos(Parameters)
         case getPosts(Parameters)

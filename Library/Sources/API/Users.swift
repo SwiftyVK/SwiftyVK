@@ -1,5 +1,5 @@
 public extension VKAPI {
-    public enum Users: APIMethod {
+    public enum Users: Methods.API {
         case get(Parameters)
         case search(Parameters)
         case isAppUser(Parameters)
