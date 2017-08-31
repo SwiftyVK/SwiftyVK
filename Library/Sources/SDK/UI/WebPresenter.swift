@@ -12,6 +12,7 @@ import Foundation
 
 internal let sheetQueue = DispatchQueue(label: "asdfghjkl")
 private let authorizeUrl = "https://oauth.vk.com/authorize?"
+private let authorizeUrl2 = "https://oauth.vk.com/oauth/authorize?"
 
 
 
@@ -71,6 +72,7 @@ internal final class WebPresenter {
             error = .failedAuthorization
         }
         else if response.contains(authorizeUrl) ||
+            response.contains(authorizeUrl2) ||
             response.contains("act=security_check") ||
             response.contains("api_validation_test") ||
             response.contains("https://m.vk.com/login?") {
