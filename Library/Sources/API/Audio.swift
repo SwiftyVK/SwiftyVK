@@ -1,5 +1,4 @@
-public extension VK.Api {
-    
+public extension VKAPI {
     public enum Audio: APIMethod {
         case get(Parameters)
         case getById(Parameters)

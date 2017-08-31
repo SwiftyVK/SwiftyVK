@@ -1,4 +1,4 @@
-public extension VK.Api {
+public extension VKAPI {
     public enum Fave: APIMethod {
         case getUsers(Parameters)
         case getPhotos(Parameters)

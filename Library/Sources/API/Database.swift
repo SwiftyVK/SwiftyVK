@@ -1,4 +1,4 @@
-public extension VK.Api {
+public extension VKAPI {
     public enum Database: APIMethod {
         case getCountries(Parameters)
         case getRegions(Parameters)

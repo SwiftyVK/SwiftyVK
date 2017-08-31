@@ -1,4 +1,4 @@
-public extension VK.Api {
+public extension VKAPI {
     public enum Users: APIMethod {
         case get(Parameters)
         case search(Parameters)

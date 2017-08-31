@@ -49,7 +49,7 @@ final class APIWorker {
     
     
     class func captcha() {
-//        VK.Api.Custom.method(name: "captcha.force").send(with: Callbacks(
+//        VKAPI.Custom.method(name: "captcha.force").send(with: Callbacks(
 //            onSuccess: { response in print("SwiftyVK: captcha.force success \n \(response)") },
 //            onError: { error in print("SwiftyVK: captcha.force fail \n \(error)") }
 //            )
@@ -59,7 +59,7 @@ final class APIWorker {
     
     
     class func validation() {
-//        VK.Api.Custom.method(name: "account.testValidation").send(with: Callbacks(
+//        VKAPI.Custom.method(name: "account.testValidation").send(with: Callbacks(
 //            onSuccess: {response in print("SwiftyVK: account.testValidation success \n \(response)")},
 //            onError: {error in print("SwiftyVK: account.testValidation fail \n \(error)")}
 //            )
@@ -69,7 +69,7 @@ final class APIWorker {
     
     
     class func usersGet() {
-        VK.Api.Users.get([VK.Arg.userId : "1"])
+        VKAPI.Users.get([VK.Arg.userId : "1"])
             .onSuccess { response in print("SwiftyVK: users.get success \n \(response)") }
             .onError { error in print("SwiftyVK: friends.get fail \n \(error)") }
             .send()
@@ -78,7 +78,7 @@ final class APIWorker {
     
     
     class func friendsGet() {
-        VK.Api.Friends.get([.count : "1", .fields : "city,domain"])
+        VKAPI.Friends.get([.count : "1", .fields : "city,domain"])
             .onSuccess { response in print("SwiftyVK: friends.get success \n \(response)") }
             .onError { error in print("SwiftyVK: friends.get fail \n \(error)") }
             .send()
@@ -89,7 +89,7 @@ final class APIWorker {
     class func uploadPhoto() {
 //        let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "testImage", ofType: "jpg")!))
 //        let media = Media(imageData: data, type: .JPG)
-//        VK.Api.Upload.Photo.toWall.toUser(media, userId: "4680178").send(
+//        VKAPI.Upload.Photo.toWall.toUser(media, userId: "4680178").send(
 //            onSuccess: {response in print("SwiftyVK: friendsGet success \n \(response)")},
 //            onError: {error in print("SwiftyVK: friendsGet fail \n \(error)")},
 //            onProgress: {done, total in print("send \(done) of \(total)")}

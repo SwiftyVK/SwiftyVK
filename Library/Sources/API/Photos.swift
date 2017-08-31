@@ -1,4 +1,4 @@
-public extension VK.Api {
+public extension VKAPI {
     public enum Photos: APIMethod {
         case createAlbum(Parameters)
         case editAlbum(Parameters)

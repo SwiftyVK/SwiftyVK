@@ -6,14 +6,14 @@ class ApiMethodTests: XCTestCase {
     
     func test_name_equalsToMethodName() {
         // When
-        let method = VK.Api.Users.get(.empty).request().rawRequest.apiMethod
+        let method = VKAPI.Users.get(.empty).request().rawRequest.apiMethod
         // Then
         XCTAssertEqual(method, "users.get")
     }
     
     func test_apiMethodParameters_isEmpty() {
         // When
-        let parameters = VK.Api.Users.get(.empty).request().rawRequest.parameters
+        let parameters = VKAPI.Users.get(.empty).request().rawRequest.parameters
         // Then
         XCTAssertEqual(parameters?.isEmpty, true)
     }
@@ -21,7 +21,7 @@ class ApiMethodTests: XCTestCase {
     func test_parameters_equalsToMethodParameters() {
         // When
         let parameter = [VK.Arg.userId: "1"]
-        let parameters = VK.Api.Users.get(parameter).request().rawRequest.parameters
+        let parameters = VKAPI.Users.get(parameter).request().rawRequest.parameters
         // Then
         XCTAssertEqual(parameters?[VK.Arg.userId] ?? "", "1")
     }
@@ -35,7 +35,7 @@ class ApiMethodTests: XCTestCase {
             sendCallCount += 1
         }
         // When
-        VK.Api.Users.get(.empty).send(with: .empty)
+        VKAPI.Users.get(.empty).send(with: .empty)
         // Then
         XCTAssertEqual(sendCallCount, 1)
     }

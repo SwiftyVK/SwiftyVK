@@ -6,35 +6,35 @@ class CustomMethodTests: XCTestCase {
     
     func test_customName_equalsToMethodName() {
         // When
-        let method = VK.Api.Custom.method(name: "test").request().rawRequest.apiMethod
+        let method = VKAPI.Custom.method(name: "test").request().rawRequest.apiMethod
         // Then
         XCTAssertEqual(method, "test")
     }
     
     func test_remoteName_equalsToMethodName() {
         // When
-        let method = VK.Api.Custom.remote(method: "test").request().rawRequest.apiMethod
+        let method = VKAPI.Custom.remote(method: "test").request().rawRequest.apiMethod
         // Then
         XCTAssertEqual(method, "execute.test")
     }
     
     func test_executeName_equalsToExecute() {
         // When
-        let method = VK.Api.Custom.execute(code: "").rawRequest.apiMethod
+        let method = VKAPI.Custom.execute(code: "").rawRequest.apiMethod
         // Then
         XCTAssertEqual(method, "execute")
     }
     
     func test_executeCode_equalsToParameters() {
         // When
-        let parameters = VK.Api.Custom.execute(code: "code").rawRequest.parameters
+        let parameters = VKAPI.Custom.execute(code: "code").rawRequest.parameters
         // Then
         XCTAssertEqual(parameters?[VK.Arg.code] ?? "", "code")
     }
     
     func test_parameters_isEmpty() {
         // When
-        let parameters = VK.Api.Custom.method(name: "test", parameters: .empty).request().rawRequest.parameters
+        let parameters = VKAPI.Custom.method(name: "test", parameters: .empty).request().rawRequest.parameters
         // Then
         XCTAssertEqual(parameters?.isEmpty, true)
     }
@@ -42,7 +42,7 @@ class CustomMethodTests: XCTestCase {
     func test_parameters_equalsToMethodParameters() {
         // When
         let parameter = [VK.Arg.userId: "1"]
-        let parameters = VK.Api.Custom.method(name: "test", parameters: parameter).request().rawRequest.parameters
+        let parameters = VKAPI.Custom.method(name: "test", parameters: parameter).request().rawRequest.parameters
         // Then
         XCTAssertEqual(parameters?[VK.Arg.userId] ?? "", "1")
     }
@@ -55,7 +55,7 @@ class CustomMethodTests: XCTestCase {
             sendCallCount += 1
         }
         // When
-        VK.Api.Custom.method(name: "test").send(with: .empty)
+        VKAPI.Custom.method(name: "test").send(with: .empty)
         // Then
         XCTAssertEqual(sendCallCount, 1)
     }

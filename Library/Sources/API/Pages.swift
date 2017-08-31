@@ -1,4 +1,4 @@
-public extension VK.Api {
+public extension VKAPI {
     public enum Pages: APIMethod {
         case get(Parameters)
         case save(Parameters)

@@ -1,4 +1,4 @@
-public extension VK.Api {
+public extension VKAPI {
     public enum NewsFeed: APIMethod {
         case get(Parameters)
         case getRecommended(Parameters)

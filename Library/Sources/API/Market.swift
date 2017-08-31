@@ -1,4 +1,4 @@
-public extension VK.Api {
+public extension VKAPI {
     public enum Market: APIMethod {
         case get(Parameters)
         case getById(Parameters)

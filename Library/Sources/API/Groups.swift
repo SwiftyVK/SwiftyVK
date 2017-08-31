@@ -1,4 +1,4 @@
-public extension VK.Api {
+public extension VKAPI {
     public enum Groups: APIMethod {
         case isMember(Parameters)
         case getById(Parameters)

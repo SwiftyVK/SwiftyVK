@@ -196,7 +196,7 @@ class TaskTests: XCTestCase {
         var sessionSheduleCallCount = 0
         let context = makeContext(
             configure: { $0.onFinish(.emptySuccess) },
-            nextRequest: VK.Api.Users.get(.empty).request()
+            nextRequest: VKAPI.Users.get(.empty).request()
         )
         
         context.session.onShedule = { _ in
@@ -269,7 +269,7 @@ private func makeContext(
         let taskSession = SessionMock()
         let attemptMaker = AttemptMakerMock()
         let apiErrorHandler = ApiErrorHandlerMock()
-        let request = VK.Api.Users.get(.empty).request(with: Config(handleErrors: handleErrors))
+        let request = VKAPI.Users.get(.empty).request(with: Config(handleErrors: handleErrors))
         
         if let nextRequest = nextRequest {
             request.next { _ in nextRequest }

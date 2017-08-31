@@ -1,4 +1,4 @@
-public extension VK.Api {
+public extension VKAPI {
     public enum Messages: APIMethod {
         case get(Parameters)
         case getDialogs(Parameters)

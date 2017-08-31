@@ -218,6 +218,8 @@
 		D41ADB021F4DFEE000E10D41 /* ResourcesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41ADB001F4DFE7000E10D41 /* ResourcesTests.swift */; };
 		D41ADB051F4E015500E10D41 /* VKStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41ADB031F4E013000E10D41 /* VKStack.swift */; };
 		D41C70551F45F34400EA454C /* VkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C70531F45F33F00EA454C /* VkError.swift */; };
+		D422F9581F585F580055E33F /* VKAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D422F9571F585F580055E33F /* VKAPI.swift */; };
+		D422F9591F585F580055E33F /* VKAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D422F9571F585F580055E33F /* VKAPI.swift */; };
 		D4306B2D1F547BC70050D165 /* ApiErrorHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4306B2C1F547BC70050D165 /* ApiErrorHandlerMock.swift */; };
 		D4306B2F1F5484380050D165 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4306B2E1F5484380050D165 /* Response.swift */; };
 		D44348F91F3B71F5008B2B50 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44348F71F3B70F4008B2B50 /* JSONTests.swift */; };
@@ -493,6 +495,7 @@
 		D41ADB001F4DFE7000E10D41 /* ResourcesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesTests.swift; sourceTree = "<group>"; };
 		D41ADB031F4E013000E10D41 /* VKStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKStack.swift; sourceTree = "<group>"; };
 		D41C70531F45F33F00EA454C /* VkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkError.swift; sourceTree = "<group>"; };
+		D422F9571F585F580055E33F /* VKAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAPI.swift; sourceTree = "<group>"; };
 		D4306B2C1F547BC70050D165 /* ApiErrorHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorHandlerMock.swift; sourceTree = "<group>"; };
 		D4306B2E1F5484380050D165 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		D44348F71F3B70F4008B2B50 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
@@ -718,6 +721,7 @@
 		A2527D5D1BD12FD200F65412 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				D422F9571F585F580055E33F /* VKAPI.swift */,
 				A2527D5E1BD12FD200F65412 /* Account.swift */,
 				A2527D601BD12FD200F65412 /* Audio.swift */,
 				A2527D611BD12FD200F65412 /* Board.swift */,
@@ -1305,6 +1309,7 @@
 				D47E92D11F572E0A00F9522A /* OneVariationsMethod.swift in Sources */,
 				A2EB6EF31BD18394008E7D86 /* Friends.swift in Sources */,
 				A2EB6EF41BD18394008E7D86 /* Groups.swift in Sources */,
+				D422F9591F585F580055E33F /* VKAPI.swift in Sources */,
 				A2D2713D1EC4D0BA00B24D09 /* SessionsHolder.swift in Sources */,
 				D47E92CA1F5727EA00F9522A /* ThreeVariationsMethod.swift in Sources */,
 				A2EB6EF51BD18394008E7D86 /* Likes.swift in Sources */,
@@ -1406,6 +1411,7 @@
 				D47E92D01F572E0A00F9522A /* OneVariationsMethod.swift in Sources */,
 				A217DAA81E9924DE00EA1430 /* APIMethod.swift in Sources */,
 				A2EB6EC31BD18389008E7D86 /* Database.swift in Sources */,
+				D422F9581F585F580055E33F /* VKAPI.swift in Sources */,
 				D4F84BDE1F435F6400DA7127 /* VKViewController.swift in Sources */,
 				D47E92C91F5727EA00F9522A /* ThreeVariationsMethod.swift in Sources */,
 				A2AF16731ED19AEB00485716 /* Authorizator.swift in Sources */,

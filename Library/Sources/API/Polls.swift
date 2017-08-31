@@ -1,4 +1,4 @@
-public extension VK.Api {
+public extension VKAPI {
     public enum Polls: APIMethod {
         case getById(Parameters)
         case addVote(Parameters)

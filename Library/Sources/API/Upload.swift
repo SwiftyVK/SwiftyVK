@@ -14,7 +14,7 @@
 //    }
 //}
 //
-//extension VK.Api {
+//extension VKAPI {
 //    //Metods to upload Mediafiles
 //    public struct Upload {
 //        ///Methods to upload photo
@@ -30,7 +30,7 @@
 //                uploadTimeout: TimeInterval = 30
 //                ) -> Request {
 //                
-//                return VK.Api.Photos.getUploadServer([
+//                return VKAPI.Photos.getUploadServer([
 //                    .albumId: albumId,
 //                    .userId: target.decoded.userId,
 //                    .groupId: target.decoded.groupId
@@ -47,7 +47,7 @@
 //                        )
 //                    }
 //                    .next {
-//                        VK.Api.Photos.save([
+//                        VKAPI.Photos.save([
 //                            .albumId: albumId,
 //                            .userId: target.decoded.userId,
 //                            .groupId: target.decoded.groupId,
@@ -71,7 +71,7 @@
 //            uploadTimeout: TimeInterval = 30
 //            ) -> Request {
 //            
-//            return VK.Api.Photos.getMessagesUploadServer(.empty)
+//            return VKAPI.Photos.getMessagesUploadServer(.empty)
 //                .request(with: config)
 //                .next {
 //                    Request(
@@ -84,7 +84,7 @@
 //                    )
 //                }
 //                .next {
-//                    VK.Api.Photos.saveMessagesPhoto([
+//                    VKAPI.Photos.saveMessagesPhoto([
 //                        .photo: $0["photo"].string,
 //                        .server: $0["server"].string,
 //                        .hash: $0["hash"].string
@@ -102,7 +102,7 @@
 //            uploadTimeout: TimeInterval = 30
 //            ) -> Request {
 //            
-//            return VK.Api.Photos.getMarketUploadServer([.groupId: groupId])
+//            return VKAPI.Photos.getMarketUploadServer([.groupId: groupId])
 //                .request(with: config)
 //                .next {
 //                    Request(
@@ -115,7 +115,7 @@
 //                    )
 //                }
 //                .next {
-//                    VK.Api.Photos.saveMarketPhoto([
+//                    VKAPI.Photos.saveMarketPhoto([
 //                        .groupId: groupId,
 //                        .photo: $0["photo"].string,
 //                        .server: $0["server"].string,
@@ -139,7 +139,7 @@
 //            uploadTimeout: TimeInterval = 30
 //            ) -> Request {
 //            
-//            return VK.Api.Photos.getMarketAlbumUploadServer([.groupId: groupId])
+//            return VKAPI.Photos.getMarketAlbumUploadServer([.groupId: groupId])
 //                .request(with: config)
 //                .next {
 //                    Request(
@@ -152,7 +152,7 @@
 //                    )
 //                }
 //                .next {
-//                    VK.Api.Photos.saveMarketAlbumPhoto([
+//                    VKAPI.Photos.saveMarketAlbumPhoto([
 //                        .groupId: groupId,
 //                        .photo: $0["photo"].string,
 //                        .server: $0["server"].string,
@@ -169,7 +169,7 @@
 //            config: Config = .default,
 //            uploadTimeout: TimeInterval = 30
 //            ) -> Request {
-//            return VK.Api.Photos.getWallUploadServer([
+//            return VKAPI.Photos.getWallUploadServer([
 //                .userId: target.decoded.userId,
 //                .groupId: target.decoded.groupId
 //                ])
@@ -185,7 +185,7 @@
 //                    )
 //                }
 //                .next {
-//                    VK.Api.Photos.saveWallPhoto([
+//                    VKAPI.Photos.saveWallPhoto([
 //                        .userId: target.decoded.userId,
 //                        .groupId: target.decoded.groupId,
 //                        .photo: $0["photo"].string,
@@ -213,7 +213,7 @@
 //                uploadTimeout: TimeInterval = 30
 //                ) -> Request {
 //                
-//                return VK.Api.Video.save([
+//                return VKAPI.Video.save([
 //                    .link: "",
 //                    .name: name,
 //                    .description: description,
@@ -250,7 +250,7 @@
 //                config: Config = .default
 //                ) -> Request {
 //                
-//                return VK.Api.Video.save([
+//                return VKAPI.Video.save([
 //                    .link: url,
 //                    .name: name,
 //                    .description: description,
@@ -272,7 +272,7 @@
 //            config: Config = .default,
 //            uploadTimeout: TimeInterval = 30
 //            ) -> Request {
-//            return VK.Api.Audio.getUploadServer(.empty)
+//            return VKAPI.Audio.getUploadServer(.empty)
 //                .request(with: config)
 //                .next {
 //                    Request(
@@ -285,7 +285,7 @@
 //                    )
 //                }
 //                .next {
-//                    VK.Api.Audio.save([
+//                    VKAPI.Audio.save([
 //                        .audio: $0["audio"].stringValue,
 //                        .server: $0["server"].stringValue,
 //                        .hash: $0["hash"].stringValue,
@@ -306,7 +306,7 @@
 //            uploadTimeout: TimeInterval = 30
 //            ) -> Request {
 //            
-//            return VK.Api.Docs.getUploadServer([.groupId: groupId])
+//            return VKAPI.Docs.getUploadServer([.groupId: groupId])
 //                .request(with: config)
 //                .next {
 //                    Request(
@@ -319,7 +319,7 @@
 //                    )
 //                }
 //                .next {
-//                    VK.Api.Docs.save([
+//                    VKAPI.Docs.save([
 //                        .file: $0["file"].string,
 //                        .title: title,
 //                        .tags: tags

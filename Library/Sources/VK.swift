@@ -1,9 +1,4 @@
 public final class VK {
-    
-    public struct Api {
-        private init() {}
-    }
-    
     public static func prepareForUse(appId: String, delegate: SwiftyVKDelegate) {
         guard dependencyHolder == nil else {
             return

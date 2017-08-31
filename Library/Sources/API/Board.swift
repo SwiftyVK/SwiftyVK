@@ -1,4 +1,4 @@
-public extension VK.Api {
+public extension VKAPI {
     public enum Board: APIMethod {
         case getTopics(Parameters)
         case getComments(Parameters)

@@ -1,4 +1,4 @@
-public extension VK.Api {
+public extension VKAPI {
     public struct Custom {
         public static func method(name: String, parameters: Parameters = .empty) -> CustomMethod {
             return CustomMethod(method: name, parameters: parameters)
