@@ -1,7 +1,8 @@
 public protocol Method: SendableMethod {
-    func configure(with config: Config) -> Methods.SuccessableFailbale
-    func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> Methods.FailableConfigurable
-    func onError(_ clousure: @escaping RequestCallbacks.Error) -> Methods.SuccessableConfigurable
+    func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> Methods.FailbaleProgressableConfigurable
+    func onError(_ clousure: @escaping RequestCallbacks.Error) -> Methods.SuccessableProgressableConfigurable
+    func onProgress(_ clousure: @escaping RequestCallbacks.Progress) -> Methods.SuccessableFailbaleConfigurable
+    func configure(with config: Config) -> Methods.SuccessableFailbaleProgressable
 }
 
 public protocol SendableMethod {

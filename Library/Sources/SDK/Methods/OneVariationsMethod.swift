@@ -13,6 +13,13 @@ extension Methods {
         }
     }
     
+    public final class Progressable: Basic {
+        public func onProgress(_ clousure: @escaping RequestCallbacks.Progress) -> Basic {
+            request.callbacks.onProgress = clousure
+            return .init(request)
+        }
+    }
+    
     public final class Configurable: Basic {
         public func configure(with config: Config) -> Basic {
             request.config = config
