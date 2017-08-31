@@ -1,5 +1,3 @@
-import Foundation
-
 extension Double {
     
     func toString() -> String {

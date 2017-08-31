@@ -32,8 +32,8 @@
 		A217DAA91E9924DE00EA1430 /* APIMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAA71E9924DE00EA1430 /* APIMethod.swift */; };
 		A217DAAC1E9926A500EA1430 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAAB1E9926A500EA1430 /* Session.swift */; };
 		A217DAAD1E9926A500EA1430 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAAB1E9926A500EA1430 /* Session.swift */; };
-		A21E81591E2A7E68008E81E7 /* CharacterSet+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E81581E2A7E68008E81E7 /* CharacterSet+Extension.swift */; };
-		A21E815A1E2A8303008E81E7 /* CharacterSet+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E81581E2A7E68008E81E7 /* CharacterSet+Extension.swift */; };
+		A21E81591E2A7E68008E81E7 /* CharacterSet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E81581E2A7E68008E81E7 /* CharacterSet+Extensions.swift */; };
+		A21E815A1E2A8303008E81E7 /* CharacterSet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E81581E2A7E68008E81E7 /* CharacterSet+Extensions.swift */; };
 		A22179C81EBA3DBD006B71FD /* AttemptShedulerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */; };
 		A22179CA1EBA4059006B71FD /* SessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179C91EBA4059006B71FD /* SessionTests.swift */; };
 		A22179CC1EBA5009006B71FD /* TaskShedulerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179CB1EBA5009006B71FD /* TaskShedulerMock.swift */; };
@@ -363,7 +363,7 @@
 		A20CDD951EF66AEC00271276 /* CaptchaControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaControllerMock.swift; sourceTree = "<group>"; };
 		A217DAA71E9924DE00EA1430 /* APIMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMethod.swift; sourceTree = "<group>"; };
 		A217DAAB1E9926A500EA1430 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		A21E81581E2A7E68008E81E7 /* CharacterSet+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CharacterSet+Extension.swift"; sourceTree = "<group>"; };
+		A21E81581E2A7E68008E81E7 /* CharacterSet+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CharacterSet+Extensions.swift"; sourceTree = "<group>"; };
 		A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptShedulerMock.swift; sourceTree = "<group>"; };
 		A22179C91EBA4059006B71FD /* SessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTests.swift; sourceTree = "<group>"; };
 		A22179CB1EBA5009006B71FD /* TaskShedulerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskShedulerMock.swift; sourceTree = "<group>"; };
@@ -761,16 +761,16 @@
 		A2527D791BD12FD200F65412 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */,
+				D484C9421F4B44A300C9651C /* GCD+Extensions.swift */,
+				A2A3E6341EAFC1C70029FA44 /* Numbers+Extensions.swift */,
+				A21E81581E2A7E68008E81E7 /* CharacterSet+Extensions.swift */,
 				A2F6322B1ED9C88D0063C9E0 /* UrlOpener.swift */,
 				D44EC0191F55E99A00F8BB4A /* ObservableObject.swift */,
 				A2F632321ED9DC7D0063C9E0 /* VKAppProxy.swift */,
 				D484C9331F4B363E00C9651C /* VKURLSession.swift */,
-				D484C9421F4B44A300C9651C /* GCD+Extensions.swift */,
 				D484C9361F4B393B00C9651C /* VKURLSessionTask.swift */,
 				D4F84BD81F435F3E00DA7127 /* VKViewController.swift */,
-				A21E81581E2A7E68008E81E7 /* CharacterSet+Extension.swift */,
-				A2A3E6341EAFC1C70029FA44 /* Numbers+Extensions.swift */,
-				A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */,
 				A296C6401EF9896200029D7D /* VKFileManager.swift */,
 				D44EC0061F55C50700F8BB4A /* VKReachability.swift */,
 				D44EC00C1F55D2C800F8BB4A /* VKNotificationCenter.swift */,
@@ -1371,7 +1371,7 @@
 				A2CF0D431E98EF0900EAFF30 /* Request.swift in Sources */,
 				A202594A1EE9AED00014B0BE /* ApiErrorHandler.swift in Sources */,
 				A2E34DBD1ED1F1260041E663 /* TokenStorage.swift in Sources */,
-				A21E815A1E2A8303008E81E7 /* CharacterSet+Extension.swift in Sources */,
+				A21E815A1E2A8303008E81E7 /* CharacterSet+Extensions.swift in Sources */,
 				A2EB6F051BD18395008E7D86 /* Video.swift in Sources */,
 				A2EB6F061BD18395008E7D86 /* Wall.swift in Sources */,
 				A24DDAE81EB73810002EA273 /* MultipartBodyBuilder.swift in Sources */,
@@ -1403,7 +1403,7 @@
 			files = (
 				D484C9461F4B58F900C9651C /* GCD+Extensions.swift in Sources */,
 				A2EB6EBD1BD18389008E7D86 /* VK.swift in Sources */,
-				A21E81591E2A7E68008E81E7 /* CharacterSet+Extension.swift in Sources */,
+				A21E81591E2A7E68008E81E7 /* CharacterSet+Extensions.swift in Sources */,
 				D484C9341F4B363E00C9651C /* VKURLSession.swift in Sources */,
 				A2EB6EBE1BD18389008E7D86 /* LongPoll.swift in Sources */,
 				A2EB6EBF1BD18389008E7D86 /* Account.swift in Sources */,

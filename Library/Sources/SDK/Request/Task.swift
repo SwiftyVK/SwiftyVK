@@ -131,7 +131,7 @@ final class TaskImpl: Operation, Task {
         
         switch result {
         case .success(let response):
-            if let next = request.nexts.popLast()?(response) {
+            if let next = request.next {
                 request = next
                 sendAttempts = 0
                 tryToSend()

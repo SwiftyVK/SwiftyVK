@@ -11,6 +11,7 @@ protocol URLOpener {
 
 #if os(OSX)
     final class URLOpenerMacOS: URLOpener {
+        
         func canOpenURL(_ url: URL) -> Bool {
             return false
         }

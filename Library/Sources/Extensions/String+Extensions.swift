@@ -1,6 +1,6 @@
 extension String {
+    
     static func random(_ length: Int) -> String {
-        
         let letters: NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let lettersLen = UInt32(letters.length)
         
