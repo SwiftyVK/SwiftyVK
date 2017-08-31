@@ -25,7 +25,7 @@ public class CustomMethod {
     }
     
     func request(with config: Config = .default) -> Request {
-        return Request(of: .api(method: method, parameters: parameters), config: config)
+        return Request(type: .api(method: method, parameters: parameters))
     }
     
 }

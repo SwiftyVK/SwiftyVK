@@ -1,5 +1,5 @@
 public extension VK.Api {
-    public enum Gifts: Method {
+    public enum Gifts: APIMethod {
         case get(Parameters)
     }
 }

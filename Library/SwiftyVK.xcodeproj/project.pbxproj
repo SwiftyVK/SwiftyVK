@@ -28,8 +28,8 @@
 		A2066AEB1D9C388F0065A4D7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2066AE91D9C388F0065A4D7 /* Task.swift */; };
 		A20CDD941EF667B000271276 /* CaptchaPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDD931EF667B000271276 /* CaptchaPresenterTests.swift */; };
 		A20CDD961EF66AEC00271276 /* CaptchaControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDD951EF66AEC00271276 /* CaptchaControllerMock.swift */; };
-		A217DAA81E9924DE00EA1430 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAA71E9924DE00EA1430 /* Method.swift */; };
-		A217DAA91E9924DE00EA1430 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAA71E9924DE00EA1430 /* Method.swift */; };
+		A217DAA81E9924DE00EA1430 /* APIMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAA71E9924DE00EA1430 /* APIMethod.swift */; };
+		A217DAA91E9924DE00EA1430 /* APIMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAA71E9924DE00EA1430 /* APIMethod.swift */; };
 		A217DAAC1E9926A500EA1430 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAAB1E9926A500EA1430 /* Session.swift */; };
 		A217DAAD1E9926A500EA1430 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217DAAB1E9926A500EA1430 /* Session.swift */; };
 		A21E81591E2A7E68008E81E7 /* CharacterSet+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21E81581E2A7E68008E81E7 /* CharacterSet+Extension.swift */; };
@@ -249,10 +249,10 @@
 		D47E92D11F572E0A00F9522A /* OneVariationsMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92CF1F572E0A00F9522A /* OneVariationsMethod.swift */; };
 		D47E92D31F572E5C00F9522A /* TwoVariationsMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D21F572E5C00F9522A /* TwoVariationsMethod.swift */; };
 		D47E92D41F572E5C00F9522A /* TwoVariationsMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D21F572E5C00F9522A /* TwoVariationsMethod.swift */; };
-		D47E92D61F572F0500F9522A /* SendableMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D51F572F0500F9522A /* SendableMethod.swift */; };
-		D47E92D71F572F0500F9522A /* SendableMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D51F572F0500F9522A /* SendableMethod.swift */; };
-		D47E92D91F5731CB00F9522A /* MethodBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D81F5731CB00F9522A /* MethodBase.swift */; };
-		D47E92DA1F5731CB00F9522A /* MethodBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D81F5731CB00F9522A /* MethodBase.swift */; };
+		D47E92D61F572F0500F9522A /* MethodInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D51F572F0500F9522A /* MethodInstance.swift */; };
+		D47E92D71F572F0500F9522A /* MethodInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D51F572F0500F9522A /* MethodInstance.swift */; };
+		D47E92D91F5731CB00F9522A /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D81F5731CB00F9522A /* Method.swift */; };
+		D47E92DA1F5731CB00F9522A /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E92D81F5731CB00F9522A /* Method.swift */; };
 		D484C9321F4B337E00C9651C /* AttemptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9311F4B337E00C9651C /* AttemptTests.swift */; };
 		D484C9341F4B363E00C9651C /* VKURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9331F4B363E00C9651C /* VKURLSession.swift */; };
 		D484C9351F4B363E00C9651C /* VKURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9331F4B363E00C9651C /* VKURLSession.swift */; };
@@ -357,7 +357,7 @@
 		A2066AE91D9C388F0065A4D7 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		A20CDD931EF667B000271276 /* CaptchaPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaPresenterTests.swift; sourceTree = "<group>"; };
 		A20CDD951EF66AEC00271276 /* CaptchaControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaControllerMock.swift; sourceTree = "<group>"; };
-		A217DAA71E9924DE00EA1430 /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
+		A217DAA71E9924DE00EA1430 /* APIMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMethod.swift; sourceTree = "<group>"; };
 		A217DAAB1E9926A500EA1430 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		A21E81581E2A7E68008E81E7 /* CharacterSet+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CharacterSet+Extension.swift"; sourceTree = "<group>"; };
 		A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptShedulerMock.swift; sourceTree = "<group>"; };
@@ -515,8 +515,8 @@
 		D47E92CB1F5729D200F9522A /* Callbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Callbacks.swift; sourceTree = "<group>"; };
 		D47E92CF1F572E0A00F9522A /* OneVariationsMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneVariationsMethod.swift; sourceTree = "<group>"; };
 		D47E92D21F572E5C00F9522A /* TwoVariationsMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoVariationsMethod.swift; sourceTree = "<group>"; };
-		D47E92D51F572F0500F9522A /* SendableMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendableMethod.swift; sourceTree = "<group>"; };
-		D47E92D81F5731CB00F9522A /* MethodBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodBase.swift; sourceTree = "<group>"; };
+		D47E92D51F572F0500F9522A /* MethodInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodInstance.swift; sourceTree = "<group>"; };
+		D47E92D81F5731CB00F9522A /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		D484C9311F4B337E00C9651C /* AttemptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptTests.swift; sourceTree = "<group>"; };
 		D484C9331F4B363E00C9651C /* VKURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKURLSession.swift; sourceTree = "<group>"; };
 		D484C9361F4B393B00C9651C /* VKURLSessionTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKURLSessionTask.swift; sourceTree = "<group>"; };
@@ -893,9 +893,9 @@
 		D47E92CE1F572DD000F9522A /* Method */ = {
 			isa = PBXGroup;
 			children = (
-				A217DAA71E9924DE00EA1430 /* Method.swift */,
-				D47E92D81F5731CB00F9522A /* MethodBase.swift */,
-				D47E92D51F572F0500F9522A /* SendableMethod.swift */,
+				A217DAA71E9924DE00EA1430 /* APIMethod.swift */,
+				D47E92D81F5731CB00F9522A /* Method.swift */,
+				D47E92D51F572F0500F9522A /* MethodInstance.swift */,
 				D47E92CF1F572E0A00F9522A /* OneVariationsMethod.swift */,
 				D47E92D21F572E5C00F9522A /* TwoVariationsMethod.swift */,
 				D47E92C81F5727EA00F9522A /* ThreeVariationsMethod.swift */,
@@ -1347,7 +1347,7 @@
 				A25A19E21EE5921B00CF13AF /* CaptchaController_iOS.swift in Sources */,
 				A25A19CE1EE41BA700CF13AF /* TokenParser.swift in Sources */,
 				A2E5C5D71ECCAAB600652262 /* String+Extensions.swift in Sources */,
-				D47E92DA1F5731CB00F9522A /* MethodBase.swift in Sources */,
+				D47E92DA1F5731CB00F9522A /* Method.swift in Sources */,
 				D47601201F2E2318005356E5 /* Response.swift in Sources */,
 				A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */,
 				A2CF0D431E98EF0900EAFF30 /* Request.swift in Sources */,
@@ -1359,7 +1359,7 @@
 				A24DDAE81EB73810002EA273 /* MultipartBodyBuilder.swift in Sources */,
 				A2EB6F071BD18395008E7D86 /* Arg.swift in Sources */,
 				A2F632341ED9DC7D0063C9E0 /* VKAppProxy.swift in Sources */,
-				A217DAA91E9924DE00EA1430 /* Method.swift in Sources */,
+				A217DAA91E9924DE00EA1430 /* APIMethod.swift in Sources */,
 				A2066AEB1D9C388F0065A4D7 /* Task.swift in Sources */,
 				A2EB6F091BD18395008E7D86 /* Media.swift in Sources */,
 				A2EB6F0A1BD18395008E7D86 /* Resources.swift in Sources */,
@@ -1367,7 +1367,7 @@
 				A25A19DD1EE58CC900CF13AF /* CaptchaController.swift in Sources */,
 				D4F84BE51F43608A00DA7127 /* ConnectionObserver.swift in Sources */,
 				A2EB6F0B1BD18395008E7D86 /* Scopes.swift in Sources */,
-				D47E92D71F572F0500F9522A /* SendableMethod.swift in Sources */,
+				D47E92D71F572F0500F9522A /* MethodInstance.swift in Sources */,
 				A24D10901C56A49E008263B0 /* Market.swift in Sources */,
 				A2EB6F0E1BD18395008E7D86 /* UrlRequestBuilder.swift in Sources */,
 				A25A19C11EE2F01800CF13AF /* WebController_iOS.swift in Sources */,
@@ -1404,7 +1404,7 @@
 				A24A29491E96B2F8006152E6 /* AttemptSheduler.swift in Sources */,
 				A2EB6EC21BD18389008E7D86 /* Board.swift in Sources */,
 				D47E92D01F572E0A00F9522A /* OneVariationsMethod.swift in Sources */,
-				A217DAA81E9924DE00EA1430 /* Method.swift in Sources */,
+				A217DAA81E9924DE00EA1430 /* APIMethod.swift in Sources */,
 				A2EB6EC31BD18389008E7D86 /* Database.swift in Sources */,
 				D4F84BDE1F435F6400DA7127 /* VKViewController.swift in Sources */,
 				D47E92C91F5727EA00F9522A /* ThreeVariationsMethod.swift in Sources */,
@@ -1448,7 +1448,7 @@
 				A2EB6ED51BD18389008E7D86 /* Upload.swift in Sources */,
 				D47601241F2E2450005356E5 /* VKError.swift in Sources */,
 				A2EB6ED61BD18389008E7D86 /* Users.swift in Sources */,
-				D47E92D91F5731CB00F9522A /* MethodBase.swift in Sources */,
+				D47E92D91F5731CB00F9522A /* Method.swift in Sources */,
 				A2EB6ED71BD18389008E7D86 /* Utils.swift in Sources */,
 				A2EB6ED81BD18389008E7D86 /* Video.swift in Sources */,
 				A25A19DC1EE58CC900CF13AF /* CaptchaController.swift in Sources */,
@@ -1468,7 +1468,7 @@
 				A2EB6EDD1BD18389008E7D86 /* Resources.swift in Sources */,
 				A25A19CD1EE41BA700CF13AF /* TokenParser.swift in Sources */,
 				A2E34DBC1ED1F1260041E663 /* TokenStorage.swift in Sources */,
-				D47E92D61F572F0500F9522A /* SendableMethod.swift in Sources */,
+				D47E92D61F572F0500F9522A /* MethodInstance.swift in Sources */,
 				A2EB6EDE1BD18389008E7D86 /* Scopes.swift in Sources */,
 				A2EB6EE11BD18389008E7D86 /* UrlRequestBuilder.swift in Sources */,
 				A29F1CD41E95674A00BE5369 /* TaskSheduler.swift in Sources */,

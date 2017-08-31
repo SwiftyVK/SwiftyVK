@@ -1,33 +1,35 @@
-public final class SuccessableFailbaleMethod: SendableMethod {
+public final class SuccessableFailbaleMethod: MethodInstance {
     public func onSuccess(_ clousure: @escaping (Data) -> ()) -> FailableMethod {
-        callbacks.onSuccess = clousure
-        return FailableMethod(method, config, callbacks)
+        request.callbacks.onSuccess = clousure
+        return FailableMethod(request)
     }
     
     public func onError(_ clousure: @escaping (VKError) -> ()) -> SuccessableMethod {
-        callbacks.onError = clousure
-        return SuccessableMethod(method, config, callbacks)
+        request.callbacks.onError = clousure
+        return SuccessableMethod(request)
     }
 }
 
-public final class SuccessableConfigurableMethod: SendableMethod {
+public final class SuccessableConfigurableMethod: MethodInstance {
     public func onSuccess(_ clousure: @escaping (Data) -> ()) -> ConfigurableMethod {
-        callbacks.onSuccess = clousure
-        return ConfigurableMethod(method, config, callbacks)
+        request.callbacks.onSuccess = clousure
+        return ConfigurableMethod(request)
     }
     
     public func configure(with config: Config) -> SuccessableMethod {
-        return SuccessableMethod(method, config, callbacks)
+        request.config = config
+        return SuccessableMethod(request)
     }
 }
 
-public final class FailableConfigurableMethod: SendableMethod {
+public final class FailableConfigurableMethod: MethodInstance {
     public func onError(_ clousure: @escaping (VKError) -> ()) -> ConfigurableMethod {
-        callbacks.onError = clousure
-        return ConfigurableMethod(method, config, callbacks)
+        request.callbacks.onError = clousure
+        return ConfigurableMethod(request)
     }
     
     public func configure(with config: Config) -> FailableMethod {
-        return FailableMethod(method, config, callbacks)
+        request.config = config
+        return FailableMethod(request)
     }
 }

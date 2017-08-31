@@ -100,7 +100,7 @@ final class TaskImpl: Operation, Task {
         sendAttempts += 1
         
         let urlRequest = try urlRequestBuilder.build(
-            request: request.rawRequest,
+            request: request.type,
             config: request.config,
             capthca: captcha,
             token: session.token
@@ -113,7 +113,7 @@ final class TaskImpl: Operation, Task {
         )
 
         currentAttempt = newAttempt
-        try session.shedule(attempt: newAttempt, concurrent: request.rawRequest.canSentConcurrently)
+        try session.shedule(attempt: newAttempt, concurrent: request.type.canSentConcurrently)
     }
     
     private func handleSended(_ current: Int64, of expected: Int64) {

@@ -1,46 +1,25 @@
-import Foundation
+public protocol Method: SendableMethod {
+    func configure(with config: Config) -> SuccessableFailbaleMethod
+    func onSuccess(_ clousure: @escaping (Data) -> ()) -> FailableConfigurableMethod
+    func onError(_ clousure: @escaping (VKError) -> ()) -> SuccessableConfigurableMethod
+}
 
-public protocol Method: MethodBase {}
+public protocol SendableMethod {
+    func toRequest() -> Request
+}
 
-public extension Method {
-    public func onSuccess(_ clousure: @escaping (Data) -> ()) -> FailableConfigurableMethod {
-        var callbacks = Callbacks.empty
-        callbacks.onSuccess = clousure
-        return FailableConfigurableMethod(self, Config.default, callbacks)
-    }
-    
-    public func onError(_ clousure: @escaping (VKError) -> ()) -> SuccessableConfigurableMethod {
-        var callbacks = Callbacks.empty
-        callbacks.onError = clousure
-        return SuccessableConfigurableMethod(self, Config.default, callbacks)
-    }
-    
-    public func configure(with config: Config) -> SuccessableFailbaleMethod {
-        return SuccessableFailbaleMethod(self, config, Callbacks.empty)
+public extension SendableMethod {
+    @discardableResult
+    func send() -> Task {
+        return send(in: nil)
     }
     
     @discardableResult
-    public func send(in session: Session?) -> Task {
-        return request().send(with: .empty, in: session)
-    }
-}
-
-extension Method {
-    func request(with config: Config = .default) -> Request {
-        return Request(of: .api(method: method, parameters: parameters), config: config)
-    }
-}
-
-private extension Method {
-    var group: String {
-        return String(describing: type(of: self)).lowercased()
-    }
-    
-    var method: String {
-        return "\(group).\(Mirror(reflecting: self).children.first?.label ?? String())"
-    }
-    
-    var parameters: Parameters {
-        return Mirror(reflecting: self).children.first?.value as? Parameters ?? .empty
+    func send(in session: Session?) -> Task {
+        guard let session = session ?? VK.sessions?.default else {
+            fatalError("You must call VK.prepareForUse function to start using SwiftyVK!")
+        }
+        
+        return session.send(method: self)
     }
 }

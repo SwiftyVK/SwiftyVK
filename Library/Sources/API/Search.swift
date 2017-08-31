@@ -1,5 +1,5 @@
 public extension VK.Api {
-    public enum Search: Method {
+    public enum Search: APIMethod {
         case getHints(Parameters)
     }
 }

@@ -7,7 +7,7 @@ public protocol Session: class {
     func logIn(rawToken: String, expires: TimeInterval) throws
     func logOut()
     @discardableResult
-    func send(request: Request, callbacks: Callbacks) -> Task
+    func send(method: SendableMethod) -> Task
 }
 
 protocol TaskSession {
@@ -157,22 +157,25 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     }
     
     @discardableResult
-    public func send(request: Request, callbacks: Callbacks) -> Task {
+    public func send(method: SendableMethod) -> Task {
+        let request = method.toRequest()
+        request.config.inject(sessionConfig: config)
+
         let task = taskMaker.task(
             request: request,
-            callbacks: callbacks,
+            callbacks: request.callbacks,
             session: self
         )
-        
+    
         do {
             try throwIfDestroyed()
-            try shedule(task: task, concurrent: request.rawRequest.canSentConcurrently)
+            try shedule(task: task, concurrent: request.type.canSentConcurrently)
         }
         catch let error as VKError {
-            callbacks.onError?(error)
+            request.callbacks.onError?(error)
         }
         catch let error {
-            callbacks.onError?(.unknown(error))
+            request.callbacks.onError?(.unknown(error))
         }
         
         return task

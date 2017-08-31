@@ -1,5 +1,5 @@
 public extension VK.Api {
-    public enum Status: Method {
+    public enum Status: APIMethod {
         case get(Parameters)
         case set(Parameters)
     }

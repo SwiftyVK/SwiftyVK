@@ -1,49 +1,41 @@
 import Foundation
 
 public final class Request {
-    
-    let rawRequest: Raw
+    let type: RequestType
     var config: Config
-    var nexts = [((Data) -> Request)]()
+    var callbacks: Callbacks
+    var nexts: [((Data) -> Request)]
     
     init(
-        of rawRequest: Raw,
-        config: Config = .default
+        type: RequestType,
+        config: Config = .default,
+        callbacks: Callbacks = .empty,
+        nexts: [((Data) -> Request)] = []
         ) {
-        self.rawRequest = rawRequest
+        self.type = type
         self.config = config
+        self.callbacks = callbacks
+        self.nexts = nexts
     }
     
     @discardableResult
-    public func next(_ next: @escaping ((Data) -> Request)) -> Request {
-        nexts = [next] + nexts
+    func next(_ next: @escaping ((Data) -> Request)) -> Request {
+        nexts.insert(next, at: 0)
         return self
-    }
-    
-    @discardableResult
-    public func send(with callbacks: Callbacks, in session: Session? = nil) -> Task {
-        guard let session = session ?? VK.sessions?.default else {
-            fatalError("You must call VK.prepareForUse function to start using SwiftyVK!")
-        }
-
-        config.inject(sessionConfig: session.config)
-        return session.send(request: self, callbacks: callbacks)
     }
 }
 
-extension Request {
-    enum Raw {
-        case api(method: String, parameters: Parameters)
-        case url(String)
-        case upload(url: String, media: [Media], partType: PartType)
-        
-        var canSentConcurrently: Bool {
-            switch self {
-            case .api:
-                return false
-            case .url, .upload:
-                return true
-            }
+enum RequestType {
+    case api(method: String, parameters: Parameters)
+    case url(String)
+    case upload(url: String, media: [Media], partType: PartType)
+    
+    var canSentConcurrently: Bool {
+        switch self {
+        case .api:
+            return false
+        case .url, .upload:
+            return true
         }
     }
 }
