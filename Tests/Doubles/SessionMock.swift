@@ -12,7 +12,7 @@ final class SessionMock: Session, TaskSession, DestroyableSession {
         
     }
     
-    func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (VKError) -> ()) {
+    func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping Callbacks.Error) {
         
     }
     

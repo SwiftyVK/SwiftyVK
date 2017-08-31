@@ -3,7 +3,7 @@ public protocol Session: class {
     var config: SessionConfig { get set }
     var state: SessionState { get }
     
-    func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (VKError) -> ())
+    func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping Callbacks.Error)
     func logIn(rawToken: String, expires: TimeInterval) throws
     func logOut()
     @discardableResult
@@ -96,7 +96,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         attemptSheduler.setLimit(to: config.attemptsPerSecLimit)
     }
     
-    public func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping (VKError) -> ()) {
+    public func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping Callbacks.Error) {
         gateQueue.async {
             do {
                 let info = try self.logIn(revoke: true)

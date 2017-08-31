@@ -32,13 +32,13 @@ extension CustomMethod: Method {
         return .init(request)
     }
     
-    public func onSuccess(_ clousure: @escaping (Data) -> ()) -> Methods.FailableConfigurable {
+    public func onSuccess(_ clousure: @escaping Callbacks.Success) -> Methods.FailableConfigurable {
         let request = toRequest()
         request.callbacks.onSuccess = clousure
         return .init(request)
     }
     
-    public func onError(_ clousure: @escaping (VKError) -> ()) -> Methods.SuccessableConfigurable {
+    public func onError(_ clousure: @escaping Callbacks.Error) -> Methods.SuccessableConfigurable {
         let request = toRequest()
         request.callbacks.onError = clousure
         return .init(request)

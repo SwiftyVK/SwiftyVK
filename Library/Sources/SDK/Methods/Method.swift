@@ -1,7 +1,7 @@
 public protocol Method: SendableMethod {
     func configure(with config: Config) -> Methods.SuccessableFailbale
-    func onSuccess(_ clousure: @escaping (Data) -> ()) -> Methods.FailableConfigurable
-    func onError(_ clousure: @escaping (VKError) -> ()) -> Methods.SuccessableConfigurable
+    func onSuccess(_ clousure: @escaping Callbacks.Success) -> Methods.FailableConfigurable
+    func onError(_ clousure: @escaping Callbacks.Error) -> Methods.SuccessableConfigurable
 }
 
 public protocol SendableMethod {
