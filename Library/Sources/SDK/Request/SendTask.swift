@@ -86,7 +86,7 @@ internal final class SendTask: Operation {
 
         switch keyPath {
         case (#keyPath(URLSessionTask.countOfBytesReceived)):
-            delegate.handle(received: task.countOfBytesExpectedToReceive, of: task.countOfBytesExpectedToReceive)
+            delegate.handle(received: task.countOfBytesReceived, of: task.countOfBytesExpectedToReceive)
         case(#keyPath(URLSessionTask.countOfBytesSent)):
             delegate.handle(received: task.countOfBytesSent, of: task.countOfBytesExpectedToSend)
         default:
