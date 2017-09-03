@@ -27,7 +27,7 @@ extension _VKAPI {
 
     ///Returns a server address (required for upload) and video data. More - https://vk.com/dev/video.save
     public static func save(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "video.save", parameters: parameters)
+      return RequestConfig(method: "video.save", parameters: parameters, handleProgress: false)
     }
 
 

@@ -34,14 +34,14 @@ extension _VKAPI {
 
     ///Returns the server address to upload audio files. More - https://vk.com/dev/audio.getUploadServer
     public static func getUploadServer(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "audio.getUploadServer", parameters: parameters)
+      return RequestConfig(method: "audio.getUploadServer", parameters: parameters, handleProgress: false)
     }
 
 
 
     ///Saves audio files after successful uploading. More - https://vk.com/dev/audio.save
     public static func save(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "audio.save", parameters: parameters)
+      return RequestConfig(method: "audio.save", parameters: parameters, handleProgress: false)
     }
 
 

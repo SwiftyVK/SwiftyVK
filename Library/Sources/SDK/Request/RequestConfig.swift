@@ -27,6 +27,8 @@ public struct RequestConfig {
     public var catchErrors = VK.config.catchErrors
     ///Allows print log messages on this request to console
     public var logToConsole: Bool = VK.config.logToConsole
+    
+    internal var handleProgress = true
 
     internal private(set) var nextRequest: ((JSON) -> RequestConfig)?
 
@@ -47,11 +49,12 @@ public struct RequestConfig {
 
 
 
-    internal init(method: String, parameters: [VK.Arg : String] = [:]) {
+    internal init(method: String, parameters: [VK.Arg : String] = [:], handleProgress: Bool = true) {
         self.method         = method
         self.parameters     = parameters
         self.customUrl      = ""
         self.media          = []
+        self.handleProgress = handleProgress
     }
 
 

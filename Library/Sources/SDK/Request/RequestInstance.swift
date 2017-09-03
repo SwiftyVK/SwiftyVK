@@ -136,9 +136,12 @@ extension RequestInstance {
 
 
 
-    func handle(sended: Int64, of expected: Int64) {
+    func handle(sent: Int64, of expected: Int64) {
         guard !isCancelled else {return}
-        VK.Log.put(self, "send \(sended) of \(expected) bytes")
+        VK.Log.put(self, "send \(sent) of \(expected) bytes")
+        if config.handleProgress {
+            progressBlock?(sent, expected)
+        }
     }
 
 
@@ -146,7 +149,9 @@ extension RequestInstance {
     func handle(received: Int64, of expected: Int64) {
         guard !isCancelled else {return}
         VK.Log.put(self, "receive \(received) of \(expected) bytes")
-        progressBlock?(received, expected)
+        if config.handleProgress {
+            progressBlock?(received, expected)
+        }
     }
 
 
