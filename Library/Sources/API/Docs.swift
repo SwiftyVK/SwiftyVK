@@ -20,21 +20,21 @@ extension _VKAPI {
 
     ///Returns the server address for document upload.  More - https://vk.com/dev/docs.getUploadServer
     public static func getUploadServer(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "docs.getUploadServer", parameters: parameters)
+      return RequestConfig(method: "docs.getUploadServer", parameters: parameters, handleProgress: false)
     }
 
 
 
     ///Returns the server address for document upload onto a user's or community's wall. More - https://vk.com/dev/docs.getWallUploadServer
     public static func getWallUploadServer(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "docs.getWallUploadServer", parameters: parameters)
+      return RequestConfig(method: "docs.getWallUploadServer", parameters: parameters, handleProgress: false)
     }
 
 
 
     ///Saves a document after uploading it to a server. More - https://vk.com/dev/docs.save
     public static func save(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "docs.save", parameters: parameters)
+      return RequestConfig(method: "docs.save", parameters: parameters, handleProgress: false)
     }
 
 

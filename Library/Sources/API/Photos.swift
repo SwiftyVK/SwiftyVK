@@ -48,28 +48,28 @@ extension _VKAPI {
 
     ///Returns the server address for photo upload. More - https://vk.com/dev/photos.getUploadServer
     public static func getUploadServer(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "photos.getUploadServer", parameters: parameters)
+      return RequestConfig(method: "photos.getUploadServer", parameters: parameters, handleProgress: false)
     }
 
 
 
     ///Returns an upload server address for a profile or community photo. More - https://vk.com/dev/photos.getOwnerPhotoUploadServer
     public static func getOwnerPhotoUploadServer(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "photos.getOwnerPhotoUploadServer", parameters: parameters)
+      return RequestConfig(method: "photos.getOwnerPhotoUploadServer", parameters: parameters, handleProgress: false)
     }
 
 
 
     ///Returns an upload link for chat cover pictures. More - https://vk.com/dev/photos.getChatUploadServer
     public static func getChatUploadServer(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "photos.getChatUploadServer", parameters: parameters)
+      return RequestConfig(method: "photos.getChatUploadServer", parameters: parameters, handleProgress: false)
     }
 
 
 
     ///Saves a profile or community photo. More - https://vk.com/dev/photos.saveOwnerPhoto
     public static func saveOwnerPhoto(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "photos.saveOwnerPhoto", parameters: parameters)
+      return RequestConfig(method: "photos.saveOwnerPhoto", parameters: parameters, handleProgress: false)
     }
 
 
@@ -77,21 +77,21 @@ extension _VKAPI {
     ///Saves a photo to a user's or community's wall after being uploaded, полученный методом photos.getWallUploadServer. 
     ///More - https://vk.com/dev/photos.saveWallPhoto
     public static func saveWallPhoto(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "photos.saveWallPhoto", parameters: parameters)
+      return RequestConfig(method: "photos.saveWallPhoto", parameters: parameters, handleProgress: false)
     }
 
 
 
     ///Returns the server address for photo upload onto a user's wall. More - https://vk.com/dev/photos.getWallUploadServer
     public static func getWallUploadServer(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "photos.getWallUploadServer", parameters: parameters)
+      return RequestConfig(method: "photos.getWallUploadServer", parameters: parameters, handleProgress: false)
     }
 
 
 
     ///Returns the server address for photo upload in a private message for a user. More - http://vk.com/dev/photos.getMessagesUploadServer
     public static func getMessagesUploadServer(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "photos.getMessagesUploadServer", parameters: parameters)
+      return RequestConfig(method: "photos.getMessagesUploadServer", parameters: parameters, handleProgress: false)
     }
 
 
@@ -99,7 +99,7 @@ extension _VKAPI {
     ///Saves a photo after being successfully uploaded. URL obtained with photos.getMessagesUploadServer method. 
     ///More - http://vk.com/dev/photos.saveMessagesPhoto
     public static func saveMessagesPhoto(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "photos.saveMessagesPhoto", parameters: parameters)
+      return RequestConfig(method: "photos.saveMessagesPhoto", parameters: parameters, handleProgress: false)
     }
 
 
@@ -127,7 +127,7 @@ extension _VKAPI {
 
     ///Saves photos after successful uploading. More - https://vk.com/dev/photos.save
     public static func save(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "photos.save", parameters: parameters)
+      return RequestConfig(method: "photos.save", parameters: parameters, handleProgress: false)
     }
 
 
@@ -289,28 +289,28 @@ extension _VKAPI {
 
     ///More - https://vk.com/dev/photos.getMarketAlbumUploadServer
     public static func getMarketAlbumUploadServer(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "photos.getMarketAlbumUploadServer", parameters: parameters)
+      return RequestConfig(method: "photos.getMarketAlbumUploadServer", parameters: parameters, handleProgress: false)
     }
 
 
 
     ///More - https://vk.com/dev/photos.saveMarketPhoto
     public static func saveMarketPhoto(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "photos.saveMarketPhoto", parameters: parameters)
+      return RequestConfig(method: "photos.saveMarketPhoto", parameters: parameters, handleProgress: false)
     }
 
 
 
     ///More - https://vk.com/dev/photos.saveMarketAlbumPhoto
     public static func saveMarketAlbumPhoto(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "photos.saveMarketAlbumPhoto", parameters: parameters)
+      return RequestConfig(method: "photos.saveMarketAlbumPhoto", parameters: parameters, handleProgress: false)
     }
 
 
 
     ///More - https://vk.com/dev/photos.getMarketUploadServer
     public static func getMarketUploadServer(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
-      return RequestConfig(method: "photos.getMarketUploadServer", parameters: parameters)
+      return RequestConfig(method: "photos.getMarketUploadServer", parameters: parameters, handleProgress: false)
     }
   }
 }
