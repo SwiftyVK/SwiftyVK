@@ -1,29 +1,25 @@
 extension Methods {
     public final class Successable: Basic {
         public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> Basic {
-            request.callbacks.onSuccess = clousure
-            return .init(request)
+            return withOnSuccess(clousure)
         }
     }
     
     public final class Failable: Basic {
         public func onError(_ clousure: @escaping RequestCallbacks.Error) -> Basic {
-            request.callbacks.onError = clousure
-            return .init(request)
+            return withOnError(clousure)
         }
     }
     
     public final class Progressable: Basic {
         public func onProgress(_ clousure: @escaping RequestCallbacks.Progress) -> Basic {
-            request.callbacks.onProgress = clousure
-            return .init(request)
+            return withOnProgress(clousure)
         }
     }
     
     public final class Configurable: Basic {
         public func configure(with config: Config) -> Basic {
-            request.config = config
-            return .init(request)
+            return withConfig(config)
         }
     }
 }

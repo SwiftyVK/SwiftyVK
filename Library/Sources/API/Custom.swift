@@ -15,7 +15,7 @@ public extension VKAPI {
 }
 
 // Do not use this class directly. Use Api.Custom
-public final class CustomMethod {
+public final class CustomMethod: Method {
     let method: String
     let parameters: Parameters
     
@@ -23,33 +23,7 @@ public final class CustomMethod {
         self.method = method
         self.parameters = parameters
     }
-}
 
-extension CustomMethod: Method {
-    public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> Methods.FailbaleProgressableConfigurable {
-        let request = toRequest()
-        request.callbacks.onSuccess = clousure
-        return .init(request)
-    }
-    
-    public func onError(_ clousure: @escaping RequestCallbacks.Error) -> Methods.SuccessableProgressableConfigurable {
-        let request = toRequest()
-        request.callbacks.onError = clousure
-        return .init(request)
-    }
-    
-    public func onProgress(_ clousure: @escaping RequestCallbacks.Progress) -> Methods.SuccessableFailbaleConfigurable {
-        let request = toRequest()
-        request.callbacks.onProgress = clousure
-        return .init(request)
-    }
-
-    public func configure(with config: Config) -> Methods.SuccessableFailbaleProgressable {
-        let request = toRequest()
-        request.config = config
-        return .init(request)
-    }
-    
     public func toRequest() -> Request {
         return Request(type: .api(method: method, parameters: parameters))
     }
