@@ -2,12 +2,17 @@ extension Methods {
     public class Basic: SendableMethod {
         let request: Request
         
-        init(_ request: Request) {
+        required public init(_ request: Request) {
             self.request = request
         }
         
         public func toRequest() -> Request {
             return request
+        }
+        
+        public func chain(_ next: @escaping (Data) -> Request) -> Self {
+            request.add(next: next)
+            return .init(request)
         }
         
         func withOnSuccess<T: Basic>(_ clousure: @escaping RequestCallbacks.Success) -> T {
@@ -25,7 +30,7 @@ extension Methods {
             return .init(request)
         }
         
-        public func withConfig<T: Basic>(_ config: Config) -> T {
+        func withConfig<T: Basic>(_ config: Config) -> T {
             request.config = config
             return .init(request)
         }

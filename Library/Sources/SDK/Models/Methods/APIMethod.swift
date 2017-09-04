@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol APIMethod {}
+public protocol APIMethod: Method {}
 
 public extension APIMethod {
     public func toRequest() -> Request {

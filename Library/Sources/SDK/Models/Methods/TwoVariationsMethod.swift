@@ -1,5 +1,5 @@
 extension Methods {
-    public final class SuccessableFailbale: Basic {
+    public final class SuccessableFailable: Basic {
         public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> Failable {
             return withOnSuccess(clousure)
         }

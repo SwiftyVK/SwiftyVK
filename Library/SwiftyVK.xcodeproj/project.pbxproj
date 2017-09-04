@@ -273,6 +273,8 @@
 		D49795AB1F4DFC2400921A21 /* ApiMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795AA1F4DFC2400921A21 /* ApiMethod.swift */; };
 		D49EA9ED1F587EEF00C1A251 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EA9EC1F587EEF00C1A251 /* RequestType.swift */; };
 		D49EA9EE1F587EF300C1A251 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EA9EC1F587EEF00C1A251 /* RequestType.swift */; };
+		D49EA9F31F5892B000C1A251 /* FullVariationsMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EA9F21F5892B000C1A251 /* FullVariationsMethod.swift */; };
+		D49EA9F41F5892B000C1A251 /* FullVariationsMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EA9F21F5892B000C1A251 /* FullVariationsMethod.swift */; };
 		D4C032AC1F51F650005AB59A /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AB1F51F650005AB59A /* IDGenerator.swift */; };
 		D4C032AD1F51F650005AB59A /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AB1F51F650005AB59A /* IDGenerator.swift */; };
 		D4C032AF1F520733005AB59A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AE1F520733005AB59A /* TaskTests.swift */; };
@@ -537,6 +539,7 @@
 		D49795AA1F4DFC2400921A21 /* ApiMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiMethod.swift; sourceTree = "<group>"; };
 		D49795AD1F4DFDF700921A21 /* URLOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = URLOpener.swift; path = Sources/Extensions/URLOpener.swift; sourceTree = SOURCE_ROOT; };
 		D49EA9EC1F587EEF00C1A251 /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
+		D49EA9F21F5892B000C1A251 /* FullVariationsMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullVariationsMethod.swift; sourceTree = "<group>"; };
 		D4C032AB1F51F650005AB59A /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		D4C032AE1F520733005AB59A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderMock.swift; sourceTree = "<group>"; };
@@ -903,6 +906,7 @@
 				D47E92CF1F572E0A00F9522A /* OneVariationsMethod.swift */,
 				D47E92D21F572E5C00F9522A /* TwoVariationsMethod.swift */,
 				D47E92C81F5727EA00F9522A /* ThreeVariationsMethod.swift */,
+				D49EA9F21F5892B000C1A251 /* FullVariationsMethod.swift */,
 			);
 			path = Methods;
 			sourceTree = "<group>";
@@ -1368,6 +1372,7 @@
 				D47E92DA1F5731CB00F9522A /* Method.swift in Sources */,
 				D47601201F2E2318005356E5 /* Response.swift in Sources */,
 				A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */,
+				D49EA9F41F5892B000C1A251 /* FullVariationsMethod.swift in Sources */,
 				A2CF0D431E98EF0900EAFF30 /* Request.swift in Sources */,
 				A202594A1EE9AED00014B0BE /* ApiErrorHandler.swift in Sources */,
 				A2E34DBD1ED1F1260041E663 /* TokenStorage.swift in Sources */,
@@ -1471,6 +1476,7 @@
 				D47E92D91F5731CB00F9522A /* Method.swift in Sources */,
 				A2EB6ED71BD18389008E7D86 /* Utils.swift in Sources */,
 				A2EB6ED81BD18389008E7D86 /* Video.swift in Sources */,
+				D49EA9F31F5892B000C1A251 /* FullVariationsMethod.swift in Sources */,
 				A25A19DC1EE58CC900CF13AF /* CaptchaController.swift in Sources */,
 				A254C0C81E9904CB001A5456 /* Custom.swift in Sources */,
 				A2EB6ED91BD18389008E7D86 /* Wall.swift in Sources */,

@@ -28,7 +28,8 @@ final class TaskImpl: Operation, Task {
         return "task #\(id), state: \(state)"
     }
     
-    private var request: Request
+    private let originalRequest: Request
+    private var currentRequest: Request
     private let callbacks: RequestCallbacks
     private let session: TaskSession
     private let semaphore = DispatchSemaphore(value: 0)
@@ -48,7 +49,8 @@ final class TaskImpl: Operation, Task {
         apiErrorHandler: ApiErrorHandler
         ) {
         self.id = id
-        self.request = request
+        self.originalRequest = request
+        self.currentRequest = request
         self.callbacks = callbacks
         self.session = session
         self.urlRequestBuilder = urlRequestBuilder
@@ -74,7 +76,7 @@ final class TaskImpl: Operation, Task {
     private func resendWith(error: VKError?, captcha: Captcha?) {
         guard !self.isCancelled else { return }
         
-        guard sendAttempts < request.config.maxAttemptsLimit.count else {
+        guard sendAttempts < currentRequest.config.maxAttemptsLimit.count else {
             if let error = error {
                 return perform(error: error)
             }
@@ -100,20 +102,20 @@ final class TaskImpl: Operation, Task {
         sendAttempts += 1
         
         let urlRequest = try urlRequestBuilder.build(
-            request: request.type,
-            config: request.config,
+            request: currentRequest.type,
+            config: currentRequest.config,
             capthca: captcha,
             token: session.token
         )
         
         let newAttempt = attemptMaker.attempt(
             request: urlRequest,
-            timeout: request.config.attemptTimeout,
+            timeout: currentRequest.config.attemptTimeout,
             callbacks: AttemptCallbacks(onFinish: handleResult, onSent: handleSended, onRecive: handleReceived)
         )
 
         currentAttempt = newAttempt
-        try session.shedule(attempt: newAttempt, concurrent: request.type.canSentConcurrently)
+        try session.shedule(attempt: newAttempt, concurrent: currentRequest.type.canSentConcurrently)
     }
     
     private func handleSended(_ current: Int64, of expected: Int64) {
@@ -131,8 +133,8 @@ final class TaskImpl: Operation, Task {
         
         switch result {
         case .success(let response):
-            if let next = request.next {
-                request = next
+            if let next = originalRequest.nexts.popLast() {
+                currentRequest = next(response)
                 sendAttempts = 0
                 tryToSend()
             }
@@ -147,7 +149,7 @@ final class TaskImpl: Operation, Task {
     private func catchApiError(error vkError: VKError) {
         guard !isCancelled else { return }
         
-        guard request.config.handleErrors == true else {
+        guard currentRequest.config.handleErrors == true else {
             return perform(error: vkError)
             
         }

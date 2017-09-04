@@ -1,5 +1,5 @@
 extension Methods {
-    public final class SuccessableFailbaleProgressable: Basic {
+    public final class SuccessableFailableProgressable: Basic {
         public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> FailableProgressable {
             return withOnSuccess(clousure)
         }
@@ -8,12 +8,12 @@ extension Methods {
             return withOnError(clousure)
         }
         
-        public func onProgress(_ clousure: @escaping RequestCallbacks.Progress) -> SuccessableFailbale {
+        public func onProgress(_ clousure: @escaping RequestCallbacks.Progress) -> SuccessableFailable {
             return withOnProgress(clousure)
         }
     }
     
-    public final class SuccessableFailbaleConfigurable: Basic {
+    public final class SuccessableFailableConfigurable: Basic {
         public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> FailableConfigurable {
             return withOnSuccess(clousure)
         }
@@ -22,7 +22,7 @@ extension Methods {
             return withOnError(clousure)
         }
         
-        public func configure(with config: Config) -> SuccessableFailbale {
+        public func configure(with config: Config) -> SuccessableFailable {
             return withConfig(config)
         }
     }
@@ -41,7 +41,7 @@ extension Methods {
         }
     }
     
-    public final class FailbaleProgressableConfigurable: Basic {
+    public final class FailableProgressableConfigurable: Basic {
         public func onError(_ clousure: @escaping RequestCallbacks.Error) -> ProgressableConfigurable {
             return withOnError(clousure)
         }
