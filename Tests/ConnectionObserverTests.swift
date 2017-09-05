@@ -4,7 +4,6 @@ import XCTest
 
 class ConnectionObserverTests: XCTestCase {
 
-    
     func test_registerAllObservers() {
         // Given
         var names = [Notification.Name?]()

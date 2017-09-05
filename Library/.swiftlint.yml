@@ -64,7 +64,7 @@ type_name:
     warning: 2
     error: 2
   max_length:
-    warning: 40
+    warning: 50
     error: 60
 statement_position:
   statement_mode: uncuddled_else

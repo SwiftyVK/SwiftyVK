@@ -1,5 +1,5 @@
 extension Methods {
-    public final class SuccessableFailableProgressableConfigurable: Basic, Method {        
+    public final class SuccessableFailableProgressableConfigurable: Basic, Method {
         public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> FailableProgressableConfigurable {
             return withOnSuccess(clousure)
         }

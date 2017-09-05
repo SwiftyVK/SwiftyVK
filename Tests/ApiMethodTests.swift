@@ -39,4 +39,53 @@ class ApiMethodTests: XCTestCase {
         // Then
         XCTAssertEqual(sendCallCount, 1)
     }
+    
+    func test_setConfig() {
+        // Given
+        let originalMethod = VKAPI.Users.get(.empty)
+        // When
+        let mutatedMethod = originalMethod.configure(with: .default)
+        // Then
+        XCTAssertTrue(type(of: mutatedMethod) == Methods.SuccessableFailableProgressable.self)
+    }
+    
+    func test_setOnSuccess() {
+        // Given
+        let originalMethod = VKAPI.Users.get(.empty)
+        // When
+        let mutatedMethod = originalMethod.onSuccess { _ in }
+        // Then
+        XCTAssertTrue(type(of: mutatedMethod) == Methods.FailableProgressableConfigurable.self)
+    }
+    
+    func test_setOnError() {
+        // Given
+        let originalMethod = VKAPI.Users.get(.empty)
+        // When
+        let mutatedMethod = originalMethod.onError { _ in }
+        // Then
+        XCTAssertTrue(type(of: mutatedMethod) == Methods.SuccessableProgressableConfigurable.self)
+    }
+    
+    func test_setOnProgress() {
+        // Given
+        let originalMethod = VKAPI.Users.get(.empty)
+        // When
+        let mutatedMethod = originalMethod.onProgress { _ in }
+        // Then
+        XCTAssertTrue(type(of: mutatedMethod) == Methods.SuccessableFailableConfigurable.self)
+    }
+    
+    func test_setNext() {
+        // Given
+        let originalMethod = VKAPI.Users.get(.empty)
+        // When
+        let mutatedMethod = originalMethod
+            .chain { _ in Request(type: .url("")) }
+            .chain { _ in Request(type: .url("")) }
+            .chain { _ in Request(type: .url("")) }
+        // Then
+        XCTAssertTrue(type(of: mutatedMethod) == Methods.SuccessableFailableProgressableConfigurable.self)
+        XCTAssertEqual(mutatedMethod.toRequest().nexts.count, 3)
+    }
 }
