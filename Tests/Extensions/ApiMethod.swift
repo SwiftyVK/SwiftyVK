@@ -1,6 +1,6 @@
 @testable import SwiftyVK
 
-extension Request.Raw {
+extension RequestType {
     var apiMethod: String? {
         switch self {
         case let .api(method, _):

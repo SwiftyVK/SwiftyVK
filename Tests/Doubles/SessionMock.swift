@@ -1,6 +1,7 @@
 @testable import SwiftyVK
 
 final class SessionMock: Session, TaskSession, DestroyableSession {
+    
     var token: Token?
     
     let id = String.random(20)
@@ -22,11 +23,11 @@ final class SessionMock: Session, TaskSession, DestroyableSession {
     
     func logOut() {}
     
-    var onSend: ((Request) -> ())?
+    var onSend: ((SendableMethod) -> ())?
     
     @discardableResult
-    func send(request: Request, callbacks: RequestCallbacks) -> Task {
-        onSend?(request)
+    func send(method: SendableMethod) -> Task {
+        onSend?(method)
         return TaskMock()
     }
     

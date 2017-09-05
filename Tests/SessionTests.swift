@@ -77,9 +77,9 @@ final class SessionTests: XCTestCase {
     func test_send() {
         // Given
         let (session, taskSheduler, _, _) = sessionObjects
-        let request = Request(of: .url(""))
+        let request = Request(type: .url("")).toMethod()
         // Then
-        _ = session.send(request: request, callbacks: .empty)
+        _ = session.send(method: request)
         // When
         XCTAssertEqual(taskSheduler.sheduleCallCount, 1)
     }
@@ -220,35 +220,23 @@ final class SessionTests: XCTestCase {
     func test_sendTask_whenSessionDestroyed() {
         // Given
         let (session, _, _, _) = sessionObjects
-        let request = Request(of: .url(""))
+        let request = Request(type: .url("")).toMethod().onError { error in
+            XCTAssertEqual(error.asVK, VKError.sessionAlreadyDestroyed(session))
+        }
         // When
         session.id = ""
-
-        session.send(
-            request: request,
-            callbacks: RequestCallbacks(
-                onError: { error in
-                    // Then
-                    XCTAssertEqual(error.asVK, VKError.sessionAlreadyDestroyed(session))
-            })
-        )
+        session.send(method: request)
     }
     
     func test_sendWrongTask_shouldBeFail() {
         // Given
         let (session, taskSheduler, _, _) = sessionObjects
-        let request = Request(of: .url(""))
+        let request = Request(type: .url("")).toMethod().onError { error in
+            XCTAssertEqual(error.asVK, VKError.wrongTaskType)
+        }
         // When
         taskSheduler.shouldThrows = true
-
-        session.send(
-            request: request,
-            callbacks: RequestCallbacks(
-                onError: { error in
-                    // Then
-                    XCTAssertEqual(error.asVK, VKError.wrongTaskType)
-            })
-        )
+        session.send(method: request)
     }
     
     func test_destroy() {

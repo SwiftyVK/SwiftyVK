@@ -14,7 +14,7 @@ final class UrlRequestBuilderTests: XCTestCase {
     }
     
     private func makeUrlRequestFrom(
-        request: Request.Raw = .api(method: "", parameters: .empty),
+        request: RequestType = .api(method: "", parameters: .empty),
         httpMethod: HttpMethod = .GET,
         timeout: TimeInterval = 0
         ) throws -> URLRequest {

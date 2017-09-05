@@ -18,7 +18,7 @@ public final class Request {
         nexts = [next] + nexts
     }
     
-    func toMethod() -> Methods.Basic {
-        return Methods.Basic(self)
+    func toMethod() -> Methods.SuccessableFailableProgressableConfigurable {
+        return .init(self)
     }
 }
