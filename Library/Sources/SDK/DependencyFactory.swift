@@ -60,7 +60,6 @@ final class DependencyFactoryImpl: DependencyFactory {
     private let foregroundSession = URLSession.shared
     
     private let uiSyncQueue = DispatchQueue(label: "SwiftyVK.uiSyncQueue")
-    private let attemptsQueue = DispatchQueue(label: "SwiftyVK.AttemptQueue")
     
     init(appId: String, delegate: SwiftyVKDelegate?) {
         self.appId = appId
@@ -221,7 +220,6 @@ final class DependencyFactoryImpl: DependencyFactory {
             request: request,
             timeout: timeout,
             session: foregroundSession,
-            queue: attemptsQueue,
             callbacks: callbacks
         )
     }

@@ -134,7 +134,6 @@ private func makeContext(timeout: TimeInterval = 10, callbacks: AttemptCallbacks
         request: request,
         timeout: timeout,
         session: session,
-        queue: attemptQueue,
         callbacks: callbacks
     )
     

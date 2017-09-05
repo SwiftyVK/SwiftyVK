@@ -5,7 +5,6 @@ protocol Attempt: class {
         request: URLRequest,
         timeout: TimeInterval,
         session: VKURLSession,
-        queue: DispatchQueue,
         callbacks: AttemptCallbacks
     )
     
@@ -18,20 +17,17 @@ final class AttemptImpl: Operation, Attempt {
     private let timeout: TimeInterval
     private var task: VKURLSessionTask?
     private let urlSession: VKURLSession
-    private let configurationChangeQueue: DispatchQueue
     private let callbacks: AttemptCallbacks
     
     init(
         request: URLRequest,
         timeout: TimeInterval,
         session: VKURLSession,
-        queue: DispatchQueue,
         callbacks: AttemptCallbacks
         ) {
         self.request = request
         self.timeout = timeout
         self.urlSession = session
-        self.configurationChangeQueue = queue
         self.callbacks = callbacks
         super.init()
     }
@@ -57,17 +53,10 @@ final class AttemptImpl: Operation, Attempt {
             }
         }
         
-        configurationChangeQueue.sync {
-            urlSession.configuration.timeoutIntervalForRequest = self.timeout
-            urlSession.configuration.timeoutIntervalForResource = self.timeout
-            
-            self.task = urlSession.dataTask(with: request, completionHandler: completion)
-            
-            task?.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived), options: .new, context: nil)
-            task?.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesSent), options: .new, context: nil)
-            
-            task?.resume()
-        }
+        task = urlSession.dataTask(with: request, completionHandler: completion)
+        task?.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived), options: .new, context: nil)
+        task?.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesSent), options: .new, context: nil)
+        task?.resume()
         
         semaphore.wait()
     }
