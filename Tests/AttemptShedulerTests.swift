@@ -19,7 +19,7 @@ final class AttemptShedulerTests: XCTestCase {
     func test_executeMinimumSerialOpearations_forOneSecond() {
         // When
         let samples = sheduleSamples(count: operationCount, concurrent: false)
-        Thread.sleep(forTimeInterval: 1)
+        Thread.sleep(forTimeInterval: 0.9)
         // Then
         XCTAssertLessThanOrEqual(samples.filter { $0.isFinished }.count, shedulerLimit.count,
             "Operations should be executed serially"
@@ -46,7 +46,7 @@ final class AttemptShedulerTests: XCTestCase {
         // When
         let serial = sheduleSamples(count: operationCount, concurrent: false, completion: { group.leave() })
         let concurrent = sheduleSamples(count: operationCount, concurrent: true)
-        Thread.sleep(forTimeInterval: 1)
+        Thread.sleep(forTimeInterval: 0.9)
         // Then
         XCTAssertLessThanOrEqual(serial.filter { $0.isFinished }.count, shedulerLimit.count,
             "Operations should be executed serially"
