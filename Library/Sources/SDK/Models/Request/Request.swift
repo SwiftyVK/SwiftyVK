@@ -4,6 +4,15 @@ public final class Request {
     var callbacks: RequestCallbacks
     private var nextRequests: [((Data) -> Request)] = []
     
+    var canSentConcurrently: Bool {
+        switch type {
+        case .api:
+            return false
+        case .url, .upload:
+            return true
+        }
+    }
+    
     init(
         type: RequestType,
         config: Config = .default,

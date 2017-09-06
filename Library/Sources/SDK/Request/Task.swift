@@ -113,7 +113,7 @@ final class TaskImpl: Operation, Task {
         )
 
         currentAttempt = newAttempt
-        try session.shedule(attempt: newAttempt, concurrent: currentRequest.type.canSentConcurrently)
+        try session.shedule(attempt: newAttempt, concurrent: currentRequest.canSentConcurrently)
     }
     
     private func handleSended(_ current: Int64, of expected: Int64) {
