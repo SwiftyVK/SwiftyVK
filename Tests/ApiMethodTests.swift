@@ -81,9 +81,9 @@ class ApiMethodTests: XCTestCase {
         let originalMethod = VKAPI.Users.get(.empty)
         // When
         let mutatedMethod = originalMethod
-            .chain { _ in Request(type: .url("")) }
-            .chain { _ in Request(type: .url("")) }
-            .chain { _ in Request(type: .url("")) }
+            .chain { _ in Request(type: .url("")).toMethod() }
+            .chain { _ in Request(type: .url("")).toMethod() }
+            .chain { _ in Request(type: .url("")).toMethod() }
         
         let lastRequest = mutatedMethod.toRequest().next(with: Data())?.next(with: Data())?.next(with: Data())
         // Then

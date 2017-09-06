@@ -2,7 +2,7 @@ public final class Request {
     let type: RequestType
     var config: Config
     var callbacks: RequestCallbacks
-    private var nextRequests: [((Data) -> Request)] = []
+    private var nextRequests: [((Data) -> SendableMethod)] = []
     
     var canSentConcurrently: Bool {
         switch type {
@@ -23,12 +23,12 @@ public final class Request {
         self.callbacks = callbacks
     }
     
-    func add(next: @escaping ((Data) -> Request)) {
+    func add(next: @escaping ((Data) -> SendableMethod)) {
         nextRequests = [next] + nextRequests
     }
     
     func next(with data: Data) -> Request? {
-        guard let next = nextRequests.popLast()?(data) else {
+        guard let next = nextRequests.popLast()?(data).toRequest() else {
             return nil
         }
         

@@ -196,7 +196,7 @@ class TaskTests: XCTestCase {
         var sessionSheduleCallCount = 0
         let context = makeContext(
             configure: { $0.onFinish(.emptySuccess) },
-            nextRequest: VKAPI.Users.get(.empty).toRequest()
+            nextRequest: VKAPI.Users.get(.empty)
         )
         
         context.session.onShedule = { _ in
@@ -258,7 +258,7 @@ private func makeContext(
     callbacks: RequestCallbacks = .empty,
     handleErrors: Bool = true,
     shouldCancel: Bool = false,
-    nextRequest: Request? = nil
+    nextRequest: SendableMethod? = nil
     ) -> (
     task: TaskImpl,
     requestBuilder: URLRequestBuilderMock,

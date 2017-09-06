@@ -46,7 +46,7 @@ public extension Method {
         return .init(request)
     }
     
-    func chain(_ next: @escaping (Data) -> Request) -> Methods.SuccessableFailableProgressableConfigurable {
+    func chain(_ next: @escaping (Data) -> SendableMethod) -> Methods.SuccessableFailableProgressableConfigurable {
         let request = toRequest()
         request.add(next: next)
         return .init(request)
