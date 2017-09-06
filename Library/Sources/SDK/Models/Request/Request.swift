@@ -2,7 +2,7 @@ public final class Request {
     let type: RequestType
     var config: Config
     var callbacks: RequestCallbacks
-    private var nexts: [((Data) -> Request)] = []
+    private var nextRequests: [((Data) -> Request)] = []
     
     init(
         type: RequestType,
@@ -15,13 +15,24 @@ public final class Request {
     }
     
     func add(next: @escaping ((Data) -> Request)) {
-        nexts = [next] + nexts
+        nextRequests = [next] + nextRequests
     }
     
     func next(with data: Data) -> Request? {
-        let nextRequest = nexts.popLast()?(data)
-        nextRequest?.nexts = nexts
-        return nextRequest
+        guard let next = nextRequests.popLast()?(data) else {
+            return nil
+        }
+        
+        next.callbacks = RequestCallbacks(
+            onSuccess: callbacks.onSuccess,
+            onError: callbacks.onError,
+            onProgress: next.callbacks.onProgress
+        )
+        
+        next.config = config.overriden(with: next.config)
+        next.nextRequests = nextRequests
+        
+        return next
     }
     
     func toMethod() -> Methods.SuccessableFailableProgressableConfigurable {

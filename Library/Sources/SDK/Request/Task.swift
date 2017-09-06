@@ -74,7 +74,7 @@ final class TaskImpl: Operation, Task {
     private func resendWith(error: VKError?, captcha: Captcha?) {
         guard !self.isCancelled else { return }
         
-        guard sendAttempts < currentRequest.config.maxAttemptsLimit.count else {
+        guard sendAttempts < currentRequest.config.attemptsMaxLimit.count else {
             if let error = error {
                 return perform(error: error)
             }

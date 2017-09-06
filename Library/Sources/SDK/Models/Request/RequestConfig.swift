@@ -10,7 +10,7 @@ public struct Config {
     var language: Language {
         return _language ?? sessionConfig?.language ?? .default
     }
-    var maxAttemptsLimit: AttemptLimit {
+    var attemptsMaxLimit: AttemptLimit {
         return _attemptsMaxLimit ?? sessionConfig?.attemptsMaxLimit ?? .default
     }
     var attemptTimeout: TimeInterval {
@@ -52,28 +52,19 @@ public struct Config {
         self.sessionConfig = sessionConfig
     }
     
-    func overriden(
-        apiVersion: String? = nil,
-        language: Language? = nil,
-        attemptLimit: AttemptLimit? = nil,
-        attemptTimeout: TimeInterval? = nil,
-        handleErrors: Bool? = nil,
-        enableLogging: Bool? = nil
-        ) -> Config {
+    func overriden(with other: Config) -> Config {
         var newConfig = Config(
             httpMethod: httpMethod,
-            apiVersion: apiVersion,
-            language: language ?? _language,
-            attemptsMaxLimit: attemptLimit ?? _attemptsMaxLimit,
-            attemptTimeout: attemptTimeout ?? _attemptTimeout,
-            handleErrors: handleErrors ?? _handleErrors,
-            enableLogging: enableLogging ?? _enableLogging
+            apiVersion: other._apiVersion ?? _apiVersion,
+            language: other._language ?? _language,
+            attemptsMaxLimit: other._attemptsMaxLimit ?? _attemptsMaxLimit,
+            attemptTimeout: other._attemptTimeout ?? _attemptTimeout,
+            handleErrors: other._handleErrors ?? _handleErrors,
+            enableLogging: other._enableLogging ?? _enableLogging
         )
         
-        if let sessionConfig = sessionConfig {
-            newConfig.inject(sessionConfig: sessionConfig)
-        }
-        
+        sessionConfig.flatMap { newConfig.inject(sessionConfig: $0) }
+
         return newConfig
     }
 }

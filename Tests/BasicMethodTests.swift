@@ -10,7 +10,7 @@ class BasicMethodTests: XCTestCase {
         // When
         let mutatedMethod = originalMethod.withConfig(Config(attemptsMaxLimit: .limited(1000)))
         // Then
-        XCTAssertEqual(mutatedMethod.toRequest().config.maxAttemptsLimit.count, 1000)
+        XCTAssertEqual(mutatedMethod.toRequest().config.attemptsMaxLimit.count, 1000)
     }
     
     func test_setOnSuccess() {
