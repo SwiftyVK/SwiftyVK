@@ -4,10 +4,14 @@ class JSON: JSONContainer, CustomStringConvertible {
         return "JSON: \(String(describing: value))"
     }
     
-    private let value: Any?
+    let value: Any?
     
     init(data: Data?) throws {
         self.value = try JSONSerialization.jsonObject(with: data ?? Data(), options: .allowFragments)
+    }
+    
+    private init(value: Any?) {
+        self.value = value
     }
     
     func value<T>(_ path: String) -> T? {
@@ -17,6 +21,10 @@ class JSON: JSONContainer, CustomStringConvertible {
     
     func any(_ path: String) -> Any? {
         return value(path)
+    }
+    
+    func json(_ path: String) -> JSON {
+        return .init(value: value(path))
     }
     
     func forcedData(_ path: String) -> Data {

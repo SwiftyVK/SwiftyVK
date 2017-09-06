@@ -31,8 +31,6 @@
 		A20ED4A71E3E572A00547BBE /* LongPoll_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20ED49F1E3E571D00547BBE /* LongPoll_Tests.swift */; };
 		A20ED4A91E3E59FE00547BBE /* success.messages.getLongPollServer.json in Resources */ = {isa = PBXBuildFile; fileRef = A20ED4A81E3E59FE00547BBE /* success.messages.getLongPollServer.json */; };
 		A20ED4AA1E3E59FE00547BBE /* success.messages.getLongPollServer.json in Resources */ = {isa = PBXBuildFile; fileRef = A20ED4A81E3E59FE00547BBE /* success.messages.getLongPollServer.json */; };
-		A20ED4AE1E3E679A00547BBE /* success.longPollFullResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A20ED4AB1E3E5EE400547BBE /* success.longPollFullResponse.json */; };
-		A20ED4AF1E3E679B00547BBE /* success.longPollFullResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A20ED4AB1E3E5EE400547BBE /* success.longPollFullResponse.json */; };
 		A20ED4B11E3E717F00547BBE /* success.longPollEmptyResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A20ED4B01E3E717F00547BBE /* success.longPollEmptyResponse.json */; };
 		A20ED4B21E3E717F00547BBE /* success.longPollEmptyResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A20ED4B01E3E717F00547BBE /* success.longPollEmptyResponse.json */; };
 		A21CD49D1D98143300FF2D88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CD49B1D98143300FF2D88 /* AppDelegate.swift */; };
@@ -197,7 +195,6 @@
 		A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyVK.xcodeproj; path = Library/SwiftyVK.xcodeproj; sourceTree = "<group>"; };
 		A20ED49F1E3E571D00547BBE /* LongPoll_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LongPoll_Tests.swift; sourceTree = "<group>"; };
 		A20ED4A81E3E59FE00547BBE /* success.messages.getLongPollServer.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.messages.getLongPollServer.json; sourceTree = "<group>"; };
-		A20ED4AB1E3E5EE400547BBE /* success.longPollFullResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.longPollFullResponse.json; sourceTree = "<group>"; };
 		A20ED4B01E3E717F00547BBE /* success.longPollEmptyResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.longPollEmptyResponse.json; sourceTree = "<group>"; };
 		A21CD49B1D98143300FF2D88 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A22599201D8B0CDD008535BE /* error.need.authorazation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = error.need.authorazation.json; sourceTree = "<group>"; };
@@ -317,7 +314,6 @@
 				A23825391D9461920070A085 /* Upload */,
 				A2F748701D9590B4009B3F38 /* success.users.get.json */,
 				A20ED4A81E3E59FE00547BBE /* success.messages.getLongPollServer.json */,
-				A20ED4AB1E3E5EE400547BBE /* success.longPollFullResponse.json */,
 				A20ED4B01E3E717F00547BBE /* success.longPollEmptyResponse.json */,
 				A2F748641D959087009B3F38 /* error.missing.parameter.json */,
 				A2F748651D959087009B3F38 /* error.need.authorazation.json */,
@@ -666,7 +662,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A20ED4AE1E3E679A00547BBE /* success.longPollFullResponse.json in Resources */,
 				A22599261D8B0E05008535BE /* error.need.authorazation.json in Resources */,
 				A20ED4A91E3E59FE00547BBE /* success.messages.getLongPollServer.json in Resources */,
 				A2F7486C1D959087009B3F38 /* error.need.captcha.json in Resources */,
@@ -692,7 +687,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A20ED4AF1E3E679B00547BBE /* success.longPollFullResponse.json in Resources */,
 				A22599271D8B0E05008535BE /* error.need.authorazation.json in Resources */,
 				A20ED4AA1E3E59FE00547BBE /* success.messages.getLongPollServer.json in Resources */,
 				A2F7486D1D959087009B3F38 /* error.need.captcha.json in Resources */,

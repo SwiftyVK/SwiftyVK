@@ -280,6 +280,9 @@
 		D49EA9EE1F587EF300C1A251 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EA9EC1F587EEF00C1A251 /* RequestType.swift */; };
 		D49EA9F31F5892B000C1A251 /* FullVariationsMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EA9F21F5892B000C1A251 /* FullVariationsMethod.swift */; };
 		D49EA9F41F5892B000C1A251 /* FullVariationsMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EA9F21F5892B000C1A251 /* FullVariationsMethod.swift */; };
+		D4AB8D931F6044190099FC42 /* LongPollUpdatingOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB8D921F6044190099FC42 /* LongPollUpdatingOperationTests.swift */; };
+		D4AB8D9B1F6048EA0099FC42 /* longPoll.updates.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D941F6048B50099FC42 /* longPoll.updates.json */; };
+		D4AB8D9D1F6055290099FC42 /* longPoll.failed.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */; };
 		D4C032AC1F51F650005AB59A /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AB1F51F650005AB59A /* IDGenerator.swift */; };
 		D4C032AD1F51F650005AB59A /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AB1F51F650005AB59A /* IDGenerator.swift */; };
 		D4C032AF1F520733005AB59A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AE1F520733005AB59A /* TaskTests.swift */; };
@@ -550,6 +553,9 @@
 		D49795AD1F4DFDF700921A21 /* URLOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = URLOpener.swift; path = Sources/Extensions/URLOpener.swift; sourceTree = SOURCE_ROOT; };
 		D49EA9EC1F587EEF00C1A251 /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
 		D49EA9F21F5892B000C1A251 /* FullVariationsMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullVariationsMethod.swift; sourceTree = "<group>"; };
+		D4AB8D921F6044190099FC42 /* LongPollUpdatingOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollUpdatingOperationTests.swift; sourceTree = "<group>"; };
+		D4AB8D941F6048B50099FC42 /* longPoll.updates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = longPoll.updates.json; sourceTree = "<group>"; };
+		D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.json; sourceTree = "<group>"; };
 		D4C032AB1F51F650005AB59A /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		D4C032AE1F520733005AB59A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderMock.swift; sourceTree = "<group>"; };
@@ -628,6 +634,7 @@
 				D4321D921F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift */,
 				D4321D8A1F5F0587001AFE9F /* FullVariationsMethodTests.swift */,
 				D4321D901F5F0D67001AFE9F /* BasicMethodTests.swift */,
+				D4AB8D921F6044190099FC42 /* LongPollUpdatingOperationTests.swift */,
 			);
 			name = Tests;
 			path = ../Tests;
@@ -954,6 +961,8 @@
 				D47601141F2E218B005356E5 /* response.empty.json */,
 				D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */,
 				D47601181F2E21DD005356E5 /* apiError.withoutCode.json */,
+				D4AB8D941F6048B50099FC42 /* longPoll.updates.json */,
+				D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */,
 				D4F49D441F2E0EF60037B875 /* apiError.correct.json */,
 			);
 			path = Data;
@@ -1171,9 +1180,11 @@
 			files = (
 				D47601191F2E21E2005356E5 /* apiError.withoutCode.json in Resources */,
 				D476011D1F2E22CA005356E5 /* empty.json in Resources */,
+				D4AB8D9D1F6055290099FC42 /* longPoll.failed.json in Resources */,
 				D47601161F2E219A005356E5 /* response.empty.json in Resources */,
 				D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */,
 				D476011B1F2E2229005356E5 /* apiError.withoutMessage.json in Resources */,
+				D4AB8D9B1F6048EA0099FC42 /* longPoll.updates.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1267,6 +1278,7 @@
 				A22179CA1EBA4059006B71FD /* SessionTests.swift in Sources */,
 				A2E5C5D91ECCAD4800652262 /* SessionsHolderMock.swift in Sources */,
 				D41C70551F45F34400EA454C /* VkError.swift in Sources */,
+				D4AB8D931F6044190099FC42 /* LongPollUpdatingOperationTests.swift in Sources */,
 				A25A19D51EE43E8100CF13AF /* TokenParserMock.swift in Sources */,
 				A2433A461EA542100058BB6D /* AttemptShedulerTests.swift in Sources */,
 				A2E5C5DB1ECCAFC800652262 /* SessionsHolderTests.swift in Sources */,
