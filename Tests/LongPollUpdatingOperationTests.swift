@@ -136,12 +136,14 @@ private func makeContext(
     
     let operation = LongPollUpdatingOperationImpl(
         session: session,
-        server: "",
-        lpKey: "",
-        startTs: "",
         delayOnError: 0,
-        onResponse: onResponse,
-        onKeyExpired: onKeyExpired
+        data: LongPoolOperationData(
+            server: "",
+            startTs: "",
+            lpKey: "",
+            onResponse: onResponse,
+            onKeyExpired: onKeyExpired
+        )
     )
     
     return (session, operation)

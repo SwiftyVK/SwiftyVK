@@ -13,7 +13,8 @@ protocol DependencyFactory:
     AttemptMaker,
     TokenMaker,
     WebControllerMaker,
-    CaptchaControllerMaker
+    CaptchaControllerMaker,
+    LongPollUpdatingOperationMaker
 {}
 
 protocol DependencyHolder: SessionsHolderHolder, AuthorizatorHolder {
@@ -52,13 +53,17 @@ protocol CaptchaControllerMaker {
     func captchaController() -> CaptchaController?
 }
 
+protocol LongPollUpdatingOperationMaker {
+    func longPollUpdatingOperation(session: Session?, data: LongPoolOperationData) -> LongPollUpdatingOperation?
+}
+
 final class DependencyFactoryImpl: DependencyFactory {
     
     private let appId: String
     private weak var delegate: SwiftyVKDelegate?
 
     private let foregroundSession = URLSession.shared
-    
+    private let longPollOperationTimeout: TimeInterval = 30
     private let uiSyncQueue = DispatchQueue(label: "SwiftyVK.uiSyncQueue")
     
     init(appId: String, delegate: SwiftyVKDelegate?) {
@@ -220,6 +225,14 @@ final class DependencyFactoryImpl: DependencyFactory {
             timeout: timeout,
             session: foregroundSession,
             callbacks: callbacks
+        )
+    }
+    
+    func longPollUpdatingOperation(session: Session?, data: LongPoolOperationData) -> LongPollUpdatingOperation? {
+        return LongPollUpdatingOperationImpl(
+            session: session,
+            delayOnError: longPollOperationTimeout,
+            data: data
         )
     }
     

@@ -16,20 +16,16 @@ final class LongPollUpdatingOperationImpl: Operation, LongPollUpdatingOperation 
     
     init(
         session: Session?,
-        server: String,
-        lpKey: String,
-        startTs: String,
         delayOnError: TimeInterval,
-        onResponse: @escaping (JSON) -> (),
-        onKeyExpired: @escaping () -> ()
+        data: LongPoolOperationData
         ) {
-        self.server = server
-        self.lpKey = lpKey
-        self.startTs = startTs
-        self.delayOnError = delayOnError
-        self.onResponse = onResponse
-        self.onKeyExpired = onKeyExpired
         self.session = session
+        self.server = data.server
+        self.lpKey = data.lpKey
+        self.startTs = data.startTs
+        self.delayOnError = delayOnError
+        self.onResponse = data.onResponse
+        self.onKeyExpired = data.onKeyExpired
     }
     
     override func main() {
@@ -57,7 +53,7 @@ final class LongPollUpdatingOperationImpl: Operation, LongPollUpdatingOperation 
                 else {
                     let newTs = response.forcedString("ts")
                     self.onResponse(response.json("updates"))
-
+                    
                     DispatchQueue.global().async {
                         self.update(ts: newTs)
                     }
@@ -78,4 +74,12 @@ final class LongPollUpdatingOperationImpl: Operation, LongPollUpdatingOperation 
         currentTask?.cancel()
         semaphore.signal()
     }
+}
+
+struct LongPoolOperationData {
+    let server: String
+    let startTs: String
+    let lpKey: String
+    let onResponse: (JSON) -> ()
+    let onKeyExpired: () -> ()
 }
