@@ -28,7 +28,6 @@ final class TaskImpl: Operation, Task {
         return "task #\(id), state: \(state)"
     }
     
-    private let originalRequest: Request
     private var currentRequest: Request
     private let callbacks: RequestCallbacks
     private let session: TaskSession
@@ -49,7 +48,6 @@ final class TaskImpl: Operation, Task {
         apiErrorHandler: ApiErrorHandler
         ) {
         self.id = id
-        self.originalRequest = request
         self.currentRequest = request
         self.callbacks = callbacks
         self.session = session
@@ -133,8 +131,8 @@ final class TaskImpl: Operation, Task {
         
         switch result {
         case .success(let response):
-            if let next = originalRequest.nexts.popLast() {
-                currentRequest = next(response)
+            if let next = currentRequest.next(with: response) {
+                currentRequest = next
                 sendAttempts = 0
                 tryToSend()
             }

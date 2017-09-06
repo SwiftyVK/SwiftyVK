@@ -84,8 +84,9 @@ class ApiMethodTests: XCTestCase {
             .chain { _ in Request(type: .url("")) }
             .chain { _ in Request(type: .url("")) }
             .chain { _ in Request(type: .url("")) }
+        
+        let lastRequest = mutatedMethod.toRequest().next(with: Data())?.next(with: Data())?.next(with: Data())
         // Then
-        XCTAssertTrue(type(of: mutatedMethod) == Methods.SuccessableFailableProgressableConfigurable.self)
-        XCTAssertEqual(mutatedMethod.toRequest().nexts.count, 3)
+        XCTAssertNotNil(lastRequest)
     }
 }

@@ -48,7 +48,9 @@ class BasicMethodTests: XCTestCase {
             .chain { _ in Request(type: .url("")) }
             .chain { _ in Request(type: .url("")) }
             .chain { _ in Request(type: .url("")) }
+        
+        let lastRequest = mutatedMethod.toRequest().next(with: Data())?.next(with: Data())?.next(with: Data())
         // Then
-        XCTAssertEqual(mutatedMethod.toRequest().nexts.count, 3)
+        XCTAssertNotNil(lastRequest)
     }
 }
