@@ -1,7 +1,7 @@
 import Foundation
 
 protocol UrlRequestBuilder {
-    func build(request: RequestType, config: Config, capthca: Captcha?, token: Token?)
+    func build(type: RequestType, config: Config, capthca: Captcha?, token: Token?)
         throws -> URLRequest
 }
 
@@ -21,7 +21,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
     }
     
     func build(
-        request: RequestType,
+        type: RequestType,
         config: Config,
         capthca: Captcha?,
         token: Token?
@@ -29,7 +29,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         throws -> URLRequest {
         var urlRequest: URLRequest
         
-        switch request {
+        switch type {
         case .api(let method, let parameters):
             urlRequest = try make(
                 from: method,

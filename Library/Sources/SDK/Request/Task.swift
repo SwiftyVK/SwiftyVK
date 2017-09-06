@@ -97,7 +97,7 @@ final class TaskImpl: Operation, Task {
         sendAttempts += 1
         
         let urlRequest = try urlRequestBuilder.build(
-            request: currentRequest.type,
+            type: currentRequest.type,
             config: currentRequest.config,
             capthca: captcha,
             token: session.token
