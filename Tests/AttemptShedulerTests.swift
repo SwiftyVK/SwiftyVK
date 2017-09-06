@@ -63,21 +63,6 @@ final class AttemptShedulerTests: XCTestCase {
         )
     }
     
-    func test_executeWrongTypeOperation() {
-        // Given
-        let sheduler = AttemptShedulerImpl(limit: shedulerLimit)
-        let sample = WrongAttemptMock()
-        
-        do {
-            // When
-            try sheduler.shedule(attempt: sample, concurrent: false)
-            XCTFail("Wrong attempt should cause exception")
-        } catch let error {
-            // Then
-            XCTAssertEqual(error.asVK, VKError.wrongAttemptType)
-        }
-    }
-    
     func test_executeOpration_whenShedulerLimitUpdated() {
         // Given
         let sheduler = AttemptShedulerImpl(limit: .unlimited)
@@ -85,7 +70,7 @@ final class AttemptShedulerTests: XCTestCase {
         
         // When
         sheduler.setLimit(to: .limited(1))
-        samples.forEach { try! sheduler.shedule(attempt: $0, concurrent: false) }
+        samples.forEach { sheduler.shedule(attempt: $0, concurrent: false) }
         
         // Then
         Thread.sleep(forTimeInterval: 1)
@@ -112,6 +97,6 @@ private var totalRunTime: TimeInterval {
 private func sheduleSamples(count: Int, concurrent: Bool, completion: (() -> ())? = nil) -> [AttemptMock] {
     let samples = (0..<count).map { _ in AttemptMock(completion: completion) }
     sheduler = AttemptShedulerImpl(limit: shedulerLimit)
-    samples.forEach { try! sheduler?.shedule(attempt: $0, concurrent: concurrent) }
+    samples.forEach { sheduler?.shedule(attempt: $0, concurrent: concurrent) }
     return samples
 }

@@ -2,7 +2,7 @@ import Foundation
 
 protocol AttemptSheduler: class {
     func setLimit(to: AttemptLimit)
-    func shedule(attempt: Attempt, concurrent: Bool) throws
+    func shedule(attempt: Attempt, concurrent: Bool)
 }
 
 final class AttemptShedulerImpl: AttemptSheduler {
@@ -27,16 +27,14 @@ final class AttemptShedulerImpl: AttemptSheduler {
         limit = newLimit
     }
     
-    func shedule(attempt: Attempt, concurrent: Bool) throws {
-        guard let attempt = attempt as? Operation else {
-            throw VKError.wrongAttemptType
-        }
+    func shedule(attempt: Attempt, concurrent: Bool) {
+        let operation = attempt.toOperation()
         
         if concurrent {
-            concurrentQueue.addOperation(attempt)
+            concurrentQueue.addOperation(operation)
         }
         else {
-            serialQueue.addOperation(attempt)
+            serialQueue.addOperation(operation)
         }
     }
 }

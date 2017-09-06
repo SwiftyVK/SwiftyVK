@@ -1,14 +1,12 @@
 import Foundation
 
-protocol Attempt: class {
+protocol Attempt: class, OperationConvertible {
     init(
         request: URLRequest,
         timeout: TimeInterval,
         session: VKURLSession,
         callbacks: AttemptCallbacks
     )
-    
-    func cancel()
 }
 
 final class AttemptImpl: Operation, Attempt {

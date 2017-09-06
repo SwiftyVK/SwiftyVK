@@ -1,5 +1,5 @@
 protocol TaskSheduler: class {
-    func shedule(task: Task, concurrent: Bool) throws
+    func shedule(task: Task, concurrent: Bool)
 }
 
 final class TaskShedulerImpl: TaskSheduler {
@@ -16,16 +16,14 @@ final class TaskShedulerImpl: TaskSheduler {
         return queue
     }()
     
-    func shedule(task: Task, concurrent: Bool) throws {
-        guard let task = task as? Operation else {
-            throw VKError.wrongTaskType
-        }
+    func shedule(task: Task, concurrent: Bool) {
+        let operation = task.toOperation()
         
         if concurrent {
-            concurrentQueue.addOperation(task)
+            concurrentQueue.addOperation(operation)
         }
         else {
-            serialQueue.addOperation(task)
+            serialQueue.addOperation(operation)
         }
     }
 }

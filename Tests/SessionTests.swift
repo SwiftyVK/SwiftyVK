@@ -222,17 +222,6 @@ final class SessionTests: XCTestCase {
         session.send(method: request)
     }
     
-    func test_sendWrongTask_shouldBeFail() {
-        // Given
-        let (session, taskSheduler, _, _) = sessionObjects
-        let request = Request(type: .url("")).toMethod().onError { error in
-            XCTAssertEqual(error.asVK, VKError.wrongTaskType)
-        }
-        // When
-        taskSheduler.shouldThrows = true
-        session.send(method: request)
-    }
-    
     func test_destroy() {
         // Given
         let (session, _, _, _) = sessionObjects

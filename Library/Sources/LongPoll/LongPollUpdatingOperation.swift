@@ -1,9 +1,6 @@
 import Foundation
 
-protocol LongPollUpdatingOperation {
-    func toOperation() -> Operation
-    func cancel()
-}
+protocol LongPollUpdatingOperation: OperationConvertible {}
 
 final class LongPollUpdatingOperationImpl: Operation, LongPollUpdatingOperation {
     
@@ -33,10 +30,6 @@ final class LongPollUpdatingOperationImpl: Operation, LongPollUpdatingOperation 
         self.onResponse = onResponse
         self.onKeyExpired = onKeyExpired
         self.session = session
-    }
-    
-    func toOperation() -> Operation {
-        return self
     }
     
     override func main() {

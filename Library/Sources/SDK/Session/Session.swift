@@ -183,14 +183,14 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     func shedule(task: Task, concurrent: Bool) throws {
         try gateQueue.sync {
             try throwIfDestroyed()
-            try taskSheduler.shedule(task: task, concurrent: concurrent)
+            taskSheduler.shedule(task: task, concurrent: concurrent)
         }
     }
     
     func shedule(attempt: Attempt, concurrent: Bool) throws {
         try gateQueue.sync {
             try throwIfDestroyed()
-            try attemptSheduler.shedule(attempt: attempt, concurrent: concurrent)
+            attemptSheduler.shedule(attempt: attempt, concurrent: concurrent)
         }
     }
     

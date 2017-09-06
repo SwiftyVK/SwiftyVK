@@ -34,30 +34,14 @@ final class AttemptMock: Operation, Attempt {
         super.init()
     }
     
+    func toOperation() -> Operation {
+        return self
+    }
+    
     override func main() {
         DispatchQueue.global().asyncAfter(deadline: .now() + runTime) { [weak self] in
             self?.isReallyFinished = true
             self?.completion?()
         }
     }
-}
-
-final class WrongAttemptMock: Attempt {
-    
-    convenience init() {
-        self.init(
-            request: URLRequest(url: URL(string: "http://test")!),
-            timeout: 0,
-            session: URLSessionMock(),
-            callbacks: AttemptCallbacks(
-                onFinish: { _ in },
-                onSent: { _ in },
-                onRecive: { _ in }
-            )
-        )
-    }
-    
-    init(request: URLRequest, timeout: TimeInterval, session: VKURLSession, callbacks: AttemptCallbacks) {}
-    
-    func cancel() {}
 }

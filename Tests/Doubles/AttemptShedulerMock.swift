@@ -9,7 +9,7 @@ final class AttemptShedulerMock: AttemptSheduler {
         limit = newLimit
     }
     
-    func shedule(attempt: Attempt, concurrent: Bool) throws {        
+    func shedule(attempt: Attempt, concurrent: Bool) {
         sheduleCallCount += 1
     }
 }

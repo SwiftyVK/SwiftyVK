@@ -1,7 +1,7 @@
 @testable import SwiftyVK
 
 final class TaskMock: Operation, Task {
-    
+
     var state: TaskState {
         willSet {
             if case .finished = newValue {
@@ -30,6 +30,10 @@ final class TaskMock: Operation, Task {
         state = .created
     }
     
+    func toOperation() -> Operation {
+        return self
+    }
+    
     override func main() {
         super.main()
         state = .created
@@ -48,9 +52,4 @@ final class TaskMock: Operation, Task {
         super.cancel()
         state = .cancelled
     }
-}
-
-final class WrongTaskMock: Task {
-    var state = TaskState.created
-    func cancel() {}
 }

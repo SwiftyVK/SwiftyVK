@@ -20,8 +20,6 @@ public enum VKError: Error {
     case jsonNotParsed(Error)
     case urlRequestError(Error)
     case maximumAttemptsExceeded
-    case wrongAttemptType
-    case wrongTaskType
     case captchaResultIsNil
     case wrongUrl
     

@@ -65,21 +65,6 @@ final class TaskShedulerTests: XCTestCase {
             "All serial operations should be executed"
         )
     }
-    
-    func test_executeWrongTypeOperation() {
-        // Given
-        let sheduler = TaskShedulerImpl()
-        let sample = WrongTaskMock()
-        
-        do {
-            // When
-            try sheduler.shedule(task: sample, concurrent: false)
-            XCTFail("Wrong attempt should cause exception")
-        } catch let error {
-            // Then
-            XCTAssertEqual(error.asVK, VKError.wrongTaskType)
-        }
-    }
 }
 
 private var sheduler: TaskShedulerImpl?
@@ -92,6 +77,6 @@ private var totalRunTime: TimeInterval {
 private func sheduleSamples(count: Int, concurrent: Bool, completion: (() -> ())? = nil) -> [TaskMock] {
     let samples = (0..<count).map { _ in TaskMock(completion: completion) }
     sheduler = TaskShedulerImpl()
-    samples.forEach { try! sheduler?.shedule(task: $0, concurrent: concurrent) }
+    samples.forEach { sheduler?.shedule(task: $0, concurrent: concurrent) }
     return samples
 }

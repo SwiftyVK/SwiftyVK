@@ -11,8 +11,6 @@ extension VKError: Equatable {
         (.urlRequestError, .urlRequestError),
         (.unknown, .unknown),
         (.maximumAttemptsExceeded, .maximumAttemptsExceeded),
-        (.wrongAttemptType, .wrongAttemptType),
-        (.wrongTaskType, .wrongTaskType),
         (.captchaResultIsNil, .captchaResultIsNil),
         (.wrongUrl, .wrongUrl),
         (.tokenNotSavedInStorage, .tokenNotSavedInStorage),

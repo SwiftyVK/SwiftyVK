@@ -1,9 +1,7 @@
 import Foundation
 
-public protocol Task {
+public protocol Task: OperationConvertible {
     var state: TaskState { get }
-    
-    func cancel()
 }
 
 final class TaskImpl: Operation, Task {
