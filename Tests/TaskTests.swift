@@ -272,14 +272,17 @@ private func makeContext(
         var request = VKAPI.Users.get(.empty)
             .configure(with: Config(handleErrors: handleErrors))
         
+        
         if let nextRequest = nextRequest {
             request = request.chain { _ in nextRequest }
         }
         
+        let _request = request.toRequest()
+        _request.callbacks = callbacks
+        
         let task = TaskImpl(
             id: 1,
-            request: request.toRequest(),
-            callbacks: callbacks,
+            request: _request,
             session: taskSession,
             urlRequestBuilder: urlRequestBuilder,
             attemptMaker: attemptMaker,

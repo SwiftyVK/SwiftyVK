@@ -29,7 +29,6 @@ final class TaskImpl: Operation, Task {
     }
     
     private var currentRequest: Request
-    private let callbacks: RequestCallbacks
     private let session: TaskSession
     private let semaphore = DispatchSemaphore(value: 0)
     private var sendAttempts = 0
@@ -41,7 +40,6 @@ final class TaskImpl: Operation, Task {
     init(
         id: Int64,
         request: Request,
-        callbacks: RequestCallbacks,
         session: TaskSession,
         urlRequestBuilder: UrlRequestBuilder,
         attemptMaker: AttemptMaker,
@@ -49,7 +47,6 @@ final class TaskImpl: Operation, Task {
         ) {
         self.id = id
         self.currentRequest = request
-        self.callbacks = callbacks
         self.session = session
         self.urlRequestBuilder = urlRequestBuilder
         self.attemptMaker = attemptMaker
@@ -118,12 +115,12 @@ final class TaskImpl: Operation, Task {
     
     private func handleSended(_ current: Int64, of expected: Int64) {
         guard !isCancelled else { return }
-        callbacks.onProgress?(.sended, current, expected)
+        currentRequest.callbacks.onProgress?(.sended, current, expected)
     }
     
     private func handleReceived(_ current: Int64, of expected: Int64) {
         guard !isCancelled else { return }
-        callbacks.onProgress?(.recieved, current, expected)
+        currentRequest.callbacks.onProgress?(.recieved, current, expected)
     }
     
     private func handleResult(_ result: Response) {
@@ -186,14 +183,14 @@ final class TaskImpl: Operation, Task {
     private func perform(error: VKError) {
         guard !isCancelled && !isFinished else { return }
         state = .failed(error)
-        callbacks.onError?(error)
+        currentRequest.callbacks.onError?(error)
         semaphore.signal()
     }
     
     private func perform(response: Data) {
         guard !isCancelled && !isFinished else { return }
         state = .finished(response)
-        callbacks.onSuccess?(response)
+        currentRequest.callbacks.onSuccess?(response)
         semaphore.signal()
     }
 }

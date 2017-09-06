@@ -18,7 +18,7 @@ final class DependencyHolderMock: DependencyHolder {
 }
 
 final class TaskMakerMock: TaskMaker {
-    func task(request: Request, callbacks: RequestCallbacks, session: ApiErrorExecutor & TaskSession) -> Task {
+    func task(request: Request, session: ApiErrorExecutor & TaskSession) -> Task {
         return TaskMock()
     }
 }

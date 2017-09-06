@@ -163,7 +163,6 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
 
         let task = taskMaker.task(
             request: request,
-            callbacks: request.callbacks,
             session: self
         )
     
