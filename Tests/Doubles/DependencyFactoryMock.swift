@@ -65,3 +65,17 @@ final class CaptchaControllerMakerMock: CaptchaControllerMaker {
         return onMake?()
     }
 }
+
+final class LongPollUpdatingOperationMakerMock: LongPollUpdatingOperationMaker {
+    
+    var onMake: ((Session?, LongPoolOperationData) -> LongPollUpdatingOperation)?
+    
+    func longPollUpdatingOperation(
+        session: Session?,
+        data: LongPoolOperationData
+        ) -> LongPollUpdatingOperation? {
+        return onMake?(session, data)
+    }
+    
+    
+}
