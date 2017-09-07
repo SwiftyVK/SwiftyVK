@@ -13,6 +13,7 @@ final class LongPollUpdatingOperationImpl: Operation, LongPollUpdatingOperation 
     private let onKeyExpired: () -> ()
     private var currentTask: Task?
     private let semaphore = DispatchSemaphore(value: 0)
+    private let repeatQueue = DispatchQueue.global(qos: .utility)
     
     init(
         session: Session?,
@@ -54,7 +55,7 @@ final class LongPollUpdatingOperationImpl: Operation, LongPollUpdatingOperation 
                     let newTs = response.forcedString("ts")
                     self.onResponse(response.json("updates"))
                     
-                    DispatchQueue.global().async {
+                    self.repeatQueue.async {
                         self.update(ts: newTs)
                     }
                 }
