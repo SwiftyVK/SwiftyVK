@@ -89,6 +89,10 @@ class AuthorizatorTests: XCTestCase {
         // Given
         let context = makeContext()
         
+        context.tokenMaker.onMake = { _ in
+            return TokenMock()
+        }
+        
         context.parser.onParse = { _ in
             return ("token", expires: 123, [:])
         }
@@ -198,6 +202,10 @@ class AuthorizatorTests: XCTestCase {
         // Given
         let context = makeContext()
         
+        context.tokenMaker.onMake = { _ in
+            return TokenMock()
+        }
+        
         context.vkApp.onHandle = { url, string in
             return nil
         }
@@ -211,6 +219,10 @@ class AuthorizatorTests: XCTestCase {
         // Given
         let context = makeContext()
         let exp = expectation(description: "")
+        
+        context.tokenMaker.onMake = { _ in
+            return TokenMock()
+        }
         
         context.vkApp.onSend = { _ in
             return true

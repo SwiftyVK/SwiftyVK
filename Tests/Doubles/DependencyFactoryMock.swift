@@ -29,7 +29,12 @@ final class AttemptMakerMock: AttemptMaker {
     var onMake: ((_ callbacks: AttemptCallbacks) -> Attempt)?
     
     func attempt(request: URLRequest, timeout: TimeInterval, callbacks: AttemptCallbacks) -> Attempt {
-        return onMake?(callbacks) ?? AttemptMock()
+        guard let result = onMake?(callbacks) else {
+            XCTFail("onMake not defined")
+            return AttemptMock()
+        }
+        
+        return result
     }
 }
 
@@ -45,7 +50,12 @@ final class TokenMakerMock: TokenMaker {
     var onMake: ((String, TimeInterval, [String : String]) -> Token)?
     
     func token(token: String, expires: TimeInterval, info: [String : String]) -> Token {
-        return onMake?(token, expires, info) ?? TokenMock()
+        guard let result = onMake?(token, expires, info) else {
+            XCTFail("onMake not defined")
+            return TokenMock()
+        }
+        
+        return result
     }
 }
 
