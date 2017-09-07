@@ -6,7 +6,7 @@ class LongPollUpdatingOperationTests: XCTestCase {
     
     func test_operation_callSuccessCallback_whenGiveUpdates() {
         // Given
-        var lpResponse: JSON?
+        var lpResponse: [[Any]]?
         var onSuccessCallCount = 0
         var data = JsonReader.read("longPoll.updates") ?? Data()
         
@@ -27,7 +27,7 @@ class LongPollUpdatingOperationTests: XCTestCase {
         // When
         context.operation.main()
         // Then
-        XCTAssertEqual(lpResponse?.int("13,0"), 80)
+        XCTAssertEqual(lpResponse?.last?.first as? Int, 80)
         XCTAssertEqual(onSuccessCallCount, 1)
     }
     
@@ -129,7 +129,7 @@ class LongPollUpdatingOperationTests: XCTestCase {
 }
 
 private func makeContext(
-    onResponse: @escaping (JSON) -> (),
+    onResponse: @escaping ([[Any]]) -> (),
     onKeyExpired: @escaping () -> ()
     ) -> (session: SessionMock, operation: LongPollUpdatingOperationImpl) {
     let session = SessionMock()

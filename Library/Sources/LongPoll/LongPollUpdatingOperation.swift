@@ -9,7 +9,7 @@ final class LongPollUpdatingOperationImpl: Operation, LongPollUpdatingOperation 
     private var startTs: String
     private let lpKey: String
     private let delayOnError: TimeInterval
-    private let onResponse: (JSON) -> ()
+    private let onResponse: ([[Any]]) -> ()
     private let onKeyExpired: () -> ()
     private var currentTask: Task?
     private let semaphore = DispatchSemaphore(value: 0)
@@ -53,7 +53,7 @@ final class LongPollUpdatingOperationImpl: Operation, LongPollUpdatingOperation 
                 }
                 else {
                     let newTs = response.forcedString("ts")
-                    self.onResponse(response.json("updates"))
+                    self.onResponse(response.array("updates") ?? [])
                     
                     self.repeatQueue.async {
                         self.update(ts: newTs)
@@ -81,6 +81,6 @@ struct LongPoolOperationData {
     let server: String
     let startTs: String
     let lpKey: String
-    let onResponse: (JSON) -> ()
+    let onResponse: ([[Any]]) -> ()
     let onKeyExpired: () -> ()
 }
