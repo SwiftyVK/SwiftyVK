@@ -1,3 +1,4 @@
+import XCTest
 @testable import SwiftyVK
 
 final class DependencyHolderMock: DependencyHolder {
@@ -73,9 +74,12 @@ final class LongPollUpdatingOperationMakerMock: LongPollUpdatingOperationMaker {
     func longPollUpdatingOperation(
         session: Session?,
         data: LongPoolOperationData
-        ) -> LongPollUpdatingOperation? {
-        return onMake?(session, data)
+        ) -> LongPollUpdatingOperation {
+        guard let result = onMake?(session, data) else {
+            XCTFail("onMake not defined")
+            return LongPollUpdatingOperationMock()
+        }
+        
+        return result
     }
-    
-    
 }
