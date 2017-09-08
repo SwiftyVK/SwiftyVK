@@ -215,10 +215,9 @@
 		A2F632341ED9DC7D0063C9E0 /* VKAppProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F632321ED9DC7D0063C9E0 /* VKAppProxy.swift */; };
 		A2F6F8E51EDDF00400933DBC /* AtomicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6F8E41EDDF00400933DBC /* AtomicTests.swift */; };
 		A2F7B5551EF18C5C006AF76C /* CaptchaPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */; };
+		D4040E2D1F62C12000025E24 /* longPoll.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */; };
 		D41665401F6192CA000E6934 /* LongPollUpdatingOperationMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D416653F1F6192CA000E6934 /* LongPollUpdatingOperationMock.swift */; };
 		D41665441F6198C0000E6934 /* ConnectionObserverMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665431F6198C0000E6934 /* ConnectionObserverMock.swift */; };
-		D41665461F61A460000E6934 /* LongPollEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665451F61A460000E6934 /* LongPollEvent.swift */; };
-		D41665471F61A460000E6934 /* LongPollEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665451F61A460000E6934 /* LongPollEvent.swift */; };
 		D41ADB021F4DFEE000E10D41 /* ResourcesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41ADB001F4DFE7000E10D41 /* ResourcesTests.swift */; };
 		D41ADB051F4E015500E10D41 /* VKStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41ADB031F4E013000E10D41 /* VKStack.swift */; };
 		D41C70551F45F34400EA454C /* VkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C70531F45F33F00EA454C /* VkError.swift */; };
@@ -510,6 +509,7 @@
 		A2F632321ED9DC7D0063C9E0 /* VKAppProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKAppProxy.swift; sourceTree = "<group>"; };
 		A2F6F8E41EDDF00400933DBC /* AtomicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicTests.swift; sourceTree = "<group>"; };
 		A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaPresenterMock.swift; sourceTree = "<group>"; };
+		D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.empty.json; sourceTree = "<group>"; };
 		D416653F1F6192CA000E6934 /* LongPollUpdatingOperationMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollUpdatingOperationMock.swift; sourceTree = "<group>"; };
 		D41665431F6198C0000E6934 /* ConnectionObserverMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionObserverMock.swift; sourceTree = "<group>"; };
 		D41665451F61A460000E6934 /* LongPollEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollEvent.swift; sourceTree = "<group>"; };
@@ -975,6 +975,7 @@
 				D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */,
 				D47601181F2E21DD005356E5 /* apiError.withoutCode.json */,
 				D4AB8D941F6048B50099FC42 /* longPoll.updates.json */,
+				D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */,
 				D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */,
 				D4F49D441F2E0EF60037B875 /* apiError.correct.json */,
 			);
@@ -1199,6 +1200,7 @@
 				D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */,
 				D476011B1F2E2229005356E5 /* apiError.withoutMessage.json in Resources */,
 				D4AB8D9B1F6048EA0099FC42 /* longPoll.updates.json in Resources */,
+				D4040E2D1F62C12000025E24 /* longPoll.empty.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

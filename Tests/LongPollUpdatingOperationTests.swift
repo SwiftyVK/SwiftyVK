@@ -31,6 +31,33 @@ class LongPollUpdatingOperationTests: XCTestCase {
         XCTAssertEqual(onSuccessCallCount, 1)
     }
     
+    func test_operation_callSuccessCallback_whenGiveEmptyUpdates() {
+        // Given
+        var lpResponse: [[Any]]?
+        var onSuccessCallCount = 0
+        var data = JsonReader.read("longPoll.empty") ?? Data()
+        
+        let context = makeContext(
+            onResponse: { response in
+                onSuccessCallCount += 1
+                lpResponse = response
+                data = Data()
+        },
+            onKeyExpired: {
+                XCTFail("Response contains unexpected error")
+        }
+        )
+        
+        context.session.onSend = { method in
+            method.toRequest().callbacks.onSuccess?(data)
+        }
+        // When
+        context.operation.main()
+        // Then
+        XCTAssertTrue(lpResponse?.isEmpty ?? false)
+        XCTAssertEqual(onSuccessCallCount, 1)
+    }
+    
     func test_operation_callKeyExpiredCallback_whenGiveFailedState() {
         // Given
         var onKeyExpiredCallCount = 0
