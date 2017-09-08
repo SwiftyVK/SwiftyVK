@@ -216,11 +216,16 @@
 		A2F6F8E51EDDF00400933DBC /* AtomicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6F8E41EDDF00400933DBC /* AtomicTests.swift */; };
 		A2F7B5551EF18C5C006AF76C /* CaptchaPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */; };
 		D4040E2D1F62C12000025E24 /* longPoll.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */; };
+		D4040E2E1F62C22500025E24 /* LongPollEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665451F61A460000E6934 /* LongPollEvent.swift */; };
+		D4040E301F62CB2500025E24 /* Collections+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4040E2F1F62CB2500025E24 /* Collections+Extensions.swift */; };
+		D4040E311F62CB2500025E24 /* Collections+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4040E2F1F62CB2500025E24 /* Collections+Extensions.swift */; };
 		D41665401F6192CA000E6934 /* LongPollUpdatingOperationMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D416653F1F6192CA000E6934 /* LongPollUpdatingOperationMock.swift */; };
 		D41665441F6198C0000E6934 /* ConnectionObserverMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665431F6198C0000E6934 /* ConnectionObserverMock.swift */; };
+		D41665481F61B52D000E6934 /* LongPollEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665451F61A460000E6934 /* LongPollEvent.swift */; };
 		D41ADB021F4DFEE000E10D41 /* ResourcesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41ADB001F4DFE7000E10D41 /* ResourcesTests.swift */; };
 		D41ADB051F4E015500E10D41 /* VKStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41ADB031F4E013000E10D41 /* VKStack.swift */; };
 		D41C70551F45F34400EA454C /* VkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C70531F45F33F00EA454C /* VkError.swift */; };
+		D41D5D971F62D0F800B4C8AF /* LongPollEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41D5D961F62D0F800B4C8AF /* LongPollEventTests.swift */; };
 		D422F9581F585F580055E33F /* VKAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D422F9571F585F580055E33F /* VKAPI.swift */; };
 		D422F9591F585F580055E33F /* VKAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D422F9571F585F580055E33F /* VKAPI.swift */; };
 		D4306B2D1F547BC70050D165 /* ApiErrorHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4306B2C1F547BC70050D165 /* ApiErrorHandlerMock.swift */; };
@@ -510,12 +515,14 @@
 		A2F6F8E41EDDF00400933DBC /* AtomicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicTests.swift; sourceTree = "<group>"; };
 		A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaPresenterMock.swift; sourceTree = "<group>"; };
 		D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.empty.json; sourceTree = "<group>"; };
+		D4040E2F1F62CB2500025E24 /* Collections+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collections+Extensions.swift"; sourceTree = "<group>"; };
 		D416653F1F6192CA000E6934 /* LongPollUpdatingOperationMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollUpdatingOperationMock.swift; sourceTree = "<group>"; };
 		D41665431F6198C0000E6934 /* ConnectionObserverMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionObserverMock.swift; sourceTree = "<group>"; };
 		D41665451F61A460000E6934 /* LongPollEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollEvent.swift; sourceTree = "<group>"; };
 		D41ADB001F4DFE7000E10D41 /* ResourcesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesTests.swift; sourceTree = "<group>"; };
 		D41ADB031F4E013000E10D41 /* VKStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKStack.swift; sourceTree = "<group>"; };
 		D41C70531F45F33F00EA454C /* VkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkError.swift; sourceTree = "<group>"; };
+		D41D5D961F62D0F800B4C8AF /* LongPollEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollEventTests.swift; sourceTree = "<group>"; };
 		D422F9571F585F580055E33F /* VKAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAPI.swift; sourceTree = "<group>"; };
 		D4306B2C1F547BC70050D165 /* ApiErrorHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorHandlerMock.swift; sourceTree = "<group>"; };
 		D4306B2E1F5484380050D165 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -645,6 +652,7 @@
 				D4321D8A1F5F0587001AFE9F /* FullVariationsMethodTests.swift */,
 				D4321D901F5F0D67001AFE9F /* BasicMethodTests.swift */,
 				D4AB8D921F6044190099FC42 /* LongPollUpdatingOperationTests.swift */,
+				D41D5D961F62D0F800B4C8AF /* LongPollEventTests.swift */,
 			);
 			name = Tests;
 			path = ../Tests;
@@ -799,6 +807,7 @@
 			isa = PBXGroup;
 			children = (
 				A2E5C5D51ECCAA5400652262 /* String+Extensions.swift */,
+				D4040E2F1F62CB2500025E24 /* Collections+Extensions.swift */,
 				D484C9421F4B44A300C9651C /* GCD+Extensions.swift */,
 				A2A3E6341EAFC1C70029FA44 /* Numbers+Extensions.swift */,
 				A21E81581E2A7E68008E81E7 /* CharacterSet+Extensions.swift */,
@@ -985,8 +994,8 @@
 		D4F84BCF1F435ED600DA7127 /* LongPoll */ = {
 			isa = PBXGroup;
 			children = (
-				D4F84BD01F435EEA00DA7127 /* LongPollUpdatingOperation.swift */,
 				A2527D7F1BD12FD200F65412 /* LongPoll.swift */,
+				D4F84BD01F435EEA00DA7127 /* LongPollUpdatingOperation.swift */,
 				D41665451F61A460000E6934 /* LongPollEvent.swift */,
 			);
 			path = LongPoll;
@@ -1334,6 +1343,7 @@
 				A2B40DFD1EA693B700106AE3 /* UrlRequestBuilderTests.swift in Sources */,
 				A25A19D01EE4233D00CF13AF /* TokenParserTests.swift in Sources */,
 				D4306B2F1F5484380050D165 /* Response.swift in Sources */,
+				D41D5D971F62D0F800B4C8AF /* LongPollEventTests.swift in Sources */,
 				A2E34DBF1ED1F6FE0041E663 /* TokenStorageMock.swift in Sources */,
 				D49795A31F4DF04000921A21 /* ApiMethodTests.swift in Sources */,
 				A2433A441EA533500058BB6D /* TaskMock.swift in Sources */,
@@ -1399,6 +1409,7 @@
 				D44EC01B1F55E99A00F8BB4A /* ObservableObject.swift in Sources */,
 				D4F84BDD1F435F6400DA7127 /* VKViewController.swift in Sources */,
 				A2838DA41E9AA0DA00FE5BE2 /* DependencyFactory.swift in Sources */,
+				D4040E2E1F62C22500025E24 /* LongPollEvent.swift in Sources */,
 				A2EB6EFB1BD18394008E7D86 /* Photos.swift in Sources */,
 				A296C6451EF9963900029D7D /* SwiftyVKDelegate.swift in Sources */,
 				A2EB6EFC1BD18394008E7D86 /* Places.swift in Sources */,
@@ -1420,6 +1431,7 @@
 				A25A19E21EE5921B00CF13AF /* CaptchaController_iOS.swift in Sources */,
 				A25A19CE1EE41BA700CF13AF /* TokenParser.swift in Sources */,
 				A2E5C5D71ECCAAB600652262 /* String+Extensions.swift in Sources */,
+				D4040E311F62CB2500025E24 /* Collections+Extensions.swift in Sources */,
 				D47E92DA1F5731CB00F9522A /* Method.swift in Sources */,
 				D47601201F2E2318005356E5 /* Response.swift in Sources */,
 				A2B4ECAD1DCA4F94009435B6 /* CapthcaPresenter.swift in Sources */,
@@ -1504,6 +1516,7 @@
 				A22179D41EBA57AF006B71FD /* SessionConfig.swift in Sources */,
 				A2EB6ECA1BD18389008E7D86 /* Newsfeed.swift in Sources */,
 				A2EB6ECB1BD18389008E7D86 /* Notes.swift in Sources */,
+				D41665481F61B52D000E6934 /* LongPollEvent.swift in Sources */,
 				D4F49D471F2E0FE50037B875 /* ApiError.swift in Sources */,
 				A2EB6ECC1BD18389008E7D86 /* Notifacations.swift in Sources */,
 				A2EB6ECD1BD18389008E7D86 /* Pages.swift in Sources */,
@@ -1525,6 +1538,7 @@
 				A2EB6ED51BD18389008E7D86 /* Upload.swift in Sources */,
 				D47601241F2E2450005356E5 /* VKError.swift in Sources */,
 				A2EB6ED61BD18389008E7D86 /* Users.swift in Sources */,
+				D4040E301F62CB2500025E24 /* Collections+Extensions.swift in Sources */,
 				D47E92D91F5731CB00F9522A /* Method.swift in Sources */,
 				A2EB6ED71BD18389008E7D86 /* Utils.swift in Sources */,
 				A2EB6ED81BD18389008E7D86 /* Video.swift in Sources */,

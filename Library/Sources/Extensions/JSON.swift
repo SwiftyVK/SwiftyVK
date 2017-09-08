@@ -135,6 +135,10 @@ extension JSONContainer {
     func parsed<T>(value: Any?, components: [String], isRoot: Bool = false) -> T? {
         var components = components
         
+        if isRoot && components.first == "*" {
+            return value as? T
+        }
+        
         if !isRoot {
             components.removeFirst()
         }
@@ -147,9 +151,6 @@ extension JSONContainer {
         }
         else if let dict = value as? NSDictionary {
             return dict.json(components)
-        }
-        else if isRoot && components.first == "*" {
-            return value as? T
         }
         
         return nil

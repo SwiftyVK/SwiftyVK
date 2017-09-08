@@ -27,7 +27,7 @@ class LongPollUpdatingOperationTests: XCTestCase {
         // When
         context.operation.main()
         // Then
-        XCTAssertEqual(lpResponse?.last?.int("0"), 80)
+        XCTAssertEqual(lpResponse?.last?.int("0"), 114)
         XCTAssertEqual(onSuccessCallCount, 1)
     }
     
