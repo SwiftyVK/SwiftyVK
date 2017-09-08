@@ -54,7 +54,7 @@ protocol CaptchaControllerMaker {
 }
 
 protocol LongPollUpdatingOperationMaker {
-    func longPollUpdatingOperation(session: Session?, data: LongPoolOperationData) -> LongPollUpdatingOperation
+    func longPollUpdatingOperation(session: Session?, data: LongPollOperationData) -> LongPollUpdatingOperation
 }
 
 final class DependencyFactoryImpl: DependencyFactory {
@@ -228,7 +228,7 @@ final class DependencyFactoryImpl: DependencyFactory {
         )
     }
     
-    func longPollUpdatingOperation(session: Session?, data: LongPoolOperationData) -> LongPollUpdatingOperation {
+    func longPollUpdatingOperation(session: Session?, data: LongPollOperationData) -> LongPollUpdatingOperation {
         return LongPollUpdatingOperationImpl(
             session: session,
             delayOnError: longPollOperationTimeout,

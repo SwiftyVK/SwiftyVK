@@ -10,7 +10,7 @@ class JSON: JSONContainer, CustomStringConvertible {
         self.value = try JSONSerialization.jsonObject(with: data ?? Data(), options: .allowFragments)
     }
     
-    private init(value: Any?) {
+    init(value: Any?) {
         self.value = value
     }
     

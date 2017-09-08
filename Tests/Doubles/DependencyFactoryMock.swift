@@ -79,11 +79,11 @@ final class CaptchaControllerMakerMock: CaptchaControllerMaker {
 
 final class LongPollUpdatingOperationMakerMock: LongPollUpdatingOperationMaker {
     
-    var onMake: ((Session?, LongPoolOperationData) -> LongPollUpdatingOperation)?
+    var onMake: ((Session?, LongPollOperationData) -> LongPollUpdatingOperation)?
     
     func longPollUpdatingOperation(
         session: Session?,
-        data: LongPoolOperationData
+        data: LongPollOperationData
         ) -> LongPollUpdatingOperation {
         guard let result = onMake?(session, data) else {
             XCTFail("onMake not defined")
