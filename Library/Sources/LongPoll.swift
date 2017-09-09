@@ -100,9 +100,8 @@ extension VKLongPoll {
             
             semaphore.wait()
             
-            
             guard let realResult = result else {
-                DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 10) {
+                DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 1) {
                     getConnectionInfo(completion: completion)
                 }
                 return
@@ -112,7 +111,7 @@ extension VKLongPoll {
         }
         
         private static func startUpdating() {
-            lpQueue.sync {
+            lpQueue.async {
                 guard isActive else {
                     VK.Log.put("LongPoll", "Long poll not active")
                     return
