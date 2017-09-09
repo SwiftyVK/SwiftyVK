@@ -59,10 +59,11 @@ extension VKLongPoll {
         }
         
         // swiftlint:disable:next large_tuple
-        private static func getConnectionInfo() -> (server: String, lpKey: String, ts: String)? {
-            guard VK.state == .authorized else {
+        private static func getConnectionInfo(completion: @escaping ((server: String, lpKey: String, ts: String)?) -> ()) {
+            guard isActive, VK.state == .authorized else {
                 VK.Log.put("LongPoll", "User is not authorized")
-                return nil
+                completion(nil)
+                return
             }
             
             let semaphore = DispatchSemaphore(value: 0)
@@ -99,13 +100,15 @@ extension VKLongPoll {
             
             semaphore.wait()
             
-            if let result = result {
-                return result
+            
+            guard let realResult = result else {
+                DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 10) {
+                    getConnectionInfo(completion: completion)
+                }
+                return
             }
-            else {
-                Thread.sleep(forTimeInterval: 10)
-                return getConnectionInfo()
-            }
+            
+            completion(realResult)
         }
         
         private static func startUpdating() {
@@ -115,27 +118,29 @@ extension VKLongPoll {
                     return
                 }
                 
-                guard let connectionInfo = getConnectionInfo() else {
-                    VK.Log.put("LongPoll", "Fail to get connection info")
-                    return
-                }
-                
-                VK.Log.put("LongPoll", "Start updating")
-                
-                let updateOperation = LongPollUpdatingOperation(
-                    server: connectionInfo.server,
-                    lpKey: connectionInfo.lpKey,
-                    startTs: connectionInfo.ts,
-                    onResponse: { updates in
-                        parse(updates)
-                    },
-                    onKeyExpired: {
-                        updateQueue.cancelAllOperations()
-                        startUpdating()
+                getConnectionInfo { connectionInfo in
+                    guard let connectionInfo = connectionInfo else {
+                        VK.Log.put("LongPoll", "Fail to get connection info")
+                        return
                     }
-                )
-            
-                updateQueue.addOperation(updateOperation)
+                    
+                    VK.Log.put("LongPoll", "Start updating")
+                    
+                    let updateOperation = LongPollUpdatingOperation(
+                        server: connectionInfo.server,
+                        lpKey: connectionInfo.lpKey,
+                        startTs: connectionInfo.ts,
+                        onResponse: { updates in
+                            parse(updates)
+                        },
+                        onKeyExpired: {
+                            updateQueue.cancelAllOperations()
+                            startUpdating()
+                        }
+                    )
+                    
+                    updateQueue.addOperation(updateOperation)
+                }
             }
         }
         
