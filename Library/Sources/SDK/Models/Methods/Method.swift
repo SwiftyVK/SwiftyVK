@@ -6,15 +6,15 @@ public extension SendableMethod {
     
     @discardableResult
     func send() -> Task {
-        return send(in: nil)
-    }
-    
-    @discardableResult
-    func send(in session: Session?) -> Task {
-        guard let session = session ?? VK.sessions?.default else {
+        guard let session = VK.sessions?.default else {
             fatalError("You must call VK.prepareForUse function to start using SwiftyVK!")
         }
         
+        return send(in: session)
+    }
+    
+    @discardableResult
+    func send(in session: Session) -> Task {
         return session.send(method: self)
     }
 }
