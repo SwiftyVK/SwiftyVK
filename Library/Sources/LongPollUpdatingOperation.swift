@@ -8,19 +8,7 @@ final class LongPollUpdatingOperation: Operation {
     private let onResponse: ([JSON]?) -> ()
     private let onKeyExpired: () -> ()
     private var currentRequest: RequestExecution?
-    
-    override var isFinished: Bool {
-        return canFinish
-    }
-    
-    private var canFinish = false {
-        willSet {
-            willChangeValue(forKey: "isFinished")
-        }
-        didSet {
-            didChangeValue(forKey: "isFinished")
-        }
-    }
+    private let semaphore = DispatchSemaphore(value: 0)
     
     private override init() {
         fatalError()
@@ -44,6 +32,7 @@ final class LongPollUpdatingOperation: Operation {
     
     override func main() {
         update(ts: startTs)
+        semaphore.wait()
     }
     
     private func update(ts: String) {
@@ -65,7 +54,7 @@ final class LongPollUpdatingOperation: Operation {
                 
                 if response["failed"].intValue > 0 {
                     self.onKeyExpired()
-                    self.canFinish = true
+                    self.semaphore.signal()
                 }
                 else {
                     let newTs = response["ts"].stringValue
@@ -89,6 +78,6 @@ final class LongPollUpdatingOperation: Operation {
     override func cancel() {
         super.cancel()
         currentRequest?.cancel()
-        canFinish = true
+        semaphore.signal()
     }
 }
