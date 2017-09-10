@@ -12,7 +12,7 @@ internal final class ConnectionObserver: NSObject {
     
     private let onConnect: () -> ()
     private let onDisconnect: () -> ()
-    private var isForeground = true
+    private var isInForeground = true
     
     private override init() {
         fatalError()
@@ -45,38 +45,39 @@ internal final class ConnectionObserver: NSObject {
     
     @objc
     private func onReachabilityChange(notification: NSNotification) {
-
         if reachability.isReachable {
+            guard isInForeground else { return }
             connect()
         }
         else {
+            guard isInForeground else { return }
             disconnect()
         }
     }
     
     @objc
     private func onForeground() {
-        isForeground = true
+        isInForeground = true
         guard reachability.isReachable else { return }
         connect()
     }
     
     @objc
     private func onBackground() {
-        isForeground = false
+        isInForeground = false
         guard reachability.isReachable else { return }
         disconnect()
     }
     
     private func connect() {
-        if isForeground && reachability.isReachable {
+        if isInForeground && reachability.isReachable {
             onConnect()
             VK.Log.put("Connection", "restored")
         }
     }
     
     private func disconnect() {
-        if !isForeground || !reachability.isReachable {
+        if !isInForeground || !reachability.isReachable {
             onDisconnect()
             VK.Log.put("Connection", "lost")
         }
