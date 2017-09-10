@@ -30,8 +30,8 @@ internal final class ConnectionObserver: NSObject {
         super.init()
         
         #if os(OSX)
-            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(onBackground), name: .NSWorkspaceScreensDidSleep, object: nil)
-            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(onForeground), name: .NSWorkspaceScreensDidWake, object: nil)
+            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(onBackground), name: .NSWorkspaceWillSleep, object: nil)
+            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(onForeground), name: .NSWorkspaceDidWake, object: nil)
         #elseif os(iOS)
             NotificationCenter.default.addObserver(self, selector: #selector(onBackground), name: .UIApplicationWillResignActive, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(onForeground), name: .UIApplicationDidBecomeActive, object: nil)
