@@ -18,10 +18,11 @@ extension VKLongPoll {
             queue.maxConcurrentOperationCount = 1
             return queue
         }()
+        private static var isConnected = false
         
         ///Starting receiving updates from the long pool server
         public static func start() {
-            lpQueue.sync {
+            lpQueue.async {
                 guard !isActive else {
                     VK.Log.put("LongPoll", "LongPoll is already active")
                     return
@@ -31,15 +32,21 @@ extension VKLongPoll {
                 
                 connectionObserver = ConnectionObserver(
                     onConnect: {
-                        if isActive {
-                            NotificationCenter.default.post(name: VK.LP.notifications.connectinDidRestore, object: nil)
-                            startUpdating()
+                        lpQueue.async {
+                            if isActive {
+                                isConnected = true
+                                NotificationCenter.default.post(name: VK.LP.notifications.connectinDidRestore, object: nil)
+                                startUpdating()
+                            }
                         }
                     },
                     onDisconnect: {
-                        if isActive {
-                            NotificationCenter.default.post(name: VK.LP.notifications.connectinDidLost, object: nil)
-                            updateQueue.cancelAllOperations()
+                        lpQueue.async {
+                            if isActive {
+                                isConnected = false
+                                NotificationCenter.default.post(name: VK.LP.notifications.connectinDidLost, object: nil)
+                                updateQueue.cancelAllOperations()
+                            }
                         }
                     }
                 )
@@ -50,7 +57,7 @@ extension VKLongPoll {
         
         ///Pause receiving updates from the long pool server
         public static func stop() {
-            lpQueue.sync {
+            lpQueue.async {
                 updateQueue.cancelAllOperations()
                 connectionObserver = nil
                 isActive = false
@@ -101,7 +108,7 @@ extension VKLongPoll {
             semaphore.wait()
             
             guard let realResult = result else {
-                DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 1) {
+                lpQueue.asyncAfter(deadline: .now() + 1) {
                     getConnectionInfo(completion: completion)
                 }
                 return
@@ -111,33 +118,37 @@ extension VKLongPoll {
         }
         
         private static func startUpdating() {
-            lpQueue.async {
-                guard isActive else {
-                    VK.Log.put("LongPoll", "Long poll not active")
+            guard isActive else {
+                VK.Log.put("LongPoll", "Long poll not active")
+                return
+            }
+            
+            getConnectionInfo { connectionInfo in
+                guard let connectionInfo = connectionInfo else {
+                    VK.Log.put("LongPoll", "Fail to get connection info")
                     return
                 }
                 
-                getConnectionInfo { connectionInfo in
-                    guard let connectionInfo = connectionInfo else {
-                        VK.Log.put("LongPoll", "Fail to get connection info")
-                        return
-                    }
-                    
-                    VK.Log.put("LongPoll", "Start updating")
-                    
-                    let updateOperation = LongPollUpdatingOperation(
-                        server: connectionInfo.server,
-                        lpKey: connectionInfo.lpKey,
-                        startTs: connectionInfo.ts,
-                        onResponse: { updates in
-                            parse(updates)
-                        },
-                        onKeyExpired: {
-                            updateQueue.cancelAllOperations()
+                VK.Log.put("LongPoll", "Start updating")
+                
+                let updateOperation = LongPollUpdatingOperation(
+                    server: connectionInfo.server,
+                    lpKey: connectionInfo.lpKey,
+                    startTs: connectionInfo.ts,
+                    onResponse: { updates in
+                        parse(updates)
+                    },
+                    onKeyExpired: {
+                        updateQueue.cancelAllOperations()
+                        lpQueue.async {
                             startUpdating()
                         }
-                    )
-                    
+                    }
+                )
+                
+                updateQueue.cancelAllOperations()
+                
+                if isConnected {
                     updateQueue.addOperation(updateOperation)
                 }
             }
