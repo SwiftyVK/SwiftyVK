@@ -3,7 +3,7 @@ import XCTest
 @testable import SwiftyVK
 
 class ConnectionObserverTests: XCTestCase {
-
+    
     func test_registerAllObservers() {
         // Given
         var names = [Notification.Name?]()
@@ -13,7 +13,7 @@ class ConnectionObserverTests: XCTestCase {
             names.append(name)
         }
         // When
-        context.observer.setUp(onConnect: {}, onDisconnect: {})
+        context.observer.subscribe(object: self, onUpdate: (onConnect: {}, onDisconnect: {}))
         // Then
         XCTAssertEqual(names[0], Notifications.active)
         XCTAssertEqual(names[1], Notifications.inactive)
@@ -26,14 +26,16 @@ class ConnectionObserverTests: XCTestCase {
         var onDisconnectCallCount = 0
         let context = makeContext()
         
-        context.observer.setUp(
-            onConnect: {
-                onConnectCallCount += 1
+        context.observer.subscribe(
+            object: self,
+            onUpdate: (
+                onConnect: {
+                    onConnectCallCount += 1
             },
-            onDisconnect: {
-                onDisconnectCallCount += 1
+                onDisconnect: {
+                    onDisconnectCallCount += 1
             }
-        )
+        ))
         // When
         context.center.blocks[Notifications.active]?(Notification(name: Notifications.active))
         context.center.blocks[Notifications.inactive]?(Notification(name: Notifications.inactive))
@@ -49,14 +51,16 @@ class ConnectionObserverTests: XCTestCase {
         var onDisconnectCallCount = 0
         let context = makeContext()
         
-        context.observer.setUp(
-            onConnect: {
-                onConnectCallCount += 1
+        context.observer.subscribe(
+            object: self,
+            onUpdate: (
+                onConnect: {
+                    onConnectCallCount += 1
             },
-            onDisconnect: {
-                onDisconnectCallCount += 1
+                onDisconnect: {
+                    onDisconnectCallCount += 1
             }
-        )
+        ))
         // When
         context.center.blocks[Notifications.inactive]?(Notification(name: Notifications.inactive))
         context.center.blocks[Notifications.active]?(Notification(name: Notifications.active))
@@ -72,14 +76,16 @@ class ConnectionObserverTests: XCTestCase {
         var onDisconnectCallCount = 0
         let context = makeContext()
         
-        context.observer.setUp(
-            onConnect: {
-                onConnectCallCount += 1
+        context.observer.subscribe(
+            object: self,
+            onUpdate: (
+                onConnect: {
+                    onConnectCallCount += 1
             },
-            onDisconnect: {
-                onDisconnectCallCount += 1
+                onDisconnect: {
+                    onDisconnectCallCount += 1
             }
-        )
+        ))
         // When
         context.reachability.isReachable = true
         context.center.blocks[Notifications.reachability]?(Notification(name: Notifications.reachability))
@@ -94,14 +100,16 @@ class ConnectionObserverTests: XCTestCase {
         var onDisconnectCallCount = 0
         let context = makeContext()
         
-        context.observer.setUp(
-            onConnect: {
-                onConnectCallCount += 1
+        context.observer.subscribe(
+            object: self,
+            onUpdate: (
+                onConnect: {
+                    onConnectCallCount += 1
             },
-            onDisconnect: {
-                onDisconnectCallCount += 1
+                onDisconnect: {
+                    onDisconnectCallCount += 1
             }
-        )
+        ))
         // When
         context.center.blocks[Notifications.inactive]?(Notification(name: Notifications.inactive))
         context.reachability.isReachable = false
@@ -117,20 +125,48 @@ class ConnectionObserverTests: XCTestCase {
         var onDisconnectCallCount = 0
         let context = makeContext()
         
-        context.observer.setUp(
-            onConnect: {
-                onConnectCallCount += 1
-        },
-            onDisconnect: {
-                onDisconnectCallCount += 1
-        }
-        )
+        context.observer.subscribe(
+            object: self,
+            onUpdate: (
+                onConnect: {
+                    onConnectCallCount += 1
+            },
+                onDisconnect: {
+                    onDisconnectCallCount += 1
+            }
+        ))
         // When
         context.reachability.isReachable = false
         context.center.blocks[Notifications.reachability]?(Notification(name: Notifications.reachability))
         // Then
         XCTAssertEqual(onConnectCallCount, 0)
         XCTAssertEqual(onDisconnectCallCount, 1)
+    }
+    
+    func test_unsubscribe() {
+        // Given
+        var onConnectCallCount = 0
+        var onDisconnectCallCount = 0
+        let context = makeContext()
+        
+        context.observer.subscribe(
+            object: self,
+            onUpdate: (
+                onConnect: {
+                    onConnectCallCount += 1
+            },
+                onDisconnect: {
+                    onDisconnectCallCount += 1
+            }
+        ))
+        // When
+        context.observer.unsubscribe(object: self)
+        context.center.blocks[Notifications.active]?(Notification(name: Notifications.active))
+        context.center.blocks[Notifications.inactive]?(Notification(name: Notifications.inactive))
+        context.center.blocks[Notifications.inactive]?(Notification(name: Notifications.inactive))
+        // Then
+        XCTAssertEqual(onConnectCallCount, 0)
+        XCTAssertEqual(onDisconnectCallCount, 0)
     }
 }
 
@@ -154,5 +190,5 @@ struct Notifications {
     static let active = Notification.Name("active")
     static let inactive = Notification.Name("inactive")
     static let reachability = Notification.Name("reachability")
-
+    
 }

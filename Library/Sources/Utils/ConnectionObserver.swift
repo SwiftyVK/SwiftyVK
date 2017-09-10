@@ -7,8 +7,11 @@ import Foundation
 #endif
 
 protocol ConnectionObserver {
-    func setUp(onConnect: @escaping () -> (), onDisconnect: @escaping () -> ())
+    func subscribe(object: AnyObject, onUpdate: ConnectionUpdate)
+    func unsubscribe(object: AnyObject)
 }
+
+typealias ConnectionUpdate = (onConnect: () -> (), onDisconnect: () -> ())
 
 internal final class ConnectionObserverImpl: ConnectionObserver {
     
@@ -21,10 +24,9 @@ internal final class ConnectionObserverImpl: ConnectionObserver {
     private let reachabilityNotificationName: Notification.Name
     
     private var appIsActive = true
-    private var onConnect: (() -> ())?
-    private var onDisconnect: (() -> ())?
     
-    private var observers = [NSObjectProtocol?]()
+    private var cocoaObservers = [NSObjectProtocol?]()
+    private var observers = [ObjectIdentifier: ConnectionUpdate]()
     
     init(
         appStateCenter: VKNotificationCenter,
@@ -40,15 +42,19 @@ internal final class ConnectionObserverImpl: ConnectionObserver {
         self.activeNotificationName = activeNotificationName
         self.inactiveNotificationName = inactiveNotificationName
         self.reachabilityNotificationName = reachabilityNotificationName
-
     }
     
-    public func setUp(onConnect: @escaping () -> (), onDisconnect: @escaping () -> ()) {
-        self.onConnect = onConnect
-        self.onDisconnect = onDisconnect
+    func subscribe(object: AnyObject, onUpdate: ConnectionUpdate) {
+        let objectIdentifier = ObjectIdentifier(object)
+        observers[objectIdentifier] = onUpdate
         
         setUpAppStateObservers()
         setUpReachabilityObserver()
+    }
+    
+    func unsubscribe(object: AnyObject) {
+        let objectIdentifier = ObjectIdentifier(object)
+        observers[objectIdentifier] = nil
     }
     
     private func setUpAppStateObservers() {
@@ -70,7 +76,7 @@ internal final class ConnectionObserverImpl: ConnectionObserver {
             }
         )
         
-        observers.append(contentsOf: [becomeActiveObserver, resignActiveObserver])
+        cocoaObservers.append(contentsOf: [becomeActiveObserver, resignActiveObserver])
     }
     
     private func setUpReachabilityObserver() {
@@ -83,7 +89,7 @@ internal final class ConnectionObserverImpl: ConnectionObserver {
             }
         )
         
-        observers.append(reachabilityObserver)
+        cocoaObservers.append(reachabilityObserver)
         _ = try? reachability.startNotifier()
     }
     
@@ -91,27 +97,27 @@ internal final class ConnectionObserverImpl: ConnectionObserver {
         guard appIsActive == true else { return }
 
         if reachability.isReachable {
-            onConnect?()
+            observers.forEach { $0.value.onConnect() }
         }
         else {
-            onDisconnect?()
+            observers.forEach { $0.value.onDisconnect() }
         }
     }
     
     private func handleAppActive() {
         guard appIsActive == false else { return }
         appIsActive = true
-        onConnect?()
+        observers.forEach { $0.value.onConnect() }
     }
     
     private func handleAppInnactive() {
         guard appIsActive == true else { return }
         appIsActive = false
-        onDisconnect?()
+        observers.forEach { $0.value.onDisconnect() }
     }
     
     deinit {
-        for observer in observers {
+        for observer in cocoaObservers {
             if let observer = observer {
                 NotificationCenter.default.removeObserver(observer)
             }

@@ -3,9 +3,15 @@ import XCTest
 
 final class ConnectionObserverMock: ConnectionObserver {
     
-    var onSetUp: ((() -> (), () -> ()) -> ())?
+    var onSubscribe: ((AnyObject, ConnectionUpdate) -> ())?
     
-    func setUp(onConnect: @escaping () -> (), onDisconnect: @escaping () -> ()) {
-        onSetUp?(onConnect, onDisconnect)
+    func subscribe(object: AnyObject, onUpdate: ConnectionUpdate) {
+        onSubscribe?(object, onUpdate)
+    }
+    
+    var onUnsubscribe: ((AnyObject) -> ())?
+    
+    func unsubscribe(object: AnyObject) {
+        onUnsubscribe?(object)
     }
 }
