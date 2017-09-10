@@ -8,63 +8,75 @@ import Foundation
 
 internal final class ConnectionObserver: NSObject {
     
-    private var connected = true
+    private let reachability: Reachability
+    
     private let onConnect: () -> ()
     private let onDisconnect: () -> ()
+    private var isForeground = true
     
     private override init() {
         fatalError()
     }
     
-    init(
+    init?(
         onConnect: @escaping () -> (),
         onDisconnect: @escaping () -> ()
         ) {
+        guard let reachability = Reachability() else { return nil }
+        self.reachability = reachability
         self.onConnect = onConnect
         self.onDisconnect = onDisconnect
         
         super.init()
         
         #if os(OSX)
-            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(disconnect), name: .NSWorkspaceScreensDidSleep, object: nil)
-            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(connect), name: .NSWorkspaceScreensDidWake, object: nil)
+            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(onBackground), name: .NSWorkspaceScreensDidSleep, object: nil)
+            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(onForeground), name: .NSWorkspaceScreensDidWake, object: nil)
         #elseif os(iOS)
-            NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: .UIApplicationWillResignActive, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(connect), name: .UIApplicationDidBecomeActive, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(onBackground), name: .UIApplicationWillResignActive, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(onForeground), name: .UIApplicationDidBecomeActive, object: nil)
         #endif
         
-        let reachability = Reachability()
         NotificationCenter.default.addObserver(self, selector: #selector(onReachabilityChange), name: ReachabilityChangedNotification, object: nil)
-        _ = try? reachability?.startNotifier()
+        _ = try? reachability.startNotifier()
         
         VK.Log.put("Connection", "Start observing")
     }
     
     @objc
     private func onReachabilityChange(notification: NSNotification) {
-        guard let reachability = notification.object as? Reachability else { return }
-        
+
         if reachability.isReachable {
-            onConnect()
+            connect()
         }
         else {
-            onDisconnect()
+            disconnect()
         }
     }
     
     @objc
+    private func onForeground() {
+        isForeground = true
+        guard reachability.isReachable else { return }
+        connect()
+    }
+    
+    @objc
+    private func onBackground() {
+        isForeground = false
+        guard reachability.isReachable else { return }
+        disconnect()
+    }
+    
     private func connect() {
-        if connected == false {
-            connected = true
+        if isForeground && reachability.isReachable {
             onConnect()
             VK.Log.put("Connection", "restored")
         }
     }
     
-    @objc
     private func disconnect() {
-        if connected == true {
-            connected = false
+        if !isForeground || !reachability.isReachable {
             onDisconnect()
             VK.Log.put("Connection", "lost")
         }
