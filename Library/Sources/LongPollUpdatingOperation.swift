@@ -48,7 +48,7 @@ final class LongPollUpdatingOperation: Operation {
         currentRequest = req.send(
             onSuccess: { [weak self] response in
                 guard let `self` = self else { return }
-                guard !self.isCancelled else { return }
+                guard !self.isCancelled, VK.state == .authorized else { return }
                 
                 VK.Log.put("LongPoll", "Received response with \(req)")
                 
