@@ -18,6 +18,7 @@ extension VKLongPoll {
             queue.maxConcurrentOperationCount = 1
             return queue
         }()
+        private static var isConnected = false
         
         ///Starting receiving updates from the long pool server
         public static func start() {
@@ -31,15 +32,21 @@ extension VKLongPoll {
                 
                 connectionObserver = ConnectionObserver(
                     onConnect: {
-                        if isActive {
-                            NotificationCenter.default.post(name: VK.LP.notifications.connectinDidRestore, object: nil)
-                            startUpdating()
+                        lpQueue.async {
+                            if isActive {
+                                isConnected = true
+                                NotificationCenter.default.post(name: VK.LP.notifications.connectinDidRestore, object: nil)
+                                startUpdating()
+                            }
                         }
                     },
                     onDisconnect: {
-                        if isActive {
-                            NotificationCenter.default.post(name: VK.LP.notifications.connectinDidLost, object: nil)
-                            updateQueue.cancelAllOperations()
+                        lpQueue.async {
+                            if isActive {
+                                isConnected = false
+                                NotificationCenter.default.post(name: VK.LP.notifications.connectinDidLost, object: nil)
+                                updateQueue.cancelAllOperations()
+                            }
                         }
                     }
                 )
@@ -59,10 +66,11 @@ extension VKLongPoll {
         }
         
         // swiftlint:disable:next large_tuple
-        private static func getConnectionInfo() -> (server: String, lpKey: String, ts: String)? {
-            guard VK.state == .authorized else {
+        private static func getConnectionInfo(completion: @escaping ((server: String, lpKey: String, ts: String)?) -> ()) {
+            guard isActive, VK.state == .authorized else {
                 VK.Log.put("LongPoll", "User is not authorized")
-                return nil
+                completion(nil)
+                return
             }
             
             let semaphore = DispatchSemaphore(value: 0)
@@ -99,23 +107,24 @@ extension VKLongPoll {
             
             semaphore.wait()
             
-            if let result = result {
-                return result
+            guard let realResult = result else {
+                lpQueue.asyncAfter(deadline: .now() + 1) {
+                    getConnectionInfo(completion: completion)
+                }
+                return
             }
-            else {
-                Thread.sleep(forTimeInterval: 10)
-                return getConnectionInfo()
-            }
+            
+            completion(realResult)
         }
         
         private static func startUpdating() {
-            lpQueue.sync {
-                guard isActive else {
-                    VK.Log.put("LongPoll", "Long poll not active")
-                    return
-                }
-                
-                guard let connectionInfo = getConnectionInfo() else {
+            guard isActive else {
+                VK.Log.put("LongPoll", "Long poll not active")
+                return
+            }
+            
+            getConnectionInfo { connectionInfo in
+                guard let connectionInfo = connectionInfo else {
                     VK.Log.put("LongPoll", "Fail to get connection info")
                     return
                 }
@@ -131,11 +140,17 @@ extension VKLongPoll {
                     },
                     onKeyExpired: {
                         updateQueue.cancelAllOperations()
-                        startUpdating()
+                        lpQueue.async {
+                            startUpdating()
+                        }
                     }
                 )
-            
-                updateQueue.addOperation(updateOperation)
+                
+                updateQueue.cancelAllOperations()
+                
+                if isConnected {
+                    updateQueue.addOperation(updateOperation)
+                }
             }
         }
         
