@@ -14,7 +14,8 @@ protocol DependencyFactory:
     TokenMaker,
     WebControllerMaker,
     CaptchaControllerMaker,
-    LongPollUpdatingOperationMaker
+    LongPollUpdatingOperationMaker,
+    LongPollMaker
 {}
 
 protocol DependencyHolder: SessionsHolderHolder, AuthorizatorHolder {
@@ -57,6 +58,10 @@ protocol LongPollUpdatingOperationMaker {
     func longPollUpdatingOperation(session: Session?, data: LongPollOperationData) -> LongPollUpdatingOperation
 }
 
+protocol LongPollMaker {
+    func longPoll(session: Session) -> LongPoll
+}
+
 final class DependencyFactoryImpl: DependencyFactory {
     
     private let appId: String
@@ -65,6 +70,29 @@ final class DependencyFactoryImpl: DependencyFactory {
     private let foregroundSession = URLSession.shared
     private let longPollOperationTimeout: TimeInterval = 30
     private let uiSyncQueue = DispatchQueue(label: "SwiftyVK.uiSyncQueue")
+    
+    private lazy var connectionObserver: ConnectionObserver? = {
+        guard let reachability = Reachability() else { return nil }
+        
+        #if os(iOS)
+            let appStateCenter = NotificationCenter.default
+            let activeNotificationName = Notification.Name.UIApplicationDidBecomeActive
+            let inactiveNotificationName = Notification.Name.UIApplicationWillResignActive
+        #elseif os(macOS)
+            let appStateCenter = NSWorkspace.shared.notificationCenter
+            let activeNotificationName = NSWorkspace.willSleepNotification
+            let inactiveNotificationName = NSWorkspace.didWakeNotification
+        #endif
+
+        return ConnectionObserverImpl(
+            appStateCenter: appStateCenter,
+            reachabilityCenter: NotificationCenter.default,
+            reachability: reachability,
+            activeNotificationName: activeNotificationName,
+            inactiveNotificationName: inactiveNotificationName,
+            reachabilityNotificationName: ReachabilityChangedNotification
+        )
+    }()
     
     init(appId: String, delegate: SwiftyVKDelegate?) {
         self.appId = appId
@@ -112,6 +140,7 @@ final class DependencyFactoryImpl: DependencyFactory {
             taskMaker: self,
             captchaPresenter: captchaPresenter,
             sessionSaver: sessionSaver,
+            longPollMaker: self,
             delegate: delegate
         )
     }
@@ -233,6 +262,14 @@ final class DependencyFactoryImpl: DependencyFactory {
             session: session,
             delayOnError: longPollOperationTimeout,
             data: data
+        )
+    }
+    
+    func longPoll(session: Session) -> LongPoll {
+        return LongPollImpl(
+            session: session,
+            operationMaker: self,
+            connectionObserver: connectionObserver
         )
     }
     

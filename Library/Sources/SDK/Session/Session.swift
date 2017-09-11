@@ -2,6 +2,7 @@ public protocol Session: class {
     var id: String { get }
     var config: SessionConfig { get set }
     var state: SessionState { get }
+    var longPoll: LongPoll { get }
     
     func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping RequestCallbacks.Error)
     func logIn(rawToken: String, expires: TimeInterval) throws
@@ -48,6 +49,10 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         }
     }
     
+    public lazy var longPoll: LongPoll = {
+        longPollMaker.longPoll(session: self)
+    }()
+    
     public var id: String {
         didSet {
             sessionSaver?.saveState()
@@ -64,6 +69,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     private let attemptSheduler: AttemptSheduler
     private let authorizator: Authorizator
     private let taskMaker: TaskMaker
+    private let longPollMaker: LongPollMaker
     private let captchaPresenter: CaptchaPresenter
     private weak var sessionSaver: SessionSaver?
     private weak var delegate: SwiftyVKSessionDelegate?
@@ -78,6 +84,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         taskMaker: TaskMaker,
         captchaPresenter: CaptchaPresenter,
         sessionSaver: SessionSaver,
+        longPollMaker: LongPollMaker,
         delegate: SwiftyVKSessionDelegate?
         ) {
         self.id = id
@@ -86,6 +93,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         self.attemptSheduler = attemptSheduler
         self.authorizator = authorizator
         self.taskMaker = taskMaker
+        self.longPollMaker = longPollMaker
         self.captchaPresenter = captchaPresenter
         self.sessionSaver = sessionSaver
         self.delegate = delegate
