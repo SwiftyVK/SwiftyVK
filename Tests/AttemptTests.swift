@@ -60,7 +60,7 @@ class AttemptTests: XCTestCase {
         OperationQueue().addOperation(context.attempt)
         Thread.sleep(forTimeInterval: 0.01)
         context.attempt.cancel()
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: 5)
         // Then
         XCTAssertEqual(cancellCallCount, 1)
     }
