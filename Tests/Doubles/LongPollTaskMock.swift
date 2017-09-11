@@ -1,7 +1,7 @@
 @testable import SwiftyVK
 import XCTest
 
-class LongPollUpdatingOperationMock: Operation, LongPollUpdatingOperation {
+class LongPollTaskMock: Operation, LongPollTask {
     
     var onMain: (() -> ())?
     

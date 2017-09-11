@@ -10,7 +10,7 @@ public protocol LongPoll {
 public final class LongPollImpl: LongPoll {
     
     private weak var session: Session?
-    private let operationMaker: LongPollUpdatingOperationMaker
+    private let operationMaker: LongPollTaskMaker
     private let connectionObserver: ConnectionObserver?
     private let getInfoDelay: TimeInterval
     
@@ -23,7 +23,7 @@ public final class LongPollImpl: LongPoll {
     
     init(
         session: Session?,
-        operationMaker: LongPollUpdatingOperationMaker,
+        operationMaker: LongPollTaskMaker,
         connectionObserver: ConnectionObserver?,
         getInfoDelay: TimeInterval
         ) {
@@ -98,7 +98,7 @@ public final class LongPollImpl: LongPoll {
         getConnectionInfo { [weak self] connectionInfo in
             guard let strongSelf = self, strongSelf.isActive else { return }
             
-            let data = LongPollOperationData(
+            let data = LongPollTaskData(
                 server: connectionInfo.server,
                 startTs: connectionInfo.ts,
                 lpKey: connectionInfo.lpKey,
@@ -117,7 +117,7 @@ public final class LongPollImpl: LongPoll {
             
             guard strongSelf.isConnected else { return }
             
-            let operation = strongSelf.operationMaker.longPollUpdatingOperation(session: strongSelf.session, data: data)
+            let operation = strongSelf.operationMaker.longPollTask(session: strongSelf.session, data: data)
             strongSelf.updatingQueue.addOperation(operation.toOperation())
         }
     }

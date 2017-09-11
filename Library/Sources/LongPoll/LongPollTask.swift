@@ -1,8 +1,8 @@
 import Foundation
 
-protocol LongPollUpdatingOperation: OperationConvertible {}
+protocol LongPollTask: OperationConvertible {}
 
-final class LongPollUpdatingOperationImpl: Operation, LongPollUpdatingOperation {
+final class LongPollTaskImpl: Operation, LongPollTask {
     
     private weak var session: Session?
     private let server: String
@@ -18,7 +18,7 @@ final class LongPollUpdatingOperationImpl: Operation, LongPollUpdatingOperation 
     init(
         session: Session?,
         delayOnError: TimeInterval,
-        data: LongPollOperationData
+        data: LongPollTaskData
         ) {
         self.session = session
         self.server = data.server
@@ -79,7 +79,7 @@ final class LongPollUpdatingOperationImpl: Operation, LongPollUpdatingOperation 
     }
 }
 
-struct LongPollOperationData {
+struct LongPollTaskData {
     let server: String
     let startTs: String
     let lpKey: String

@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class LongPollUpdatingOperationTests: XCTestCase {
+class LongPollTaskTests: XCTestCase {
     
     func test_operation_callSuccessCallback_whenGiveUpdates() {
         // Given
@@ -158,10 +158,10 @@ class LongPollUpdatingOperationTests: XCTestCase {
 private func makeContext(
     onResponse: @escaping ([JSON]) -> (),
     onKeyExpired: @escaping () -> ()
-    ) -> (session: SessionMock, operation: LongPollUpdatingOperationImpl) {
+    ) -> (session: SessionMock, operation: LongPollTaskImpl) {
     let session = SessionMock()
     
-    let operation = LongPollUpdatingOperationImpl(
+    let operation = LongPollTaskImpl(
         session: session,
         delayOnError: 0,
         data: LongPollOperationData(

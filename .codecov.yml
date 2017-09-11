@@ -13,4 +13,3 @@ coverage:
     - Library/Sources/Extensions/Numbers+Extensions.swift
     - Library/Sources/Extensions/URLOpener.swift
     - Library/Sources/Extensions/VKURLSession.swift
-

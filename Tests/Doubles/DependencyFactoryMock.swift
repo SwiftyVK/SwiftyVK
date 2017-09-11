@@ -77,17 +77,17 @@ final class CaptchaControllerMakerMock: CaptchaControllerMaker {
     }
 }
 
-final class LongPollUpdatingOperationMakerMock: LongPollUpdatingOperationMaker {
+final class LongPollTaskMakerMock: LongPollTaskMaker {
     
-    var onMake: ((Session?, LongPollOperationData) -> LongPollUpdatingOperation)?
+    var onMake: ((Session?, LongPollOperationData) -> LongPollTask)?
     
-    func longPollUpdatingOperation(
+    func longPollTask(
         session: Session?,
         data: LongPollOperationData
-        ) -> LongPollUpdatingOperation {
+        ) -> LongPollTask {
         guard let result = onMake?(session, data) else {
             XCTFail("onMake not defined")
-            return LongPollUpdatingOperationMock()
+            return LongPollTaskMock()
         }
         
         return result

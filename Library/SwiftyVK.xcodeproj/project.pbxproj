@@ -219,7 +219,7 @@
 		D4040E2E1F62C22500025E24 /* LongPollEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665451F61A460000E6934 /* LongPollEvent.swift */; };
 		D4040E301F62CB2500025E24 /* Collections+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4040E2F1F62CB2500025E24 /* Collections+Extensions.swift */; };
 		D4040E311F62CB2500025E24 /* Collections+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4040E2F1F62CB2500025E24 /* Collections+Extensions.swift */; };
-		D41665401F6192CA000E6934 /* LongPollUpdatingOperationMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D416653F1F6192CA000E6934 /* LongPollUpdatingOperationMock.swift */; };
+		D41665401F6192CA000E6934 /* LongPollTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D416653F1F6192CA000E6934 /* LongPollTaskMock.swift */; };
 		D41665421F6193BD000E6934 /* LongPollTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665411F6193BD000E6934 /* LongPollTests.swift */; };
 		D41665441F6198C0000E6934 /* ConnectionObserverMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665431F6198C0000E6934 /* ConnectionObserverMock.swift */; };
 		D41665481F61B52D000E6934 /* LongPollEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665451F61A460000E6934 /* LongPollEvent.swift */; };
@@ -289,7 +289,7 @@
 		D49EA9EE1F587EF300C1A251 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EA9EC1F587EEF00C1A251 /* RequestType.swift */; };
 		D49EA9F31F5892B000C1A251 /* FullVariationsMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EA9F21F5892B000C1A251 /* FullVariationsMethod.swift */; };
 		D49EA9F41F5892B000C1A251 /* FullVariationsMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49EA9F21F5892B000C1A251 /* FullVariationsMethod.swift */; };
-		D4AB8D931F6044190099FC42 /* LongPollUpdatingOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB8D921F6044190099FC42 /* LongPollUpdatingOperationTests.swift */; };
+		D4AB8D931F6044190099FC42 /* LongPollTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB8D921F6044190099FC42 /* LongPollTaskTests.swift */; };
 		D4AB8D9B1F6048EA0099FC42 /* longPoll.updates.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D941F6048B50099FC42 /* longPoll.updates.json */; };
 		D4AB8D9D1F6055290099FC42 /* longPoll.failed.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */; };
 		D4AB8D9F1F605FD20099FC42 /* OperationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB8D9E1F605FD20099FC42 /* OperationConvertible.swift */; };
@@ -305,8 +305,8 @@
 		D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
 		D4F49D471F2E0FE50037B875 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D461F2E0FE50037B875 /* ApiError.swift */; };
 		D4F49D481F2E0FE50037B875 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D461F2E0FE50037B875 /* ApiError.swift */; };
-		D4F84BD11F435EEA00DA7127 /* LongPollUpdatingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD01F435EEA00DA7127 /* LongPollUpdatingOperation.swift */; };
-		D4F84BD21F435EEA00DA7127 /* LongPollUpdatingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD01F435EEA00DA7127 /* LongPollUpdatingOperation.swift */; };
+		D4F84BD11F435EEA00DA7127 /* LongPollTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD01F435EEA00DA7127 /* LongPollTask.swift */; };
+		D4F84BD21F435EEA00DA7127 /* LongPollTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD01F435EEA00DA7127 /* LongPollTask.swift */; };
 		D4F84BDD1F435F6400DA7127 /* VKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD81F435F3E00DA7127 /* VKViewController.swift */; };
 		D4F84BDE1F435F6400DA7127 /* VKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD81F435F3E00DA7127 /* VKViewController.swift */; };
 		D4F84BDF1F43608100DA7127 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD71F435F2B00DA7127 /* JSON.swift */; };
@@ -519,7 +519,7 @@
 		A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaPresenterMock.swift; sourceTree = "<group>"; };
 		D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.empty.json; sourceTree = "<group>"; };
 		D4040E2F1F62CB2500025E24 /* Collections+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collections+Extensions.swift"; sourceTree = "<group>"; };
-		D416653F1F6192CA000E6934 /* LongPollUpdatingOperationMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollUpdatingOperationMock.swift; sourceTree = "<group>"; };
+		D416653F1F6192CA000E6934 /* LongPollTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollTaskMock.swift; sourceTree = "<group>"; };
 		D41665411F6193BD000E6934 /* LongPollTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollTests.swift; sourceTree = "<group>"; };
 		D41665431F6198C0000E6934 /* ConnectionObserverMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionObserverMock.swift; sourceTree = "<group>"; };
 		D41665451F61A460000E6934 /* LongPollEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollEvent.swift; sourceTree = "<group>"; };
@@ -573,7 +573,7 @@
 		D49795AD1F4DFDF700921A21 /* URLOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = URLOpener.swift; path = Sources/Extensions/URLOpener.swift; sourceTree = SOURCE_ROOT; };
 		D49EA9EC1F587EEF00C1A251 /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
 		D49EA9F21F5892B000C1A251 /* FullVariationsMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullVariationsMethod.swift; sourceTree = "<group>"; };
-		D4AB8D921F6044190099FC42 /* LongPollUpdatingOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollUpdatingOperationTests.swift; sourceTree = "<group>"; };
+		D4AB8D921F6044190099FC42 /* LongPollTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollTaskTests.swift; sourceTree = "<group>"; };
 		D4AB8D941F6048B50099FC42 /* longPoll.updates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = longPoll.updates.json; sourceTree = "<group>"; };
 		D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.json; sourceTree = "<group>"; };
 		D4AB8D9E1F605FD20099FC42 /* OperationConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationConvertible.swift; sourceTree = "<group>"; };
@@ -586,7 +586,7 @@
 		D4F49D411F2DF5B10037B875 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		D4F49D441F2E0EF60037B875 /* apiError.correct.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.correct.json; sourceTree = "<group>"; };
 		D4F49D461F2E0FE50037B875 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
-		D4F84BD01F435EEA00DA7127 /* LongPollUpdatingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LongPollUpdatingOperation.swift; path = Sources/LongPoll/LongPollUpdatingOperation.swift; sourceTree = SOURCE_ROOT; };
+		D4F84BD01F435EEA00DA7127 /* LongPollTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LongPollTask.swift; path = Sources/LongPoll/LongPollTask.swift; sourceTree = SOURCE_ROOT; };
 		D4F84BD31F435EFC00DA7127 /* ConnectionObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectionObserver.swift; path = Sources/Utils/ConnectionObserver.swift; sourceTree = SOURCE_ROOT; };
 		D4F84BD71F435F2B00DA7127 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = Sources/Extensions/JSON.swift; sourceTree = SOURCE_ROOT; };
 		D4F84BD81F435F3E00DA7127 /* VKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VKViewController.swift; path = Sources/Extensions/VKViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -657,7 +657,7 @@
 				D4321D921F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift */,
 				D4321D8A1F5F0587001AFE9F /* FullVariationsMethodTests.swift */,
 				D4321D901F5F0D67001AFE9F /* BasicMethodTests.swift */,
-				D4AB8D921F6044190099FC42 /* LongPollUpdatingOperationTests.swift */,
+				D4AB8D921F6044190099FC42 /* LongPollTaskTests.swift */,
 				D41665411F6193BD000E6934 /* LongPollTests.swift */,
 				D41D5D961F62D0F800B4C8AF /* LongPollEventTests.swift */,
 			);
@@ -696,7 +696,7 @@
 				D4306B2C1F547BC70050D165 /* ApiErrorHandlerMock.swift */,
 				D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */,
 				D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */,
-				D416653F1F6192CA000E6934 /* LongPollUpdatingOperationMock.swift */,
+				D416653F1F6192CA000E6934 /* LongPollTaskMock.swift */,
 				D41665431F6198C0000E6934 /* ConnectionObserverMock.swift */,
 				D4CA9B731F66BED90085E4F3 /* LongPollMock.swift */,
 			);
@@ -1004,7 +1004,7 @@
 			isa = PBXGroup;
 			children = (
 				A2527D7F1BD12FD200F65412 /* LongPoll.swift */,
-				D4F84BD01F435EEA00DA7127 /* LongPollUpdatingOperation.swift */,
+				D4F84BD01F435EEA00DA7127 /* LongPollTask.swift */,
 				D41665451F61A460000E6934 /* LongPollEvent.swift */,
 			);
 			path = LongPoll;
@@ -1306,7 +1306,7 @@
 				A25A19CB1EE4126E00CF13AF /* DependencyFactoryMock.swift in Sources */,
 				A2F6F8E51EDDF00400933DBC /* AtomicTests.swift in Sources */,
 				D47601221F2E236E005356E5 /* ResponseTests.swift in Sources */,
-				D41665401F6192CA000E6934 /* LongPollUpdatingOperationMock.swift in Sources */,
+				D41665401F6192CA000E6934 /* LongPollTaskMock.swift in Sources */,
 				A2AF167D1ED1CCA900485716 /* AuthorizatorMock.swift in Sources */,
 				A23E692C1EDAEC5800AA3B3B /* VKAppProxyTests.swift in Sources */,
 				D484C9411F4B3E8300C9651C /* VKURLSessionTaskMock.swift in Sources */,
@@ -1314,7 +1314,7 @@
 				A22179CA1EBA4059006B71FD /* SessionTests.swift in Sources */,
 				A2E5C5D91ECCAD4800652262 /* SessionsHolderMock.swift in Sources */,
 				D41C70551F45F34400EA454C /* VkError.swift in Sources */,
-				D4AB8D931F6044190099FC42 /* LongPollUpdatingOperationTests.swift in Sources */,
+				D4AB8D931F6044190099FC42 /* LongPollTaskTests.swift in Sources */,
 				A25A19D51EE43E8100CF13AF /* TokenParserMock.swift in Sources */,
 				A2433A461EA542100058BB6D /* AttemptShedulerTests.swift in Sources */,
 				A2E5C5DB1ECCAFC800652262 /* SessionsHolderTests.swift in Sources */,
@@ -1403,7 +1403,7 @@
 				A2D2713D1EC4D0BA00B24D09 /* SessionsHolder.swift in Sources */,
 				D47E92CA1F5727EA00F9522A /* ThreeVariationsMethod.swift in Sources */,
 				A2EB6EF51BD18394008E7D86 /* Likes.swift in Sources */,
-				D4F84BD11F435EEA00DA7127 /* LongPollUpdatingOperation.swift in Sources */,
+				D4F84BD11F435EEA00DA7127 /* LongPollTask.swift in Sources */,
 				D47E92CD1F5729D200F9522A /* RequestCallbacks.swift in Sources */,
 				A2EB6EF61BD18394008E7D86 /* Messages.swift in Sources */,
 				A22179D51EBA57AF006B71FD /* SessionConfig.swift in Sources */,
@@ -1491,7 +1491,7 @@
 				D4F84BE41F43608900DA7127 /* Reachability.swift in Sources */,
 				A2E5C5D61ECCAA5400652262 /* String+Extensions.swift in Sources */,
 				A27052891EF8138A00C05936 /* EncodedSession.swift in Sources */,
-				D4F84BD21F435EEA00DA7127 /* LongPollUpdatingOperation.swift in Sources */,
+				D4F84BD21F435EEA00DA7127 /* LongPollTask.swift in Sources */,
 				D476011F1F2E2318005356E5 /* Response.swift in Sources */,
 				A28368EC1D9D742700EEBE2A /* Attempt.swift in Sources */,
 				A2EB6EC11BD18389008E7D86 /* Audio.swift in Sources */,

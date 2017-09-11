@@ -79,7 +79,7 @@ class LongPollTests: XCTestCase {
         }
         
         context.operationMaker.onMake = { _, data in
-            let operation = LongPollUpdatingOperationMock()
+            let operation = LongPollTaskMock()
             
             operation.onMain = {
                 data.onResponse(updates)
@@ -130,7 +130,7 @@ class LongPollTests: XCTestCase {
         }
         
         context.operationMaker.onMake = { _, data in
-            let operation = LongPollUpdatingOperationMock()
+            let operation = LongPollTaskMock()
             
             operation.onMain = {
                 data.onResponse([])
@@ -179,7 +179,7 @@ class LongPollTests: XCTestCase {
         }
         
         context.operationMaker.onMake = { _, data in
-            let operation = LongPollUpdatingOperationMock()
+            let operation = LongPollTaskMock()
             
             operation.onMain = {
                 if getInfoCallCount == 1 {
@@ -235,7 +235,7 @@ class LongPollTests: XCTestCase {
         }
         
         context.operationMaker.onMake = { _, data in
-            let operation = LongPollUpdatingOperationMock()
+            let operation = LongPollTaskMock()
             
             operation.onMain = {
                 data.onResponse([])
@@ -279,11 +279,11 @@ class LongPollTests: XCTestCase {
 private func makeContext() -> (
     session: SessionMock,
     longPoll: LongPollImpl,
-    operationMaker: LongPollUpdatingOperationMakerMock,
+    operationMaker: LongPollTaskMakerMock,
     connectionObserver: ConnectionObserverMock
     ) {
     let session = SessionMock()
-    let operationMaker = LongPollUpdatingOperationMakerMock()
+    let operationMaker = LongPollTaskMakerMock()
     let connectionObserver = ConnectionObserverMock()
     
     let longPoll = LongPollImpl(
