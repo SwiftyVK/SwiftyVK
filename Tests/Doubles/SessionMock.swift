@@ -2,6 +2,8 @@
 
 final class SessionMock: Session, TaskSession, DestroyableSession {
     
+    var longPoll: LongPoll = LongPollMock()
+    
     var token: Token?
     
     let id = String.random(20)

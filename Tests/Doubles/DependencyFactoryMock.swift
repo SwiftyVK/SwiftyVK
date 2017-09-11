@@ -93,3 +93,18 @@ final class LongPollUpdatingOperationMakerMock: LongPollUpdatingOperationMaker {
         return result
     }
 }
+
+final class LongPollMakerMock: LongPollMaker {
+    
+    var onMake: ((Session) -> LongPoll)?
+
+    func longPoll(session: Session) -> LongPoll {
+        guard let result = onMake?(session) else {
+            XCTFail("onMake not defined")
+            return LongPollMock()
+        }
+        
+        return result
+    }
+
+}

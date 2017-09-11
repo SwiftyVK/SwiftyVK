@@ -4,7 +4,7 @@ public protocol LongPoll {
     var isActive: Bool { get }
     
     func start(onReceiveEvents: @escaping ([LongPollEvent]) -> ())
-    func stop() throws
+    func stop()
 }
 
 public final class LongPollImpl: LongPoll {

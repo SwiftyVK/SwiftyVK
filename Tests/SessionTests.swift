@@ -21,6 +21,7 @@ final class SessionTests: XCTestCase {
             taskMaker: taskMaker,
             captchaPresenter: captchaPresenter,
             sessionSaver: sessionSaver,
+            longPollMaker: LongPollMakerMock(),
             delegate: delegate
         )
         
