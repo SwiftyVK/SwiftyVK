@@ -22,5 +22,33 @@ extension _VKAPI {
     public static func getServerTime(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
       return RequestConfig(method: "utils.getServerTime", parameters: parameters)
     }
+    
+    
+    
+    ///Returns a list of user's shortened links. More - https://vk.com/dev/utils.getLastShortenedLinks
+    public static func getLastShortenedLinks(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
+        return RequestConfig(method: "utils.getLastShortenedLinks", parameters: parameters)
+    }
+    
+    
+    
+    ///Allows to receive a link shortened via vk.cc. More - https://vk.com/dev/utils.getShortLink
+    public static func getShortLink(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
+        return RequestConfig(method: "utils.getShortLink", parameters: parameters)
+    }
+    
+    
+    
+    ///Returns stats data for shortened link. More - https://vk.com/dev/utils.getLinkStats
+    public static func getLinkStats(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
+        return RequestConfig(method: "utils.getLinkStats", parameters: parameters)
+    }
+    
+    
+    
+    ///Deletes shortened link from user's list. More - https://vk.com/dev/utils.deleteFromLastShortened
+    public static func deleteFromLastShortened(_ parameters: [VK.Arg : String] = [:]) -> RequestConfig {
+        return RequestConfig(method: "utils.deleteFromLastShortened", parameters: parameters)
+    }
   }
 }
