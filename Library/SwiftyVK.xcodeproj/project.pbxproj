@@ -991,11 +991,11 @@
 				D47601141F2E218B005356E5 /* response.empty.json */,
 				D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */,
 				D47601181F2E21DD005356E5 /* apiError.withoutCode.json */,
+				D4CA9B751F66CA890085E4F3 /* longPoll.getServer.success.json */,
 				D4AB8D941F6048B50099FC42 /* longPoll.updates.json */,
 				D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */,
 				D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */,
 				D4F49D441F2E0EF60037B875 /* apiError.correct.json */,
-				D4CA9B751F66CA890085E4F3 /* longPoll.getServer.success.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";

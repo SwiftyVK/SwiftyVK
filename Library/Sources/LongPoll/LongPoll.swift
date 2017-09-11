@@ -12,13 +12,10 @@ public final class LongPollImpl: LongPoll {
     private weak var session: Session?
     private let operationMaker: LongPollUpdatingOperationMaker
     private let connectionObserver: ConnectionObserver?
+    private let getInfoDelay: TimeInterval
     
     private let synchronyQueue = DispatchQueue.global(qos: .utility)
-    private let updatingQueue: OperationQueue = {
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 1
-        return queue
-    }()
+    private let updatingQueue: OperationQueue
     
     public var isActive: Bool
     private var isConnected = false
@@ -27,13 +24,20 @@ public final class LongPollImpl: LongPoll {
     init(
         session: Session?,
         operationMaker: LongPollUpdatingOperationMaker,
-        connectionObserver: ConnectionObserver?
+        connectionObserver: ConnectionObserver?,
+        getInfoDelay: TimeInterval
         ) {
         self.isActive = false
         self.session = session
         self.operationMaker = operationMaker
         self.connectionObserver = connectionObserver
-        setUpConnectionObserver()
+        self.getInfoDelay = getInfoDelay
+        
+        self.updatingQueue = {
+            let queue = OperationQueue()
+            queue.maxConcurrentOperationCount = 1
+            return queue
+        }()
     }
     
     public func start(onReceiveEvents: @escaping ([LongPollEvent]) -> ()) {
@@ -42,7 +46,7 @@ public final class LongPollImpl: LongPoll {
             
             self.onReceiveEvents = onReceiveEvents
             isActive = true
-            startUpdating()
+            setUpConnectionObserver()
         }
     }
     
@@ -69,24 +73,24 @@ public final class LongPollImpl: LongPoll {
     }
     
     private func onConnect() {
-        synchronyQueue.sync {
-            guard !isConnected else { return }
-            isConnected = true
+        synchronyQueue.async { [weak self] in
+            guard let strongSelf = self, !strongSelf.isConnected else { return }
+            strongSelf.isConnected = true
 
-            guard isActive else { return }
-            onReceiveEvents?([.connect])
-            startUpdating()
+            guard strongSelf.isActive else { return }
+            strongSelf.onReceiveEvents?([.connect])
+            strongSelf.startUpdating()
         }
     }
     
     private func onDisconnect() {
-        synchronyQueue.sync {
-            guard isConnected else { return }
-            isConnected = false
+        synchronyQueue.async { [weak self] in
+            guard let strongSelf = self, strongSelf.isConnected else { return }
+            strongSelf.isConnected = false
             
-            guard isActive else { return }
-            updatingQueue.cancelAllOperations()
-            onReceiveEvents?([.disconnect])
+            guard strongSelf.isActive else { return }
+            strongSelf.updatingQueue.cancelAllOperations()
+            strongSelf.onReceiveEvents?([.disconnect])
         }
     }
     
@@ -129,9 +133,15 @@ public final class LongPollImpl: LongPoll {
             .configure(with: Config(attemptsMaxLimit: .limited(1), handleErrors: false))
             .onSuccess { data in
                 defer { semaphore.signal() }
-                guard let response = try? JSON(data: data) else { return }
-                guard let server = response.string("server") else { return }
-                guard let lpKey = response.string("key") else { return }
+                
+                guard
+                    let response = try? JSON(data: data),
+                    let server = response.string("server"),
+                    let lpKey = response.string("key")
+                    else {
+                        return
+                }
+                
                 let ts = response.forcedString("ts")
                 result = (server, lpKey, ts)
             }
@@ -143,10 +153,9 @@ public final class LongPollImpl: LongPoll {
         semaphore.wait()
         
         guard let tryResult = result else {
-            synchronyQueue.asyncAfter(deadline: .now() + 3) { [weak self] in
+            return synchronyQueue.asyncAfter(deadline: .now() + getInfoDelay) { [weak self] in
                 self?.getConnectionInfo(completion: completion)
             }
-            return
         }
         
         completion(tryResult)

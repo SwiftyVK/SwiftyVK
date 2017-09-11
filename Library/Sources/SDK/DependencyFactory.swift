@@ -269,7 +269,8 @@ final class DependencyFactoryImpl: DependencyFactory {
         return LongPollImpl(
             session: session,
             operationMaker: self,
-            connectionObserver: connectionObserver
+            connectionObserver: connectionObserver,
+            getInfoDelay: 3
         )
     }
     
