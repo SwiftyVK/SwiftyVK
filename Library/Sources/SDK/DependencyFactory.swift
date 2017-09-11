@@ -67,9 +67,18 @@ final class DependencyFactoryImpl: DependencyFactory {
     private let appId: String
     private weak var delegate: SwiftyVKDelegate?
 
-    private let foregroundSession = URLSession.shared
     private let longPollTaskTimeout: TimeInterval = 30
     private let uiSyncQueue = DispatchQueue(label: "SwiftyVK.uiSyncQueue")
+    
+    private lazy var foregroundSession: VKURLSession = {
+        let config = URLSessionConfiguration.default
+        
+        if #available(OSX 10.13, iOS 11.0, *) {
+            config.waitsForConnectivity = true
+        }
+        
+        return URLSession(configuration:config)
+    }()
     
     private lazy var connectionObserver: ConnectionObserver? = {
         guard let reachability = Reachability() else { return nil }
