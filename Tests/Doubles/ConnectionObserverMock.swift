@@ -5,8 +5,8 @@ final class ConnectionObserverMock: ConnectionObserver {
     
     var onSubscribe: ((AnyObject, ConnectionUpdate) -> ())?
     
-    func subscribe(object: AnyObject, onUpdate: ConnectionUpdate) {
-        onSubscribe?(object, onUpdate)
+    func subscribe(object: AnyObject, callbacks: ConnectionUpdate) {
+        onSubscribe?(object, callbacks)
     }
     
     var onUnsubscribe: ((AnyObject) -> ())?

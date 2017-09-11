@@ -58,7 +58,7 @@ public final class LongPollImpl: LongPoll {
     private func setUpConnectionObserver() {
         connectionObserver?.subscribe(
             object: self,
-            onUpdate: (
+            callbacks: (
                 onConnect: { [weak self] in
                     self?.onConnect()
                 },
@@ -70,6 +70,7 @@ public final class LongPollImpl: LongPoll {
     
     private func onConnect() {
         synchronyQueue.sync {
+            guard !isConnected else { return }
             isConnected = true
 
             guard isActive else { return }
@@ -80,6 +81,7 @@ public final class LongPollImpl: LongPoll {
     
     private func onDisconnect() {
         synchronyQueue.sync {
+            guard isConnected else { return }
             isConnected = false
             
             guard isActive else { return }

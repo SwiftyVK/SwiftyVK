@@ -7,7 +7,7 @@ import Foundation
 #endif
 
 protocol ConnectionObserver {
-    func subscribe(object: AnyObject, onUpdate: ConnectionUpdate)
+    func subscribe(object: AnyObject, callbacks: ConnectionUpdate)
     func unsubscribe(object: AnyObject)
 }
 
@@ -42,14 +42,21 @@ internal final class ConnectionObserverImpl: ConnectionObserver {
         self.activeNotificationName = activeNotificationName
         self.inactiveNotificationName = inactiveNotificationName
         self.reachabilityNotificationName = reachabilityNotificationName
-    }
-    
-    func subscribe(object: AnyObject, onUpdate: ConnectionUpdate) {
-        let objectIdentifier = ObjectIdentifier(object)
-        observers[objectIdentifier] = onUpdate
         
         setUpAppStateObservers()
         setUpReachabilityObserver()
+    }
+    
+    func subscribe(object: AnyObject, callbacks: ConnectionUpdate) {
+        let objectIdentifier = ObjectIdentifier(object)
+        observers[objectIdentifier] = callbacks
+        
+        if appIsActive && reachability.isReachable {
+            callbacks.onConnect()
+        }
+        else {
+            callbacks.onDisconnect()
+        }
     }
     
     func unsubscribe(object: AnyObject) {

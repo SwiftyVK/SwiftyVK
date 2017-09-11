@@ -13,7 +13,7 @@ class ConnectionObserverTests: XCTestCase {
             names.append(name)
         }
         // When
-        context.observer.subscribe(object: self, onUpdate: (onConnect: {}, onDisconnect: {}))
+        context.observer.subscribe(object: self, callbacks: (onConnect: {}, onDisconnect: {}))
         // Then
         XCTAssertEqual(names[0], Notifications.active)
         XCTAssertEqual(names[1], Notifications.inactive)
@@ -28,7 +28,7 @@ class ConnectionObserverTests: XCTestCase {
         
         context.observer.subscribe(
             object: self,
-            onUpdate: (
+            callbacks: (
                 onConnect: {
                     onConnectCallCount += 1
             },
@@ -53,7 +53,7 @@ class ConnectionObserverTests: XCTestCase {
         
         context.observer.subscribe(
             object: self,
-            onUpdate: (
+            callbacks: (
                 onConnect: {
                     onConnectCallCount += 1
             },
@@ -78,7 +78,7 @@ class ConnectionObserverTests: XCTestCase {
         
         context.observer.subscribe(
             object: self,
-            onUpdate: (
+            callbacks: (
                 onConnect: {
                     onConnectCallCount += 1
             },
@@ -102,7 +102,7 @@ class ConnectionObserverTests: XCTestCase {
         
         context.observer.subscribe(
             object: self,
-            onUpdate: (
+            callbacks: (
                 onConnect: {
                     onConnectCallCount += 1
             },
@@ -127,7 +127,7 @@ class ConnectionObserverTests: XCTestCase {
         
         context.observer.subscribe(
             object: self,
-            onUpdate: (
+            callbacks: (
                 onConnect: {
                     onConnectCallCount += 1
             },
@@ -151,7 +151,7 @@ class ConnectionObserverTests: XCTestCase {
         
         context.observer.subscribe(
             object: self,
-            onUpdate: (
+            callbacks: (
                 onConnect: {
                     onConnectCallCount += 1
             },
