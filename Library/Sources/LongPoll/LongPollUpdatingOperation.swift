@@ -41,33 +41,33 @@ final class LongPollUpdatingOperationImpl: Operation, LongPollUpdatingOperation 
             .toMethod()
             .configure(with: Config(attemptsMaxLimit: .limited(1), attemptTimeout: 30, handleErrors: false))
             .onSuccess { [weak self] data in
-                guard let `self` = self, !self.isCancelled else { return }
+                guard let strongSelf = self, !strongSelf.isCancelled else { return }
                 guard let response = try? JSON(data: data) else {
-                    self.semaphore.signal()
+                    strongSelf.semaphore.signal()
                     return
                 }
                 
                 if response.forcedInt("failed") > 0 {
-                    self.onKeyExpired()
-                    self.semaphore.signal()
+                    strongSelf.onKeyExpired()
+                    strongSelf.semaphore.signal()
                 }
                 else {
                     let newTs = response.forcedString("ts")
                     let updates: [Any] = response.array("updates") ?? []
                     
-                    self.onResponse(updates.map { JSON(value: $0) })
+                    strongSelf.onResponse(updates.map { JSON(value: $0) })
                     
-                    self.repeatQueue.async {
-                        self.update(ts: newTs)
+                    strongSelf.repeatQueue.async {
+                        strongSelf.update(ts: newTs)
                     }
                 }
             }
             .onError { [weak self] _ in
-                guard let `self` = self, !self.isCancelled else { return }
+                guard let strongSelf = self, !strongSelf.isCancelled else { return }
                 
-                Thread.sleep(forTimeInterval: self.delayOnError)
-                guard !self.isCancelled else { return }
-                self.update(ts: ts)
+                Thread.sleep(forTimeInterval: strongSelf.delayOnError)
+                guard !strongSelf.isCancelled else { return }
+                strongSelf.update(ts: ts)
             }
             .send(in: session)
     }

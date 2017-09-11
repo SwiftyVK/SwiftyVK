@@ -56,17 +56,17 @@ final class WebPresenterImpl: WebPresenter {
             controller.load(
                 urlRequest: urlRequest,
                 onResult: { [weak self] result in
-                    guard let `self` = self else { return }
+                    guard let strongSelf = self else { return }
                     
                     do {
-                        let handledResult = try self.handle(result: result, fails: fails, originalPath: originalPath)
+                        let handledResult = try strongSelf.handle(result: result, fails: fails, originalPath: originalPath)
                         
                         switch handledResult {
                         case let .response(value):
                             finalResult = .response(value)
                         case .fail:
                             fails += 1
-                            self.currentController?.reload()
+                            strongSelf.currentController?.reload()
                         case .nothing:
                             break
                         }
@@ -80,7 +80,7 @@ final class WebPresenterImpl: WebPresenter {
                     }
                     
                     if finalResult != nil {
-                        self.currentController?.dismiss()
+                        strongSelf.currentController?.dismiss()
                     }
                 },
                 

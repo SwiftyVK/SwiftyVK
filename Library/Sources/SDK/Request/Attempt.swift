@@ -38,16 +38,16 @@ final class AttemptImpl: Operation, Attempt {
                 semaphore.signal()
             }
             
-            guard let `self` = self, !self.isCancelled else { return }
+            guard let strongSelf = self, !strongSelf.isCancelled else { return }
             
             if let error = error {
-                self.callbacks.onFinish(.error(.urlRequestError(error)))
+                strongSelf.callbacks.onFinish(.error(.urlRequestError(error)))
             }
             else if let data = data {
-                self.callbacks.onFinish(Response(data))
+                strongSelf.callbacks.onFinish(Response(data))
             }
             else {
-                self.callbacks.onFinish(.error(.unexpectedResponse))
+                strongSelf.callbacks.onFinish(.error(.unexpectedResponse))
             }
         }
         

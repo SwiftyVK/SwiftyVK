@@ -92,29 +92,29 @@ public final class LongPollImpl: LongPoll {
     
     private func startUpdating() {
         getConnectionInfo { [weak self] connectionInfo in
-            guard let `self` = self, self.isActive else { return }
+            guard let strongSelf = self, strongSelf.isActive else { return }
             
             let data = LongPollOperationData(
                 server: connectionInfo.server,
                 startTs: connectionInfo.ts,
                 lpKey: connectionInfo.lpKey,
                 onResponse: { updates in
-                    guard self.isActive == true else { return }
+                    guard strongSelf.isActive == true else { return }
                     let events = updates.flatMap { LongPollEvent(json: $0) }
-                    self.onReceiveEvents?(events)
+                    strongSelf.onReceiveEvents?(events)
                 },
                 onKeyExpired: {
-                    self.updatingQueue.cancelAllOperations()
-                    self.startUpdating()
+                    strongSelf.updatingQueue.cancelAllOperations()
+                    strongSelf.startUpdating()
                 }
             )
             
-            self.updatingQueue.cancelAllOperations()
+            strongSelf.updatingQueue.cancelAllOperations()
             
-            guard self.isConnected else { return }
+            guard strongSelf.isConnected else { return }
             
-            let operation = self.operationMaker.longPollUpdatingOperation(session: self.session, data: data)
-            self.updatingQueue.addOperation(operation.toOperation())
+            let operation = strongSelf.operationMaker.longPollUpdatingOperation(session: strongSelf.session, data: data)
+            strongSelf.updatingQueue.addOperation(operation.toOperation())
         }
     }
     
