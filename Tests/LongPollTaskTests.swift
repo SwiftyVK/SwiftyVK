@@ -164,7 +164,7 @@ private func makeContext(
     let operation = LongPollTaskImpl(
         session: session,
         delayOnError: 0,
-        data: LongPollOperationData(
+        data: LongPollTaskData(
             server: "",
             startTs: "",
             lpKey: "",

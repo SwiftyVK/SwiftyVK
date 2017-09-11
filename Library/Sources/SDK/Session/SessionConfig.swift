@@ -53,7 +53,7 @@ public enum Language: String, Codable {
     }
 }
 
-public enum AttemptLimit: Codable {
+public enum AttemptLimit: Codable, ExpressibleByIntegerLiteral {
     
     public static let `default` = AttemptLimit.limited(3)
     
@@ -66,6 +66,15 @@ public enum AttemptLimit: Codable {
             return 0
         case .limited(let limit):
             return limit
+        }
+    }
+    
+    public init(integerLiteral value: Int) {
+        if value <= 0 {
+            self = .unlimited
+        }
+        else {
+            self = .limited(value)
         }
     }
     

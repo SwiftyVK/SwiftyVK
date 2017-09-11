@@ -135,7 +135,7 @@ final class DependencyFactoryImpl: DependencyFactory {
             id: id,
             config: config,
             taskSheduler: TaskShedulerImpl(),
-            attemptSheduler: AttemptShedulerImpl(limit: .limited(3)),
+            attemptSheduler: AttemptShedulerImpl(limit: 3),
             authorizator: sharedAuthorizator,
             taskMaker: self,
             captchaPresenter: captchaPresenter,

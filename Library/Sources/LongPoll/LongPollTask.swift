@@ -39,7 +39,7 @@ final class LongPollTaskImpl: Operation, LongPollTask {
         
         currentTask = Request(type: .url("https://\(server)?act=a_check&key=\(lpKey)&ts=\(ts)&wait=25&mode=106"))
             .toMethod()
-            .configure(with: Config(attemptsMaxLimit: .limited(1), attemptTimeout: 30, handleErrors: false))
+            .configure(with: Config(attemptsMaxLimit: 1, attemptTimeout: 30, handleErrors: false))
             .onSuccess { [weak self] data in
                 guard let strongSelf = self, !strongSelf.isCancelled else { return }
                 guard let response = try? JSON(data: data) else {
