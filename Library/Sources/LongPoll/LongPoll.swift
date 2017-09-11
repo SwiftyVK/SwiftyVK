@@ -138,7 +138,7 @@ public final class LongPollImpl: LongPoll {
             .onError { _ in
                 semaphore.signal()
             }
-            .send()
+            .send(in: session)
         
         semaphore.wait()
         
