@@ -1,7 +1,7 @@
 @testable import SwiftyVK
 
-final class SessionMock: Session, TaskSession, DestroyableSession {
-    
+final class SessionMock: Session, TaskSession, DestroyableSession, ApiErrorExecutor {
+
     var longPoll: LongPoll = LongPollMock()
     
     var token: Token?
@@ -48,5 +48,17 @@ final class SessionMock: Session, TaskSession, DestroyableSession {
     
     func destroy() {
         state = .destroyed
+    }
+    
+    func logIn(revoke: Bool) throws -> [String : String] {
+        return [:]
+    }
+    
+    func validate(redirectUrl: URL) throws {
+        
+    }
+    
+    func captcha(rawUrlToImage: String, dismissOnFinish: Bool) throws -> String {
+        return ""
     }
 }

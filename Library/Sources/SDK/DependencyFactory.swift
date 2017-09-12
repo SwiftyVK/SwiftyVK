@@ -206,7 +206,7 @@ final class DependencyFactoryImpl: DependencyFactory {
             return nil
         }
         
-        DispatchQueue.main.sync {
+        DispatchQueue.performOnMainIfNeeded {
             self.delegate?.vkNeedToPresent(viewController: controller)
         }
         
@@ -226,7 +226,7 @@ final class DependencyFactoryImpl: DependencyFactory {
             return nil
         }
         
-        DispatchQueue.main.sync {
+        DispatchQueue.performOnMainIfNeeded {
             self.delegate?.vkNeedToPresent(viewController: controller)
         }
         
