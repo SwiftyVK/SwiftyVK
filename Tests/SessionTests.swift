@@ -44,7 +44,7 @@ final class SessionTests: XCTestCase {
         XCTAssertEqual(context.attemptSheduler.sheduleCallCount, 1)
     }
     
-    func test_send_once() {
+    func test_sendTask_once() {
         // Given
         let context = makeContext()
         let request = Request(type: .url("")).toMethod()
@@ -173,11 +173,105 @@ final class SessionTests: XCTestCase {
         XCTAssertEqual(context.session.state, .destroyed)
     }
     
+    func test_logInWithRawToken_shouldBeFail_whenAlreadyAuthorized() {
+        // Given
+        let context = makeContext()
+        
+        context.authorizator.onRawAuthorize = { _, _, _ in
+            return TokenMock()
+        }
+        // When
+        do {
+            try context.session.logIn(rawToken: "", expires: 0)
+            try context.session.logIn(rawToken: "", expires: 0)
+            XCTFail("Log in sould be fail")
+        } catch let error {
+            // Then
+            XCTAssertEqual(context.session.state, .authorized)
+            XCTAssertEqual(error.asVK, VKError.sessionAlreadyAuthorized(context.session))
+        }
+        // Then
+        XCTAssertEqual(context.session.state, .authorized)
+    }
+    
+    func test_tokenCreatedNotificationCalled_whenTokenCreated() {
+        // Given
+        let context = makeContext()
+        var onVKTokenCreatedCallCount = 0
+        
+        context.delegate.onVKTokenCreated = { _, _ in
+            onVKTokenCreatedCallCount += 1
+        }
+        
+        context.authorizator.onRawAuthorize = { _, _, _ in
+            return TokenMock()
+        }
+        // When
+        do {
+            try context.session.logIn(rawToken: "", expires: 0)
+        } catch let error {
+            XCTFail("Unexpected error \(error)")
+        }
+        // Then
+        XCTAssertEqual(onVKTokenCreatedCallCount, 1)
+    }
+    
+    func test_tokenUpdatedNotificationCalled_whenTokenUpdated() {
+        // Given
+        let context = makeContext()
+        var onVKTokenUpdatedCallCount = 0
+        
+        context.delegate.onVKTokenUpdated = { _, _ in
+            onVKTokenUpdatedCallCount += 1
+        }
+        
+        context.authorizator.onRawAuthorize = { _, _, _ in
+            return TokenMock(valid: false)
+        }
+        
+        // When
+        do {
+            try context.session.logIn(rawToken: "", expires: 0)
+            try context.session.logIn(rawToken: "", expires: 0)
+        } catch let error {
+            XCTFail("Unexpected error \(error)")
+        }
+        // Then
+        XCTAssertEqual(onVKTokenUpdatedCallCount, 1)
+    }
+    
+    func test_tokenRemovedNotificationCalled_whenTokenRemoved() {
+        // Given
+        let context = makeContext()
+        var onVKDidLogOutCallCount = 0
+        
+        context.delegate.onVKTokenRemoved = { _ in
+            onVKDidLogOutCallCount += 1
+        }
+        
+        context.authorizator.onRawAuthorize = { _, _, _ in
+            return TokenMock()
+        }
+        
+        // When
+        do {
+            try context.session.logIn(rawToken: "", expires: 0)
+            context.session.logOut()
+        } catch let error {
+            XCTFail("Unexpected error \(error)")
+        }
+        // Then
+        XCTAssertEqual(onVKDidLogOutCallCount, 1)
+    }
+    
     func test_logInWithRawToken() {
         // Given
         let context = makeContext()
-        // When
         
+        context.authorizator.onRawAuthorize = { _, _, _ in
+            return TokenMock()
+        }
+        // When
         do {
             try context.session.logIn(rawToken: "", expires: 0)
         } catch let error {
@@ -230,7 +324,7 @@ final class SessionTests: XCTestCase {
         context.session.send(method: request)
     }
     
-    func test_destroy() {
+    func test_destroy_changesStateToDestroyed() {
         // Given
         let context = makeContext()
         // When
@@ -238,9 +332,66 @@ final class SessionTests: XCTestCase {
         // Then
         XCTAssertEqual(context.session.state, .destroyed)
     }
+    
+    func test_validate_changesStateToAuthorized() {
+        // Given
+        let context = makeContext()
+        
+        context.authorizator.onValidate = { _, _ in
+            return TokenMock()
+        }
+        // When
+        do {
+            try context.session.validate(redirectUrl: URL(fileURLWithPath: ""))
+        } catch let error {
+            XCTFail("Unexpected error: \(error)")
+        }
+        // Then
+        XCTAssertEqual(context.session.state, .authorized)
+    }
+    
+    func test_captcha_isPresentedOnce() {
+        // Given
+        var onPresentCallCount = 0
+        let context = makeContext()
+        
+        context.captchaPresenter.onPresent = {
+            onPresentCallCount += 1
+            return ""
+        }
+        // When
+        do {
+            _ = try context.session.captcha(rawUrlToImage: "")
+        } catch let error {
+            XCTFail("Unexpected error: \(error)")
+        }
+        // Then
+        XCTAssertEqual(onPresentCallCount, 1)
+    }
+    
+    func test_dismissCaptcha_isDismissedOnce() {
+        // Given
+        var onDismissCallCount = 0
+        let context = makeContext()
+        
+        context.captchaPresenter.onDismiss = {
+            onDismissCallCount += 1
+        }
+        // When
+        context.session.dismissCaptcha()
+        // Then
+        XCTAssertEqual(onDismissCallCount, 1)
+    }
 }
 
-private func makeContext() -> (session: SessionImpl, taskSheduler: TaskShedulerMock, attemptSheduler: AttemptShedulerMock, authorizator: AuthorizatorMock) {
+private func makeContext() -> (
+    session: SessionImpl,
+    taskSheduler: TaskShedulerMock,
+    attemptSheduler: AttemptShedulerMock,
+    authorizator: AuthorizatorMock,
+    captchaPresenter: CaptchaPresenterMock,
+    delegate: SwiftyVKDelegateMock
+    ) {
     let taskSheduler = TaskShedulerMock()
     let attemptSheduler = AttemptShedulerMock()
     let authorizator = AuthorizatorMock()
@@ -263,5 +414,5 @@ private func makeContext() -> (session: SessionImpl, taskSheduler: TaskShedulerM
         delegate: delegate
     )
     
-    return (session, taskSheduler, attemptSheduler, authorizator)
+    return (session, taskSheduler, attemptSheduler, authorizator, captchaPresenter, delegate)
 }

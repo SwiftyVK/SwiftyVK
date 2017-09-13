@@ -41,7 +41,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         if id.isEmpty {
             return .destroyed
         }
-        else if token != nil {
+        else if token?.isValid == true {
             return .authorized
         }
         else {

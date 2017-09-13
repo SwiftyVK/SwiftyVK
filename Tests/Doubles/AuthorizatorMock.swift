@@ -21,18 +21,32 @@ final class AuthorizatorMock: Authorizator {
     
     var authorizeWithRawTokenCallCount = 0
     
+    var onRawAuthorize: ((String, String, TimeInterval) -> Token)?
+    
     func authorize(sessionId: String, rawToken: String, expires: TimeInterval) -> Token {
         authorizeWithRawTokenCallCount += 1
         
-        return TokenMock()
+        guard let result = onRawAuthorize?(sessionId, rawToken, expires) else {
+            XCTFail("onAuthorize not defined")
+            return TokenMock()
+        }
+        
+        return result
     }
     
     func getSavedToken(sessionId: String) -> Token? {
         return nil
     }
     
+    var onValidate: ((String, URL) throws -> Token)?
+    
     func validate(sessionId: String, url: URL) throws -> Token {
-        return TokenMock()
+        guard let result = try onValidate?(sessionId, url) else {
+            XCTFail("onAuthorize not defined")
+            return TokenMock()
+        }
+        
+        return result
     }
     
     func reset(sessionId: String) -> Token? {
