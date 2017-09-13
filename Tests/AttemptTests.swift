@@ -122,6 +122,85 @@ class AttemptTests: XCTestCase {
         XCTAssertEqual(removeObserverForCountOfBytesReceivedCallCount, 1)
         XCTAssertEqual(removeObserverForCountOfBytesSentCallCount, 1)
     }
+    
+    func test_observing_whenTaskSentBytes() {
+        // Given
+        var onSentCallCount = 0
+        
+        let context = makeContext(callbacks:
+            AttemptCallbacks(
+                onSent: { sent, total in
+                    // Then
+                    onSentCallCount += 1
+                    XCTAssertEqual(sent, 100)
+                    XCTAssertEqual(total, 1000)
+                }
+            )
+        )
+        
+        configureTask(in: context.session) { task, handler in
+            task.countOfBytesSent = 100
+            task.countOfBytesExpectedToSend = 1000
+            handler(nil, nil, nil)
+        }
+        // When
+        context.attempt.main()
+        context.attempt.observeValue(forKeyPath: #keyPath(URLSessionTask.countOfBytesSent), of: nil, change: nil, context: nil)
+        // Then
+        XCTAssertEqual(onSentCallCount, 1)
+    }
+    
+    func test_observing_whenTaskRecieveBytes() {
+        // Given
+        var onRecieveCallCount = 0
+
+        let context = makeContext(callbacks:
+            AttemptCallbacks(
+                onRecive: { recieve, total in
+                    // Then
+                    onRecieveCallCount += 1
+                    XCTAssertEqual(recieve, 100)
+                    XCTAssertEqual(total, 1000)
+                }
+            )
+        )
+        
+        configureTask(in: context.session) { task, handler in
+            task.countOfBytesReceived = 100
+            task.countOfBytesExpectedToReceive = 1000
+            handler(nil, nil, nil)
+        }
+        // When
+        context.attempt.main()
+        context.attempt.observeValue(forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived), of: nil, change: nil, context: nil)
+        // Then
+        XCTAssertEqual(onRecieveCallCount, 1)
+    }
+    
+    func test_observing_whenKeyPathIsNotKnown() {
+        // Given
+        var observerCallCount = 0
+        
+        let context = makeContext(callbacks:
+            AttemptCallbacks(
+                onSent: { sent, total in
+                    observerCallCount += 1
+                },
+                onRecive: { _, _ in
+                    observerCallCount += 1
+                }
+            )
+        )
+        
+        configureTask(in: context.session) { task, handler in
+            handler(nil, nil, nil)
+        }
+        // When
+        context.attempt.main()
+        context.attempt.observeValue(forKeyPath: #keyPath(URLSessionTask.currentRequest), of: nil, change: nil, context: nil)
+        // Then
+        XCTAssertEqual(observerCallCount, 0)
+    }
 }
 
 private var attemptQueue = DispatchQueue.global(qos: .background)

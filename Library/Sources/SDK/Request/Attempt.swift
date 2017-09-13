@@ -74,7 +74,7 @@ final class AttemptImpl: Operation, Attempt {
         case(#keyPath(URLSessionTask.countOfBytesReceived)):
             callbacks.onRecive(task.countOfBytesReceived, task.countOfBytesExpectedToReceive)
         default:
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+            break
         }
     }
     
