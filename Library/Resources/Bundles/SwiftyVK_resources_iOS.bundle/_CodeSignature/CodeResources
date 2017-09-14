@@ -4,98 +4,98 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Resources/Assets.car</key>
+		<key>Assets.car</key>
 		<data>
-		0TymMNfTNHUEpK91uZ79TG6VXzw=
+		9xFeRNQeygsKf9Xd+QGhLuOMdvM=
 		</data>
-		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/2x6-4U-608-view-fL7-e2-4bl.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/5iw-hV-gmH-view-Ope-bS-Fva.nib</key>
 		<data>
-		rItXjfltdPPENGfVPh7XcMKyIjg=
+		IgWBrXjMB6HpSzGhIRBBfuCrGvU=
 		</data>
-		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/Captcha.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/Captcha.nib</key>
 		<data>
-		YjjCB0hXSK3XbGwaIb9WUtWVtDI=
+		QdXYbesy6GHFWjj4E5MOu6YSEUM=
 		</data>
-		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/Info.plist</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/Info.plist</key>
 		<data>
-		FQKrrJrkHmmCnmq9GDvEgfLXepg=
+		5VKUu8YJBIblSy9lw/1d8Aazi30=
 		</data>
-		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/Web.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/QO6-eV-iRy-view-OaR-C0-QIp.nib</key>
 		<data>
-		CdjHgwpoWvhuEJsVWf4tqXMZiXM=
+		GZpFjeTRN1firPnqjmLNiDBO1uQ=
 		</data>
-		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/r5f-06-Ldu-view-s8e-Dt-oLw.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/Web.nib</key>
 		<data>
-		slsuXmzYGsKYRbgQf/fRZieq/b4=
+		XuM+ROEQ55teLfQP+TwRGJWujeM=
 		</data>
-		<key>Resources/be.lproj/Storyboard_macOS.strings</key>
+		<key>be.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9HJEreadQFzon6bN3EpDMJXYHk4=
+			vmWNMM4yYgXr8nrTB1F00VZr3is=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/de.lproj/Storyboard_macOS.strings</key>
+		<key>de.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+JCipeeYyQzEb+Ovzs+hG2zQ5Tg=
+			rly3I4OpP24YBm/McTJKaEEw6sg=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/en.lproj/Storyboard_macOS.strings</key>
+		<key>en.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			fcMWwXwIEXwJoUHaJ3DyGTwU9As=
+			URg3kBLyG2qZanBz57HxIcuVOXs=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/es.lproj/Storyboard_macOS.strings</key>
+		<key>es.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4/4/Zyo5X6pVWOU/oLdzMTt+Ie4=
+			adkArQvoRaxLI6EiMTXwEb4oAPg=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/fi.lproj/Storyboard_macOS.strings</key>
+		<key>fi.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			EQOQB3RlYf0l2UNjZs7kiFIilZU=
+			AiSuvPOgUcQbJpKlop7tlI2Dw8U=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/it.lproj/Storyboard_macOS.strings</key>
+		<key>it.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QqZfFeYCA+zpnplnlD0dAsugQfM=
+			F3F5niTBL98lX6btRmEC+eNU85A=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/ru.lproj/Storyboard_macOS.strings</key>
+		<key>ru.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9HJEreadQFzon6bN3EpDMJXYHk4=
+			vmWNMM4yYgXr8nrTB1F00VZr3is=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/uk.lproj/Storyboard_macOS.strings</key>
+		<key>uk.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4SaEODuIbQ+BkudTs2ZEogJ2/Ss=
+			vmWNMM4yYgXr8nrTB1F00VZr3is=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -103,172 +103,172 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Resources/Assets.car</key>
+		<key>Assets.car</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0TymMNfTNHUEpK91uZ79TG6VXzw=
+			9xFeRNQeygsKf9Xd+QGhLuOMdvM=
 			</data>
 			<key>hash2</key>
 			<data>
-			9TQYY5Sw2W+g3cTmqRkfvXE9fKv4sNKQFsqnAbuowoM=
+			7Px2ODWFwOiEShVY4pJwi6iUmkPZOUuAa+2+Fn7w3Ls=
 			</data>
 		</dict>
-		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/2x6-4U-608-view-fL7-e2-4bl.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/5iw-hV-gmH-view-Ope-bS-Fva.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rItXjfltdPPENGfVPh7XcMKyIjg=
+			IgWBrXjMB6HpSzGhIRBBfuCrGvU=
 			</data>
 			<key>hash2</key>
 			<data>
-			tER7MlcYEGEHa3jV/vAdHbwLdwAc5etk5nOxm+Zc8FA=
+			7WCjyWT3fu6v9W02aQG/UsJmyZCOMj9QfmWSDxkNxjI=
 			</data>
 		</dict>
-		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/Captcha.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/Captcha.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			YjjCB0hXSK3XbGwaIb9WUtWVtDI=
+			QdXYbesy6GHFWjj4E5MOu6YSEUM=
 			</data>
 			<key>hash2</key>
 			<data>
-			P9bNZM31Dp7t6aIoxYnB9gIqN+wR6iBrxEe7js3PWJI=
+			gaOy6xkPMC8LP4I/1ZRuWW7mSLPtQNmDn8B72loBewQ=
 			</data>
 		</dict>
-		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/Info.plist</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			FQKrrJrkHmmCnmq9GDvEgfLXepg=
+			5VKUu8YJBIblSy9lw/1d8Aazi30=
 			</data>
 			<key>hash2</key>
 			<data>
-			vfZO2TLO+BMHRX9Yt6A/lGh60eoYLXTlOtEx4Wb8s1U=
+			njKrOingc5UtEkc4dPqJK1zraBTvBE9SB8ky09CuB2I=
 			</data>
 		</dict>
-		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/Web.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/QO6-eV-iRy-view-OaR-C0-QIp.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			CdjHgwpoWvhuEJsVWf4tqXMZiXM=
+			GZpFjeTRN1firPnqjmLNiDBO1uQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			D9uAhX21/6ywd3opWsKynNdJ+wPYIqYgt8gK7wdcPz4=
+			ReOKBYtKLHxpQ9l7pJKCtaV72daBnZZudwrtMXePs7s=
 			</data>
 		</dict>
-		<key>Resources/Base.lproj/Storyboard_macOS.storyboardc/r5f-06-Ldu-view-s8e-Dt-oLw.nib</key>
+		<key>Base.lproj/Storyboard_iOS.storyboardc/Web.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			slsuXmzYGsKYRbgQf/fRZieq/b4=
+			XuM+ROEQ55teLfQP+TwRGJWujeM=
 			</data>
 			<key>hash2</key>
 			<data>
-			2f2KYoihINSKNBFOC9ODYfQ6oVMPnle47wbVtOj8CEg=
+			/QsjutbOYgnNe+z7cpplCgMcMRLaj3+33NpdkEDnRKE=
 			</data>
 		</dict>
-		<key>Resources/be.lproj/Storyboard_macOS.strings</key>
+		<key>be.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9HJEreadQFzon6bN3EpDMJXYHk4=
+			vmWNMM4yYgXr8nrTB1F00VZr3is=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ik5gYnS27tccjiY50IbPGDhBKfQoM/rocqo82tNa6EQ=
+			l3TrZ1GJ4Bt8U+szy2ELkaGXPREOrHwo9Mi+Ci+GA6U=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/de.lproj/Storyboard_macOS.strings</key>
+		<key>de.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+JCipeeYyQzEb+Ovzs+hG2zQ5Tg=
+			rly3I4OpP24YBm/McTJKaEEw6sg=
 			</data>
 			<key>hash2</key>
 			<data>
-			8oc8xqpJxaJMp/9QP2xXU/fMfVohm+zORM42QMK3Fow=
+			TGcisE3c9bRPzJVgG1BAIIHub5HWAWwV6NAnVVulRmA=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/en.lproj/Storyboard_macOS.strings</key>
+		<key>en.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			fcMWwXwIEXwJoUHaJ3DyGTwU9As=
+			URg3kBLyG2qZanBz57HxIcuVOXs=
 			</data>
 			<key>hash2</key>
 			<data>
-			+TAmPLd0YCzOZzF7rwYovg/kdCzRBNi6uvCYBUo0/Rs=
+			8cQBMRYj2AJkhxVU9EHbs2l1P1+BRvNItALaTj6UYCY=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/es.lproj/Storyboard_macOS.strings</key>
+		<key>es.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4/4/Zyo5X6pVWOU/oLdzMTt+Ie4=
+			adkArQvoRaxLI6EiMTXwEb4oAPg=
 			</data>
 			<key>hash2</key>
 			<data>
-			/puNfNiKdDvLAw1Qgf/4I+yLDBEqSiXM7mebzslyUO4=
+			AUw57jFtjljHpR4op1iXmYbNJ6mOR2SLXdBW7LzgU9M=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/fi.lproj/Storyboard_macOS.strings</key>
+		<key>fi.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			EQOQB3RlYf0l2UNjZs7kiFIilZU=
+			AiSuvPOgUcQbJpKlop7tlI2Dw8U=
 			</data>
 			<key>hash2</key>
 			<data>
-			XSpJ/NmX0DysCCuomvy5Ao2isyFwXM52UgEkswg6M4c=
+			OxeJazXIIH6uZhD2ua0tSaHC8t6iYjgqqIkJfU0ql2c=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/it.lproj/Storyboard_macOS.strings</key>
+		<key>it.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QqZfFeYCA+zpnplnlD0dAsugQfM=
+			F3F5niTBL98lX6btRmEC+eNU85A=
 			</data>
 			<key>hash2</key>
 			<data>
-			UODndwUOF3HkTT2+ExGQvDTt11RwYQ3NjyrAh9PidC0=
+			meieZMO93Dz/yRnz2eiS5SGtY71kannXY5hHObTMn0g=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/ru.lproj/Storyboard_macOS.strings</key>
+		<key>ru.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9HJEreadQFzon6bN3EpDMJXYHk4=
+			vmWNMM4yYgXr8nrTB1F00VZr3is=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ik5gYnS27tccjiY50IbPGDhBKfQoM/rocqo82tNa6EQ=
+			l3TrZ1GJ4Bt8U+szy2ELkaGXPREOrHwo9Mi+Ci+GA6U=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/uk.lproj/Storyboard_macOS.strings</key>
+		<key>uk.lproj/Storyboard_iOS.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4SaEODuIbQ+BkudTs2ZEogJ2/Ss=
+			vmWNMM4yYgXr8nrTB1F00VZr3is=
 			</data>
 			<key>hash2</key>
 			<data>
-			9yvvTcuo9TLMAIlkKPlbE0mtSrkMqPE8e38N8tDfspw=
+			l3TrZ1GJ4Bt8U+szy2ELkaGXPREOrHwo9Mi+Ci+GA6U=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -276,23 +276,23 @@
 	</dict>
 	<key>rules</key>
 	<dict>
-		<key>^Resources/</key>
+		<key>^</key>
 		<true/>
-		<key>^Resources/.*\.lproj/</key>
+		<key>^.*\.lproj/</key>
 		<dict>
 			<key>optional</key>
 			<true/>
 			<key>weight</key>
 			<real>1000</real>
 		</dict>
-		<key>^Resources/.*\.lproj/locversion.plist$</key>
+		<key>^.*\.lproj/locversion.plist$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
 		</dict>
-		<key>^Resources/Base\.lproj/</key>
+		<key>^Base\.lproj/</key>
 		<dict>
 			<key>weight</key>
 			<real>1010</real>
@@ -306,6 +306,11 @@
 		<dict>
 			<key>weight</key>
 			<real>11</real>
+		</dict>
+		<key>^</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
 		</dict>
 		<key>^(.*/)?\.DS_Store$</key>
 		<dict>
@@ -323,6 +328,25 @@
 		</dict>
 		<key>^.*</key>
 		<true/>
+		<key>^.*\.lproj/</key>
+		<dict>
+			<key>optional</key>
+			<true/>
+			<key>weight</key>
+			<real>1000</real>
+		</dict>
+		<key>^.*\.lproj/locversion.plist$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
+		</dict>
 		<key>^Info\.plist$</key>
 		<dict>
 			<key>omit</key>
@@ -336,30 +360,6 @@
 			<true/>
 			<key>weight</key>
 			<real>20</real>
-		</dict>
-		<key>^Resources/</key>
-		<dict>
-			<key>weight</key>
-			<real>20</real>
-		</dict>
-		<key>^Resources/.*\.lproj/</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>1000</real>
-		</dict>
-		<key>^Resources/.*\.lproj/locversion.plist$</key>
-		<dict>
-			<key>omit</key>
-			<true/>
-			<key>weight</key>
-			<real>1100</real>
-		</dict>
-		<key>^Resources/Base\.lproj/</key>
-		<dict>
-			<key>weight</key>
-			<real>1010</real>
 		</dict>
 		<key>^[^/]+$</key>
 		<dict>
