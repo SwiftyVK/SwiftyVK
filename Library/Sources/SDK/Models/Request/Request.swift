@@ -2,7 +2,7 @@ public final class Request {
     let type: RequestType
     var config: Config
     var callbacks: RequestCallbacks
-    private var nextRequests: [((Data) -> SendableMethod)] = []
+    private var nextRequests: [((Data) throws -> ChainableMethod)] = []
     
     var canSentConcurrently: Bool {
         switch type {
@@ -23,25 +23,27 @@ public final class Request {
         self.callbacks = callbacks
     }
     
-    func add(next: @escaping ((Data) -> ChainableMethod)) {
+    func add(next: @escaping ((Data) throws -> ChainableMethod)) {
         nextRequests = [next] + nextRequests
     }
     
-    func next(with data: Data) -> Request? {
-        guard let next = nextRequests.popLast()?(data).toRequest() else {
+    func next(with data: Data) throws -> Request? {
+        guard let nextMethod = nextRequests.popLast() else {
             return nil
         }
         
-        next.callbacks = RequestCallbacks(
+        let nextRequest = try nextMethod(data).toRequest()
+        
+        nextRequest.callbacks = RequestCallbacks(
             onSuccess: callbacks.onSuccess,
             onError: callbacks.onError,
-            onProgress: next.callbacks.onProgress
+            onProgress: nextRequest.callbacks.onProgress
         )
         
-        next.config = config.overriden(with: next.config)
-        next.nextRequests = nextRequests
+        nextRequest.config = config.overriden(with: nextRequest.config)
+        nextRequest.nextRequests = nextRequests
         
-        return next
+        return nextRequest
     }
     
     func toMethod() -> Methods.SuccessableFailableProgressableConfigurable {

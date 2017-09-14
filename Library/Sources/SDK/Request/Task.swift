@@ -126,7 +126,13 @@ final class TaskImpl: Operation, Task {
         
         switch result {
         case .success(let response):
-            if let next = currentRequest.next(with: response) {
+            var next: Request?
+            
+            tryToPerform {
+                next = try currentRequest.next(with: response)
+            }
+            
+            if let next = next {
                 currentRequest = next
                 sendAttempts = 0
                 tryToSend()

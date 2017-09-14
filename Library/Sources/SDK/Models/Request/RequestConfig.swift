@@ -52,6 +52,28 @@ public struct Config {
         self.sessionConfig = sessionConfig
     }
     
+    func overriden(
+        httpMethod: HttpMethod = .GET,
+        apiVersion: String? = nil,
+        language: Language? = nil,
+        attemptsMaxLimit: AttemptLimit? = nil,
+        attemptTimeout: TimeInterval? = nil,
+        handleErrors: Bool? = nil,
+        enableLogging: Bool? = nil
+        ) -> Config {
+        let newConfig = Config(
+            httpMethod: httpMethod,
+            apiVersion: apiVersion,
+            language: language,
+            attemptsMaxLimit: attemptsMaxLimit,
+            attemptTimeout: attemptTimeout,
+            handleErrors: handleErrors,
+            enableLogging: enableLogging
+        )
+        
+        return overriden(with: newConfig)
+    }
+    
     func overriden(with other: Config) -> Config {
         var newConfig = Config(
             httpMethod: httpMethod,
