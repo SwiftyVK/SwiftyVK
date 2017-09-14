@@ -73,7 +73,7 @@ final class AttemptShedulerTests: XCTestCase {
         samples.forEach { sheduler.shedule(attempt: $0, concurrent: false) }
         
         // Then
-        Thread.sleep(forTimeInterval: 1)
+        Thread.sleep(forTimeInterval: 0.9)
         
         XCTAssertEqual(samples.filter { $0.isFinished } .count, 1,
             "Only one operation should be executed"
