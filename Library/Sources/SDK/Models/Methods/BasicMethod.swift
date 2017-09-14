@@ -10,7 +10,7 @@ extension Methods {
             return request
         }
         
-        public func chain(_ next: @escaping (Data) -> SendableMethod) -> Self {
+        public func chain(_ next: @escaping (Data) -> ChainableMethod) -> Self {
             request.add(next: next)
             return .init(request)
         }

@@ -19,7 +19,9 @@ public extension SendableMethod {
     }
 }
 
-public protocol Method: SendableMethod {}
+public protocol ChainableMethod: SendableMethod {}
+
+public protocol Method: ChainableMethod {}
 
 public extension Method {
     func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> Methods.FailableProgressableConfigurable {
@@ -46,7 +48,7 @@ public extension Method {
         return .init(request)
     }
     
-    func chain(_ next: @escaping (Data) -> SendableMethod) -> Methods.SuccessableFailableProgressableConfigurable {
+    func chain(_ next: @escaping (Data) -> ChainableMethod) -> Methods.SuccessableFailableProgressableConfigurable {
         let request = toRequest()
         request.add(next: next)
         return .init(request)

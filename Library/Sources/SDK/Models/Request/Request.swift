@@ -23,7 +23,7 @@ public final class Request {
         self.callbacks = callbacks
     }
     
-    func add(next: @escaping ((Data) -> SendableMethod)) {
+    func add(next: @escaping ((Data) -> ChainableMethod)) {
         nextRequests = [next] + nextRequests
     }
     

@@ -258,7 +258,7 @@ private func makeContext(
     callbacks: RequestCallbacks = .empty,
     handleErrors: Bool = true,
     shouldCancel: Bool = false,
-    nextRequest: SendableMethod? = nil
+    nextRequest: ChainableMethod? = nil
     ) -> (
     task: TaskImpl,
     requestBuilder: URLRequestBuilderMock,
@@ -271,7 +271,6 @@ private func makeContext(
         let apiErrorHandler = ApiErrorHandlerMock()
         var request = VKAPI.Users.get(.empty)
             .configure(with: Config(handleErrors: handleErrors))
-        
         
         if let nextRequest = nextRequest {
             request = request.chain { _ in nextRequest }

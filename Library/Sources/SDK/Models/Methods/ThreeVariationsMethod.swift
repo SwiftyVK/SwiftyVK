@@ -1,5 +1,5 @@
 extension Methods {
-    public final class SuccessableFailableProgressable: Basic {
+    public final class SuccessableFailableProgressable: Basic, ChainableMethod {
         public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> FailableProgressable {
             return withOnSuccess(clousure)
         }
@@ -13,7 +13,7 @@ extension Methods {
         }
     }
     
-    public final class SuccessableFailableConfigurable: Basic {
+    public final class SuccessableFailableConfigurable: Basic, ChainableMethod {
         public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> FailableConfigurable {
             return withOnSuccess(clousure)
         }
