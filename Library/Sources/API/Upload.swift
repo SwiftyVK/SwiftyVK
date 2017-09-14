@@ -1,76 +1,78 @@
-//import CoreLocation
-//
-//public enum UploadTarget {
-//    case user(id: String)
-//    case group(id: String)
-//    
-//    var decoded: (userId: String?, groupId: String?) {
-//        switch self {
-//        case .user(let id):
-//            return (userId: id, groupId: nil)
-//        case .group(let id):
-//            return (userId: nil, groupId: id)
-//        }
-//    }
-//}
-//
-//extension VKAPI {
-//    //Metods to upload Mediafiles
-//    public struct Upload {
-//        ///Methods to upload photo
-//        public struct Photo {
-//            ///Upload photo to user album
-//            public static func toAlbum(
-//                _ media: [Media],
-//                to target: UploadTarget,
-//                albumId: String,
-//                caption: String? = nil,
-//                location: CLLocationCoordinate2D? = nil,
-//                config: Config = .default,
-//                uploadTimeout: TimeInterval = 30
-//                ) -> Request {
-//                
-//                return VKAPI.Photos.getUploadServer([
-//                    .albumId: albumId,
-//                    .userId: target.decoded.userId,
-//                    .groupId: target.decoded.groupId
-//                    ])
-//                    .request(with: config)
-//                    .next {
-//                        Request(
-//                            of: .upload(
-//                                url: $0["upload_url"].stringValue,
-//                                media: Array(media.prefix(5)),
-//                                partType: .indexedFile
-//                            ),
-//                            config: config.overriden(attemptTimeout: uploadTimeout)
-//                        )
-//                    }
-//                    .next {
-//                        VKAPI.Photos.save([
-//                            .albumId: albumId,
-//                            .userId: target.decoded.userId,
-//                            .groupId: target.decoded.groupId,
-//                            .server: $0["server"].string,
-//                            .photosList: $0["photos_list"].string,
-//                            .aid: $0["aid"].string,
-//                            .hash: $0["hash"].string,
-//                            .caption: caption,
-//                            .latitude: location?.latitude.toString(),
-//                            .longitude: location?.longitude.toString()
-//                            ])
-//                            .request(with: config)
-//                }
-//            }
-//        }
-//        
-//        ///Upload photo to message
+import CoreLocation
+
+public enum UploadTarget {
+    case user(id: String)
+    case group(id: String)
+
+    var decoded: (userId: String?, groupId: String?) {
+        switch self {
+        case .user(let id):
+            return (userId: id, groupId: nil)
+        case .group(let id):
+            return (userId: nil, groupId: id)
+        }
+    }
+}
+
+extension VKAPI {
+    //Metods to upload Mediafiles
+    public struct Upload {
+        ///Methods to upload photo
+        public struct Photo {
+            ///Upload photo to user album
+            public static func toAlbum(
+                _ media: [Media],
+                to target: UploadTarget,
+                albumId: String,
+                caption: String? = nil,
+                location: CLLocationCoordinate2D? = nil,
+                config: Config = .default,
+                uploadTimeout: TimeInterval = 30
+                ) -> Method {
+                
+                return VKAPI.Photos.getUploadServer([
+                    .albumId: albumId,
+                    .userId: target.decoded.userId,
+                    .groupId: target.decoded.groupId
+                    ])
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return Request(
+                            type: .upload(
+                                url: response.forcedString("upload_url"),
+                                media: Array(media.prefix(5)),
+                                partType: .indexedFile
+                            ),
+                            config: config.overriden(attemptTimeout: uploadTimeout)
+                            )
+                            .toMethod()
+                    }
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return VKAPI.Photos.save([
+                            .albumId: albumId,
+                            .userId: target.decoded.userId,
+                            .groupId: target.decoded.groupId,
+                            .server: response.forcedInt("server").toString(),
+                            .photosList: response.forcedString("photos_list"),
+                            .aid: response.forcedInt("aid").toString(),
+                            .hash: response.forcedString("hash"),
+                            .caption: caption,
+                            .latitude: location?.latitude.toString(),
+                            .longitude: location?.longitude.toString()
+                            ])
+                    }
+            }
+
+        ///Upload photo to message
 //        public static func toMessage(
 //            _ media: Media,
 //            config: Config = .default,
 //            uploadTimeout: TimeInterval = 30
 //            ) -> Request {
-//            
+//
 //            return VKAPI.Photos.getMessagesUploadServer(.empty)
 //                .request(with: config)
 //                .next {
@@ -92,8 +94,8 @@
 //                        .request(with: config)
 //            }
 //        }
-//        
-//        ///Upload photo to market
+
+        ///Upload photo to market
 //        public static func toMarket(
 //            _ media: Media,
 //            mainPhotoConfig: (cropX: String?, cropY: String?, cropW: String?)?,
@@ -101,7 +103,7 @@
 //            config: Config = .default,
 //            uploadTimeout: TimeInterval = 30
 //            ) -> Request {
-//            
+//
 //            return VKAPI.Photos.getMarketUploadServer([.groupId: groupId])
 //                .request(with: config)
 //                .next {
@@ -130,15 +132,15 @@
 //                        .request(with: config)
 //            }
 //        }
-//        
-//        ///Upload photo to market album
+
+        ///Upload photo to market album
 //        public static func toMarketAlbum(
 //            _ media: Media,
 //            groupId: String,
 //            config: Config = .default,
 //            uploadTimeout: TimeInterval = 30
 //            ) -> Request {
-//            
+//
 //            return VKAPI.Photos.getMarketAlbumUploadServer([.groupId: groupId])
 //                .request(with: config)
 //                .next {
@@ -161,8 +163,8 @@
 //                        .request(with: config)
 //            }
 //        }
-//        
-//        ///Upload photo to user or group wall
+
+        ///Upload photo to user or group wall
 //        public static func toWall(
 //            _ media: Media,
 //            to target: UploadTarget,
@@ -194,11 +196,11 @@
 //                        ])
 //                        .request(with: config)
 //            }
-//        }
-//        
-//        ///Upload video from file or url
-//        public struct Video {
-//            //Upload local video file
+        }
+
+        ///Upload video from file or url
+        public struct Video {
+            //Upload local video file
 //            public static func fromFile(
 //                _ media: Media,
 //                name: String? = nil,
@@ -212,7 +214,7 @@
 //                config: Config = .default,
 //                uploadTimeout: TimeInterval = 30
 //                ) -> Request {
-//                
+//
 //                return VKAPI.Video.save([
 //                    .link: "",
 //                    .name: name,
@@ -235,8 +237,8 @@
 //                        )
 //                }
 //            }
-//            
-//            ///Upload local video from external resource
+
+            ///Upload local video from external resource
 //            public static func fromUrl(
 //                _ url: String? = nil,
 //                name: String? = nil,
@@ -249,7 +251,7 @@
 //                isNoComments: Bool = false,
 //                config: Config = .default
 //                ) -> Request {
-//                
+//
 //                return VKAPI.Video.save([
 //                    .link: url,
 //                    .name: name,
@@ -263,8 +265,8 @@
 //                    .request(with: config)
 //            }
 //        }
-//        
-//        ///Upload audio
+
+        ///Upload audio
 //        public static func audio(
 //            _ media: Media,
 //            artist: String? = nil,
@@ -295,8 +297,8 @@
 //                        .request(with: config)
 //            }
 //        }
-//        
-//        ///Upload document
+
+        ///Upload document
 //        public static func document(
 //            _ media: Media,
 //            groupId: String? = nil,
@@ -305,7 +307,7 @@
 //            config: Config = .default,
 //            uploadTimeout: TimeInterval = 30
 //            ) -> Request {
-//            
+//
 //            return VKAPI.Docs.getUploadServer([.groupId: groupId])
 //                .request(with: config)
 //                .next {
@@ -325,8 +327,8 @@
 //                        .tags: tags
 //                        ])
 //                        .request(with: config)
-//                    
+//
 //            }
-//        }
-//    }
-//}
+        }
+    }
+}
