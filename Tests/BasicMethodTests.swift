@@ -48,9 +48,13 @@ class BasicMethodTests: XCTestCase {
             .chain { _ in Request(type: .url("")).toMethod() }
             .chain { _ in Request(type: .url("")).toMethod() }
             .chain { _ in Request(type: .url("")).toMethod() }
-        
-        let lastRequest = mutatedMethod.toRequest().next(with: Data())?.next(with: Data())?.next(with: Data())
-        // Then
-        XCTAssertNotNil(lastRequest)
+
+        do {
+            let lastRequest = try mutatedMethod.toRequest().next(with: Data())?.next(with: Data())?.next(with: Data())
+            // Then
+            XCTAssertNotNil(lastRequest)
+        } catch let error {
+            XCTFail("Unexpected error: \(error)")
+        }
     }
 }

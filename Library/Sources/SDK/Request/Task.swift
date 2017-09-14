@@ -103,7 +103,6 @@ final class TaskImpl: Operation, Task {
         
         let newAttempt = attemptMaker.attempt(
             request: urlRequest,
-            timeout: currentRequest.config.attemptTimeout,
             callbacks: AttemptCallbacks(onFinish: handleResult, onSent: handleSended, onRecive: handleReceived)
         )
 

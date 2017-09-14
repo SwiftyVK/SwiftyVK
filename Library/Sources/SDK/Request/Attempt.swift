@@ -3,7 +3,6 @@ import Foundation
 protocol Attempt: class, OperationConvertible {
     init(
         request: URLRequest,
-        timeout: TimeInterval,
         session: VKURLSession,
         callbacks: AttemptCallbacks
     )
@@ -12,19 +11,16 @@ protocol Attempt: class, OperationConvertible {
 final class AttemptImpl: Operation, Attempt {
     
     private let request: URLRequest
-    private let timeout: TimeInterval
     private var task: VKURLSessionTask?
     private let urlSession: VKURLSession
     private let callbacks: AttemptCallbacks
     
     init(
         request: URLRequest,
-        timeout: TimeInterval,
         session: VKURLSession,
         callbacks: AttemptCallbacks
         ) {
         self.request = request
-        self.timeout = timeout
         self.urlSession = session
         self.callbacks = callbacks
         super.init()

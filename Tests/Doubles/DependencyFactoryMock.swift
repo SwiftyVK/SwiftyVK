@@ -28,7 +28,7 @@ final class AttemptMakerMock: AttemptMaker {
     
     var onMake: ((_ callbacks: AttemptCallbacks) -> Attempt)?
     
-    func attempt(request: URLRequest, timeout: TimeInterval, callbacks: AttemptCallbacks) -> Attempt {
+    func attempt(request: URLRequest, callbacks: AttemptCallbacks) -> Attempt {
         guard let result = onMake?(callbacks) else {
             XCTFail("onMake not defined")
             return AttemptMock()

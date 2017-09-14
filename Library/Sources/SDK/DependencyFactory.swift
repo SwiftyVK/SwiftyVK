@@ -39,7 +39,7 @@ protocol TaskMaker: class {
 }
 
 protocol AttemptMaker: class {
-    func attempt(request: URLRequest, timeout: TimeInterval, callbacks: AttemptCallbacks) -> Attempt
+    func attempt(request: URLRequest, callbacks: AttemptCallbacks) -> Attempt
 }
 
 protocol TokenMaker: class {
@@ -257,10 +257,9 @@ final class DependencyFactoryImpl: DependencyFactory {
         )
     }
     
-    func attempt(request: URLRequest, timeout: TimeInterval, callbacks: AttemptCallbacks) -> Attempt {
+    func attempt(request: URLRequest, callbacks: AttemptCallbacks) -> Attempt {
         return AttemptImpl(
             request: request,
-            timeout: timeout,
             session: foregroundSession,
             callbacks: callbacks
         )

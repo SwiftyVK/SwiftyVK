@@ -17,7 +17,7 @@ class DependencyFactoryTests: XCTestCase {
         // Given
         let context = makeContext()
         // When
-        let object = context.factory.attempt(request: URLRequest(url: URL(fileURLWithPath: "")), timeout: 0, callbacks: .default)
+        let object = context.factory.attempt(request: URLRequest(url: URL(fileURLWithPath: "")), callbacks: .default)
         // Then
         XCTAssertTrue(type(of: object) == AttemptImpl.self)
     }

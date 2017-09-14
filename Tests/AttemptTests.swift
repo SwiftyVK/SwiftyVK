@@ -205,13 +205,12 @@ class AttemptTests: XCTestCase {
 
 private var attemptQueue = DispatchQueue.global(qos: .background)
 
-private func makeContext(timeout: TimeInterval = 10, callbacks: AttemptCallbacks = .default) -> (attempt: AttemptImpl, session: URLSessionMock) {
+private func makeContext(callbacks: AttemptCallbacks = .default) -> (attempt: AttemptImpl, session: URLSessionMock) {
     let request = URLRequest(url: URL(string: "http://test.com")!)
     let session = URLSessionMock()
     
     let attempt = AttemptImpl(
         request: request,
-        timeout: timeout,
         session: session,
         callbacks: callbacks
     )

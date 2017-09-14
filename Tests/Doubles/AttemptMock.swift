@@ -18,7 +18,6 @@ final class AttemptMock: Operation, Attempt {
         
         self.init(
             request: URLRequest(url: URL(string: "http://test")!),
-            timeout: 0,
             session: URLSessionMock(),
             callbacks: AttemptCallbacks(
                 onFinish: { _ in },
@@ -30,7 +29,7 @@ final class AttemptMock: Operation, Attempt {
         self.completion = completion
     }
     
-    init(request: URLRequest, timeout: TimeInterval, session: VKURLSession, callbacks: AttemptCallbacks) {
+    init(request: URLRequest, session: VKURLSession, callbacks: AttemptCallbacks) {
         super.init()
     }
     
