@@ -111,12 +111,12 @@ final class TaskImpl: Operation, Task {
     }
     
     private func handleSended(_ current: Int64, of expected: Int64) {
-        guard !isCancelled else { return }
+        guard !isCancelled && currentRequest.config.handleProgress else { return }
         currentRequest.callbacks.onProgress?(.sended, current, expected)
     }
     
     private func handleReceived(_ current: Int64, of expected: Int64) {
-        guard !isCancelled else { return }
+        guard !isCancelled && currentRequest.config.handleProgress else { return }
         currentRequest.callbacks.onProgress?(.recieved, current, expected)
     }
     

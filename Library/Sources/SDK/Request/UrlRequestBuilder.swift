@@ -38,14 +38,17 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
                 capthca: capthca,
                 token: token
             )
+            
+            urlRequest.timeoutInterval = config.attemptTimeout
         case .upload(let url, let media, let partType):
             urlRequest = try make(from: media, url: url, partType: partType)
+            urlRequest.timeoutInterval = media.reduce(0.0) { $0 + Double($1.data.count) } * 0.001
         case .url(let url):
             urlRequest = try make(from: url)
+            urlRequest.timeoutInterval = config.attemptTimeout
+
         }
-        
-        urlRequest.timeoutInterval = config.attemptTimeout
-        
+            
         return urlRequest
     }
     

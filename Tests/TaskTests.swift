@@ -50,7 +50,7 @@ class TaskTests: XCTestCase {
             configure: {
                 $0.onRecive(100, 1000)
                 $0.onFinish(.unexpectedError)
-        },
+            },
             callbacks: RequestCallbacks(onProgress: { progressResult = $0 })
         )
         // When
@@ -68,7 +68,7 @@ class TaskTests: XCTestCase {
             configure: {
                 $0.onSent(100, 1000)
                 $0.onFinish(.unexpectedError)
-        },
+            },
             callbacks: RequestCallbacks(onProgress: { progressResult = $0 })
         )
         // When
@@ -269,8 +269,11 @@ private func makeContext(
         let taskSession = SessionMock()
         let attemptMaker = AttemptMakerMock()
         let apiErrorHandler = ApiErrorHandlerMock()
-        var request = VKAPI.Users.get(.empty)
-            .configure(with: Config(handleErrors: handleErrors))
+        let config = Config(handleErrors: handleErrors).overriden(with: .upload)
+        
+        var request = Request(type: .url(""))
+            .toMethod()
+            .configure(with: config)
         
         if let nextRequest = nextRequest {
             request = request.chain { _ in nextRequest }

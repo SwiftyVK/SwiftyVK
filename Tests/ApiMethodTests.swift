@@ -46,7 +46,7 @@ class ApiMethodTests: XCTestCase {
         // When
         let mutatedMethod = originalMethod.configure(with: .default)
         // Then
-        XCTAssertTrue(type(of: mutatedMethod) == Methods.SuccessableFailableProgressable.self)
+        XCTAssertTrue(type(of: mutatedMethod) == Methods.SuccessableFailable.self)
     }
     
     func test_setOnSuccess() {
@@ -55,7 +55,7 @@ class ApiMethodTests: XCTestCase {
         // When
         let mutatedMethod = originalMethod.onSuccess { _ in }
         // Then
-        XCTAssertTrue(type(of: mutatedMethod) == Methods.FailableProgressableConfigurable.self)
+        XCTAssertTrue(type(of: mutatedMethod) == Methods.FailableConfigurable.self)
     }
     
     func test_setOnError() {
@@ -64,16 +64,7 @@ class ApiMethodTests: XCTestCase {
         // When
         let mutatedMethod = originalMethod.onError { _ in }
         // Then
-        XCTAssertTrue(type(of: mutatedMethod) == Methods.SuccessableProgressableConfigurable.self)
-    }
-    
-    func test_setOnProgress() {
-        // Given
-        let originalMethod = VKAPI.Users.get(.empty)
-        // When
-        let mutatedMethod = originalMethod.onProgress { _ in }
-        // Then
-        XCTAssertTrue(type(of: mutatedMethod) == Methods.SuccessableFailableConfigurable.self)
+        XCTAssertTrue(type(of: mutatedMethod) == Methods.SuccessableConfigurable.self)
     }
     
     func test_setNext() {

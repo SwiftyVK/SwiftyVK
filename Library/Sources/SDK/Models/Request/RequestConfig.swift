@@ -1,6 +1,11 @@
 public struct Config {
     
     public static let `default` = Config()
+    static let upload: Config = {
+        var config = Config(httpMethod: .POST)
+        config.handleProgress = true
+        return config
+    }()
     
     let httpMethod: HttpMethod
     
@@ -23,6 +28,8 @@ public struct Config {
         return _enableLogging ?? sessionConfig?.enableLogging ?? false
     }
     
+    private(set) var handleProgress: Bool = false
+    
     private var _apiVersion: String?
     private var _language: Language?
     private var _attemptsMaxLimit: AttemptLimit?
@@ -31,7 +38,7 @@ public struct Config {
     private var _enableLogging: Bool?
     private var sessionConfig: SessionConfig?
     
-    init(
+    public init(
         httpMethod: HttpMethod = .GET,
         apiVersion: String? = nil,
         language: Language? = nil,
@@ -52,28 +59,6 @@ public struct Config {
         self.sessionConfig = sessionConfig
     }
     
-    func overriden(
-        httpMethod: HttpMethod = .GET,
-        apiVersion: String? = nil,
-        language: Language? = nil,
-        attemptsMaxLimit: AttemptLimit? = nil,
-        attemptTimeout: TimeInterval? = nil,
-        handleErrors: Bool? = nil,
-        enableLogging: Bool? = nil
-        ) -> Config {
-        let newConfig = Config(
-            httpMethod: httpMethod,
-            apiVersion: apiVersion,
-            language: language,
-            attemptsMaxLimit: attemptsMaxLimit,
-            attemptTimeout: attemptTimeout,
-            handleErrors: handleErrors,
-            enableLogging: enableLogging
-        )
-        
-        return overriden(with: newConfig)
-    }
-    
     func overriden(with other: Config) -> Config {
         var newConfig = Config(
             httpMethod: httpMethod,
@@ -84,6 +69,8 @@ public struct Config {
             handleErrors: other._handleErrors ?? _handleErrors,
             enableLogging: other._enableLogging ?? _enableLogging
         )
+        
+        newConfig.handleProgress = other.handleProgress
         
         sessionConfig.flatMap { newConfig.inject(sessionConfig: $0) }
 

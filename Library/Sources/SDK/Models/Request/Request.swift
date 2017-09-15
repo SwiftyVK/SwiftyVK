@@ -37,7 +37,7 @@ public final class Request {
         nextRequest.callbacks = RequestCallbacks(
             onSuccess: callbacks.onSuccess,
             onError: callbacks.onError,
-            onProgress: nextRequest.callbacks.onProgress
+            onProgress: callbacks.onProgress
         )
         
         nextRequest.config = config.overriden(with: nextRequest.config)
