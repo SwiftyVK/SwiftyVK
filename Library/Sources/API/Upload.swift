@@ -25,12 +25,9 @@ extension VKAPI {
                 to target: UploadTarget,
                 albumId: String,
                 caption: String? = nil,
-                location: CLLocationCoordinate2D? = nil,
-                config: Config = .default,
-                uploadTimeout: TimeInterval = 30
-                ) -> Method {
-                
-                return VKAPI.Photos.getUploadServer([
+                location: CLLocationCoordinate2D? = nil
+                ) -> Methods.SuccessableFailableProgressableConfigurable {
+                let method = VKAPI.Photos.getUploadServer([
                     .albumId: albumId,
                     .userId: target.decoded.userId,
                     .groupId: target.decoded.groupId
@@ -44,9 +41,10 @@ extension VKAPI {
                                 media: Array(media.prefix(5)),
                                 partType: .indexedFile
                             ),
-                            config: config.overriden(attemptTimeout: uploadTimeout)
+                            config: .default
                             )
                             .toMethod()
+                            .configure(with: .upload)
                     }
                     .chain {
                         let response = try JSON(data: $0)
@@ -64,35 +62,42 @@ extension VKAPI {
                             .longitude: location?.longitude.toString()
                             ])
                     }
+                
+                return Methods.SuccessableFailableProgressableConfigurable(method.request)
             }
-
+            
         ///Upload photo to message
 //        public static func toMessage(
 //            _ media: Media,
 //            config: Config = .default,
 //            uploadTimeout: TimeInterval = 30
-//            ) -> Request {
+//            ) -> SendableMethod {
 //
 //            return VKAPI.Photos.getMessagesUploadServer(.empty)
-//                .request(with: config)
-//                .next {
-//                    Request(
-//                        of: .upload(
-//                            url: $0["upload_url"].stringValue,
+//                .configure(with: config)
+//                .chain {
+//                    let response = try JSON(data: $0)
+//
+//                    return Request(
+//                        type: .upload(
+//                            url: response.forcedString("upload_url"),
 //                            media: [media],
 //                            partType: .photo
 //                        ),
-//                        config: config.overriden(attemptTimeout: uploadTimeout)
+//                        config: config.overriden(with: uploadTimeout)
 //                    )
+//                    .toMethod()
 //                }
-//                .next {
-//                    VKAPI.Photos.saveMessagesPhoto([
-//                        .photo: $0["photo"].string,
-//                        .server: $0["server"].string,
-//                        .hash: $0["hash"].string
+//                .chain {
+//                    let response = try JSON(data: $0)
+//
+//                    return VKAPI.Photos.saveMessagesPhoto([
+//                        .photo: response.forcedString("photo"),
+//                        .server: response.forcedString("server"),
+//                        .hash: response.forcedString("hash")
 //                        ])
-//                        .request(with: config)
-//            }
+//                        .configure(with: config)
+//                }
 //        }
 
         ///Upload photo to market
