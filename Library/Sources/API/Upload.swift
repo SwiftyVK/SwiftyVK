@@ -213,59 +213,30 @@ extension VKAPI {
             }
         }
 
-        ///Upload video from file or url
-        public struct Video {
-            /// Upload local video file
-            public static func fromFile(
-                _ media: Media,
-                savingParams: Parameters = .empty
-                ) -> Methods.SuccessableFailableProgressableConfigurable {
-                
-                let method = VKAPI.Video.save(savingParams)
-                    .chain {
-                        let response = try JSON(data: $0)
 
-                        return Request(
-                            type: .upload(
-                                url: response.forcedString("upload_url"),
-                                media: [media],
-                                partType: .video
-                            ),
-                            config: .upload
-                            )
-                            .toMethod()
-                    }
-                
-                return Methods.SuccessableFailableProgressableConfigurable(method.request)
-            }
-
-            ///Upload local video from external resource
-//            public static func fromUrl(
-//                _ url: String? = nil,
-//                name: String? = nil,
-//                description: String? = nil,
-//                groupId: String? = nil,
-//                albumId: String? = nil,
-//                isPrivate: Bool = false,
-//                isWallPost: Bool = false,
-//                isRepeat: Bool = false,
-//                isNoComments: Bool = false,
-//                config: Config = .default
-//                ) -> Request {
-//
-//                return VKAPI.Video.save([
-//                    .link: url,
-//                    .name: name,
-//                    .description: description,
-//                    .groupId: groupId,
-//                    .albumId: albumId,
-//                    .isPrivate: isPrivate ? "1" : "0",
-//                    .wallpost: isWallPost ? "1" : "0",
-//                    .`repeat`: isRepeat ? "1" : "0"
-//                    ])
-//                    .request(with: config)
-//            }
-//        }
+        /// Upload video file to "my videos"
+        public static func video(
+            _ media: Media,
+            savingParams: Parameters = .empty
+            ) -> Methods.SuccessableFailableProgressableConfigurable {
+            
+            let method = VKAPI.Video.save(savingParams)
+                .chain {
+                    let response = try JSON(data: $0)
+                    
+                    return Request(
+                        type: .upload(
+                            url: response.forcedString("upload_url"),
+                            media: [media],
+                            partType: .video
+                        ),
+                        config: .upload
+                        )
+                        .toMethod()
+                }
+            
+            return Methods.SuccessableFailableProgressableConfigurable(method.request)
+        }
 
         ///Upload audio
 //        public static func audio(
@@ -332,4 +303,3 @@ extension VKAPI {
 //            }
         }
     }
-}
