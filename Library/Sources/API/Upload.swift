@@ -27,6 +27,7 @@ extension VKAPI {
                 caption: String? = nil,
                 location: CLLocationCoordinate2D? = nil
                 ) -> Methods.SuccessableFailableProgressableConfigurable {
+                
                 let method = VKAPI.Photos.getUploadServer([
                     .albumId: albumId,
                     .userId: target.decoded.userId,
@@ -41,10 +42,9 @@ extension VKAPI {
                                 media: Array(media.prefix(5)),
                                 partType: .indexedFile
                             ),
-                            config: .default
+                            config: .upload
                             )
                             .toMethod()
-                            .configure(with: .upload)
                     }
                     .chain {
                         let response = try JSON(data: $0)
@@ -66,39 +66,38 @@ extension VKAPI {
                 return Methods.SuccessableFailableProgressableConfigurable(method.request)
             }
             
-        ///Upload photo to message
-//        public static func toMessage(
-//            _ media: Media,
-//            config: Config = .default,
-//            uploadTimeout: TimeInterval = 30
-//            ) -> SendableMethod {
-//
-//            return VKAPI.Photos.getMessagesUploadServer(.empty)
-//                .configure(with: config)
-//                .chain {
-//                    let response = try JSON(data: $0)
-//
-//                    return Request(
-//                        type: .upload(
-//                            url: response.forcedString("upload_url"),
-//                            media: [media],
-//                            partType: .photo
-//                        ),
-//                        config: config.overriden(with: uploadTimeout)
-//                    )
-//                    .toMethod()
-//                }
-//                .chain {
-//                    let response = try JSON(data: $0)
-//
-//                    return VKAPI.Photos.saveMessagesPhoto([
-//                        .photo: response.forcedString("photo"),
-//                        .server: response.forcedString("server"),
-//                        .hash: response.forcedString("hash")
-//                        ])
-//                        .configure(with: config)
-//                }
-//        }
+        /// Upload photo for using in messages.send method
+        public static func toMessage(
+            _ media: Media,
+            uploadTimeout: TimeInterval = 30
+            ) -> Methods.SuccessableFailableProgressableConfigurable {
+
+            let method = VKAPI.Photos.getMessagesUploadServer(.empty)
+                .chain {
+                    let response = try JSON(data: $0)
+
+                    return Request(
+                        type: .upload(
+                            url: response.forcedString("upload_url"),
+                            media: [media],
+                            partType: .photo
+                        ),
+                        config: .upload
+                    )
+                    .toMethod()
+                }
+                .chain {
+                    let response = try JSON(data: $0)
+
+                    return VKAPI.Photos.saveMessagesPhoto([
+                        .photo: response.forcedString("photo"),
+                        .server: response.forcedInt("server").toString(),
+                        .hash: response.forcedString("hash")
+                        ])
+                }
+            
+            return Methods.SuccessableFailableProgressableConfigurable(method.request)
+        }
 
         ///Upload photo to market
 //        public static func toMarket(
