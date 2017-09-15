@@ -67,10 +67,7 @@ extension VKAPI {
             }
             
             /// Upload photo for using in messages.send method
-            public static func toMessage(
-                _ media: Media,
-                uploadTimeout: TimeInterval = 30
-                ) -> Methods.SuccessableFailableProgressableConfigurable {
+            public static func toMessage(_ media: Media) -> Methods.SuccessableFailableProgressableConfigurable {
                 
                 let method = VKAPI.Photos.getMessagesUploadServer(.empty)
                     .chain {
@@ -275,35 +272,38 @@ extension VKAPI {
         }
 
         ///Upload document
-//        public static func document(
-//            _ media: Media,
-//            groupId: String? = nil,
-//            title: String? = nil,
-//            tags: String? = nil,
-//            config: Config = .default,
-//            uploadTimeout: TimeInterval = 30
-//            ) -> Request {
-//
-//            return VKAPI.Docs.getUploadServer([.groupId: groupId])
-//                .request(with: config)
-//                .next {
-//                    Request(
-//                        of: .upload(
-//                            url: $0["upload_url"].stringValue,
-//                            media: [media],
-//                            partType: .file
-//                        ),
-//                        config: config.overriden(attemptTimeout: uploadTimeout)
-//                    )
-//                }
-//                .next {
-//                    VKAPI.Docs.save([
-//                        .file: $0["file"].string,
-//                        .title: title,
-//                        .tags: tags
-//                        ])
-//                        .request(with: config)
-//
-//            }
+        public static func document(
+            _ media: Media,
+            groupId: String? = nil,
+            title: String? = nil,
+            tags: String? = nil
+            ) -> Methods.SuccessableFailableProgressableConfigurable {
+            
+            let method = VKAPI.Docs.getUploadServer([.groupId: groupId])
+                .chain {
+                    let response = try JSON(data: $0)
+                    
+                    return Request(
+                        type: .upload(
+                            url: response.forcedString("upload_url"),
+                            media: [media],
+                            partType: .file
+                        ),
+                        config: .upload
+                        )
+                        .toMethod()
+                }
+                .chain {
+                    let response = try JSON(data: $0)
+                    
+                    return VKAPI.Docs.save([
+                        .file: response.forcedString("file"),
+                        .title: title,
+                        .tags: tags
+                        ])
+                }
+            
+            return Methods.SuccessableFailableProgressableConfigurable(method.request)
         }
     }
+}
