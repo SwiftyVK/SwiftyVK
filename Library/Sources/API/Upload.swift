@@ -83,8 +83,8 @@ extension VKAPI {
                             partType: .photo
                         ),
                         config: .upload
-                    )
-                    .toMethod()
+                        )
+                        .toMethod()
                 }
                 .chain {
                     let response = try JSON(data: $0)
@@ -99,43 +99,46 @@ extension VKAPI {
             return Methods.SuccessableFailableProgressableConfigurable(method.request)
         }
 
-        ///Upload photo to market
-//        public static func toMarket(
-//            _ media: Media,
-//            mainPhotoConfig: (cropX: String?, cropY: String?, cropW: String?)?,
-//            groupId: String,
-//            config: Config = .default,
-//            uploadTimeout: TimeInterval = 30
-//            ) -> Request {
-//
-//            return VKAPI.Photos.getMarketUploadServer([.groupId: groupId])
-//                .request(with: config)
-//                .next {
-//                    Request(
-//                        of: .upload(
-//                            url: $0["upload_url"].stringValue,
-//                            media: [media],
-//                            partType: .file
-//                        ),
-//                        config: config.overriden(attemptTimeout: uploadTimeout)
-//                    )
-//                }
-//                .next {
-//                    VKAPI.Photos.saveMarketPhoto([
-//                        .groupId: groupId,
-//                        .photo: $0["photo"].string,
-//                        .server: $0["server"].string,
-//                        .hash: $0["hash"].string,
-//                        .cropData: $0["crop_data"].string,
-//                        .cropHash: $0["crop_hash"].string,
-//                        .mainPhoto: (mainPhotoConfig != nil ? "1" : "0"),
-//                        .cropX: mainPhotoConfig?.cropX,
-//                        .cropY: mainPhotoConfig?.cropY,
-//                        .cropWidth: mainPhotoConfig?.cropW
-//                        ])
-//                        .request(with: config)
-//            }
-//        }
+        /// Upload photo for using in market.add or market.edit methods
+        public static func toMarket(
+            _ media: Media,
+            mainPhotoConfig: (cropX: String?, cropY: String?, cropW: String?)?,
+            groupId: String
+            ) -> Methods.SuccessableFailableProgressableConfigurable {
+
+            let method = VKAPI.Photos.getMarketUploadServer([.groupId: groupId])
+                .chain {
+                    let response = try JSON(data: $0)
+
+                    return Request(
+                        type: .upload(
+                            url: response.forcedString("upload_url"),
+                            media: [media],
+                            partType: .file
+                        ),
+                        config: .upload
+                        )
+                        .toMethod()
+                }
+                .chain {
+                    let response = try JSON(data: $0)
+
+                    return VKAPI.Photos.saveMarketPhoto([
+                        .groupId: groupId,
+                        .photo: response.forcedString("photo"),
+                        .server: response.forcedInt("server").toString(),
+                        .hash: response.forcedString("hash"),
+                        .cropData: response.forcedString("crop_data"),
+                        .cropHash: response.forcedString("crop_hash"),
+                        .mainPhoto: (mainPhotoConfig != nil ? "1" : "0"),
+                        .cropX: mainPhotoConfig?.cropX,
+                        .cropY: mainPhotoConfig?.cropY,
+                        .cropWidth: mainPhotoConfig?.cropW
+                        ])
+                }
+            
+            return Methods.SuccessableFailableProgressableConfigurable(method.request)
+        }
 
         ///Upload photo to market album
 //        public static func toMarketAlbum(
