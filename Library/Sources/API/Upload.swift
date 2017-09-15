@@ -215,43 +215,29 @@ extension VKAPI {
 
         ///Upload video from file or url
         public struct Video {
-            //Upload local video file
-//            public static func fromFile(
-//                _ media: Media,
-//                name: String? = nil,
-//                description: String? = nil,
-//                groupId: String? = nil,
-//                albumId: String? = nil,
-//                isPrivate: Bool = false,
-//                isWallPost: Bool = false,
-//                isRepeat: Bool = false,
-//                isNoComments: Bool = false,
-//                config: Config = .default,
-//                uploadTimeout: TimeInterval = 30
-//                ) -> Request {
-//
-//                return VKAPI.Video.save([
-//                    .link: "",
-//                    .name: name,
-//                    .description: description,
-//                    .groupId: groupId,
-//                    .albumId: albumId,
-//                    .isPrivate: isPrivate ? "1" : "0",
-//                    .wallpost: isWallPost ? "1" : "0",
-//                    .`repeat`: isRepeat ? "1" : "0"
-//                    ])
-//                    .request(with: config)
-//                    .next {
-//                        Request(
-//                            of: .upload(
-//                                url: $0["upload_url"].stringValue,
-//                                media: [media],
-//                                partType: .video
-//                            ),
-//                            config: config.overriden(attemptTimeout: uploadTimeout)
-//                        )
-//                }
-//            }
+            /// Upload local video file
+            public static func fromFile(
+                _ media: Media,
+                savingParams: Parameters = .empty
+                ) -> Methods.SuccessableFailableProgressableConfigurable {
+                
+                let method = VKAPI.Video.save(savingParams)
+                    .chain {
+                        let response = try JSON(data: $0)
+
+                        return Request(
+                            type: .upload(
+                                url: response.forcedString("upload_url"),
+                                media: [media],
+                                partType: .video
+                            ),
+                            config: .upload
+                            )
+                            .toMethod()
+                    }
+                
+                return Methods.SuccessableFailableProgressableConfigurable(method.request)
+            }
 
             ///Upload local video from external resource
 //            public static func fromUrl(
