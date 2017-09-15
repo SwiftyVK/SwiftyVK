@@ -140,36 +140,41 @@ extension VKAPI {
             return Methods.SuccessableFailableProgressableConfigurable(method.request)
         }
 
-        ///Upload photo to market album
-//        public static func toMarketAlbum(
-//            _ media: Media,
-//            groupId: String,
-//            config: Config = .default,
-//            uploadTimeout: TimeInterval = 30
-//            ) -> Request {
-//
-//            return VKAPI.Photos.getMarketAlbumUploadServer([.groupId: groupId])
-//                .request(with: config)
-//                .next {
-//                    Request(
-//                        of: .upload(
-//                            url: $0["upload_url"].stringValue,
-//                            media: [media],
-//                            partType: .file
-//                        ),
-//                        config: config.overriden(attemptTimeout: uploadTimeout)
-//                    )
-//                }
-//                .next {
-//                    VKAPI.Photos.saveMarketAlbumPhoto([
-//                        .groupId: groupId,
-//                        .photo: $0["photo"].string,
-//                        .server: $0["server"].string,
-//                        .hash: $0["hash"].string
-//                        ])
-//                        .request(with: config)
-//            }
-//        }
+        /// Upload photo for using in market.addAlbum or market.editAlbum methods
+        public static func toMarketAlbum(
+            _ media: Media,
+            groupId: String,
+            config: Config = .default,
+            uploadTimeout: TimeInterval = 30
+            ) -> Methods.SuccessableFailableProgressableConfigurable {
+            
+            let method = VKAPI.Photos.getMarketAlbumUploadServer([.groupId: groupId])
+                .chain {
+                    let response = try JSON(data: $0)
+                    
+                    return Request(
+                        type: .upload(
+                            url: response.forcedString("upload_url"),
+                            media: [media],
+                            partType: .file
+                        ),
+                        config: .upload
+                        )
+                        .toMethod()
+                }
+                .chain {
+                    let response = try JSON(data: $0)
+                    
+                    return VKAPI.Photos.saveMarketAlbumPhoto([
+                        .groupId: groupId,
+                        .photo: response.forcedString("photo"),
+                        .server: response.forcedInt("server").toString(),
+                        .hash: response.forcedString("hash")
+                        ])
+                }
+            
+            return Methods.SuccessableFailableProgressableConfigurable(method.request)
+        }
 
         ///Upload photo to user or group wall
 //        public static func toWall(
