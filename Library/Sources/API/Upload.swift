@@ -238,37 +238,41 @@ extension VKAPI {
             return Methods.SuccessableFailableProgressableConfigurable(method.request)
         }
 
-        ///Upload audio
-//        public static func audio(
-//            _ media: Media,
-//            artist: String? = nil,
-//            title: String? = nil,
-//            config: Config = .default,
-//            uploadTimeout: TimeInterval = 30
-//            ) -> Request {
-//            return VKAPI.Audio.getUploadServer(.empty)
-//                .request(with: config)
-//                .next {
-//                    Request(
-//                        of: .upload(
-//                            url: $0["upload_url"].stringValue,
-//                            media: [media],
-//                            partType: .file
-//                        ),
-//                        config: config.overriden(attemptTimeout: uploadTimeout)
-//                    )
-//                }
-//                .next {
-//                    VKAPI.Audio.save([
-//                        .audio: $0["audio"].stringValue,
-//                        .server: $0["server"].stringValue,
-//                        .hash: $0["hash"].stringValue,
-//                        .artist: artist,
-//                        .title: title
-//                        ])
-//                        .request(with: config)
-//            }
-//        }
+        /// Upload audio to "My audios"
+        public static func audio(
+            _ media: Media,
+            artist: String? = nil,
+            title: String? = nil
+            ) -> Methods.SuccessableFailableProgressableConfigurable {
+            
+            let method = VKAPI.Audio.getUploadServer(.empty)
+                .chain {
+                    let response = try JSON(data: $0)
+
+                    return Request(
+                        type: .upload(
+                            url: response.forcedString("upload_url"),
+                            media: [media],
+                            partType: .file
+                        ),
+                        config: .upload
+                        )
+                        .toMethod()
+                }
+                .chain {
+                    let response = try JSON(data: $0)
+
+                    return VKAPI.Audio.save([
+                        .audio: response.forcedString("audio"),
+                        .server: response.forcedInt("server").toString(),
+                        .hash: response.forcedString("hash"),
+                        .artist: artist,
+                        .title: title
+                        ])
+                }
+            
+            return Methods.SuccessableFailableProgressableConfigurable(method.request)
+        }
 
         ///Upload document
 //        public static func document(
