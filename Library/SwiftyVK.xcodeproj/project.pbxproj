@@ -246,6 +246,8 @@
 		D44EC0181F55DC4A00F8BB4A /* ConnectionObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */; };
 		D44EC01A1F55E99A00F8BB4A /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0191F55E99A00F8BB4A /* ObservableObject.swift */; };
 		D44EC01B1F55E99A00F8BB4A /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0191F55E99A00F8BB4A /* ObservableObject.swift */; };
+		D46906E51F7C04BE00580651 /* KeychainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906E41F7C04BE00580651 /* KeychainProvider.swift */; };
+		D46906E61F7C04BE00580651 /* KeychainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906E41F7C04BE00580651 /* KeychainProvider.swift */; };
 		D47601161F2E219A005356E5 /* response.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601141F2E218B005356E5 /* response.empty.json */; };
 		D47601191F2E21E2005356E5 /* apiError.withoutCode.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601181F2E21DD005356E5 /* apiError.withoutCode.json */; };
 		D476011B1F2E2229005356E5 /* apiError.withoutMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */; };
@@ -543,6 +545,7 @@
 		D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNotificationCenterMock.swift; sourceTree = "<group>"; };
 		D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionObserverTests.swift; sourceTree = "<group>"; };
 		D44EC0191F55E99A00F8BB4A /* ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
+		D46906E41F7C04BE00580651 /* KeychainProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
 		D47601141F2E218B005356E5 /* response.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.empty.json; sourceTree = "<group>"; };
 		D47601181F2E21DD005356E5 /* apiError.withoutCode.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutCode.json; sourceTree = "<group>"; };
 		D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutMessage.json; sourceTree = "<group>"; };
@@ -1024,6 +1027,7 @@
 				A2527D7C1BD12FD200F65412 /* Reachability.swift */,
 				D49795AD1F4DFDF700921A21 /* URLOpener.swift */,
 				D4C032AB1F51F650005AB59A /* IDGenerator.swift */,
+				D46906E41F7C04BE00580651 /* KeychainProvider.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1446,6 +1450,7 @@
 				A23E69341EDB49FB00AA3B3B /* WebPresenter.swift in Sources */,
 				A25A19E21EE5921B00CF13AF /* CaptchaController_iOS.swift in Sources */,
 				A25A19CE1EE41BA700CF13AF /* TokenParser.swift in Sources */,
+				D46906E61F7C04BE00580651 /* KeychainProvider.swift in Sources */,
 				A2E5C5D71ECCAAB600652262 /* String+Extensions.swift in Sources */,
 				D4040E311F62CB2500025E24 /* Collections+Extensions.swift in Sources */,
 				D47E92DA1F5731CB00F9522A /* Method.swift in Sources */,
@@ -1553,6 +1558,7 @@
 				A23E69331EDB49FB00AA3B3B /* WebPresenter.swift in Sources */,
 				A2EB6ED51BD18389008E7D86 /* Upload.swift in Sources */,
 				D47601241F2E2450005356E5 /* VKError.swift in Sources */,
+				D46906E51F7C04BE00580651 /* KeychainProvider.swift in Sources */,
 				A2EB6ED61BD18389008E7D86 /* Users.swift in Sources */,
 				D4040E301F62CB2500025E24 /* Collections+Extensions.swift in Sources */,
 				D47E92D91F5731CB00F9522A /* Method.swift in Sources */,

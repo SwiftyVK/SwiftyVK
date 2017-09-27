@@ -6,7 +6,7 @@ final class TokenStorageMock: TokenStorage {
     var onGet: ((String) -> Token?)?
     var onRemove: ((String) -> ())?
     
-    func save(token: Token, for sessionId: String) {
+    func save(_ token: Token, for sessionId: String) {
         onSave?(token, sessionId)
     }
     

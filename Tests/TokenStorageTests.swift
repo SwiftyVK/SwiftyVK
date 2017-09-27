@@ -11,7 +11,7 @@ final class TokenStorageTests: XCTestCase {
         let token = TokenMock()
         
         do {
-            try repository.save(token: token, for: id)
+            try repository.save(token, for: id)
         } catch let error {
             XCTFail("\(error)")
         }

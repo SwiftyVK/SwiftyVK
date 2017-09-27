@@ -82,7 +82,7 @@ final class AuthorizatorImpl: Authorizator {
     func authorize(sessionId: String, rawToken: String, expires: TimeInterval) throws -> Token {
         return try queue.sync {
             let token = tokenMaker.token(token: rawToken, expires: expires, info: [:])
-            try tokenStorage.save(token: token, for:  sessionId)
+            try tokenStorage.save(token, for:  sessionId)
             return token
         }
     }
@@ -138,7 +138,7 @@ final class AuthorizatorImpl: Authorizator {
             token = handledToken
         }
         
-        try tokenStorage.save(token: token, for:  sessionId)
+        try tokenStorage.save(token, for:  sessionId)
         return token
     }
     
