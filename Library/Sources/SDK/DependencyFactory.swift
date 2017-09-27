@@ -103,6 +103,13 @@ final class DependencyFactoryImpl: DependencyFactory {
         )
     }()
     
+    private lazy var cookiesHolder: CookiesHolder = {
+        CookiesHolderImpl(
+            vkStorage: CookiesStorageImpl(serviceKey: self.bundleName + "_Cookies"),
+            sharedStorage: HTTPCookieStorage.shared
+        )
+    }()
+    
     init(appId: String, delegate: SwiftyVKDelegate?) {
         self.appId = appId
         self.delegate = delegate
@@ -168,7 +175,7 @@ final class DependencyFactoryImpl: DependencyFactory {
             urlOpener = URLOpenerMacOS()
         #endif
         
-        let tokenStorge = TokenStorageImpl(serviceKey: self.bundleName)
+        let tokenStorge = TokenStorageImpl(serviceKey: self.bundleName + "_Token")
         
         let vkAppProxy = VKAppProxyImpl(
             appId: self.appId,
@@ -189,7 +196,8 @@ final class DependencyFactoryImpl: DependencyFactory {
             tokenMaker: self,
             tokenParser: TokenParserImpl(),
             vkAppProxy: vkAppProxy,
-            webPresenter: webPresenter
+            webPresenter: webPresenter,
+            cookiesHolder: cookiesHolder
         )
     }()
     
