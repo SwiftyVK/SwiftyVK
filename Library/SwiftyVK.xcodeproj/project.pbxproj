@@ -248,6 +248,8 @@
 		D44EC01B1F55E99A00F8BB4A /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0191F55E99A00F8BB4A /* ObservableObject.swift */; };
 		D46906E51F7C04BE00580651 /* KeychainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906E41F7C04BE00580651 /* KeychainProvider.swift */; };
 		D46906E61F7C04BE00580651 /* KeychainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906E41F7C04BE00580651 /* KeychainProvider.swift */; };
+		D46906E81F7C07F200580651 /* CookiesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906E71F7C07F200580651 /* CookiesStorage.swift */; };
+		D46906E91F7C07F200580651 /* CookiesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906E71F7C07F200580651 /* CookiesStorage.swift */; };
 		D47601161F2E219A005356E5 /* response.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601141F2E218B005356E5 /* response.empty.json */; };
 		D47601191F2E21E2005356E5 /* apiError.withoutCode.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601181F2E21DD005356E5 /* apiError.withoutCode.json */; };
 		D476011B1F2E2229005356E5 /* apiError.withoutMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */; };
@@ -546,6 +548,7 @@
 		D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionObserverTests.swift; sourceTree = "<group>"; };
 		D44EC0191F55E99A00F8BB4A /* ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
 		D46906E41F7C04BE00580651 /* KeychainProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
+		D46906E71F7C07F200580651 /* CookiesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookiesStorage.swift; sourceTree = "<group>"; };
 		D47601141F2E218B005356E5 /* response.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.empty.json; sourceTree = "<group>"; };
 		D47601181F2E21DD005356E5 /* apiError.withoutCode.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutCode.json; sourceTree = "<group>"; };
 		D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutMessage.json; sourceTree = "<group>"; };
@@ -897,6 +900,7 @@
 			isa = PBXGroup;
 			children = (
 				A2AF16721ED19AEB00485716 /* Authorizator.swift */,
+				D46906E71F7C07F200580651 /* CookiesStorage.swift */,
 			);
 			name = Authorizator;
 			sourceTree = "<group>";
@@ -1433,6 +1437,7 @@
 				A2EB6EFB1BD18394008E7D86 /* Photos.swift in Sources */,
 				A296C6451EF9963900029D7D /* SwiftyVKDelegate.swift in Sources */,
 				A2EB6EFC1BD18394008E7D86 /* Places.swift in Sources */,
+				D46906E91F7C07F200580651 /* CookiesStorage.swift in Sources */,
 				A2EB6EFD1BD18394008E7D86 /* Polls.swift in Sources */,
 				A2EB6EFE1BD18394008E7D86 /* Search.swift in Sources */,
 				A2967E751CBBC51600B7D48F /* Gifts.swift in Sources */,
@@ -1541,6 +1546,7 @@
 				D4F49D471F2E0FE50037B875 /* ApiError.swift in Sources */,
 				A2EB6ECC1BD18389008E7D86 /* Notifacations.swift in Sources */,
 				A2EB6ECD1BD18389008E7D86 /* Pages.swift in Sources */,
+				D46906E81F7C07F200580651 /* CookiesStorage.swift in Sources */,
 				A2EB6ECE1BD18389008E7D86 /* Photos.swift in Sources */,
 				A2EB6ECF1BD18389008E7D86 /* Places.swift in Sources */,
 				A217DAAC1E9926A500EA1430 /* Session.swift in Sources */,
