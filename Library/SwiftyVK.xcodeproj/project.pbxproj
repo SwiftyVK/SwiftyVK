@@ -250,6 +250,8 @@
 		D46906E61F7C04BE00580651 /* KeychainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906E41F7C04BE00580651 /* KeychainProvider.swift */; };
 		D46906E81F7C07F200580651 /* CookiesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906E71F7C07F200580651 /* CookiesStorage.swift */; };
 		D46906E91F7C07F200580651 /* CookiesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906E71F7C07F200580651 /* CookiesStorage.swift */; };
+		D46906EB1F7C08A300580651 /* CookiesHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906EA1F7C08A300580651 /* CookiesHolder.swift */; };
+		D46906EC1F7C08A300580651 /* CookiesHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906EA1F7C08A300580651 /* CookiesHolder.swift */; };
 		D46906EE1F7C093500580651 /* VKHTTPCookieStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906ED1F7C093500580651 /* VKHTTPCookieStorage.swift */; };
 		D46906EF1F7C093500580651 /* VKHTTPCookieStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906ED1F7C093500580651 /* VKHTTPCookieStorage.swift */; };
 		D47601161F2E219A005356E5 /* response.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601141F2E218B005356E5 /* response.empty.json */; };
@@ -551,6 +553,7 @@
 		D44EC0191F55E99A00F8BB4A /* ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
 		D46906E41F7C04BE00580651 /* KeychainProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
 		D46906E71F7C07F200580651 /* CookiesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookiesStorage.swift; sourceTree = "<group>"; };
+		D46906EA1F7C08A300580651 /* CookiesHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookiesHolder.swift; sourceTree = "<group>"; };
 		D46906ED1F7C093500580651 /* VKHTTPCookieStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKHTTPCookieStorage.swift; sourceTree = "<group>"; };
 		D47601141F2E218B005356E5 /* response.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.empty.json; sourceTree = "<group>"; };
 		D47601181F2E21DD005356E5 /* apiError.withoutCode.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutCode.json; sourceTree = "<group>"; };
@@ -905,6 +908,7 @@
 			children = (
 				A2AF16721ED19AEB00485716 /* Authorizator.swift */,
 				D46906E71F7C07F200580651 /* CookiesStorage.swift */,
+				D46906EA1F7C08A300580651 /* CookiesHolder.swift */,
 			);
 			name = Authorizator;
 			sourceTree = "<group>";
@@ -1409,6 +1413,7 @@
 				D47E92C51F5680A400F9522A /* WebViewWrapperIOS.swift in Sources */,
 				D4F49D481F2E0FE50037B875 /* ApiError.swift in Sources */,
 				A217DAAD1E9926A500EA1430 /* Session.swift in Sources */,
+				D46906EC1F7C08A300580651 /* CookiesHolder.swift in Sources */,
 				D4F84BE01F43608200DA7127 /* JSON.swift in Sources */,
 				D4AB8DA01F605FD20099FC42 /* OperationConvertible.swift in Sources */,
 				A2AF16741ED19AEB00485716 /* Authorizator.swift in Sources */,
@@ -1519,6 +1524,7 @@
 				A2BDF36F1EDC9EB200E9263A /* Lock.swift in Sources */,
 				A2066AEA1D9C388F0065A4D7 /* Task.swift in Sources */,
 				A296C6441EF9963900029D7D /* SwiftyVKDelegate.swift in Sources */,
+				D46906EB1F7C08A300580651 /* CookiesHolder.swift in Sources */,
 				A24A29491E96B2F8006152E6 /* AttemptSheduler.swift in Sources */,
 				D4AB8D9F1F605FD20099FC42 /* OperationConvertible.swift in Sources */,
 				A2EB6EC21BD18389008E7D86 /* Board.swift in Sources */,
