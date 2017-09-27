@@ -210,7 +210,6 @@ extension VKAPI {
             }
         }
 
-
         /// Upload video file to "my videos"
         public static func video(
             _ media: Media,
