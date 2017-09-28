@@ -100,6 +100,8 @@
 		A2F7486F1D959087009B3F38 /* error.too.many.requests.json in Resources */ = {isa = PBXBuildFile; fileRef = A2F748671D959087009B3F38 /* error.too.many.requests.json */; };
 		A2F748711D9590B4009B3F38 /* success.users.get.json in Resources */ = {isa = PBXBuildFile; fileRef = A2F748701D9590B4009B3F38 /* success.users.get.json */; };
 		A2F748721D9590B4009B3F38 /* success.users.get.json in Resources */ = {isa = PBXBuildFile; fileRef = A2F748701D9590B4009B3F38 /* success.users.get.json */; };
+		D43E658F1F7D588200AF48C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D43E658E1F7D588200AF48C8 /* Assets.xcassets */; };
+		D43E65901F7D588200AF48C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D43E658E1F7D588200AF48C8 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -258,6 +260,7 @@
 		A2F748671D959087009B3F38 /* error.too.many.requests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = error.too.many.requests.json; sourceTree = "<group>"; };
 		A2F748701D9590B4009B3F38 /* success.users.get.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.users.get.json; sourceTree = "<group>"; };
 		A2F748791D980E53009B3F38 /* SwiftyVK-Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SwiftyVK-Tests-Bridging-Header.h"; path = "Tests/SwiftyVK-Tests-Bridging-Header.h"; sourceTree = "<group>"; };
+		D43E658E1F7D588200AF48C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -356,6 +359,7 @@
 				A2F748791D980E53009B3F38 /* SwiftyVK-Tests-Bridging-Header.h */,
 				A2527E6A1BD13A3B00F65412 /* OSX */,
 				A2527E7B1BD13A5300F65412 /* iOS */,
+				D43E658E1F7D588200AF48C8 /* Assets.xcassets */,
 			);
 			name = Resources;
 			path = ..;
@@ -638,6 +642,7 @@
 				A2EB6F351BD1857D008E7D86 /* testDoc.rtf in Resources */,
 				A2EB6F331BD1857D008E7D86 /* testAudio.mp3 in Resources */,
 				A2EB6F391BD1857D008E7D86 /* testVideo.mp4 in Resources */,
+				D43E658F1F7D588200AF48C8 /* Assets.xcassets in Resources */,
 				A2EB6F371BD1857D008E7D86 /* testImage.jpg in Resources */,
 				A2F33E881D8F24E100856417 /* captcha.jpg in Resources */,
 			);
@@ -654,6 +659,7 @@
 				A2EB6F3A1BD1857D008E7D86 /* testVideo.mp4 in Resources */,
 				A2EB6F361BD1857D008E7D86 /* testDoc.rtf in Resources */,
 				A2F33E891D8F24E100856417 /* captcha.jpg in Resources */,
+				D43E65901F7D588200AF48C8 /* Assets.xcassets in Resources */,
 				A2EB6F381BD1857D008E7D86 /* testImage.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
