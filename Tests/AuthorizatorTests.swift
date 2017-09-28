@@ -21,6 +21,7 @@ class AuthorizatorTests: XCTestCase {
             let vkApp = VKAppProxyMock()
             let webPresenter = WebPresenterMock()
             let session = SessionMock()
+            let cookiesHolder = CookiesHolderMock()
             
             let authorizator = AuthorizatorImpl(
                 appId: "1234567890",
@@ -29,7 +30,8 @@ class AuthorizatorTests: XCTestCase {
                 tokenMaker: tokenMaker,
                 tokenParser: parser,
                 vkAppProxy: vkApp,
-                webPresenter: webPresenter
+                webPresenter: webPresenter,
+                cookiesHolder: cookiesHolder
             )
             
             return (

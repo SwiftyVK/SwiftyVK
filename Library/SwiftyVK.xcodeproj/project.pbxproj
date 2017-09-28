@@ -236,6 +236,7 @@
 		D4321D8F1F5F0B34001AFE9F /* TwoVariationsMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4321D8E1F5F0B34001AFE9F /* TwoVariationsMethodTests.swift */; };
 		D4321D911F5F0D67001AFE9F /* BasicMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4321D901F5F0D67001AFE9F /* BasicMethodTests.swift */; };
 		D4321D931F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4321D921F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift */; };
+		D43E658D1F7D526100AF48C8 /* CookiesHolderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43E658A1F7D524A00AF48C8 /* CookiesHolderMock.swift */; };
 		D44348F91F3B71F5008B2B50 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44348F71F3B70F4008B2B50 /* JSONTests.swift */; };
 		D44EC0071F55C50700F8BB4A /* VKReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0061F55C50700F8BB4A /* VKReachability.swift */; };
 		D44EC00B1F55D2A500F8BB4A /* VKReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0061F55C50700F8BB4A /* VKReachability.swift */; };
@@ -544,6 +545,7 @@
 		D4321D8E1F5F0B34001AFE9F /* TwoVariationsMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoVariationsMethodTests.swift; sourceTree = "<group>"; };
 		D4321D901F5F0D67001AFE9F /* BasicMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicMethodTests.swift; sourceTree = "<group>"; };
 		D4321D921F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeVariationsMethodTests.swift; sourceTree = "<group>"; };
+		D43E658A1F7D524A00AF48C8 /* CookiesHolderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookiesHolderMock.swift; sourceTree = "<group>"; };
 		D44348F71F3B70F4008B2B50 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		D44EC0061F55C50700F8BB4A /* VKReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKReachability.swift; sourceTree = "<group>"; };
 		D44EC00C1F55D2C800F8BB4A /* VKNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNotificationCenter.swift; sourceTree = "<group>"; };
@@ -714,6 +716,7 @@
 				D416653F1F6192CA000E6934 /* LongPollTaskMock.swift */,
 				D41665431F6198C0000E6934 /* ConnectionObserverMock.swift */,
 				D4CA9B731F66BED90085E4F3 /* LongPollMock.swift */,
+				D43E658A1F7D524A00AF48C8 /* CookiesHolderMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1347,6 +1350,7 @@
 				D4CA9B741F66BED90085E4F3 /* LongPollMock.swift in Sources */,
 				A22179CC1EBA5009006B71FD /* TaskShedulerMock.swift in Sources */,
 				A24DDAF21EB73E3F002EA273 /* QueryBuilderTests.swift in Sources */,
+				D43E658D1F7D526100AF48C8 /* CookiesHolderMock.swift in Sources */,
 				A25A19D31EE438FB00CF13AF /* AuthorizatorTests.swift in Sources */,
 				D497959F1F4DE40900921A21 /* ApiErrorHandlerTests.swift in Sources */,
 				A22179C81EBA3DBD006B71FD /* AttemptShedulerMock.swift in Sources */,
