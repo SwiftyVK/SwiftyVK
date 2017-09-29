@@ -2,7 +2,7 @@ public struct SessionConfig: Codable {
     
     public static let `default` = SessionConfig()
     
-    public var apiVersion = "5.62"
+    public var apiVersion = "5.68"
     public let sdkVersion = "1.3.17"
     public var language: Language
     public var attemptsMaxLimit: AttemptLimit
