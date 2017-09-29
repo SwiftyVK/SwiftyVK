@@ -30,6 +30,7 @@ extension VK {
     case ageFrom = "age_from"
     case ageTo = "age_to"
     case birthDay = "birth_day"
+    case birthday = "birthday"
     case birthMonth = "birth_month"
     case birthYear = "birth_year"
     case online
@@ -326,6 +327,8 @@ extension VK {
     case deviceId = "device_id"
     case sandbox
     case settings
+    case groupsCanPost = "groups_can_post"
+    case lpVersion = "lp_version"
     
     public var hashValue: Int {
       return self.rawValue.hashValue
