@@ -40,8 +40,5 @@
       <FileRef
          location = "group:Library/../.gitignore">
       </FileRef>
-      <FileRef
-         location = "group:Example/Cartfile.private">
-      </FileRef>
    </Group>
 </Workspace>
