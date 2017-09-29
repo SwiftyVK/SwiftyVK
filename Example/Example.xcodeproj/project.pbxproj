@@ -59,7 +59,6 @@
 		A2527E871BD13A5300F65412 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2527E851BD13A5300F65412 /* LaunchScreen.storyboard */; };
 		A2527EBD1BD13F7E00F65412 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527EBC1BD13F7E00F65412 /* APIWorker.swift */; };
 		A2527EBE1BD13F7E00F65412 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527EBC1BD13F7E00F65412 /* APIWorker.swift */; };
-		A2527EC31BD13FB600F65412 /* Back-iOS.png in Resources */ = {isa = PBXBuildFile; fileRef = A2527EC11BD13FB600F65412 /* Back-iOS.png */; };
 		A29B14D91D8F258F00997817 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29B14D81D8F258F00997817 /* OHHTTPStubs.framework */; };
 		A29B14DB1D8F25C700997817 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29B14DA1D8F25C700997817 /* OHHTTPStubs.framework */; };
 		A2A647E71D8D7F1900B9C2FF /* Captcha_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A647E61D8D7F1900B9C2FF /* Captcha_Tests.swift */; };
@@ -229,7 +228,6 @@
 		A2527E861BD13A5300F65412 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2527E881BD13A5300F65412 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2527EBC1BD13F7E00F65412 /* APIWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = APIWorker.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		A2527EC11BD13FB600F65412 /* Back-iOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Back-iOS.png"; path = "Example/Resources/Back-iOS.png"; sourceTree = "<group>"; };
 		A29B14D81D8F258F00997817 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/Mac/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		A29B14DA1D8F25C700997817 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		A2A647E61D8D7F1900B9C2FF /* Captcha_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Captcha_Tests.swift; sourceTree = "<group>"; };
@@ -350,7 +348,6 @@
 			isa = PBXGroup;
 			children = (
 				A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */,
-				A2527EC11BD13FB600F65412 /* Back-iOS.png */,
 				A2EB6F2D1BD1857D008E7D86 /* testAudio.mp3 */,
 				A2EB6F2E1BD1857D008E7D86 /* testDoc.rtf */,
 				A2EB6F2F1BD1857D008E7D86 /* testImage.jpg */,
@@ -652,7 +649,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2527EC31BD13FB600F65412 /* Back-iOS.png in Resources */,
 				A2EB6F341BD1857D008E7D86 /* testAudio.mp3 in Resources */,
 				A2527E871BD13A5300F65412 /* LaunchScreen.storyboard in Resources */,
 				A2527E821BD13A5300F65412 /* Main.storyboard in Resources */,
