@@ -60,7 +60,9 @@ class VKDelegateExample: VKDelegate {
     
     #elseif os(iOS)
     func vkWillPresentView() -> UIViewController {
-        return UIApplication.shared.delegate!.window!!.rootViewController!
+        return DispatchQueue.main.sync {
+            return UIApplication.shared.delegate!.window!!.rootViewController!
+        }
     }
     #endif
 }

@@ -118,7 +118,9 @@ internal struct Authorizator {
                 return false
             }
             
-            return UIApplication.shared.canOpenURL(url)
+            return DispatchQueue.main.sync {
+                return UIApplication.shared.canOpenURL(url)
+            }
         }
 
 
@@ -128,7 +130,10 @@ internal struct Authorizator {
                 return
             }
             
-            UIApplication.shared.openURL(url)
+            DispatchQueue.main.sync {
+                UIApplication.shared.openURL(url)
+            }
+            
             Thread.sleep(forTimeInterval: 1)
             startWithWeb()
         }
