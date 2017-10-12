@@ -19,7 +19,7 @@ final class AuthorizatorImpl: Authorizator {
     private let tokenParser: TokenParser
     private let vkAppProxy: VKAppProxy
     private let webPresenter: WebPresenter
-    private let cookiesHolder: CookiesHolder
+    private let cookiesHolder: CookiesHolder?
     private weak var delegate: SwiftyVKAuthorizatorDelegate?
     
     private(set) var handledToken: Token?
@@ -33,7 +33,7 @@ final class AuthorizatorImpl: Authorizator {
         tokenParser: TokenParser,
         vkAppProxy: VKAppProxy,
         webPresenter: WebPresenter,
-        cookiesHolder: CookiesHolder
+        cookiesHolder: CookiesHolder?
         ) {
         self.appId = appId
         self.delegate = delegate
@@ -105,7 +105,7 @@ final class AuthorizatorImpl: Authorizator {
     func reset(sessionId: String) -> Token? {
         return queue.sync {
             tokenStorage.removeFor(sessionId: sessionId)
-            cookiesHolder.remove(for: sessionId)
+            cookiesHolder?.remove(for: sessionId)
             return nil
         }
     }
@@ -135,14 +135,14 @@ final class AuthorizatorImpl: Authorizator {
         }
         
         do {
-            cookiesHolder.replace(for: sessionId, url: url)
+            cookiesHolder?.replace(for: sessionId, url: url)
             let tokenInfo = try webPresenter.presentWith(urlRequest: request)
             token = try makeToken(tokenInfo: tokenInfo)
-            cookiesHolder.save(for: sessionId, url: url)
+            cookiesHolder?.save(for: sessionId, url: url)
         }
         catch let error {
             guard let handledToken = handledToken else {
-                cookiesHolder.restore(for: url)
+                cookiesHolder?.restore(for: url)
                 throw error
             }
             

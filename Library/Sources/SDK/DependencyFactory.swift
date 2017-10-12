@@ -197,7 +197,7 @@ final class DependencyFactoryImpl: DependencyFactory {
             tokenParser: TokenParserImpl(),
             vkAppProxy: vkAppProxy,
             webPresenter: webPresenter,
-            cookiesHolder: cookiesHolder
+            cookiesHolder: nil
         )
     }()
     
