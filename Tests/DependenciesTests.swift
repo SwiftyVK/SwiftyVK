@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class DependencyFactoryTests: XCTestCase {
+class DependenciesTests: XCTestCase {
     
     func test_maleAuthorizator_typeIsAuthorizatorImpl() {
         // Given
@@ -101,9 +101,9 @@ class DependencyFactoryTests: XCTestCase {
     }
 }
 
-private func makeContext() -> (factory: DependencyFactoryImpl, delegate: SwiftyVKDelegateMock) {
+private func makeContext() -> (factory: DependenciesImpl, delegate: SwiftyVKDelegateMock) {
     let delegate = SwiftyVKDelegateMock()
-    let factory = DependencyFactoryImpl(appId: "123", delegate: delegate)
+    let factory = DependenciesImpl(appId: "123", delegate: delegate)
     
     return (factory, delegate)
 }

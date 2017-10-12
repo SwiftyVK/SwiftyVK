@@ -316,7 +316,7 @@
 		D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
 		D4F49D471F2E0FE50037B875 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D461F2E0FE50037B875 /* ApiError.swift */; };
 		D4F49D481F2E0FE50037B875 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D461F2E0FE50037B875 /* ApiError.swift */; };
-		D4F56CDE1F6837BC00ACC3CF /* DependencyFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F56CDD1F6837BC00ACC3CF /* DependencyFactoryTests.swift */; };
+		D4F56CDE1F6837BC00ACC3CF /* DependenciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F56CDD1F6837BC00ACC3CF /* DependenciesTests.swift */; };
 		D4F84BD11F435EEA00DA7127 /* LongPollTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD01F435EEA00DA7127 /* LongPollTask.swift */; };
 		D4F84BD21F435EEA00DA7127 /* LongPollTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD01F435EEA00DA7127 /* LongPollTask.swift */; };
 		D4F84BDD1F435F6400DA7127 /* VKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F84BD81F435F3E00DA7127 /* VKViewController.swift */; };
@@ -604,7 +604,7 @@
 		D4F49D411F2DF5B10037B875 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		D4F49D441F2E0EF60037B875 /* apiError.correct.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.correct.json; sourceTree = "<group>"; };
 		D4F49D461F2E0FE50037B875 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
-		D4F56CDD1F6837BC00ACC3CF /* DependencyFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyFactoryTests.swift; sourceTree = "<group>"; };
+		D4F56CDD1F6837BC00ACC3CF /* DependenciesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependenciesTests.swift; sourceTree = "<group>"; };
 		D4F84BD01F435EEA00DA7127 /* LongPollTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LongPollTask.swift; path = Sources/LongPoll/LongPollTask.swift; sourceTree = SOURCE_ROOT; };
 		D4F84BD31F435EFC00DA7127 /* ConnectionObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectionObserver.swift; path = Sources/Utils/ConnectionObserver.swift; sourceTree = SOURCE_ROOT; };
 		D4F84BD71F435F2B00DA7127 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = Sources/Extensions/JSON.swift; sourceTree = SOURCE_ROOT; };
@@ -679,7 +679,7 @@
 				D4AB8D921F6044190099FC42 /* LongPollTaskTests.swift */,
 				D41665411F6193BD000E6934 /* LongPollTests.swift */,
 				D41D5D961F62D0F800B4C8AF /* LongPollEventTests.swift */,
-				D4F56CDD1F6837BC00ACC3CF /* DependencyFactoryTests.swift */,
+				D4F56CDD1F6837BC00ACC3CF /* DependenciesTests.swift */,
 			);
 			name = Tests;
 			path = ../Tests;
@@ -1367,7 +1367,7 @@
 				A2AF167B1ED1CC9B00485716 /* TokenMock.swift in Sources */,
 				A23E692E1EDAEC6400AA3B3B /* URLOpenerMock.swift in Sources */,
 				D44EC0181F55DC4A00F8BB4A /* ConnectionObserverTests.swift in Sources */,
-				D4F56CDE1F6837BC00ACC3CF /* DependencyFactoryTests.swift in Sources */,
+				D4F56CDE1F6837BC00ACC3CF /* DependenciesTests.swift in Sources */,
 				A23708C81EA532B900103212 /* TaskShedulerTests.swift in Sources */,
 				A20CDD941EF667B000271276 /* CaptchaPresenterTests.swift in Sources */,
 				D44EC0161F55D50600F8BB4A /* VKNotificationCenterMock.swift in Sources */,
