@@ -2,22 +2,19 @@ import Foundation
 
 public protocol SessionsHolder: class {
     var `default`: Session { get }
-    var all: [Session] { get }
     
-    func make(config: SessionConfig) -> Session
-    func destroy(session: Session) throws
-    func markAsDefault(session: Session) throws
+    // For now SwiftyVK does not support multisession
+    // Probably, in the future it will be done
+    // If you want to use more than one session, let me know about it
+    // Maybe, you make PR to SwiftyVK ;)
+    //    func make(config: SessionConfig) -> Session
+    //    var all: [Session] { get }
+    //    func destroy(session: Session) throws
+    //    func markAsDefault(session: Session) throws
 }
 
 protocol SessionSaver: class {
     func saveState()
-}
-
-extension SessionsHolder {
-    
-    func make() -> Session {
-        return make(config: .default)
-    }
 }
 
 public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
@@ -45,6 +42,10 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
         restoreState()
         self.sessions.add(`default`)
         saveState()
+    }
+    
+    func make() -> Session {
+        return make(config: .default)
     }
     
     public func make(config: SessionConfig) -> Session {

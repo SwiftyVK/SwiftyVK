@@ -11,7 +11,7 @@ final class SessionsHolderTests: XCTestCase {
     }
     
     func test_makeNewSession() {
-        XCTAssertTrue(makeHolder().make() is SessionMock)
+        XCTAssertTrue(makeHolder().make(config: .default) is SessionMock)
     }
     
     func test_markAsDefault() {

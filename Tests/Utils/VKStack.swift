@@ -4,8 +4,8 @@ class VKStack {
     static let delegate = SwiftyVKDelegateMock()
     
     static func mock() {
-        if VK.dependenciesHolderInstanceType != DependenciesHolderMock.self {
-            VK.dependenciesHolderInstanceType = DependenciesHolderMock.self
+        if VK.dependenciesType != DependenciesHolderMock.self {
+            VK.dependenciesType = DependenciesHolderMock.self
             VK.prepareForUse(appId: "", delegate: delegate)
         }
     }    
