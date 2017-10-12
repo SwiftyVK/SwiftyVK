@@ -1,5 +1,5 @@
 protocol Dependencies:
-    DependencyHolder,
+    DependenciesHolder,
     SessionMaker,
     TaskMaker,
     AttemptMaker,
@@ -7,10 +7,9 @@ protocol Dependencies:
     WebControllerMaker,
     CaptchaControllerMaker,
     LongPollTaskMaker,
-    LongPollMaker
-{}
+    LongPollMaker { }
 
-protocol DependencyHolder: SessionsHolderHolder, AuthorizatorHolder {
+protocol DependenciesHolder: SessionsHolderHolder, AuthorizatorHolder {
     init(appId: String, delegate: SwiftyVKDelegate?)
 }
 
