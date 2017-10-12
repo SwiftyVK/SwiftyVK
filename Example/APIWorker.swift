@@ -42,28 +42,28 @@ final class APIWorker {
     }
     
     class func captcha() {
-        PrivateVKAPI.Custom.method(name: "captcha.force")
+        VK.API.Custom.method(name: "captcha.force")
             .onSuccess { print("SwiftyVK: captcha.force success \n \($0)") }
             .onError { print("SwiftyVK: captcha.force fail \n \($0)") }
             .send()
     }
     
     class func validation() {
-        PrivateVKAPI.Custom.method(name: "account.testValidation")
+        VK.API.Custom.method(name: "account.testValidation")
             .onSuccess { print("SwiftyVK: account.testValidation success \n \($0)") }
             .onError { print("SwiftyVK: account.testValidation fail \n \($0)") }
             .send()
     }
     
     class func usersGet() {
-        PrivateVKAPI.Users.get([VK.Arg.userId : "1"])
+        VK.API.Users.get([VK.Arg.userId : "1"])
             .onSuccess { print("SwiftyVK: users.get success \n \($0)") }
             .onError { print("SwiftyVK: friends.get fail \n \($0)") }
             .send()
     }
     
     class func friendsGet() {
-        PrivateVKAPI.Friends.get([.count : "1", .fields : "city,domain"])
+        VK.API.Friends.get([.count : "1", .fields : "city,domain"])
             .onSuccess { print("SwiftyVK: friends.get success \n \($0)") }
             .onError { print("SwiftyVK: friends.get fail \n \($0)") }
             .send()
@@ -73,7 +73,7 @@ final class APIWorker {
         let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "testImage", ofType: "jpg")!))
         let media = Media.image(data: data, type: .jpg)
         
-        PrivateVKAPI.Upload.Photo.toWall(media, to: .user(id: "4680178"))
+        VK.API.Upload.Photo.toWall(media, to: .user(id: "4680178"))
             .onSuccess { print("SwiftyVK: friendsGet success \n \($0)") }
             .onError { print("SwiftyVK: friendsGet fail \n \($0)")}
             .onProgress { print("\($0) \($1) of \($2)")}
