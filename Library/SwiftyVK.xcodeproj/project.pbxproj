@@ -303,6 +303,8 @@
 		D4AB8D9D1F6055290099FC42 /* longPoll.failed.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */; };
 		D4AB8D9F1F605FD20099FC42 /* OperationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB8D9E1F605FD20099FC42 /* OperationConvertible.swift */; };
 		D4AB8DA01F605FD20099FC42 /* OperationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB8D9E1F605FD20099FC42 /* OperationConvertible.swift */; };
+		D4BBFD5C1F8FC4EB009615E7 /* DependencyFactoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFD5B1F8FC4EB009615E7 /* DependencyFactoryImpl.swift */; };
+		D4BBFD5D1F8FC4EB009615E7 /* DependencyFactoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFD5B1F8FC4EB009615E7 /* DependencyFactoryImpl.swift */; };
 		D4C032AC1F51F650005AB59A /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AB1F51F650005AB59A /* IDGenerator.swift */; };
 		D4C032AD1F51F650005AB59A /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AB1F51F650005AB59A /* IDGenerator.swift */; };
 		D4C032AF1F520733005AB59A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AE1F520733005AB59A /* TaskTests.swift */; };
@@ -592,6 +594,7 @@
 		D4AB8D941F6048B50099FC42 /* longPoll.updates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = longPoll.updates.json; sourceTree = "<group>"; };
 		D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.json; sourceTree = "<group>"; };
 		D4AB8D9E1F605FD20099FC42 /* OperationConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationConvertible.swift; sourceTree = "<group>"; };
+		D4BBFD5B1F8FC4EB009615E7 /* DependencyFactoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyFactoryImpl.swift; sourceTree = "<group>"; };
 		D4C032AB1F51F650005AB59A /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		D4C032AE1F520733005AB59A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderMock.swift; sourceTree = "<group>"; };
@@ -856,6 +859,7 @@
 			isa = PBXGroup;
 			children = (
 				A2838DA21E9AA0DA00FE5BE2 /* DependencyFactory.swift */,
+				D4BBFD5B1F8FC4EB009615E7 /* DependencyFactoryImpl.swift */,
 				A24DDAE91EB73A2C002EA273 /* Logic */,
 				A2527D811BD12FD200F65412 /* Models */,
 				A2527D8D1BD12FD200F65412 /* UI */,
@@ -1450,6 +1454,7 @@
 				D4040E2E1F62C22500025E24 /* LongPollEvent.swift in Sources */,
 				A2EB6EFB1BD18394008E7D86 /* Photos.swift in Sources */,
 				A296C6451EF9963900029D7D /* SwiftyVKDelegate.swift in Sources */,
+				D4BBFD5D1F8FC4EB009615E7 /* DependencyFactoryImpl.swift in Sources */,
 				A2EB6EFC1BD18394008E7D86 /* Places.swift in Sources */,
 				D46906E91F7C07F200580651 /* CookiesStorage.swift in Sources */,
 				A2EB6EFD1BD18394008E7D86 /* Polls.swift in Sources */,
@@ -1561,6 +1566,7 @@
 				D41665481F61B52D000E6934 /* LongPollEvent.swift in Sources */,
 				D4F49D471F2E0FE50037B875 /* ApiError.swift in Sources */,
 				A2EB6ECC1BD18389008E7D86 /* Notifacations.swift in Sources */,
+				D4BBFD5C1F8FC4EB009615E7 /* DependencyFactoryImpl.swift in Sources */,
 				A2EB6ECD1BD18389008E7D86 /* Pages.swift in Sources */,
 				D46906E81F7C07F200580651 /* CookiesStorage.swift in Sources */,
 				A2EB6ECE1BD18389008E7D86 /* Photos.swift in Sources */,
