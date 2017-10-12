@@ -12,6 +12,6 @@ Pod::Spec.new do |s|
 
   s.source                  = { :git => "https://github.com/WE-St0r/SwiftyVK.git" , :tag => s.version.to_s }
   s.source_files            = "Library/Sources/**/*.*"
-  s.ios.resources           = "Library/Resources/Bundles/SwiftyVKResources_iOS.bundle"
-  s.osx.resources           = "Library/Resources/Bundles/SwiftyVKResources_OSX.bundle"
+  s.ios.resources           = "Library/Resources/Bundles/SwiftyVK_resources_iOS.bundle"
+  s.osx.resources           = "Library/Resources/Bundles/SwiftyVK_resources_OSX.bundle"
 end
