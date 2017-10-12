@@ -88,8 +88,8 @@
 		A270528F1EF834FF00C05936 /* SessionsStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A270528E1EF834FF00C05936 /* SessionsStorageTests.swift */; };
 		A28368EC1D9D742700EEBE2A /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* Attempt.swift */; };
 		A28368ED1D9D742D00EEBE2A /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28368EB1D9D742700EEBE2A /* Attempt.swift */; };
-		A2838DA31E9AA0DA00FE5BE2 /* DependencyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2838DA21E9AA0DA00FE5BE2 /* DependencyFactory.swift */; };
-		A2838DA41E9AA0DA00FE5BE2 /* DependencyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2838DA21E9AA0DA00FE5BE2 /* DependencyFactory.swift */; };
+		A2838DA31E9AA0DA00FE5BE2 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2838DA21E9AA0DA00FE5BE2 /* Dependencies.swift */; };
+		A2838DA41E9AA0DA00FE5BE2 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2838DA21E9AA0DA00FE5BE2 /* Dependencies.swift */; };
 		A29508841EBBA24B00981EC0 /* RequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29508831EBBA24B00981EC0 /* RequestConfig.swift */; };
 		A29508851EBBA24B00981EC0 /* RequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29508831EBBA24B00981EC0 /* RequestConfig.swift */; };
 		A2967E741CBBC4A700B7D48F /* Gifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2967E731CBBC4A700B7D48F /* Gifts.swift */; };
@@ -303,8 +303,8 @@
 		D4AB8D9D1F6055290099FC42 /* longPoll.failed.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */; };
 		D4AB8D9F1F605FD20099FC42 /* OperationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB8D9E1F605FD20099FC42 /* OperationConvertible.swift */; };
 		D4AB8DA01F605FD20099FC42 /* OperationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB8D9E1F605FD20099FC42 /* OperationConvertible.swift */; };
-		D4BBFD5C1F8FC4EB009615E7 /* DependencyFactoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFD5B1F8FC4EB009615E7 /* DependencyFactoryImpl.swift */; };
-		D4BBFD5D1F8FC4EB009615E7 /* DependencyFactoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFD5B1F8FC4EB009615E7 /* DependencyFactoryImpl.swift */; };
+		D4BBFD5C1F8FC4EB009615E7 /* DependenciesImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFD5B1F8FC4EB009615E7 /* DependenciesImpl.swift */; };
+		D4BBFD5D1F8FC4EB009615E7 /* DependenciesImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFD5B1F8FC4EB009615E7 /* DependenciesImpl.swift */; };
 		D4C032AC1F51F650005AB59A /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AB1F51F650005AB59A /* IDGenerator.swift */; };
 		D4C032AD1F51F650005AB59A /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AB1F51F650005AB59A /* IDGenerator.swift */; };
 		D4C032AF1F520733005AB59A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AE1F520733005AB59A /* TaskTests.swift */; };
@@ -475,7 +475,7 @@
 		A270528B1EF82DA600C05936 /* SessionsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsStorage.swift; sourceTree = "<group>"; };
 		A270528E1EF834FF00C05936 /* SessionsStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsStorageTests.swift; sourceTree = "<group>"; };
 		A28368EB1D9D742700EEBE2A /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
-		A2838DA21E9AA0DA00FE5BE2 /* DependencyFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyFactory.swift; sourceTree = "<group>"; };
+		A2838DA21E9AA0DA00FE5BE2 /* Dependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 		A29508831EBBA24B00981EC0 /* RequestConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestConfig.swift; sourceTree = "<group>"; };
 		A2967E731CBBC4A700B7D48F /* Gifts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gifts.swift; sourceTree = "<group>"; };
 		A296C6401EF9896200029D7D /* VKFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKFileManager.swift; sourceTree = "<group>"; };
@@ -594,7 +594,7 @@
 		D4AB8D941F6048B50099FC42 /* longPoll.updates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = longPoll.updates.json; sourceTree = "<group>"; };
 		D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.json; sourceTree = "<group>"; };
 		D4AB8D9E1F605FD20099FC42 /* OperationConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationConvertible.swift; sourceTree = "<group>"; };
-		D4BBFD5B1F8FC4EB009615E7 /* DependencyFactoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyFactoryImpl.swift; sourceTree = "<group>"; };
+		D4BBFD5B1F8FC4EB009615E7 /* DependenciesImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependenciesImpl.swift; sourceTree = "<group>"; };
 		D4C032AB1F51F650005AB59A /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		D4C032AE1F520733005AB59A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderMock.swift; sourceTree = "<group>"; };
@@ -858,8 +858,8 @@
 		A2527D801BD12FD200F65412 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				A2838DA21E9AA0DA00FE5BE2 /* DependencyFactory.swift */,
-				D4BBFD5B1F8FC4EB009615E7 /* DependencyFactoryImpl.swift */,
+				A2838DA21E9AA0DA00FE5BE2 /* Dependencies.swift */,
+				D4BBFD5B1F8FC4EB009615E7 /* DependenciesImpl.swift */,
 				A24DDAE91EB73A2C002EA273 /* Logic */,
 				A2527D811BD12FD200F65412 /* Models */,
 				A2527D8D1BD12FD200F65412 /* UI */,
@@ -1450,11 +1450,11 @@
 				A270528A1EF8138A00C05936 /* EncodedSession.swift in Sources */,
 				D44EC01B1F55E99A00F8BB4A /* ObservableObject.swift in Sources */,
 				D4F84BDD1F435F6400DA7127 /* VKViewController.swift in Sources */,
-				A2838DA41E9AA0DA00FE5BE2 /* DependencyFactory.swift in Sources */,
+				A2838DA41E9AA0DA00FE5BE2 /* Dependencies.swift in Sources */,
 				D4040E2E1F62C22500025E24 /* LongPollEvent.swift in Sources */,
 				A2EB6EFB1BD18394008E7D86 /* Photos.swift in Sources */,
 				A296C6451EF9963900029D7D /* SwiftyVKDelegate.swift in Sources */,
-				D4BBFD5D1F8FC4EB009615E7 /* DependencyFactoryImpl.swift in Sources */,
+				D4BBFD5D1F8FC4EB009615E7 /* DependenciesImpl.swift in Sources */,
 				A2EB6EFC1BD18394008E7D86 /* Places.swift in Sources */,
 				D46906E91F7C07F200580651 /* CookiesStorage.swift in Sources */,
 				A2EB6EFD1BD18394008E7D86 /* Polls.swift in Sources */,
@@ -1557,7 +1557,7 @@
 				A2EB6EC91BD18389008E7D86 /* Messages.swift in Sources */,
 				D4C032AC1F51F650005AB59A /* IDGenerator.swift in Sources */,
 				A24DDAE41EB737C7002EA273 /* QueryBuilder.swift in Sources */,
-				A2838DA31E9AA0DA00FE5BE2 /* DependencyFactory.swift in Sources */,
+				A2838DA31E9AA0DA00FE5BE2 /* Dependencies.swift in Sources */,
 				A2D2713C1EC4D0BA00B24D09 /* SessionsHolder.swift in Sources */,
 				D44EC01A1F55E99A00F8BB4A /* ObservableObject.swift in Sources */,
 				A22179D41EBA57AF006B71FD /* SessionConfig.swift in Sources */,
@@ -1566,7 +1566,7 @@
 				D41665481F61B52D000E6934 /* LongPollEvent.swift in Sources */,
 				D4F49D471F2E0FE50037B875 /* ApiError.swift in Sources */,
 				A2EB6ECC1BD18389008E7D86 /* Notifacations.swift in Sources */,
-				D4BBFD5C1F8FC4EB009615E7 /* DependencyFactoryImpl.swift in Sources */,
+				D4BBFD5C1F8FC4EB009615E7 /* DependenciesImpl.swift in Sources */,
 				A2EB6ECD1BD18389008E7D86 /* Pages.swift in Sources */,
 				D46906E81F7C07F200580651 /* CookiesStorage.swift in Sources */,
 				A2EB6ECE1BD18389008E7D86 /* Photos.swift in Sources */,

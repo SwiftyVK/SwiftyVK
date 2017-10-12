@@ -1,4 +1,4 @@
-protocol DependencyFactory:
+protocol Dependencies:
     DependencyHolder,
     SessionMaker,
     TaskMaker,

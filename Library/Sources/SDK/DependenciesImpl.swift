@@ -6,7 +6,7 @@
     typealias VKStoryboard = UIStoryboard
 #endif
 
-final class DependencyFactoryImpl: DependencyFactory {
+final class DependenciesImpl: Dependencies {
     
     private let appId: String
     private weak var delegate: SwiftyVKDelegate?
