@@ -37,70 +37,8 @@ final class AttemptShedulerImpl: AttemptSheduler {
             serialQueue.addOperation(operation)
         }
     }
-}
-
-private class AttemptApiQueue: OperationQueue {
     
-    private let counterQueue = DispatchQueue(label: "SwiftyVK.couterQueue")
-    private let attemptsQueue = DispatchQueue(
-        label: "SwiftyVK.serialAttemptQueue",
-        qos: .userInitiated
-    )
-    
-    private var sended = 0
-    private var waited = [Operation]()
-    var limit: AttemptLimit
-    
-    init(limit: AttemptLimit) {
-        self.limit = limit
-        
-        super.init()
-        underlyingQueue = attemptsQueue
-        
-        counterQueue.async {
-            let timer = Timer(
-                timeInterval: 1,
-                target: self,
-                selector: #selector(self.dropCounter),
-                userInfo: nil,
-                repeats: true
-            )
-            timer.tolerance = 0.01
-            RunLoop.current.add(timer, forMode: .defaultRunLoopMode)
-            RunLoop.current.run()
-        }
-    }
-    
-    override func addOperation(_ operation: Operation) {
-        attemptsQueue.async {
-            self.addOperationSync(operation)
-        }
-    }
-    
-    private func addOperationSync(_ operation: Operation) {
-        if limit.count < 1 || sended < limit.count {
-            sended += 1
-            super.addOperation(operation)
-        }
-        else {
-            waited.append(operation)
-        }
-    }
-
-    @objc
-    private func dropCounter() {
-        attemptsQueue.async(execute: dropCounterSync)
-    }
-    
-    private func dropCounterSync() {
-        guard !waited.isEmpty || sended > 0 else { return }
-        
-        self.sended = 0
-        
-        while !waited.isEmpty && sended < limit.count {
-            sended += 1
-            let op = waited.removeFirst()
-            super.addOperation(op)
-        }
+    deinit {
+        serialQueue.killTimer()
     }
 }

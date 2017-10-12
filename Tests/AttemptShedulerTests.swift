@@ -87,7 +87,7 @@ final class AttemptShedulerTests: XCTestCase {
 
 private var sheduler: AttemptShedulerImpl?
 
-private let shedulerLimit = AttemptLimit.limited(30)
+private let shedulerLimit: AttemptLimit = 30
 private let operationCount = 100
 
 private var totalRunTime: TimeInterval {

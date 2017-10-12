@@ -4,7 +4,7 @@ import Foundation
 class Atomic<Value> where Value: Equatable {
     
     private var value: Value
-    private var lock = MultiplatrormLock()
+    private var lock: Lock = MultiplatrormLock()
     
     private var willWrap: ((Value) -> ())?
     private var didWrap: ((Value) -> ())?
@@ -20,7 +20,7 @@ class Atomic<Value> where Value: Equatable {
     func wrap(_ newValue: Value) {
         guard value != newValue else { return }
         
-        lock.performCritical {
+        lock.perform {
             let oldValue = value
             willWrap?(oldValue)
             value = newValue
@@ -43,13 +43,13 @@ class Atomic<Value> where Value: Equatable {
     /// Unwrap wrapped value atomically
     /// - returns: wrapped value
     func unwrap() -> Value {
-        return lock.performCritical { value }
+        return lock.perform { value }
     }
     
     /// Perform scope with wrapped value atomically
     /// - parameter scope: closure with some work on wrapped value
     func perform(scope: (Value) throws -> ()) rethrows {
-        try lock.performCritical {
+        try lock.perform {
             try scope(value)
         }
     }
@@ -57,7 +57,7 @@ class Atomic<Value> where Value: Equatable {
     /// Perform scope and modify wrapped value atomically
     /// - parameter scope: clousure whitch modify wrapped value
     func modify(withScope scope: (Value) throws -> Value) rethrows {
-        try lock.performCritical {
+        try lock.perform {
             let oldValue = value
             let newValue = try scope(value)
             

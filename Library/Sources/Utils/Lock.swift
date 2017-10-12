@@ -6,14 +6,14 @@ protocol Lock {
 }
 
 extension Lock {
-    func performCritical<T> (scope: () throws -> (T)) rethrows -> T {
+    func perform<T> (scope: () throws -> (T)) rethrows -> T {
         lock()
         defer { unlock() }
         return try scope()
     }
 }
 
-class MultiplatrormLock {
+class MultiplatrormLock: Lock {
     private let lockRef: Lock
     
     init() {
@@ -31,12 +31,6 @@ class MultiplatrormLock {
     
     func unlock() {
         lockRef.unlock()
-    }
-    
-    func performCritical<T> (scope: () throws -> (T)) rethrows -> T {
-        lock()
-        defer { unlock() }
-        return try scope()
     }
 }
 

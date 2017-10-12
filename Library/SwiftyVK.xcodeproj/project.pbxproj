@@ -305,6 +305,8 @@
 		D4AB8DA01F605FD20099FC42 /* OperationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB8D9E1F605FD20099FC42 /* OperationConvertible.swift */; };
 		D4BBFD5C1F8FC4EB009615E7 /* DependenciesImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFD5B1F8FC4EB009615E7 /* DependenciesImpl.swift */; };
 		D4BBFD5D1F8FC4EB009615E7 /* DependenciesImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFD5B1F8FC4EB009615E7 /* DependenciesImpl.swift */; };
+		D4BBFD741F8FE590009615E7 /* AttemptApiQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFD731F8FE590009615E7 /* AttemptApiQueue.swift */; };
+		D4BBFD751F8FE590009615E7 /* AttemptApiQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFD731F8FE590009615E7 /* AttemptApiQueue.swift */; };
 		D4C032AC1F51F650005AB59A /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AB1F51F650005AB59A /* IDGenerator.swift */; };
 		D4C032AD1F51F650005AB59A /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AB1F51F650005AB59A /* IDGenerator.swift */; };
 		D4C032AF1F520733005AB59A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AE1F520733005AB59A /* TaskTests.swift */; };
@@ -595,6 +597,7 @@
 		D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.json; sourceTree = "<group>"; };
 		D4AB8D9E1F605FD20099FC42 /* OperationConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationConvertible.swift; sourceTree = "<group>"; };
 		D4BBFD5B1F8FC4EB009615E7 /* DependenciesImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependenciesImpl.swift; sourceTree = "<group>"; };
+		D4BBFD731F8FE590009615E7 /* AttemptApiQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptApiQueue.swift; sourceTree = "<group>"; };
 		D4C032AB1F51F650005AB59A /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		D4C032AE1F520733005AB59A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderMock.swift; sourceTree = "<group>"; };
@@ -729,6 +732,7 @@
 			children = (
 				A29F1CD31E95674A00BE5369 /* TaskSheduler.swift */,
 				A24A29481E96B2F8006152E6 /* AttemptSheduler.swift */,
+				D4BBFD731F8FE590009615E7 /* AttemptApiQueue.swift */,
 			);
 			name = Shedulers;
 			path = Request;
@@ -1424,6 +1428,7 @@
 				D46906EC1F7C08A300580651 /* CookiesHolder.swift in Sources */,
 				D4F84BE01F43608200DA7127 /* JSON.swift in Sources */,
 				D4AB8DA01F605FD20099FC42 /* OperationConvertible.swift in Sources */,
+				D4BBFD751F8FE590009615E7 /* AttemptApiQueue.swift in Sources */,
 				A2AF16741ED19AEB00485716 /* Authorizator.swift in Sources */,
 				D47E92D11F572E0A00F9522A /* OneVariationsMethod.swift in Sources */,
 				A2EB6EF31BD18394008E7D86 /* Friends.swift in Sources */,
@@ -1536,6 +1541,7 @@
 				D46906EB1F7C08A300580651 /* CookiesHolder.swift in Sources */,
 				A24A29491E96B2F8006152E6 /* AttemptSheduler.swift in Sources */,
 				D4AB8D9F1F605FD20099FC42 /* OperationConvertible.swift in Sources */,
+				D4BBFD741F8FE590009615E7 /* AttemptApiQueue.swift in Sources */,
 				A2EB6EC21BD18389008E7D86 /* Board.swift in Sources */,
 				D47E92D01F572E0A00F9522A /* OneVariationsMethod.swift in Sources */,
 				A217DAA81E9924DE00EA1430 /* APIMethod.swift in Sources */,
