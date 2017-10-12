@@ -29,7 +29,7 @@ class CustomMethodTests: XCTestCase {
         // When
         let parameters = PrivateVKAPI.Custom.execute(code: "code").toRequest().type.parameters
         // Then
-        XCTAssertEqual(parameters?[VK.Arg.code] ?? "", "code")
+        XCTAssertEqual(parameters?[Parameter.code] ?? "", "code")
     }
     
     func test_parameters_isEmpty() {
@@ -41,10 +41,10 @@ class CustomMethodTests: XCTestCase {
     
     func test_parameters_equalsToMethodParameters() {
         // When
-        let parameter = [VK.Arg.userId: "1"]
+        let parameter = [Parameter.userId: "1"]
         let parameters = PrivateVKAPI.Custom.method(name: "test", parameters: parameter).toRequest().type.parameters
         // Then
-        XCTAssertEqual(parameters?[VK.Arg.userId] ?? "", "1")
+        XCTAssertEqual(parameters?[Parameter.userId] ?? "", "1")
     }
     
     func test_callSessionSend_whenMethodSended() {

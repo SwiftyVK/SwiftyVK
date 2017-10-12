@@ -20,10 +20,10 @@ class ApiMethodTests: XCTestCase {
     
     func test_parameters_equalsToMethodParameters() {
         // When
-        let parameter = [VK.Arg.userId: "1"]
+        let parameter = [Parameter.userId: "1"]
         let parameters = PrivateVKAPI.Users.get(parameter).toRequest().type.parameters
         // Then
-        XCTAssertEqual(parameters?[VK.Arg.userId] ?? "", "1")
+        XCTAssertEqual(parameters?[Parameter.userId] ?? "", "1")
     }
     
     func test_callSessionSend_whenMethodSended() {

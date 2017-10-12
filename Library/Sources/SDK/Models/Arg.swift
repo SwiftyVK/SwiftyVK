@@ -1,15 +1,14 @@
-public typealias Parameters = [VK.Arg: String?]
+public typealias Parameters = [Parameter: String?]
 
-public extension Dictionary where Key == VK.Arg, Value == String? {
-    public static var empty: [VK.Arg: String?] {
+public extension Dictionary where Key == Parameter, Value == String? {
+    public static var empty: [Parameter: String?] {
         return [:]
     }
 }
 
 // swiftlint:disable type_body_length identifier_name
-extension VK {
   ///Parameters for methods VK API
-  public enum Arg: String, Hashable {
+  public enum Parameter: String, Hashable {
     case userIDs = "user_ids"
     case fields
     case nameCase = "name_case"
@@ -334,8 +333,7 @@ extension VK {
       return self.rawValue.hashValue
     }
   }
-}
 
-public func == (lhs: VK.Arg, rhs: VK.Arg) -> Bool {
+public func == (lhs: Parameter, rhs: Parameter) -> Bool {
   return lhs.rawValue == rhs.rawValue
 }

@@ -56,7 +56,7 @@ final class APIWorker {
     }
     
     class func usersGet() {
-        VK.API.Users.get([VK.Arg.userId : "1"])
+        VK.API.Users.get([Parameter.userId : "1"])
             .onSuccess { print("SwiftyVK: users.get success \n \($0)") }
             .onError { print("SwiftyVK: friends.get fail \n \($0)") }
             .send()

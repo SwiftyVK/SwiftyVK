@@ -47,7 +47,7 @@ final class QueryBuilderTests: XCTestCase {
         let sample = parameters(from: builder.makeQuery(parameters: [.userId: "test"]))
         
         // Then
-        XCTAssertEqual(sample[VK.Arg.userId.rawValue], "test")
+        XCTAssertEqual(sample[Parameter.userId.rawValue], "test")
     }
     
     func test_ignoreNullParameter() {
@@ -55,7 +55,7 @@ final class QueryBuilderTests: XCTestCase {
         let sample = parameters(from: builder.makeQuery(parameters: [.userId: nil]))
         
         // Then
-        XCTAssertFalse(sample.keys.contains(VK.Arg.userId.rawValue))
+        XCTAssertFalse(sample.keys.contains(Parameter.userId.rawValue))
     }
     
     func test_addCaptchaParameters() {
