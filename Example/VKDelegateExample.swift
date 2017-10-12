@@ -14,7 +14,7 @@ class VKDelegateExample: SwiftyVKDelegate {
     let scopes: Scopes = [.messages,.offline,.friends,.wall,.photos,.audio,.video,.docs,.market,.email]
     
     init() {
-        VK.prepareForUse(appId: appId, delegate: self)
+        VK.setUp(appId: appId, delegate: self)
     }
 
     func vkNeedToPresent(viewController: VKViewController) {

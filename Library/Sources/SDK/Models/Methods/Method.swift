@@ -7,7 +7,7 @@ public extension SendableMethod {
     @discardableResult
     func send() -> Task {
         guard let session = VK.sessions?.default else {
-            fatalError("You must call VK.prepareForUse function to start using SwiftyVK!")
+            fatalError("You must call VK.setUp function to start using SwiftyVK!")
         }
         
         return send(in: session)

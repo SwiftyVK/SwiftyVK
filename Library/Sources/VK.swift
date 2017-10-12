@@ -1,5 +1,5 @@
 public final class VK {
-    public static func prepareForUse(appId: String, delegate: SwiftyVKDelegate) {
+    public static func setUp(appId: String, delegate: SwiftyVKDelegate) {
         guard dependencies == nil else {
             return
         }

@@ -6,7 +6,7 @@ class VKStack {
     static func mock() {
         if VK.dependenciesType != DependenciesHolderMock.self {
             VK.dependenciesType = DependenciesHolderMock.self
-            VK.prepareForUse(appId: "", delegate: delegate)
+            VK.setUp(appId: "", delegate: delegate)
         }
     }    
 }
