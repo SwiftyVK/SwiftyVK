@@ -1,4 +1,4 @@
-public extension VKAPI {
+public extension PrivateVKAPI {
     public enum Places: APIMethod {
         case add(Parameters)
         case getById(Parameters)

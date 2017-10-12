@@ -1,4 +1,4 @@
-public extension VKAPI {
+public extension PrivateVKAPI {
     public enum Wall: APIMethod {
         case get(Parameters)
         case search(Parameters)

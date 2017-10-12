@@ -1,4 +1,4 @@
-public extension VKAPI {
+public extension PrivateVKAPI {
     public enum Video: APIMethod {
         case get(Parameters)
         case edit(Parameters)

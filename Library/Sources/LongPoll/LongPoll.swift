@@ -129,7 +129,7 @@ public final class LongPollImpl: LongPoll {
         
         var result: (server: String, lpKey: String, ts: String)?
         
-        VKAPI.Messages.getLongPollServer([.useSsl: "0", .needPts: "1", .lpVersion: "2"])
+        PrivateVKAPI.Messages.getLongPollServer([.useSsl: "0", .needPts: "1", .lpVersion: "2"])
             .configure(with: Config(attemptsMaxLimit: 1, handleErrors: false))
             .onSuccess { data in
                 defer { semaphore.signal() }

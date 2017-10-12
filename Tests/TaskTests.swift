@@ -196,7 +196,7 @@ class TaskTests: XCTestCase {
         var sessionSheduleCallCount = 0
         let context = makeContext(
             configure: { $0.onFinish(.emptySuccess) },
-            nextRequest: VKAPI.Users.get(.empty)
+            nextRequest: PrivateVKAPI.Users.get(.empty)
         )
         
         context.session.onShedule = { _ in

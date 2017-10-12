@@ -1,4 +1,4 @@
-public extension VKAPI {
+public extension PrivateVKAPI {
     public enum Friends: APIMethod {
         case get(Parameters)
         case getOnline(Parameters)

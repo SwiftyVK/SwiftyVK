@@ -1,4 +1,4 @@
-public extension VKAPI {
+public extension PrivateVKAPI {
     public struct Custom {
         public static func remote(method: String) -> CustomMethod {
             return self.method(name: "execute.\(method)")

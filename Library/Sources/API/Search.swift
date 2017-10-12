@@ -1,4 +1,4 @@
-public extension VKAPI {
+public extension PrivateVKAPI {
     public enum Search: APIMethod {
         case getHints(Parameters)
     }

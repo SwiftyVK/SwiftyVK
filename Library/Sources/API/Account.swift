@@ -1,4 +1,4 @@
-public extension VKAPI {
+public extension PrivateVKAPI {
     public enum Account: APIMethod {
         case getCounters(Parameters)
         case setNameInMenu(Parameters)

@@ -1,4 +1,4 @@
-public extension VKAPI {
+public extension PrivateVKAPI {
     public enum Messages: APIMethod {
         case get(Parameters)
         case getDialogs(Parameters)

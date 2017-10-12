@@ -14,7 +14,7 @@ public enum UploadTarget {
     }
 }
 
-extension VKAPI {
+extension PrivateVKAPI {
     //Metods to upload Mediafiles
     public struct Upload {
         ///Methods to upload photo
@@ -28,7 +28,7 @@ extension VKAPI {
                 location: CLLocationCoordinate2D? = nil
                 ) -> Methods.SuccessableFailableProgressableConfigurable {
                 
-                let method = VKAPI.Photos.getUploadServer([
+                let method = PrivateVKAPI.Photos.getUploadServer([
                     .albumId: albumId,
                     .userId: target.decoded.userId,
                     .groupId: target.decoded.groupId
@@ -49,7 +49,7 @@ extension VKAPI {
                     .chain {
                         let response = try JSON(data: $0)
                         
-                        return VKAPI.Photos.save([
+                        return PrivateVKAPI.Photos.save([
                             .albumId: albumId,
                             .userId: target.decoded.userId,
                             .groupId: target.decoded.groupId,
@@ -69,7 +69,7 @@ extension VKAPI {
             /// Upload photo for using in messages.send method
             public static func toMessage(_ media: Media) -> Methods.SuccessableFailableProgressableConfigurable {
                 
-                let method = VKAPI.Photos.getMessagesUploadServer(.empty)
+                let method = PrivateVKAPI.Photos.getMessagesUploadServer(.empty)
                     .chain {
                         let response = try JSON(data: $0)
                         
@@ -86,7 +86,7 @@ extension VKAPI {
                     .chain {
                         let response = try JSON(data: $0)
                         
-                        return VKAPI.Photos.saveMessagesPhoto([
+                        return PrivateVKAPI.Photos.saveMessagesPhoto([
                             .photo: response.forcedString("photo"),
                             .server: response.forcedInt("server").toString(),
                             .hash: response.forcedString("hash")
@@ -103,7 +103,7 @@ extension VKAPI {
                 groupId: String
                 ) -> Methods.SuccessableFailableProgressableConfigurable {
                 
-                let method = VKAPI.Photos.getMarketUploadServer([.groupId: groupId])
+                let method = PrivateVKAPI.Photos.getMarketUploadServer([.groupId: groupId])
                     .chain {
                         let response = try JSON(data: $0)
                         
@@ -120,7 +120,7 @@ extension VKAPI {
                     .chain {
                         let response = try JSON(data: $0)
                         
-                        return VKAPI.Photos.saveMarketPhoto([
+                        return PrivateVKAPI.Photos.saveMarketPhoto([
                             .groupId: groupId,
                             .photo: response.forcedString("photo"),
                             .server: response.forcedInt("server").toString(),
@@ -143,7 +143,7 @@ extension VKAPI {
                 groupId: String
                 ) -> Methods.SuccessableFailableProgressableConfigurable {
                 
-                let method = VKAPI.Photos.getMarketAlbumUploadServer([.groupId: groupId])
+                let method = PrivateVKAPI.Photos.getMarketAlbumUploadServer([.groupId: groupId])
                     .chain {
                         let response = try JSON(data: $0)
                         
@@ -160,7 +160,7 @@ extension VKAPI {
                     .chain {
                         let response = try JSON(data: $0)
                         
-                        return VKAPI.Photos.saveMarketAlbumPhoto([
+                        return PrivateVKAPI.Photos.saveMarketAlbumPhoto([
                             .groupId: groupId,
                             .photo: response.forcedString("photo"),
                             .server: response.forcedInt("server").toString(),
@@ -177,7 +177,7 @@ extension VKAPI {
                 to target: UploadTarget
                 ) -> Methods.SuccessableFailableProgressableConfigurable {
                 
-                let method = VKAPI.Photos.getWallUploadServer([
+                let method = PrivateVKAPI.Photos.getWallUploadServer([
                     .userId: target.decoded.userId,
                     .groupId: target.decoded.groupId
                     ])
@@ -197,7 +197,7 @@ extension VKAPI {
                     .chain {
                         let response = try JSON(data: $0)
                         
-                        return VKAPI.Photos.saveWallPhoto([
+                        return PrivateVKAPI.Photos.saveWallPhoto([
                             .userId: target.decoded.userId,
                             .groupId: target.decoded.groupId,
                             .photo: response.forcedString("photo"),
@@ -216,7 +216,7 @@ extension VKAPI {
             savingParams: Parameters = .empty
             ) -> Methods.SuccessableFailableProgressableConfigurable {
             
-            let method = VKAPI.Video.save(savingParams)
+            let method = PrivateVKAPI.Video.save(savingParams)
                 .chain {
                     let response = try JSON(data: $0)
                     
@@ -241,7 +241,7 @@ extension VKAPI {
             title: String? = nil
             ) -> Methods.SuccessableFailableProgressableConfigurable {
             
-            let method = VKAPI.Audio.getUploadServer(.empty)
+            let method = PrivateVKAPI.Audio.getUploadServer(.empty)
                 .chain {
                     let response = try JSON(data: $0)
 
@@ -258,7 +258,7 @@ extension VKAPI {
                 .chain {
                     let response = try JSON(data: $0)
 
-                    return VKAPI.Audio.save([
+                    return PrivateVKAPI.Audio.save([
                         .audio: response.forcedString("audio"),
                         .server: response.forcedInt("server").toString(),
                         .hash: response.forcedString("hash"),
@@ -278,7 +278,7 @@ extension VKAPI {
             tags: String? = nil
             ) -> Methods.SuccessableFailableProgressableConfigurable {
             
-            let method = VKAPI.Docs.getUploadServer([.groupId: groupId])
+            let method = PrivateVKAPI.Docs.getUploadServer([.groupId: groupId])
                 .chain {
                     let response = try JSON(data: $0)
                     
@@ -295,7 +295,7 @@ extension VKAPI {
                 .chain {
                     let response = try JSON(data: $0)
                     
-                    return VKAPI.Docs.save([
+                    return PrivateVKAPI.Docs.save([
                         .file: response.forcedString("file"),
                         .title: title,
                         .tags: tags
