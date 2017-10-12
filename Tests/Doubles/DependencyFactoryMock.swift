@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyVK
 
-final class DependencyHolderMock: DependencyHolder {
+final class DependenciesHolderMock: DependenciesHolder {
     
     init(appId: String, delegate: SwiftyVKDelegate?) {}
     
