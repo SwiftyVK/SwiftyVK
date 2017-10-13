@@ -35,7 +35,7 @@ final class TaskShedulerTests: XCTestCase {
         for _ in 0..<operationCount { group.enter() }
         // When
         let samples = sheduleSamples(count: operationCount, concurrent: false, completion: { group.leave() })
-        _ = group.wait(timeout: .now() + totalRunTime * 10)
+        _ = group.wait(timeout: .now() + totalRunTime * 2)
         // Then
         XCTAssertEqual(samples.filter { $0.isFinished }.count, operationCount,
             "All operations should be executed"
@@ -59,24 +59,32 @@ final class TaskShedulerTests: XCTestCase {
             "All concurrent operations should be executed"
         )
         
-        _ = group.wait(timeout: .now() + totalRunTime * 10)
+        _ = group.wait(timeout: .now() + totalRunTime * 2)
 
         XCTAssertEqual(serial.filter { $0.isFinished }.count, operationCount,
             "All serial operations should be executed"
         )
+    }
+    
+    override func setUp() {
+        sheduler = TaskShedulerImpl()
+    }
+    
+    override func tearDown() {
+        sheduler = nil
     }
 }
 
 private var sheduler: TaskShedulerImpl?
 
 private let operationCount = 100
+
 private var totalRunTime: TimeInterval {
     return TaskMock().runTime*Double(operationCount)
 }
 
 private func sheduleSamples(count: Int, concurrent: Bool, completion: (() -> ())? = nil) -> [TaskMock] {
     let samples = (0..<count).map { _ in TaskMock(completion: completion) }
-    sheduler = TaskShedulerImpl()
     samples.forEach { sheduler?.shedule(task: $0, concurrent: concurrent) }
     return samples
 }
