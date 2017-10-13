@@ -35,7 +35,7 @@ final class TaskShedulerTests: XCTestCase {
         for _ in 0..<operationCount { group.enter() }
         // When
         let samples = sheduleSamples(count: operationCount, concurrent: false, completion: { group.leave() })
-        _ = group.wait(timeout: .now() + totalRunTime * 2)
+        _ = group.wait(timeout: .now() + totalRunTime * 10)
         // Then
         XCTAssertEqual(samples.filter { $0.isFinished }.count, operationCount,
             "All operations should be executed"
@@ -59,7 +59,7 @@ final class TaskShedulerTests: XCTestCase {
             "All concurrent operations should be executed"
         )
         
-        _ = group.wait(timeout: .now() + totalRunTime * 2)
+        _ = group.wait(timeout: .now() + totalRunTime * 10)
 
         XCTAssertEqual(serial.filter { $0.isFinished }.count, operationCount,
             "All serial operations should be executed"
