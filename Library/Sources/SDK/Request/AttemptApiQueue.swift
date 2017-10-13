@@ -3,6 +3,7 @@ class AttemptApiQueue: OperationQueue {
     var limit: AttemptLimit
     
     private let counterQueue = DispatchQueue(label: "SwiftyVK.counterQueue", qos: .userInitiated)
+    private let gateQueue = DispatchQueue(label: "SwiftyVK.attemptApi.gateQueue", qos: .userInitiated)
     
     private var sended = 0
     private var waited = [Operation]()
@@ -28,7 +29,6 @@ class AttemptApiQueue: OperationQueue {
             userInfo: nil,
             repeats: true
         )
-        timer.tolerance = 0.001
         
         self.timer = timer
         
@@ -39,7 +39,7 @@ class AttemptApiQueue: OperationQueue {
     }
     
     override func addOperation(_ operation: Operation) {
-        DispatchQueue.global().async { [weak self] in
+        gateQueue.async { [weak self] in
             self?.lock.perform { self?._addOperation(operation) }
         }
     }
@@ -60,8 +60,8 @@ class AttemptApiQueue: OperationQueue {
     
     @objc
     private func dropCounter() {
-        DispatchQueue.global().async { [weak self] in
-            _ = self?.lock.perform { self?._dropCounter }
+        gateQueue.async { [weak self] in
+            _ = self?.lock.perform { self?._dropCounter() }
         }
     }
     

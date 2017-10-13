@@ -9,7 +9,7 @@ final class AttemptShedulerTests: XCTestCase {
         for _ in 0..<operationCount { group.enter() }
         // When
         let samples = sheduleSamples(count: operationCount, concurrent: true, completion: { group.leave() })
-        _ = group.wait(timeout: .now() + totalRunTime)
+        _ = group.wait(timeout: .now() + totalAsyncTime)
         // Then
         XCTAssertEqual(samples.map {$0.isFinished}, (0..<operationCount).map { _ in true },
             "All concurrent operations should be executed"
@@ -32,7 +32,7 @@ final class AttemptShedulerTests: XCTestCase {
         for _ in 0..<operationCount { group.enter() }
         // When
         let samples = sheduleSamples(count: operationCount, concurrent: false, completion: { group.leave() })
-        _ = group.wait(timeout: .now() + totalRunTime * 10)
+        _ = group.wait(timeout: .now() + totalSyncTime * 2)
         // Then
         XCTAssertEqual(samples.filter { $0.isFinished }.count, operationCount,
             "All operations should be executed"
@@ -56,11 +56,13 @@ final class AttemptShedulerTests: XCTestCase {
             "All concurrent operations should be executed"
         )
         
-        _ = group.wait(timeout: .now() + totalRunTime * 10)
+        _ = group.wait(timeout: .now() + totalSyncTime * 2)
 
         XCTAssertEqual(serial.filter { $0.isFinished }.count, operationCount,
             "All serial operations should be executed"
         )
+        
+        sheduler?.setLimit(to: 0)
     }
     
     func test_executeOpration_whenShedulerLimitUpdated() {
@@ -80,6 +82,10 @@ final class AttemptShedulerTests: XCTestCase {
         )
     }
     
+    override func setUp() {
+        sheduler = AttemptShedulerImpl(limit: shedulerLimit)
+    }
+    
     override func tearDown() {
         sheduler = nil
     }
@@ -90,13 +96,16 @@ private var sheduler: AttemptShedulerImpl?
 private let shedulerLimit: AttemptLimit = 30
 private let operationCount = 100
 
-private var totalRunTime: TimeInterval {
+private var totalAsyncTime: TimeInterval {
     return AttemptMock().runTime * Double(operationCount)
+}
+
+private var totalSyncTime: TimeInterval {
+    return TimeInterval(operationCount / shedulerLimit.count)
 }
 
 private func sheduleSamples(count: Int, concurrent: Bool, completion: (() -> ())? = nil) -> [AttemptMock] {
     let samples = (0..<count).map { _ in AttemptMock(completion: completion) }
-    sheduler = AttemptShedulerImpl(limit: shedulerLimit)
     samples.forEach { sheduler?.shedule(attempt: $0, concurrent: concurrent) }
     return samples
 }

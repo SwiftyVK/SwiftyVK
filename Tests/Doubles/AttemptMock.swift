@@ -2,15 +2,7 @@
 
 final class AttemptMock: Operation, Attempt {
     
-    private var isReallyFinished = false {
-        willSet { willChangeValue(forKey: "isFinished") }
-        didSet { didChangeValue(forKey: "isFinished") }
-    }
     var runTime = 0.01
-    
-    override var isFinished: Bool {
-        return isReallyFinished
-    }
     
     private var completion: (() -> ())?
     
@@ -38,9 +30,7 @@ final class AttemptMock: Operation, Attempt {
     }
     
     override func main() {
-        DispatchQueue.global().asyncAfter(deadline: .now() + runTime) { [weak self] in
-            self?.isReallyFinished = true
-            self?.completion?()
-        }
+        Thread.sleep(forTimeInterval: runTime)
+        completion?()
     }
 }
