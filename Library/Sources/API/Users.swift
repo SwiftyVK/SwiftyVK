@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Users: APIMethod {
         case get(Parameters)
         case getFollowers(Parameters)

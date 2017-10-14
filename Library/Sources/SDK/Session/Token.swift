@@ -36,7 +36,7 @@ class TokenImpl: NSObject, Token {
         switch expires {
         case .never:
             aCoder.encode("never", forKey: "expireCase")
-        case.during(let created, let expires):
+        case let .during(created, expires):
             aCoder.encode("during", forKey: "expireCase")
             aCoder.encode(created, forKey: "crated")
             aCoder.encode(expires, forKey: "expires")
@@ -85,7 +85,7 @@ private enum Expires {
         switch self {
         case .never:
             return false
-        case .during(let created, let expires):
+        case let .during(created, expires):
             let deadline = Date(timeIntervalSince1970: created).addingTimeInterval(expires)
             return Date() > deadline
         }

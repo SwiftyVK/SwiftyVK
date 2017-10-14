@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Groups: APIMethod {
         case addCallbackServer(Parameters)
         case addLink(Parameters)

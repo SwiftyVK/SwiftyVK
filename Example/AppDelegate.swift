@@ -29,7 +29,7 @@ var vkDelegateReference : SwiftyVKDelegate?
             return true
         }
     }
-#elseif os(OSX)
+#elseif os(macOS)
     import Cocoa
     
     @NSApplicationMain

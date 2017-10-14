@@ -30,7 +30,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         var urlRequest: URLRequest
         
         switch type {
-        case .api(let method, let parameters):
+        case let .api( method, parameters):
             urlRequest = try make(
                 from: method,
                 parameters: parameters,
@@ -40,10 +40,10 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
             )
             
             urlRequest.timeoutInterval = config.attemptTimeout
-        case .upload(let url, let media, let partType):
+        case let .upload(url, media, partType):
             urlRequest = try make(from: media, url: url, partType: partType)
             urlRequest.timeoutInterval = media.reduce(0.0) { $0 + Double($1.data.count) } * 0.001
-        case .url(let url):
+        case let .url(url):
             urlRequest = try make(from: url)
             urlRequest.timeoutInterval = config.attemptTimeout
 

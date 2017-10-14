@@ -1,4 +1,4 @@
-#if os(OSX)
+#if os(macOS)
     import Cocoa
     typealias VKStoryboard = NSStoryboard
 #elseif os(iOS)
@@ -151,7 +151,9 @@ final class DependenciesImpl: Dependencies {
         #if os(iOS)
             webController = storyboard().instantiateViewController(withIdentifier: "Web") as? WebControllerIOS
         #elseif os(macOS)
-            webController = storyboard().instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Web")) as? WebControllerMacOS
+            webController = storyboard().instantiateController(
+                withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Web")
+                ) as? WebControllerMacOS
         #endif
         
         guard let controller = webController as? VKViewController else {
@@ -169,9 +171,13 @@ final class DependenciesImpl: Dependencies {
         var captchaController: CaptchaController?
         
         #if os(iOS)
-            captchaController = storyboard().instantiateViewController(withIdentifier: "Captcha") as? CaptchaControllerIOS
+            captchaController = storyboard().instantiateViewController(
+                withIdentifier: "Captcha"
+                ) as? CaptchaControllerIOS
         #elseif os(macOS)
-            captchaController = storyboard().instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Captcha")) as? CaptchaControllerMacOS
+            captchaController = storyboard().instantiateController(
+                withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Captcha")
+                ) as? CaptchaControllerMacOS
         #endif
         
         guard let controller = captchaController as? VKViewController else {
@@ -186,7 +192,7 @@ final class DependenciesImpl: Dependencies {
     }
     
     func storyboard() -> VKStoryboard {
-        #if os(OSX)
+        #if os(macOS)
             let name = NSStoryboard.Name(rawValue: Resources.withSuffix("Storyboard"))
         #elseif os(iOS)
             let name = Resources.withSuffix("Storyboard")

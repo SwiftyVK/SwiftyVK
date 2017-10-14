@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Photos: APIMethod {
         case confirmTag(Parameters)
         case copy(Parameters)

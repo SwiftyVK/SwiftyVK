@@ -2,13 +2,13 @@ import Foundation
 
 public protocol APIMethod: Method {}
 
-public extension APIMethod {
+extension APIMethod {
     public func toRequest() -> Request {
         return Request(type: .api(method: method, parameters: parameters))
     }
 }
 
-private extension APIMethod {
+extension APIMethod {
     var group: String {
         return String(describing: type(of: self)).lowercased()
     }

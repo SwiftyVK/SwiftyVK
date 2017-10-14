@@ -59,7 +59,11 @@ final class WebPresenterImpl: WebPresenter {
                     guard let strongSelf = self else { return }
                     
                     do {
-                        let handledResult = try strongSelf.handle(result: result, fails: fails, originalPath: originalPath)
+                        let handledResult = try strongSelf.handle(
+                            result: result,
+                            fails: fails,
+                            originalPath: originalPath
+                        )
                         
                         switch handledResult {
                         case let .response(value):

@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Database: APIMethod {
         case getChairs(Parameters)
         case getCities(Parameters)

@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Gifts: APIMethod {
         case get(Parameters)
     }

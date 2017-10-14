@@ -4,7 +4,7 @@ private class ResourceTestClass {}
 
 struct Resources {
     private static let pathSuffix: String = {
-        #if os(OSX)
+        #if os(macOS)
             return "_macOS"
         #elseif os(iOS)
             return "_iOS"

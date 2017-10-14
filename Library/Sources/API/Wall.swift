@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Wall: APIMethod {
         case createComment(Parameters)
         case delete(Parameters)

@@ -14,6 +14,7 @@ public enum UploadTarget {
     }
 }
 
+// swiftlint:disable next nesting
 extension PrivateVKAPI {
     //Metods to upload Mediafiles
     public struct Upload {

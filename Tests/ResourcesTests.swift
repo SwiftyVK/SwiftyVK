@@ -8,7 +8,7 @@ class ResourcesTests: XCTestCase {
         // When
         let path = Resources.withSuffix("test")
         // Then
-        #if os(OSX)
+        #if os(macOS)
             XCTAssertEqual(path, "test_macOS")
         #elseif os(iOS)
             XCTAssertEqual(path, "test_iOS")

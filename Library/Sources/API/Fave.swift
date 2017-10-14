@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Fave: APIMethod {
         case addGroup(Parameters)
         case addLink(Parameters)

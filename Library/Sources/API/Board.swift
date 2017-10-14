@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Board: APIMethod {
         case addTopic(Parameters)
         case closeTopic(Parameters)

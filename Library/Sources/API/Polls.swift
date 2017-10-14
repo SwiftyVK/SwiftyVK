@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Polls: APIMethod {
         case addVote(Parameters)
         case create(Parameters)

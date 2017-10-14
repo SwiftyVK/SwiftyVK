@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Likes: APIMethod {
         case add(Parameters)
         case delete(Parameters)

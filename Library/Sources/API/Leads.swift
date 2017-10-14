@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Leads: APIMethod {
         case checkUser(Parameters)
         case complete(Parameters)

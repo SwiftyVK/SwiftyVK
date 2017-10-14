@@ -2,6 +2,6 @@ public struct PrivateVKAPI {
     private init() {}
 }
 
-public extension VK {
+extension VK {
     public typealias API = PrivateVKAPI
 }

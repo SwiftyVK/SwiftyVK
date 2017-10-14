@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Stats: APIMethod {
         case get(Parameters)
         case getPostReach(Parameters)

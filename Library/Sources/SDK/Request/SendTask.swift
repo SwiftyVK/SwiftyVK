@@ -59,8 +59,18 @@ internal final class SendTask: Operation {
             let urlRequest = UrlFabric.createWith(config: config)
             self.task = session.dataTask(with: urlRequest, completionHandler: completeon)
             
-            task?.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived), options: .new, context: nil)
-            task?.addObserver(self, forKeyPath: #keyPath(URLSessionTask.countOfBytesSent), options: .new, context: nil)
+            task?.addObserver(
+                self,
+                forKeyPath: #keyPath(URLSessionTask.countOfBytesReceived),
+                options: .new,
+                context: nil
+            )
+            task?.addObserver(
+                self,
+                forKeyPath: #keyPath(URLSessionTask.countOfBytesSent),
+                options: .new,
+                context: nil
+            )
             
             task?.resume()
         }
@@ -68,7 +78,12 @@ internal final class SendTask: Operation {
         semaphore.wait()
     }
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(
+        forKeyPath keyPath: String?,
+        of object: Any?,
+        change: [NSKeyValueChangeKey: Any]?,
+        context: UnsafeMutableRawPointer?
+        ) {
         guard let keyPath = keyPath else { return }
         guard let task = task else { return }
 

@@ -1,4 +1,4 @@
-#if os(OSX)
+#if os(macOS)
     import Cocoa
 #elseif os(iOS)
     import UIKit
@@ -9,7 +9,7 @@ protocol URLOpener {
     func openURL(_ url: URL) -> Bool
 }
 
-#if os(OSX)
+#if os(macOS)
     final class URLOpenerMacOS: URLOpener {
         
         func canOpenURL(_ url: URL) -> Bool {

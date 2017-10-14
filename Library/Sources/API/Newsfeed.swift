@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum NewsFeed: APIMethod {
         case addBan(Parameters)
         case deleteBan(Parameters)

@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Market: APIMethod {
         case searchadd(Parameters)
         case addAlbum(Parameters)

@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Friends: APIMethod {
         case add(Parameters)
         case addList(Parameters)

@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Ads: APIMethod {
         case addOfficeUsers(Parameters)
         case checkLink(Parameters)

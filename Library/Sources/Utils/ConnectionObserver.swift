@@ -1,9 +1,7 @@
-import Foundation
-
-#if os(iOS)
-    import UIKit
-#elseif os(OSX)
+#if os(macOS)
     import Cocoa
+#elseif os(iOS)
+    import UIKit
 #endif
 
 protocol ConnectionObserver {

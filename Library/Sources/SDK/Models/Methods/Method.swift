@@ -2,7 +2,7 @@ public protocol SendableMethod {
     func toRequest() -> Request
 }
 
-public extension SendableMethod {
+extension SendableMethod {
     
     @discardableResult
     func send() -> Task {
@@ -23,7 +23,7 @@ public protocol ChainableMethod: SendableMethod {}
 
 public protocol Method: ChainableMethod {}
 
-public extension Method {
+extension Method {
     func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> Methods.FailableConfigurable {
         let request = toRequest()
         request.callbacks.onSuccess = clousure

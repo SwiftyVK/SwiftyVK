@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Video: APIMethod {
         case add(Parameters)
         case addAlbum(Parameters)

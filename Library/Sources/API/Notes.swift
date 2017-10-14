@@ -1,4 +1,4 @@
-public extension PrivateVKAPI {
+extension PrivateVKAPI {
     public enum Notes: APIMethod {
         case add(Parameters)
         case createComment(Parameters)

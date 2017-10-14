@@ -1,6 +1,6 @@
 public typealias Parameters = [Parameter: String?]
 
-public extension Dictionary where Key == Parameter, Value == String? {
+extension Dictionary where Key == Parameter, Value == String? {
     public static var empty: [Parameter: String?] {
         return [:]
     }
