@@ -19,8 +19,5 @@ public extension PrivateVKAPI {
         case setSilenceMode(Parameters)
         case unbanUser(Parameters)
         case unregisterDevice(Parameters)
-        
-        // Deprecated
-        case lookupContacts(Parameters)
     }
 }

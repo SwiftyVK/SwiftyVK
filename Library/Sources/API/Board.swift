@@ -1,17 +1,17 @@
 public extension PrivateVKAPI {
     public enum Board: APIMethod {
-        case getTopics(Parameters)
-        case getComments(Parameters)
         case addTopic(Parameters)
-        case addComment(Parameters)
-        case deleteTopic(Parameters)
-        case editTopic(Parameters)
-        case editComment(Parameters)
-        case restoreComment(Parameters)
-        case deleteComment(Parameters)
-        case openTopic(Parameters)
         case closeTopic(Parameters)
+        case createComment(Parameters)
+        case deleteComment(Parameters)
+        case deleteTopic(Parameters)
+        case editComment(Parameters)
+        case editTopic(Parameters)
         case fixTopic(Parameters)
+        case getComments(Parameters)
+        case getTopics(Parameters)
+        case openTopic(Parameters)
+        case restoreComment(Parameters)
         case unfixTopic(Parameters)
     }
 }
