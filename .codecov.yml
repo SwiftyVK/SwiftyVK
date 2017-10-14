@@ -6,8 +6,8 @@ coverage:
   ignore:
     - Example
     - Tests
-    - Library/Sources/SDK/UI/*/*Controller*
-    - Library/Sources/SDK/UI/Web/WebViewWrapper*
+    - Library/Sources/UI/*/*Controller*
+    - Library/Sources/UI/Web/WebViewWrapper*
     - Library/Sources/Utils/Reachability.swift
     - Library/Sources/Utils/IDGenerator.swift
     - Library/Sources/Extensions/Numbers+Extensions.swift
