@@ -818,6 +818,7 @@
 				A2527D631BD12FD200F65412 /* Docs.swift */,
 				A2527D641BD12FD200F65412 /* Fave.swift */,
 				A2527D651BD12FD200F65412 /* Friends.swift */,
+				A2967E731CBBC4A700B7D48F /* Gifts.swift */,
 				A2527D661BD12FD200F65412 /* Groups.swift */,
 				A2527D671BD12FD200F65412 /* Likes.swift */,
 				A2527D681BD12FD200F65412 /* Messages.swift */,
@@ -838,7 +839,6 @@
 				A2527D761BD12FD200F65412 /* Utils.swift */,
 				A2527D771BD12FD200F65412 /* Video.swift */,
 				A2527D781BD12FD200F65412 /* Wall.swift */,
-				A2967E731CBBC4A700B7D48F /* Gifts.swift */,
 				A254C0C71E9904CB001A5456 /* Custom.swift */,
 			);
 			path = API;
