@@ -13,7 +13,7 @@ extension VKError: Equatable {
         (.maximumAttemptsExceeded, .maximumAttemptsExceeded),
         (.captchaResultIsNil, .captchaResultIsNil),
         (.wrongUrl, .wrongUrl),
-        (.tokenNotSavedInStorage, .tokenNotSavedInStorage),
+        (.cantSaveToKeychain, .cantSaveToKeychain),
         (.cantMakeCapthaImageUrl, .cantMakeCapthaImageUrl),
         (.vkDelegateNotFound, .vkDelegateNotFound),
         (.cantParseTokenInfo, .cantParseTokenInfo),

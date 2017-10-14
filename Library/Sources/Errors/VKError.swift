@@ -8,7 +8,7 @@ public enum VKError: Error {
     case api(ApiError)
     
     // MARK: - Session errors
-    case tokenNotSavedInStorage
+    case cantSaveToKeychain(Int32)
     case vkDelegateNotFound
     case cantParseTokenInfo(String)
     case cantDestroyDefaultSession

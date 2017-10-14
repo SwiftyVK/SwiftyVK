@@ -35,7 +35,7 @@ class BasicMethodTests: XCTestCase {
         // Given
         let originalMethod = Methods.Basic(Request(type: .url("")))
         // When
-        let mutatedMethod = originalMethod.withOnProgress { _ in }
+        let mutatedMethod = originalMethod.withOnProgress { _,_,_  in }
         // Then
         XCTAssertNotNil(mutatedMethod.toRequest().callbacks.onProgress)
     }

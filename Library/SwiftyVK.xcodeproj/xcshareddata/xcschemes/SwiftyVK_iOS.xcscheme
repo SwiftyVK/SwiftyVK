@@ -20,6 +20,20 @@
                ReferencedContainer = "container:SwiftyVK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D46FB3E01F929D7A000CEAEB"
+               BuildableName = "SwiftyVK_tests_iOS.xctest"
+               BlueprintName = "SwiftyVK_tests_iOS"
+               ReferencedContainer = "container:SwiftyVK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -30,7 +44,31 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D46FB3E01F929D7A000CEAEB"
+               BuildableName = "SwiftyVK_tests_iOS.xctest"
+               BlueprintName = "SwiftyVK_tests_iOS"
+               ReferencedContainer = "container:SwiftyVK.xcodeproj">
+            </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "TokenStorageTests/test_getSaved()">
+               </Test>
+            </SkippedTests>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "A2EB6E9A1BD180DD008E7D86"
+            BuildableName = "SwiftyVK.framework"
+            BlueprintName = "SwiftyVK_iOS"
+            ReferencedContainer = "container:SwiftyVK.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

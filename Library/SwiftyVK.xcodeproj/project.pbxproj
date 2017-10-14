@@ -90,6 +90,104 @@
 		D44EC0121F55D4DF00F8BB4A /* VKReachabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */; };
 		D44EC0161F55D50600F8BB4A /* VKNotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */; };
 		D44EC0181F55DC4A00F8BB4A /* ConnectionObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */; };
+		D46FB3E61F929D7A000CEAEB /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */; };
+		D46FB3EC1F929DBC000CEAEB /* AuthorizatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19D21EE438FB00CF13AF /* AuthorizatorTests.swift */; };
+		D46FB3ED1F929DBC000CEAEB /* TokenParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19CF1EE4233D00CF13AF /* TokenParserTests.swift */; };
+		D46FB3EE1F929DBC000CEAEB /* TaskShedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23708C61EA5309700103212 /* TaskShedulerTests.swift */; };
+		D46FB3EF1F929DBC000CEAEB /* AttemptShedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2433A451EA542100058BB6D /* AttemptShedulerTests.swift */; };
+		D46FB3F01F929DBC000CEAEB /* UrlRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B40DFC1EA693B700106AE3 /* UrlRequestBuilderTests.swift */; };
+		D46FB3F11F929DBC000CEAEB /* QueryBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24DDAF11EB73E3F002EA273 /* QueryBuilderTests.swift */; };
+		D46FB3F21F929DBC000CEAEB /* MultipartBodyBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A3A2C1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift */; };
+		D46FB3F31F929DBC000CEAEB /* SessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179C91EBA4059006B71FD /* SessionTests.swift */; };
+		D46FB3F41F929DBC000CEAEB /* SessionsHolderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5DA1ECCAFC800652262 /* SessionsHolderTests.swift */; };
+		D46FB3F51F929DBC000CEAEB /* TokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF16781ED1AD2E00485716 /* TokenTests.swift */; };
+		D46FB3F61F929DBC000CEAEB /* TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DC01ED1FB2F0041E663 /* TokenStorageTests.swift */; };
+		D46FB3F71F929DBC000CEAEB /* VKAppProxyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23E692B1EDAEC5800AA3B3B /* VKAppProxyTests.swift */; };
+		D46FB3F81F929DBC000CEAEB /* WebPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B805571EDDB313004DA7EB /* WebPresenterTests.swift */; };
+		D46FB3F91F929DBC000CEAEB /* AtomicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6F8E41EDDF00400933DBC /* AtomicTests.swift */; };
+		D46FB3FA1F929DBC000CEAEB /* CaptchaPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDD931EF667B000271276 /* CaptchaPresenterTests.swift */; };
+		D46FB3FB1F929DBC000CEAEB /* SessionsStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A270528E1EF834FF00C05936 /* SessionsStorageTests.swift */; };
+		D46FB3FC1F929DBC000CEAEB /* ApiErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */; };
+		D46FB3FD1F929DBC000CEAEB /* ResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47601211F2E236E005356E5 /* ResponseTests.swift */; };
+		D46FB3FE1F929DBC000CEAEB /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44348F71F3B70F4008B2B50 /* JSONTests.swift */; };
+		D46FB3FF1F929DBC000CEAEB /* AttemptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9311F4B337E00C9651C /* AttemptTests.swift */; };
+		D46FB4001F929DBC000CEAEB /* ApiErrorHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D497959E1F4DE40900921A21 /* ApiErrorHandlerTests.swift */; };
+		D46FB4011F929DBC000CEAEB /* ApiMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795A21F4DF04000921A21 /* ApiMethodTests.swift */; };
+		D46FB4021F929DBC000CEAEB /* CustomMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795A41F4DF86400921A21 /* CustomMethodTests.swift */; };
+		D46FB4031F929DBC000CEAEB /* VKErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795A61F4DFB3400921A21 /* VKErrorTests.swift */; };
+		D46FB4041F929DBC000CEAEB /* ResourcesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41ADB001F4DFE7000E10D41 /* ResourcesTests.swift */; };
+		D46FB4051F929DBC000CEAEB /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AE1F520733005AB59A /* TaskTests.swift */; };
+		D46FB4061F929DBC000CEAEB /* ConnectionObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */; };
+		D46FB4071F929DBC000CEAEB /* OneVariationsMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4321D8C1F5F0A31001AFE9F /* OneVariationsMethodTests.swift */; };
+		D46FB4081F929DBC000CEAEB /* TwoVariationsMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4321D8E1F5F0B34001AFE9F /* TwoVariationsMethodTests.swift */; };
+		D46FB4091F929DBC000CEAEB /* ThreeVariationsMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4321D921F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift */; };
+		D46FB40A1F929DBC000CEAEB /* FullVariationsMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4321D8A1F5F0587001AFE9F /* FullVariationsMethodTests.swift */; };
+		D46FB40B1F929DBC000CEAEB /* BasicMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4321D901F5F0D67001AFE9F /* BasicMethodTests.swift */; };
+		D46FB40C1F929DBC000CEAEB /* LongPollTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB8D921F6044190099FC42 /* LongPollTaskTests.swift */; };
+		D46FB40D1F929DBC000CEAEB /* LongPollTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665411F6193BD000E6934 /* LongPollTests.swift */; };
+		D46FB40E1F929DBC000CEAEB /* LongPollEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41D5D961F62D0F800B4C8AF /* LongPollEventTests.swift */; };
+		D46FB40F1F929DBC000CEAEB /* DependenciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F56CDD1F6837BC00ACC3CF /* DependenciesTests.swift */; };
+		D46FB4101F929DC1000CEAEB /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D411F2DF5B10037B875 /* JsonReader.swift */; };
+		D46FB4111F929DC1000CEAEB /* VKStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41ADB031F4E013000E10D41 /* VKStack.swift */; };
+		D46FB4121F929DC1000CEAEB /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4306B2E1F5484380050D165 /* Response.swift */; };
+		D46FB4131F929DC6000CEAEB /* empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D476011C1F2E22C6005356E5 /* empty.json */; };
+		D46FB4141F929DC6000CEAEB /* response.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601141F2E218B005356E5 /* response.empty.json */; };
+		D46FB4151F929DC6000CEAEB /* apiError.withoutMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */; };
+		D46FB4161F929DC6000CEAEB /* apiError.withoutCode.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601181F2E21DD005356E5 /* apiError.withoutCode.json */; };
+		D46FB4171F929DC6000CEAEB /* longPoll.getServer.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4CA9B751F66CA890085E4F3 /* longPoll.getServer.success.json */; };
+		D46FB4181F929DC6000CEAEB /* longPoll.updates.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D941F6048B50099FC42 /* longPoll.updates.json */; };
+		D46FB4191F929DC6000CEAEB /* longPoll.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */; };
+		D46FB41A1F929DC6000CEAEB /* longPoll.failed.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */; };
+		D46FB41B1F929DC6000CEAEB /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
+		D46FB41C1F929DCB000CEAEB /* VkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C70531F45F33F00EA454C /* VkError.swift */; };
+		D46FB41D1F929DCB000CEAEB /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795A81F4DFB9E00921A21 /* ApiError.swift */; };
+		D46FB41E1F929DCB000CEAEB /* ApiMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795AA1F4DFC2400921A21 /* ApiMethod.swift */; };
+		D46FB41F1F929E31000CEAEB /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB01F9297A9009615E7 /* WebPresenter.swift */; };
+		D46FB4201F929E31000CEAEB /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB01F9297A9009615E7 /* WebPresenter.swift */; };
+		D46FB4221F929E35000CEAEB /* WebViewWrapperIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDAF1F9297A9009615E7 /* WebViewWrapperIOS.swift */; };
+		D46FB4241F929E3C000CEAEB /* WebController_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB11F9297A9009615E7 /* WebController_macOS.swift */; };
+		D46FB4251F929E3C000CEAEB /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB21F9297A9009615E7 /* WebController.swift */; };
+		D46FB4261F929E3C000CEAEB /* WebViewWrapperMacOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB31F9297A9009615E7 /* WebViewWrapperMacOS.swift */; };
+		D46FB4291F929E3C000CEAEB /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB21F9297A9009615E7 /* WebController.swift */; };
+		D46FB42B1F929E3C000CEAEB /* WebController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB41F9297A9009615E7 /* WebController_iOS.swift */; };
+		D46FB42C1F929E4E000CEAEB /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB61F9297A9009615E7 /* CapthcaPresenter.swift */; };
+		D46FB42D1F929E4E000CEAEB /* CaptchaController_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB71F9297A9009615E7 /* CaptchaController_macOS.swift */; };
+		D46FB42F1F929E4E000CEAEB /* CaptchaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB91F9297A9009615E7 /* CaptchaController.swift */; };
+		D46FB4301F929E4E000CEAEB /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB61F9297A9009615E7 /* CapthcaPresenter.swift */; };
+		D46FB4321F929E4E000CEAEB /* CaptchaController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB81F9297A9009615E7 /* CaptchaController_iOS.swift */; };
+		D46FB4331F929E4E000CEAEB /* CaptchaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB91F9297A9009615E7 /* CaptchaController.swift */; };
+		D46FB4351F929EE1000CEAEB /* TaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2433A431EA533500058BB6D /* TaskMock.swift */; };
+		D46FB4361F929EE6000CEAEB /* AttemptMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2433A471EA542620058BB6D /* AttemptMock.swift */; };
+		D46FB4371F929EE6000CEAEB /* QueryBuilderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24DDAEB1EB73C9E002EA273 /* QueryBuilderMock.swift */; };
+		D46FB4381F929EE6000CEAEB /* BodyBuilderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24DDAEF1EB73CB6002EA273 /* BodyBuilderMock.swift */; };
+		D46FB4391F929EE6000CEAEB /* AttemptShedulerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */; };
+		D46FB43A1F929EE6000CEAEB /* TaskShedulerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179CB1EBA5009006B71FD /* TaskShedulerMock.swift */; };
+		D46FB43B1F929EE6000CEAEB /* SessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179CF1EBA530C006B71FD /* SessionMock.swift */; };
+		D46FB43C1F929EE6000CEAEB /* SessionsHolderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5C5D81ECCAD4800652262 /* SessionsHolderMock.swift */; };
+		D46FB43D1F929EE6000CEAEB /* TokenMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF167A1ED1CC9B00485716 /* TokenMock.swift */; };
+		D46FB43E1F929EE6000CEAEB /* AuthorizatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF167C1ED1CCA900485716 /* AuthorizatorMock.swift */; };
+		D46FB43F1F929EE6000CEAEB /* TokenStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E34DBE1ED1F6FE0041E663 /* TokenStorageMock.swift */; };
+		D46FB4401F929EE6000CEAEB /* URLOpenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23E692D1EDAEC6400AA3B3B /* URLOpenerMock.swift */; };
+		D46FB4411F929EE6000CEAEB /* WebControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B805551EDDB01C004DA7EB /* WebControllerMock.swift */; };
+		D46FB4421F929EE6000CEAEB /* SwiftyVKDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19C81EE4112700CF13AF /* SwiftyVKDelegateMock.swift */; };
+		D46FB4431F929EE6000CEAEB /* DependencyFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19CA1EE4126E00CF13AF /* DependencyFactoryMock.swift */; };
+		D46FB4441F929EE6000CEAEB /* TokenParserMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19D41EE43E8100CF13AF /* TokenParserMock.swift */; };
+		D46FB4451F929EE6000CEAEB /* VKAppProxyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19D61EE4405E00CF13AF /* VKAppProxyMock.swift */; };
+		D46FB4461F929EE6000CEAEB /* WebPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19D91EE5198600CF13AF /* WebPresenterMock.swift */; };
+		D46FB4471F929EE6000CEAEB /* CaptchaPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */; };
+		D46FB4481F929EE6000CEAEB /* CaptchaControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDD951EF66AEC00271276 /* CaptchaControllerMock.swift */; };
+		D46FB4491F929EE6000CEAEB /* SessionStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D355F11EFAD4C300395E61 /* SessionStorageMock.swift */; };
+		D46FB44A1F929EE6000CEAEB /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C93C1F4B3E2F00C9651C /* URLSessionMock.swift */; };
+		D46FB44B1F929EE6000CEAEB /* VKURLSessionTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9401F4B3E8300C9651C /* VKURLSessionTaskMock.swift */; };
+		D46FB44C1F929EE6000CEAEB /* ApiErrorExecutorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795A01F4DE57100921A21 /* ApiErrorExecutorMock.swift */; };
+		D46FB44D1F929EE6000CEAEB /* URLRequestBuilderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */; };
+		D46FB44E1F929EE6000CEAEB /* ApiErrorHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4306B2C1F547BC70050D165 /* ApiErrorHandlerMock.swift */; };
+		D46FB44F1F929EE6000CEAEB /* VKReachabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */; };
+		D46FB4501F929EE6000CEAEB /* VKNotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */; };
+		D46FB4511F929EE6000CEAEB /* LongPollTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D416653F1F6192CA000E6934 /* LongPollTaskMock.swift */; };
+		D46FB4521F929EE6000CEAEB /* ConnectionObserverMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665431F6198C0000E6934 /* ConnectionObserverMock.swift */; };
+		D46FB4531F929EE6000CEAEB /* LongPollMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CA9B731F66BED90085E4F3 /* LongPollMock.swift */; };
+		D46FB4541F929EE6000CEAEB /* CookiesHolderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43E658A1F7D524A00AF48C8 /* CookiesHolderMock.swift */; };
 		D47601161F2E219A005356E5 /* response.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601141F2E218B005356E5 /* response.empty.json */; };
 		D47601191F2E21E2005356E5 /* apiError.withoutCode.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601181F2E21DD005356E5 /* apiError.withoutCode.json */; };
 		D476011B1F2E2229005356E5 /* apiError.withoutMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */; };
@@ -344,6 +442,13 @@
 			remoteGlobalIDString = A2527D541BD1134500F65412;
 			remoteInfo = "SwiftyVKResources-iOS";
 		};
+		D46FB3E71F929D7A000CEAEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2527D261BD1123E00F65412 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A2EB6E9A1BD180DD008E7D86;
+			remoteInfo = SwiftyVK_iOS;
+		};
 		D49795941F4DDA5500921A21 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A2527D261BD1123E00F65412 /* Project object */;
@@ -468,6 +573,7 @@
 		D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKReachabilityMock.swift; sourceTree = "<group>"; };
 		D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNotificationCenterMock.swift; sourceTree = "<group>"; };
 		D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionObserverTests.swift; sourceTree = "<group>"; };
+		D46FB3E11F929D7A000CEAEB /* SwiftyVK_tests_iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyVK_tests_iOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47601141F2E218B005356E5 /* response.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.empty.json; sourceTree = "<group>"; };
 		D47601181F2E21DD005356E5 /* apiError.withoutCode.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutCode.json; sourceTree = "<group>"; };
 		D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutMessage.json; sourceTree = "<group>"; };
@@ -617,6 +723,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D46FB3DE1F929D7A000CEAEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D46FB3E61F929D7A000CEAEB /* SwiftyVK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -725,6 +839,7 @@
 				A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */,
 				A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */,
 				A23708BA1EA52F0D00103212 /* SwiftyVK_tests_macOS.xctest */,
+				D46FB3E11F929D7A000CEAEB /* SwiftyVK_tests_iOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1182,6 +1297,24 @@
 			productReference = A2EB6EA81BD180E9008E7D86 /* SwiftyVK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		D46FB3E01F929D7A000CEAEB /* SwiftyVK_tests_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D46FB3E91F929D7A000CEAEB /* Build configuration list for PBXNativeTarget "SwiftyVK_tests_iOS" */;
+			buildPhases = (
+				D46FB3DD1F929D7A000CEAEB /* Sources */,
+				D46FB3DE1F929D7A000CEAEB /* Frameworks */,
+				D46FB3DF1F929D7A000CEAEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D46FB3E81F929D7A000CEAEB /* PBXTargetDependency */,
+			);
+			name = SwiftyVK_tests_iOS;
+			productName = SwiftyVK_tests_iOS;
+			productReference = D46FB3E11F929D7A000CEAEB /* SwiftyVK_tests_iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1221,6 +1354,10 @@
 						DevelopmentTeamName = "Алексей Кудрявцев (Personal Team)";
 						LastSwiftMigration = 0900;
 					};
+					D46FB3E01F929D7A000CEAEB = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = A2527D291BD1123E00F65412 /* Build configuration list for PBXProject "SwiftyVK" */;
@@ -1249,6 +1386,7 @@
 				A2527D4A1BD1130D00F65412 /* SwiftyVK_resources_macOS */,
 				A2527D541BD1134500F65412 /* SwiftyVK_resources_iOS */,
 				A23708B91EA52F0D00103212 /* SwiftyVK_tests_macOS */,
+				D46FB3E01F929D7A000CEAEB /* SwiftyVK_tests_iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -1301,6 +1439,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2EB6EB71BD182E3008E7D86 /* SwiftyVK_resources_macOS.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D46FB3DF1F929D7A000CEAEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D46FB4191F929DC6000CEAEB /* longPoll.empty.json in Resources */,
+				D46FB4181F929DC6000CEAEB /* longPoll.updates.json in Resources */,
+				D46FB4131F929DC6000CEAEB /* empty.json in Resources */,
+				D46FB4151F929DC6000CEAEB /* apiError.withoutMessage.json in Resources */,
+				D46FB4161F929DC6000CEAEB /* apiError.withoutCode.json in Resources */,
+				D46FB4141F929DC6000CEAEB /* response.empty.json in Resources */,
+				D46FB41A1F929DC6000CEAEB /* longPoll.failed.json in Resources */,
+				D46FB41B1F929DC6000CEAEB /* apiError.correct.json in Resources */,
+				D46FB4171F929DC6000CEAEB /* longPoll.getServer.success.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1429,10 +1583,12 @@
 				D4BBFFBA1F929893009615E7 /* RequestType.swift in Sources */,
 				D4BBFFB91F929893009615E7 /* Request.swift in Sources */,
 				D4BBFFC11F929893009615E7 /* Attempt.swift in Sources */,
+				D46FB4331F929E4E000CEAEB /* CaptchaController.swift in Sources */,
 				D4BBFF8F1F929892009615E7 /* Audio.swift in Sources */,
 				D4BBFF851F929892009615E7 /* Ads.swift in Sources */,
 				D4BBFF9F1F929893009615E7 /* VKAppProxy.swift in Sources */,
 				D4BBFF9B1F929893009615E7 /* OperationConvertible.swift in Sources */,
+				D46FB4301F929E4E000CEAEB /* CapthcaPresenter.swift in Sources */,
 				D4BBFF821F929892009615E7 /* Docs.swift in Sources */,
 				D4BBFF7B1F929892009615E7 /* Polls.swift in Sources */,
 				D4BBFF751F929892009615E7 /* Notifacations.swift in Sources */,
@@ -1452,6 +1608,7 @@
 				D4BBFF921F929892009615E7 /* Account.swift in Sources */,
 				D4BBFFAF1F929893009615E7 /* OneVariationsMethod.swift in Sources */,
 				D4BBFFC21F929893009615E7 /* UrlRequestBuilder.swift in Sources */,
+				D46FB4201F929E31000CEAEB /* WebPresenter.swift in Sources */,
 				D4BBFFD41F929893009615E7 /* Lock.swift in Sources */,
 				D4BBFF7E1F929892009615E7 /* Photos.swift in Sources */,
 				D4BBFFCA1F929893009615E7 /* Authorizator.swift in Sources */,
@@ -1485,7 +1642,10 @@
 				D4BBFF811F929892009615E7 /* Groups.swift in Sources */,
 				D4BBFFC51F929893009615E7 /* Task.swift in Sources */,
 				D4BBFFD61F929893009615E7 /* ConnectionObserver.swift in Sources */,
+				D46FB4221F929E35000CEAEB /* WebViewWrapperIOS.swift in Sources */,
+				D46FB4321F929E4E000CEAEB /* CaptchaController_iOS.swift in Sources */,
 				D4BBFFA21F929893009615E7 /* VKFileManager.swift in Sources */,
+				D46FB42B1F929E3C000CEAEB /* WebController_iOS.swift in Sources */,
 				D4BBFFB51F929893009615E7 /* Response.swift in Sources */,
 				D4BBFF9D1F929893009615E7 /* JSON.swift in Sources */,
 				D4BBFFC61F929893009615E7 /* QueryBuilder.swift in Sources */,
@@ -1518,6 +1678,7 @@
 				D4BBFFAE1F929893009615E7 /* Method.swift in Sources */,
 				D4BBFF861F929892009615E7 /* Database.swift in Sources */,
 				D4BBFFD71F929893009615E7 /* Atomic.swift in Sources */,
+				D46FB4291F929E3C000CEAEB /* WebController.swift in Sources */,
 				D4BBFF931F929892009615E7 /* Search.swift in Sources */,
 				D4BBFFA01F929893009615E7 /* VKNotificationCenter.swift in Sources */,
 				D4BBFFBE1F929893009615E7 /* AttemptApiQueue.swift in Sources */,
@@ -1538,10 +1699,12 @@
 				D4BBFEF21F929891009615E7 /* RequestType.swift in Sources */,
 				D4BBFEF11F929891009615E7 /* Request.swift in Sources */,
 				D4BBFEF91F929891009615E7 /* Attempt.swift in Sources */,
+				D46FB42F1F929E4E000CEAEB /* CaptchaController.swift in Sources */,
 				D4BBFEC71F929891009615E7 /* Audio.swift in Sources */,
 				D4BBFEBD1F929891009615E7 /* Ads.swift in Sources */,
 				D4BBFED71F929891009615E7 /* VKAppProxy.swift in Sources */,
 				D4BBFED31F929891009615E7 /* OperationConvertible.swift in Sources */,
+				D46FB42C1F929E4E000CEAEB /* CapthcaPresenter.swift in Sources */,
 				D4BBFEBA1F929891009615E7 /* Docs.swift in Sources */,
 				D4BBFEB31F929891009615E7 /* Polls.swift in Sources */,
 				D4BBFEAD1F929891009615E7 /* Notifacations.swift in Sources */,
@@ -1554,6 +1717,7 @@
 				D4BBFF061F929891009615E7 /* Token.swift in Sources */,
 				D4BBFEE21F929891009615E7 /* DependenciesImpl.swift in Sources */,
 				D4BBFEC01F929891009615E7 /* Friends.swift in Sources */,
+				D46FB4261F929E3C000CEAEB /* WebViewWrapperMacOS.swift in Sources */,
 				D4BBFEC61F929891009615E7 /* Market.swift in Sources */,
 				D4BBFEC81F929891009615E7 /* Wall.swift in Sources */,
 				D4BBFEF01F929891009615E7 /* RequestConfig.swift in Sources */,
@@ -1561,6 +1725,7 @@
 				D4BBFECA1F929891009615E7 /* Account.swift in Sources */,
 				D4BBFEE71F929891009615E7 /* OneVariationsMethod.swift in Sources */,
 				D4BBFEFA1F929891009615E7 /* UrlRequestBuilder.swift in Sources */,
+				D46FB41F1F929E31000CEAEB /* WebPresenter.swift in Sources */,
 				D4BBFF0C1F929891009615E7 /* Lock.swift in Sources */,
 				D4BBFEB61F929891009615E7 /* Photos.swift in Sources */,
 				D4BBFF021F929891009615E7 /* Authorizator.swift in Sources */,
@@ -1619,7 +1784,9 @@
 				D4BBFEDE1F929891009615E7 /* LongPollTask.swift in Sources */,
 				D4BBFECF1F929891009615E7 /* ObservableObject.swift in Sources */,
 				D4BBFF041F929891009615E7 /* EncodedSession.swift in Sources */,
+				D46FB42D1F929E4E000CEAEB /* CaptchaController_macOS.swift in Sources */,
 				D4BBFED41F929891009615E7 /* CharacterSet+Extensions.swift in Sources */,
+				D46FB4241F929E3C000CEAEB /* WebController_macOS.swift in Sources */,
 				D4BBFEEB1F929891009615E7 /* Scopes.swift in Sources */,
 				D4BBFED61F929891009615E7 /* URLOpener.swift in Sources */,
 				D4BBFEB51F929891009615E7 /* Custom.swift in Sources */,
@@ -1627,6 +1794,7 @@
 				D4BBFEE61F929891009615E7 /* Method.swift in Sources */,
 				D4BBFEBE1F929891009615E7 /* Database.swift in Sources */,
 				D4BBFF0F1F929891009615E7 /* Atomic.swift in Sources */,
+				D46FB4251F929E3C000CEAEB /* WebController.swift in Sources */,
 				D4BBFECB1F929891009615E7 /* Search.swift in Sources */,
 				D4BBFED81F929891009615E7 /* VKNotificationCenter.swift in Sources */,
 				D4BBFEF61F929891009615E7 /* AttemptApiQueue.swift in Sources */,
@@ -1634,6 +1802,87 @@
 				D4BBFEE31F929891009615E7 /* Parameters.swift in Sources */,
 				D4BBFF111F929891009615E7 /* VK.swift in Sources */,
 				D4BBFEAE1F929891009615E7 /* Users.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D46FB3DD1F929D7A000CEAEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D46FB4391F929EE6000CEAEB /* AttemptShedulerMock.swift in Sources */,
+				D46FB3EF1F929DBC000CEAEB /* AttemptShedulerTests.swift in Sources */,
+				D46FB4531F929EE6000CEAEB /* LongPollMock.swift in Sources */,
+				D46FB4111F929DC1000CEAEB /* VKStack.swift in Sources */,
+				D46FB4411F929EE6000CEAEB /* WebControllerMock.swift in Sources */,
+				D46FB4431F929EE6000CEAEB /* DependencyFactoryMock.swift in Sources */,
+				D46FB4461F929EE6000CEAEB /* WebPresenterMock.swift in Sources */,
+				D46FB40A1F929DBC000CEAEB /* FullVariationsMethodTests.swift in Sources */,
+				D46FB4041F929DBC000CEAEB /* ResourcesTests.swift in Sources */,
+				D46FB4451F929EE6000CEAEB /* VKAppProxyMock.swift in Sources */,
+				D46FB4021F929DBC000CEAEB /* CustomMethodTests.swift in Sources */,
+				D46FB4501F929EE6000CEAEB /* VKNotificationCenterMock.swift in Sources */,
+				D46FB3EE1F929DBC000CEAEB /* TaskShedulerTests.swift in Sources */,
+				D46FB43F1F929EE6000CEAEB /* TokenStorageMock.swift in Sources */,
+				D46FB4511F929EE6000CEAEB /* LongPollTaskMock.swift in Sources */,
+				D46FB44D1F929EE6000CEAEB /* URLRequestBuilderMock.swift in Sources */,
+				D46FB4421F929EE6000CEAEB /* SwiftyVKDelegateMock.swift in Sources */,
+				D46FB4031F929DBC000CEAEB /* VKErrorTests.swift in Sources */,
+				D46FB4521F929EE6000CEAEB /* ConnectionObserverMock.swift in Sources */,
+				D46FB3F51F929DBC000CEAEB /* TokenTests.swift in Sources */,
+				D46FB4101F929DC1000CEAEB /* JsonReader.swift in Sources */,
+				D46FB44A1F929EE6000CEAEB /* URLSessionMock.swift in Sources */,
+				D46FB4441F929EE6000CEAEB /* TokenParserMock.swift in Sources */,
+				D46FB4361F929EE6000CEAEB /* AttemptMock.swift in Sources */,
+				D46FB3EC1F929DBC000CEAEB /* AuthorizatorTests.swift in Sources */,
+				D46FB4011F929DBC000CEAEB /* ApiMethodTests.swift in Sources */,
+				D46FB3FA1F929DBC000CEAEB /* CaptchaPresenterTests.swift in Sources */,
+				D46FB3F81F929DBC000CEAEB /* WebPresenterTests.swift in Sources */,
+				D46FB4091F929DBC000CEAEB /* ThreeVariationsMethodTests.swift in Sources */,
+				D46FB4051F929DBC000CEAEB /* TaskTests.swift in Sources */,
+				D46FB3FC1F929DBC000CEAEB /* ApiErrorTests.swift in Sources */,
+				D46FB4001F929DBC000CEAEB /* ApiErrorHandlerTests.swift in Sources */,
+				D46FB43E1F929EE6000CEAEB /* AuthorizatorMock.swift in Sources */,
+				D46FB4541F929EE6000CEAEB /* CookiesHolderMock.swift in Sources */,
+				D46FB3F41F929DBC000CEAEB /* SessionsHolderTests.swift in Sources */,
+				D46FB3F21F929DBC000CEAEB /* MultipartBodyBuilderTests.swift in Sources */,
+				D46FB44C1F929EE6000CEAEB /* ApiErrorExecutorMock.swift in Sources */,
+				D46FB3ED1F929DBC000CEAEB /* TokenParserTests.swift in Sources */,
+				D46FB3FF1F929DBC000CEAEB /* AttemptTests.swift in Sources */,
+				D46FB44F1F929EE6000CEAEB /* VKReachabilityMock.swift in Sources */,
+				D46FB40B1F929DBC000CEAEB /* BasicMethodTests.swift in Sources */,
+				D46FB40C1F929DBC000CEAEB /* LongPollTaskTests.swift in Sources */,
+				D46FB4121F929DC1000CEAEB /* Response.swift in Sources */,
+				D46FB4401F929EE6000CEAEB /* URLOpenerMock.swift in Sources */,
+				D46FB43A1F929EE6000CEAEB /* TaskShedulerMock.swift in Sources */,
+				D46FB40D1F929DBC000CEAEB /* LongPollTests.swift in Sources */,
+				D46FB44E1F929EE6000CEAEB /* ApiErrorHandlerMock.swift in Sources */,
+				D46FB44B1F929EE6000CEAEB /* VKURLSessionTaskMock.swift in Sources */,
+				D46FB40E1F929DBC000CEAEB /* LongPollEventTests.swift in Sources */,
+				D46FB3F31F929DBC000CEAEB /* SessionTests.swift in Sources */,
+				D46FB4071F929DBC000CEAEB /* OneVariationsMethodTests.swift in Sources */,
+				D46FB4491F929EE6000CEAEB /* SessionStorageMock.swift in Sources */,
+				D46FB3F11F929DBC000CEAEB /* QueryBuilderTests.swift in Sources */,
+				D46FB43D1F929EE6000CEAEB /* TokenMock.swift in Sources */,
+				D46FB3F91F929DBC000CEAEB /* AtomicTests.swift in Sources */,
+				D46FB40F1F929DBC000CEAEB /* DependenciesTests.swift in Sources */,
+				D46FB43C1F929EE6000CEAEB /* SessionsHolderMock.swift in Sources */,
+				D46FB3FB1F929DBC000CEAEB /* SessionsStorageTests.swift in Sources */,
+				D46FB4381F929EE6000CEAEB /* BodyBuilderMock.swift in Sources */,
+				D46FB3F71F929DBC000CEAEB /* VKAppProxyTests.swift in Sources */,
+				D46FB41C1F929DCB000CEAEB /* VkError.swift in Sources */,
+				D46FB41D1F929DCB000CEAEB /* ApiError.swift in Sources */,
+				D46FB4061F929DBC000CEAEB /* ConnectionObserverTests.swift in Sources */,
+				D46FB3F01F929DBC000CEAEB /* UrlRequestBuilderTests.swift in Sources */,
+				D46FB4481F929EE6000CEAEB /* CaptchaControllerMock.swift in Sources */,
+				D46FB4471F929EE6000CEAEB /* CaptchaPresenterMock.swift in Sources */,
+				D46FB3F61F929DBC000CEAEB /* TokenStorageTests.swift in Sources */,
+				D46FB41E1F929DCB000CEAEB /* ApiMethod.swift in Sources */,
+				D46FB3FD1F929DBC000CEAEB /* ResponseTests.swift in Sources */,
+				D46FB43B1F929EE6000CEAEB /* SessionMock.swift in Sources */,
+				D46FB4371F929EE6000CEAEB /* QueryBuilderMock.swift in Sources */,
+				D46FB3FE1F929DBC000CEAEB /* JSONTests.swift in Sources */,
+				D46FB4351F929EE1000CEAEB /* TaskMock.swift in Sources */,
+				D46FB4081F929DBC000CEAEB /* TwoVariationsMethodTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1654,6 +1903,11 @@
 			isa = PBXTargetDependency;
 			target = A2527D541BD1134500F65412 /* SwiftyVK_resources_iOS */;
 			targetProxy = A2EB6EB51BD182D4008E7D86 /* PBXContainerItemProxy */;
+		};
+		D46FB3E81F929D7A000CEAEB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A2EB6E9A1BD180DD008E7D86 /* SwiftyVK_iOS */;
+			targetProxy = D46FB3E71F929D7A000CEAEB /* PBXContainerItemProxy */;
 		};
 		D49795951F4DDA5500921A21 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1754,7 +2008,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1787,7 +2041,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK_tests_macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -2286,6 +2540,81 @@
 			};
 			name = Release;
 		};
+		D46FB3EA1F929D7A000CEAEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = ../Tests/info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "west0r.SwiftyVK-tests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D46FB3EB1F929D7A000CEAEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = ../Tests/info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "west0r.SwiftyVK-tests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2348,6 +2677,15 @@
 			buildConfigurations = (
 				A2EB6EAE1BD180EA008E7D86 /* Debug */,
 				A2EB6EAF1BD180EA008E7D86 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D46FB3E91F929D7A000CEAEB /* Build configuration list for PBXNativeTarget "SwiftyVK_tests_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D46FB3EA1F929D7A000CEAEB /* Debug */,
+				D46FB3EB1F929D7A000CEAEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

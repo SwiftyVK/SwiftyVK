@@ -51,7 +51,7 @@ class TaskTests: XCTestCase {
                 $0.onRecive(100, 1000)
                 $0.onFinish(.unexpectedError)
             },
-            callbacks: RequestCallbacks(onProgress: { progressResult = $0 })
+            callbacks: RequestCallbacks(onProgress: { progressResult = ($0, $1, $2) })
         )
         // When
         context.task.main()
@@ -69,7 +69,7 @@ class TaskTests: XCTestCase {
                 $0.onSent(100, 1000)
                 $0.onFinish(.unexpectedError)
             },
-            callbacks: RequestCallbacks(onProgress: { progressResult = $0 })
+            callbacks: RequestCallbacks(onProgress: { progressResult = ($0, $1, $2) })
         )
         // When
         context.task.main()

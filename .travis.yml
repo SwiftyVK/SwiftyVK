@@ -27,8 +27,8 @@ install:
 
 script:
   - set -o pipefail
+  - xcodebuild -workspace "$WORKSPACE" -scheme "$IOS_SCHEME" -destination "$IOS_DESTANATION" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" -enableCodeCoverage YES test | xcpretty -f `xcpretty-travis-formatter`
   - xcodebuild -workspace "$WORKSPACE" -scheme "$MAC_SCHEME" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_TESTABILITY=YES -enableCodeCoverage YES test | xcpretty -f `xcpretty-travis-formatter`
-  - xcodebuild -workspace "$WORKSPACE" -scheme "$IOS_SCHEME" -destination "$IOS_DESTANATION" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" build | xcpretty -f `xcpretty-travis-formatter`
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)

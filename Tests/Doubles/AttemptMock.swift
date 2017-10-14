@@ -13,8 +13,8 @@ final class AttemptMock: Operation, Attempt {
             session: URLSessionMock(),
             callbacks: AttemptCallbacks(
                 onFinish: { _ in },
-                onSent: { _ in },
-                onRecive: { _ in }
+                onSent: { _,_  in },
+                onRecive: { _,_  in }
             )
         )
         

@@ -10,7 +10,8 @@ class KeychainProvider<EntityType> {
         let keychainQuery = keychainParamsFor(sessionId: sessionId)
         
         keychainQuery.setObject(
-            NSKeyedArchiver.archivedData(withRootObject: entity), forKey: NSString(format: kSecValueData)
+            NSKeyedArchiver.archivedData(withRootObject: entity),
+            forKey: NSString(format: kSecValueData)
         )
         
         removeFor(sessionId: sessionId)
@@ -18,7 +19,7 @@ class KeychainProvider<EntityType> {
         let keychainCode = SecItemAdd(keychainQuery, nil)
         
         guard keychainCode == 0 else {
-            throw VKError.tokenNotSavedInStorage
+            throw VKError.cantSaveToKeychain(keychainCode)
         }
     }
     
@@ -51,7 +52,7 @@ class KeychainProvider<EntityType> {
     
     private func keychainParamsFor(sessionId: String) -> NSMutableDictionary {
         return [
-            kSecAttrAccessible: kSecAttrAccessibleWhenUnlocked,
+            kSecAttrAccessible: kSecAttrAccessibleAlways,
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: serviceKey,
             kSecAttrAccount: "SVK" + sessionId

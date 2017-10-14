@@ -91,7 +91,7 @@ class AuthorizatorTests: XCTestCase {
         // Given
         let context = makeContext()
         
-        context.tokenMaker.onMake = { _ in
+        context.tokenMaker.onMake = { _, _, _ in
             return TokenMock()
         }
         
@@ -204,7 +204,7 @@ class AuthorizatorTests: XCTestCase {
         // Given
         let context = makeContext()
         
-        context.tokenMaker.onMake = { _ in
+        context.tokenMaker.onMake = { _, _, _ in
             return TokenMock()
         }
         
@@ -222,7 +222,7 @@ class AuthorizatorTests: XCTestCase {
         let context = makeContext()
         let exp = expectation(description: "")
         
-        context.tokenMaker.onMake = { _ in
+        context.tokenMaker.onMake = { _, _, _ in
             return TokenMock()
         }
         

@@ -26,7 +26,7 @@ class ThreeVariationsMethodTests: XCTestCase {
         // Given
         let originalMethod = Methods.SuccessableFailableProgressable(Request(type: .url("")))
         // When
-        let mutatedMethod = originalMethod.onProgress { _ in }
+        let mutatedMethod = originalMethod.onProgress { _,_,_  in }
         // Then
         XCTAssertTrue(type(of: mutatedMethod) == Methods.SuccessableFailable.self)
     }
@@ -71,7 +71,7 @@ class ThreeVariationsMethodTests: XCTestCase {
         // Given
         let originalMethod = Methods.SuccessableProgressableConfigurable(Request(type: .url("")))
         // When
-        let mutatedMethod = originalMethod.onProgress { _ in }
+        let mutatedMethod = originalMethod.onProgress { _,_,_  in }
         // Then
         XCTAssertTrue(type(of: mutatedMethod) == Methods.SuccessableConfigurable.self)
     }
@@ -98,7 +98,7 @@ class ThreeVariationsMethodTests: XCTestCase {
         // Given
         let originalMethod = Methods.FailableProgressableConfigurable(Request(type: .url("")))
         // When
-        let mutatedMethod = originalMethod.onProgress { _ in }
+        let mutatedMethod = originalMethod.onProgress { _,_,_  in }
         // Then
         XCTAssertTrue(type(of: mutatedMethod) == Methods.FailableConfigurable.self)
     }
