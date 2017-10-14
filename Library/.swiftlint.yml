@@ -14,10 +14,8 @@ opt_in_rules:
   - force_unwrapping
   - object_literal
   - private_outlet
-  - empty_count
   - explicit_init
   - overridden_super_call
-  - redundant_nil_coalesing
   - switch_case_on_newline
   - empty_count
   - redundant_nil_coalescing
@@ -52,7 +50,7 @@ line_length:
 function_body_length:
   warning: 100
   error: 150
-variable_name:
+identifier_name:
   min_length:
     warning: 2
     error: 2
