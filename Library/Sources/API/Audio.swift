@@ -1,5 +1,6 @@
 public extension PrivateVKAPI {
     public enum Audio: APIMethod {
+        // Deprecated
         case get(Parameters)
         case getById(Parameters)
         case getLyrics(Parameters)
