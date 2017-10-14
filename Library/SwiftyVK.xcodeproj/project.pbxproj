@@ -311,6 +311,8 @@
 		D4BBFD7D1F911DA5009615E7 /* Ads.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFD7B1F911DA5009615E7 /* Ads.swift */; };
 		D4BBFD7F1F924BFB009615E7 /* Apps.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFD7E1F924BFB009615E7 /* Apps.swift */; };
 		D4BBFD801F924BFB009615E7 /* Apps.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFD7E1F924BFB009615E7 /* Apps.swift */; };
+		D4BBFD861F92514F009615E7 /* Leads.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFD851F92514F009615E7 /* Leads.swift */; };
+		D4BBFD871F92514F009615E7 /* Leads.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFD851F92514F009615E7 /* Leads.swift */; };
 		D4C032AC1F51F650005AB59A /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AB1F51F650005AB59A /* IDGenerator.swift */; };
 		D4C032AD1F51F650005AB59A /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AB1F51F650005AB59A /* IDGenerator.swift */; };
 		D4C032AF1F520733005AB59A /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032AE1F520733005AB59A /* TaskTests.swift */; };
@@ -604,6 +606,7 @@
 		D4BBFD731F8FE590009615E7 /* AttemptApiQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptApiQueue.swift; sourceTree = "<group>"; };
 		D4BBFD7B1F911DA5009615E7 /* Ads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ads.swift; sourceTree = "<group>"; };
 		D4BBFD7E1F924BFB009615E7 /* Apps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apps.swift; sourceTree = "<group>"; };
+		D4BBFD851F92514F009615E7 /* Leads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leads.swift; sourceTree = "<group>"; };
 		D4C032AB1F51F650005AB59A /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		D4C032AE1F520733005AB59A /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderMock.swift; sourceTree = "<group>"; };
@@ -820,6 +823,7 @@
 				A2527D651BD12FD200F65412 /* Friends.swift */,
 				A2967E731CBBC4A700B7D48F /* Gifts.swift */,
 				A2527D661BD12FD200F65412 /* Groups.swift */,
+				D4BBFD851F92514F009615E7 /* Leads.swift */,
 				A2527D671BD12FD200F65412 /* Likes.swift */,
 				A2527D681BD12FD200F65412 /* Messages.swift */,
 				A24D108E1C56A49E008263B0 /* Market.swift */,
@@ -1464,6 +1468,7 @@
 				A270528A1EF8138A00C05936 /* EncodedSession.swift in Sources */,
 				D44EC01B1F55E99A00F8BB4A /* ObservableObject.swift in Sources */,
 				D4F84BDD1F435F6400DA7127 /* VKViewController.swift in Sources */,
+				D4BBFD871F92514F009615E7 /* Leads.swift in Sources */,
 				A2838DA41E9AA0DA00FE5BE2 /* Dependencies.swift in Sources */,
 				D4040E2E1F62C22500025E24 /* LongPollEvent.swift in Sources */,
 				A2EB6EFB1BD18394008E7D86 /* Photos.swift in Sources */,
@@ -1579,6 +1584,7 @@
 				D44EC01A1F55E99A00F8BB4A /* ObservableObject.swift in Sources */,
 				A22179D41EBA57AF006B71FD /* SessionConfig.swift in Sources */,
 				A2EB6ECA1BD18389008E7D86 /* Newsfeed.swift in Sources */,
+				D4BBFD861F92514F009615E7 /* Leads.swift in Sources */,
 				A2EB6ECB1BD18389008E7D86 /* Notes.swift in Sources */,
 				D41665481F61B52D000E6934 /* LongPollEvent.swift in Sources */,
 				D4F49D471F2E0FE50037B875 /* ApiError.swift in Sources */,
