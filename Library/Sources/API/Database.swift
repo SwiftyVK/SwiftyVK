@@ -1,15 +1,15 @@
 public extension PrivateVKAPI {
     public enum Database: APIMethod {
-        case getCountries(Parameters)
-        case getRegions(Parameters)
-        case getStreetsById(Parameters)
-        case getCountriesById(Parameters)
+        case getChairs(Parameters)
         case getCities(Parameters)
         case getCitiesById(Parameters)
-        case getUniversities(Parameters)
-        case getSchools(Parameters)
-        case getSchoolClasses(Parameters)
+        case getCountries(Parameters)
+        case getCountriesById(Parameters)
         case getFaculties(Parameters)
-        case getChairs(Parameters)
+        case getRegions(Parameters)
+        case getSchoolClasses(Parameters)
+        case getSchools(Parameters)
+        case getStreetsById(Parameters)
+        case getUniversities(Parameters)
     }
 }
