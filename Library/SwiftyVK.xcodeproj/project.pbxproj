@@ -144,7 +144,7 @@
 		D46FB41E1F929DCB000CEAEB /* ApiMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795AA1F4DFC2400921A21 /* ApiMethod.swift */; };
 		D46FB41F1F929E31000CEAEB /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB01F9297A9009615E7 /* WebPresenter.swift */; };
 		D46FB4201F929E31000CEAEB /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB01F9297A9009615E7 /* WebPresenter.swift */; };
-		D46FB4221F929E35000CEAEB /* WebViewWrapperIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDAF1F9297A9009615E7 /* WebViewWrapperIOS.swift */; };
+		D46FB4221F929E35000CEAEB /* WebViewWrapper_IOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDAF1F9297A9009615E7 /* WebViewWrapper_IOS.swift */; };
 		D46FB4241F929E3C000CEAEB /* WebController_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB11F9297A9009615E7 /* WebController_macOS.swift */; };
 		D46FB4251F929E3C000CEAEB /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB21F9297A9009615E7 /* WebController.swift */; };
 		D46FB4261F929E3C000CEAEB /* WebViewWrapperMacOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB31F9297A9009615E7 /* WebViewWrapperMacOS.swift */; };
@@ -599,7 +599,7 @@
 		D4BBFDA91F9297A9009615E7 /* ConnectionObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionObserver.swift; sourceTree = "<group>"; };
 		D4BBFDAA1F9297A9009615E7 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		D4BBFDAB1F9297A9009615E7 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
-		D4BBFDAF1F9297A9009615E7 /* WebViewWrapperIOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewWrapperIOS.swift; sourceTree = "<group>"; };
+		D4BBFDAF1F9297A9009615E7 /* WebViewWrapper_IOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewWrapper_IOS.swift; sourceTree = "<group>"; };
 		D4BBFDB01F9297A9009615E7 /* WebPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPresenter.swift; sourceTree = "<group>"; };
 		D4BBFDB11F9297A9009615E7 /* WebController_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebController_macOS.swift; sourceTree = "<group>"; };
 		D4BBFDB21F9297A9009615E7 /* WebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebController.swift; sourceTree = "<group>"; };
@@ -778,8 +778,7 @@
 				D41D5D961F62D0F800B4C8AF /* LongPollEventTests.swift */,
 				D4F56CDD1F6837BC00ACC3CF /* DependenciesTests.swift */,
 			);
-			name = Tests;
-			path = ../Tests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		A2433A421EA5331A0058BB6D /* Doubles */ = {
@@ -824,6 +823,7 @@
 		A2527D251BD1123E00F65412 = {
 			isa = PBXGroup;
 			children = (
+				D47E1CC71F92B079002BB2AC /* UI */,
 				A2527D5C1BD12FD200F65412 /* Sources */,
 				A2527DF01BD133E100F65412 /* Resources */,
 				A2527D321BD1129500F65412 /* Products */,
@@ -849,7 +849,7 @@
 			children = (
 				A2527D901BD12FD200F65412 /* SwiftyVK.h */,
 				D46FB3D91F929B45000CEAEB /* Errors */,
-				D4BBFDAD1F9297A9009615E7 /* UI */,
+				D4BBFDAD1F9297A9009615E7 /* Presentation */,
 				D4BBFFDB1F929935009615E7 /* Dependecies */,
 				D4BBFDBD1F9297A9009615E7 /* API Supporting */,
 				D4BBFDD41F9297A9009615E7 /* Networking */,
@@ -924,6 +924,35 @@
 			path = Management;
 			sourceTree = "<group>";
 		};
+		D47E1CC71F92B079002BB2AC /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D47E1CC91F92B08D002BB2AC /* iOS */,
+				D47E1CC81F92B087002BB2AC /* macOS */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		D47E1CC81F92B087002BB2AC /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				D4BBFDB11F9297A9009615E7 /* WebController_macOS.swift */,
+				D4BBFDB31F9297A9009615E7 /* WebViewWrapperMacOS.swift */,
+				D4BBFDB71F9297A9009615E7 /* CaptchaController_macOS.swift */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		D47E1CC91F92B08D002BB2AC /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D4BBFDAF1F9297A9009615E7 /* WebViewWrapper_IOS.swift */,
+				D4BBFDB41F9297A9009615E7 /* WebController_iOS.swift */,
+				D4BBFDB81F9297A9009615E7 /* CaptchaController_iOS.swift */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
 		D4BBFDA41F9297A9009615E7 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -938,24 +967,20 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		D4BBFDAD1F9297A9009615E7 /* UI */ = {
+		D4BBFDAD1F9297A9009615E7 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
 				D4BBFDAE1F9297A9009615E7 /* Web */,
 				D4BBFDB51F9297A9009615E7 /* Captcha */,
 			);
-			path = UI;
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		D4BBFDAE1F9297A9009615E7 /* Web */ = {
 			isa = PBXGroup;
 			children = (
-				D4BBFDAF1F9297A9009615E7 /* WebViewWrapperIOS.swift */,
 				D4BBFDB01F9297A9009615E7 /* WebPresenter.swift */,
-				D4BBFDB11F9297A9009615E7 /* WebController_macOS.swift */,
 				D4BBFDB21F9297A9009615E7 /* WebController.swift */,
-				D4BBFDB31F9297A9009615E7 /* WebViewWrapperMacOS.swift */,
-				D4BBFDB41F9297A9009615E7 /* WebController_iOS.swift */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -964,8 +989,6 @@
 			isa = PBXGroup;
 			children = (
 				D4BBFDB61F9297A9009615E7 /* CapthcaPresenter.swift */,
-				D4BBFDB71F9297A9009615E7 /* CaptchaController_macOS.swift */,
-				D4BBFDB81F9297A9009615E7 /* CaptchaController_iOS.swift */,
 				D4BBFDB91F9297A9009615E7 /* CaptchaController.swift */,
 			);
 			path = Captcha;
@@ -1642,7 +1665,7 @@
 				D4BBFF811F929892009615E7 /* Groups.swift in Sources */,
 				D4BBFFC51F929893009615E7 /* Task.swift in Sources */,
 				D4BBFFD61F929893009615E7 /* ConnectionObserver.swift in Sources */,
-				D46FB4221F929E35000CEAEB /* WebViewWrapperIOS.swift in Sources */,
+				D46FB4221F929E35000CEAEB /* WebViewWrapper_IOS.swift in Sources */,
 				D46FB4321F929E4E000CEAEB /* CaptchaController_iOS.swift in Sources */,
 				D4BBFFA21F929893009615E7 /* VKFileManager.swift in Sources */,
 				D46FB42B1F929E3C000CEAEB /* WebController_iOS.swift in Sources */,

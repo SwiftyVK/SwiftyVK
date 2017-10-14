@@ -1,4 +1,5 @@
 excluded:
+  - Tests
   - Carthage
   - Pods
   - Sources/Utils/Reachability.swift

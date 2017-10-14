@@ -22,8 +22,6 @@
 		A2527E871BD13A5300F65412 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2527E851BD13A5300F65412 /* LaunchScreen.storyboard */; };
 		A2527EBD1BD13F7E00F65412 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527EBC1BD13F7E00F65412 /* APIWorker.swift */; };
 		A2527EBE1BD13F7E00F65412 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527EBC1BD13F7E00F65412 /* APIWorker.swift */; };
-		D43E658F1F7D588200AF48C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D43E658E1F7D588200AF48C8 /* Assets.xcassets */; };
-		D43E65901F7D588200AF48C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D43E658E1F7D588200AF48C8 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +59,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = A23708BA1EA52F0D00103212;
 			remoteInfo = "SwiftyVK-Tests-OSX";
+		};
+		D47E1CD21F92B3EA002BB2AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D46FB3E11F929D7A000CEAEB;
+			remoteInfo = SwiftyVK_tests_iOS;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -127,7 +132,7 @@
 		A2527EBC1BD13F7E00F65412 /* APIWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = APIWorker.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A2EB6F3C1BD186F9008E7D86 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		A2EB6F3D1BD186F9008E7D86 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		D43E658E1F7D588200AF48C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D47E1CD41F92B3F5002BB2AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Example/Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +163,7 @@
 				A2087A5A1D8580940076BB5E /* SwiftyVK_resources_macOS.bundle */,
 				A2087A5C1D8580940076BB5E /* SwiftyVK_resources_iOS.bundle */,
 				A223C8851EB8E33600EC4E4A /* SwiftyVK_tests_macOS.xctest */,
+				D47E1CD31F92B3EA002BB2AC /* SwiftyVK_tests_iOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -165,10 +171,10 @@
 		A25221041BD17B450047C638 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D47E1CD41F92B3F5002BB2AC /* Assets.xcassets */,
 				A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */,
 				A2527E6A1BD13A3B00F65412 /* OSX */,
 				A2527E7B1BD13A5300F65412 /* iOS */,
-				D43E658E1F7D588200AF48C8 /* Assets.xcassets */,
 			);
 			name = Resources;
 			path = ..;
@@ -351,6 +357,13 @@
 			remoteRef = A223C8841EB8E33600EC4E4A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		D47E1CD31F92B3EA002BB2AC /* SwiftyVK_tests_iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftyVK_tests_iOS.xctest;
+			remoteRef = D47E1CD21F92B3EA002BB2AC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -359,7 +372,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A204446C1EE2DFE700612E57 /* Main.storyboard in Resources */,
-				D43E658F1F7D588200AF48C8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +381,6 @@
 			files = (
 				A2527E871BD13A5300F65412 /* LaunchScreen.storyboard in Resources */,
 				A2527E821BD13A5300F65412 /* Main.storyboard in Resources */,
-				D43E65901F7D588200AF48C8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

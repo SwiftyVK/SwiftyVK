@@ -18,15 +18,15 @@ env:
   - IOS_DESTANATION="platform=iOS Simulator,OS=10.3.1,name=iPhone 7 Plus"
 
 before_install:
-  - ./.install_swiftlint.sh
-  - swiftlint lint --path ./Library --config ./Library/.swiftlint.yml --strict
-
+  - set -o pipefail
 
 install:
   - gem install xcpretty-travis-formatter
+  - ./.install_swiftlint.sh
 
 script:
-  - set -o pipefail
+  - swiftlint lint --path ./Library --config ./Library/.swiftlint.yml --strict
+  - pod lib lint
   - xcodebuild -workspace "$WORKSPACE" -scheme "$IOS_SCHEME" -destination "$IOS_DESTANATION" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" -enableCodeCoverage YES test | xcpretty -f `xcpretty-travis-formatter`
   - xcodebuild -workspace "$WORKSPACE" -scheme "$MAC_SCHEME" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_TESTABILITY=YES -enableCodeCoverage YES test | xcpretty -f `xcpretty-travis-formatter`
 
