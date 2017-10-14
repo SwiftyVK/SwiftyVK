@@ -1,4 +1,4 @@
-extension PrivateVKAPI {
+extension APIScope {
     public enum Utils: APIMethod {
         case checkLink(Parameters)
         case deleteFromLastShortened(Parameters)

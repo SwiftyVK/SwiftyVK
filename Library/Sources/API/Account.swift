@@ -1,4 +1,4 @@
-extension PrivateVKAPI {
+extension APIScope {
     public enum Account: APIMethod {
         case banUser(Parameters)
         case changePassword(Parameters)

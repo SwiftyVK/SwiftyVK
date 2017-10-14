@@ -1,4 +1,4 @@
-extension PrivateVKAPI {
+extension APIScope {
     public struct Custom {
         public static func remote(method: String) -> CustomMethod {
             return self.method(name: "execute.\(method)")

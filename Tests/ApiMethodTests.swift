@@ -6,14 +6,14 @@ class ApiMethodTests: XCTestCase {
     
     func test_name_equalsToMethodName() {
         // When
-        let method = PrivateVKAPI.Users.get(.empty).toRequest().type.apiMethod
+        let method = APIScope.Users.get(.empty).toRequest().type.apiMethod
         // Then
         XCTAssertEqual(method, "users.get")
     }
     
     func test_apiMethodParameters_isEmpty() {
         // When
-        let parameters = PrivateVKAPI.Users.get(.empty).toRequest().type.parameters
+        let parameters = APIScope.Users.get(.empty).toRequest().type.parameters
         // Then
         XCTAssertEqual(parameters?.isEmpty, true)
     }
@@ -21,7 +21,7 @@ class ApiMethodTests: XCTestCase {
     func test_parameters_equalsToMethodParameters() {
         // When
         let parameter = [Parameter.userId: "1"]
-        let parameters = PrivateVKAPI.Users.get(parameter).toRequest().type.parameters
+        let parameters = APIScope.Users.get(parameter).toRequest().type.parameters
         // Then
         XCTAssertEqual(parameters?[Parameter.userId] ?? "", "1")
     }
@@ -35,14 +35,14 @@ class ApiMethodTests: XCTestCase {
             sendCallCount += 1
         }
         // When
-        PrivateVKAPI.Users.get(.empty).send()
+        APIScope.Users.get(.empty).send()
         // Then
         XCTAssertEqual(sendCallCount, 1)
     }
     
     func test_setConfig() {
         // Given
-        let originalMethod = PrivateVKAPI.Users.get(.empty)
+        let originalMethod = APIScope.Users.get(.empty)
         // When
         let mutatedMethod = originalMethod.configure(with: .default)
         // Then
@@ -51,7 +51,7 @@ class ApiMethodTests: XCTestCase {
     
     func test_setOnSuccess() {
         // Given
-        let originalMethod = PrivateVKAPI.Users.get(.empty)
+        let originalMethod = APIScope.Users.get(.empty)
         // When
         let mutatedMethod = originalMethod.onSuccess { _ in }
         // Then
@@ -60,7 +60,7 @@ class ApiMethodTests: XCTestCase {
     
     func test_setOnError() {
         // Given
-        let originalMethod = PrivateVKAPI.Users.get(.empty)
+        let originalMethod = APIScope.Users.get(.empty)
         // When
         let mutatedMethod = originalMethod.onError { _ in }
         // Then
@@ -69,7 +69,7 @@ class ApiMethodTests: XCTestCase {
     
     func test_setNext() {
         // Given
-        let originalMethod = PrivateVKAPI.Users.get(.empty)
+        let originalMethod = APIScope.Users.get(.empty)
         // When
         let mutatedMethod = originalMethod
             .chain { _ in Request(type: .url("")).toMethod() }

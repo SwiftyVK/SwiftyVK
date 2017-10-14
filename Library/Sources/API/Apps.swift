@@ -1,4 +1,4 @@
-extension PrivateVKAPI {
+extension APIScope {
     public enum Apps: APIMethod {
         case deleteAppRequests(Parameters)
         case get(Parameters)

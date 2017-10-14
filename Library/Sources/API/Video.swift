@@ -1,4 +1,4 @@
-extension PrivateVKAPI {
+extension APIScope {
     public enum Video: APIMethod {
         case add(Parameters)
         case addAlbum(Parameters)

@@ -1,4 +1,4 @@
-extension PrivateVKAPI {
+extension APIScope {
     public enum Database: APIMethod {
         case getChairs(Parameters)
         case getCities(Parameters)

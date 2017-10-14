@@ -1,4 +1,4 @@
-extension PrivateVKAPI {
+extension APIScope {
     public enum Messages: APIMethod {
         case addChatUser(Parameters)
         case allowMessagesFromGroup(Parameters)

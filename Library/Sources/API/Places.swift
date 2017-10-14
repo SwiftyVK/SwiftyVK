@@ -1,4 +1,4 @@
-extension PrivateVKAPI {
+extension APIScope {
     public enum Places: APIMethod {
         case add(Parameters)
         case checkin(Parameters)

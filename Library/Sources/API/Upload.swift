@@ -15,7 +15,7 @@ public enum UploadTarget {
 }
 
 // swiftlint:disable next nesting
-extension PrivateVKAPI {
+extension APIScope {
     //Metods to upload Mediafiles
     public struct Upload {
         ///Methods to upload photo
@@ -29,7 +29,7 @@ extension PrivateVKAPI {
                 location: CLLocationCoordinate2D? = nil
                 ) -> Methods.SuccessableFailableProgressableConfigurable {
                 
-                let method = PrivateVKAPI.Photos.getUploadServer([
+                let method = APIScope.Photos.getUploadServer([
                     .albumId: albumId,
                     .userId: target.decoded.userId,
                     .groupId: target.decoded.groupId
@@ -50,7 +50,7 @@ extension PrivateVKAPI {
                     .chain {
                         let response = try JSON(data: $0)
                         
-                        return PrivateVKAPI.Photos.save([
+                        return APIScope.Photos.save([
                             .albumId: albumId,
                             .userId: target.decoded.userId,
                             .groupId: target.decoded.groupId,
@@ -70,7 +70,7 @@ extension PrivateVKAPI {
             /// Upload photo for using in messages.send method
             public static func toMessage(_ media: Media) -> Methods.SuccessableFailableProgressableConfigurable {
                 
-                let method = PrivateVKAPI.Photos.getMessagesUploadServer(.empty)
+                let method = APIScope.Photos.getMessagesUploadServer(.empty)
                     .chain {
                         let response = try JSON(data: $0)
                         
@@ -87,7 +87,7 @@ extension PrivateVKAPI {
                     .chain {
                         let response = try JSON(data: $0)
                         
-                        return PrivateVKAPI.Photos.saveMessagesPhoto([
+                        return APIScope.Photos.saveMessagesPhoto([
                             .photo: response.forcedString("photo"),
                             .server: response.forcedInt("server").toString(),
                             .hash: response.forcedString("hash")
@@ -104,7 +104,7 @@ extension PrivateVKAPI {
                 groupId: String
                 ) -> Methods.SuccessableFailableProgressableConfigurable {
                 
-                let method = PrivateVKAPI.Photos.getMarketUploadServer([.groupId: groupId])
+                let method = APIScope.Photos.getMarketUploadServer([.groupId: groupId])
                     .chain {
                         let response = try JSON(data: $0)
                         
@@ -121,7 +121,7 @@ extension PrivateVKAPI {
                     .chain {
                         let response = try JSON(data: $0)
                         
-                        return PrivateVKAPI.Photos.saveMarketPhoto([
+                        return APIScope.Photos.saveMarketPhoto([
                             .groupId: groupId,
                             .photo: response.forcedString("photo"),
                             .server: response.forcedInt("server").toString(),
@@ -144,7 +144,7 @@ extension PrivateVKAPI {
                 groupId: String
                 ) -> Methods.SuccessableFailableProgressableConfigurable {
                 
-                let method = PrivateVKAPI.Photos.getMarketAlbumUploadServer([.groupId: groupId])
+                let method = APIScope.Photos.getMarketAlbumUploadServer([.groupId: groupId])
                     .chain {
                         let response = try JSON(data: $0)
                         
@@ -161,7 +161,7 @@ extension PrivateVKAPI {
                     .chain {
                         let response = try JSON(data: $0)
                         
-                        return PrivateVKAPI.Photos.saveMarketAlbumPhoto([
+                        return APIScope.Photos.saveMarketAlbumPhoto([
                             .groupId: groupId,
                             .photo: response.forcedString("photo"),
                             .server: response.forcedInt("server").toString(),
@@ -178,7 +178,7 @@ extension PrivateVKAPI {
                 to target: UploadTarget
                 ) -> Methods.SuccessableFailableProgressableConfigurable {
                 
-                let method = PrivateVKAPI.Photos.getWallUploadServer([
+                let method = APIScope.Photos.getWallUploadServer([
                     .userId: target.decoded.userId,
                     .groupId: target.decoded.groupId
                     ])
@@ -198,7 +198,7 @@ extension PrivateVKAPI {
                     .chain {
                         let response = try JSON(data: $0)
                         
-                        return PrivateVKAPI.Photos.saveWallPhoto([
+                        return APIScope.Photos.saveWallPhoto([
                             .userId: target.decoded.userId,
                             .groupId: target.decoded.groupId,
                             .photo: response.forcedString("photo"),
@@ -217,7 +217,7 @@ extension PrivateVKAPI {
             savingParams: Parameters = .empty
             ) -> Methods.SuccessableFailableProgressableConfigurable {
             
-            let method = PrivateVKAPI.Video.save(savingParams)
+            let method = APIScope.Video.save(savingParams)
                 .chain {
                     let response = try JSON(data: $0)
                     
@@ -242,7 +242,7 @@ extension PrivateVKAPI {
             title: String? = nil
             ) -> Methods.SuccessableFailableProgressableConfigurable {
             
-            let method = PrivateVKAPI.Audio.getUploadServer(.empty)
+            let method = APIScope.Audio.getUploadServer(.empty)
                 .chain {
                     let response = try JSON(data: $0)
 
@@ -259,7 +259,7 @@ extension PrivateVKAPI {
                 .chain {
                     let response = try JSON(data: $0)
 
-                    return PrivateVKAPI.Audio.save([
+                    return APIScope.Audio.save([
                         .audio: response.forcedString("audio"),
                         .server: response.forcedInt("server").toString(),
                         .hash: response.forcedString("hash"),
@@ -279,7 +279,7 @@ extension PrivateVKAPI {
             tags: String? = nil
             ) -> Methods.SuccessableFailableProgressableConfigurable {
             
-            let method = PrivateVKAPI.Docs.getUploadServer([.groupId: groupId])
+            let method = APIScope.Docs.getUploadServer([.groupId: groupId])
                 .chain {
                     let response = try JSON(data: $0)
                     
@@ -296,7 +296,7 @@ extension PrivateVKAPI {
                 .chain {
                     let response = try JSON(data: $0)
                     
-                    return PrivateVKAPI.Docs.save([
+                    return APIScope.Docs.save([
                         .file: response.forcedString("file"),
                         .title: title,
                         .tags: tags

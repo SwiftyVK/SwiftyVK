@@ -1,4 +1,4 @@
-extension PrivateVKAPI {
+extension APIScope {
     public enum Groups: APIMethod {
         case addCallbackServer(Parameters)
         case addLink(Parameters)

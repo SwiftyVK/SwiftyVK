@@ -1,4 +1,4 @@
-extension PrivateVKAPI {
+extension APIScope {
     public enum Notes: APIMethod {
         case add(Parameters)
         case createComment(Parameters)

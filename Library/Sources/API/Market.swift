@@ -1,4 +1,4 @@
-extension PrivateVKAPI {
+extension APIScope {
     public enum Market: APIMethod {
         case searchadd(Parameters)
         case addAlbum(Parameters)

@@ -1,7 +1,7 @@
-public struct PrivateVKAPI {
+public struct APIScope {
     private init() {}
 }
 
 extension VK {
-    public typealias API = PrivateVKAPI
+    public typealias API = APIScope
 }

@@ -1,4 +1,4 @@
-extension PrivateVKAPI {
+extension APIScope {
     public enum Audio: APIMethod {
         // Deprecated
         case get(Parameters)
