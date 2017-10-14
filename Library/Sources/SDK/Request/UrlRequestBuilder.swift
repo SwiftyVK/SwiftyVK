@@ -52,7 +52,6 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         return urlRequest
     }
     
-    // swiftlint:disable function_parameter_count next
     private func make(
         from apiMethod: String,
         parameters: Parameters,

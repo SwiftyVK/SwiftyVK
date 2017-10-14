@@ -58,7 +58,7 @@ final class AttemptImpl: Operation, Attempt {
     override func observeValue(
         forKeyPath keyPath: String?,
         of object: Any?,
-        change: [NSKeyValueChangeKey : Any]?,
+        change: [NSKeyValueChangeKey: Any]?,
         context: UnsafeMutableRawPointer?
         ) {
         guard let keyPath = keyPath else { return }

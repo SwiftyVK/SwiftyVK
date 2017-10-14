@@ -26,7 +26,7 @@ public struct ApiError: Equatable {
         return .api(self)
     }
     
-    private func makeRequestParams(from error: JSON) -> [String : String] {
+    private func makeRequestParams(from error: JSON) -> [String: String] {
         var paramsDict = [String: String]()
         
         if let paramsArray: [[String: String]] = error.array("error, request_params") {
@@ -40,7 +40,7 @@ public struct ApiError: Equatable {
         return paramsDict
     }
     
-    private func makeOtherInfo(from errorDict: [String: Any]) -> [String : String] {
+    private func makeOtherInfo(from errorDict: [String: Any]) -> [String: String] {
         var infoDict = [String: String]()
         let ignoredKeys = ["error_code", "error_msg", "request_params"]
         

@@ -4,7 +4,7 @@ public protocol Session: class {
     var state: SessionState { get }
     var longPoll: LongPoll { get }
     
-    func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping RequestCallbacks.Error)
+    func logIn(onSuccess: @escaping ([String: String]) -> (), onError: @escaping RequestCallbacks.Error)
     func logIn(rawToken: String, expires: TimeInterval) throws
     func logOut()
     @discardableResult
@@ -23,7 +23,7 @@ protocol DestroyableSession: Session {
 }
 
 protocol ApiErrorExecutor {
-    func logIn(revoke: Bool) throws -> [String : String]
+    func logIn(revoke: Bool) throws -> [String: String]
     func validate(redirectUrl: URL) throws
     func captcha(rawUrlToImage: String, dismissOnFinish: Bool) throws -> String
 }
@@ -104,7 +104,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         attemptSheduler.setLimit(to: config.attemptsPerSecLimit)
     }
     
-    public func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping RequestCallbacks.Error) {
+    public func logIn(onSuccess: @escaping ([String: String]) -> (), onError: @escaping RequestCallbacks.Error) {
         gateQueue.async {
             do {
                 let info = try self.logIn(revoke: true)
@@ -119,7 +119,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         }
     }
     
-    func logIn(revoke: Bool) throws -> [String : String] {
+    func logIn(revoke: Bool) throws -> [String: String] {
         try self.throwIfDestroyed()
         try self.throwIfAuthorized()
         

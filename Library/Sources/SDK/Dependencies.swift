@@ -34,7 +34,7 @@ protocol AttemptMaker: class {
 }
 
 protocol TokenMaker: class {
-    func token(token: String, expires: TimeInterval, info: [String : String]) -> Token
+    func token(token: String, expires: TimeInterval, info: [String: String]) -> Token
 }
 
 protocol WebControllerMaker: class {

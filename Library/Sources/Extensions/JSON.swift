@@ -49,11 +49,11 @@ class JSON: JSONContainer, CustomStringConvertible {
         return value(path)
     }
     
-    func forcedDictionary<T>(_ path: String) -> [String : T] {
+    func forcedDictionary<T>(_ path: String) -> [String: T] {
         return dictionary(path) ?? [:]
     }
     
-    func dictionary<T>(_ path: String) -> [String : T]? {
+    func dictionary<T>(_ path: String) -> [String: T]? {
         return value(path)
     }
     

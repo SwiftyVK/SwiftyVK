@@ -21,12 +21,12 @@ struct Resources {
         
         if
             let path = Bundle.main.path(forResource: name, ofType: bundleType),
-            let bundle = Bundle(path:path) {
+            let bundle = Bundle(path: path) {
             return bundle
         }
         else if
             let path = Bundle(for: ResourceTestClass.self).path(forResource: name, ofType: bundleType),
-            let bundle = Bundle(path:path) {
+            let bundle = Bundle(path: path) {
             return bundle
         }
         

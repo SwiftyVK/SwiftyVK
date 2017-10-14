@@ -4,7 +4,7 @@ protocol TokenParser: class {
 
 final class TokenParserImpl: TokenParser {
     
-    func parse(tokenInfo: String) -> (token: String, expires: TimeInterval, info: [String : String])? {
+    func parse(tokenInfo: String) -> (token: String, expires: TimeInterval, info: [String: String])? {
         var token: String?
         var expires: TimeInterval?
         var info = [String: String]()

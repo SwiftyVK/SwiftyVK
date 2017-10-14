@@ -21,7 +21,7 @@ final class DependenciesImpl: Dependencies {
             config.waitsForConnectivity = true
         }
         
-        return URLSession(configuration:config)
+        return URLSession(configuration: config)
     }()
     
     private lazy var connectionObserver: ConnectionObserver? = {
@@ -234,7 +234,7 @@ final class DependenciesImpl: Dependencies {
         )
     }
     
-    func token(token: String, expires: TimeInterval, info: [String : String]) -> Token {
+    func token(token: String, expires: TimeInterval, info: [String: String]) -> Token {
         return TokenImpl(
             token: token,
             expires: expires,

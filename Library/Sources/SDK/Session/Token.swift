@@ -1,5 +1,5 @@
 protocol Token: class, NSCoding {
-    var info: [String : String] { get }
+    var info: [String: String] { get }
     var isValid: Bool { get }
     
     func get() -> String?
@@ -18,7 +18,7 @@ class TokenImpl: NSObject, Token {
     init(
         token: String,
         expires: TimeInterval,
-        info: [String : String]
+        info: [String: String]
         ) {
         self.token = token
         self.expires = Expires(expires: expires)
@@ -46,7 +46,7 @@ class TokenImpl: NSObject, Token {
     required init?(coder aDecoder: NSCoder) {
         guard
             let token = aDecoder.decodeObject(forKey: "token") as? String,
-            let info = aDecoder.decodeObject(forKey: "info") as? [String : String],
+            let info = aDecoder.decodeObject(forKey: "info") as? [String: String],
             let expireCase = aDecoder.decodeObject(forKey: "expireCase") as? String else {
                 return nil
         }
