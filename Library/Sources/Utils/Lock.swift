@@ -13,7 +13,7 @@ extension Lock {
     }
 }
 
-class MultiplatrormLock: Lock {
+final class MultiplatrormLock: Lock {
     private let lockRef: Lock
     
     init() {
@@ -34,7 +34,7 @@ class MultiplatrormLock: Lock {
     }
 }
 
-class SpinLock: Lock {
+final class SpinLock: Lock {
     private var lockRef = OS_SPINLOCK_INIT
     
     func lock() {
@@ -47,7 +47,7 @@ class SpinLock: Lock {
 }
 
 @available(OSX 10.12, *, iOS 10, *, tvOS 10.0, *)
-class UnfairLock: Lock {
+final class UnfairLock: Lock {
     var lockRer = os_unfair_lock_s()
     
     func lock() {

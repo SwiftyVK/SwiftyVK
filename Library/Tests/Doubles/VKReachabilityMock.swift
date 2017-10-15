@@ -1,6 +1,6 @@
 @testable import SwiftyVK
 
-class VKReachabilityMock: VKReachability {
+final class VKReachabilityMock: VKReachability {
     var isReachable = false
 
     var onStartNotifier: (() throws -> ())?

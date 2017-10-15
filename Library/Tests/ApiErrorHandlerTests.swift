@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class ApiErrorHandlerTests: XCTestCase {
+final class ApiErrorHandlerTests: XCTestCase {
     
     func test_callLogIn_whenHandledAccessDeniedError() {
         // Given

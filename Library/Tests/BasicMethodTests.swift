@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class BasicMethodTests: XCTestCase {
+final class BasicMethodTests: XCTestCase {
     
     func test_setConfig() {
         // Given

@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class LongPollTests: XCTestCase {
+final class LongPollTests: XCTestCase {
     
     func test_sendConnectEvent_onConnected() {
         // Given

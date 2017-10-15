@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class LongPollTaskTests: XCTestCase {
+final class LongPollTaskTests: XCTestCase {
     
     func test_operation_callSuccessCallback_whenGiveUpdates() {
         // Given

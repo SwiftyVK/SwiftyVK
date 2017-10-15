@@ -1,6 +1,6 @@
 @testable import SwiftyVK
 
-class ApiErrorHandlerMock: ApiErrorHandler {
+final class ApiErrorHandlerMock: ApiErrorHandler {
     
     var onHandle: (() throws -> ApiErrorHandlerResult)?
     

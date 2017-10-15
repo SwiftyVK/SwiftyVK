@@ -2,7 +2,7 @@ protocol IDGenerator {
     func next() -> Int64
 }
 
-class IDGeneratorImpl: IDGenerator {
+final class IDGeneratorImpl: IDGenerator {
     let queue = DispatchQueue(label: "")
     var id: Int64 = 0
     

@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class DependenciesTests: XCTestCase {
+final class DependenciesTests: XCTestCase {
     
     func test_maleAuthorizator_typeIsAuthorizatorImpl() {
         // Given

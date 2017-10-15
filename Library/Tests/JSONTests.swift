@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class JSONTests: XCTestCase {
+final class JSONTests: XCTestCase {
     
     func test_init_whenDataIsNil() {
         // When

@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class ResponseTests: XCTestCase {
+final class ResponseTests: XCTestCase {
     
     func test_parsing_apiError() {
         guard let data = JsonReader.read("apiError.correct") else { return }

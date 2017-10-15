@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class ResourcesTests: XCTestCase {
+final class ResourcesTests: XCTestCase {
     
     func test_suffixForPlatform() {
         // When

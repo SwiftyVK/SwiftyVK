@@ -3,7 +3,7 @@ import XCTest
 
 typealias ObserverBlock = (Notification) -> Void
 
-class VKNotificationCenterMock: VKNotificationCenter {
+final class VKNotificationCenterMock: VKNotificationCenter {
     private(set) var blocks = [NSNotification.Name: ObserverBlock]()
     
     var onAddObserver: ((NSNotification.Name?) -> ())?

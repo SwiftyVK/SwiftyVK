@@ -1,7 +1,7 @@
 import Cocoa
 import WebKit
 
-class WebViewWrapperMacOs: NSView {
+final class WebViewWrapperMacOs: NSView {
     let webView: WKWebView
     
     public required init?(coder: NSCoder) {

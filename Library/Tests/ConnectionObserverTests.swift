@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class ConnectionObserverTests: XCTestCase {
+final class ConnectionObserverTests: XCTestCase {
     
     func test_registerAllObservers() {
         // Given

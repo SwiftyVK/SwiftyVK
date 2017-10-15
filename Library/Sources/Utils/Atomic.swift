@@ -1,7 +1,7 @@
 import Foundation
 
 /// Atomic container for any Equatable value. Synchronized with Lock.
-class Atomic<Value> where Value: Equatable {
+final class Atomic<Value> where Value: Equatable {
     
     private var value: Value
     private var lock: Lock = MultiplatrormLock()

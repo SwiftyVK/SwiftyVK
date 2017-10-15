@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class AttemptTests: XCTestCase {
+final class AttemptTests: XCTestCase {
     
     func test_sendTask_giveSuccess_whenSuccessed() {
         // Given

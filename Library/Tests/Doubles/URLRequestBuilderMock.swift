@@ -1,6 +1,6 @@
 @testable import SwiftyVK
 
-class URLRequestBuilderMock: UrlRequestBuilder {
+final class URLRequestBuilderMock: UrlRequestBuilder {
     
     var onBuild: (() throws -> URLRequest)?
     

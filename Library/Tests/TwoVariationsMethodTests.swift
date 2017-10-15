@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class TwoVariationsMethodTests: XCTestCase {
+final class TwoVariationsMethodTests: XCTestCase {
     
     func test_successableConfigurable_setConfig() {
         // Given

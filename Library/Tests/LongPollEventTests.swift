@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class LongPollEventTests: XCTestCase {
+final class LongPollEventTests: XCTestCase {
     
     func test_eventsConverting_whenAllUpdatesAreValid() {
         // Given

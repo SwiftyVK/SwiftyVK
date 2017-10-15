@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class VKErrorTests: XCTestCase {
+final class VKErrorTests: XCTestCase {
     
     func test_errorConvertationFromApiError() {
         // When

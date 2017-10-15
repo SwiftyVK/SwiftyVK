@@ -1,4 +1,4 @@
-class JSON: JSONContainer, CustomStringConvertible {
+final class JSON: JSONContainer, CustomStringConvertible {
     
     var description: String {
         return "JSON: \(String(describing: value))"

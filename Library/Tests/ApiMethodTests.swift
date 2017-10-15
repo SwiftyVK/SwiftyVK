@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class ApiMethodTests: XCTestCase {
+final class ApiMethodTests: XCTestCase {
     
     func test_name_equalsToMethodName() {
         // When

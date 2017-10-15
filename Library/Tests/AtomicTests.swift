@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class AtomicTests: XCTestCase {
+final class AtomicTests: XCTestCase {
     
     func test_wrapAndUnwrap() {
         let atomic = Atomic(1)

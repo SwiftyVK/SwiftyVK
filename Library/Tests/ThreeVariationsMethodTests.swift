@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class ThreeVariationsMethodTests: XCTestCase {
+final class ThreeVariationsMethodTests: XCTestCase {
     
     func test_successableFailableProgressable_setOnSuccess() {
         // Given

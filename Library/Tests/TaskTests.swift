@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class TaskTests: XCTestCase {
+final class TaskTests: XCTestCase {
     
     func test_callSessionShedule() {
         // Given

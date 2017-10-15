@@ -8,7 +8,7 @@ import SwiftyVK
 
 
 
-class VKDelegateExample: SwiftyVKDelegate {
+final class VKDelegateExample: SwiftyVKDelegate {
     
     let appId = "4994842"
     let scopes: Scopes = [.messages,.offline,.friends,.wall,.photos,.audio,.video,.docs,.market,.email]

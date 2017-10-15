@@ -1,4 +1,4 @@
-class AttemptApiQueue: OperationQueue {
+final class AttemptApiQueue: OperationQueue {
     
     var limit: AttemptLimit
     

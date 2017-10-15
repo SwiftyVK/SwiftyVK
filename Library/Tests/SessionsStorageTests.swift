@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class SessionStorageTests: XCTestCase {
+final class SessionStorageTests: XCTestCase {
     
     func makeStorage() -> SessionsStorageImpl {
         return SessionsStorageImpl(fileManager: FileManager(), bundleName: "", configName: "")

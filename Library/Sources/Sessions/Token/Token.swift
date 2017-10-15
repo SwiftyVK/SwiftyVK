@@ -5,7 +5,7 @@ protocol Token: class, NSCoding {
     func get() -> String?
 }
 
-class TokenImpl: NSObject, Token {
+final class TokenImpl: NSObject, Token {
     
     private let token: String
     private let expires: Expires

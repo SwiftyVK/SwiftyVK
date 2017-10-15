@@ -3,7 +3,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class JsonReader {
+final class JsonReader {
     
     static func read(_ name: String, file: StaticString = #file, line: UInt = #line) -> Data? {
         let bundle = Bundle(for: JsonReader.self)

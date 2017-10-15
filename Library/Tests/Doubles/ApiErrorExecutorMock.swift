@@ -1,6 +1,6 @@
 @testable import SwiftyVK
 
-class ApiErrorExecutorMock: ApiErrorExecutor {
+final class ApiErrorExecutorMock: ApiErrorExecutor {
     
     var onLogIn: (() -> [String : String])?
     

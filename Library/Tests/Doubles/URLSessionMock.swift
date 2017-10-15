@@ -1,6 +1,6 @@
 @testable import SwiftyVK
 
-class URLSessionMock: VKURLSession {
+final class URLSessionMock: VKURLSession {
     
     var configuration = URLSessionConfiguration.default
     

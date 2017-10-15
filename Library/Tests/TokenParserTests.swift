@@ -1,7 +1,7 @@
 import XCTest
 @testable import SwiftyVK
 
-class TokenParserTests: XCTestCase {
+final class TokenParserTests: XCTestCase {
     
     func test_parseValidToken() {
         // Given

@@ -1,6 +1,6 @@
 @testable import SwiftyVK
 
-class VKStack {
+final class VKStack {
     static let delegate = SwiftyVKDelegateMock()
     
     static func mock() {

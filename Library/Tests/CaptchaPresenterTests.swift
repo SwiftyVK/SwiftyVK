@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import SwiftyVK
 
-class CaptchaPresenterTests: XCTestCase {
+final class CaptchaPresenterTests: XCTestCase {
     
     func makeContext() -> (presenter: CaptchaPresenter, webControllerMaker: CaptchaControllerMakerMock, urlSession: URLSessionMock) {
         let controllerMaker = CaptchaControllerMakerMock()
