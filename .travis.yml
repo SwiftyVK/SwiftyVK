@@ -14,11 +14,11 @@ before_script:
 jobs:
   include:
     - stage: test
-      env: JOB=macOS Tests
+      env: JOB=Linting
       script:
-        - xcodebuild -workspace SwiftyVK.xcworkspace -scheme SwiftyVK_macOS -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_TESTABILITY=YES test | xcpretty -f `xcpretty-travis-formatter`
-      after_success:
-        - bash <(curl -s https://codecov.io/bash)
+        - swiftlint version
+        - pod --version
+        - swiftlint lint --path Library --strict && pod lib lint --fail-fast
 
     - stage: test
       env: JOB=iOS Tests
@@ -28,8 +28,8 @@ jobs:
         - bash <(curl -s https://codecov.io/bash)
 
     - stage: test
-      env: JOB=Linting
+      env: JOB=macOS Tests
       script:
-        - swiftlint version
-        - pod --version
-        - swiftlint lint --path Library --strict && pod lib lint --fail-fast
+        - xcodebuild -workspace SwiftyVK.xcworkspace -scheme SwiftyVK_macOS -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_TESTABILITY=YES test | xcpretty -f `xcpretty-travis-formatter`
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
