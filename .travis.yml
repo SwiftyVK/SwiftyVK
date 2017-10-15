@@ -8,25 +8,25 @@ branches:
     - master
     - v3
 
-env:
-  global:
-  - LC_CTYPE=en_US.UTF-8
-  - LANG=en_US.UTF-8
+before_script:
+  - set -o pipefail
 
 jobs:
   include:
     - stage: test
       env: JOB=SwiftLint
-      script: swiftlint lint --path Library --strict
+      script:
+        - swiftlint lint --path Library --strict
     - stage: test
-      env: JOB=MacOS test
-      script: ./Scripts/macOS-tests.sh
+      env: JOB=Test SwiftyVK macOS
+      script:
+        - xcodebuild -workspace SwiftyVK.xcworkspace -scheme SwiftyVK_macOS -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_TESTABILITY=YES test | xcpretty -f `xcpretty-travis-formatter`
+        - bash <(curl -s https://codecov.io/bash)
     - stage: test
-      env: JOB=iOS test
-      script: ./Scripts/iOS-tests.sh
+      env: JOB=Test SwiftyVK iOS
+      script:
+        - xcodebuild -workspace SwiftyVK.xcworkspace -scheme SwiftyVK_iOS -destination "platform=iOS Simulator,name=iPhone 7 Plus" -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" test | xcpretty -f `xcpretty-travis-formatter`
     - stage: test
-      env: JOB=Pod lint
-      script: pod lib lint
-    - stage: deploy
-      env: JOB=Codecov
-      script: bash <(curl -s https://codecov.io/bash)
+      env: JOB=Pod lib lint
+      script:
+        - pod lib lint
