@@ -13,25 +13,6 @@
    <Group
       location = "container:"
       name = "Supporting">
-      <Group
-         location = "group:Scripts"
-         name = "Scripts">
-         <FileRef
-            location = "group:travis-script.sh">
-         </FileRef>
-         <FileRef
-            location = "group:/Dew/VK/SwiftyVK/Scripts/iOS-tests.sh">
-         </FileRef>
-         <FileRef
-            location = "group:macOS-tests.sh">
-         </FileRef>
-         <FileRef
-            location = "group:/Dew/VK/SwiftyVK/Scripts/SwiftLint.sh">
-         </FileRef>
-         <FileRef
-            location = "group:/Dew/VK/SwiftyVK/Scripts/install-SwiftLint.sh">
-         </FileRef>
-      </Group>
       <FileRef
          location = "group:README.md">
       </FileRef>
@@ -48,7 +29,7 @@
          location = "group:Example/../.travis.yml">
       </FileRef>
       <FileRef
-         location = "group:Library/../.codecov.yml">
+         location = "group:/Dew/VK/SwiftyVK/codecov.yml">
       </FileRef>
       <FileRef
          location = "group:Example/../.swift-version">
