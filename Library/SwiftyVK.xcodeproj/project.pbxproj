@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		A21F10B81DCDFCF6003EFDDC /* LintAllTargets */ = {
+		A21F10B81DCDFCF6003EFDDC /* SwiftyVK_multiplatform */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = A21F10BB1DCDFCF6003EFDDC /* Build configuration list for PBXAggregateTarget "LintAllTargets" */;
+			buildConfigurationList = A21F10BB1DCDFCF6003EFDDC /* Build configuration list for PBXAggregateTarget "SwiftyVK_multiplatform" */;
 			buildPhases = (
 				A21F10C01DCDFD1A003EFDDC /* SwiftLint */,
 				A20C36471DE04A16004AA642 /* NeedLess */,
 			);
 			dependencies = (
+				D47E1CE81F9356E6002BB2AC /* PBXTargetDependency */,
+				D47E1CEA1F9356E6002BB2AC /* PBXTargetDependency */,
 			);
-			name = LintAllTargets;
+			name = SwiftyVK_multiplatform;
 			productName = SwiftyVK;
 		};
 /* End PBXAggregateTarget section */
@@ -449,19 +451,19 @@
 			remoteGlobalIDString = A2EB6E9A1BD180DD008E7D86;
 			remoteInfo = SwiftyVK_iOS;
 		};
-		D49795941F4DDA5500921A21 /* PBXContainerItemProxy */ = {
+		D47E1CE71F9356E6002BB2AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A2527D261BD1123E00F65412 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A21F10B81DCDFCF6003EFDDC;
-			remoteInfo = LintAllTargets;
+			remoteGlobalIDString = A2EB6EA71BD180E9008E7D86;
+			remoteInfo = SwiftyVK_macOS;
 		};
-		D497959C1F4DDAE200921A21 /* PBXContainerItemProxy */ = {
+		D47E1CE91F9356E6002BB2AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A2527D261BD1123E00F65412 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A21F10B81DCDFCF6003EFDDC;
-			remoteInfo = LintAllTargets;
+			remoteGlobalIDString = A2EB6E9A1BD180DD008E7D86;
+			remoteInfo = SwiftyVK_iOS;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1292,7 +1294,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				D497959D1F4DDAE200921A21 /* PBXTargetDependency */,
 				A2EB6EB61BD182D4008E7D86 /* PBXTargetDependency */,
 			);
 			name = SwiftyVK_iOS;
@@ -1312,7 +1313,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				D49795951F4DDA5500921A21 /* PBXTargetDependency */,
 				A2EB6EB21BD182C7008E7D86 /* PBXTargetDependency */,
 			);
 			name = SwiftyVK_macOS;
@@ -1354,7 +1354,7 @@
 					};
 					A23708B91EA52F0D00103212 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 842SSJ357W;
+						DevelopmentTeam = 744972ET87;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -1379,6 +1379,7 @@
 					};
 					D46FB3E01F929D7A000CEAEB = {
 						CreatedOnToolsVersion = 9.0;
+						DevelopmentTeam = 744972ET87;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1403,7 +1404,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A21F10B81DCDFCF6003EFDDC /* LintAllTargets */,
+				A21F10B81DCDFCF6003EFDDC /* SwiftyVK_multiplatform */,
 				A2EB6EA71BD180E9008E7D86 /* SwiftyVK_macOS */,
 				A2EB6E9A1BD180DD008E7D86 /* SwiftyVK_iOS */,
 				A2527D4A1BD1130D00F65412 /* SwiftyVK_resources_macOS */,
@@ -1932,15 +1933,15 @@
 			target = A2EB6E9A1BD180DD008E7D86 /* SwiftyVK_iOS */;
 			targetProxy = D46FB3E71F929D7A000CEAEB /* PBXContainerItemProxy */;
 		};
-		D49795951F4DDA5500921A21 /* PBXTargetDependency */ = {
+		D47E1CE81F9356E6002BB2AC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A21F10B81DCDFCF6003EFDDC /* LintAllTargets */;
-			targetProxy = D49795941F4DDA5500921A21 /* PBXContainerItemProxy */;
+			target = A2EB6EA71BD180E9008E7D86 /* SwiftyVK_macOS */;
+			targetProxy = D47E1CE71F9356E6002BB2AC /* PBXContainerItemProxy */;
 		};
-		D497959D1F4DDAE200921A21 /* PBXTargetDependency */ = {
+		D47E1CEA1F9356E6002BB2AC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A21F10B81DCDFCF6003EFDDC /* LintAllTargets */;
-			targetProxy = D497959C1F4DDAE200921A21 /* PBXContainerItemProxy */;
+			target = A2EB6E9A1BD180DD008E7D86 /* SwiftyVK_iOS */;
+			targetProxy = D47E1CE91F9356E6002BB2AC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2013,7 +2014,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 842SSJ357W;
+				DEVELOPMENT_TEAM = 744972ET87;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2023,7 +2024,7 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = ../Tests/info.plist;
+				INFOPLIST_FILE = Tests/info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -2052,12 +2053,12 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 842SSJ357W;
+				DEVELOPMENT_TEAM = 744972ET87;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = ../Tests/info.plist;
+				INFOPLIST_FILE = Tests/info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -2581,6 +2582,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 744972ET87;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2590,7 +2592,7 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = ../Tests/info.plist;
+				INFOPLIST_FILE = Tests/info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -2621,11 +2623,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 744972ET87;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = ../Tests/info.plist;
+				INFOPLIST_FILE = Tests/info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -2641,7 +2644,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A21F10BB1DCDFCF6003EFDDC /* Build configuration list for PBXAggregateTarget "LintAllTargets" */ = {
+		A21F10BB1DCDFCF6003EFDDC /* Build configuration list for PBXAggregateTarget "SwiftyVK_multiplatform" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A21F10B91DCDFCF6003EFDDC /* Debug */,

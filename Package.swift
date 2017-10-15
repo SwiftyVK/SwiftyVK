@@ -8,7 +8,6 @@ let package = Package(
             targets: ["SwiftyVK_macOS", "SwiftyVK_iOS"]
         ),
         targets: [
-        
         .target(name: "SwiftyVK_macOS", dependencies: ["SwiftyVK_resources_macOS"]),
         .target(name: "SwiftyVK_iOS", dependencies: ["SwiftyVK_resources_iOS"]),
         .testTarget(name: "SwiftyVK_tests_macOS", dependencies: ["SwiftyVK_macOS"]),

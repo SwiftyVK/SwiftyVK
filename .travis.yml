@@ -1,34 +1,32 @@
 language: objective-c
+os: osx
 osx_image: xcode9
 xcode_sdk: iphonesimulator10.2
 
 branches:
-except:
-- v3
+  only:
+    - master
+    - v3
 
 env:
   global:
   - LC_CTYPE=en_US.UTF-8
   - LANG=en_US.UTF-8
-  - WORKSPACE=SwiftyVK.xcworkspace
+  - JOB= SwiftLint
+  - JOB=MacOS
+  - JOB=iOS
+  - JOB=CocoaPods
 
-  - MAC_SCHEME="SwiftyVK_macOS"
-
-  - IOS_SCHEME="SwiftyVK_iOS"
-  - IOS_DESTANATION="platform=iOS Simulator,OS=10.3.1,name=iPhone 7 Plus"
-
-before_install:
-  - set -o pipefail
-
-install:
-  - gem install xcpretty-travis-formatter
-  - ./.install_swiftlint.sh
-
-script:
-  - swiftlint lint --path ./Library --config ./Library/.swiftlint.yml --strict
-  - pod lib lint
-  - xcodebuild -workspace "$WORKSPACE" -scheme "$IOS_SCHEME" -destination "$IOS_DESTANATION" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" -enableCodeCoverage YES test | xcpretty -f `xcpretty-travis-formatter`
-  - xcodebuild -workspace "$WORKSPACE" -scheme "$MAC_SCHEME" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_TESTABILITY=YES -enableCodeCoverage YES test | xcpretty -f `xcpretty-travis-formatter`
-
-after_success:
-- bash <(curl -s https://codecov.io/bash)
+jobs:
+  include:
+    - stage: test
+      script: swiftlint lint --path Library --strict
+    - stage: test
+      script: ./Scripts/macOS-tests.sh
+    - stage: test
+      script: ./Scripts/iOS-tests.sh
+    - stage: test
+      script: pod lib lint
+    - stage: deploy
+      env: JOB=Codecov
+      script: bash <(curl -s https://codecov.io/bash)
