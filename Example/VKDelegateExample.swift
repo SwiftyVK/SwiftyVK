@@ -16,6 +16,10 @@ final class VKDelegateExample: SwiftyVKDelegate {
     init() {
         VK.setUp(appId: appId, delegate: self)
     }
+    
+    func vkNeedsScopes(for sessionId: String) -> Scopes {
+        return scopes
+    }
 
     func vkNeedToPresent(viewController: VKViewController) {
         #if os(macOS)
@@ -39,13 +43,5 @@ final class VKDelegateExample: SwiftyVKDelegate {
     
     func vkTokenRemoved(for sessionId: String) {
         print("token removed in session \(sessionId)")
-    }
-    
-    func vkNeedsScopes(for sessionId: String) -> Scopes {
-        return scopes
-    }
-    
-    func vkDidLogOut(for sessionId: String) {
-        print("logout in", sessionId)
     }
 }

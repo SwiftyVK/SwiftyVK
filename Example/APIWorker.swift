@@ -43,29 +43,37 @@ final class APIWorker {
     
     class func captcha() {
         VK.API.Custom.method(name: "captcha.force")
-            .onSuccess { print("SwiftyVK: captcha.force success \n \($0)") }
-            .onError { print("SwiftyVK: captcha.force fail \n \($0)") }
+            .onSuccess { print("SwiftyVK: captcha.force successed with \n \($0)") }
+            .onError { print("SwiftyVK: captcha.force failed with \n \($0)") }
             .send()
     }
     
     class func validation() {
         VK.API.Custom.method(name: "account.testValidation")
-            .onSuccess { print("SwiftyVK: account.testValidation success \n \($0)") }
-            .onError { print("SwiftyVK: account.testValidation fail \n \($0)") }
+            .onSuccess { print("SwiftyVK: account.testValidation successed with \n \($0)") }
+            .onError { print("SwiftyVK: account.testValidation failed with \n \($0)") }
             .send()
     }
     
     class func usersGet() {
-        VK.API.Users.get([Parameter.userId : "1"])
-            .onSuccess { print("SwiftyVK: users.get success \n \($0)") }
+        VK.API.Users.get(.empty).send()
+        
+        VK.API.Users.get([
+            .userId: "1",
+            .fields: "sex,bdate,city"
+            ])
+            .onSuccess { print("SwiftyVK: users.get successed with \n \($0)") }
             .onError { print("SwiftyVK: friends.get fail \n \($0)") }
             .send()
     }
     
     class func friendsGet() {
-        VK.API.Friends.get([.count : "1", .fields : "city,domain"])
-            .onSuccess { print("SwiftyVK: friends.get success \n \($0)") }
-            .onError { print("SwiftyVK: friends.get fail \n \($0)") }
+        VK.API.Friends.get([
+            .count : "1",
+            .fields : "city,domain"
+            ])
+            .onSuccess { print("SwiftyVK: friends.get successed with \n \($0)") }
+            .onError { print("SwiftyVK: friends.get failed with \n \($0)") }
             .send()
     }
     
@@ -74,8 +82,8 @@ final class APIWorker {
         let media = Media.image(data: data, type: .jpg)
         
         VK.API.Upload.Photo.toWall(media, to: .user(id: "4680178"))
-            .onSuccess { print("SwiftyVK: friendsGet success \n \($0)") }
-            .onError { print("SwiftyVK: friendsGet fail \n \($0)")}
+            .onSuccess { print("SwiftyVK: friendsGet successed with \n \($0)") }
+            .onError { print("SwiftyVK: friendsGet failed with \n \($0)")}
             .onProgress { print("\($0) \($1) of \($2)")}
             .send()
     }
