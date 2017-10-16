@@ -1,5 +1,5 @@
 public struct RequestCallbacks {
-    public typealias Success = (Data) -> ()
+    public typealias Success = (Data) throws -> ()
     public typealias Error = (VKError) -> ()
     public typealias Progress = (_ type: ProgressType, _ current: Int64, _ of: Int64) -> ()
 

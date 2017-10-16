@@ -137,7 +137,9 @@ final class TaskImpl: Operation, Task {
                 tryToSend()
             }
             else {
-                perform(response: response)
+                tryToPerform {
+                    try perform(response: response)
+                }
             }
         case .error(let error):
             catchApiError(error: error)
@@ -190,10 +192,10 @@ final class TaskImpl: Operation, Task {
         semaphore.signal()
     }
     
-    private func perform(response: Data) {
+    private func perform(response: Data) throws {
         guard !isCancelled && !isFinished else { return }
+        try currentRequest.callbacks.onSuccess?(response)
         state = .finished(response)
-        currentRequest.callbacks.onSuccess?(response)
         semaphore.signal()
     }
 }
