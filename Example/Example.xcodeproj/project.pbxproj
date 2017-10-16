@@ -22,8 +22,6 @@
 		A2527E871BD13A5300F65412 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2527E851BD13A5300F65412 /* LaunchScreen.storyboard */; };
 		A2527EBD1BD13F7E00F65412 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527EBC1BD13F7E00F65412 /* APIWorker.swift */; };
 		A2527EBE1BD13F7E00F65412 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527EBC1BD13F7E00F65412 /* APIWorker.swift */; };
-		D47E1CE01F934C31002BB2AC /* .travis-script.sh in Resources */ = {isa = PBXBuildFile; fileRef = D47E1CD81F934C31002BB2AC /* .travis-script.sh */; };
-		D47E1CE11F934C31002BB2AC /* .travis-script.sh in Resources */ = {isa = PBXBuildFile; fileRef = D47E1CD81F934C31002BB2AC /* .travis-script.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -376,7 +374,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A204446C1EE2DFE700612E57 /* Main.storyboard in Resources */,
-				D47E1CE11F934C31002BB2AC /* .travis-script.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,7 +382,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2527E871BD13A5300F65412 /* LaunchScreen.storyboard in Resources */,
-				D47E1CE01F934C31002BB2AC /* .travis-script.sh in Resources */,
 				A2527E821BD13A5300F65412 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

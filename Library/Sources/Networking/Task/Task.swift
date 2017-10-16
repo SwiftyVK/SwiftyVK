@@ -103,21 +103,21 @@ final class TaskImpl: Operation, Task {
         
         let newAttempt = attemptMaker.attempt(
             request: urlRequest,
-            callbacks: AttemptCallbacks(onFinish: handleResult, onSent: handleSended, onRecive: handleReceived)
+            callbacks: AttemptCallbacks(onFinish: handleResult, onSent: handleSent, onRecive: handleReceive)
         )
 
         currentAttempt = newAttempt
         try session.shedule(attempt: newAttempt, concurrent: currentRequest.canSentConcurrently)
     }
     
-    private func handleSended(_ current: Int64, of expected: Int64) {
+    private func handleSent(_ current: Int64, of expected: Int64) {
         guard !isCancelled && currentRequest.config.handleProgress else { return }
-        currentRequest.callbacks.onProgress?(.sended, current, expected)
+        currentRequest.callbacks.onProgress?(.sent(current: current, of: expected))
     }
     
-    private func handleReceived(_ current: Int64, of expected: Int64) {
+    private func handleReceive(_ current: Int64, of expected: Int64) {
         guard !isCancelled && currentRequest.config.handleProgress else { return }
-        currentRequest.callbacks.onProgress?(.recieved, current, expected)
+        currentRequest.callbacks.onProgress?(.recieve(current: current, of: expected))
     }
     
     private func handleResult(_ result: Response) {

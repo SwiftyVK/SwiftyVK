@@ -45,7 +45,7 @@ final class TaskTests: XCTestCase {
     
     func test_callbacksContainsRecievedBytes_whenAttemptRecieveBytes() {
         // Given
-        var progressResult: (type: ProgressType, current: Int64, total: Int64)?
+        var progressResult: (type: Progress, current: Int64, total: Int64)?
         let context = makeContext(
             configure: {
                 $0.onRecive(100, 1000)
@@ -63,7 +63,7 @@ final class TaskTests: XCTestCase {
     
     func test_callbacksContainsSendedBytes_whenAttemptSentBytes() {
         // Given
-        var progressResult: (type: ProgressType, current: Int64, total: Int64)?
+        var progressResult: (type: Progress, current: Int64, total: Int64)?
         let context = makeContext(
             configure: {
                 $0.onSent(100, 1000)
