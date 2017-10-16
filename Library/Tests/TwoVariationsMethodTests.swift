@@ -53,7 +53,7 @@ final class TwoVariationsMethodTests: XCTestCase {
         // Given
         let originalMethod = Methods.SuccessableProgressable(Request(type: .url("")))
         // When
-        let mutatedMethod = originalMethod.onProgress { _,_,_  in }
+        let mutatedMethod = originalMethod.onProgress { _  in }
         // Then
         XCTAssertTrue(type(of: mutatedMethod) == Methods.Successable.self)
     }
@@ -89,7 +89,7 @@ final class TwoVariationsMethodTests: XCTestCase {
         // Given
         let originalMethod = Methods.FailableProgressable(Request(type: .url("")))
         // When
-        let mutatedMethod = originalMethod.onProgress { _,_,_  in }
+        let mutatedMethod = originalMethod.onProgress { _  in }
         // Then
         XCTAssertTrue(type(of: mutatedMethod) == Methods.Failable.self)
     }
@@ -107,7 +107,7 @@ final class TwoVariationsMethodTests: XCTestCase {
         // Given
         let originalMethod = Methods.ProgressableConfigurable(Request(type: .url("")))
         // When
-        let mutatedMethod = originalMethod.onProgress { _,_,_  in }
+        let mutatedMethod = originalMethod.onProgress { _  in }
         // Then
         XCTAssertTrue(type(of: mutatedMethod) == Methods.Configurable.self)
     }

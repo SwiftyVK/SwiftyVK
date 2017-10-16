@@ -45,38 +45,46 @@ final class TaskTests: XCTestCase {
     
     func test_callbacksContainsRecievedBytes_whenAttemptRecieveBytes() {
         // Given
-        var progressResult: (type: Progress, current: Int64, total: Int64)?
+        var progressResult: ProgressType?
         let context = makeContext(
             configure: {
                 $0.onRecive(100, 1000)
                 $0.onFinish(.unexpectedError)
             },
-            callbacks: RequestCallbacks(onProgress: { progressResult = ($0, $1, $2) })
+            callbacks: RequestCallbacks(onProgress: { progressResult = $0 })
         )
         // When
         context.task.main()
         // Then
-        XCTAssertEqual(progressResult?.type, .recieved)
-        XCTAssertEqual(progressResult?.current, 100)
-        XCTAssertEqual(progressResult?.total, 1000)
+        switch progressResult {
+        case let .recieve(current, total)?:
+            XCTAssertEqual(current, 100)
+            XCTAssertEqual(total, 1000)
+        default:
+            XCTFail("Unexpected progress type")
+        }
     }
     
     func test_callbacksContainsSendedBytes_whenAttemptSentBytes() {
         // Given
-        var progressResult: (type: Progress, current: Int64, total: Int64)?
+        var progressResult: ProgressType?
         let context = makeContext(
             configure: {
                 $0.onSent(100, 1000)
                 $0.onFinish(.unexpectedError)
             },
-            callbacks: RequestCallbacks(onProgress: { progressResult = ($0, $1, $2) })
+            callbacks: RequestCallbacks(onProgress: { progressResult = $0 })
         )
         // When
         context.task.main()
         // Then
-        XCTAssertEqual(progressResult?.type, .sended)
-        XCTAssertEqual(progressResult?.current, 100)
-        XCTAssertEqual(progressResult?.total, 1000)
+        switch progressResult {
+        case let .sent(current, total)?:
+            XCTAssertEqual(current, 100)
+            XCTAssertEqual(total, 1000)
+        default:
+            XCTFail("Unexpected progress type")
+        }
     }
     
     func test_callbacksNotCalled_whenTaskCancelled() {
@@ -87,7 +95,7 @@ final class TaskTests: XCTestCase {
             callbacks: RequestCallbacks(
                 onSuccess: { _ in callbacksCalled = true },
                 onError: { _ in callbacksCalled = true },
-                onProgress: { _,_,_ in callbacksCalled = true }
+                onProgress: { _ in callbacksCalled = true }
             ),
             shouldCancel: true
         )

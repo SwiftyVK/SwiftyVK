@@ -35,7 +35,7 @@ final class OneVariationsMethodTests: XCTestCase {
         // Given
         let originalMethod = Methods.Progressable(Request(type: .url("")))
         // When
-        let mutatedMethod = originalMethod.onProgress { _,_,_  in }
+        let mutatedMethod = originalMethod.onProgress { _ in }
         // Then
         XCTAssertTrue(type(of: mutatedMethod) == Methods.Basic.self)
     }

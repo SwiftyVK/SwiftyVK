@@ -22,7 +22,7 @@ final class LongPollTaskTests: XCTestCase {
         )
         
         context.session.onSend = { method in
-            method.toRequest().callbacks.onSuccess?(data)
+            try? method.toRequest().callbacks.onSuccess?(data)
         }
         // When
         context.operation.main()
@@ -49,7 +49,7 @@ final class LongPollTaskTests: XCTestCase {
         )
         
         context.session.onSend = { method in
-            method.toRequest().callbacks.onSuccess?(data)
+            try? method.toRequest().callbacks.onSuccess?(data)
         }
         // When
         context.operation.main()
@@ -73,7 +73,7 @@ final class LongPollTaskTests: XCTestCase {
         )
         
         context.session.onSend = { method in
-            method.toRequest().callbacks.onSuccess?(data)
+            try? method.toRequest().callbacks.onSuccess?(data)
         }
         // When
         context.operation.main()
@@ -101,7 +101,7 @@ final class LongPollTaskTests: XCTestCase {
                 method.toRequest().callbacks.onError?(.unexpectedResponse)
             }
             else {
-                method.toRequest().callbacks.onSuccess?(Data())
+                try? method.toRequest().callbacks.onSuccess?(Data())
             }
         }
         // When
@@ -125,7 +125,7 @@ final class LongPollTaskTests: XCTestCase {
         
         context.session.onSend = { method in
             context.operation.cancel()
-            method.toRequest().callbacks.onSuccess?(data)
+            try? method.toRequest().callbacks.onSuccess?(data)
         }
         // When
         context.operation.main()

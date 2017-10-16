@@ -1,7 +1,7 @@
 public struct RequestCallbacks {
     public typealias Success = (Data) throws -> ()
     public typealias Error = (VKError) -> ()
-    public typealias Progress = (SwiftyVK.Progress) -> ()
+    public typealias Progress = (ProgressType) -> ()
 
     public static let empty = RequestCallbacks()
     
@@ -20,7 +20,7 @@ public struct RequestCallbacks {
     }
 }
 
-public enum Progress {
+public enum ProgressType {
     case sent(current: Int64, of: Int64)
     case recieve(current: Int64, of: Int64)
 }

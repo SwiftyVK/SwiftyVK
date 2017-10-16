@@ -89,7 +89,7 @@ final class LongPollTests: XCTestCase {
         }
         
         context.session.onSend = { method in
-            method.toRequest().callbacks.onSuccess?(longPollServerResponseData)
+            try? method.toRequest().callbacks.onSuccess?(longPollServerResponseData)
         }
         
         // When
@@ -140,7 +140,7 @@ final class LongPollTests: XCTestCase {
         }
         
         context.session.onSend = { method in
-            method.toRequest().callbacks.onSuccess?(longPollServerResponseData)
+            try? method.toRequest().callbacks.onSuccess?(longPollServerResponseData)
         }
         
         // When
@@ -194,7 +194,7 @@ final class LongPollTests: XCTestCase {
         
         context.session.onSend = { method in
             getInfoCallCount += 1
-            method.toRequest().callbacks.onSuccess?(longPollServerResponseData)
+            try? method.toRequest().callbacks.onSuccess?(longPollServerResponseData)
         }
         
         // When
@@ -251,7 +251,7 @@ final class LongPollTests: XCTestCase {
                 method.toRequest().callbacks.onError?(.unexpectedResponse)
             }
             else {
-                method.toRequest().callbacks.onSuccess?(longPollServerResponseData)
+                try? method.toRequest().callbacks.onSuccess?(longPollServerResponseData)
             }
         }
         
