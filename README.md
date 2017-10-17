@@ -1,7 +1,7 @@
 # SwiftyVK - easy and powerful way to interact with [VK API](https://vk.com/dev) for iOS and macOS.
 
 [![Swift](https://img.shields.io/badge/Swift-4.0.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
-[![VK API](https://img.shields.io/badge/VK_API-5.62-blue.svg?style=flat)](https://vk.com/dev/versions)
+[![VK API](https://img.shields.io/badge/VK_API-5.68-blue.svg?style=flat)](https://vk.com/dev/versions)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat)](http://cocoadocs.org/docsets/SwiftyVK)
 [![Build Status](https://travis-ci.org/west0r/SwiftyVK.svg?branch=master)](https://travis-ci.org/west0r/SwiftyVK)
 [![Test Coverage](https://img.shields.io/codecov/c/github/west0r/SwiftyVK.svg)](https://codecov.io/gh/west0r/SwiftyVK)
