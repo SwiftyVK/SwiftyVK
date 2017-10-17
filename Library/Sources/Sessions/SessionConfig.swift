@@ -9,22 +9,19 @@ public struct SessionConfig: Codable {
     public var attemptsPerSecLimit: AttemptLimit
     public var attemptTimeout: TimeInterval
     public var handleErrors: Bool
-    public var enableLogging: Bool
     
     public init(
         language: Language = .default,
         attemptsMaxLimit: AttemptLimit = .default,
         attemptsPerSecLimit: AttemptLimit = .default,
         attemptTimeout: TimeInterval = 10,
-        handleErrors: Bool = true,
-        enableLogging: Bool = false
+        handleErrors: Bool = true
         ) {
         self.language = language
         self.attemptsMaxLimit = attemptsMaxLimit
         self.attemptsPerSecLimit = attemptsPerSecLimit
         self.attemptTimeout = attemptTimeout
         self.handleErrors = handleErrors
-        self.enableLogging = enableLogging
     }
 }
 

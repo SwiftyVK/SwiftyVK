@@ -24,9 +24,6 @@ public struct Config {
     var handleErrors: Bool {
         return _handleErrors ?? sessionConfig?.handleErrors ?? true
     }
-    var enableLogging: Bool {
-        return _enableLogging ?? sessionConfig?.enableLogging ?? false
-    }
     
     private(set) var handleProgress: Bool = false
     
@@ -35,7 +32,6 @@ public struct Config {
     private var _attemptsMaxLimit: AttemptLimit?
     private var _attemptTimeout: TimeInterval?
     private var _handleErrors: Bool?
-    private var _enableLogging: Bool?
     private var sessionConfig: SessionConfig?
     
     public init(
@@ -44,15 +40,13 @@ public struct Config {
         language: Language? = nil,
         attemptsMaxLimit: AttemptLimit? = nil,
         attemptTimeout: TimeInterval? = nil,
-        handleErrors: Bool? = nil,
-        enableLogging: Bool? = nil
+        handleErrors: Bool? = nil
         ) {
         self.httpMethod = httpMethod
         _language = language
         _attemptsMaxLimit = attemptsMaxLimit
         _attemptTimeout = attemptTimeout
         _handleErrors = handleErrors
-        _enableLogging = enableLogging
     }
     
     mutating func inject(sessionConfig: SessionConfig) {
@@ -66,8 +60,7 @@ public struct Config {
             language: other._language ?? _language,
             attemptsMaxLimit: other._attemptsMaxLimit ?? _attemptsMaxLimit,
             attemptTimeout: other._attemptTimeout ?? _attemptTimeout,
-            handleErrors: other._handleErrors ?? _handleErrors,
-            enableLogging: other._enableLogging ?? _enableLogging
+            handleErrors: other._handleErrors ?? _handleErrors
         )
         
         newConfig.handleProgress = other.handleProgress
