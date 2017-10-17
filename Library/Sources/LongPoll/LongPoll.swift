@@ -20,6 +20,7 @@ public final class LongPollImpl: LongPoll {
     public var isActive: Bool
     private var isConnected = false
     private var onReceiveEvents: (([LongPollEvent]) -> ())?
+    private var taskData: LongPollTaskData?
     
     init(
         session: Session?,
@@ -79,7 +80,12 @@ public final class LongPollImpl: LongPoll {
 
             guard strongSelf.isActive else { return }
             strongSelf.onReceiveEvents?([.connect])
-            strongSelf.startUpdating()
+            
+            if strongSelf.taskData != nil {
+                strongSelf.startUpdating()
+            } else {
+                strongSelf.updateTaskDataAndStartUpdating()
+            }
         }
     }
     
@@ -94,11 +100,13 @@ public final class LongPollImpl: LongPoll {
         }
     }
     
-    private func startUpdating() {
+    private func updateTaskDataAndStartUpdating() {
+        updatingQueue.cancelAllOperations()
+
         getConnectionInfo { [weak self] connectionInfo in
             guard let strongSelf = self, strongSelf.isActive else { return }
             
-            let data = LongPollTaskData(
+            strongSelf.taskData = LongPollTaskData(
                 server: connectionInfo.server,
                 startTs: connectionInfo.ts,
                 lpKey: connectionInfo.lpKey,
@@ -108,18 +116,24 @@ public final class LongPollImpl: LongPoll {
                     strongSelf.onReceiveEvents?(events)
                 },
                 onKeyExpired: {
-                    strongSelf.updatingQueue.cancelAllOperations()
-                    strongSelf.startUpdating()
+                    strongSelf.updateTaskDataAndStartUpdating()
                 }
             )
             
-            strongSelf.updatingQueue.cancelAllOperations()
-            
-            guard strongSelf.isConnected else { return }
-            
-            let operation = strongSelf.operationMaker.longPollTask(session: strongSelf.session, data: data)
-            strongSelf.updatingQueue.addOperation(operation.toOperation())
+            strongSelf.startUpdating()
         }
+    }
+    
+    private func startUpdating() {
+        updatingQueue.cancelAllOperations()
+        
+        guard
+            isConnected,
+            let data = taskData
+            else { return }
+        
+        let operation = operationMaker.longPollTask(session: session, data: data)
+        updatingQueue.addOperation(operation.toOperation())
     }
     
     private func getConnectionInfo(completion: @escaping ((server: String, lpKey: String, ts: String)) -> ()) {
