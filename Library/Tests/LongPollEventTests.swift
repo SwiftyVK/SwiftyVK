@@ -19,7 +19,7 @@ final class LongPollEventTests: XCTestCase {
         XCTAssertEqual(events.count, updates.count)
         
         for event in events {
-            XCTAssertFalse(event.data.isEmpty)
+            XCTAssertFalse(event.data?.isEmpty ?? true)
         }
     }
     
