@@ -56,22 +56,14 @@ final class APIWorker {
     }
     
     class func usersGet() {
-        VK.API.Users.get(.empty).send()
-        
-        VK.API.Users.get([
-            .userId: "1",
-            .fields: "sex,bdate,city"
-            ])
+        VK.API.Users.get(.empty)
             .onSuccess { print("SwiftyVK: users.get successed with \n \($0)") }
             .onError { print("SwiftyVK: friends.get fail \n \($0)") }
             .send()
     }
     
     class func friendsGet() {
-        VK.API.Friends.get([
-            .count : "1",
-            .fields : "city,domain"
-            ])
+        VK.API.Friends.get(.empty)
             .onSuccess { print("SwiftyVK: friends.get successed with \n \($0)") }
             .onError { print("SwiftyVK: friends.get failed with \n \($0)") }
             .send()
