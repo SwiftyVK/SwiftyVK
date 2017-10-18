@@ -1,8 +1,10 @@
 public struct SessionConfig: Codable {
     
+    public static let currentApiVersion = "5.68"
+    
     public static let `default` = SessionConfig()
     
-    public var apiVersion = "5.68"
+    public var apiVersion = SessionConfig.currentApiVersion
     public let sdkVersion = "1.3.17"
     public var language: Language
     public var attemptsMaxLimit: AttemptLimit
@@ -11,17 +13,19 @@ public struct SessionConfig: Codable {
     public var handleErrors: Bool
     
     public init(
-        language: Language = .default,
-        attemptsMaxLimit: AttemptLimit = .default,
-        attemptsPerSecLimit: AttemptLimit = .default,
-        attemptTimeout: TimeInterval = 10,
-        handleErrors: Bool = true
+        apiVersion: String? = SessionConfig.currentApiVersion,
+        language: Language? = .default,
+        attemptsMaxLimit: AttemptLimit? = .default,
+        attemptsPerSecLimit: AttemptLimit? = .default,
+        attemptTimeout: TimeInterval? = 10,
+        handleErrors: Bool? = true
         ) {
-        self.language = language
-        self.attemptsMaxLimit = attemptsMaxLimit
-        self.attemptsPerSecLimit = attemptsPerSecLimit
-        self.attemptTimeout = attemptTimeout
-        self.handleErrors = handleErrors
+        self.apiVersion = apiVersion ?? SessionConfig.currentApiVersion
+        self.language = language ?? .default
+        self.attemptsMaxLimit = attemptsMaxLimit ?? .default
+        self.attemptsPerSecLimit = attemptsPerSecLimit ?? .default
+        self.attemptTimeout = attemptTimeout ?? 10
+        self.handleErrors = handleErrors ?? true
     }
 }
 

@@ -301,7 +301,7 @@ final class SessionTests: XCTestCase {
         
         context.session.logOut()
         // Then
-        XCTAssertEqual(context.session.state, .initiated)
+        XCTAssertEqual(context.session.state, .destroyed)
     }
     
     func test_logOut_withoutToken() {
@@ -310,7 +310,7 @@ final class SessionTests: XCTestCase {
         // When
         context.session.logOut()
         // Then
-        XCTAssertEqual(context.session.state, .initiated)
+        XCTAssertEqual(context.session.state, .destroyed)
     }
     
     func test_sendTask_whenSessionDestroyed() {

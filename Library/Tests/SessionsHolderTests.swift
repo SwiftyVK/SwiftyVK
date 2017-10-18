@@ -36,19 +36,6 @@ final class SessionsHolderTests: XCTestCase {
         XCTAssertEqual(newSession.state, .destroyed)
     }
     
-    func test_destroyDefaultSession_shouldBeFail() {
-        // Given
-        let holder = makeHolder()
-        // When
-        do {
-            try holder.destroy(session: holder.default)
-        } catch let error {
-            // Then
-            XCTAssertEqual(error.asVK, VKError.cantDestroyDefaultSession)
-            
-        }
-    }
-    
     func test_destroyDeadSession_shouldBeFail() {
         // Given
         let holder = makeHolder()
@@ -56,10 +43,11 @@ final class SessionsHolderTests: XCTestCase {
         // When
         do {
             try holder.destroy(session: session)
+            try holder.destroy(session: session)
+            XCTFail("Unexpected behavior")
         } catch let error {
             // Then
             XCTAssertEqual(error.asVK, VKError.sessionAlreadyDestroyed(session))
-            
         }
     }
     
@@ -70,5 +58,19 @@ final class SessionsHolderTests: XCTestCase {
         let sessions = [holder.make(), holder.make(), holder.make(), holder.make(), holder.default]
         // Then
         XCTAssertEqual(holder.all.count, sessions.count)
+    }
+    
+    func test_changeSefault() {
+        // Given
+        let holder = makeHolder()
+        let oldDefaultId = holder.default.id
+        holder.default.config = SessionConfig(apiVersion: "TEST")
+        // When
+        try? holder.destroy(session: holder.default)
+        let newDefaultId = holder.default.id
+        let newConfig = holder.default.config
+        // Then
+        XCTAssertNotEqual(oldDefaultId, newDefaultId)
+        XCTAssertEqual(newConfig.apiVersion, "TEST")
     }
 }

@@ -137,9 +137,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     }
     
     public func logOut() {
-        gateQueue.sync {
-            self.token = self.authorizator.reset(sessionId: self.id)
-        }
+        destroy()
     }
     
     public func validate(redirectUrl: URL) throws {
@@ -227,9 +225,8 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     }
     
     func destroy() {
-        self.logOut()
-        
         gateQueue.sync {
+            self.token = self.authorizator.reset(sessionId: self.id)
             self.id = ""
         }
     }

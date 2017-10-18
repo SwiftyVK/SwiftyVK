@@ -22,10 +22,34 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     private let sessionMaker: SessionMaker
     private let sessionsStorage: SessionsStorage
     private var sessions = NSHashTable<AnyObject>(options: .strongMemory)
-    private var canKillDefaultSessions = false
     
-    lazy public var `default`: Session = {
-        self.sessionMaker.session(id: .random(20), config: .default, sessionSaver: self)
+    public var `default`: Session {
+        get {
+            if storedDefault.state == .destroyed {
+                sessions.remove(storedDefault)
+                
+                storedDefault = self.sessionMaker.session(
+                    id: .random(20),
+                    config: storedDefault.config,
+                    sessionSaver: self
+                )
+                
+                sessions.add(storedDefault)
+            }
+            
+            return storedDefault
+        }
+        set {
+            storedDefault = newValue
+        }
+    }
+    
+    lazy private var storedDefault: Session = {
+        self.sessionMaker.session(
+            id: .random(20),
+            config: .default,
+            sessionSaver: self
+        )
     }()
     
     public var all: [Session] {
@@ -49,7 +73,11 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     }
     
     public func make(config: SessionConfig) -> Session {
-        let session = sessionMaker.session(id: .random(20), config: config, sessionSaver: self)
+        let session = sessionMaker.session(
+            id: .random(20),
+            config: config,
+            sessionSaver: self
+        )
         
         sessions.add(session)
         saveState()
@@ -57,10 +85,6 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     }
     
     public func destroy(session: Session) throws {
-        if !canKillDefaultSessions && session == `default` {
-            throw VKError.cantDestroyDefaultSession
-        }
-        
         if session.state == .destroyed {
             throw VKError.sessionAlreadyDestroyed(session)
         }

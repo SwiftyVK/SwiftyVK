@@ -41,7 +41,9 @@ final class AttemptMakerMock: AttemptMaker {
 final class SessionMakerMock: SessionMaker {
     
     func session(id: String, config: SessionConfig, sessionSaver: SessionSaver) -> Session {
-        return SessionMock()
+        let session = SessionMock()
+        session.config = config
+        return session
     }
 }
 

@@ -17,7 +17,6 @@ extension VKError: Equatable {
         (.cantMakeCapthaImageUrl, .cantMakeCapthaImageUrl),
         (.vkDelegateNotFound, .vkDelegateNotFound),
         (.cantParseTokenInfo, .cantParseTokenInfo),
-        (.cantDestroyDefaultSession, .cantDestroyDefaultSession),
         (.sessionAlreadyDestroyed, .sessionAlreadyDestroyed),
         (.sessionAlreadyAuthorized, .sessionAlreadyAuthorized),
         (.cantBuildWebViewUrl, .cantBuildWebViewUrl),
