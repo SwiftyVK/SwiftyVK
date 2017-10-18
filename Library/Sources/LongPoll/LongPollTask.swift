@@ -10,7 +10,7 @@ final class LongPollTaskImpl: Operation, LongPollTask {
     private let lpKey: String
     private let delayOnError: TimeInterval
     private let onResponse: ([JSON]) -> ()
-    private let onKeyExpired: () -> ()
+    private let onError: (LongPollTaskError) -> ()
     private var currentTask: Task?
     private let semaphore = DispatchSemaphore(value: 0)
     private let repeatQueue = DispatchQueue.global(qos: .utility)
@@ -26,7 +26,7 @@ final class LongPollTaskImpl: Operation, LongPollTask {
         self.startTs = data.startTs
         self.delayOnError = delayOnError
         self.onResponse = data.onResponse
-        self.onKeyExpired = data.onKeyExpired
+        self.onError = data.onError
     }
     
     override func main() {
@@ -47,9 +47,8 @@ final class LongPollTaskImpl: Operation, LongPollTask {
                     return
                 }
                 
-                if response.forcedInt("failed") > 0 {
-                    strongSelf.onKeyExpired()
-                    strongSelf.semaphore.signal()
+                if let errorCode = response.int("failed") {
+                    strongSelf.handleError(code: errorCode, response: response)
                 }
                 else {
                     let newTs = response.forcedString("ts")
@@ -72,6 +71,29 @@ final class LongPollTaskImpl: Operation, LongPollTask {
             .send(in: session)
     }
     
+    func handleError(code: Int, response: JSON) {
+        switch code {
+        case 1:
+            guard let newTs = response.string("ts") else {
+                onError(.unknown)
+                semaphore.signal()
+                return
+            }
+            
+            onError(.historyMayBeLost)
+            
+            repeatQueue.async { [weak self] in
+                self?.update(ts: newTs)
+            }
+        case 2, 3:
+            onError(.connectionInfoLost)
+            semaphore.signal()
+        default:
+            onError(.unknown)
+            semaphore.signal()
+        }
+    }
+    
     override func cancel() {
         super.cancel()
         currentTask?.cancel()
@@ -84,5 +106,11 @@ struct LongPollTaskData {
     let startTs: String
     let lpKey: String
     let onResponse: ([JSON]) -> ()
-    let onKeyExpired: () -> ()
+    let onError: (LongPollTaskError) -> ()
+}
+
+enum LongPollTaskError {
+    case unknown
+    case historyMayBeLost
+    case connectionInfoLost
 }

@@ -1,8 +1,8 @@
 import Foundation
 
 public enum LongPollEvent {
-    case connect
-    case disconnect
+    case forcedStop
+    case historyMayBeLost
     case type1(data: Data)
     case type2(data: Data)
     case type3(data: Data)

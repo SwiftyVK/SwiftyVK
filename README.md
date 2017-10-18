@@ -428,15 +428,12 @@ VK.sessions?.default.longPoll.start {
 
 LongPollEvent has two special cases:
 
-`.disconnect` - returns when LongPoll was disconnected from server.
-You do not need reconnect LongPoll manually,
-client will do it himself when the network connection is back again.
-Use this case to display "connection not available" indicator or something else like this.
+`.forcedStop` - returns when LongPoll was obtain unexpected error and stop. You can restart it again.
 
-`.connect` - returns when LongPoll was connected to server again.
-Use this case to display "connection available" indicator or something else like this
-and **refresh data which could change during the network was unavailable**
-because LongPoll do not send old events.
+`.historyMayBeLost` - returns when LongPoll was disconnected from server for long time
+and `lpKey` or `timestamp` was outdated.
+You do not need reconnect LongPoll manually, client will do it himself.
+Use this case to **refresh data which could change during the network was unavailable**
 
 ## Stop LongPoll
 

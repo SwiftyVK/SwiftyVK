@@ -73,6 +73,8 @@
 		A2F6F8E51EDDF00400933DBC /* AtomicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6F8E41EDDF00400933DBC /* AtomicTests.swift */; };
 		A2F7B5551EF18C5C006AF76C /* CaptchaPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */; };
 		D4040E2D1F62C12000025E24 /* longPoll.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */; };
+		D40B451E1F979C80000221DE /* longPoll.failed.2.json in Resources */ = {isa = PBXBuildFile; fileRef = D40B451D1F979C80000221DE /* longPoll.failed.2.json */; };
+		D40B451F1F979C80000221DE /* longPoll.failed.2.json in Resources */ = {isa = PBXBuildFile; fileRef = D40B451D1F979C80000221DE /* longPoll.failed.2.json */; };
 		D41665401F6192CA000E6934 /* LongPollTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D416653F1F6192CA000E6934 /* LongPollTaskMock.swift */; };
 		D41665421F6193BD000E6934 /* LongPollTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665411F6193BD000E6934 /* LongPollTests.swift */; };
 		D41665441F6198C0000E6934 /* ConnectionObserverMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665431F6198C0000E6934 /* ConnectionObserverMock.swift */; };
@@ -89,6 +91,8 @@
 		D4321D931F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4321D921F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift */; };
 		D43E658D1F7D526100AF48C8 /* CookiesHolderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43E658A1F7D524A00AF48C8 /* CookiesHolderMock.swift */; };
 		D44348F91F3B71F5008B2B50 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44348F71F3B70F4008B2B50 /* JSONTests.swift */; };
+		D44C80EE1F967F85004E3CF4 /* longPoll.failed.1.json in Resources */ = {isa = PBXBuildFile; fileRef = D44C80EB1F967F13004E3CF4 /* longPoll.failed.1.json */; };
+		D44C80EF1F967F86004E3CF4 /* longPoll.failed.1.json in Resources */ = {isa = PBXBuildFile; fileRef = D44C80EB1F967F13004E3CF4 /* longPoll.failed.1.json */; };
 		D44EC0121F55D4DF00F8BB4A /* VKReachabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */; };
 		D44EC0161F55D50600F8BB4A /* VKNotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */; };
 		D44EC0181F55DC4A00F8BB4A /* ConnectionObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */; };
@@ -139,7 +143,7 @@
 		D46FB4171F929DC6000CEAEB /* longPoll.getServer.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4CA9B751F66CA890085E4F3 /* longPoll.getServer.success.json */; };
 		D46FB4181F929DC6000CEAEB /* longPoll.updates.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D941F6048B50099FC42 /* longPoll.updates.json */; };
 		D46FB4191F929DC6000CEAEB /* longPoll.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */; };
-		D46FB41A1F929DC6000CEAEB /* longPoll.failed.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */; };
+		D46FB41A1F929DC6000CEAEB /* longPoll.failed.1.withTs.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D9C1F6055290099FC42 /* longPoll.failed.1.withTs.json */; };
 		D46FB41B1F929DC6000CEAEB /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
 		D46FB41C1F929DCB000CEAEB /* VkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C70531F45F33F00EA454C /* VkError.swift */; };
 		D46FB41D1F929DCB000CEAEB /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795A81F4DFB9E00921A21 /* ApiError.swift */; };
@@ -207,7 +211,7 @@
 		D49795AB1F4DFC2400921A21 /* ApiMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795AA1F4DFC2400921A21 /* ApiMethod.swift */; };
 		D4AB8D931F6044190099FC42 /* LongPollTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB8D921F6044190099FC42 /* LongPollTaskTests.swift */; };
 		D4AB8D9B1F6048EA0099FC42 /* longPoll.updates.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D941F6048B50099FC42 /* longPoll.updates.json */; };
-		D4AB8D9D1F6055290099FC42 /* longPoll.failed.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */; };
+		D4AB8D9D1F6055290099FC42 /* longPoll.failed.1.withTs.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D9C1F6055290099FC42 /* longPoll.failed.1.withTs.json */; };
 		D4BBFEAB1F929891009615E7 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDFE1F9297AA009615E7 /* Storage.swift */; };
 		D4BBFEAC1F929891009615E7 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDFF1F9297AA009615E7 /* Messages.swift */; };
 		D4BBFEAD1F929891009615E7 /* Notifacations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFE001F9297AA009615E7 /* Notifacations.swift */; };
@@ -556,6 +560,7 @@
 		A2F6F8E41EDDF00400933DBC /* AtomicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicTests.swift; sourceTree = "<group>"; };
 		A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaPresenterMock.swift; sourceTree = "<group>"; };
 		D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.empty.json; sourceTree = "<group>"; };
+		D40B451D1F979C80000221DE /* longPoll.failed.2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.2.json; sourceTree = "<group>"; };
 		D416653F1F6192CA000E6934 /* LongPollTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollTaskMock.swift; sourceTree = "<group>"; };
 		D41665411F6193BD000E6934 /* LongPollTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollTests.swift; sourceTree = "<group>"; };
 		D41665431F6198C0000E6934 /* ConnectionObserverMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionObserverMock.swift; sourceTree = "<group>"; };
@@ -572,6 +577,7 @@
 		D4321D921F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeVariationsMethodTests.swift; sourceTree = "<group>"; };
 		D43E658A1F7D524A00AF48C8 /* CookiesHolderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookiesHolderMock.swift; sourceTree = "<group>"; };
 		D44348F71F3B70F4008B2B50 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
+		D44C80EB1F967F13004E3CF4 /* longPoll.failed.1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.1.json; sourceTree = "<group>"; };
 		D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKReachabilityMock.swift; sourceTree = "<group>"; };
 		D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNotificationCenterMock.swift; sourceTree = "<group>"; };
 		D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionObserverTests.swift; sourceTree = "<group>"; };
@@ -593,7 +599,7 @@
 		D49795AA1F4DFC2400921A21 /* ApiMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiMethod.swift; sourceTree = "<group>"; };
 		D4AB8D921F6044190099FC42 /* LongPollTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollTaskTests.swift; sourceTree = "<group>"; };
 		D4AB8D941F6048B50099FC42 /* longPoll.updates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = longPoll.updates.json; sourceTree = "<group>"; };
-		D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.json; sourceTree = "<group>"; };
+		D4AB8D9C1F6055290099FC42 /* longPoll.failed.1.withTs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.1.withTs.json; sourceTree = "<group>"; };
 		D4BBFDA51F9297A9009615E7 /* KeychainProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
 		D4BBFDA61F9297A9009615E7 /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		D4BBFDA71F9297A9009615E7 /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
@@ -1206,7 +1212,9 @@
 				D4CA9B751F66CA890085E4F3 /* longPoll.getServer.success.json */,
 				D4AB8D941F6048B50099FC42 /* longPoll.updates.json */,
 				D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */,
-				D4AB8D9C1F6055290099FC42 /* longPoll.failed.json */,
+				D4AB8D9C1F6055290099FC42 /* longPoll.failed.1.withTs.json */,
+				D44C80EB1F967F13004E3CF4 /* longPoll.failed.1.json */,
+				D40B451D1F979C80000221DE /* longPoll.failed.2.json */,
 				D4F49D441F2E0EF60037B875 /* apiError.correct.json */,
 			);
 			path = Data;
@@ -1423,11 +1431,13 @@
 				D47601191F2E21E2005356E5 /* apiError.withoutCode.json in Resources */,
 				D4CA9B761F66CA890085E4F3 /* longPoll.getServer.success.json in Resources */,
 				D476011D1F2E22CA005356E5 /* empty.json in Resources */,
-				D4AB8D9D1F6055290099FC42 /* longPoll.failed.json in Resources */,
+				D40B451E1F979C80000221DE /* longPoll.failed.2.json in Resources */,
+				D4AB8D9D1F6055290099FC42 /* longPoll.failed.1.withTs.json in Resources */,
 				D47601161F2E219A005356E5 /* response.empty.json in Resources */,
 				D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */,
 				D476011B1F2E2229005356E5 /* apiError.withoutMessage.json in Resources */,
 				D4AB8D9B1F6048EA0099FC42 /* longPoll.updates.json in Resources */,
+				D44C80EE1F967F85004E3CF4 /* longPoll.failed.1.json in Resources */,
 				D4040E2D1F62C12000025E24 /* longPoll.empty.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1473,11 +1483,13 @@
 				D46FB4191F929DC6000CEAEB /* longPoll.empty.json in Resources */,
 				D46FB4181F929DC6000CEAEB /* longPoll.updates.json in Resources */,
 				D46FB4131F929DC6000CEAEB /* empty.json in Resources */,
+				D40B451F1F979C80000221DE /* longPoll.failed.2.json in Resources */,
 				D46FB4151F929DC6000CEAEB /* apiError.withoutMessage.json in Resources */,
 				D46FB4161F929DC6000CEAEB /* apiError.withoutCode.json in Resources */,
 				D46FB4141F929DC6000CEAEB /* response.empty.json in Resources */,
-				D46FB41A1F929DC6000CEAEB /* longPoll.failed.json in Resources */,
+				D46FB41A1F929DC6000CEAEB /* longPoll.failed.1.withTs.json in Resources */,
 				D46FB41B1F929DC6000CEAEB /* apiError.correct.json in Resources */,
+				D44C80EF1F967F86004E3CF4 /* longPoll.failed.1.json in Resources */,
 				D46FB4171F929DC6000CEAEB /* longPoll.getServer.success.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

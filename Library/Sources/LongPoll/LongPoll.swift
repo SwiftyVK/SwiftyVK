@@ -17,6 +17,9 @@ public final class LongPollImpl: LongPoll {
     private let synchronyQueue = DispatchQueue.global(qos: .utility)
     private let updatingQueue: OperationQueue
     
+    private let onDisconnected: (() -> ())?
+    private let onConnected: (() -> ())?
+    
     public var isActive: Bool
     private var isConnected = false
     private var onReceiveEvents: (([LongPollEvent]) -> ())?
@@ -26,13 +29,17 @@ public final class LongPollImpl: LongPoll {
         session: Session?,
         operationMaker: LongPollTaskMaker,
         connectionObserver: ConnectionObserver?,
-        getInfoDelay: TimeInterval
+        getInfoDelay: TimeInterval,
+        onConnected: (() -> ())? = nil,
+        onDisconnected: (() -> ())? = nil
         ) {
         self.isActive = false
         self.session = session
         self.operationMaker = operationMaker
         self.connectionObserver = connectionObserver
         self.getInfoDelay = getInfoDelay
+        self.onConnected = onConnected
+        self.onDisconnected = onDisconnected
         
         self.updatingQueue = {
             let queue = OperationQueue()
@@ -75,15 +82,20 @@ public final class LongPollImpl: LongPoll {
     
     private func onConnect() {
         synchronyQueue.async { [weak self] in
-            guard let strongSelf = self, !strongSelf.isConnected else { return }
+            guard
+                let strongSelf = self,
+                !strongSelf.isConnected
+                else { return }
+            
             strongSelf.isConnected = true
 
             guard strongSelf.isActive else { return }
-            strongSelf.onReceiveEvents?([.connect])
+            strongSelf.onConnected?()
             
             if strongSelf.taskData != nil {
                 strongSelf.startUpdating()
-            } else {
+            }
+            else {
                 strongSelf.updateTaskDataAndStartUpdating()
             }
         }
@@ -91,36 +103,36 @@ public final class LongPollImpl: LongPoll {
     
     private func onDisconnect() {
         synchronyQueue.async { [weak self] in
-            guard let strongSelf = self, strongSelf.isConnected else { return }
+            guard
+                let strongSelf = self,
+                strongSelf.isConnected
+                else { return }
+            
             strongSelf.isConnected = false
             
             guard strongSelf.isActive else { return }
             strongSelf.updatingQueue.cancelAllOperations()
-            strongSelf.onReceiveEvents?([.disconnect])
+            strongSelf.onDisconnected?()
         }
     }
     
     private func updateTaskDataAndStartUpdating() {
-        updatingQueue.cancelAllOperations()
-
         getConnectionInfo { [weak self] connectionInfo in
-            guard let strongSelf = self, strongSelf.isActive else { return }
+            guard self?.isActive == true else { return }
             
-            strongSelf.taskData = LongPollTaskData(
+            self?.taskData = LongPollTaskData(
                 server: connectionInfo.server,
                 startTs: connectionInfo.ts,
                 lpKey: connectionInfo.lpKey,
                 onResponse: { updates in
-                    guard strongSelf.isActive == true else { return }
+                    guard self?.isActive == true else { return }
                     let events = updates.flatMap { LongPollEvent(json: $0) }
-                    strongSelf.onReceiveEvents?(events)
+                    self?.onReceiveEvents?(events)
                 },
-                onKeyExpired: {
-                    strongSelf.updateTaskDataAndStartUpdating()
-                }
+                onError: { self?.handleError($0) }
             )
             
-            strongSelf.startUpdating()
+            self?.startUpdating()
         }
     }
     
@@ -137,7 +149,10 @@ public final class LongPollImpl: LongPoll {
     }
     
     private func getConnectionInfo(completion: @escaping ((server: String, lpKey: String, ts: String)) -> ()) {
-        guard let session = session, session.state == .authorized else { return }
+        guard
+            let session = session,
+            session.state == .authorized
+            else { return }
         
         let semaphore = DispatchSemaphore(value: 0)
         
@@ -152,9 +167,7 @@ public final class LongPollImpl: LongPoll {
                     let response = try? JSON(data: data),
                     let server = response.string("server"),
                     let lpKey = response.string("key")
-                    else {
-                        return
-                }
+                    else { return }
                 
                 let ts = response.forcedString("ts")
                 result = (server, lpKey, ts)
@@ -166,13 +179,24 @@ public final class LongPollImpl: LongPoll {
         
         semaphore.wait()
         
-        guard let tryResult = result else {
+        guard let unwrappedResult = result else {
             return synchronyQueue.asyncAfter(deadline: .now() + getInfoDelay) { [weak self] in
                 self?.getConnectionInfo(completion: completion)
             }
         }
         
-        completion(tryResult)
+        completion(unwrappedResult)
+    }
+    
+    private func handleError(_ error: LongPollTaskError) {
+        switch error {
+        case .unknown:
+            onReceiveEvents?([.forcedStop])
+        case .historyMayBeLost:
+            onReceiveEvents?([.historyMayBeLost])
+        case .connectionInfoLost:
+            updateTaskDataAndStartUpdating()
+        }
     }
     
     deinit {

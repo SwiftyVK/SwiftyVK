@@ -16,7 +16,7 @@ final class LongPollTaskTests: XCTestCase {
                 lpResponse = response
                 data = Data()
             },
-            onKeyExpired: {
+            onError: { _ in
                 XCTFail("Response contains unexpected error")
             }
         )
@@ -43,7 +43,7 @@ final class LongPollTaskTests: XCTestCase {
                 lpResponse = response
                 data = Data()
         },
-            onKeyExpired: {
+            onError: { _ in
                 XCTFail("Response contains unexpected error")
         }
         )
@@ -58,17 +58,43 @@ final class LongPollTaskTests: XCTestCase {
         XCTAssertEqual(onSuccessCallCount, 1)
     }
     
-    func test_operation_callKeyExpiredCallback_whenGiveFailedState() {
+    func test_operation_callOnErrorCallback_whenHistoryIsLost() {
         // Given
-        var onKeyExpiredCallCount = 0
-        let data = JsonReader.read("longPoll.failed") ?? Data()
+        var onErrorCallCount = 0
+        let data = JsonReader.read("longPoll.failed.1.withTs") ?? Data()
         
         let context = makeContext(
             onResponse: { _ in
                 XCTFail("Response contains unexpected updates")
             },
-            onKeyExpired: {
-                onKeyExpiredCallCount += 1
+            onError: { error in
+                XCTAssertEqual(error, .historyMayBeLost)
+                onErrorCallCount += 1
+            }
+        )
+        
+        context.session.onSend = { method in
+            try? method.toRequest().callbacks.onSuccess?(data)
+            context.operation.cancel()
+        }
+        // When
+        context.operation.main()
+        // Then
+        XCTAssertEqual(onErrorCallCount, 1)
+    }
+    
+    func test_operation_callOnErrorCallback_whenHistoryIsLostWithoutTs() {
+        // Given
+        var onErrorCallCount = 0
+        let data = JsonReader.read("longPoll.failed.1") ?? Data()
+        
+        let context = makeContext(
+            onResponse: { _ in
+                XCTFail("Response contains unexpected updates")
+            },
+            onError: { error in
+                XCTAssertEqual(error, .unknown)
+                onErrorCallCount += 1
             }
         )
         
@@ -78,7 +104,31 @@ final class LongPollTaskTests: XCTestCase {
         // When
         context.operation.main()
         // Then
-        XCTAssertEqual(onKeyExpiredCallCount, 1)
+        XCTAssertEqual(onErrorCallCount, 1)
+    }
+    
+    func test_operation_callOnErrorCallback_whenConnectionIsLost() {
+        // Given
+        var onErrorCallCount = 0
+        let data = JsonReader.read("longPoll.failed.2") ?? Data()
+        
+        let context = makeContext(
+            onResponse: { _ in
+                XCTFail("Response contains unexpected updates")
+            },
+            onError: { error in
+                XCTAssertEqual(error, .connectionInfoLost)
+                onErrorCallCount += 1
+            }
+        )
+        
+        context.session.onSend = { method in
+            try? method.toRequest().callbacks.onSuccess?(data)
+        }
+        // When
+        context.operation.main()
+        // Then
+        XCTAssertEqual(onErrorCallCount, 1)
     }
     
     func test_operation_sendTwoTimesCallback_whenGiveError() {
@@ -89,7 +139,7 @@ final class LongPollTaskTests: XCTestCase {
             onResponse: { _ in
                 XCTFail("Response contains unexpected updates")
             },
-            onKeyExpired: {
+            onError: { _ in
                 XCTFail("Response contains unexpected error")
             }
         )
@@ -118,7 +168,7 @@ final class LongPollTaskTests: XCTestCase {
             onResponse: { _ in
                 XCTFail("Response contains unexpected updates")
             },
-            onKeyExpired: {
+            onError: { _ in
                 XCTFail("Response contains unexpected error")
             }
         )
@@ -139,7 +189,7 @@ final class LongPollTaskTests: XCTestCase {
             onResponse: { _ in
                 XCTFail("Response contains unexpected updates")
             },
-            onKeyExpired: {
+            onError: { _ in
                 XCTFail("Response contains unexpected error")
             }
         )
@@ -157,7 +207,7 @@ final class LongPollTaskTests: XCTestCase {
 
 private func makeContext(
     onResponse: @escaping ([JSON]) -> (),
-    onKeyExpired: @escaping () -> ()
+    onError: @escaping (LongPollTaskError) -> ()
     ) -> (session: SessionMock, operation: LongPollTaskImpl) {
     let session = SessionMock()
     
@@ -169,7 +219,7 @@ private func makeContext(
             startTs: "",
             lpKey: "",
             onResponse: onResponse,
-            onKeyExpired: onKeyExpired
+            onError: onError
         )
     )
     

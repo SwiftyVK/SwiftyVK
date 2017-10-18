@@ -76,7 +76,7 @@ final class DependenciesTests: XCTestCase {
         // When
         let object = context.factory.longPollTask(
             session: SessionMock(),
-            data: LongPollTaskData(server: "", startTs: "", lpKey: "", onResponse: { _ in }, onKeyExpired: {})
+            data: LongPollTaskData(server: "", startTs: "", lpKey: "", onResponse: { _ in }, onError: { _ in } )
         )
         // Then
         XCTAssertTrue(type(of: object) == LongPollTaskImpl.self)

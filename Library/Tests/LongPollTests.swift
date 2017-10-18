@@ -3,35 +3,33 @@ import XCTest
 @testable import SwiftyVK
 
 final class LongPollTests: XCTestCase {
-    
-    func test_sendConnectEvent_onConnected() {
+
+    func test_callOnConnected_onConnected() {
         // Given
         let expectation = self.expectation(description: "")
-        let context = makeContext()
-        
+        let context = makeContext(
+            onConnected: { expectation.fulfill() },
+            onDisconnected: { XCTFail("Unexpected result") }
+        )
+
         context.session.state = .authorized
-        
+
         context.connectionObserver.onSubscribe = { _, callbacks in
             callbacks.onConnect()
         }
-        
+
         // When
-        context.longPoll.start { events in
-            if case .connect? = events.first {
-                expectation.fulfill()
-            }
-            else {
-                XCTFail("Unexpected events: \(events)")
-            }
-        }
+        context.longPoll.start { _ in }
         // Then
         waitForExpectations(timeout: 5)
     }
-    
-    func test_sendDisconnectEvent_onDisconnected() {
+
+    func test_callOnDisconnected_onDisconnected() {
         // Given
         let expectation = self.expectation(description: "")
-        let context = makeContext()
+        let context = makeContext(
+            onDisconnected: { expectation.fulfill() }
+        )
         
         context.session.state = .authorized
         
@@ -39,23 +37,13 @@ final class LongPollTests: XCTestCase {
             callbacks.onConnect()
             callbacks.onDisconnect()
         }
-        
+
         // When
-        context.longPoll.start { events in
-            if case .connect? = events.first {
-                // Do nothing
-            }
-            else if case .disconnect? = events.first {
-                expectation.fulfill()
-            }
-            else {
-                XCTFail("Unexpected events: \(events)")
-            }
-        }
+        context.longPoll.start { _ in }
         // Then
         waitForExpectations(timeout: 5)
     }
-    
+//
     func test_handleUpdates_whenStarted() {
         // Given
         guard let longPollServerData = JsonReader.read("longPoll.getServer.success") else { return }
@@ -94,13 +82,7 @@ final class LongPollTests: XCTestCase {
         
         // When
         context.longPoll.start { events in
-            if case .connect? = events.first {
-                // Do nothing
-            }
-            else if case .disconnect? = events.first {
-                // Do nothing
-            }
-            else if case .type114? = events.last {
+            if case .type114? = events.last {
                 expectation.fulfill()
             }
             else {
@@ -110,7 +92,7 @@ final class LongPollTests: XCTestCase {
         // Then
         waitForExpectations(timeout: 5)
     }
-    
+
     func test_notHandleUpdates_whenStopped() {
         // Given
         guard let longPollServerData = JsonReader.read("longPoll.getServer.success") else { return }
@@ -145,13 +127,7 @@ final class LongPollTests: XCTestCase {
         
         // When
         context.longPoll.start { events in
-            if case .connect? = events.first {
-                // Do nothing
-            }
-            else if case .disconnect? = events.first {
-                // Do nothing
-            }
-            else {
+            if events.first?.data != nil {
                 XCTFail("Unexpected events: \(events)")
             }
         }
@@ -160,8 +136,8 @@ final class LongPollTests: XCTestCase {
         // Then
         waitForExpectations(timeout: 5)
     }
-    
-    func test_restartingUpdate_whenKeyExpired() {
+
+    func test_restartingUpdate_whenConnectionInfoLost() {
         // Given
         guard let longPollServerData = JsonReader.read("longPoll.getServer.success") else { return }
         guard let longPollServerResponseData = Response(longPollServerData).data else {
@@ -183,7 +159,7 @@ final class LongPollTests: XCTestCase {
             
             operation.onMain = {
                 if getInfoCallCount == 1 {
-                    data.onKeyExpired()
+                    data.onError(.connectionInfoLost)
                 } else {
                     data.onResponse([])
                 }
@@ -199,13 +175,7 @@ final class LongPollTests: XCTestCase {
         
         // When
         context.longPoll.start { events in
-            if case .connect? = events.first {
-                // Do nothing
-            }
-            else if case .disconnect? = events.first {
-                // Do nothing
-            }
-            else if events.isEmpty {
+            if events.isEmpty {
                 expectation.fulfill()
             }
             else {
@@ -217,6 +187,117 @@ final class LongPollTests: XCTestCase {
         XCTAssertEqual(getInfoCallCount, 2)
     }
     
+    func test_restartingUpdate_whenHistoryMayBeLost() {
+        // Given
+        guard let longPollServerData = JsonReader.read("longPoll.getServer.success") else { return }
+        guard let longPollServerResponseData = Response(longPollServerData).data else {
+            return XCTFail("response not parsed")
+        }
+        
+        let expectation = self.expectation(description: "")
+        let context = makeContext()
+        var taskCount = 0
+        
+        context.session.state = .authorized
+        
+        context.connectionObserver.onSubscribe = { _, callbacks in
+            callbacks.onConnect()
+        }
+        
+        context.operationMaker.onMake = { _, data in
+            let operation = LongPollTaskMock()
+            
+            operation.onMain = {
+                taskCount += 1
+
+                if taskCount == 1 {
+                    data.onError(.historyMayBeLost)
+                    operation.onMain?()
+                } else {
+                    data.onResponse([])
+                }
+            }
+            
+            return operation
+        }
+        
+        context.session.onSend = { method in
+            try? method.toRequest().callbacks.onSuccess?(longPollServerResponseData)
+        }
+        
+        // When
+        context.longPoll.start { events in
+            if taskCount == 1 {
+                guard case .historyMayBeLost? = events.first else {
+                    return XCTFail("Unexpected event: \(events.first)")
+                }
+            } else if events.isEmpty {
+                expectation.fulfill()
+            }
+            else {
+                XCTFail("Unexpected events: \(events)")
+            }
+        }
+        // Then
+        waitForExpectations(timeout: 5)
+        XCTAssertEqual(taskCount, 2)
+    }
+    
+    func test_restartingUpdate_whenUnexpectedError() {
+        // Given
+        guard let longPollServerData = JsonReader.read("longPoll.getServer.success") else { return }
+        guard let longPollServerResponseData = Response(longPollServerData).data else {
+            return XCTFail("response not parsed")
+        }
+        
+        let expectation = self.expectation(description: "")
+        let context = makeContext()
+        var taskCount = 0
+        
+        context.session.state = .authorized
+        
+        context.connectionObserver.onSubscribe = { _, callbacks in
+            callbacks.onConnect()
+        }
+        
+        context.operationMaker.onMake = { _, data in
+            let operation = LongPollTaskMock()
+            
+            operation.onMain = {
+                taskCount += 1
+                
+                if taskCount == 1 {
+                    data.onError(.unknown)
+                } else {
+                    data.onResponse([])
+                }
+            }
+            
+            return operation
+        }
+        
+        context.session.onSend = { method in
+            try? method.toRequest().callbacks.onSuccess?(longPollServerResponseData)
+        }
+        
+        // When
+        context.longPoll.start { events in
+            if taskCount == 1 {
+                guard case .forcedStop? = events.first else {
+                    return XCTFail("Unexpected event: \(events.first)")
+                }
+                
+                expectation.fulfill()
+            }
+            else {
+                XCTFail("Unexpected events: \(events)")
+            }
+        }
+        // Then
+        waitForExpectations(timeout: 5)
+        XCTAssertEqual(taskCount, 1)
+    }
+
     func test_restartingUpdate_whenGetInfoFailing() {
         // Given
         guard let longPollServerData = JsonReader.read("longPoll.getServer.success") else { return }
@@ -257,13 +338,7 @@ final class LongPollTests: XCTestCase {
         
         // When
         context.longPoll.start { events in
-            if case .connect? = events.first {
-                // Do nothing
-            }
-            else if case .disconnect? = events.first {
-                // Do nothing
-            }
-            else if events.isEmpty {
+            if events.isEmpty {
                 expectation.fulfill()
             }
             else {
@@ -276,7 +351,10 @@ final class LongPollTests: XCTestCase {
     }
 }
 
-private func makeContext() -> (
+private func makeContext(
+    onConnected: (() -> ())? = nil,
+    onDisconnected: (() -> ())? = nil
+    ) -> (
     session: SessionMock,
     longPoll: LongPollImpl,
     operationMaker: LongPollTaskMakerMock,
@@ -290,8 +368,11 @@ private func makeContext() -> (
         session: session,
         operationMaker: operationMaker,
         connectionObserver: connectionObserver,
-        getInfoDelay: 0.1
+        getInfoDelay: 0.1,
+        onConnected: onConnected,
+        onDisconnected: onDisconnected
     )
     
     return (session, longPoll, operationMaker, connectionObserver)
 }
+
