@@ -4,6 +4,8 @@
 
 🚫 Please fill all fields below and delete this title.
 
+---
+
 ### Description
 
 Describe the issue in detail here
