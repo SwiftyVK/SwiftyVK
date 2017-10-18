@@ -11,7 +11,6 @@ public enum VKError: Error {
     case cantSaveToKeychain(Int32)
     case vkDelegateNotFound
     case cantParseTokenInfo(String)
-    case cantDestroyDefaultSession
     case sessionAlreadyDestroyed(Session)
     case sessionAlreadyAuthorized(Session)
     

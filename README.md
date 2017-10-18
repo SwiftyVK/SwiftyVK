@@ -90,7 +90,7 @@ class VKDelegateExample: SwiftyVKDelegate {
 
     func vkNeedToPresent(viewController: VKViewController) {
       // Called when SwiftyVK wants to present UI (e.g webView or captcha)
-      // Should return current top view controller from your app view hierarchy
+      // Should display given view controller from current top view controller
     }
 
     func vkTokenCreated(for sessionId: String, info: [String : String]) {
