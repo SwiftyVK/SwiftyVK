@@ -1,22 +1,33 @@
-🚫IMPORTANT! If this template is not filled out your issue **will** be closed with no comment. Please fill template and remove this line.🚫
+# 🚫 **ISSUE TEMPLATE** 🚫
 
+🚫 If this template is not filled out with right info, your issue ***will be closed without any comments!***
 
-### New Issue Checklist
+🚫 Please fill all fields below and delete this title.
 
-* [ ] I have looked at the [README.md](./README.md)
-* [ ] I have looked at the [Example project](./Example)
-* [ ] I have filled out this issue template.
+### Description
 
-### Issue Info
+Describe the issue in detail here
 
- Info                    | Value                               |
+### Environment
+
+ Key                     | Value                               |
 -------------------------|-------------------------------------|
  Platform                | e.g. ios/osx
- Platform Version        | e.g. 8.0
-  Swift Version          | e.g. 3.0
- SwiftyVK Version        | e.g. 2.0.0
+ Platform version        | exact version e.g. 8.0
+ Xcode version           | exact version e.g. 9.0
+ Swift version           | exact version e.g. 3.0
+ SwiftyVK version        | exact version e.g. 2.0.0
  Integration Method      | e.g. carthage/cocoapods/manually
  
-### Issue Description
-
-Place description of your issue here
+ ### Checklist
+ 
+ Set [x] in box if you checked this:
+ 
+* [ ] I have looked and not find decision at [README.md](./README.md)
+* [ ] I have looked and not find decision at [Example project](./Example)
+* [ ] I have not find duplicates of this issue on [issues list](https://github.com/west0r/SwiftyVK/issues) 
+* [ ] I made an understandable short title
+* [ ] I made an exhaustive description
+* [ ] I completely described the environment 
+* [ ] I have full filled out this issue template
+* [ ] I use english language
