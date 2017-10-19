@@ -1,14 +1,17 @@
+/// Distionary of [Parameter: String?]
+/// If value is nil it will be ignored
 public typealias Parameters = [Parameter: String?]
 
 extension Dictionary where Key == Parameter, Value == String? {
+    /// Alias to empty parameters dictionary
     public static var empty: [Parameter: String?] {
         return [:]
     }
 }
 
 // swiftlint:disable type_body_length identifier_name
-  ///Parameters for methods VK API
-  public enum Parameter: String, Hashable {
+/// Parameter for VK API methods
+public enum Parameter: String, Hashable {
     case userIDs = "user_ids"
     case fields
     case nameCase = "name_case"
@@ -330,10 +333,10 @@ extension Dictionary where Key == Parameter, Value == String? {
     case lpVersion = "lp_version"
     
     public var hashValue: Int {
-      return self.rawValue.hashValue
+        return self.rawValue.hashValue
     }
-  }
+}
 
 public func == (lhs: Parameter, rhs: Parameter) -> Bool {
-  return lhs.rawValue == rhs.rawValue
+    return lhs.rawValue == rhs.rawValue
 }

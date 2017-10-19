@@ -1,4 +1,5 @@
 extension APIScope {
+    /// https://vk.com/dev/docs
     public enum Docs: APIMethod {
         case add(Parameters)
         case delete(Parameters)

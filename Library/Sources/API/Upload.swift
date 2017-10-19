@@ -1,5 +1,6 @@
 import CoreLocation
 
+/// File uploading target
 public enum UploadTarget {
     case user(id: String)
     case group(id: String)
@@ -16,7 +17,7 @@ public enum UploadTarget {
 
 // swiftlint:disable next nesting
 extension APIScope {
-    //Metods to upload Mediafiles
+    //Metods to upload Mediafiles. More info - https://vk.com/dev/upload_files
     public struct Upload {
         ///Methods to upload photo
         public struct Photo {

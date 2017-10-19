@@ -1,6 +1,9 @@
 public struct RequestCallbacks {
+    /// Clousure (Data) throws -> ()
     public typealias Success = (Data) throws -> ()
+    /// Clousure (VKError) -> ()
     public typealias Error = (VKError) -> ()
+    /// Clousure (ProgressType) -> ()
     public typealias Progress = (ProgressType) -> ()
 
     public static let empty = RequestCallbacks()
@@ -9,7 +12,7 @@ public struct RequestCallbacks {
     var onError: Error?
     var onProgress: Progress?
     
-    public init(
+    init(
         onSuccess: Success? = nil,
         onError: Error? = nil,
         onProgress: Progress? = nil
@@ -20,6 +23,9 @@ public struct RequestCallbacks {
     }
 }
 
+/// Represents progress of VK.API.Upload method group
+/// - sent: progress of sending
+/// - recieve: progress of receiving
 public enum ProgressType {
     case sent(current: Int64, of: Int64)
     case recieve(current: Int64, of: Int64)

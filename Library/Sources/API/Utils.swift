@@ -1,4 +1,5 @@
 extension APIScope {
+    /// https://vk.com/dev/utils
     public enum Utils: APIMethod {
         case checkLink(Parameters)
         case deleteFromLastShortened(Parameters)

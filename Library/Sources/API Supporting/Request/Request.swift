@@ -1,3 +1,4 @@
+/// SwiftyVK internal representation of request
 public final class Request {
     let type: RequestType
     var config: Config

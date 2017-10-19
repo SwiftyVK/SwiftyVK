@@ -1,4 +1,5 @@
 extension APIScope {
+    /// https://vk.com/dev/notes
     public enum Notes: APIMethod {
         case add(Parameters)
         case createComment(Parameters)

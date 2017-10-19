@@ -1,4 +1,5 @@
 extension APIScope {
+    /// https://vk.com/dev/groups
     public enum Groups: APIMethod {
         case addCallbackServer(Parameters)
         case addLink(Parameters)

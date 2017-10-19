@@ -1,4 +1,5 @@
 extension APIScope {
+    /// https://vk.com/dev/market
     public enum Market: APIMethod {
         case searchadd(Parameters)
         case addAlbum(Parameters)

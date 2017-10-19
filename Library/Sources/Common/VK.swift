@@ -1,3 +1,4 @@
+/// SwiftyVK entry point
 public final class VK {
     public static func setUp(appId: String, delegate: SwiftyVKDelegate) {
         guard dependencies == nil else {
@@ -7,6 +8,7 @@ public final class VK {
         dependencies = dependenciesType.init(appId: appId, delegate: delegate)
     }
     
+    /// Returns SwiftyVK user sessions
     public static var sessions: SessionsHolder? {
         return dependencies?.sessionsHolder
     }

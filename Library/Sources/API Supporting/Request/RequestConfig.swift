@@ -1,8 +1,11 @@
 import Foundation
 
+/// Represents request config
 public struct Config {
     
+    /// Config vith default values
     public static let `default` = Config()
+    
     static let upload: Config = {
         var config = Config(httpMethod: .POST)
         config.handleProgress = true
@@ -36,6 +39,21 @@ public struct Config {
     private var _handleErrors: Bool?
     private var sessionConfig: SessionConfig?
     
+    /// Init new sconfig
+    /// - parameter httpMethod: HTTP method. You can use GET or POST.
+    /// For big body (e.g. long message text in message.send method) use POST method.
+    ///
+    /// - parameter apiVersion: VK API version. By default uses latest version.
+    /// If you need different version - change this value.
+    ///
+    /// - parameter language: Language of response. For EN Pavel Durov, for RU Павел Дуров.
+    ///
+    /// - parameter attemptsMaxLimit: Maximum number of attempts to send request before returning an error.
+    ///
+    /// - parameter attemptTimeout: Timeout in seconds of waiting request before returning an error.
+    ///
+    /// - parameter handleErrors: Allows automatically handle specific VK errors
+    /// like authorization, captcha, validation nedеed and present dialog to user for resolve this situation.
     public init(
         httpMethod: HttpMethod = .GET,
         apiVersion: String? = nil,

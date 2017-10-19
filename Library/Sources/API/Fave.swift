@@ -1,4 +1,5 @@
 extension APIScope {
+    /// https://vk.com/dev/fave
     public enum Fave: APIMethod {
         case addGroup(Parameters)
         case addLink(Parameters)

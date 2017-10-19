@@ -17,13 +17,13 @@ final class TaskShedulerImpl: TaskSheduler {
     }()
     
     func shedule(task: Task, concurrent: Bool) {
-        let operation = task.toOperation()
+        let operation = (task as? OperationConvertible)?.toOperation()
         
         if concurrent {
-            concurrentQueue.addOperation(operation)
+            operation.flatMap { concurrentQueue.addOperation($0) }
         }
         else {
-            serialQueue.addOperation(operation)
+            operation.flatMap { serialQueue.addOperation($0) }
         }
     }
 }

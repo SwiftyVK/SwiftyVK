@@ -1,4 +1,5 @@
 extension APIScope {
+    /// https://vk.com/dev/apps
     public enum Apps: APIMethod {
         case deleteAppRequests(Parameters)
         case get(Parameters)

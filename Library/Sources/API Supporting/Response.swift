@@ -1,6 +1,6 @@
 import Foundation
 
-public enum Response {
+enum Response {
     case success(Data)
     case error(VKError)
     

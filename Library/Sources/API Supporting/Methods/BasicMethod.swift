@@ -6,10 +6,14 @@ extension Methods {
             self.request = request
         }
         
+        /// For internal using only!
         public func toRequest() -> Request {
             return request
         }
         
+        /// Build chain of requests
+        /// - parameter next: Clousure which recieve result of executing previos request
+        /// and return next request
         public func chain(_ next: @escaping (Data) throws -> ChainableMethod) -> Self {
             request.add(next: next)
             return .init(request)

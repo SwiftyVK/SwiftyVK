@@ -1,10 +1,16 @@
 import Foundation
 
-public protocol Task: OperationConvertible {
+/// Represents sended VK API request task
+public protocol Task {
+    /// State of sending
     var state: TaskState { get }
+    
+    /// Cancel task.
+    /// Callbacks will be newer executed!
+    func cancel()
 }
 
-final class TaskImpl: Operation, Task {
+final class TaskImpl: Operation, Task, OperationConvertible {
     
     let id: Int64
     
@@ -200,6 +206,7 @@ final class TaskImpl: Operation, Task {
     }
 }
 
+/// Represents state of VK API request task
 public enum TaskState {
     case created
     case sended

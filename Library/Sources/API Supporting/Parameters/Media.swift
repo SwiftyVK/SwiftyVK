@@ -1,5 +1,7 @@
 import Foundation
 
+/// Represents different media items for VK.API.Upload method group
+/// Used for MIME type generation
 public enum Media: CustomStringConvertible {
     case image(data: Data, type: ImageType)
     case audio(data: Data)
@@ -37,6 +39,8 @@ public enum Media: CustomStringConvertible {
     }
 }
 
+/// Type of image for VK.API.Upload.Images
+/// Used for MIME type generation
 public enum ImageType: String {
     case jpg
     case png

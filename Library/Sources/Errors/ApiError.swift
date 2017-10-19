@@ -1,9 +1,14 @@
 import Foundation
 
+/// Represents Error recieved from VK API. More info - https://vk.com/dev/errors
 public struct ApiError: Equatable {
+    /// Error code
     public let code: Int
+    /// Error message
     public let message: String
+    /// Parameters of sended request
     public internal(set) var requestParams = [String: String]()
+    /// Other info about error
     public internal(set) var otherInfo = [String: String]()
     
     init?(_ json: JSON) {

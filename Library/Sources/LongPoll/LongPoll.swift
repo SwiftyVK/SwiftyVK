@@ -1,9 +1,15 @@
 import Foundation
 
+/// Long poll client
 public protocol LongPoll {
+    /// Is long poll can handle events
     var isActive: Bool { get }
     
+    /// Start recieve long poll events
+    /// parameters onReceiveEvents: clousure ehich executes when long poll recieve set of events
     func start(onReceiveEvents: @escaping ([LongPollEvent]) -> ())
+    
+    /// Stop recieve long poll events
     func stop()
 }
 

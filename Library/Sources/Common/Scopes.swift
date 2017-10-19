@@ -1,3 +1,4 @@
+/// Represents VK API auth scopes. More info - https://vk.com/dev/permissions
 public struct Scopes: OptionSet {
     public let rawValue: Int
     

@@ -57,6 +57,7 @@ final class APIWorker {
     
     class func usersGet() {
         VK.API.Users.get(.empty)
+            .configure(with: Config.init(httpMethod: .POST))
             .onSuccess { print("SwiftyVK: users.get successed with \n \($0)") }
             .onError { print("SwiftyVK: friends.get fail \n \($0)") }
             .send()

@@ -1,5 +1,6 @@
 import Foundation
 
+/// Represents any error which SwiftyVK can return
 public enum VKError: Error {
     // MARK: - Any error wrapper
     case unknown(Error)

@@ -1,4 +1,5 @@
 extension APIScope {
+    /// https://vk.com/dev/photos
     public enum Photos: APIMethod {
         case confirmTag(Parameters)
         case copy(Parameters)

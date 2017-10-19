@@ -1,5 +1,6 @@
 import Foundation
 
+/// Represents LongPoll event. More info - https://vk.com/dev/using_longpoll
 public enum LongPollEvent {
     case forcedStop
     case historyMayBeLost

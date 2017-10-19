@@ -1,4 +1,5 @@
 extension APIScope {
+    /// https://vk.com/dev/board
     public enum Board: APIMethod {
         case addTopic(Parameters)
         case closeTopic(Parameters)

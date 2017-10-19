@@ -1,12 +1,29 @@
+/// VK user session
 public protocol Session: class {
+    /// Internal SwiftyVK session identifier
     var id: String { get }
+    /// Current session configuration.
+    /// All requests in session inherit it
     var config: SessionConfig { get set }
+    /// Current session state
     var state: SessionState { get }
+    /// Long poll client for this session
     var longPoll: LongPoll { get }
     
+    /// Log in user with oAuth or VK app
+    /// - parameter onSuccess: clousure which will be executed when user sucessfully logged.
+    /// Returns info about logged user.
+    /// - parameter onError: clousure which will be executed when logging failed.
+    /// Returns cause of failure.
     func logIn(onSuccess: @escaping ([String: String]) -> (), onError: @escaping RequestCallbacks.Error)
+    /// Log in user with raw token
+    /// - parameter rawToken: token raw string
+    /// - parameter expires: token expires time from now. Zero is infinite token.
     func logIn(rawToken: String, expires: TimeInterval) throws
+    /// Log out user, remove all data and destroy current session
     func logOut()
+    /// Send request in this session
+    /// - parameter method: VK API method
     @discardableResult
     func send(method: SendableMethod) -> Task
 }

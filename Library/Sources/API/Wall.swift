@@ -1,4 +1,5 @@
 extension APIScope {
+    /// https://vk.com/dev/wall
     public enum Wall: APIMethod {
         case createComment(Parameters)
         case delete(Parameters)

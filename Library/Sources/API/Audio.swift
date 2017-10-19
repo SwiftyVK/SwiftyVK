@@ -1,6 +1,6 @@
 extension APIScope {
+    /// https://vk.com/dev/audio
     public enum Audio: APIMethod {
-        // Deprecated
         case get(Parameters)
         case getById(Parameters)
         case getLyrics(Parameters)

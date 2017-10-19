@@ -1088,11 +1088,11 @@
 		D4BBFDFD1F9297AA009615E7 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				D4BBFE021F9297AA009615E7 /* VKAPI.swift */,
 				D4BBFDFE1F9297AA009615E7 /* Storage.swift */,
 				D4BBFDFF1F9297AA009615E7 /* Messages.swift */,
 				D4BBFE001F9297AA009615E7 /* Notifacations.swift */,
 				D4BBFE011F9297AA009615E7 /* Users.swift */,
-				D4BBFE021F9297AA009615E7 /* VKAPI.swift */,
 				D4BBFE031F9297AA009615E7 /* Board.swift */,
 				D4BBFE041F9297AA009615E7 /* Notes.swift */,
 				D4BBFE051F9297AA009615E7 /* Leads.swift */,
