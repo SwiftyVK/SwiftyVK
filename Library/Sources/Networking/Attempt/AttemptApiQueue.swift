@@ -7,46 +7,34 @@ final class AttemptApiQueue: OperationQueue {
     
     private var sended = 0
     private var waited = [Operation]()
-    private var timer: Timer?
-    private let lock = MultiplatrormLock()
+    private var dropCounterTimer: DispatchSourceTimer?
     
     init(limit: AttemptLimit) {
         self.limit = limit
-        
         super.init()
     }
     
-    func killTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
-    private func runTimer() {
-        let timer = Timer(
-            timeInterval: 1,
-            target: self,
-            selector: #selector(self.dropCounter),
-            userInfo: nil,
-            repeats: true
-        )
-        
-        self.timer = timer
-        
-        counterQueue.async {
-            RunLoop.current.add(timer, forMode: .defaultRunLoopMode)
-            RunLoop.current.run()
+    private func runDropCounterTimer() {
+        dropCounterTimer = DispatchSource.makeTimerSource(queue: counterQueue)
+        dropCounterTimer?.schedule(wallDeadline: .now() + 1, repeating: 1)
+        dropCounterTimer?.setEventHandler { [weak self] in
+            self?.dropCounter()
         }
+        
+        dropCounterTimer?.resume()
     }
     
     override func addOperation(_ operation: Operation) {
         gateQueue.async { [weak self] in
-            self?.lock.perform { self?._addOperation(operation) }
+            self?._addOperation(operation)
         }
     }
     
     private func _addOperation(_ operation: Operation) {
-        if timer == nil {
-            runTimer()
+        
+        // swiftlint:disable empty_count next
+        if dropCounterTimer == nil && (limit.count > 0 || !waited.isEmpty) {
+            runDropCounterTimer()
         }
         
         if limit.count < 1 || sended < limit.count {
@@ -61,21 +49,24 @@ final class AttemptApiQueue: OperationQueue {
     @objc
     private func dropCounter() {
         gateQueue.async { [weak self] in
-            _ = self?.lock.perform { self?._dropCounter() }
+            self?._dropCounter()
         }
     }
     
     private func _dropCounter() {
-        guard !waited.isEmpty else {
-            killTimer()
-            return
+        
+        defer {
+            if waited.isEmpty {
+                dropCounterTimer = nil
+            }
         }
         
-        guard sended > 0 else { return }
-        
+        let oldSended = sended
         sended = 0
         
-        while !waited.isEmpty && sended < limit.count {
+        guard oldSended > 0 else { return }
+        
+        while !waited.isEmpty {
             sended += 1
             let op = waited.removeFirst()
             super.addOperation(op)

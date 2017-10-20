@@ -34,11 +34,7 @@ final class AttemptShedulerImpl: AttemptSheduler {
             concurrentQueue.addOperation(operation)
         }
         else {
-            serialQueue.addOperation(operation)
+            self.serialQueue.addOperation(operation)
         }
-    }
-    
-    deinit {
-        serialQueue.killTimer()
     }
 }
