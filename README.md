@@ -1,13 +1,14 @@
-# SwiftyVK - easy and powerful way to interact with [VK API](https://vk.com/dev) for iOS and macOS.
+[![SwiftyVK](./SwiftyVK_logo.png)](./)
+# Easy and powerful way to interact with [VK API](https://vk.com/dev) for iOS and macOS.
 
 [![Swift](https://img.shields.io/badge/Swift-4.0.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![VK API](https://img.shields.io/badge/VK_API-5.68-blue.svg?style=flat)](https://vk.com/dev/versions)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat)](http://cocoadocs.org/docsets/SwiftyVK)
-[![Build Status](https://travis-ci.org/west0r/SwiftyVK.svg?branch=master)](https://travis-ci.org/west0r/SwiftyVK)
-[![Test Coverage](https://img.shields.io/codecov/c/github/west0r/SwiftyVK.svg)](https://codecov.io/gh/west0r/SwiftyVK)
+[![Build Status](https://travis-ci.org/SwiftyVK/SwiftyVK.svg?branch=master)](https://travis-ci.org/SwiftyVK/SwiftyVK)
+[![Test Coverage](https://img.shields.io/codecov/c/github/SwiftyVK/SwiftyVK.svg)](https://codecov.io/gh/SwiftyVK/SwiftyVK)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftyVK.svg?style=flat)](https://cocoapods.org/pods/SwiftyVK)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-supported-brightgreen.svg)](https://github.com/west0r/SwiftyVK)
-[![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/west0r/SwiftyVK/master/LICENSE)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-supported-brightgreen.svg)](./)
+[![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/SwiftyVK/SwiftyVK/master/LICENSE)
 ---
 ## Table of contents
 * [Requirements](#requirements)
@@ -65,7 +66,7 @@ end
 
 ### [Carthage](https://github.com/Carthage/Carthage)
 ```
-github "west0r/SwiftyVK"
+github "SwiftyVK/SwiftyVK"
 ```
 
 ## **Getting started**
@@ -449,4 +450,4 @@ For now this section is empty...
 ## **License**
 
 SwiftyVK is released under the MIT license.
-See [LICENSE](https://github.com/west0r/SwiftyVK/blob/master/LICENSE.txt) for details.
+See [LICENSE](./LICENSE.txt) for details.
