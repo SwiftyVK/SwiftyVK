@@ -133,7 +133,8 @@ internal struct Authorizator {
             DispatchQueue.main.sync {
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(url)
-                } else {
+                }
+                else {
                     UIApplication.shared.openURL(url)
                 }
             }
