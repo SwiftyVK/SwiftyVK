@@ -1,15 +1,34 @@
 [![SwiftyVK](./SwiftyVK_logo.png)](./)
+
+<p align="center">
+  <a href="https://developer.apple.com/swift/">
+    <img src="https://img.shields.io/badge/Swift-4.0.0-orange.svg?style=flat" alt="Swift">
+  </a>
+  <a href="https://vk.com/dev/versions">
+    <img src="https://img.shields.io/badge/VK_API-5.68-blue.svg?style=flat" alt="VK API">
+  </a>
+  <a href="http://cocoadocs.org/docsets/SwiftyVK">
+    <img src="https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat" alt="Platform">
+  </a>
+    <a href="https://travis-ci.org/SwiftyVK/SwiftyVK">
+    <img src="https://travis-ci.org/SwiftyVK/SwiftyVK.svg?branch=master" alt="Build status">
+  </a>
+    <a href="https://codecov.io/gh/SwiftyVK/SwiftyVK">
+    <img src="https://img.shields.io/codecov/c/github/SwiftyVK/SwiftyVK.svg" alt="Test coverage">
+  </a>
+    <a href="https://cocoapods.org/pods/SwiftyVK">
+    <img src="https://img.shields.io/cocoapods/v/SwiftyVK.svg?style=flat" alt="Cocoapods compatible">
+  </a>
+    <a href="https://github.com/Carthage/Carthage">
+    <img src="https://img.shields.io/badge/Carthage-supported-brightgreen.svg" alt="Carthage compatible">
+  </a>
+    <a href="./LICENSE.txt">
+    <img src="https://img.shields.io/badge/license-MIT-lightgrey.svg" alt="License">
+  </a>
+</p>
+
 # Easy and powerful way to interact with [VK API](https://vk.com/dev) for iOS and macOS.
 
-[![Swift](https://img.shields.io/badge/Swift-4.0.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
-[![VK API](https://img.shields.io/badge/VK_API-5.68-blue.svg?style=flat)](https://vk.com/dev/versions)
-[![Platform](https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat)](http://cocoadocs.org/docsets/SwiftyVK)
-[![Build Status](https://travis-ci.org/SwiftyVK/SwiftyVK.svg?branch=master)](https://travis-ci.org/SwiftyVK/SwiftyVK)
-[![Test Coverage](https://img.shields.io/codecov/c/github/SwiftyVK/SwiftyVK.svg)](https://codecov.io/gh/SwiftyVK/SwiftyVK)
-[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftyVK.svg?style=flat)](https://cocoapods.org/pods/SwiftyVK)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-supported-brightgreen.svg)](./)
-[![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/SwiftyVK/SwiftyVK/master/LICENSE)
----
 ## Table of contents
 * [Requirements](#requirements)
 * [Integration](#integration)
