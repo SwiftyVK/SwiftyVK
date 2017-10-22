@@ -22,6 +22,8 @@
 		A2527E871BD13A5300F65412 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2527E851BD13A5300F65412 /* LaunchScreen.storyboard */; };
 		A2527EBD1BD13F7E00F65412 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527EBC1BD13F7E00F65412 /* APIWorker.swift */; };
 		A2527EBE1BD13F7E00F65412 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527EBC1BD13F7E00F65412 /* APIWorker.swift */; };
+		D4BBF0351F9D10CC00AC425C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D47E1CD41F92B3F5002BB2AC /* Assets.xcassets */; };
+		D4BBF0361F9D10CC00AC425C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D47E1CD41F92B3F5002BB2AC /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,7 +135,6 @@
 		A2EB6F3C1BD186F9008E7D86 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		A2EB6F3D1BD186F9008E7D86 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D47E1CD41F92B3F5002BB2AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Example/Assets.xcassets; sourceTree = "<group>"; };
-		D47E1CD81F934C31002BB2AC /* .travis-script.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = ".travis-script.sh"; path = "../.travis-script.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,7 +185,6 @@
 		A2527E5A1BD139E200F65412 = {
 			isa = PBXGroup;
 			children = (
-				D47E1CD81F934C31002BB2AC /* .travis-script.sh */,
 				A21CD49B1D98143300FF2D88 /* AppDelegate.swift */,
 				A227371C1CF462F60042868A /* VKDelegateExample.swift */,
 				A2527EBC1BD13F7E00F65412 /* APIWorker.swift */,
@@ -373,6 +373,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4BBF0351F9D10CC00AC425C /* Assets.xcassets in Resources */,
 				A204446C1EE2DFE700612E57 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2527E871BD13A5300F65412 /* LaunchScreen.storyboard in Resources */,
+				D4BBF0361F9D10CC00AC425C /* Assets.xcassets in Resources */,
 				A2527E821BD13A5300F65412 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,6 +523,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -574,6 +577,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -620,6 +624,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -673,6 +678,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
