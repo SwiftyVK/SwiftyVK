@@ -2,8 +2,8 @@ extension APIScope {
     /// Represents methods whick VK APi not contains directly
     public struct Custom {
         /// Alows to execute stored on VK server procedures
-        public static func remote(method: String) -> CustomMethod {
-            return self.method(name: "execute.\(method)")
+        public static func remote(method: String, parameters: Parameters = .empty) -> CustomMethod {
+            return self.method(name: "execute.\(method)", parameters: parameters)
         }
         
         /// Alows execute method which SwiftyVK does not support.
@@ -13,8 +13,10 @@ extension APIScope {
         }
         
         /// Allows execute https://vk.com/dev/execute
-        public static func execute(code: String, config: Config = .default) -> CustomMethod {
-            return CustomMethod(method: "execute", parameters: [.code: code])
+        public static func execute(code: String, parameters: Parameters = .empty) -> CustomMethod {
+            var parameters = parameters
+            parameters[.code] = code
+            return CustomMethod(method: "execute", parameters: parameters)
         }
     }
 }
