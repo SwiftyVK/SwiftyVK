@@ -51,7 +51,7 @@ final class AuthorizatorImpl: Authorizator {
                 return token
             }
             
-            guard tokenExists else {
+            guard revoke || tokenExists else {
                 throw VKError.needAuthorization
             }
             

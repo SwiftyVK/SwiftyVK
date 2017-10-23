@@ -154,7 +154,7 @@ VK.sessions?.default.logIn(rawToken: String, expires: TimeInterval)
 // Start work with SwiftyVK session here
 ```
 
-`TimeInterval` - token expires time interval from now. Zero value is a newer expires.
+`TimeInterval` - token expires time interval from now. Zero value - never expires token.
 
 ### oAuth WebView
 Standard authorization method which shows webView with oAuth dialog. Suitable for most cases.
