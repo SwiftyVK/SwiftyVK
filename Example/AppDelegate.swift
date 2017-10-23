@@ -2,13 +2,11 @@ import SwiftyVK
 
 
 
-var vkDelegateReference : VKDelegate?
+var vkDelegateReference : SwiftyVKDelegate?
 
 
 #if os(iOS)
     import UIKit
-    
-    
     
     @UIApplicationMain
     final class AppDelegate : UIResponder, UIApplicationDelegate {
@@ -19,30 +17,20 @@ var vkDelegateReference : VKDelegate?
             return true
         }
         
-        
-        
-        
         @available(iOS 9.0, *)
         func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
             let app = options[.sourceApplication] as? String
-            VK.process(url: url, sourceApplication: app)
+            VK.handle(url: url, sourceApplication: app)
             return true
         }
         
-        
-        
         func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-            VK.process(url: url, sourceApplication: sourceApplication)
+            VK.handle(url: url, sourceApplication: sourceApplication)
             return true
         }
     }
-    
-    
-    
-#elseif os(OSX)
+#elseif os(macOS)
     import Cocoa
-    
-    
     
     @NSApplicationMain
     final class AppDelegate : NSObject, NSApplicationDelegate {
@@ -52,11 +40,3 @@ var vkDelegateReference : VKDelegate?
         }
     }
 #endif
-
-
-
-extension AppDelegate {
-    @IBAction func buttonDown(_ sender: AnyObject) {
-        APIWorker.action(sender.tag)
-    }
-}

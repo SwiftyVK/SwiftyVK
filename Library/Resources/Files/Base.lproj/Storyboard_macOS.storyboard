@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13189.4"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Web Controller MacOS-->
+        <scene sceneID="Rku-He-er5">
+            <objects>
+                <viewController storyboardIdentifier="Web" id="2x6-4U-608" customClass="WebControllerMacOS" customModule="SwiftyVK" sceneMemberID="viewController">
+                    <customView key="view" id="fL7-e2-4bl">
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="350"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="s7g-ar-psG" customClass="WebViewWrapperMacOs" customModule="SwiftyVK">
+                                <rect key="frame" x="0.0" y="0.0" width="500" height="350"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="1vR-Rb-RIx"/>
+                                    <constraint firstAttribute="width" constant="500" id="jF7-JJ-Kst"/>
+                                </constraints>
+                            </customView>
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="4L5-mP-HPw">
+                                <rect key="frame" x="234" y="159" width="32" height="32"/>
+                            </progressIndicator>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="4L5-mP-HPw" firstAttribute="centerY" secondItem="fL7-e2-4bl" secondAttribute="centerY" id="9Oq-QQ-1ws"/>
+                            <constraint firstItem="4L5-mP-HPw" firstAttribute="centerX" secondItem="fL7-e2-4bl" secondAttribute="centerX" id="WrN-Gn-8Zp"/>
+                            <constraint firstItem="s7g-ar-psG" firstAttribute="top" secondItem="fL7-e2-4bl" secondAttribute="top" id="hw0-x4-Ijy"/>
+                            <constraint firstItem="s7g-ar-psG" firstAttribute="leading" secondItem="fL7-e2-4bl" secondAttribute="leading" id="wjC-wv-F0l"/>
+                            <constraint firstAttribute="trailing" secondItem="s7g-ar-psG" secondAttribute="trailing" id="x3B-yl-qsK"/>
+                            <constraint firstAttribute="bottom" secondItem="s7g-ar-psG" secondAttribute="bottom" id="yzx-AW-iOi"/>
+                        </constraints>
+                    </customView>
+                    <connections>
+                        <outlet property="preloader" destination="4L5-mP-HPw" id="g5u-4X-vFV"/>
+                        <outlet property="webWrapper" destination="s7g-ar-psG" id="bzI-Ns-XuQ"/>
+                    </connections>
+                </viewController>
+                <customObject id="tPu-ny-o1w" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="419" y="84"/>
+        </scene>
+        <!--Captcha Controller MacOS-->
+        <scene sceneID="EPR-9A-kFp">
+            <objects>
+                <viewController storyboardIdentifier="Captcha" id="r5f-06-Ldu" customClass="CaptchaControllerMacOS" customModule="SwiftyVK" sceneMemberID="viewController">
+                    <view key="view" id="s8e-Dt-oLw">
+                        <rect key="frame" x="0.0" y="0.0" width="270" height="154"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r20-OG-mXJ">
+                                <rect key="frame" x="10" y="44" width="250" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="4pV-wb-xyZ"/>
+                                    <constraint firstAttribute="width" constant="250" id="mTj-gU-9fZ"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="kKB-4Z-5Xc"/>
+                            </imageView>
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="HZT-MJ-hF0">
+                                <rect key="frame" x="119" y="78" width="32" height="32"/>
+                            </progressIndicator>
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M80-Jn-UUP">
+                                <rect key="frame" x="11" y="10" width="249" height="24"/>
+                                <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" alignment="center" placeholderString="Enter code from the image" id="hXf-ia-qTL">
+                                    <font key="font" metaFont="system" size="20"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IHw-mS-mIc">
+                                <rect key="frame" x="5" y="127" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="h7Z-nn-bxm"/>
+                                    <constraint firstAttribute="width" constant="22" id="xtE-Bt-s2I"/>
+                                </constraints>
+                                <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="CloseButton" imagePosition="only" alternateImage="CloseButtonPressed" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="7QQ-D0-g6h">
+                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="cellTitle"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="dismissByButtonTap:" target="r5f-06-Ldu" id="J8T-Vn-LID"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="M80-Jn-UUP" firstAttribute="top" secondItem="r20-OG-mXJ" secondAttribute="bottom" constant="10" id="2p1-cU-fh0"/>
+                            <constraint firstItem="r20-OG-mXJ" firstAttribute="top" secondItem="s8e-Dt-oLw" secondAttribute="top" constant="10" id="3uZ-SQ-ghg"/>
+                            <constraint firstItem="IHw-mS-mIc" firstAttribute="leading" secondItem="s8e-Dt-oLw" secondAttribute="leading" constant="5" id="6yb-Ik-iRw"/>
+                            <constraint firstItem="IHw-mS-mIc" firstAttribute="top" secondItem="s8e-Dt-oLw" secondAttribute="top" constant="5" id="961-E7-752"/>
+                            <constraint firstItem="HZT-MJ-hF0" firstAttribute="centerX" secondItem="r20-OG-mXJ" secondAttribute="centerX" id="DU5-rW-hdI"/>
+                            <constraint firstAttribute="bottom" secondItem="M80-Jn-UUP" secondAttribute="bottom" constant="10" id="RBQ-Ud-O3o"/>
+                            <constraint firstItem="HZT-MJ-hF0" firstAttribute="centerY" secondItem="r20-OG-mXJ" secondAttribute="centerY" id="Ujm-Yy-kb9"/>
+                            <constraint firstItem="M80-Jn-UUP" firstAttribute="centerX" secondItem="r20-OG-mXJ" secondAttribute="centerX" id="fEC-13-GkR"/>
+                            <constraint firstItem="r20-OG-mXJ" firstAttribute="leading" secondItem="s8e-Dt-oLw" secondAttribute="leading" constant="10" id="nMV-kZ-nBh"/>
+                            <constraint firstAttribute="trailing" secondItem="r20-OG-mXJ" secondAttribute="trailing" constant="10" id="nWd-pa-Asd"/>
+                            <constraint firstItem="M80-Jn-UUP" firstAttribute="width" secondItem="r20-OG-mXJ" secondAttribute="width" constant="-5" id="obd-KH-QwM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="IHw-mS-mIc" id="7LA-VX-ORz"/>
+                        <outlet property="imageView" destination="r20-OG-mXJ" id="Xzs-UP-Ieu"/>
+                        <outlet property="preloader" destination="HZT-MJ-hF0" id="GUI-dL-1gr"/>
+                        <outlet property="textField" destination="M80-Jn-UUP" id="bY5-pQ-TfZ"/>
+                    </connections>
+                </viewController>
+                <customObject id="7j2-em-ZNp" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="913" y="151"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="CloseButton" width="22" height="22"/>
+        <image name="CloseButtonPressed" width="22" height="22"/>
+    </resources>
+</document>

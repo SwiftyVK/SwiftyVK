@@ -1,0 +1,30 @@
+{
+  "error": {
+    "error_code": 14,
+    "error_msg": "Captcha needed",
+    "request_params": [
+      {
+        "key": "oauth",
+        "value": "1"
+      },
+      {
+        "key": "method",
+        "value": "captcha.force"
+      },
+      {
+        "key": "v",
+        "value": "5.62"
+      },
+      {
+        "key": "lang",
+        "value": "en"
+      },
+      {
+        "key": "https",
+        "value": "1"
+      }
+    ],
+    "captcha_sid": "556434287095",
+    "captcha_img": "https:\\/\\/api.vk.com\\/captcha.php?sid=556434287095&s=1"
+  }
+}

@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:LICENSE">
+      location = "group:LICENSE.txt">
    </FileRef>
    <FileRef
       location = "group:Library/SwiftyVK.xcodeproj">
@@ -23,25 +23,19 @@
          location = "group:Example/../Package.swift">
       </FileRef>
       <FileRef
-         location = "group:Library/../.install_swiftlint.sh">
-      </FileRef>
-      <FileRef
          location = "group:Library/.swiftlint.yml">
       </FileRef>
       <FileRef
          location = "group:Example/../.travis.yml">
       </FileRef>
       <FileRef
-         location = "group:Library/../.codecov.yml">
+         location = "group:/Dew/VK/SwiftyVK/codecov.yml">
       </FileRef>
       <FileRef
          location = "group:Example/../.swift-version">
       </FileRef>
       <FileRef
          location = "group:Library/../.gitignore">
-      </FileRef>
-      <FileRef
-         location = "group:Example/Cartfile.private">
       </FileRef>
    </Group>
 </Workspace>

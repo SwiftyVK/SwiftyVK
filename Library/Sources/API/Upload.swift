@@ -1,283 +1,310 @@
 import CoreLocation
 
+/// File uploading target
+public enum UploadTarget {
+    case user(id: String)
+    case group(id: String)
 
+    var decoded: (userId: String?, groupId: String?) {
+        switch self {
+        case .user(let id):
+            return (userId: id, groupId: nil)
+        case .group(let id):
+            return (userId: nil, groupId: id)
+        }
+    }
+}
 
-extension _VKAPI {
-    //Metods to upload Mediafiles
+// swiftlint:disable next nesting
+extension APIScope {
+    //Metods to upload Mediafiles. More info - https://vk.com/dev/upload_files
     public struct Upload {
         ///Methods to upload photo
         public struct Photo {
             ///Upload photo to user album
             public static func toAlbum(
                 _ media: [Media],
+                to target: UploadTarget,
                 albumId: String,
-                groupId: String = "",
-                caption: String = "",
-                location: CLLocationCoordinate2D? = nil) -> RequestConfig {
-
-                var getServerReq = VK.API.Photos.getUploadServer([.albumId: albumId, .groupId: groupId])
-
-                getServerReq.next {response -> RequestConfig in
-                    var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: Array(media.prefix(5)))
-
-                    uploadReq.next {response -> RequestConfig in
-                        var saveReq = VK.API.Photos.save([
+                caption: String? = nil,
+                location: CLLocationCoordinate2D? = nil
+                ) -> Methods.SuccessableFailableProgressableConfigurable {
+                
+                let method = APIScope.Photos.getUploadServer([
+                    .albumId: albumId,
+                    .userId: target.decoded.userId,
+                    .groupId: target.decoded.groupId
+                    ])
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return Request(
+                            type: .upload(
+                                url: response.forcedString("upload_url"),
+                                media: Array(media.prefix(5)),
+                                partType: .indexedFile
+                            ),
+                            config: .upload
+                            )
+                            .toMethod()
+                    }
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return APIScope.Photos.save([
                             .albumId: albumId,
-                            .groupId: groupId,
-                            .server: response["server"].stringValue,
-                            .photosList: response["photos_list"].stringValue,
-                            .aid: response["aid"].stringValue,
-                            .hash: response["hash"].stringValue,
-                            .caption: caption
-                            ])
-
-                        if let lat = location?.latitude, let lon = location?.longitude {
-                            saveReq.parameters[.latitude] = String(lat)
-                            saveReq.parameters[.longitude] = String(lon)
-                        }
-                        return saveReq
-                    }
-                    return uploadReq
-                }
-                return getServerReq
-            }
-
-
-
-            ///Upload photo to message
-            public static func toMessage(_ media: Media) -> RequestConfig {
-                var getServerReq = VK.API.Photos.getMessagesUploadServer()
-
-                getServerReq.next {response -> RequestConfig in
-                    var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [media])
-
-                    uploadReq.next {response -> RequestConfig in
-                        return VK.API.Photos.saveMessagesPhoto([
-                            .photo: response["photo"].stringValue,
-                            .server: response["server"].stringValue,
-                            .hash: response["hash"].stringValue
+                            .userId: target.decoded.userId,
+                            .groupId: target.decoded.groupId,
+                            .server: response.forcedInt("server").toString(),
+                            .photosList: response.forcedString("photos_list"),
+                            .aid: response.forcedInt("aid").toString(),
+                            .hash: response.forcedString("hash"),
+                            .caption: caption,
+                            .latitude: location?.latitude.toString(),
+                            .longitude: location?.longitude.toString()
                             ])
                     }
-                    return uploadReq
-                }
-                return getServerReq
+                
+                return Methods.SuccessableFailableProgressableConfigurable(method.request)
             }
-
-
-
-            ///Upload photo to market
+            
+            /// Upload photo for using in messages.send method
+            public static func toMessage(_ media: Media) -> Methods.SuccessableFailableProgressableConfigurable {
+                
+                let method = APIScope.Photos.getMessagesUploadServer(.empty)
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return Request(
+                            type: .upload(
+                                url: response.forcedString("upload_url"),
+                                media: [media],
+                                partType: .photo
+                            ),
+                            config: .upload
+                            )
+                            .toMethod()
+                    }
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return APIScope.Photos.saveMessagesPhoto([
+                            .photo: response.forcedString("photo"),
+                            .server: response.forcedInt("server").toString(),
+                            .hash: response.forcedString("hash")
+                            ])
+                    }
+                
+                return Methods.SuccessableFailableProgressableConfigurable(method.request)
+            }
+            
+            /// Upload photo for using in market.add or market.edit methods
             public static func toMarket(
                 _ media: Media,
-                groupId: String,
-                mainPhoto: Bool = false,
-                cropX: String = "",
-                cropY: String = "",
-                cropW: String = ""
-                ) -> RequestConfig {
-
-                var getServerReq = VK.API.Photos.getMarketUploadServer([.groupId: groupId])
-                if mainPhoto {
-                    getServerReq.add(parameters: [
-                        .mainPhoto: "1",
-                        .cropX: cropX,
-                        .cropY: cropY,
-                        .cropWidth: cropW
-                        ])
-                }
-
-                getServerReq.next {response -> RequestConfig in
-                    var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [media])
-
-                    uploadReq.next {response -> RequestConfig in
-                        return VK.API.Photos.saveMarketPhoto([
+                mainPhotoConfig: (cropX: String?, cropY: String?, cropW: String?)?,
+                groupId: String
+                ) -> Methods.SuccessableFailableProgressableConfigurable {
+                
+                let method = APIScope.Photos.getMarketUploadServer([.groupId: groupId])
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return Request(
+                            type: .upload(
+                                url: response.forcedString("upload_url"),
+                                media: [media],
+                                partType: .file
+                            ),
+                            config: .upload
+                            )
+                            .toMethod()
+                    }
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return APIScope.Photos.saveMarketPhoto([
                             .groupId: groupId,
-                            .photo: response["photo"].stringValue,
-                            .server: response["server"].stringValue,
-                            .hash: response["hash"].stringValue,
-                            .cropData: response["crop_data"].stringValue,
-                            .cropHash: response["crop_hash"].stringValue
+                            .photo: response.forcedString("photo"),
+                            .server: response.forcedInt("server").toString(),
+                            .hash: response.forcedString("hash"),
+                            .cropData: response.forcedString("crop_data"),
+                            .cropHash: response.forcedString("crop_hash"),
+                            .mainPhoto: (mainPhotoConfig != nil ? "1" : "0"),
+                            .cropX: mainPhotoConfig?.cropX,
+                            .cropY: mainPhotoConfig?.cropY,
+                            .cropWidth: mainPhotoConfig?.cropW
                             ])
                     }
-
-                    return uploadReq
-                }
-                return getServerReq
+                
+                return Methods.SuccessableFailableProgressableConfigurable(method.request)
             }
-
-
-
-            ///Upload photo to market album
-            public static func toMarketAlbum(_ media: Media, groupId: String) -> RequestConfig {
-                var getServerReq = VK.API.Photos.getMarketAlbumUploadServer([.groupId: groupId])
-
-                getServerReq.next {response -> RequestConfig in
-                    var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [media])
-
-                    uploadReq.next {response -> RequestConfig in
-                        return VK.API.Photos.saveMarketAlbumPhoto([
-                            .groupId: groupId,
-                            .photo: response["photo"].stringValue,
-                            .server: response["server"].stringValue,
-                            .hash: response["hash"].stringValue
-                            ])
-                    }
-                    return uploadReq
-                }
-                return getServerReq
-            }
-
-
-            // swiftlint:disable type_name
-            ///Upload photo to user or group wall
-            public struct toWall {
-                // swiftlint:enable type_name
-                ///Upload photo to user wall
-                public static func toUser(_ media: Media, userId: String) -> RequestConfig {
-                    return pToWall(media, userId: userId)
-                }
-
-
-
-                ///Upload photo to group wall
-                public static func toGroup(_ media: Media, groupId: String) -> RequestConfig {
-                    return pToWall(media, groupId: groupId)
-                }
-
-
-
-                ///Upload photo to user or group wall
-                private static func pToWall(_ media: Media, userId: String = "", groupId: String = "") -> RequestConfig {
-                    var getServerReq = VK.API.Photos.getWallUploadServer([.groupId: groupId])
-
-                    getServerReq.next {response -> RequestConfig in
-                        var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [media])
-
-                        uploadReq.next {response -> RequestConfig in
-                            return VK.API.Photos.saveWallPhoto([
-                                .userId: userId,
-                                .groupId: groupId,
-                                .photo: response["photo"].stringValue,
-                                .server: response["server"].stringValue,
-                                .hash: response["hash"].stringValue
-                                ])
-                        }
-                        return uploadReq
-                    }
-
-                    return getServerReq
-                }
-            }
-        }
-
-
-
-        ///Upload video from file or url
-        public struct Video {
-            ///Upload local video file
-            public static func fromFile(
+            
+            /// Upload photo for using in market.addAlbum or market.editAlbum methods
+            public static func toMarketAlbum(
                 _ media: Media,
-                name: String = "No name",
-                description: String = "",
-                groupId: String = "",
-                albumId: String = "",
-                isPrivate: Bool = false,
-                isWallPost: Bool = false,
-                isRepeat: Bool = false,
-                isNoComments: Bool = false
-                ) -> RequestConfig {
-
-                var saveReq = VK.API.Video.save([
-                    .link: "",
-                    .name: name,
-                    .description: description,
-                    .groupId: groupId,
-                    .albumId: albumId,
-                    .isPrivate: isPrivate ? "1" : "0",
-                    .wallpost: isWallPost ? "1" : "0",
-                    .`repeat`: isRepeat ? "1" : "0"
-                    ])
-
-                saveReq.next {response -> RequestConfig in
-                    return RequestConfig(url: response["upload_url"].stringValue, media: [media])
-                }
-                return saveReq
+                groupId: String
+                ) -> Methods.SuccessableFailableProgressableConfigurable {
+                
+                let method = APIScope.Photos.getMarketAlbumUploadServer([.groupId: groupId])
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return Request(
+                            type: .upload(
+                                url: response.forcedString("upload_url"),
+                                media: [media],
+                                partType: .file
+                            ),
+                            config: .upload
+                            )
+                            .toMethod()
+                    }
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return APIScope.Photos.saveMarketAlbumPhoto([
+                            .groupId: groupId,
+                            .photo: response.forcedString("photo"),
+                            .server: response.forcedInt("server").toString(),
+                            .hash: response.forcedString("hash")
+                            ])
+                    }
+                
+                return Methods.SuccessableFailableProgressableConfigurable(method.request)
             }
-
-
-
-            ///Upload local video from external resource
-            public static func fromUrl(
-                _ url: String,
-                name: String = "No name",
-                description: String = "",
-                groupId: String = "",
-                albumId: String = "",
-                isPrivate: Bool = false,
-                isWallPost: Bool = false,
-                isRepeat: Bool = false,
-                isNoComments: Bool = false
-                ) -> RequestConfig {
-
-                return VK.API.Video.save([
-                    .link: url,
-                    .name: name,
-                    .description: description,
-                    .groupId: groupId,
-                    .albumId: albumId,
-                    .isPrivate: isPrivate ? "1" : "0",
-                    .wallpost: isWallPost ? "1" : "0",
-                    .`repeat`: isRepeat ? "1" : "0"
-                    ]
-                )
+            
+            /// Upload photo for using in wall.post method
+            public static func toWall(
+                _ media: Media,
+                to target: UploadTarget
+                ) -> Methods.SuccessableFailableProgressableConfigurable {
+                
+                let method = APIScope.Photos.getWallUploadServer([
+                    .userId: target.decoded.userId,
+                    .groupId: target.decoded.groupId
+                    ])
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return Request(
+                            type: .upload(
+                                url: response.forcedString("upload_url"),
+                                media: [media],
+                                partType: .photo
+                            ),
+                            config: .upload
+                            )
+                            .toMethod()
+                    }
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return APIScope.Photos.saveWallPhoto([
+                            .userId: target.decoded.userId,
+                            .groupId: target.decoded.groupId,
+                            .photo: response.forcedString("photo"),
+                            .server: response.forcedInt("server").toString(),
+                            .hash: response.forcedString("hash")
+                            ])
+                    }
+                
+                return Methods.SuccessableFailableProgressableConfigurable(method.request)
             }
         }
 
+        /// Upload video file to "my videos"
+        public static func video(
+            _ media: Media,
+            savingParams: Parameters = .empty
+            ) -> Methods.SuccessableFailableProgressableConfigurable {
+            
+            let method = APIScope.Video.save(savingParams)
+                .chain {
+                    let response = try JSON(data: $0)
+                    
+                    return Request(
+                        type: .upload(
+                            url: response.forcedString("upload_url"),
+                            media: [media],
+                            partType: .video
+                        ),
+                        config: .upload
+                        )
+                        .toMethod()
+                }
+            
+            return Methods.SuccessableFailableProgressableConfigurable(method.request)
+        }
 
+        /// Upload audio to "My audios"
+        public static func audio(
+            _ media: Media,
+            artist: String? = nil,
+            title: String? = nil
+            ) -> Methods.SuccessableFailableProgressableConfigurable {
+            
+            let method = APIScope.Audio.getUploadServer(.empty)
+                .chain {
+                    let response = try JSON(data: $0)
 
-        ///Upload audio
-        public static func audio(_ media: Media, artist: String = "", title: String = "") -> RequestConfig {
-            var getServierReq = VK.API.Audio.getUploadServer()
+                    return Request(
+                        type: .upload(
+                            url: response.forcedString("upload_url"),
+                            media: [media],
+                            partType: .file
+                        ),
+                        config: .upload
+                        )
+                        .toMethod()
+                }
+                .chain {
+                    let response = try JSON(data: $0)
 
-            getServierReq.next {response -> RequestConfig in
-                var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [media])
-
-                uploadReq.next {response -> RequestConfig in
-                    return VK.API.Audio.save([
-                        .audio: response["audio"].stringValue,
-                        .server: response["server"].stringValue,
-                        .hash: response["hash"].stringValue,
+                    return APIScope.Audio.save([
+                        .audio: response.forcedString("audio"),
+                        .server: response.forcedInt("server").toString(),
+                        .hash: response.forcedString("hash"),
                         .artist: artist,
                         .title: title
                         ])
                 }
-                return uploadReq
-            }
-            return getServierReq
+            
+            return Methods.SuccessableFailableProgressableConfigurable(method.request)
         }
-
-
 
         ///Upload document
         public static func document(
             _ media: Media,
-            groupId: String = "",
-            title: String = "",
-            tags: String = "") -> RequestConfig {
-            var getServierReq = VK.API.Docs.getUploadServer([.groupId: groupId])
-
-            getServierReq.next {response -> RequestConfig in
-                var uploadReq = RequestConfig(url: response["upload_url"].stringValue, media: [media])
-
-                uploadReq.next {response -> RequestConfig in
-                    return VK.API.Docs.save([
-                        .file: (response["file"].stringValue),
+            groupId: String? = nil,
+            title: String? = nil,
+            tags: String? = nil
+            ) -> Methods.SuccessableFailableProgressableConfigurable {
+            
+            let method = APIScope.Docs.getUploadServer([.groupId: groupId])
+                .chain {
+                    let response = try JSON(data: $0)
+                    
+                    return Request(
+                        type: .upload(
+                            url: response.forcedString("upload_url"),
+                            media: [media],
+                            partType: .file
+                        ),
+                        config: .upload
+                        )
+                        .toMethod()
+                }
+                .chain {
+                    let response = try JSON(data: $0)
+                    
+                    return APIScope.Docs.save([
+                        .file: response.forcedString("file"),
                         .title: title,
                         .tags: tags
                         ])
                 }
-                return uploadReq
-            }
-            return getServierReq
+            
+            return Methods.SuccessableFailableProgressableConfigurable(method.request)
         }
     }
 }

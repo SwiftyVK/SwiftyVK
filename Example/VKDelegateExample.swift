@@ -1,6 +1,6 @@
 import SwiftyVK
 
-#if os(OSX)
+#if os(macOS)
     import Cocoa
 #elseif os(iOS)
     import UIKit
@@ -8,61 +8,40 @@ import SwiftyVK
 
 
 
-class VKDelegateExample: VKDelegate {
-    let appID = "4994842"
-    let scope: Set<VK.Scope> = [.messages,.offline,.friends,.wall,.photos,.audio,.video,.docs,.market,.email]
+final class VKDelegateExample: SwiftyVKDelegate {
     
-    
+    let appId = "4994842"
+    let scopes: Scopes = [.messages,.offline,.friends,.wall,.photos,.audio,.video,.docs,.market,.email]
     
     init() {
-        VK.config.logToConsole = true
-        VK.configure(withAppId: appID, delegate: self)
+        VK.setUp(appId: appId, delegate: self)
     }
     
-    
-    
-    func vkWillAuthorize() -> Set<VK.Scope> {
-        return scope
+    func vkNeedsScopes(for sessionId: String) -> Scopes {
+        return scopes
+    }
+
+    func vkNeedToPresent(viewController: VKViewController) {
+        #if os(macOS)
+            if let contentController = NSApplication.shared.keyWindow?.contentViewController {
+                contentController.presentViewControllerAsSheet(viewController)
+            }
+        #elseif os(iOS)
+            if let rootController = UIApplication.shared.keyWindow?.rootViewController {
+                rootController.present(viewController, animated: true, completion: nil)
+            }
+        #endif
     }
     
-    
-    
-    func vkDidAuthorizeWith(parameters: Dictionary<String, String>) {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "TestVkDidAuthorize"), object: nil)
+    func vkTokenCreated(for sessionId: String, info: [String : String]) {
+        print("token created in session \(sessionId) with info \(info)")
     }
     
-    
-    
-    
-    func vkAutorizationFailedWith(error: AuthError) {
-        print("Autorization failed with error: \n\(error)")
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "TestVkDidNotAuthorize"), object: nil)
+    func vkTokenUpdated(for sessionId: String, info: [String : String]) {
+        print("token updated in session \(sessionId) with info \(info)")
     }
     
-    
-    
-    func vkDidUnauthorize() {}
-    
-    
-    
-    func vkShouldUseTokenPath() -> String? {
-        return nil
+    func vkTokenRemoved(for sessionId: String) {
+        print("token removed in session \(sessionId)")
     }
-    
-    
-    
-    #if os(OSX)
-    func vkWillPresentView() -> NSWindow? {
-        return NSApplication.shared().windows[0]
-    }
-    
-    
-    
-    #elseif os(iOS)
-    func vkWillPresentView() -> UIViewController {
-        return DispatchQueue.main.sync {
-            return UIApplication.shared.delegate!.window!!.rootViewController!
-        }
-    }
-    #endif
 }

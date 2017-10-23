@@ -1,144 +1,185 @@
-# SwiftyVK: Easy interact with [VK API](https://vk.com/dev) for iOS and macOS.
+[![SwiftyVK](./SwiftyVK_logo.png)](./)
 
-[![Swift](https://img.shields.io/badge/Swift-3.0.1-orange.svg?style=flat)](https://developer.apple.com/swift/) [![VK API](https://img.shields.io/badge/VK_API-5.62-blue.svg?style=flat)](https://vk.com/dev/versions) [![Platform](https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat)](http://cocoadocs.org/docsets/SwiftyVK) [![Build Status](https://travis-ci.org/west0r/SwiftyVK.svg?branch=swift-3-v2)](https://travis-ci.org/west0r/SwiftyVK) [![Test Coverage](https://img.shields.io/codecov/c/github/west0r/SwiftyVK.svg)](https://codecov.io/gh/west0r/SwiftyVK) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SwiftyVK.svg?style=flat)](https://cocoapods.org/pods/SwiftyVK) [![Carthage Compatible](https://img.shields.io/badge/Carthage-✔️-brightgreen.svg)](https://github.com/west0r/SwiftyVK) [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/west0r/SwiftyVK/master/LICENSE)
+<p align="center">
+  <a href="https://developer.apple.com/swift/">
+    <img src="https://img.shields.io/badge/Swift-4.0.0-orange.svg?style=flat" alt="Swift">
+  </a>
+  <a href="https://vk.com/dev/versions">
+    <img src="https://img.shields.io/badge/VK_API-5.68-blue.svg?style=flat" alt="VK API">
+  </a>
+  <a href="http://cocoadocs.org/docsets/SwiftyVK">
+    <img src="https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat" alt="Platform">
+  </a>
+    <a href="https://travis-ci.org/SwiftyVK/SwiftyVK">
+    <img src="https://travis-ci.org/SwiftyVK/SwiftyVK.svg?branch=master" alt="Build status">
+  </a>
+    <a href="https://codecov.io/gh/SwiftyVK/SwiftyVK">
+    <img src="https://img.shields.io/codecov/c/github/SwiftyVK/SwiftyVK.svg" alt="Test coverage">
+  </a>
+    <a href="https://cocoapods.org/pods/SwiftyVK">
+    <img src="https://img.shields.io/cocoapods/v/SwiftyVK.svg?style=flat" alt="Cocoapods compatible">
+  </a>
+    <a href="https://github.com/Carthage/Carthage">
+    <img src="https://img.shields.io/badge/Carthage-supported-brightgreen.svg" alt="Carthage compatible">
+  </a>
+    <a href="./LICENSE.txt">
+    <img src="https://img.shields.io/badge/license-MIT-lightgrey.svg" alt="License">
+  </a>
+</p>
 
-On this page:
+# Easy and powerful way to interact with [VK API](https://vk.com/dev) for iOS and macOS.
 
+## Table of contents
 * [Requirements](#requirements)
 * [Integration](#integration)
-  * [Manually](#manually)
-  * [CocoaPods](#cocoapods)
-  * [Carthage](#carthage)
+  - [Manually](#manually)
+  - [CocoaPods](#cocoapods)
+  - [Carthage](#carthage)
 * [Getting started](#getting-started)
-  * [Import and implementation](#import-and-implementation)
-  * [Initialization](#initialization)
-  * [User authorization](#user-authorization)
-  * [Authorization with VK App](#authorization-with-vk-app)
-* [API Requests](#api-requests)
-  * [Syntax](#syntax)
-  * [Custom requests](#custom-requests)
-  * [Request properties](#request-properties)
-  * [Default properties](#default-properties)
-* [Parsing response](#parsing-response)
-* [Error handling](#error-handling)
+  - [Implement SwiftyVKDelegate](#implement-swiftyvkdelegate)
+  - [Setting up VK application](#setting-up-vk-application)
+  - [Authorization](#authorization)
+      - [Raw token string](#raw-token-string)
+      - [oAuth WebView](#oauth-webview)
+      - [Official VK Application](#official-vk-application)
+* [Interaction with VK API](#interaction-with-vk-api)
+  - [Request](#request)
+  - [Parameters](#parameters)
+  - [Callbacks](#callbacks)
+      - [onSuccess](#onsuccess)
+      - [onError](#onerror)
+  - [Cancellation](#cancellation)
+  - [Chaining](#chaining)
+* [Configuring](#configuring)
 * [Upload files](#upload-files)
-* [Longpoll](#longpoll)
+* [Interaction with LongPoll](#interaction-with-longpoll)
+    - [Start LongPoll](#start-longpoll)
+    - [Handle updates](#handle-updates)
+    - [Stop LongPoll](#stop-longpoll)
+* [FAQ](#faq)
+* [License](#license)
 
+
+
+----
 ## **Requirements**
-* Swift 3.0+
-* iOS 8.0+ / OSX 10.10+
-* Xcode 8.0+
+* Swift 4.0 +
+* iOS 8.0 +
+* macOS 10.10 +
+* Xcode 9.0 +
 
 ## **Integration**
 
 ### Manually
-1. Just drag **SwiftyVK.framework** or include the whole **SwiftyVK.xcodeproj** to project
-2. Link SwiftyVK.framework to application in **Target preferences -> General -> Embedded binaries**.
+  1. Just drag **SwiftyVK.framework** or include the whole **SwiftyVK.xcodeproj** into project
+  2. Link **SwiftyVK.framework** with application in **Your target preferences -> General -> Embedded binaries**
 
-
-
-### CocoaPods
-You can use [CocoaPods](https://github.com/CocoaPods/CocoaPods) to install `SwiftyVK` by adding it to `Podfile`:
-
+### [CocoaPods](https://github.com/CocoaPods/CocoaPods)
 ```ruby
 use_frameworks!
 
-target 'MyApp' do
-pod 'SwiftyVK', :git => 'https://github.com/WE-St0r/SwiftyVK.git'
+target '$MySuperApp$' do
+  pod 'SwiftyVK'
 end
 ```
 
-### Carthage
-You can use [Carthage](https://github.com/Carthage/Carthage) to install `SwiftyVK` by adding it to `Cartfile`:
+### [Carthage](https://github.com/Carthage/Carthage)
 ```
-github "WE-St0r/SwiftyVK"
+github "SwiftyVK/SwiftyVK"
 ```
 
 ## **Getting started**
-### Import and implementation
+### Implement SwiftyVKDelegate
 
-Import **SviftyVK** to Swift file:
+For start using `SwiftyVK` you should implement `SwiftyVKDelegate` protocol in your custom `VKDelegate` class.
+It is using to notify your app about important SwiftyVK lifecycle events.
+
+For example:
+
 ```swift
 import SwiftyVK
 ```
 
-Implement `VKDelegate` protocol and **all its functions** in custom class. For example:
-
 ```swift
-class YourClass: Superclass, VKDelegate {
+class VKDelegateExample: SwiftyVKDelegate {
 
-  func vkWillAuthorize() -> Set<VK.Scope> {
-    //Called when SwiftyVK need authorization permissions.
-    return //an set of application permissions
-  }
+    func vkNeedsScopes(for sessionId: String) -> Scopes {
+      // Called when SwiftyVK attempts get access to user account
+      // Should return set of permission scopes
+    }
 
-  func vkDidAuthorizeWith(parameters: Dictionary<String, String>) {
-    //Called when the user is log in.
-    //Here you can start to send requests to the API.
-  }
+    func vkNeedToPresent(viewController: VKViewController) {
+      // Called when SwiftyVK wants to present UI (e.g webView or captcha)
+      // Should display given view controller from current top view controller
+    }
 
-  func vkAutorizationFailedWith(error: AuthError) {
-   //Called when SwiftyVK could not authorize. To let the application know that something went wrong.
-  }
+    func vkTokenCreated(for sessionId: String, info: [String : String]) {
+      // Called when user grant access and SwiftyVK gets new session token
+      // Can be used for run SwiftyVK requests and save session data
+    }
 
-  func vkDidUnauthorize() {
-    //Called when user is log out.
-  }
+    func vkTokenUpdated(for sessionId: String, info: [String : String]) {
+      // Called when existing session token was expired and successfully refreshed
+      // Most likely here you do not do anything
+    }
 
-  func vkShouldUseTokenPath() -> String? {
-    // ---DEPRECATED. TOKEN NOW STORED IN KEYCHAIN---
-    //Called when SwiftyVK need know where a token is located.
-    return //Path to save/read token or nil if should save token to UserDefaults
-  }
-
-  func vkWillPresentView() -> UIViewController {
-    //Only for iOS!
-    //Called when need to display a view from SwiftyVK.
-    return //UIViewController that should present authorization view controller
-  }
-
-  func vkWillPresentView() -> NSWindow? {
-    //Only for OSX!
-    //Called when need to display a window from SwiftyVK.
-    return //Parent window for modal view or nil if view should present in separate window
-  }
+    func vkTokenRemoved(for sessionId: String) {
+      // Called when user was logged out
+      // Use this point to cancel all SwiftyVK requests and remove session data
+    }
 }
 ```
 *See full implementation in Example project*
 
-### **Initialization**
+### Setting up VK application
 
-1. [Create new standalone application](https://vk.com/editapp?act=create) and get `application ID`
-2. Init **SwiftyVK** with `application ID` and `VKDelegate` object:
-
-```swift
-VK.configure(withAppId: applicationID, delegate: <VKDelegate_OBJECT>)
-```
-
-### **User authorization**
-* Implement `vkWillAuthorize()` function in `VKDelegate` and return [application  permissions](https://vk.com/dev/permissions).
-* Just call:
-
+1. [Create new standalone application](https://vk.com/editapp?act=create)
+2. save `application ID` from **Preferences -> Application ID**
+3. Set up **SwiftyVK** with `application ID` and `VKDelegate` obtained in the previous steps:
 
 ```swift
-VK.logIn()
+VK.setUp(appId: String, delegate: SwiftyVKDelegate)
 ```
-* And user will see authorization dialog.
 
-After this, you will check VK state:
+## **Authorization**
+
+SwiftyVK provides several ways to authorize user. You may choose one that more suitable:
+
+### Raw token string
+If you already have previously received token, just put it to this method
+
 ```swift
-VK.state // will be unknown, configured, authorized
+VK.sessions?.default.logIn(rawToken: String, expires: TimeInterval)
+
+// Start work with SwiftyVK session here
 ```
 
-And if state == authorized, send your requests to API (:
+`TimeInterval` - token expires time interval from now. Zero value - never expires token.
 
-### **Authorization with VK App**
-For authorization with official VK application for iOS, you need:
+### oAuth WebView
+Standard authorization method which shows webView with oAuth dialog. Suitable for most cases.
 
-*1. In Xcode -> Target -> Info*
+```swift
+VK.sessions?.default.logIn(
+      onSuccess: { _ in
+        // Start work with SwiftyVK session here
+      },
+      onError: { _ in
+        // Handle an error if something went wrong
+      }
+  )
+```
 
-* Add new URL Type with URL identifier to **URL Types** `vk$YOUR_APP_ID$` (e.g. vk1234567890)
-* Add app schemas to Info.plist file:
+### Official VK Application
+
+If user have official VK application on device, SwiftyVK can be authorized through it.
+For this you need:
+
+1. In *Xcode -> Target -> Info -> URL Types*
+
+    - Add new URL Type like `vk$YOUR_APP_ID$` (e.g. vk1234567890)
+    - Add app schemas to Info.plist file:
+
 ```html
 <key>LSApplicationQueriesSchemes</key>
   <array>
@@ -146,172 +187,286 @@ For authorization with official VK application for iOS, you need:
     <string>vk$YOUR_APP_ID$</string>
   </array>
 ```
-*2. In https://vk.com/apps?act=manage -> Edit App -> Settings*
 
-* Set `App Bundle ID for iOS` to your `App Bundle` in Xcode -> Target -> Bundle Identifier (e.g. com.developer.applicationName)
+2. Copy `Application Bundle` from
+*Xcode -> $App Target$ -> General -> Bundle Identifier* (e.g. com.developer.applicationName)
+2. Set copied `Application Bundle` to
+*https://vk.com/apps?act=manage -> Edit App -> Settings -> App Bundle ID for iOS* field
 
-*3. Add this code to AppDelegate*
+4. Add this code to AppDelegate
+
+
+  - For iOS 9 and bellow
+
 ```swift
-func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+func application(
+    _ app: UIApplication,
+    open url: URL,
+    options: [UIApplicationOpenURLOptionsKey : Any] = [:]
+    ) -> Bool {
     let app = options[.sourceApplication] as? String
-    VK.process(url: url, sourceApplication: app)
+    VK.handle(url: url, sourceApplication: app)
     return true
 }
 ```
-*4. Test it!*
+  - For iOS 10 and above
 
-
-***If user deny authorization with VK App, SwiftyVK show standart authorization WebView in your app.***
-
-
-## **API Requests**
-### Syntax
-The call requests is as follows **VK.methodGroup.methodName**.
-
-For example, send request with parameters and response processing:
 ```swift
-//Init
-var preparedReq = VK.API.Users.get()
-
-//Add parameters
-preparedReq.add(parameters: [VK.Arg.userId : "1"])
-
-//Add next request after this (optional)
-preparedReq. next {response in
-  return //Configured next request
+func application(
+    _ application: UIApplication,
+    open url: URL,
+    sourceApplication: String?,
+    annotation: Any
+    ) -> Bool {
+    VK.handle(url: url, sourceApplication: sourceApplication)
+    return true
 }
-
-//Send
-let sendedReq = preparedReq.send(
-    onSuccess: {response in print(response)},
-    onError: {error in print(error)}
-)
-
-//Get request status
-print(sendedeReq.status)
-// -> created, sended, successed, errored, cancelled
-
-//Cancel request
-sendedReq.cancel()
-
 ```
+4. Make auth like [oAuth WebView](#oauth-webview).
 
-Or a bit shorter:
-```swift
-VK.API.Users.get([VK.Arg.userId : "1"]).send(
-    onSuccess: {response in print(response)},
-    onError: {error in print(error)}
-)
-```
-### Custom requests
-You may also send special requests, such as:
+    ***If user deny authorization with VK App, SwiftyVK will present oAuth dialog***
 
-* Request with custom method path:
-```swift
-VK.API.custom(method: "users.get", parameters: [VK.Arg.userId : "1"])
-```
-* [Execute request](https://vk.com/dev/execute) returns "Hello World":
-```swift
-VK.API.execute("return \"Hello World\"")
-```
-* Remote execute stored application code:
-```swift
-VK.API.remote(method: "YourRemoteMethodName")
-```
-### Request properties
+## **Interaction with VK API**
 
-The requests have several properties that control their behavior. Their names speak for themselves, but just in case I describe them:
+SwiftyVK provides a very simple interface for interaction with VK API.
+All requests performs asynchronouly in own private queue with API scheduler
+(by default scheduler send no more than 3 requests per second).
+You just can send it and get response without a lot of work.
 
-Property | Default | Description
-:------------- | ------------- | :-------------
-`timeout` | 10 | How long in seconds a request will wait for a response from the server. If the wait is longer this value, the generated request error.
-`maxAttempts` | 3 | The number of times can be resend the request automatically, if during its execution the error occurred. **0 == infinity attempts**.
-`HttpMethod`| .GET | HTTP protocol method.
-`parameters`| [VK.Arg : String] | Request API parameters
-`catchErrors` | true | Whether to attempt **SwiftyVK** to handle some query errors automatically. Among these errors include the required authentication, captcha, exceeding the limit of requests per second.
-`logToConsole`| false | Allows print log messages on this request to console
 
-### Default properties
+List of all API methods is [here](https://vk.com/dev/methods)  
 
-In addition to the settings of each individual request, you can set global settings for **SwiftyVK**. You need to contact structure `VK.config`. Some fields completely duplicate the properties of requests and will be assigned to the request when it is initialized, and the other presented only in a global context.
+Let's look closer to requests syntax:
 
-Property | Default | Description
-:------------- | ------------- | :-------------
-`apiVersion`| >5.60 | Returns used VK API version
-`useSendLimit`| true | Need limit requests per second or not. See next property for more information.
-`sendLimit` | 3 | The maximum number of requests that can be sent per second. Here you can [read more](https://vk.com/dev/api_requests) in the section "Limitations and recommendations".
-`language`| system | This language will be used in responses from VK
+### Request
+The base requests calls looks like **VK.methodGroup.methodName()**.
 
-## **Parsing response**
-
-Responses to requests come in the form of text in [JSON](https://en.wikipedia.org/wiki/JSON) format. To present the data as objects, **SwiftyVK** uses the [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) library. You can refer to the documentation of the library. Here I'll describe only a short example.
-
-In our request example about the syntax that will return the response:
-```JSON
-[
-  {
-    "id" : 1,
-    "first_name" : "Pavel",
-    "last_name" : "Durov"
-  }
-]
-```
-
-It contains an array of users which we have access to 3 fields. Suppose that we want to get all user data into separate variable. We can do this:
-```swift
-var id = response[0,"id"].intValue //1
-var firstName = response[0,"first_name"].stringValue //Pavel
-var lastName = response[0,"last_name"].stringValue //Durov
-```
-And that's all You need. If You want to learn more, check out the [SwiftyJSON documentation](https://github.com/SwiftyJSON/SwiftyJSON).
-
-## **Error handling**
-
-In the process of request execution something can go wrong, as expected. In this case, an error is generated. **SwiftyVK** offers two ways of working with errors:
-
-* `catchErrors == false`: SwiftyVK is **always** called the block error handling and you get to decide what to do with the error.
-
-But sometimes it so happens that the query is executed when the user is **not authorized, requires validation / captcha entering, or simply exceeded the number of requests per second**. To automatically resolve these errors is second case.
-
-* `catchErrors == true`: SwiftyVK **first try to handle the error**. If it contains [codes](https://vk.com/dev/errors) 5, 14, 17, which arise in the above cases, the **user will see a dialogue** offering to authorize, validate, or enter the captcha. If the error persists, and the number of resends of request more than `maxAttempts`, it will **call the error block**.
-
-## **Upload files**
-
-**SwiftyVK** allows you to easily upload files in one request by combining standard requests to VK API. Use methods in `VK.Upload` section. Let's see how you can quickly upload photos to an album:
+For example, [get short info about current user](https://vk.com/dev/users.get):
 
 ```swift
-//Get data of image
-let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("image", ofType: "jpg")!)!
-//Crete Media object to upload
-let Media = Media(imageData: data, type: .JPG)
-//Upload image to wall        
-VK.API.Upload.Photo.toWall.toUser(media, userId: "4680178").send(
-    onSuccess: {response in printresponse)},
-    onError: {error in print(error)},
-    onProgress: {done, total in print("send \(done) of \(total)")}
-)
+VK.API.Users.get(.empty)
+    .onSuccess { /* handle and parse response */ }
+    .onError { /* handle error */ }
+    .send()
 ```
 
-This way you can download all the other supported Vkontakte file types. Can see the implementation of other types of loading in the library tests.
+Object created with
+```swift
+VK.API.Users.get(.empty)
+```
+is represents a request that can be immediately sent or first configure and sent later.
 
-Keep in mind that in some cases, such as uploading photos to a message, using this method, you just load the file to the server and get its ID. To send a message with photo, you need to add photo ID to the message.
-
-## **Longpoll**
-
-If you want to use Longpoll to receive updates, **SwiftyVK** allows you to easily do this, as it contains tool for working with Longpoll.
-
-**VK.LP** sends requests **every 25 seconds** and waits for a response. When the response is received, VK.LP **send a notification** and send next request. If the device goes to sleep, the app becomes inactive, or is lost the network, VK.LP stops and again starts working when the state is changed to the opposite. This process is fully automatic. All you need are two methods and one parameter:
+### Parameters
+If you want to get additional fields for concrete user in previous example, can set request parameters in this way:
 
 ```swift
-VK.LP.start() //Start updating
-VK.LP.isActive //Longpoll status
-VK.LP.stop() //Stop updating
+VK.API.Users.get([
+    .userId: "1",
+    .fields: "sex,bdate,city"
+    ])
 ```
 
-And notifications types in `VK.LP.notifications` whose codes correspond to the [codes here](https://vk.com/dev/using_longpoll)
+Use `.empty` if do not want provide parameters.
 
-To subscribe to the notification you just need to use standard observer:
+### Callbacks
+Request executes asynchronously and provides some callbacks for handle execution results:
+
+#### onSuccess
+
+This callback will be called when request was successfully executed and return `Data` object.
+You can handle and parse response with any JSON parsing method
+(e.g. `JSONSerialization`, `Codable`, [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) and others)
 
 ```swift
-NotificationCenter.default.addObserver(self, selector: #selector(UPDATE), name: VK.LP.notifications.type4, object: nil)
+VK.API.Users.get(.empty)
+    .onSuccess {
+        let response = try JSONSerialization.jsonObject(with: $0)
+    }
 ```
+
+You can throws errors within `onSuccess` callback
+and this will cause to be called `onError` callback with thrown error.
+
+#### onError
+
+This callback will be called when request was failed for whatever reason.
+You may handle thrown error in this callback.
+
+```swift
+VK.API.Users.get(.empty)
+    .onError {
+        print("Request failed with error: ($0)")
+     }
+```
+
+### Cancellation
+
+If you no longer need to sent sheduled request (e.g. screen was popped out), just cancel it:
+
+```swift
+// `send()` function returns `Task` object which has `cancel()` function
+let request = VK.API.Users.get([
+    .userId: "1",
+    .fields: "sex,bdate,city"
+    ])
+    .onSuccess { print($0) }
+    .send()
+
+// Cancel sheduled request.
+// onSuccess callback will never be executed.
+request.cancel()
+```
+
+### Chaining
+
+SwiftyVK allows make chains of requests. If you need to send next request
+with data of response from previous request, just build a chain of requests:
+
+```swift
+// `send()` function returns `Task` object which has `cancel()` function
+VK.API.Users.get(.empty)
+    .chain {
+        // This block will be called only
+        // when `users.get` method is successfully executed.
+        // Receives result of executing `users.get` method.
+        let user = try JSONDecoder().decode(User.self, from: $0)
+        return VK.API.Messages.send([
+            .userId: response.user.id,
+            .message: "Hello"
+        ])
+    }
+    .onSuccess {
+        // This block will be called only when `users.get` and `messages.send`
+        // methods are successfully executed.
+        // Receives result of executing `messages.send` method
+    }
+    .onError {
+        // This block will be called when `users.get` or `messages.send` methods are failed.
+        // Receives error of executing `users.get` or `messages.send` method.
+    }
+    .send()
+```
+
+You can make very long chains with SwiftyVK!
+
+## **Configuring**
+In SwiftyVK each session has default configuration for their requests.
+Each request gets configuration from their session.
+Configuration includes different settings such as `httpMethod`, `attemptTimeout` and others.
+
+You can change configuration for single request
+
+```swift
+// Set different httpMethod only for this request
+VK.API.Users.get(.empty)
+    .configure(with: Config(httpMethod: .POST))
+```
+
+or for the whole session
+
+```swift
+// Set default apiVersion value for all requests in default session
+VK.sessions?.default.config.apiVersion = "5.68"
+```
+
+You may change following configuration properties:
+
+Property            | Default               | Description
+:-------------      | -------------         | :-------------
+`httpMethod`        | `.GET`                | [HTTP method](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods). You can use `GET` or `POST`. For big body (e.g. long message text in `message.send` method) use `POST` method.  
+`apiVersion`        | `latest version`      | [VK API version](https://vk.com/dev/versions). By default uses latest version. If you need different version - change this value.
+`language`          | `User system language`| Language of response. For EN `Pavel Durov`, for RU `Павел Дуров`.
+`attemptsMaxLimit`  | `3`                   | Maximum number of attempts to send request before returning an error.
+`attemptTimeout`    | `10`                  | Timeout in seconds of waiting request before returning an error.
+`handleErrors`      | `true`                | Allows automatically handle specific VK errors like authorization, captcha, validation nedеed and present dialog to user for resolve this situation.
+
+## Upload files
+
+SwiftyVK provides ability to easily file uploading to VK servers. For example:
+
+```swift
+// Get path of image file
+guard let path = Bundle.main.path(forResource: "testImage", ofType: "jpg") else { return }
+
+// Get data from image file on given path
+guard let data = try Data(contentsOf: URL(fileURLWithPath: path)) else { return }
+
+// Create SwiftyVK Media representation from given data
+let media = Media.image(data: data, type: .jpg)
+
+// Upload image to server
+VK.API.Upload.Photo.toWall(media, to: .user(id: "4680178"))
+    .onSuccess { print($0) }
+    .onError { print($0) }
+    .onProgress {
+        // This callback available only for uploading requests
+        // Use it to handle uploading status and show it to user
+    }
+    .send()
+```
+
+**Some upload requests do not immediately download files**
+
+
+e.g `VK.API.Upload.Photo.toMessage` will return `photoId`
+which you can use in `messages.send` method.
+See [docs](https://vk.com/dev/upload_files) for more info.
+## **Interaction with LongPoll**
+
+## Start LongPoll
+
+Also with SwiftyVK you can interract VK [LongPoll](https://vk.com/dev/using_longpoll) server very easily.
+Just call:
+
+```swift
+VK.sessions?.default.longPoll.start {
+    // This callback will be executed every time
+    // when long poll client receive set of new events
+    print($0)
+}
+```
+
+## Handle updates
+
+Data format describing on [this](https://vk.com/dev/using_longpoll) page.
+LongPollEvent is enum with `Data` associated value in every case.
+You can parse this data to `JSON` with any your favorite JSON parser like this
+
+```swift
+VK.sessions?.default.longPoll.start {
+    for event in $0 {
+        switch event {
+            case let .type1(data):
+                let json = JSON(data)
+                print(json)
+            default:
+                break
+        }
+    }
+}
+```
+
+LongPollEvent has two special cases:
+
+`.forcedStop` - returns when LongPoll was obtain unexpected error and stop. You can restart it again.
+
+`.historyMayBeLost` - returns when LongPoll was disconnected from server for long time
+and `lpKey` or `timestamp` was outdated.
+You do not need reconnect LongPoll manually, client will do it himself.
+Use this case to **refresh data which could change during the network was unavailable**
+
+## Stop LongPoll
+
+If you no longer need to receive LongPoll updates, just call this function:
+```swift
+VK.sessions?.default.longPoll.stop()
+```
+
+## **FAQ**
+
+For now this section is empty...
+
+## **License**
+
+SwiftyVK is released under the MIT license.
+See [LICENSE](./LICENSE.txt) for details.
