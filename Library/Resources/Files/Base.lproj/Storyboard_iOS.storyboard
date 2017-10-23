@@ -45,13 +45,11 @@
                                                     <constraint firstAttribute="width" secondItem="Vs6-Iw-Cuw" secondAttribute="height" multiplier="5:2" id="cne-fh-hLT"/>
                                                 </constraints>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" highlighted="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter code from the image" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eur-XY-eQs">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" highlighted="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter code from the image" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Eur-XY-eQs">
                                                 <rect key="frame" x="0.0" y="110" width="250" height="30"/>
                                                 <color key="backgroundColor" red="0.94525331440000004" green="0.94525331440000004" blue="0.94525331440000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="gOD-h2-yMH"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="XUO-xl-e7e">
@@ -79,6 +77,7 @@
                                             <constraint firstItem="Eur-XY-eQs" firstAttribute="leading" secondItem="uwb-RL-fqD" secondAttribute="leading" id="njO-14-0M9"/>
                                             <constraint firstItem="XUO-xl-e7e" firstAttribute="centerX" secondItem="Vs6-Iw-Cuw" secondAttribute="centerX" id="nvQ-X7-uR9"/>
                                             <constraint firstItem="Vs6-Iw-Cuw" firstAttribute="top" secondItem="uwb-RL-fqD" secondAttribute="top" id="psP-iD-8xu"/>
+                                            <constraint firstAttribute="width" constant="250" id="tZ6-3n-8JU"/>
                                             <constraint firstAttribute="bottom" secondItem="Eur-XY-eQs" secondAttribute="bottom" id="vhb-Yl-PWF"/>
                                         </constraints>
                                     </view>

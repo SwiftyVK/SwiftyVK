@@ -189,7 +189,7 @@ final class CaptchaPresenterTests: XCTestCase {
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
-            XCTAssertEqual(error.asVK, VKError.captchaResultIsNil)
+            XCTAssertEqual(error.asVK, .captchaWasDismissed)
         }
     }
 }
