@@ -30,6 +30,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
         
         return try uiSyncQueue.sync {
             var result: String?
+            var dismissed = false
             
             guard let controller = currentController ?? controllerMaker.captchaController() else {
                 throw VKError.cantMakeCaptchaController
@@ -54,6 +55,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
                     }
                 },
                 onDismiss: {
+                    dismissed = true
                     semaphore.signal()
                 }
             )
@@ -63,6 +65,10 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
                 throw VKError.captchaPresenterTimedOut
             case .success:
                 break
+            }
+            
+            guard !dismissed else {
+                throw VKError.captchaWasDismissed
             }
             
             guard let unwrappedResult = result else {
