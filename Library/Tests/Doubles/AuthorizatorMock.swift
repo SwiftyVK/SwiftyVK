@@ -6,12 +6,12 @@ final class AuthorizatorMock: Authorizator {
     var authorizeShouldThrows = false
     var authorizeCallCount = 0
     
-    var onAuthorize: ((String, SessionConfig, Bool) throws -> Token)?
+    var onAuthorize: ((String, SessionConfig, Bool, Bool) throws -> Token)?
     
-    func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Token {
+    func authorize(sessionId: String, config: SessionConfig, revoke: Bool, tokenExists: Bool) throws -> Token {
         authorizeCallCount += 1
         
-        guard let result = try onAuthorize?(sessionId, config, revoke) else {
+        guard let result = try onAuthorize?(sessionId, config, revoke, tokenExists) else {
             XCTFail("onAuthorize not defined")
             return TokenMock()
         }

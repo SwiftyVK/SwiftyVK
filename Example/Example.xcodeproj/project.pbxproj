@@ -562,7 +562,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK_example_macOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "west0r.SwiftyVK-example-macOS";
 				PRODUCT_NAME = "~SwiftyVK~";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -610,7 +610,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK_example_macOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "west0r.SwiftyVK-example-macOS";
 				PRODUCT_NAME = "~SwiftyVK~";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -663,7 +663,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK_example_iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "west0r.SwiftyVK-example-iOS";
 				PRODUCT_NAME = "~SwiftyVK~";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -711,7 +711,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK_example_iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "west0r.SwiftyVK-example-iOS";
 				PRODUCT_NAME = "~SwiftyVK~";
 				SDKROOT = iphoneos;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;

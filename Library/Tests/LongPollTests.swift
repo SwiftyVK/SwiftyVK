@@ -229,7 +229,7 @@ final class LongPollTests: XCTestCase {
         context.longPoll.start { events in
             if taskCount == 1 {
                 guard case .historyMayBeLost? = events.first else {
-                    return XCTFail("Unexpected event: \(events.first)")
+                    return XCTFail("Unexpected event: \(String(describing: events.first))")
                 }
             } else if events.isEmpty {
                 expectation.fulfill()

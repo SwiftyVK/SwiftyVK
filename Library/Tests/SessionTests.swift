@@ -76,7 +76,7 @@ final class SessionTests: XCTestCase {
         // Given
         let context = makeContext()
 
-        context.authorizator.onAuthorize = { _, _, _ in
+        context.authorizator.onAuthorize = { _, _, _, _ in
             return TokenMock()
         }
         // When
@@ -98,7 +98,7 @@ final class SessionTests: XCTestCase {
         // Given
         let context = makeContext()
 
-        context.authorizator.onAuthorize = { _, _, _ in
+        context.authorizator.onAuthorize = { _, _, _, _ in
             throw VKError.authorizationFailed
         }
         // When
@@ -120,7 +120,7 @@ final class SessionTests: XCTestCase {
         // Given
         let context = makeContext()
 
-        context.authorizator.onAuthorize = { _, _, _ in
+        context.authorizator.onAuthorize = { _, _, _, _ in
             throw NSError(domain: "", code: 0, userInfo: nil)
         }
         // When
@@ -286,7 +286,7 @@ final class SessionTests: XCTestCase {
         // Given
         let context = makeContext()
 
-        context.authorizator.onAuthorize = { _, _, _ in
+        context.authorizator.onAuthorize = { _, _, _, _ in
             return TokenMock()
         }
         // When
@@ -337,11 +337,16 @@ final class SessionTests: XCTestCase {
         // Given
         let context = makeContext()
         
+        context.authorizator.onAuthorize = { _, _, _, _ in
+            return TokenMock()
+        }
+        
         context.authorizator.onValidate = { _, _ in
             return TokenMock()
         }
         // When
         do {
+            try context.session.logIn(revoke: false)
             try context.session.validate(redirectUrl: URL(fileURLWithPath: ""))
         } catch let error {
             XCTFail("Unexpected error: \(error)")
@@ -355,12 +360,17 @@ final class SessionTests: XCTestCase {
         var onPresentCallCount = 0
         let context = makeContext()
         
+        context.authorizator.onAuthorize = { _, _, _, _ in
+            return TokenMock()
+        }
+        
         context.captchaPresenter.onPresent = {
             onPresentCallCount += 1
             return ""
         }
         // When
         do {
+            try context.session.logIn(revoke: false)
             _ = try context.session.captcha(rawUrlToImage: "")
         } catch let error {
             XCTFail("Unexpected error: \(error)")

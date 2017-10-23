@@ -10,7 +10,6 @@ extension VKError: Equatable {
         (.jsonNotParsed, .jsonNotParsed),
         (.urlRequestError, .urlRequestError),
         (.unknown, .unknown),
-        (.maximumAttemptsExceeded, .maximumAttemptsExceeded),
         (.captchaResultIsNil, .captchaResultIsNil),
         (.wrongUrl, .wrongUrl),
         (.cantSaveToKeychain, .cantSaveToKeychain),
@@ -30,7 +29,8 @@ extension VKError: Equatable {
         (.authorizationUrlIsNil, .authorizationUrlIsNil),
         (.authorizationDenied, .authorizationDenied),
         (.authorizationCancelled, .authorizationCancelled),
-        (.authorizationFailed, .authorizationFailed):
+        (.authorizationFailed, .authorizationFailed),
+        (.needAuthorization, .needAuthorization):
             return true
         case (_, _):
             return false

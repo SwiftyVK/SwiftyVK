@@ -64,7 +64,8 @@ final class AuthorizatorTests: XCTestCase {
         let token = try? context.authorizator.authorize(
             sessionId: context.sessionId,
             config: context.sessionConfig,
-            revoke: false
+            revoke: false,
+            tokenExists: true
         )
         // Then
         XCTAssertNotNil(token)
@@ -78,12 +79,31 @@ final class AuthorizatorTests: XCTestCase {
             _ = try context.authorizator.authorize(
                 sessionId: context.sessionId,
                 config: context.sessionConfig,
-                revoke: false
+                revoke: false,
+                tokenExists: true
             )
             // Then
             XCTFail("Code above should throw error")
         } catch let error {
             XCTAssertEqual(error.asVK, VKError.cantParseTokenInfo(""))
+        }
+    }
+    
+    func test_authorize_shouldThrowNeedAuthorization_whenTokenExists() {
+        // Given
+        let context = makeContext()
+        // When
+        do {
+            _ = try context.authorizator.authorize(
+                sessionId: context.sessionId,
+                config: context.sessionConfig,
+                revoke: false,
+                tokenExists: false
+            )
+            // Then
+            XCTFail("Code above should throw error")
+        } catch let error {
+            XCTAssertEqual(error.asVK, VKError.needAuthorization)
         }
     }
     
@@ -102,7 +122,8 @@ final class AuthorizatorTests: XCTestCase {
         let token = try? context.authorizator.authorize(
             sessionId: context.sessionId,
             config: context.sessionConfig,
-            revoke: false
+            revoke: false,
+            tokenExists: true
         )
         // Then
         XCTAssertNotNil(token)
@@ -122,7 +143,8 @@ final class AuthorizatorTests: XCTestCase {
         _ = try? context.authorizator.authorize(
             sessionId: context.sessionId,
             config: context.sessionConfig,
-            revoke: true
+            revoke: true,
+            tokenExists: true
         )
         // Then
         XCTAssertEqual(delegateCallCount, 1)
@@ -251,7 +273,8 @@ final class AuthorizatorTests: XCTestCase {
                 let token = try context.authorizator.authorize(
                     sessionId: context.sessionId,
                     config: context.sessionConfig,
-                    revoke: false
+                    revoke: false,
+                    tokenExists: true
                 )
                 // Then
                 XCTAssertNotNil(token)

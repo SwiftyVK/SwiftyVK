@@ -1,7 +1,7 @@
 import Foundation
 
 /// Represents any error which SwiftyVK can return
-public enum VKError: Error {
+public indirect enum VKError: Error {
     // MARK: - Any error wrapper
     case unknown(Error)
     
@@ -14,12 +14,13 @@ public enum VKError: Error {
     case cantParseTokenInfo(String)
     case sessionAlreadyDestroyed(Session)
     case sessionAlreadyAuthorized(Session)
+    case sessionIsNotAuthorized(Session)
+    case needAuthorization
     
     // MARK: - Request errors
     case unexpectedResponse
     case jsonNotParsed(Error)
     case urlRequestError(Error)
-    case maximumAttemptsExceeded
     case captchaResultIsNil
     case wrongUrl
     

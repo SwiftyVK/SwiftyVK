@@ -72,16 +72,11 @@ final class TaskImpl: Operation, Task, OperationConvertible {
         semaphore.signal()
     }
     
-    private func resendWith(error: VKError?, captcha: Captcha?) {
+    private func resendWith(error: VKError, captcha: Captcha?) {
         guard !self.isCancelled else { return }
         
         guard sendAttempts < currentRequest.config.attemptsMaxLimit.count else {
-            if let error = error {
-                return perform(error: error)
-            }
-            else {
-                return perform(error: .maximumAttemptsExceeded)
-            }
+            return perform(error: error)
         }
         
         tryToSend(captcha: captcha)
@@ -179,15 +174,15 @@ final class TaskImpl: Operation, Task, OperationConvertible {
     
     private func tryToPerform(code: () throws -> ()) {
         guard !isCancelled else { return }
-
+        
         do {
             try code()
         }
         catch let error as VKError {
-            perform(error: error)
+            resendWith(error: error, captcha: nil)
         }
         catch let error {
-            perform(error: .unknown(error))
+            resendWith(error: .unknown(error), captcha: nil)
         }
     }
     

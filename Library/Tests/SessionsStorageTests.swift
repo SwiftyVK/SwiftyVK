@@ -20,9 +20,7 @@ final class SessionStorageTests: XCTestCase {
         do {
             let fileUrl = try makeStorage().configurationUrl()
             let fileManager = FileManager.default
-            
-            print(fileUrl.absoluteString)
-            
+                        
             if fileManager.fileExists(atPath: fileUrl.path) {
                 try fileManager.removeItem(at: fileUrl)
             }

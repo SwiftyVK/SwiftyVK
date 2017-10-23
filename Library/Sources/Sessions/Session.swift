@@ -137,18 +137,24 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     }
     
     func logIn(revoke: Bool) throws -> [String: String] {
-        try self.throwIfDestroyed()
-        try self.throwIfAuthorized()
+        try throwIfDestroyed()
+        try throwIfAuthorized()
+        let tokenExists = token != nil
         
-        self.token = try self.authorizator.authorize(sessionId: self.id, config: self.config, revoke: revoke)
-        return self.token?.info ?? [:]
+        token = try authorizator.authorize(
+            sessionId: id,
+            config: config,
+            revoke: revoke,
+            tokenExists: tokenExists
+        )
+        
+        return token?.info ?? [:]
     }
     
     public func logIn(rawToken: String, expires: TimeInterval) throws {
         try gateQueue.sync {
             try throwIfDestroyed()
             try throwIfAuthorized()
-            
             token = try authorizator.authorize(sessionId: id, rawToken: rawToken, expires: expires)
         }
     }
@@ -160,13 +166,16 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     public func validate(redirectUrl: URL) throws {
         try gateQueue.sync {
             try throwIfDestroyed()
+            try throwIfNotAuthorized()
             token = try authorizator.validate(sessionId: id, url: redirectUrl)
         }
     }
     
     func captcha(rawUrlToImage: String) throws -> String {
         return try gateQueue.sync {
-            try captcha(rawUrlToImage: rawUrlToImage, dismissOnFinish: true)
+            try throwIfDestroyed()
+            try throwIfNotAuthorized()
+            return try captcha(rawUrlToImage: rawUrlToImage, dismissOnFinish: true)
         }
     }
     
@@ -238,6 +247,12 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     private func throwIfAuthorized() throws {
         guard state < .authorized else {
             throw VKError.sessionAlreadyAuthorized(self)
+        }
+    }
+    
+    private func throwIfNotAuthorized() throws {
+        guard state >= .authorized else {
+            throw VKError.sessionIsNotAuthorized(self)
         }
     }
     

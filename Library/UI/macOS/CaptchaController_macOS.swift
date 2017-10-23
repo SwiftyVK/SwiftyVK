@@ -76,8 +76,4 @@ final class CaptchaControllerMacOS: NSViewController, NSTextFieldDelegate, Captc
         
         onResult?(result)
     }
-    
-    deinit {
-        print("captcha deinit")
-    }
 }

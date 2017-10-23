@@ -1,6 +1,6 @@
 @testable import SwiftyVK
 
-final class TaskMock: Operation, Task {
+final class TaskMock: Operation, Task, OperationConvertible {
 
     var state: TaskState {
         willSet {
