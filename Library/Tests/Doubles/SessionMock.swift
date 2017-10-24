@@ -62,6 +62,6 @@ final class SessionMock: Session, TaskSession, DestroyableSession, ApiErrorExecu
         return ""
     }
     
-    func share() {
+    func share(_ context: ShareDialogContext) {
     }
 }

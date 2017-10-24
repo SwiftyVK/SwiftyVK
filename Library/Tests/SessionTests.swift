@@ -397,7 +397,8 @@ final class SessionTests: XCTestCase {
         // Given
         let context = makeContext()
         // When
-        context.session.share()
+        let shareContext = ShareDialogContext()
+        context.session.share(shareContext)
     }
 }
 

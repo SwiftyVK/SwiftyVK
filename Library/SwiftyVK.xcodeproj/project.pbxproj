@@ -420,6 +420,8 @@
 		D4C032B11F520C1A005AB59A /* URLRequestBuilderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */; };
 		D4CA9B741F66BED90085E4F3 /* LongPollMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CA9B731F66BED90085E4F3 /* LongPollMock.swift */; };
 		D4CA9B761F66CA890085E4F3 /* longPoll.getServer.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4CA9B751F66CA890085E4F3 /* longPoll.getServer.success.json */; };
+		D4DADE071F9F9AE9004F159E /* ShareDialogContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DADE061F9F9AE9004F159E /* ShareDialogContext.swift */; };
+		D4DADE081F9F9AE9004F159E /* ShareDialogContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DADE061F9F9AE9004F159E /* ShareDialogContext.swift */; };
 		D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */; };
 		D4F49D421F2DF5B10037B875 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D411F2DF5B10037B875 /* JsonReader.swift */; };
 		D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
@@ -716,6 +718,7 @@
 		D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderMock.swift; sourceTree = "<group>"; };
 		D4CA9B731F66BED90085E4F3 /* LongPollMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollMock.swift; sourceTree = "<group>"; };
 		D4CA9B751F66CA890085E4F3 /* longPoll.getServer.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.getServer.success.json; sourceTree = "<group>"; };
+		D4DADE061F9F9AE9004F159E /* ShareDialogContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDialogContext.swift; sourceTree = "<group>"; };
 		D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorTests.swift; sourceTree = "<group>"; };
 		D4F49D411F2DF5B10037B875 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		D4F49D441F2E0EF60037B875 /* apiError.correct.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.correct.json; sourceTree = "<group>"; };
@@ -863,6 +866,7 @@
 				D4BBFDD41F9297A9009615E7 /* Networking */,
 				D4BBFDDE1F9297A9009615E7 /* Sessions */,
 				D4BBFDFD1F9297AA009615E7 /* API */,
+				D4DADE051F9F9AD2004F159E /* Sharing */,
 				D4BBFDEB1F9297A9009615E7 /* Extensions */,
 				D4BBFE1F1F9297AA009615E7 /* LongPoll */,
 				D4BBFFDC1F929955009615E7 /* Common */,
@@ -1190,6 +1194,14 @@
 				D4BBFDDC1F9297A9009615E7 /* Task.swift */,
 			);
 			path = Task;
+			sourceTree = "<group>";
+		};
+		D4DADE051F9F9AD2004F159E /* Sharing */ = {
+			isa = PBXGroup;
+			children = (
+				D4DADE061F9F9AE9004F159E /* ShareDialogContext.swift */,
+			);
+			path = Sharing;
 			sourceTree = "<group>";
 		};
 		D4F49D401F2DF5950037B875 /* Utils */ = {
@@ -1636,6 +1648,7 @@
 				D4BBFF791F929892009615E7 /* Notes.swift in Sources */,
 				D4BBFFCE1F929893009615E7 /* Token.swift in Sources */,
 				D4BBFFAA1F929893009615E7 /* DependenciesImpl.swift in Sources */,
+				D4DADE081F9F9AE9004F159E /* ShareDialogContext.swift in Sources */,
 				D4BBFF881F929892009615E7 /* Friends.swift in Sources */,
 				D4BBFF8E1F929892009615E7 /* Market.swift in Sources */,
 				D4BBFF901F929892009615E7 /* Wall.swift in Sources */,
@@ -1752,6 +1765,7 @@
 				D4BBFEB11F929891009615E7 /* Notes.swift in Sources */,
 				D4BBFF061F929891009615E7 /* Token.swift in Sources */,
 				D4BBFEE21F929891009615E7 /* DependenciesImpl.swift in Sources */,
+				D4DADE071F9F9AE9004F159E /* ShareDialogContext.swift in Sources */,
 				D4BBFEC01F929891009615E7 /* Friends.swift in Sources */,
 				D46FB4261F929E3C000CEAEB /* WebViewWrapperMacOS.swift in Sources */,
 				D4BBFEC61F929891009615E7 /* Market.swift in Sources */,

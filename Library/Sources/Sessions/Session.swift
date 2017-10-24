@@ -28,7 +28,7 @@ public protocol Session: class {
     func send(method: SendableMethod) -> Task
     
     /// Show share to wall dialog
-    func share()
+    func share(_ context: ShareDialogContext)
 }
 
 protocol TaskSession {
@@ -215,8 +215,12 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         return task
     }
     
-    public func share() {
-        
+    public func share(_ context: ShareDialogContext) {
+        do {
+            try throwIfDestroyed()
+        } catch let error {
+            print(error)
+        }
     }
     
     func shedule(task: Task, concurrent: Bool) throws {
