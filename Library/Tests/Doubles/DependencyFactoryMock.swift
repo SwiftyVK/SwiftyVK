@@ -110,3 +110,17 @@ final class LongPollMakerMock: LongPollMaker {
     }
 
 }
+
+final class SharePresenterMakerMock: SharePresenterMaker {
+    
+    var onMake: (() -> SharePresenter)?
+    
+    func sharePresenter() -> SharePresenter {
+        guard let result = onMake?() else {
+            XCTFail("onMake not defined")
+            return SharePresenterMock()
+        }
+        
+        return result
+    }
+}

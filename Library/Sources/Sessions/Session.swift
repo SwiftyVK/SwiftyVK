@@ -28,7 +28,7 @@ public protocol Session: class {
     func send(method: SendableMethod) -> Task
     
     /// Show share to wall dialog
-    func share(_ context: ShareDialogContext)
+    func share(_ context: ShareContext)
 }
 
 protocol TaskSession {
@@ -91,6 +91,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     private let taskMaker: TaskMaker
     private let longPollMaker: LongPollMaker
     private let captchaPresenter: CaptchaPresenter
+    private let sharePresenterMaker: SharePresenterMaker
     private weak var sessionSaver: SessionSaver?
     private weak var delegate: SwiftyVKSessionDelegate?
     private let gateQueue = DispatchQueue(label: "SwiftyVK.sessionQueue")
@@ -103,6 +104,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         authorizator: Authorizator,
         taskMaker: TaskMaker,
         captchaPresenter: CaptchaPresenter,
+        sharePresenterMaker: SharePresenterMaker,
         sessionSaver: SessionSaver,
         longPollMaker: LongPollMaker,
         delegate: SwiftyVKSessionDelegate?
@@ -115,6 +117,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         self.taskMaker = taskMaker
         self.longPollMaker = longPollMaker
         self.captchaPresenter = captchaPresenter
+        self.sharePresenterMaker = sharePresenterMaker
         self.sessionSaver = sessionSaver
         self.delegate = delegate
         
@@ -215,10 +218,13 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         return task
     }
     
-    public func share(_ context: ShareDialogContext) {
+    public func share(_ context: ShareContext) {
         do {
             try throwIfDestroyed()
-        } catch let error {
+            let presenter = sharePresenterMaker.sharePresenter()
+            presenter.share(context, in: self)
+        }
+        catch let error {
             print(error)
         }
     }

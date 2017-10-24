@@ -393,11 +393,40 @@ final class SessionTests: XCTestCase {
         XCTAssertEqual(onDismissCallCount, 1)
     }
     
-    func test_shareDialog() {
+    func test_sharePresenter_shareCalled() {
         // Given
         let context = makeContext()
+        let shareContext = ShareContext()
+        var shareCallCount = 0
+        
+        context.sharePresenterMaker.onMake = {
+            let presenter = SharePresenterMock()
+            presenter.onShare = { _shareContext, session in
+                // Then
+                XCTAssertEqual(_shareContext, shareContext)
+                XCTAssertEqual(session.id, context.session.id)
+                shareCallCount += 1
+            }
+            return presenter
+        }
         // When
-        let shareContext = ShareDialogContext()
+        context.session.share(shareContext)
+        // Then
+        XCTAssertEqual(shareCallCount, 1)
+    }
+    
+    func test_sharePresenter_shareNotCalled_whenSessionDestroyed() {
+        // Given
+        let context = makeContext()
+        let shareContext = ShareContext()
+        context.session.destroy()
+        
+        context.sharePresenterMaker.onMake = {
+            // Then
+            XCTFail("Session already destroyed")
+            return SharePresenterMock()
+        }
+        // When
         context.session.share(shareContext)
     }
 }
@@ -408,7 +437,8 @@ private func makeContext() -> (
     attemptSheduler: AttemptShedulerMock,
     authorizator: AuthorizatorMock,
     captchaPresenter: CaptchaPresenterMock,
-    delegate: SwiftyVKDelegateMock
+    delegate: SwiftyVKDelegateMock,
+    sharePresenterMaker: SharePresenterMakerMock
     ) {
     let taskSheduler = TaskShedulerMock()
     let attemptSheduler = AttemptShedulerMock()
@@ -418,6 +448,7 @@ private func makeContext() -> (
     let sessionSaver = SessionsHolderMock()
     let delegate = SwiftyVKDelegateMock()
     let longPollMaker = LongPollMakerMock()
+    let sharePresenterMaker = SharePresenterMakerMock()
     
     let session = SessionImpl(
         id: .random(20),
@@ -427,10 +458,11 @@ private func makeContext() -> (
         authorizator: authorizator,
         taskMaker: taskMaker,
         captchaPresenter: captchaPresenter,
+        sharePresenterMaker: sharePresenterMaker,
         sessionSaver: sessionSaver,
         longPollMaker: longPollMaker,
         delegate: delegate
     )
     
-    return (session, taskSheduler, attemptSheduler, authorizator, captchaPresenter, delegate)
+    return (session, taskSheduler, attemptSheduler, authorizator, captchaPresenter, delegate, sharePresenterMaker)
 }

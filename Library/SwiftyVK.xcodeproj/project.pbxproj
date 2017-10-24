@@ -202,6 +202,10 @@
 		D484C9321F4B337E00C9651C /* AttemptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9311F4B337E00C9651C /* AttemptTests.swift */; };
 		D484C93F1F4B3E3400C9651C /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C93C1F4B3E2F00C9651C /* URLSessionMock.swift */; };
 		D484C9411F4B3E8300C9651C /* VKURLSessionTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9401F4B3E8300C9651C /* VKURLSessionTaskMock.swift */; };
+		D48F78971F9FA0FC0092931E /* SharePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78961F9FA0FC0092931E /* SharePresenter.swift */; };
+		D48F78981F9FA0FC0092931E /* SharePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78961F9FA0FC0092931E /* SharePresenter.swift */; };
+		D48F789A1F9FA51C0092931E /* SharePresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78991F9FA51C0092931E /* SharePresenterMock.swift */; };
+		D48F789B1F9FA51C0092931E /* SharePresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78991F9FA51C0092931E /* SharePresenterMock.swift */; };
 		D497959F1F4DE40900921A21 /* ApiErrorHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D497959E1F4DE40900921A21 /* ApiErrorHandlerTests.swift */; };
 		D49795A11F4DE57100921A21 /* ApiErrorExecutorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795A01F4DE57100921A21 /* ApiErrorExecutorMock.swift */; };
 		D49795A31F4DF04000921A21 /* ApiMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795A21F4DF04000921A21 /* ApiMethodTests.swift */; };
@@ -420,8 +424,8 @@
 		D4C032B11F520C1A005AB59A /* URLRequestBuilderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */; };
 		D4CA9B741F66BED90085E4F3 /* LongPollMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CA9B731F66BED90085E4F3 /* LongPollMock.swift */; };
 		D4CA9B761F66CA890085E4F3 /* longPoll.getServer.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4CA9B751F66CA890085E4F3 /* longPoll.getServer.success.json */; };
-		D4DADE071F9F9AE9004F159E /* ShareDialogContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DADE061F9F9AE9004F159E /* ShareDialogContext.swift */; };
-		D4DADE081F9F9AE9004F159E /* ShareDialogContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DADE061F9F9AE9004F159E /* ShareDialogContext.swift */; };
+		D4DADE071F9F9AE9004F159E /* ShareContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DADE061F9F9AE9004F159E /* ShareContext.swift */; };
+		D4DADE081F9F9AE9004F159E /* ShareContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DADE061F9F9AE9004F159E /* ShareContext.swift */; };
 		D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */; };
 		D4F49D421F2DF5B10037B875 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D411F2DF5B10037B875 /* JsonReader.swift */; };
 		D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
@@ -592,6 +596,8 @@
 		D484C9311F4B337E00C9651C /* AttemptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptTests.swift; sourceTree = "<group>"; };
 		D484C93C1F4B3E2F00C9651C /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		D484C9401F4B3E8300C9651C /* VKURLSessionTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKURLSessionTaskMock.swift; sourceTree = "<group>"; };
+		D48F78961F9FA0FC0092931E /* SharePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenter.swift; sourceTree = "<group>"; };
+		D48F78991F9FA51C0092931E /* SharePresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenterMock.swift; sourceTree = "<group>"; };
 		D497959E1F4DE40900921A21 /* ApiErrorHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorHandlerTests.swift; sourceTree = "<group>"; };
 		D49795A01F4DE57100921A21 /* ApiErrorExecutorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorExecutorMock.swift; sourceTree = "<group>"; };
 		D49795A21F4DF04000921A21 /* ApiMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiMethodTests.swift; sourceTree = "<group>"; };
@@ -718,7 +724,7 @@
 		D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderMock.swift; sourceTree = "<group>"; };
 		D4CA9B731F66BED90085E4F3 /* LongPollMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollMock.swift; sourceTree = "<group>"; };
 		D4CA9B751F66CA890085E4F3 /* longPoll.getServer.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.getServer.success.json; sourceTree = "<group>"; };
-		D4DADE061F9F9AE9004F159E /* ShareDialogContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDialogContext.swift; sourceTree = "<group>"; };
+		D4DADE061F9F9AE9004F159E /* ShareContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareContext.swift; sourceTree = "<group>"; };
 		D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorTests.swift; sourceTree = "<group>"; };
 		D4F49D411F2DF5B10037B875 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		D4F49D441F2E0EF60037B875 /* apiError.correct.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.correct.json; sourceTree = "<group>"; };
@@ -827,6 +833,7 @@
 				D41665431F6198C0000E6934 /* ConnectionObserverMock.swift */,
 				D4CA9B731F66BED90085E4F3 /* LongPollMock.swift */,
 				D43E658A1F7D524A00AF48C8 /* CookiesHolderMock.swift */,
+				D48F78991F9FA51C0092931E /* SharePresenterMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1199,7 +1206,8 @@
 		D4DADE051F9F9AD2004F159E /* Sharing */ = {
 			isa = PBXGroup;
 			children = (
-				D4DADE061F9F9AE9004F159E /* ShareDialogContext.swift */,
+				D4DADE061F9F9AE9004F159E /* ShareContext.swift */,
+				D48F78961F9FA0FC0092931E /* SharePresenter.swift */,
 			);
 			path = Sharing;
 			sourceTree = "<group>";
@@ -1612,6 +1620,7 @@
 				A2433A441EA533500058BB6D /* TaskMock.swift in Sources */,
 				A2D355F21EFAD4C300395E61 /* SessionStorageMock.swift in Sources */,
 				D41ADB051F4E015500E10D41 /* VKStack.swift in Sources */,
+				D48F789A1F9FA51C0092931E /* SharePresenterMock.swift in Sources */,
 				D4321D8D1F5F0A31001AFE9F /* OneVariationsMethodTests.swift in Sources */,
 				A24DDAF01EB73CB6002EA273 /* BodyBuilderMock.swift in Sources */,
 				D4321D931F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift in Sources */,
@@ -1648,7 +1657,7 @@
 				D4BBFF791F929892009615E7 /* Notes.swift in Sources */,
 				D4BBFFCE1F929893009615E7 /* Token.swift in Sources */,
 				D4BBFFAA1F929893009615E7 /* DependenciesImpl.swift in Sources */,
-				D4DADE081F9F9AE9004F159E /* ShareDialogContext.swift in Sources */,
+				D4DADE081F9F9AE9004F159E /* ShareContext.swift in Sources */,
 				D4BBFF881F929892009615E7 /* Friends.swift in Sources */,
 				D4BBFF8E1F929892009615E7 /* Market.swift in Sources */,
 				D4BBFF901F929892009615E7 /* Wall.swift in Sources */,
@@ -1702,6 +1711,7 @@
 				D4BBFF8D1F929892009615E7 /* Apps.swift in Sources */,
 				D4BBFFB01F929893009615E7 /* TwoVariationsMethod.swift in Sources */,
 				D4BBFF981F929893009615E7 /* VKHTTPCookieStorage.swift in Sources */,
+				D48F78981F9FA0FC0092931E /* SharePresenter.swift in Sources */,
 				D4BBFFAD1F929893009615E7 /* APIMethod.swift in Sources */,
 				D4BBFFBF1F929893009615E7 /* MultipartBodyBuilder.swift in Sources */,
 				D4BBFFC41F929893009615E7 /* AttemptSheduler.swift in Sources */,
@@ -1765,7 +1775,7 @@
 				D4BBFEB11F929891009615E7 /* Notes.swift in Sources */,
 				D4BBFF061F929891009615E7 /* Token.swift in Sources */,
 				D4BBFEE21F929891009615E7 /* DependenciesImpl.swift in Sources */,
-				D4DADE071F9F9AE9004F159E /* ShareDialogContext.swift in Sources */,
+				D4DADE071F9F9AE9004F159E /* ShareContext.swift in Sources */,
 				D4BBFEC01F929891009615E7 /* Friends.swift in Sources */,
 				D46FB4261F929E3C000CEAEB /* WebViewWrapperMacOS.swift in Sources */,
 				D4BBFEC61F929891009615E7 /* Market.swift in Sources */,
@@ -1819,6 +1829,7 @@
 				D4BBFED01F929891009615E7 /* VKHTTPCookieStorage.swift in Sources */,
 				D4BBFEE51F929891009615E7 /* APIMethod.swift in Sources */,
 				D4BBFEF71F929891009615E7 /* MultipartBodyBuilder.swift in Sources */,
+				D48F78971F9FA0FC0092931E /* SharePresenter.swift in Sources */,
 				D4BBFEFC1F929891009615E7 /* AttemptSheduler.swift in Sources */,
 				D4BBFF101F929891009615E7 /* Resources.swift in Sources */,
 				D4BBFEBB1F929891009615E7 /* Fave.swift in Sources */,
@@ -1927,6 +1938,7 @@
 				D46FB4471F929EE6000CEAEB /* CaptchaPresenterMock.swift in Sources */,
 				D46FB3F61F929DBC000CEAEB /* TokenStorageTests.swift in Sources */,
 				D46FB41E1F929DCB000CEAEB /* ApiMethod.swift in Sources */,
+				D48F789B1F9FA51C0092931E /* SharePresenterMock.swift in Sources */,
 				D46FB3FD1F929DBC000CEAEB /* ResponseTests.swift in Sources */,
 				D46FB43B1F929EE6000CEAEB /* SessionMock.swift in Sources */,
 				D46FB4371F929EE6000CEAEB /* QueryBuilderMock.swift in Sources */,

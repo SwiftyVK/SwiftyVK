@@ -99,6 +99,7 @@ final class DependenciesImpl: Dependencies {
             authorizator: sharedAuthorizator,
             taskMaker: self,
             captchaPresenter: captchaPresenter,
+            sharePresenterMaker: self,
             sessionSaver: sessionSaver,
             longPollMaker: self,
             delegate: delegate
@@ -253,5 +254,9 @@ final class DependenciesImpl: Dependencies {
             queryBuilder: QueryBuilderImpl(),
             bodyBuilder: MultipartBodyBuilderImpl()
         )
+    }
+    
+    func sharePresenter() -> SharePresenter {
+        return SharePresenterImpl()
     }
 }

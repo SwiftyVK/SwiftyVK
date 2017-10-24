@@ -1,4 +1,5 @@
-public struct ShareDialogContext {
+public struct ShareContext: Equatable {
+    
     private let text: String?
     private let images: [Data]
     private let link: ShareDialogLink?
@@ -12,9 +13,14 @@ public struct ShareDialogContext {
         self.images = images
         self.link = link
     }
+    
+    public static func == (lhs: ShareContext, rhs: ShareContext) -> Bool {
+        return lhs.text == rhs.text && lhs.images == rhs.images && lhs.link == rhs.link
+    }
 }
 
-public struct ShareDialogLink {
+public struct ShareDialogLink: Equatable {
+    
     private let title: String
     private let url: URL
     
@@ -24,5 +30,9 @@ public struct ShareDialogLink {
         ) {
         self.title = title
         self.url = url
+    }
+    
+    public static func == (lhs: ShareDialogLink, rhs: ShareDialogLink) -> Bool {
+        return lhs.title == rhs.title && lhs.url == rhs.url
     }
 }
