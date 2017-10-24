@@ -61,4 +61,7 @@ final class SessionMock: Session, TaskSession, DestroyableSession, ApiErrorExecu
     func captcha(rawUrlToImage: String, dismissOnFinish: Bool) throws -> String {
         return ""
     }
+    
+    func share() {
+    }
 }

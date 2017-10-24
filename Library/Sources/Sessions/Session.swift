@@ -26,6 +26,9 @@ public protocol Session: class {
     /// - parameter method: VK API method
     @discardableResult
     func send(method: SendableMethod) -> Task
+    
+    /// Show share to wall dialog
+    func share()
 }
 
 protocol TaskSession {
@@ -210,6 +213,10 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         }
         
         return task
+    }
+    
+    public func share() {
+        
     }
     
     func shedule(task: Task, concurrent: Bool) throws {

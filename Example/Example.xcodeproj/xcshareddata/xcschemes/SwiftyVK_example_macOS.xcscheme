@@ -34,10 +34,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A2EB712C1BD27639008E7D86"
-               BuildableName = "SwiftyVK-Tests-OSX.xctest"
-               BlueprintName = "SwiftyVK-Tests-OSX"
-               ReferencedContainer = "container:Example.xcodeproj">
+               BlueprintIdentifier = "A23708B91EA52F0D00103212"
+               BuildableName = "SwiftyVK_tests_macOS.xctest"
+               BlueprintName = "SwiftyVK_tests_macOS"
+               ReferencedContainer = "container:../Library/SwiftyVK.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

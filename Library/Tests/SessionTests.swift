@@ -392,6 +392,13 @@ final class SessionTests: XCTestCase {
         // Then
         XCTAssertEqual(onDismissCallCount, 1)
     }
+    
+    func test_shareDialog() {
+        // Given
+        let context = makeContext()
+        // When
+        context.session.share()
+    }
 }
 
 private func makeContext() -> (
