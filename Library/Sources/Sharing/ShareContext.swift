@@ -2,12 +2,12 @@ public struct ShareContext: Equatable {
     
     private let text: String?
     private let images: [Data]
-    private let link: ShareDialogLink?
+    private let link: ShareLink?
     
     public init(
         text: String? = nil,
         images: [Data] = [],
-        link: ShareDialogLink? = nil
+        link: ShareLink? = nil
         ) {
         self.text = text
         self.images = images
@@ -19,7 +19,7 @@ public struct ShareContext: Equatable {
     }
 }
 
-public struct ShareDialogLink: Equatable {
+public struct ShareLink: Equatable {
     
     private let title: String
     private let url: URL
@@ -32,7 +32,7 @@ public struct ShareDialogLink: Equatable {
         self.url = url
     }
     
-    public static func == (lhs: ShareDialogLink, rhs: ShareDialogLink) -> Bool {
+    public static func == (lhs: ShareLink, rhs: ShareLink) -> Bool {
         return lhs.title == rhs.title && lhs.url == rhs.url
     }
 }
