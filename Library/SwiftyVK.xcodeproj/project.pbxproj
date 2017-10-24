@@ -96,6 +96,8 @@
 		D44EC0121F55D4DF00F8BB4A /* VKReachabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */; };
 		D44EC0161F55D50600F8BB4A /* VKNotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */; };
 		D44EC0181F55DC4A00F8BB4A /* ConnectionObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */; };
+		D46263A21F9FAB4100333DC3 /* SharePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */; };
+		D46263A31F9FAB4100333DC3 /* SharePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */; };
 		D46FB3E61F929D7A000CEAEB /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */; };
 		D46FB3EC1F929DBC000CEAEB /* AuthorizatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19D21EE438FB00CF13AF /* AuthorizatorTests.swift */; };
 		D46FB3ED1F929DBC000CEAEB /* TokenParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19CF1EE4233D00CF13AF /* TokenParserTests.swift */; };
@@ -206,6 +208,8 @@
 		D48F78981F9FA0FC0092931E /* SharePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78961F9FA0FC0092931E /* SharePresenter.swift */; };
 		D48F789A1F9FA51C0092931E /* SharePresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78991F9FA51C0092931E /* SharePresenterMock.swift */; };
 		D48F789B1F9FA51C0092931E /* SharePresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78991F9FA51C0092931E /* SharePresenterMock.swift */; };
+		D48F789D1F9FAABD0092931E /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F789C1F9FAABD0092931E /* ShareController.swift */; };
+		D48F789E1F9FAABD0092931E /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F789C1F9FAABD0092931E /* ShareController.swift */; };
 		D497959F1F4DE40900921A21 /* ApiErrorHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D497959E1F4DE40900921A21 /* ApiErrorHandlerTests.swift */; };
 		D49795A11F4DE57100921A21 /* ApiErrorExecutorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795A01F4DE57100921A21 /* ApiErrorExecutorMock.swift */; };
 		D49795A31F4DF04000921A21 /* ApiMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795A21F4DF04000921A21 /* ApiMethodTests.swift */; };
@@ -587,6 +591,7 @@
 		D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKReachabilityMock.swift; sourceTree = "<group>"; };
 		D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNotificationCenterMock.swift; sourceTree = "<group>"; };
 		D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionObserverTests.swift; sourceTree = "<group>"; };
+		D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenterTests.swift; sourceTree = "<group>"; };
 		D46FB3E11F929D7A000CEAEB /* SwiftyVK_tests_iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyVK_tests_iOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47601141F2E218B005356E5 /* response.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.empty.json; sourceTree = "<group>"; };
 		D47601181F2E21DD005356E5 /* apiError.withoutCode.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutCode.json; sourceTree = "<group>"; };
@@ -598,6 +603,7 @@
 		D484C9401F4B3E8300C9651C /* VKURLSessionTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKURLSessionTaskMock.swift; sourceTree = "<group>"; };
 		D48F78961F9FA0FC0092931E /* SharePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenter.swift; sourceTree = "<group>"; };
 		D48F78991F9FA51C0092931E /* SharePresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenterMock.swift; sourceTree = "<group>"; };
+		D48F789C1F9FAABD0092931E /* ShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
 		D497959E1F4DE40900921A21 /* ApiErrorHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorHandlerTests.swift; sourceTree = "<group>"; };
 		D49795A01F4DE57100921A21 /* ApiErrorExecutorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorExecutorMock.swift; sourceTree = "<group>"; };
 		D49795A21F4DF04000921A21 /* ApiMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiMethodTests.swift; sourceTree = "<group>"; };
@@ -794,6 +800,7 @@
 				D41665411F6193BD000E6934 /* LongPollTests.swift */,
 				D41D5D961F62D0F800B4C8AF /* LongPollEventTests.swift */,
 				D4F56CDD1F6837BC00ACC3CF /* DependenciesTests.swift */,
+				D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1208,6 +1215,7 @@
 			children = (
 				D4DADE061F9F9AE9004F159E /* ShareContext.swift */,
 				D48F78961F9FA0FC0092931E /* SharePresenter.swift */,
+				D48F789C1F9FAABD0092931E /* ShareController.swift */,
 			);
 			path = Sharing;
 			sourceTree = "<group>";
@@ -1562,6 +1570,7 @@
 				D4321D8F1F5F0B34001AFE9F /* TwoVariationsMethodTests.swift in Sources */,
 				A25A19CB1EE4126E00CF13AF /* DependencyFactoryMock.swift in Sources */,
 				A2F6F8E51EDDF00400933DBC /* AtomicTests.swift in Sources */,
+				D46263A21F9FAB4100333DC3 /* SharePresenterTests.swift in Sources */,
 				D47601221F2E236E005356E5 /* ResponseTests.swift in Sources */,
 				D41665401F6192CA000E6934 /* LongPollTaskMock.swift in Sources */,
 				A2AF167D1ED1CCA900485716 /* AuthorizatorMock.swift in Sources */,
@@ -1689,6 +1698,7 @@
 				D4BBFFD11F929893009615E7 /* SwiftyVKDelegate.swift in Sources */,
 				D4BBFFA11F929893009615E7 /* Collections+Extensions.swift in Sources */,
 				D4BBFF991F929893009615E7 /* VKViewController.swift in Sources */,
+				D48F789E1F9FAABD0092931E /* ShareController.swift in Sources */,
 				D4BBFFBC1F929893009615E7 /* TokenParser.swift in Sources */,
 				D4BBFF781F929892009615E7 /* Board.swift in Sources */,
 				D4BBFFC01F929893009615E7 /* TaskSheduler.swift in Sources */,
@@ -1807,6 +1817,7 @@
 				D4BBFECC1F929891009615E7 /* VKURLSession.swift in Sources */,
 				D4BBFF091F929891009615E7 /* SwiftyVKDelegate.swift in Sources */,
 				D4BBFED91F929891009615E7 /* Collections+Extensions.swift in Sources */,
+				D48F789D1F9FAABD0092931E /* ShareController.swift in Sources */,
 				D4BBFED11F929891009615E7 /* VKViewController.swift in Sources */,
 				D4BBFEF41F929891009615E7 /* TokenParser.swift in Sources */,
 				D4BBFEB01F929891009615E7 /* Board.swift in Sources */,
@@ -1880,6 +1891,7 @@
 				D46FB40A1F929DBC000CEAEB /* FullVariationsMethodTests.swift in Sources */,
 				D46FB4041F929DBC000CEAEB /* ResourcesTests.swift in Sources */,
 				D46FB4451F929EE6000CEAEB /* VKAppProxyMock.swift in Sources */,
+				D46263A31F9FAB4100333DC3 /* SharePresenterTests.swift in Sources */,
 				D46FB4021F929DBC000CEAEB /* CustomMethodTests.swift in Sources */,
 				D46FB4501F929EE6000CEAEB /* VKNotificationCenterMock.swift in Sources */,
 				D46FB3EE1F929DBC000CEAEB /* TaskShedulerTests.swift in Sources */,
