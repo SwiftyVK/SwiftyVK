@@ -147,49 +147,42 @@ final class DependenciesImpl: Dependencies {
     }()
     
     func webController() -> WebController? {
-        var webController: WebController?
-        
-        #if os(iOS)
-            webController = storyboard().instantiateViewController(withIdentifier: "Web") as? WebControllerIOS
-        #elseif os(macOS)
-            webController = storyboard().instantiateController(
-                withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Web")
-                ) as? WebControllerMacOS
-        #endif
-        
-        guard let controller = webController as? VKViewController else {
-            return nil
-        }
-        
-        DispatchQueue.performOnMainIfNeeded {
-            self.delegate?.vkNeedToPresent(viewController: controller)
-        }
-        
-        return webController
+        return viewController(name: "Web")
     }
     
     func captchaController() -> CaptchaController? {
-        var captchaController: CaptchaController?
+        return viewController(name: "Captcha")
+    }
+    
+    func shareController() -> ShareController? {
+        return viewController(name: "Share")
+    }
+    
+    private func viewController<ControllerType>(name: String) -> ControllerType? {
+        var controller: VKViewController?
         
         #if os(iOS)
-            captchaController = storyboard().instantiateViewController(
-                withIdentifier: "Captcha"
-                ) as? CaptchaControllerIOS
+            controller = storyboard().instantiateViewController(
+                withIdentifier: name
+                )
         #elseif os(macOS)
-            captchaController = storyboard().instantiateController(
-                withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Captcha")
-                ) as? CaptchaControllerMacOS
+            controller = storyboard().instantiateController(
+                withIdentifier: NSStoryboard.SceneIdentifier(rawValue: name)
+                ) as? VKViewController
         #endif
         
-        guard let controller = captchaController as? VKViewController else {
+        guard
+            let unwrappedController = controller,
+            let resultController = unwrappedController as? ControllerType
+            else {
             return nil
         }
         
         DispatchQueue.performOnMainIfNeeded {
-            self.delegate?.vkNeedToPresent(viewController: controller)
+            self.delegate?.vkNeedToPresent(viewController: unwrappedController)
         }
         
-        return captchaController
+        return resultController
     }
     
     func storyboard() -> VKStoryboard {
@@ -257,6 +250,6 @@ final class DependenciesImpl: Dependencies {
     }
     
     func sharePresenter() -> SharePresenter {
-        return SharePresenterImpl()
+        return SharePresenterImpl(controllerMaker: self)
     }
 }

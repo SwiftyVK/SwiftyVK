@@ -8,6 +8,4 @@ final class SharePresenterMock: SharePresenter {
     func share(_ context: ShareContext, in session: Session) {
         onShare?(context, session)
     }
-    
 }
-

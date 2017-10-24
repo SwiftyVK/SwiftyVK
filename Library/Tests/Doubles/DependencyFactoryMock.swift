@@ -124,3 +124,17 @@ final class SharePresenterMakerMock: SharePresenterMaker {
         return result
     }
 }
+
+final class ShareControllerMakerMock: ShareControllerMaker {
+    
+    var onMake: (() -> ShareController)?
+    
+    func shareController() -> ShareController? {
+        guard let result = onMake?() else {
+            XCTFail("onMake not defined")
+            return ShareControllerMock()
+        }
+        
+        return result
+    }
+}
