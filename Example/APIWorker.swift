@@ -71,12 +71,19 @@ final class APIWorker {
     }
     
     class func uploadPhoto() {
-        let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "testImage", ofType: "jpg")!))
-        let media = Media.image(data: data, type: .jpg)
+        guard
+            let pathToImage = Bundle.main.path(forResource: "testImage", ofType: "png"),
+            let data = try? Data(contentsOf: URL(fileURLWithPath: pathToImage))
+            else {
+                print("Can not find testImage.png")
+                return
+        }
+        
+        let media = Media.image(data: data, type: .png)
         
         VK.API.Upload.Photo.toWall(media, to: .user(id: "4680178"))
-            .onSuccess { print("SwiftyVK: friendsGet successed with \n \($0)") }
-            .onError { print("SwiftyVK: friendsGet failed with \n \($0)")}
+            .onSuccess { print("SwiftyVK: upload successed with \n \($0)") }
+            .onError { print("SwiftyVK: upload failed with \n \($0)")}
             .onProgress { print($0) }
             .send()
     }
