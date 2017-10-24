@@ -5,8 +5,8 @@ coverage:
 
   ignore:
     - Example
-    - Library/Tests
-    - Library/Sources/UI
+    - Library/Tests/
+    - Library/UI/
     - Library/Sources/Utils/Reachability.swift
     - Library/Sources/Utils/IDGenerator.swift
     - Library/Sources/Extensions/Numbers+Extensions.swift
