@@ -14,7 +14,7 @@
     <img src="https://travis-ci.org/SwiftyVK/SwiftyVK.svg?branch=master" alt="Build status">
   </a>
     <a href="https://codecov.io/gh/SwiftyVK/SwiftyVK">
-    <img src="https://img.shields.io/codecov/c/github/SwiftyVK/SwiftyVK.svg" alt="Test coverage">
+    <img src="https://codecov.io/gh/SwiftyVK/SwiftyVK/branch/master/graph/badge.svg" alt="Codecov" />
   </a>
     <a href="https://cocoapods.org/pods/SwiftyVK">
     <img src="https://img.shields.io/cocoapods/v/SwiftyVK.svg?style=flat" alt="Cocoapods compatible">
