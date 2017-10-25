@@ -1,6 +1,5 @@
 import Cocoa
 
-@objc
 final class CaptchaControllerMacOS: NSViewController, NSTextFieldDelegate, CaptchaController {
     
     @IBOutlet private weak var imageView: NSImageView?

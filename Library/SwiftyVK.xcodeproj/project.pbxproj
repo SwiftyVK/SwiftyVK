@@ -157,7 +157,7 @@
 		D46FB4221F929E35000CEAEB /* WebViewWrapper_IOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDAF1F9297A9009615E7 /* WebViewWrapper_IOS.swift */; };
 		D46FB4241F929E3C000CEAEB /* WebController_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB11F9297A9009615E7 /* WebController_macOS.swift */; };
 		D46FB4251F929E3C000CEAEB /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB21F9297A9009615E7 /* WebController.swift */; };
-		D46FB4261F929E3C000CEAEB /* WebViewWrapperMacOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB31F9297A9009615E7 /* WebViewWrapperMacOS.swift */; };
+		D46FB4261F929E3C000CEAEB /* WebViewWrapper_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB31F9297A9009615E7 /* WebViewWrapper_macOS.swift */; };
 		D46FB4291F929E3C000CEAEB /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB21F9297A9009615E7 /* WebController.swift */; };
 		D46FB42B1F929E3C000CEAEB /* WebController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB41F9297A9009615E7 /* WebController_iOS.swift */; };
 		D46FB42C1F929E4E000CEAEB /* CapthcaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDB61F9297A9009615E7 /* CapthcaPresenter.swift */; };
@@ -206,6 +206,8 @@
 		D484C9321F4B337E00C9651C /* AttemptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9311F4B337E00C9651C /* AttemptTests.swift */; };
 		D484C93F1F4B3E3400C9651C /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C93C1F4B3E2F00C9651C /* URLSessionMock.swift */; };
 		D484C9411F4B3E8300C9651C /* VKURLSessionTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C9401F4B3E8300C9651C /* VKURLSessionTaskMock.swift */; };
+		D486E3401FA0E623002134EB /* ShareController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486E33F1FA0E623002134EB /* ShareController_iOS.swift */; };
+		D486E3421FA0E64E002134EB /* ShareController_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486E3411FA0E64E002134EB /* ShareController_macOS.swift */; };
 		D48F78971F9FA0FC0092931E /* SharePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78961F9FA0FC0092931E /* SharePresenter.swift */; };
 		D48F78981F9FA0FC0092931E /* SharePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78961F9FA0FC0092931E /* SharePresenter.swift */; };
 		D48F789A1F9FA51C0092931E /* SharePresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78991F9FA51C0092931E /* SharePresenterMock.swift */; };
@@ -604,6 +606,8 @@
 		D484C9311F4B337E00C9651C /* AttemptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptTests.swift; sourceTree = "<group>"; };
 		D484C93C1F4B3E2F00C9651C /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		D484C9401F4B3E8300C9651C /* VKURLSessionTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKURLSessionTaskMock.swift; sourceTree = "<group>"; };
+		D486E33F1FA0E623002134EB /* ShareController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController_iOS.swift; sourceTree = "<group>"; };
+		D486E3411FA0E64E002134EB /* ShareController_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController_macOS.swift; sourceTree = "<group>"; };
 		D48F78961F9FA0FC0092931E /* SharePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenter.swift; sourceTree = "<group>"; };
 		D48F78991F9FA51C0092931E /* SharePresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenterMock.swift; sourceTree = "<group>"; };
 		D48F789C1F9FAABD0092931E /* ShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
@@ -628,7 +632,7 @@
 		D4BBFDB01F9297A9009615E7 /* WebPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPresenter.swift; sourceTree = "<group>"; };
 		D4BBFDB11F9297A9009615E7 /* WebController_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebController_macOS.swift; sourceTree = "<group>"; };
 		D4BBFDB21F9297A9009615E7 /* WebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebController.swift; sourceTree = "<group>"; };
-		D4BBFDB31F9297A9009615E7 /* WebViewWrapperMacOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewWrapperMacOS.swift; sourceTree = "<group>"; };
+		D4BBFDB31F9297A9009615E7 /* WebViewWrapper_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewWrapper_macOS.swift; sourceTree = "<group>"; };
 		D4BBFDB41F9297A9009615E7 /* WebController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebController_iOS.swift; sourceTree = "<group>"; };
 		D4BBFDB61F9297A9009615E7 /* CapthcaPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapthcaPresenter.swift; sourceTree = "<group>"; };
 		D4BBFDB71F9297A9009615E7 /* CaptchaController_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaController_macOS.swift; sourceTree = "<group>"; };
@@ -975,9 +979,10 @@
 		D47E1CC81F92B087002BB2AC /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				D4BBFDB31F9297A9009615E7 /* WebViewWrapper_macOS.swift */,
 				D4BBFDB11F9297A9009615E7 /* WebController_macOS.swift */,
-				D4BBFDB31F9297A9009615E7 /* WebViewWrapperMacOS.swift */,
 				D4BBFDB71F9297A9009615E7 /* CaptchaController_macOS.swift */,
+				D486E3411FA0E64E002134EB /* ShareController_macOS.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -988,6 +993,7 @@
 				D4BBFDAF1F9297A9009615E7 /* WebViewWrapper_IOS.swift */,
 				D4BBFDB41F9297A9009615E7 /* WebController_iOS.swift */,
 				D4BBFDB81F9297A9009615E7 /* CaptchaController_iOS.swift */,
+				D486E33F1FA0E623002134EB /* ShareController_iOS.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -1755,6 +1761,7 @@
 				D4BBFF9C1F929893009615E7 /* CharacterSet+Extensions.swift in Sources */,
 				D4BBFFB31F929893009615E7 /* Scopes.swift in Sources */,
 				D4BBFF9E1F929893009615E7 /* URLOpener.swift in Sources */,
+				D486E3401FA0E623002134EB /* ShareController_iOS.swift in Sources */,
 				D4BBFF7D1F929892009615E7 /* Custom.swift in Sources */,
 				D4BBFF7A1F929892009615E7 /* Leads.swift in Sources */,
 				D4BBFFAE1F929893009615E7 /* Method.swift in Sources */,
@@ -1800,7 +1807,7 @@
 				D4BBFEE21F929891009615E7 /* DependenciesImpl.swift in Sources */,
 				D4DADE071F9F9AE9004F159E /* ShareContext.swift in Sources */,
 				D4BBFEC01F929891009615E7 /* Friends.swift in Sources */,
-				D46FB4261F929E3C000CEAEB /* WebViewWrapperMacOS.swift in Sources */,
+				D46FB4261F929E3C000CEAEB /* WebViewWrapper_macOS.swift in Sources */,
 				D4BBFEC61F929891009615E7 /* Market.swift in Sources */,
 				D4BBFEC81F929891009615E7 /* Wall.swift in Sources */,
 				D4BBFEF01F929891009615E7 /* RequestConfig.swift in Sources */,
@@ -1840,6 +1847,7 @@
 				D4BBFEEF1F929891009615E7 /* Media.swift in Sources */,
 				D4BBFF001F929891009615E7 /* Session.swift in Sources */,
 				D4BBFEEA1F929891009615E7 /* BasicMethod.swift in Sources */,
+				D486E3421FA0E64E002134EB /* ShareController_macOS.swift in Sources */,
 				D4BBFEB91F929891009615E7 /* Groups.swift in Sources */,
 				D4BBFEFD1F929891009615E7 /* Task.swift in Sources */,
 				D4BBFF0E1F929891009615E7 /* ConnectionObserver.swift in Sources */,
