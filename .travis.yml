@@ -6,7 +6,6 @@ xcode_sdk: iphonesimulator10.2
 branches:
   only:
     - master
-    - v3
 
 before_script:
   - set -o pipefail

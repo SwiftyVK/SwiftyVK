@@ -29,7 +29,7 @@
          location = "group:Example/../.travis.yml">
       </FileRef>
       <FileRef
-         location = "group:/Dew/VK/SwiftyVK/codecov.yml">
+         location = "group:Library/../.codecov.yml">
       </FileRef>
       <FileRef
          location = "group:Example/../.swift-version">
