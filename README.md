@@ -91,8 +91,8 @@ github "SwiftyVK/SwiftyVK"
 ## **Getting started**
 ### Implement SwiftyVKDelegate
 
-For start using `SwiftyVK` you should implement `SwiftyVKDelegate` protocol in your custom `VKDelegate` class.
-It is using to notify your app about important SwiftyVK lifecycle events.
+To start using `SwiftyVK` you should implement `SwiftyVKDelegate` protocol in your custom `VKDelegate` class.
+It is used to notify your app about important SwiftyVK lifecycle events.
 
 For example:
 
@@ -104,28 +104,28 @@ import SwiftyVK
 class VKDelegateExample: SwiftyVKDelegate {
 
     func vkNeedsScopes(for sessionId: String) -> Scopes {
-      // Called when SwiftyVK attempts get access to user account
-      // Should return set of permission scopes
+      // Called when SwiftyVK attempts to get access to user account
+      // Should return a set of permission scopes
     }
 
     func vkNeedToPresent(viewController: VKViewController) {
-      // Called when SwiftyVK wants to present UI (e.g webView or captcha)
+      // Called when SwiftyVK wants to present UI (e.g. webView or captcha)
       // Should display given view controller from current top view controller
     }
 
     func vkTokenCreated(for sessionId: String, info: [String : String]) {
-      // Called when user grant access and SwiftyVK gets new session token
-      // Can be used for run SwiftyVK requests and save session data
+      // Called when user grants access and SwiftyVK gets new session token
+      // Can be used to run SwiftyVK requests and save session data
     }
 
     func vkTokenUpdated(for sessionId: String, info: [String : String]) {
-      // Called when existing session token was expired and successfully refreshed
-      // Most likely here you do not do anything
+      // Called when existing session token has expired and successfully refreshed
+      // You don't need to do anything special here
     }
 
     func vkTokenRemoved(for sessionId: String) {
       // Called when user was logged out
-      // Use this point to cancel all SwiftyVK requests and remove session data
+      // Use this method to cancel all SwiftyVK requests and remove session data
     }
 }
 ```
@@ -134,7 +134,7 @@ class VKDelegateExample: SwiftyVKDelegate {
 ### Setting up VK application
 
 1. [Create new standalone application](https://vk.com/editapp?act=create)
-2. save `application ID` from **Preferences -> Application ID**
+2. Save `application ID` from **Preferences -> Application ID**
 3. Set up **SwiftyVK** with `application ID` and `VKDelegate` obtained in the previous steps:
 
 ```swift
@@ -143,26 +143,26 @@ VK.setUp(appId: String, delegate: SwiftyVKDelegate)
 
 ## **Authorization**
 
-SwiftyVK provides several ways to authorize user. You may choose one that more suitable:
+SwiftyVK provides several ways to authorize user. Choose the one that's more suitable for you.
 
 ### Raw token string
-If you already have previously received token, just put it to this method
+If you have previously received user token, just pass it to the following method:
 
 ```swift
 VK.sessions?.default.logIn(rawToken: String, expires: TimeInterval)
 
-// Start work with SwiftyVK session here
+// Start working with SwiftyVK session here
 ```
 
-`TimeInterval` - token expires time interval from now. Zero value - never expires token.
+`TimeInterval` is a time, after which the token will no longer be valid. Pass `0` if you want token to never expire.
 
 ### oAuth WebView
-Standard authorization method which shows webView with oAuth dialog. Suitable for most cases.
+This is a standard authorization method which shows web view with oAuth dialog. Suitable for most cases.
 
 ```swift
 VK.sessions?.default.logIn(
       onSuccess: { _ in
-        // Start work with SwiftyVK session here
+        // Start working with SwiftyVK session here
       },
       onError: { _ in
         // Handle an error if something went wrong
@@ -171,9 +171,7 @@ VK.sessions?.default.logIn(
 ```
 
 ### Official VK Application
-
-If user have official VK application on device, SwiftyVK can be authorized through it.
-For this you need:
+If a user has the official VK app installed on their device, SwiftyVK can be authorized using it. To do that:
 
 1. In *Xcode -> Target -> Info -> URL Types*
 
@@ -193,10 +191,10 @@ For this you need:
 2. Set copied `Application Bundle` to
 *https://vk.com/apps?act=manage -> Edit App -> Settings -> App Bundle ID for iOS* field
 
-4. Add this code to AppDelegate
+4. Add the following code to AppDelegate:
 
 
-  - For iOS 9 and bellow
+  - For iOS 9 and below
 
 ```swift
 func application(
@@ -222,26 +220,25 @@ func application(
     return true
 }
 ```
-4. Make auth like [oAuth WebView](#oauth-webview).
+4. Authorize as described in [oAuth WebView](#oauth-webview).
 
-    ***If user deny authorization with VK App, SwiftyVK will present oAuth dialog***
+    ***If user denies authorization in VK App, SwiftyVK will present oAuth dialog***
 
 ## **Interaction with VK API**
 
 SwiftyVK provides a very simple interface for interaction with VK API.
-All requests performs asynchronouly in own private queue with API scheduler
-(by default scheduler send no more than 3 requests per second).
-You just can send it and get response without a lot of work.
+All requests are performed asynchronouly in a private queue by API scheduler
+(the scheduler sends no more than 3 requests per second by default).
+You can just send a request and get a response without a lot of work.
 
-
-List of all API methods is [here](https://vk.com/dev/methods)  
+All API methods are listed [here](https://vk.com/dev/methods)
 
 Let's look closer to requests syntax:
 
 ### Request
-The base requests calls looks like **VK.methodGroup.methodName()**.
+The basic request calls look like **VK.methodGroup.methodName()**.
 
-For example, [get short info about current user](https://vk.com/dev/users.get):
+For example, to [get short info about current user](https://vk.com/dev/users.get):
 
 ```swift
 VK.API.Users.get(.empty)
@@ -254,10 +251,10 @@ Object created with
 ```swift
 VK.API.Users.get(.empty)
 ```
-is represents a request that can be immediately sent or first configure and sent later.
+represents a request that can be sent immediately or can be configured first and sent later.
 
 ### Parameters
-If you want to get additional fields for concrete user in previous example, can set request parameters in this way:
+If you want to get additional fields for a user in previous example, you can set request parameters:
 
 ```swift
 VK.API.Users.get([
@@ -266,15 +263,15 @@ VK.API.Users.get([
     ])
 ```
 
-Use `.empty` if do not want provide parameters.
+Use `.empty` if you don't want to pass any parameters.
 
 ### Callbacks
-Request executes asynchronously and provides some callbacks for handle execution results:
+Requests are executed asynchronously and provide some callbacks for handling execution results:
 
 #### onSuccess
 
-This callback will be called when request was successfully executed and return `Data` object.
-You can handle and parse response with any JSON parsing method
+This callback will be called when request has succeeded and returned `Data` object.
+You can handle and parse response using any JSON parsing method
 (e.g. `JSONSerialization`, `Codable`, [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) and others)
 
 ```swift
@@ -284,13 +281,12 @@ VK.API.Users.get(.empty)
     }
 ```
 
-You can throws errors within `onSuccess` callback
-and this will cause to be called `onError` callback with thrown error.
+You can throw errors in `onSuccess` callback, which will cause `onError` to be called with your error.
 
 #### onError
 
-This callback will be called when request was failed for whatever reason.
-You may handle thrown error in this callback.
+This callback will be called when request has failed for some reason.
+You may handle the error that was thrown in this callback.
 
 ```swift
 VK.API.Users.get(.empty)
@@ -301,7 +297,7 @@ VK.API.Users.get(.empty)
 
 ### Cancellation
 
-If you no longer need to sent sheduled request (e.g. screen was popped out), just cancel it:
+If you no longer need to send sheduled request (e.g. screen was popped out), just cancel it:
 
 ```swift
 // `send()` function returns `Task` object which has `cancel()` function
@@ -319,29 +315,28 @@ request.cancel()
 
 ### Chaining
 
-SwiftyVK allows make chains of requests. If you need to send next request
-with data of response from previous request, just build a chain of requests:
+SwiftyVK allows you to chain requests. If your second request needs to consume a response from the first one, just chain them together:
 
 ```swift
-// `send()` function returns `Task` object which has `cancel()` function
+// тут что-то про chain() должно быть, наверное?
 VK.API.Users.get(.empty)
-    .chain {
+    .chain { response in
         // This block will be called only
         // when `users.get` method is successfully executed.
         // Receives result of executing `users.get` method.
-        let user = try JSONDecoder().decode(User.self, from: $0)
+        let user = try JSONDecoder().decode(User.self, from: response)
         return VK.API.Messages.send([
-            .userId: response.user.id,
+            .userId: user.id,
             .message: "Hello"
         ])
     }
-    .onSuccess {
-        // This block will be called only when `users.get` and `messages.send`
+    .onSuccess { response in
+        // This block will be called only when both `users.get` and `messages.send`
         // methods are successfully executed.
-        // Receives result of executing `messages.send` method
+        // `response` is a result of `messages.send` method
     }
-    .onError {
-        // This block will be called when `users.get` or `messages.send` methods are failed.
+    .onError { error in
+        // This block will be called when either `users.get` or `messages.send` methods is failed.
         // Receives error of executing `users.get` or `messages.send` method.
     }
     .send()
@@ -350,11 +345,11 @@ VK.API.Users.get(.empty)
 You can make very long chains with SwiftyVK!
 
 ## **Configuring**
-In SwiftyVK each session has default configuration for their requests.
-Each request gets configuration from their session.
-Configuration includes different settings such as `httpMethod`, `attemptTimeout` and others.
+In SwiftyVK each session has default configuration for its requests.
+Each request gets configuration from its session.
+Configuration contains settings such as `httpMethod`, `attemptTimeout` and others.
 
-You can change configuration for single request
+You can change configuration for a single request
 
 ```swift
 // Set different httpMethod only for this request
@@ -377,18 +372,18 @@ Property            | Default               | Description
 `apiVersion`        | `latest version`      | [VK API version](https://vk.com/dev/versions). By default uses latest version. If you need different version - change this value.
 `language`          | `User system language`| Language of response. For EN `Pavel Durov`, for RU `Павел Дуров`.
 `attemptsMaxLimit`  | `3`                   | Maximum number of attempts to send request before returning an error.
-`attemptTimeout`    | `10`                  | Timeout in seconds of waiting request before returning an error.
-`handleErrors`      | `true`                | Allows automatically handle specific VK errors like authorization, captcha, validation nedеed and present dialog to user for resolve this situation.
+`attemptTimeout`    | `10`                  | Timeout in seconds of waiting for a response before returning an error.
+`handleErrors`      | `true`                | Allow to handle specific VK errors automatically by presenting a dialog to a user when authorization, captcha solving or validation is required.
 
 ## Upload files
 
-SwiftyVK provides ability to easily file uploading to VK servers. For example:
+SwiftyVK provides the ability to easily upload a file to VK servers. For example:
 
 ```swift
-// Get path of image file
+// Get path to image file
 guard let path = Bundle.main.path(forResource: "testImage", ofType: "jpg") else { return }
 
-// Get data from image file on given path
+// Get data from image file by path
 guard let data = try Data(contentsOf: URL(fileURLWithPath: path)) else { return }
 
 // Create SwiftyVK Media representation from given data
@@ -415,22 +410,22 @@ See [docs](https://vk.com/dev/upload_files) for more info.
 
 ## Start LongPoll
 
-Also with SwiftyVK you can interract VK [LongPoll](https://vk.com/dev/using_longpoll) server very easily.
+With SwiftyVK you can interact with VK [LongPoll](https://vk.com/dev/using_longpoll) server very easily.
 Just call:
 
 ```swift
 VK.sessions?.default.longPoll.start {
-    // This callback will be executed every time
-    // when long poll client receive set of new events
+    // This callback will be executed each time
+    // long poll client receives a set of new events
     print($0)
 }
 ```
 
 ## Handle updates
 
-Data format describing on [this](https://vk.com/dev/using_longpoll) page.
-LongPollEvent is enum with `Data` associated value in every case.
-You can parse this data to `JSON` with any your favorite JSON parser like this
+Data format is described [here](https://vk.com/dev/using_longpoll).
+LongPollEvent is an enum with associated value of type `Data` in each case.
+You can parse this data to JSON using your favorite parser like this:
 
 ```swift
 VK.sessions?.default.longPoll.start {
@@ -448,16 +443,16 @@ VK.sessions?.default.longPoll.start {
 
 LongPollEvent has two special cases:
 
-`.forcedStop` - returns when LongPoll was obtain unexpected error and stop. You can restart it again.
+`.forcedStop` - returned when LongPoll has experienced unexpected error and stop. You can restart it again.
 
-`.historyMayBeLost` - returns when LongPoll was disconnected from server for long time
-and `lpKey` or `timestamp` was outdated.
-You do not need reconnect LongPoll manually, client will do it himself.
-Use this case to **refresh data which could change during the network was unavailable**
+`.historyMayBeLost` - returned when LongPoll was disconnected from server for a long time
+and either `lpKey` or `timestamp` is outdated.
+You do not need to reconnect LongPoll manually, client will do it itself.
+Use this case to **refresh data that could have beeen updated while network was unavailable**.
 
 ## Stop LongPoll
 
-If you no longer need to receive LongPoll updates, just call this function:
+If you don't need to receive LongPoll updates anymore, just call this function:
 ```swift
 VK.sessions?.default.longPoll.stop()
 ```
