@@ -318,7 +318,6 @@ request.cancel()
 SwiftyVK allows you to chain requests. If your second request needs to consume a response from the first one, just chain them together:
 
 ```swift
-// тут что-то про chain() должно быть, наверное?
 VK.API.Users.get(.empty)
     .chain { response in
         // This block will be called only
