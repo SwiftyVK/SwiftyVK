@@ -95,6 +95,7 @@
 		D44348F91F3B71F5008B2B50 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44348F71F3B70F4008B2B50 /* JSONTests.swift */; };
 		D44C80EE1F967F85004E3CF4 /* longPoll.failed.1.json in Resources */ = {isa = PBXBuildFile; fileRef = D44C80EB1F967F13004E3CF4 /* longPoll.failed.1.json */; };
 		D44C80EF1F967F86004E3CF4 /* longPoll.failed.1.json in Resources */ = {isa = PBXBuildFile; fileRef = D44C80EB1F967F13004E3CF4 /* longPoll.failed.1.json */; };
+		D44C84191FA267210029EA7B /* DisclosuredButton_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44C84181FA267210029EA7B /* DisclosuredButton_iOS.swift */; };
 		D44EC0121F55D4DF00F8BB4A /* VKReachabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */; };
 		D44EC0161F55D50600F8BB4A /* VKNotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */; };
 		D44EC0181F55DC4A00F8BB4A /* ConnectionObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */; };
@@ -595,6 +596,7 @@
 		D43E658A1F7D524A00AF48C8 /* CookiesHolderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookiesHolderMock.swift; sourceTree = "<group>"; };
 		D44348F71F3B70F4008B2B50 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		D44C80EB1F967F13004E3CF4 /* longPoll.failed.1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.1.json; sourceTree = "<group>"; };
+		D44C84181FA267210029EA7B /* DisclosuredButton_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosuredButton_iOS.swift; sourceTree = "<group>"; };
 		D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKReachabilityMock.swift; sourceTree = "<group>"; };
 		D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNotificationCenterMock.swift; sourceTree = "<group>"; };
 		D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionObserverTests.swift; sourceTree = "<group>"; };
@@ -931,6 +933,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		D44C84171FA267060029EA7B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D44C84181FA267210029EA7B /* DisclosuredButton_iOS.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		D46FB3D81F929AB7000CEAEB /* Token */ = {
 			isa = PBXGroup;
 			children = (
@@ -999,6 +1009,7 @@
 				D4BBFDB81F9297A9009615E7 /* CaptchaController_iOS.swift */,
 				D486E33F1FA0E623002134EB /* ShareController_iOS.swift */,
 				D49E594C1FA1087B005B3C97 /* SharePreviewController_iOS.swift */,
+				D44C84171FA267060029EA7B /* Components */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -1742,6 +1753,7 @@
 				D4BBFFB51F929893009615E7 /* Response.swift in Sources */,
 				D4BBFF9D1F929893009615E7 /* JSON.swift in Sources */,
 				D4BBFFC61F929893009615E7 /* QueryBuilder.swift in Sources */,
+				D44C84191FA267210029EA7B /* DisclosuredButton_iOS.swift in Sources */,
 				D4BBFFB61F929893009615E7 /* VKError.swift in Sources */,
 				D4BBFF8D1F929892009615E7 /* Apps.swift in Sources */,
 				D4BBFFB01F929893009615E7 /* TwoVariationsMethod.swift in Sources */,

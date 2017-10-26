@@ -9,6 +9,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -152,17 +153,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="288" height="430"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7WS-t7-NmA">
-                                <rect key="frame" x="0.0" y="44" width="288" height="386"/>
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TfK-bE-GVM" customClass="DisclosuredButtonIOS" customModule="SwiftyVK">
+                                <rect key="frame" x="0.0" y="386" width="288" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="8XF-mA-rSE"/>
+                                </constraints>
+                                <state key="normal" image="disclosureIndicator">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Post settings">
+                                            <attributes>
+                                                <color key="NSColor" red="0.21857154187817263" green="0.21857154187817263" blue="0.21857154187817263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="18" name=".SFNSText"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" firstLineHeadIndent="15" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <state key="selected">
+                                    <attributedString key="attributedTitle"/>
+                                </state>
+                                <state key="highlighted" image="disclosureIndicatorHiglighted" backgroundImage="selectedColor">
+                                    <attributedString key="attributedTitle"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Set-lV-CID" kind="show" id="Tea-As-iS5">
+                                        <segue key="commit" inheritsFrom="parent" id="jlg-nZ-Gpe"/>
+                                        <segue key="preview" inheritsFrom="commit" id="Ipk-fS-W7G"/>
+                                    </segue>
+                                </connections>
+                            </button>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MeY-WT-Xh7" userLabel="Separator">
+                                <rect key="frame" x="0.0" y="386" width="288" height="1"/>
+                                <color key="backgroundColor" red="0.83597430469138612" green="0.834634800869546" blue="0.85803259613626948" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="msd-ls-E0A"/>
+                                </constraints>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="7WS-t7-NmA">
+                                <rect key="frame" x="0.0" y="44" width="288" height="342"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x1I-NN-d05">
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="138"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MGr-xq-tp4">
-                                                <rect key="frame" x="0.0" y="0.0" width="288" height="38"/>
+                                                <rect key="frame" x="10" y="0.0" width="268" height="38"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                             </textView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TuJ-7H-M96">
                                                 <rect key="frame" x="0.0" y="38" width="288" height="100"/>
@@ -188,35 +225,40 @@
                                                 </cells>
                                             </collectionView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="TuJ-7H-M96" secondAttribute="trailing" id="E5r-uc-bPk"/>
                                             <constraint firstItem="TuJ-7H-M96" firstAttribute="top" secondItem="MGr-xq-tp4" secondAttribute="bottom" id="GIa-5M-bh3"/>
                                             <constraint firstItem="MGr-xq-tp4" firstAttribute="top" secondItem="x1I-NN-d05" secondAttribute="top" id="Ggr-IX-TcT"/>
-                                            <constraint firstAttribute="trailing" secondItem="MGr-xq-tp4" secondAttribute="trailing" id="Lcz-qS-rnV"/>
-                                            <constraint firstItem="MGr-xq-tp4" firstAttribute="leading" secondItem="x1I-NN-d05" secondAttribute="leading" id="QGM-Ec-Uji"/>
-                                            <constraint firstItem="TuJ-7H-M96" firstAttribute="top" secondItem="MGr-xq-tp4" secondAttribute="bottom" id="YX8-bR-nWu"/>
+                                            <constraint firstAttribute="trailing" secondItem="MGr-xq-tp4" secondAttribute="trailing" constant="10" id="Lcz-qS-rnV"/>
+                                            <constraint firstItem="MGr-xq-tp4" firstAttribute="leading" secondItem="x1I-NN-d05" secondAttribute="leading" constant="10" id="QGM-Ec-Uji"/>
+                                            <constraint firstAttribute="bottom" secondItem="TuJ-7H-M96" secondAttribute="bottom" id="SM2-i0-YfB"/>
                                             <constraint firstItem="TuJ-7H-M96" firstAttribute="leading" secondItem="x1I-NN-d05" secondAttribute="leading" id="fDD-PL-5sJ"/>
-                                            <constraint firstAttribute="bottom" secondItem="TuJ-7H-M96" secondAttribute="bottom" id="xj2-pe-k2z"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="x1I-NN-d05" secondAttribute="bottom" id="Arx-bN-Sfr"/>
                                     <constraint firstAttribute="trailing" secondItem="x1I-NN-d05" secondAttribute="trailing" id="eAR-e5-6ku"/>
                                     <constraint firstItem="x1I-NN-d05" firstAttribute="top" secondItem="7WS-t7-NmA" secondAttribute="top" id="jeC-tU-6lO"/>
                                     <constraint firstItem="x1I-NN-d05" firstAttribute="leading" secondItem="7WS-t7-NmA" secondAttribute="leading" id="qc5-b5-OIt"/>
                                     <constraint firstItem="x1I-NN-d05" firstAttribute="width" secondItem="7WS-t7-NmA" secondAttribute="width" id="tgp-Lg-hcA"/>
-                                    <constraint firstAttribute="bottom" secondItem="x1I-NN-d05" secondAttribute="bottom" id="ylZ-wh-FcX"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="mvj-Ki-3w6" firstAttribute="top" secondItem="TfK-bE-GVM" secondAttribute="bottom" id="0jS-cr-ZyI"/>
+                            <constraint firstAttribute="trailing" secondItem="TfK-bE-GVM" secondAttribute="trailing" id="3ID-kK-kVj"/>
+                            <constraint firstItem="TfK-bE-GVM" firstAttribute="leading" secondItem="kqX-mz-tLy" secondAttribute="leading" id="7US-R9-Jh8"/>
                             <constraint firstAttribute="trailing" secondItem="7WS-t7-NmA" secondAttribute="trailing" id="CD1-SZ-2VV"/>
+                            <constraint firstItem="TfK-bE-GVM" firstAttribute="top" secondItem="MeY-WT-Xh7" secondAttribute="top" id="PI0-1U-BOn"/>
+                            <constraint firstItem="TfK-bE-GVM" firstAttribute="top" secondItem="7WS-t7-NmA" secondAttribute="bottom" id="PaE-l6-rcL"/>
                             <constraint firstItem="7WS-t7-NmA" firstAttribute="top" secondItem="Arj-5S-wYD" secondAttribute="bottom" id="QIM-zX-ZSL"/>
-                            <constraint firstItem="mvj-Ki-3w6" firstAttribute="top" secondItem="7WS-t7-NmA" secondAttribute="bottom" id="WHR-xC-Zn7"/>
                             <constraint firstItem="7WS-t7-NmA" firstAttribute="leading" secondItem="kqX-mz-tLy" secondAttribute="leading" id="gFl-iz-aOw"/>
+                            <constraint firstItem="TfK-bE-GVM" firstAttribute="leading" secondItem="MeY-WT-Xh7" secondAttribute="leading" id="ozK-1O-3qM"/>
+                            <constraint firstItem="TfK-bE-GVM" firstAttribute="trailing" secondItem="MeY-WT-Xh7" secondAttribute="trailing" id="qbd-yU-4kZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EJP-UA-uLX">
@@ -225,11 +267,30 @@
                     </navigationItem>
                     <connections>
                         <outlet property="messageTextView" destination="MGr-xq-tp4" id="4FF-sb-OFg"/>
+                        <outlet property="separatorHeight" destination="msd-ls-E0A" id="DB2-oC-coM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ejr-QZ-HOd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1269.375" y="945"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="xNk-KR-bpc">
+            <objects>
+                <viewController id="Set-lV-CID" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SMf-FW-Fih"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vbr-Ik-fcl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WrW-cs-iYB">
+                        <rect key="frame" x="0.0" y="0.0" width="288" height="386"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DH3-36-ppH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2031" y="945"/>
         </scene>
         <!--Share Controller iOS-->
         <scene sceneID="IUr-Dy-VwH">
@@ -355,5 +416,11 @@
     </scenes>
     <resources>
         <image name="CloseButton" width="22" height="22"/>
+        <image name="disclosureIndicator" width="16" height="26"/>
+        <image name="disclosureIndicatorHiglighted" width="16" height="26"/>
+        <image name="selectedColor" width="5" height="5"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Tea-As-iS5"/>
+    </inferredMetricsTieBreakers>
 </document>
