@@ -20,6 +20,8 @@ final class APIWorker {
             uploadPhoto()
         case 7:
             validation()
+        case 8:
+            share()
         default:
             print("Unrecognized action!")
         }
@@ -79,5 +81,9 @@ final class APIWorker {
             .onError { print("SwiftyVK: friendsGet failed with \n \($0)")}
             .onProgress { print($0) }
             .send()
+    }
+    
+    class func share() {
+        VK.sessions?.default.share(ShareContext())
     }
 }

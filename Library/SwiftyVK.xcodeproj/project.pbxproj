@@ -221,6 +221,7 @@
 		D49795A71F4DFB3400921A21 /* VKErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795A61F4DFB3400921A21 /* VKErrorTests.swift */; };
 		D49795A91F4DFB9E00921A21 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795A81F4DFB9E00921A21 /* ApiError.swift */; };
 		D49795AB1F4DFC2400921A21 /* ApiMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795AA1F4DFC2400921A21 /* ApiMethod.swift */; };
+		D49E594D1FA1087B005B3C97 /* SharePreviewController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49E594C1FA1087B005B3C97 /* SharePreviewController_iOS.swift */; };
 		D4AB8D931F6044190099FC42 /* LongPollTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB8D921F6044190099FC42 /* LongPollTaskTests.swift */; };
 		D4AB8D9B1F6048EA0099FC42 /* longPoll.updates.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D941F6048B50099FC42 /* longPoll.updates.json */; };
 		D4AB8D9D1F6055290099FC42 /* longPoll.failed.1.withTs.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D9C1F6055290099FC42 /* longPoll.failed.1.withTs.json */; };
@@ -618,6 +619,7 @@
 		D49795A61F4DFB3400921A21 /* VKErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKErrorTests.swift; sourceTree = "<group>"; };
 		D49795A81F4DFB9E00921A21 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		D49795AA1F4DFC2400921A21 /* ApiMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiMethod.swift; sourceTree = "<group>"; };
+		D49E594C1FA1087B005B3C97 /* SharePreviewController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePreviewController_iOS.swift; sourceTree = "<group>"; };
 		D4AB8D921F6044190099FC42 /* LongPollTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollTaskTests.swift; sourceTree = "<group>"; };
 		D4AB8D941F6048B50099FC42 /* longPoll.updates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = longPoll.updates.json; sourceTree = "<group>"; };
 		D4AB8D9C1F6055290099FC42 /* longPoll.failed.1.withTs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.1.withTs.json; sourceTree = "<group>"; };
@@ -994,6 +996,7 @@
 				D4BBFDB41F9297A9009615E7 /* WebController_iOS.swift */,
 				D4BBFDB81F9297A9009615E7 /* CaptchaController_iOS.swift */,
 				D486E33F1FA0E623002134EB /* ShareController_iOS.swift */,
+				D49E594C1FA1087B005B3C97 /* SharePreviewController_iOS.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -1672,6 +1675,7 @@
 				D4BBFF8F1F929892009615E7 /* Audio.swift in Sources */,
 				D4BBFF851F929892009615E7 /* Ads.swift in Sources */,
 				D4BBFF9F1F929893009615E7 /* VKAppProxy.swift in Sources */,
+				D49E594D1FA1087B005B3C97 /* SharePreviewController_iOS.swift in Sources */,
 				D4BBFF9B1F929893009615E7 /* OperationConvertible.swift in Sources */,
 				D46FB4301F929E4E000CEAEB /* CapthcaPresenter.swift in Sources */,
 				D4BBFF821F929892009615E7 /* Docs.swift in Sources */,
