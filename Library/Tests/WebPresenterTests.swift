@@ -184,7 +184,7 @@ final class WebPresenterTests: XCTestCase {
         XCTAssertEqual(result, "success=1")
     }
     
-    func test_load_callGoBackOnce_whenRedirect() {
+    func test_load_callGoBackOnce_whenOpenThirdpartyUrl() {
         // Given
         let context = makeContext()
         var goBackCallCount = 0
@@ -199,7 +199,7 @@ final class WebPresenterTests: XCTestCase {
                 var nerUrl = url
                 
                 if url?.path == "/test1" {
-                    nerUrl = URL(string: "http://vk.com/test2")!
+                    nerUrl = URL(string: "http://test.ru")!
                 }
                 
                 onResultBlock?(.response(nerUrl))

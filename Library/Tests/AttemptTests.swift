@@ -38,7 +38,6 @@ final class AttemptTests: XCTestCase {
     
     func test_sendTask_notGiveResponse_whenCancelled() {
         // Given
-        var cancellCallCount = 0
         let context = makeContext(callbacks: .init(onFinish: { _ in
                 XCTFail("Operation should be cancelled without call completion")
         }))
@@ -46,23 +45,23 @@ final class AttemptTests: XCTestCase {
         
         configureTask(in: context.session) { task, handler in
             task.onResume = {
-                Thread.sleep(forTimeInterval: 0.02)
+                Thread.sleep(forTimeInterval: 0.5)
                 handler(nil, nil, nil)
             }
 
             task.onCancel = {
-                cancellCallCount += 1
-                Thread.sleep(forTimeInterval: 0.05)
+                Thread.sleep(forTimeInterval: 1)
                 exp.fulfill()
             }
         }
         // When
         OperationQueue().addOperation(context.attempt)
-        Thread.sleep(forTimeInterval: 0.01)
-        context.attempt.cancel()
-        waitForExpectations(timeout: 5)
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) {
+            context.attempt.cancel()
+        }
         // Then
-        XCTAssertEqual(cancellCallCount, 1)
+        waitForExpectations(timeout: 5)
     }
     
     func test_addObservers_whenSended() {

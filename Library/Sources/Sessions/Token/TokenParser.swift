@@ -22,8 +22,10 @@ final class TokenParserImpl: TokenParser {
                 case "expires_in":
                     expires = TimeInterval(value)
                 default:
-                    info[key] = value
+                    break
                 }
+                
+                info[key] = value
             }
         }
         

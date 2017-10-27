@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.version                 = "3.0.0"
+  s.version                 = "3.0.1"
   s.name                    = "SwiftyVK"
   s.summary                 = "Easy and powerful way to interact with VK API for iOS and macOS"
   s.homepage                = "https://github.com/SwiftyVK/SwiftyVK"
