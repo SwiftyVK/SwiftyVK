@@ -12,7 +12,7 @@ final class TokenParserTests: XCTestCase {
         // Then
         XCTAssertEqual(result?.token, "1234567890")
         XCTAssertEqual(result?.expires, 123)
-        XCTAssertEqual(result?.info ?? [:], ["info" : "testInfo"])
+        XCTAssertEqual(result?.info ?? [:], ["info": "testInfo", "access_token": "1234567890", "expires_in": "123"])
     }
     
     func test_parseTokenWithoutExpires() {

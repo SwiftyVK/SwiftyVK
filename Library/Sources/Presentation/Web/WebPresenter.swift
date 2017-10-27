@@ -125,9 +125,14 @@ final class WebPresenterImpl: WebPresenter {
             throw VKError.authorizationUrlIsNil
         }
         
+        let host = url.host ?? ""
         let fragment = url.fragment ?? ""
 
-        if fragment.contains("access_token=") {
+        if host != "vk.com" && host != "m.vk.com" && host != "oauth.vk.com" {
+            print(url)
+            currentController?.goBack()
+        }
+        else if fragment.contains("access_token=") {
             return .response(fragment)
         }
         else if fragment.contains("success=1") {
@@ -142,13 +147,8 @@ final class WebPresenterImpl: WebPresenter {
         else if fragment.contains("fail=1") {
             throw VKError.authorizationFailed
         }
-        else if url.path == originalPath {
-            return .nothing
-        }
-        else {
-            currentController?.goBack()
-            return .nothing
-        }
+        
+        return .nothing
     }
     
     private func handle(error: VKError, fails: Int) throws -> HandledResult {
