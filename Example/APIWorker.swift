@@ -91,6 +91,23 @@ final class APIWorker {
     }
     
     class func share() {
-        VK.sessions?.default.share(ShareContext())
+        guard
+            let pathToImage = Bundle.main.path(forResource: "testImage", ofType: "png"),
+            let data = try? Data(contentsOf: URL(fileURLWithPath: pathToImage)),
+            let link = URL(string: "https://en.wikipedia.org/wiki/Hyperspace")
+            else {
+                print("Can not find testImage.png")
+                return
+        }
+        
+        VK.sessions?.default.share(ShareContext(
+            text: "This post made with #SwiftyVK 🖖🏽",
+            images: [data],
+            link: ShareLink(
+                title: "Follow the white rabbit",
+                url: link
+                )
+            )
+        )
     }
 }

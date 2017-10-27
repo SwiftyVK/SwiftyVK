@@ -213,8 +213,8 @@
 		D48F78981F9FA0FC0092931E /* SharePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78961F9FA0FC0092931E /* SharePresenter.swift */; };
 		D48F789A1F9FA51C0092931E /* SharePresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78991F9FA51C0092931E /* SharePresenterMock.swift */; };
 		D48F789B1F9FA51C0092931E /* SharePresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78991F9FA51C0092931E /* SharePresenterMock.swift */; };
-		D48F789D1F9FAABD0092931E /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F789C1F9FAABD0092931E /* ShareController.swift */; };
-		D48F789E1F9FAABD0092931E /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F789C1F9FAABD0092931E /* ShareController.swift */; };
+		D48F789D1F9FAABD0092931E /* ShareControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F789C1F9FAABD0092931E /* ShareControllers.swift */; };
+		D48F789E1F9FAABD0092931E /* ShareControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F789C1F9FAABD0092931E /* ShareControllers.swift */; };
 		D497959F1F4DE40900921A21 /* ApiErrorHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D497959E1F4DE40900921A21 /* ApiErrorHandlerTests.swift */; };
 		D49795A11F4DE57100921A21 /* ApiErrorExecutorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795A01F4DE57100921A21 /* ApiErrorExecutorMock.swift */; };
 		D49795A31F4DF04000921A21 /* ApiMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49795A21F4DF04000921A21 /* ApiMethodTests.swift */; };
@@ -226,6 +226,7 @@
 		D4AB8D931F6044190099FC42 /* LongPollTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB8D921F6044190099FC42 /* LongPollTaskTests.swift */; };
 		D4AB8D9B1F6048EA0099FC42 /* longPoll.updates.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D941F6048B50099FC42 /* longPoll.updates.json */; };
 		D4AB8D9D1F6055290099FC42 /* longPoll.failed.1.withTs.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D9C1F6055290099FC42 /* longPoll.failed.1.withTs.json */; };
+		D4B44EA51FA38A5100E85E31 /* ShareNavigationController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B44EA41FA38A5100E85E31 /* ShareNavigationController_iOS.swift */; };
 		D4BBFEAB1F929891009615E7 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDFE1F9297AA009615E7 /* Storage.swift */; };
 		D4BBFEAC1F929891009615E7 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDFF1F9297AA009615E7 /* Messages.swift */; };
 		D4BBFEAD1F929891009615E7 /* Notifacations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFE001F9297AA009615E7 /* Notifacations.swift */; };
@@ -614,7 +615,7 @@
 		D486E3411FA0E64E002134EB /* ShareController_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController_macOS.swift; sourceTree = "<group>"; };
 		D48F78961F9FA0FC0092931E /* SharePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenter.swift; sourceTree = "<group>"; };
 		D48F78991F9FA51C0092931E /* SharePresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenterMock.swift; sourceTree = "<group>"; };
-		D48F789C1F9FAABD0092931E /* ShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
+		D48F789C1F9FAABD0092931E /* ShareControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareControllers.swift; sourceTree = "<group>"; };
 		D497959E1F4DE40900921A21 /* ApiErrorHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorHandlerTests.swift; sourceTree = "<group>"; };
 		D49795A01F4DE57100921A21 /* ApiErrorExecutorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorExecutorMock.swift; sourceTree = "<group>"; };
 		D49795A21F4DF04000921A21 /* ApiMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiMethodTests.swift; sourceTree = "<group>"; };
@@ -626,6 +627,7 @@
 		D4AB8D921F6044190099FC42 /* LongPollTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollTaskTests.swift; sourceTree = "<group>"; };
 		D4AB8D941F6048B50099FC42 /* longPoll.updates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = longPoll.updates.json; sourceTree = "<group>"; };
 		D4AB8D9C1F6055290099FC42 /* longPoll.failed.1.withTs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.1.withTs.json; sourceTree = "<group>"; };
+		D4B44EA41FA38A5100E85E31 /* ShareNavigationController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareNavigationController_iOS.swift; sourceTree = "<group>"; };
 		D4BBFDA51F9297A9009615E7 /* KeychainProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
 		D4BBFDA61F9297A9009615E7 /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		D4BBFDA71F9297A9009615E7 /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
@@ -918,7 +920,7 @@
 			isa = PBXGroup;
 			children = (
 				D48F78961F9FA0FC0092931E /* SharePresenter.swift */,
-				D48F789C1F9FAABD0092931E /* ShareController.swift */,
+				D48F789C1F9FAABD0092931E /* ShareControllers.swift */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -1008,6 +1010,7 @@
 				D4BBFDB41F9297A9009615E7 /* WebController_iOS.swift */,
 				D4BBFDB81F9297A9009615E7 /* CaptchaController_iOS.swift */,
 				D486E33F1FA0E623002134EB /* ShareController_iOS.swift */,
+				D4B44EA41FA38A5100E85E31 /* ShareNavigationController_iOS.swift */,
 				D49E594C1FA1087B005B3C97 /* SharePreviewController_iOS.swift */,
 				D44C84171FA267060029EA7B /* Components */,
 			);
@@ -1679,6 +1682,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4BBFFD31F929893009615E7 /* IDGenerator.swift in Sources */,
+				D4B44EA51FA38A5100E85E31 /* ShareNavigationController_iOS.swift in Sources */,
 				D4BBFFCF1F929893009615E7 /* SessionConfig.swift in Sources */,
 				D4BBFF951F929893009615E7 /* VKURLSessionTask.swift in Sources */,
 				D4BBFFBA1F929893009615E7 /* RequestType.swift in Sources */,
@@ -1734,7 +1738,7 @@
 				D4BBFFD11F929893009615E7 /* SwiftyVKDelegate.swift in Sources */,
 				D4BBFFA11F929893009615E7 /* Collections+Extensions.swift in Sources */,
 				D4BBFF991F929893009615E7 /* VKViewController.swift in Sources */,
-				D48F789E1F9FAABD0092931E /* ShareController.swift in Sources */,
+				D48F789E1F9FAABD0092931E /* ShareControllers.swift in Sources */,
 				D4BBFFBC1F929893009615E7 /* TokenParser.swift in Sources */,
 				D4BBFF781F929892009615E7 /* Board.swift in Sources */,
 				D4BBFFC01F929893009615E7 /* TaskSheduler.swift in Sources */,
@@ -1855,7 +1859,7 @@
 				D4BBFECC1F929891009615E7 /* VKURLSession.swift in Sources */,
 				D4BBFF091F929891009615E7 /* SwiftyVKDelegate.swift in Sources */,
 				D4BBFED91F929891009615E7 /* Collections+Extensions.swift in Sources */,
-				D48F789D1F9FAABD0092931E /* ShareController.swift in Sources */,
+				D48F789D1F9FAABD0092931E /* ShareControllers.swift in Sources */,
 				D4BBFED11F929891009615E7 /* VKViewController.swift in Sources */,
 				D4BBFEF41F929891009615E7 /* TokenParser.swift in Sources */,
 				D4BBFEB01F929891009615E7 /* Board.swift in Sources */,

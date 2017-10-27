@@ -1,8 +1,8 @@
 public struct ShareContext: Equatable {
     
-    private let text: String?
-    private let images: [Data]
-    private let link: ShareLink?
+    var text: String?
+    let images: [String: Data]
+    let link: ShareLink?
     
     public init(
         text: String? = nil,
@@ -10,7 +10,7 @@ public struct ShareContext: Equatable {
         link: ShareLink? = nil
         ) {
         self.text = text
-        self.images = images
+        self.images = images.reduce(into: [String: Data]()) { $0[String.random(5)] = $1 }
         self.link = link
     }
     

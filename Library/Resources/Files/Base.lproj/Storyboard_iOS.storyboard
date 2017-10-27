@@ -16,12 +16,12 @@
         <!--Captcha Controller iOS-->
         <scene sceneID="10n-Ej-Gtq">
             <objects>
-                <viewController storyboardIdentifier="Captcha" modalPresentationStyle="overCurrentContext" id="QO6-eV-iRy" customClass="CaptchaControllerIOS" customModule="SwiftyVK" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Captcha" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="overCurrentContext" id="QO6-eV-iRy" customClass="CaptchaControllerIOS" customModule="SwiftyVK" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yXH-7r-o29"/>
                         <viewControllerLayoutGuide type="bottom" id="P2T-2x-qru"/>
                     </layoutGuides>
-                    <view key="view" opaque="NO" contentMode="scaleToFill" id="OaR-C0-QIp">
+                    <view key="view" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="OaR-C0-QIp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -97,7 +97,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="OS1-0O-CnX" firstAttribute="leading" secondItem="OaR-C0-QIp" secondAttribute="leading" id="DbK-Jj-dt6"/>
                             <constraint firstAttribute="trailing" secondItem="OS1-0O-CnX" secondAttribute="trailing" id="MLs-pn-i43"/>
@@ -123,10 +123,10 @@
             </objects>
             <point key="canvasLocation" x="1273" y="189"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Share Navigation Controller iOS-->
         <scene sceneID="Gmh-eR-O3k">
             <objects>
-                <navigationController id="3Pn-mM-rTZ" sceneMemberID="viewController">
+                <navigationController id="3Pn-mM-rTZ" customClass="ShareNavigationControllerIOS" customModule="SwiftyVK" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="OlM-ur-9yg">
                         <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -262,11 +262,19 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EJP-UA-uLX">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="8YO-qC-DgY"/>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Qc3-nV-l5B"/>
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="8YO-qC-DgY">
+                            <connections>
+                                <action selector="cancelPressed:" destination="3ao-WD-33z" id="O5Q-QA-W5F"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Qc3-nV-l5B">
+                            <connections>
+                                <action selector="donePressed:" destination="3ao-WD-33z" id="k2S-dr-HId"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="messageTextView" destination="MGr-xq-tp4" id="4FF-sb-OFg"/>
+                        <outlet property="messageTextView" destination="MGr-xq-tp4" id="ies-0U-2hE"/>
                         <outlet property="separatorHeight" destination="msd-ls-E0A" id="DB2-oC-coM"/>
                     </connections>
                 </viewController>
@@ -320,7 +328,7 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="D5b-JN-kIz" secondAttribute="trailing" id="FeY-Vf-W7K"/>
                             <constraint firstItem="D5b-JN-kIz" firstAttribute="leading" secondItem="0lj-3q-Lho" secondAttribute="leading" id="K8K-aO-Zcr"/>
@@ -371,7 +379,7 @@
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="JG6-X0-sew" firstAttribute="top" secondItem="8mo-Su-QDT" secondAttribute="bottom" constant="15" id="0JM-Jb-CGb"/>
                             <constraint firstItem="idF-k7-oeq" firstAttribute="top" secondItem="Ope-bS-Fva" secondAttribute="top" id="1gM-hX-AXZ"/>

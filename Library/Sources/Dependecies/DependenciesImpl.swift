@@ -178,7 +178,7 @@ final class DependenciesImpl: Dependencies {
             return nil
         }
         
-        DispatchQueue.performOnMainIfNeeded {
+        DispatchQueue.safelyOnMain {
             self.delegate?.vkNeedToPresent(viewController: unwrappedController)
         }
         

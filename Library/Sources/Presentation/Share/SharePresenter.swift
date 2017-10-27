@@ -12,5 +12,9 @@ final class SharePresenterImpl: SharePresenter {
     
     func share(_ context: ShareContext, in session: Session) {
         let controller = controllerMaker.shareController()
+        
+        controller?.share(context) { [weak controller] context in
+            controller?.close()
+        }
     }
 }
