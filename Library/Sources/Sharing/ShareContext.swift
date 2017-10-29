@@ -21,8 +21,8 @@ public struct ShareContext: Equatable {
 
 public struct ShareLink: Equatable {
     
-    private let title: String
-    private let url: URL
+    let title: String
+    let url: URL
     
     public init(
         title: String,
