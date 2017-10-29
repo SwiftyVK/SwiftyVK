@@ -584,7 +584,6 @@
 		D41ADB001F4DFE7000E10D41 /* ResourcesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesTests.swift; sourceTree = "<group>"; };
 		D41ADB031F4E013000E10D41 /* VKStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKStack.swift; sourceTree = "<group>"; };
 		D41B3CFF1F9FB48C00177075 /* ShareControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareControllerMock.swift; sourceTree = "<group>"; };
-		D41B3D0B1FA064BA00177075 /* .codecov.yml */ = {isa = PBXFileReference; lastKnownFileType = text; name = .codecov.yml; path = ../.codecov.yml; sourceTree = "<group>"; };
 		D41C70531F45F33F00EA454C /* VKError+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VKError+Equatable.swift"; sourceTree = "<group>"; };
 		D41D5D961F62D0F800B4C8AF /* LongPollEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollEventTests.swift; sourceTree = "<group>"; };
 		D4306B2C1F547BC70050D165 /* ApiErrorHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorHandlerMock.swift; sourceTree = "<group>"; };
@@ -863,7 +862,6 @@
 		A2527D251BD1123E00F65412 = {
 			isa = PBXGroup;
 			children = (
-				D41B3D0B1FA064BA00177075 /* .codecov.yml */,
 				D47E1CC71F92B079002BB2AC /* UI */,
 				A2527D5C1BD12FD200F65412 /* Sources */,
 				A2527DF01BD133E100F65412 /* Resources */,
