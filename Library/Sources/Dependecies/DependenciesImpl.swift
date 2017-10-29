@@ -15,7 +15,7 @@ final class DependenciesImpl: Dependencies {
     private let uiSyncQueue = DispatchQueue(label: "SwiftyVK.uiSyncQueue")
     
     private lazy var foregroundSession: VKURLSession = {
-        return URLSession(configuration: .default)
+        URLSession(configuration: .default)
     }()
     
     private lazy var connectionObserver: ConnectionObserver? = {
