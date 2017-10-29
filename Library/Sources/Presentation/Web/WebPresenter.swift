@@ -76,11 +76,8 @@ final class WebPresenterImpl: WebPresenter {
                         }
                         
                     }
-                    catch let error as VKError {
-                        finalResult = .error(error)
-                    }
                     catch let error {
-                        finalResult = .error(.unknown(error))
+                        finalResult = .error(error.toVK())
                     }
                     
                     if finalResult != nil {

@@ -186,12 +186,8 @@ final class TaskImpl: Operation, Task, OperationConvertible {
         do {
             try code()
         }
-            
-        catch let error as VKError {
-            resendIfPossible(error: error, captcha: nil)
-        }
         catch let error {
-            resendIfPossible(error: .unknown(error), captcha: nil)
+            resendIfPossible(error: error.toVK(), captcha: nil)
         }
     }
     
