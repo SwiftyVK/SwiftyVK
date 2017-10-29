@@ -1,5 +1,10 @@
 protocol SharePresenter {
-    func share(_ context: ShareContext, in session: Session)
+    func share(
+        _ context: ShareContext,
+        in session: Session,
+        onSuccess: @escaping () -> (),
+        onError: @escaping RequestCallbacks.Error
+    )
 }
 
 final class SharePresenterImpl: SharePresenter {
@@ -10,7 +15,12 @@ final class SharePresenterImpl: SharePresenter {
     }
     
     
-    func share(_ context: ShareContext, in session: Session) {
+    func share(
+        _ context: ShareContext,
+        in session: Session,
+        onSuccess: @escaping () -> (),
+        onError: @escaping RequestCallbacks.Error
+        ) {
         let controller = controllerMaker.shareController()
         
         controller?.share(context) { [weak controller] context in

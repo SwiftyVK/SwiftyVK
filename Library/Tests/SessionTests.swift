@@ -393,15 +393,19 @@ final class SessionTests: XCTestCase {
         XCTAssertEqual(onDismissCallCount, 1)
     }
     
-    func test_sharePresenter_shareCalled() {
+    func test_share_presenterCalled_whenSessionAuthorized() {
         // Given
         let context = makeContext()
         let shareContext = ShareContext()
         var shareCallCount = 0
         
+        context.authorizator.onAuthorize = { _, _, _, _ in
+            return TokenMock()
+        }
+        
         context.sharePresenterMaker.onMake = {
             let presenter = SharePresenterMock()
-            presenter.onShare = { _shareContext, session in
+            presenter.onShare = { _shareContext, session, _, _ in
                 // Then
                 XCTAssertEqual(_shareContext, shareContext)
                 XCTAssertEqual(session.id, context.session.id)
@@ -410,12 +414,75 @@ final class SessionTests: XCTestCase {
             return presenter
         }
         // When
-        context.session.share(shareContext)
+        _ = try? context.session.logIn(revoke: false)
+        
+        context.session.share(
+            shareContext,
+            onSuccess: {},
+            onError: { _ in }
+        )
         // Then
         XCTAssertEqual(shareCallCount, 1)
     }
     
-    func test_sharePresenter_shareNotCalled_whenSessionDestroyed() {
+    func test_share_shareCalled_whenSessionAuthorizedOnSharing() {
+        // Given
+        let context = makeContext()
+        let shareContext = ShareContext()
+        var shareCallCount = 0
+        let exp = self.expectation(description: "")
+        
+        context.authorizator.onAuthorize = { _, _, _, _ in
+            return TokenMock()
+        }
+        
+        context.sharePresenterMaker.onMake = {
+            let presenter = SharePresenterMock()
+            presenter.onShare = { _shareContext, session, _, _ in
+                // Then
+                XCTAssertEqual(_shareContext, shareContext)
+                XCTAssertEqual(session.id, context.session.id)
+                shareCallCount += 1
+                exp.fulfill()
+            }
+            return presenter
+        }
+        // When
+        context.session.share(
+            shareContext,
+            onSuccess: {},
+            onError: { _ in }
+        )
+        // Then
+        waitForExpectations(timeout: 5)
+        XCTAssertEqual(shareCallCount, 1)
+    }
+    
+    func test_share_shareReturnsError_whenSessionNotAuthorizedOnSharing() {
+        // Given
+        let context = makeContext()
+        let shareContext = ShareContext()
+        let exp = self.expectation(description: "")
+        
+        context.authorizator.onAuthorize = { _, _, _, _ in
+            throw VKError.cantParseTokenInfo("")
+        }
+        
+        // When
+        context.session.share(
+            shareContext,
+            onSuccess: {},
+            onError: {
+                // Then
+                XCTAssertEqual($0, VKError.cantParseTokenInfo(""))
+                exp.fulfill()
+            }
+        )
+        
+        waitForExpectations(timeout: 5)
+    }
+    
+    func test_share_presenterNotCalled_whenSessionDestroyed() {
         // Given
         let context = makeContext()
         let shareContext = ShareContext()
@@ -427,7 +494,11 @@ final class SessionTests: XCTestCase {
             return SharePresenterMock()
         }
         // When
-        context.session.share(shareContext)
+        context.session.share(
+            shareContext,
+            onSuccess: {},
+            onError: { _ in }
+        )
     }
 }
 

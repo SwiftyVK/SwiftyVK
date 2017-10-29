@@ -17,7 +17,12 @@ final class SharePresenterTests: XCTestCase {
             return ShareControllerMock()
         }
         // When
-        presenter.share(shareContext, in: session)
+        presenter.share(
+            shareContext,
+            in: session,
+            onSuccess: {},
+            onError: { _ in }
+        )
         // Then
         XCTAssertEqual(controllerMakerCallCount, 1)
     }

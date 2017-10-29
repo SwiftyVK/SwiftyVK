@@ -62,6 +62,6 @@ final class SessionMock: Session, TaskSession, DestroyableSession, ApiErrorExecu
         return ""
     }
     
-    func share(_ context: ShareContext) {
+    func share(_ context: ShareContext, onSuccess: @escaping () -> (), onError: @escaping RequestCallbacks.Error) {
     }
 }

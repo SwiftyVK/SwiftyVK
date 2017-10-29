@@ -27,8 +27,8 @@ public protocol Session: class {
     @discardableResult
     func send(method: SendableMethod) -> Task
     
-    /// Show share to wall dialog
-    func share(_ context: ShareContext)
+    /// Show share dialog
+    func share(_ context: ShareContext, onSuccess: @escaping () -> (), onError: @escaping RequestCallbacks.Error)
 }
 
 protocol TaskSession {
@@ -133,11 +133,8 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
                 let info = try self.logIn(revoke: true)
                 onSuccess(info)
             }
-            catch let error as VKError {
-                onError(error)
-            }
             catch let error {
-                onError(.unknown(error))
+                onError(error.toVK())
             }
         }
     }
@@ -208,25 +205,39 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
             try throwIfDestroyed()
             try shedule(task: task, concurrent: request.canSentConcurrently)
         }
-        catch let error as VKError {
-            request.callbacks.onError?(error)
-        }
         catch let error {
-            request.callbacks.onError?(.unknown(error))
+            request.callbacks.onError?(error.toVK())
         }
         
         return task
     }
     
-    public func share(_ context: ShareContext) {
+    public func share(
+        _ context: ShareContext,
+        onSuccess: @escaping () -> (),
+        onError: @escaping RequestCallbacks.Error
+        ) {
+        
         do {
             try throwIfDestroyed()
-            let presenter = sharePresenterMaker.sharePresenter()
-            presenter.share(context, in: self)
         }
         catch let error {
-            print(error)
+            onError(error.toVK())
         }
+        
+        let share = {
+            let presenter = self.sharePresenterMaker.sharePresenter()
+            presenter.share(context, in: self, onSuccess: onSuccess, onError: onError)
+        }
+        
+        guard state >= .authorized else {
+            return logIn(
+                onSuccess: { _ in share() },
+                onError: { onError($0) }
+            )
+        }
+        
+        share()
     }
     
     func shedule(task: Task, concurrent: Bool) throws {
