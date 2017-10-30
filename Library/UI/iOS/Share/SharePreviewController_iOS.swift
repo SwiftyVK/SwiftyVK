@@ -5,10 +5,11 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     @IBOutlet weak var messageTextView: UITextView?
     @IBOutlet weak var linkTitle: UILabel?
     @IBOutlet weak var linkUrl: UILabel?
+    @IBOutlet weak var imageCollection: ShareImageCollectionViewIOS?
     
     @IBOutlet weak var separatorHeight: NSLayoutConstraint?
     @IBOutlet weak var linkViewHeight: NSLayoutConstraint?
-    @IBOutlet weak var linkSeparatorHeight: NSLayoutConstraint?
+    @IBOutlet weak var imageCollectionHeight: NSLayoutConstraint?
     
     private var context = ShareContext()
     private var completion: ((ShareContext) -> ())?
@@ -18,7 +19,7 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         
         messageTextView?.delegate = self
         separatorHeight?.constant = 1 / UIScreen.main.nativeScale
-        linkSeparatorHeight?.constant = 1 / UIScreen.main.nativeScale
+        imageCollection?.set(images: context.images)
         
         messageTextView?.text = context.text
         
@@ -29,7 +30,8 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        linkViewHeight?.constant = context.link != nil ? 54 : 0
+        imageCollectionHeight?.constant = context.images.isEmpty ? 0 : 135
+        linkViewHeight?.constant = context.link != nil ? 51 : 0
     }
     
     func share(_ context: ShareContext, completion: @escaping (ShareContext) -> ()) {

@@ -86,6 +86,8 @@
 		D41D5D971F62D0F800B4C8AF /* LongPollEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41D5D961F62D0F800B4C8AF /* LongPollEventTests.swift */; };
 		D423E0461FA63CE40083C8FB /* Error+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D423E0451FA63CE40083C8FB /* Error+Extensions.swift */; };
 		D423E0471FA63CE40083C8FB /* Error+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D423E0451FA63CE40083C8FB /* Error+Extensions.swift */; };
+		D423E0491FA640D90083C8FB /* ShareImageCollectionView_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D423E0481FA640D90083C8FB /* ShareImageCollectionView_iOS.swift */; };
+		D423E04C1FA6414F0083C8FB /* ShareImageCollectionCell_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D423E04B1FA6414F0083C8FB /* ShareImageCollectionCell_iOS.swift */; };
 		D4306B2D1F547BC70050D165 /* ApiErrorHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4306B2C1F547BC70050D165 /* ApiErrorHandlerMock.swift */; };
 		D4306B2F1F5484380050D165 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4306B2E1F5484380050D165 /* Response.swift */; };
 		D4321D8B1F5F0587001AFE9F /* FullVariationsMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4321D8A1F5F0587001AFE9F /* FullVariationsMethodTests.swift */; };
@@ -589,6 +591,8 @@
 		D41C70531F45F33F00EA454C /* VKError+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VKError+Equatable.swift"; sourceTree = "<group>"; };
 		D41D5D961F62D0F800B4C8AF /* LongPollEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollEventTests.swift; sourceTree = "<group>"; };
 		D423E0451FA63CE40083C8FB /* Error+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Extensions.swift"; sourceTree = "<group>"; };
+		D423E0481FA640D90083C8FB /* ShareImageCollectionView_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageCollectionView_iOS.swift; sourceTree = "<group>"; };
+		D423E04B1FA6414F0083C8FB /* ShareImageCollectionCell_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageCollectionCell_iOS.swift; sourceTree = "<group>"; };
 		D4306B2C1F547BC70050D165 /* ApiErrorHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorHandlerMock.swift; sourceTree = "<group>"; };
 		D4306B2E1F5484380050D165 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		D4321D8A1F5F0587001AFE9F /* FullVariationsMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullVariationsMethodTests.swift; sourceTree = "<group>"; };
@@ -936,6 +940,18 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		D423E04A1FA640E10083C8FB /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				D486E33F1FA0E623002134EB /* ShareController_iOS.swift */,
+				D4B44EA41FA38A5100E85E31 /* ShareNavigationController_iOS.swift */,
+				D49E594C1FA1087B005B3C97 /* SharePreviewController_iOS.swift */,
+				D423E0481FA640D90083C8FB /* ShareImageCollectionView_iOS.swift */,
+				D423E04B1FA6414F0083C8FB /* ShareImageCollectionCell_iOS.swift */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
 		D44C84171FA267060029EA7B /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -1010,9 +1026,7 @@
 				D4BBFDAF1F9297A9009615E7 /* WebViewWrapper_IOS.swift */,
 				D4BBFDB41F9297A9009615E7 /* WebController_iOS.swift */,
 				D4BBFDB81F9297A9009615E7 /* CaptchaController_iOS.swift */,
-				D486E33F1FA0E623002134EB /* ShareController_iOS.swift */,
-				D4B44EA41FA38A5100E85E31 /* ShareNavigationController_iOS.swift */,
-				D49E594C1FA1087B005B3C97 /* SharePreviewController_iOS.swift */,
+				D423E04A1FA640E10083C8FB /* Share */,
 				D44C84171FA267060029EA7B /* Components */,
 			);
 			path = iOS;
@@ -1705,6 +1719,7 @@
 				D4BBFF841F929892009615E7 /* Gifts.swift in Sources */,
 				D4BBFF891F929892009615E7 /* Upload.swift in Sources */,
 				D4BBFFB11F929893009615E7 /* ThreeVariationsMethod.swift in Sources */,
+				D423E04C1FA6414F0083C8FB /* ShareImageCollectionCell_iOS.swift in Sources */,
 				D4BBFF791F929892009615E7 /* Notes.swift in Sources */,
 				D4BBFFCE1F929893009615E7 /* Token.swift in Sources */,
 				D4BBFFAA1F929893009615E7 /* DependenciesImpl.swift in Sources */,
@@ -1756,6 +1771,7 @@
 				D46FB4321F929E4E000CEAEB /* CaptchaController_iOS.swift in Sources */,
 				D4BBFFA21F929893009615E7 /* VKFileManager.swift in Sources */,
 				D46FB42B1F929E3C000CEAEB /* WebController_iOS.swift in Sources */,
+				D423E0491FA640D90083C8FB /* ShareImageCollectionView_iOS.swift in Sources */,
 				D4BBFFB51F929893009615E7 /* Response.swift in Sources */,
 				D4BBFF9D1F929893009615E7 /* JSON.swift in Sources */,
 				D4BBFFC61F929893009615E7 /* QueryBuilder.swift in Sources */,
