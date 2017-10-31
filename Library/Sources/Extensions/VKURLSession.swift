@@ -5,17 +5,17 @@ protocol VKURLSession {
         with request: URLRequest,
         completionHandler: @escaping (Data?, URLResponse?, Error?) -> Swift.Void
         ) -> VKURLSessionTask
+
     func synchronousDataTaskWithURL(url: URL) -> (data: Data?, response: URLResponse?, error: Error?)
 }
 
 extension URLSession: VKURLSession {
-    
+
     func dataTask(
         with request: URLRequest,
         completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void
         ) -> VKURLSessionTask {
-        let task: URLSessionDataTask = dataTask(with: request, completionHandler: completionHandler)
-        return task as VKURLSessionTask
+        return dataTask(with: request, completionHandler: completionHandler) as URLSessionTask
     }
     
     func synchronousDataTaskWithURL(url: URL) -> (data: Data?, response: URLResponse?, error: Error?) {

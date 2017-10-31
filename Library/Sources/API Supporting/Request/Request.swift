@@ -14,6 +14,15 @@ public final class Request {
         }
     }
     
+    var isUploading: Bool {
+        switch type {
+        case .api, .url:
+            return false
+        case .upload:
+            return true
+        }
+    }
+    
     init(
         type: RequestType,
         config: Config = .default,

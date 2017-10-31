@@ -2,25 +2,27 @@ import UIKit
 
 final class ShareImageCollectionViewIOS: UICollectionView, UICollectionViewDataSource {
     
-    private var separator: UIView?
-    private var images = [String: Data]()
-    
+    private var images = NSMutableArray()
     
     override func awakeFromNib() {
         dataSource = self
     }
     
-    func set(images: [String: Data]) {
-        self.images = images
-        reloadData()
+    func set(images: [ShareImage]) {
+        self.images = NSMutableArray(array: images)
         
-        separator = UIView()
-        separator?.backgroundColor = UIColor(red: 0.84, green: 0.84, blue: 0.86, alpha: 1)
-        
-        separator.flatMap {
-            addSubview($0)
-            bringSubview(toFront: $0)
+        images.forEach { [weak self] image in
+            image.setOnFail {
+                DispatchQueue.safelyOnMain {
+                    guard let index = self?.images.index(of: image) else { return }
+                    self?.images.removeObject(identicalTo: image)
+                    self?.deleteItems(at: [IndexPath(item: index, section: 0)])
+                    
+                }
+            }
         }
+        
+        reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -32,27 +34,15 @@ final class ShareImageCollectionViewIOS: UICollectionView, UICollectionViewDataS
         
         guard let cell = dequeueReusableCell(
             withReuseIdentifier: "ShareImageCell",
-            for: indexPath) as? ShareImageCollectionCellIOS
+            for: indexPath) as? ShareImageCollectionCellIOS,
+            let image = images.object(at: index) as? ShareImage
             else {
                 return UICollectionViewCell()
         }
         
-        let id = Array(images.keys)[index]
-        let image = Array(images.values)[index]
         
-        cell.set(id: id, image: image)
+        cell.set(image: image)
         
         return cell
     }
-    
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//
-//        separator?.frame = CGRect(
-//            x: 0,
-//            y: 0,
-//            width: contentSize.width,
-//            height: 1 / UIScreen.main.nativeScale
-//        )
-//    }
 }

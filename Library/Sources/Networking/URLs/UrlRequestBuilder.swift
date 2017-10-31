@@ -98,6 +98,8 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         
         req.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
         req.httpBody = query.data(using: .utf8)
+        let contentLength = String(req.httpBody?.count ?? 0)
+        req.setValue(contentLength, forHTTPHeaderField: "Content-Length")
         
         return req
     }
@@ -113,6 +115,9 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         req.addValue("8bit", forHTTPHeaderField: "Content-Transfer-Encoding")
         req.setValue("multipart/form-data;  boundary=\(bodyBuilder.boundary)", forHTTPHeaderField: "Content-Type")
         req.httpBody = bodyBuilder.makeBody(from: media, partType: partType)
+        
+        let contentLength = String(req.httpBody?.count ?? 0)
+        req.setValue(contentLength, forHTTPHeaderField: "Content-Length")
         
         return req
     }

@@ -103,7 +103,9 @@ final class APIWorker {
         VK.sessions?.default.share(
             ShareContext(
                 text: "This post made with #SwiftyVK 🖖🏽",
-                images: [data],
+                images: [
+                    ShareImage(data: data, type: .jpg)
+                ],
                 link: ShareLink(
                     title: "Follow the white rabbit",
                     url: link

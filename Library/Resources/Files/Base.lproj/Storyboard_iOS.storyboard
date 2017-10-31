@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13528" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13526"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -224,16 +224,30 @@
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q5f-gS-i1b">
                                                                     <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                                                 </imageView>
+                                                                <view opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ij2-E9-rnc">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                                                    <color key="backgroundColor" white="0.25" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="4XB-H1-bRW">
+                                                                    <rect key="frame" x="50" y="50" width="20" height="20"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                </activityIndicatorView>
                                                             </subviews>
                                                         </view>
                                                         <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="Ij2-E9-rnc" secondAttribute="trailing" id="OGe-uj-uYy"/>
                                                             <constraint firstItem="Q5f-gS-i1b" firstAttribute="top" secondItem="jsu-jX-rd2" secondAttribute="top" id="Pja-VG-eo7"/>
+                                                            <constraint firstItem="Ij2-E9-rnc" firstAttribute="leading" secondItem="jsu-jX-rd2" secondAttribute="leading" id="eTS-Ki-dbX"/>
                                                             <constraint firstAttribute="bottom" secondItem="Q5f-gS-i1b" secondAttribute="bottom" id="gEI-mQ-haf"/>
                                                             <constraint firstAttribute="trailing" secondItem="Q5f-gS-i1b" secondAttribute="trailing" id="gxS-wz-Uyi"/>
                                                             <constraint firstItem="Q5f-gS-i1b" firstAttribute="leading" secondItem="jsu-jX-rd2" secondAttribute="leading" id="i7N-gs-RPp"/>
+                                                            <constraint firstItem="Ij2-E9-rnc" firstAttribute="top" secondItem="jsu-jX-rd2" secondAttribute="top" id="knc-Zl-mTX"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Ij2-E9-rnc" secondAttribute="bottom" id="mGX-0P-TVs"/>
                                                         </constraints>
                                                         <connections>
+                                                            <outlet property="activityIndicator" destination="4XB-H1-bRW" id="BAJ-Bp-zYd"/>
                                                             <outlet property="imageView" destination="Q5f-gS-i1b" id="Pmu-OW-bFd"/>
+                                                            <outlet property="overlayView" destination="Ij2-E9-rnc" id="R0d-Cq-UxU"/>
                                                         </connections>
                                                     </collectionViewCell>
                                                 </cells>
@@ -248,7 +262,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDu-eD-Jpl">
-                                                        <rect key="frame" x="15" y="20.666666666666657" width="344" height="19.333333333333343"/>
+                                                        <rect key="frame" x="15" y="20.666666666666657" width="344" height="19.333333333333329"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                         <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>

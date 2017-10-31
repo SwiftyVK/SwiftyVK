@@ -66,8 +66,10 @@ final class AttemptImpl: Operation, Attempt {
         
         switch keyPath {
         case (#keyPath(URLSessionTask.countOfBytesSent)):
+            guard task.countOfBytesExpectedToSend > 0 else { return }
             callbacks.onSent(task.countOfBytesSent, task.countOfBytesExpectedToSend)
         case(#keyPath(URLSessionTask.countOfBytesReceived)):
+            guard task.countOfBytesExpectedToReceive > 0 else { return }
             callbacks.onRecive(task.countOfBytesReceived, task.countOfBytesExpectedToReceive)
         default:
             break

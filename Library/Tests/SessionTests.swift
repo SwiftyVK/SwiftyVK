@@ -346,7 +346,7 @@ final class SessionTests: XCTestCase {
         }
         // When
         do {
-            try context.session.logIn(revoke: false)
+            _ = try context.session.logIn(revoke: false)
             try context.session.validate(redirectUrl: URL(fileURLWithPath: ""))
         } catch let error {
             XCTFail("Unexpected error: \(error)")
