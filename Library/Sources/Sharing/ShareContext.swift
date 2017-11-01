@@ -1,6 +1,6 @@
 public struct ShareContext: Equatable {
     
-    var text: String?
+    var message: String?
     let images: [ShareImage]
     let link: ShareLink?
     let canShowError: Bool
@@ -15,14 +15,14 @@ public struct ShareContext: Equatable {
         link: ShareLink? = nil,
         canShowError: Bool = true
         ) {
-        self.text = text
+        self.message = text
         self.images = images
         self.link = link
         self.canShowError = canShowError
     }
     
     public static func == (lhs: ShareContext, rhs: ShareContext) -> Bool {
-        return lhs.text == rhs.text && lhs.images == rhs.images && lhs.link == rhs.link
+        return lhs.message == rhs.message && lhs.images == rhs.images && lhs.link == rhs.link
     }
 }
 

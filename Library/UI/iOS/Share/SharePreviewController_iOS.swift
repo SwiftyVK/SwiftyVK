@@ -24,7 +24,7 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         separatorHeight?.constant = 1 / UIScreen.main.nativeScale
         imageCollection?.set(images: context.images)
         
-        messageTextView?.text = context.text
+        messageTextView?.text = context.message
         
         linkTitle?.text = context.link?.title
         linkUrl?.text = context.link?.url.absoluteString
@@ -82,7 +82,7 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        context.text = textView.text
+        context.message = textView.text
         updateSendButton()
     }
     

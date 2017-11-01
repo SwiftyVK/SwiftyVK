@@ -45,6 +45,7 @@ final class SharePresenterImpl: SharePresenter {
                     controller?.enablePostButton(false)
                     
                     self?.post(
+                        context: context,
                         in: session,
                         onSuccess: {
                             controller?.close()
@@ -108,13 +109,14 @@ final class SharePresenterImpl: SharePresenter {
                 return .failed
         }
         
-        let imageId = String(format: "photo=%@_%@", ownerId, photoId)
+        let imageId = String(format: "photo%@_%@", ownerId, photoId)
         attachements.append(imageId)
         
         return .uploaded
     }
     
     private func post(
+        context: ShareContext,
         in session: Session,
         onSuccess: @escaping RequestCallbacks.Success,
         onError: @escaping RequestCallbacks.Error
@@ -123,6 +125,7 @@ final class SharePresenterImpl: SharePresenter {
             self?.group.wait()
             
             self?.tasks += VK.API.Wall.post([
+                .message: context.message ?? context.link?.title,
                 .attachments: self?.attachements.joined(separator: ",")
                 ])
                 .onSuccess(onSuccess)
