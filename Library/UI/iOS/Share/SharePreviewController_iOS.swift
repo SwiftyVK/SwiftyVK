@@ -15,6 +15,7 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     private var context = ShareContext()
     private var onPost: ((ShareContext) -> ())?
     private var onDismiss: (() -> ())?
+    private var rightButton: UIBarButtonItem?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -49,12 +50,19 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         self.onDismiss = onDismiss
     }
     
-    func wait() {
+    func enablePostButton(_ enable: Bool) {
         DispatchQueue.safelyOnMain {
-            let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-            let barButton = UIBarButtonItem(customView: activityIndicator)
-            self.navigationItem.setRightBarButton(barButton, animated: true)
-            activityIndicator.startAnimating()
+            if enable {
+                navigationItem.setRightBarButton(rightButton, animated: true)
+                rightButton = nil
+            }
+            else {
+                rightButton = navigationItem.rightBarButtonItem
+                let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+                let barButton = UIBarButtonItem(customView: activityIndicator)
+                navigationItem.setRightBarButton(barButton, animated: true)
+                activityIndicator.startAnimating()
+            }
         }
     }
     
@@ -69,7 +77,7 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         DispatchQueue.safelyOnMain {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: buttontext, style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
+            present(alert, animated: true, completion: nil) 
         }
     }
     

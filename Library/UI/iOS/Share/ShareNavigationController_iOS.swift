@@ -10,8 +10,8 @@ final class ShareNavigationControllerIOS: UINavigationController, ShareControlle
         nextController?.share(context, onPost: onPost, onDismiss: onDismiss)
     }
     
-    func wait() {
-        nextController?.wait()
+    func enablePostButton(_ enable: Bool) {
+        nextController?.enablePostButton(enable)
     }
     
     func close() {

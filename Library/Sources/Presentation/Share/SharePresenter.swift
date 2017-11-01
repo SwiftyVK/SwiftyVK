@@ -42,7 +42,7 @@ final class SharePresenterImpl: SharePresenter {
             controller?.share(
                 context,
                 onPost: { [weak self] context in
-                    controller?.wait()
+                    controller?.enablePostButton(false)
                     
                     self?.post(
                         in: session,
@@ -51,6 +51,8 @@ final class SharePresenterImpl: SharePresenter {
                             try onSuccess($0)
                         },
                         onError: {
+                            controller?.enablePostButton(true)
+
                             controller?.showError(
                                 title: "@@@",
                                 message: "!!!",

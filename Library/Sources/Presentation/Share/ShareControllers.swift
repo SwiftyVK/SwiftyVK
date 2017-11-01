@@ -5,7 +5,7 @@ protocol ShareController: class {
         onDismiss: @escaping () -> ()
     )
     
-    func wait()
+    func enablePostButton(_ enable: Bool)
     
     func showError(title: String, message: String, buttontext: String)
 

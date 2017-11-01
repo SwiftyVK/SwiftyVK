@@ -17,8 +17,8 @@ final class ShareControllerIOS: UIViewController, ShareController {
         nextController?.share(context, onPost: onPost, onDismiss: onDismiss)
     }
     
-    func wait() {
-        nextController?.wait()
+    func enablePostButton(_ enable: Bool) {
+        nextController?.enablePostButton(enable)
     }
     
     func close() {
