@@ -28,7 +28,7 @@ final class VKDelegateExample: SwiftyVKDelegate {
             }
         #elseif os(iOS)
             if let rootController = UIApplication.shared.keyWindow?.rootViewController {
-                rootController.present(viewController, animated: true, completion: nil)
+                rootController.present(viewController, animated: true)
             }
         #endif
     }

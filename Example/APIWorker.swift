@@ -104,6 +104,14 @@ final class APIWorker {
             ShareContext(
                 text: "This post made with #SwiftyVK 🖖🏽",
                 images: [
+                    ShareImage(data: data, type: .jpg),
+                    ShareImage(data: data, type: .jpg),
+                    ShareImage(data: data, type: .jpg),
+                    ShareImage(data: data, type: .jpg),
+                    ShareImage(data: data, type: .jpg),
+                    ShareImage(data: data, type: .jpg),
+                    ShareImage(data: data, type: .jpg),
+                    ShareImage(data: data, type: .jpg),
                     ShareImage(data: data, type: .jpg)
                 ],
                 link: ShareLink(
@@ -111,7 +119,7 @@ final class APIWorker {
                     url: link
                 )
             ),
-            onSuccess: { print("SwiftyVK: successfully shared") },
+            onSuccess: { print("SwiftyVK: successfully shared with \n \(JSON($0))") },
             onError: { print("SwiftyVK: share failed with \n \($0)") }
         )
     }

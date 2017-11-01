@@ -6,13 +6,15 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     @IBOutlet weak var linkTitle: UILabel?
     @IBOutlet weak var linkUrl: UILabel?
     @IBOutlet weak var imageCollection: ShareImageCollectionViewIOS?
+    @IBOutlet weak var sendButton: UIBarButtonItem?
     
     @IBOutlet weak var separatorHeight: NSLayoutConstraint?
     @IBOutlet weak var linkViewHeight: NSLayoutConstraint?
     @IBOutlet weak var imageCollectionHeight: NSLayoutConstraint?
     
     private var context = ShareContext()
-    private var completion: ((ShareContext) -> ())?
+    private var onPost: ((ShareContext) -> ())?
+    private var onDismiss: (() -> ())?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -25,6 +27,13 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         
         linkTitle?.text = context.link?.title
         linkUrl?.text = context.link?.url.absoluteString
+        
+        updateSendButton()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        onDismiss?()
     }
     
     override func viewWillLayoutSubviews() {
@@ -34,28 +43,47 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         linkViewHeight?.constant = context.link != nil ? 51 : 0
     }
     
-    func share(_ context: ShareContext, completion: @escaping (ShareContext) -> ()) {
+    func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> (), onDismiss: @escaping () -> ()) {
         self.context = context
-        self.completion = completion
+        self.onPost = onPost
+        self.onDismiss = onDismiss
+    }
+    
+    func wait() {
+        DispatchQueue.safelyOnMain {
+            let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+            let barButton = UIBarButtonItem(customView: activityIndicator)
+            self.navigationItem.setRightBarButton(barButton, animated: true)
+            activityIndicator.startAnimating()
+        }
     }
     
     func close() {
-        messageTextView?.endEditing(true)
-        navigationController?.dismiss(animated: true, completion: nil)
+        DispatchQueue.safelyOnMain {
+            messageTextView?.endEditing(true)
+            navigationController?.dismiss(animated: true, completion: nil)
+        }
     }
     
     func showError(title: String, message: String, buttontext: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: buttontext, style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        DispatchQueue.safelyOnMain {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: buttontext, style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     func textViewDidChange(_ textView: UITextView) {
         context.text = textView.text
+        updateSendButton()
+    }
+    
+    private func updateSendButton() {
+        sendButton?.isEnabled = messageTextView?.text.isEmpty == false || context.hasAttachments
     }
     
     @IBAction func donePressed(_ sender: Any) {
-        completion?(context)
+        onPost?(context)
     }
     
     @IBAction func cancelPressed(_ sender: Any) {

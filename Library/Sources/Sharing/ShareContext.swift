@@ -4,6 +4,10 @@ public struct ShareContext: Equatable {
     let images: [ShareImage]
     let link: ShareLink?
     
+    var hasAttachments: Bool {
+        return images.isEmpty || link != nil
+    }
+    
     public init(
         text: String? = nil,
         images: [ShareImage] = [],

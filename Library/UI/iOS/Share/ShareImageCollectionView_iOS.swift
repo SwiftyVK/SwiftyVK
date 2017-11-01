@@ -17,7 +17,6 @@ final class ShareImageCollectionViewIOS: UICollectionView, UICollectionViewDataS
                     guard let index = self?.images.index(of: image) else { return }
                     self?.images.removeObject(identicalTo: image)
                     self?.deleteItems(at: [IndexPath(item: index, section: 0)])
-                    
                 }
             }
         }

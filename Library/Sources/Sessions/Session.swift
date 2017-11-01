@@ -28,7 +28,7 @@ public protocol Session: class {
     func send(method: SendableMethod) -> Task
     
     /// Show share dialog
-    func share(_ context: ShareContext, onSuccess: @escaping () -> (), onError: @escaping RequestCallbacks.Error)
+    func share(_ context: ShareContext, onSuccess: @escaping RequestCallbacks.Success, onError: @escaping RequestCallbacks.Error)
 }
 
 protocol TaskSession {
@@ -214,7 +214,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     
     public func share(
         _ context: ShareContext,
-        onSuccess: @escaping () -> (),
+        onSuccess: @escaping RequestCallbacks.Success,
         onError: @escaping RequestCallbacks.Error
         ) {
         

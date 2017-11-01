@@ -226,9 +226,9 @@
                                                                 </imageView>
                                                                 <view opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ij2-E9-rnc">
                                                                     <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
-                                                                    <color key="backgroundColor" white="0.25" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </view>
-                                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="4XB-H1-bRW">
+                                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4XB-H1-bRW">
                                                                     <rect key="frame" x="50" y="50" width="20" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 </activityIndicatorView>
@@ -338,6 +338,7 @@
                         <outlet property="linkUrl" destination="fDu-eD-Jpl" id="Vcm-Np-6nK"/>
                         <outlet property="linkViewHeight" destination="2GZ-4Z-fs1" id="ebS-Vp-jwT"/>
                         <outlet property="messageTextView" destination="MGr-xq-tp4" id="ies-0U-2hE"/>
+                        <outlet property="sendButton" destination="Qc3-nV-l5B" id="LjG-mP-nYh"/>
                         <outlet property="separatorHeight" destination="msd-ls-E0A" id="DB2-oC-coM"/>
                     </connections>
                 </viewController>

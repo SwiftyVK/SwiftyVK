@@ -6,8 +6,12 @@ final class ShareNavigationControllerIOS: UINavigationController, ShareControlle
         return viewControllers.first as? ShareController
     }
     
-    func share(_ context: ShareContext, completion: @escaping (ShareContext) -> ()) {
-        nextController?.share(context, completion: completion)
+    func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> (), onDismiss: @escaping () -> ()) {
+        nextController?.share(context, onPost: onPost, onDismiss: onDismiss)
+    }
+    
+    func wait() {
+        nextController?.wait()
     }
     
     func close() {

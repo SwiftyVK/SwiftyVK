@@ -23,10 +23,7 @@ final class TaskImpl: Operation, Task, OperationConvertible {
         }
     }
     
-    var state: TaskState = .created {
-        willSet { willChangeValue(forKey: "isFinished") }
-        didSet { didChangeValue(forKey: "isFinished") }
-    }
+    var state: TaskState = .created
     
     override var description: String {
         return "task #\(id), state: \(state)"

@@ -13,8 +13,12 @@ final class ShareControllerIOS: UIViewController, ShareController {
         roundedContainer?.clipsToBounds = true
     }
     
-    func share(_ context: ShareContext, completion: @escaping (ShareContext) -> ()) {
-        nextController?.share(context, completion: completion)
+    func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> (), onDismiss: @escaping () -> ()) {
+        nextController?.share(context, onPost: onPost, onDismiss: onDismiss)
+    }
+    
+    func wait() {
+        nextController?.wait()
     }
     
     func close() {
