@@ -244,6 +244,10 @@ final class DependenciesImpl: Dependencies {
     }
     
     func sharePresenter() -> SharePresenter {
-        return SharePresenterImpl(uiSyncQueue: uiSyncQueue, controllerMaker: self)
+        
+        return SharePresenterImpl(
+            uiSyncQueue: uiSyncQueue,
+            shareWorker: ShareWorkerImpl(),
+            controllerMaker: self)
     }
 }

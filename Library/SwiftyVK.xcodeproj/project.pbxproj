@@ -445,6 +445,8 @@
 		D4DCF2D21FAA20C7003D4497 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DCF2D01FAA20B0003D4497 /* Array+Extensions.swift */; };
 		D4DCF2D61FAA2C18003D4497 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4DCF2D91FAA2C18003D4497 /* Localizable.strings */; };
 		D4DCF2D71FAA2C18003D4497 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4DCF2D91FAA2C18003D4497 /* Localizable.strings */; };
+		D4DCF2E31FAA3860003D4497 /* ShareWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DCF2E21FAA3860003D4497 /* ShareWorker.swift */; };
+		D4DCF2E41FAA3860003D4497 /* ShareWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DCF2E21FAA3860003D4497 /* ShareWorker.swift */; };
 		D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */; };
 		D4F49D421F2DF5B10037B875 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D411F2DF5B10037B875 /* JsonReader.swift */; };
 		D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
@@ -764,6 +766,7 @@
 		D4DCF2DE1FAA2C22003D4497 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4DCF2DF1FAA2C24003D4497 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4DCF2E01FAA2C25003D4497 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D4DCF2E21FAA3860003D4497 /* ShareWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareWorker.swift; sourceTree = "<group>"; };
 		D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorTests.swift; sourceTree = "<group>"; };
 		D4F49D411F2DF5B10037B875 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		D4F49D441F2E0EF60037B875 /* apiError.correct.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.correct.json; sourceTree = "<group>"; };
@@ -940,6 +943,7 @@
 			children = (
 				D48F78961F9FA0FC0092931E /* SharePresenter.swift */,
 				D48F789C1F9FAABD0092931E /* ShareControllers.swift */,
+				D4DCF2E21FAA3860003D4497 /* ShareWorker.swift */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -1805,6 +1809,7 @@
 				D4BBFF831F929892009615E7 /* Fave.swift in Sources */,
 				D4BBFFA81F929893009615E7 /* Dependencies.swift in Sources */,
 				D4BBFFAC1F929893009615E7 /* FullVariationsMethod.swift in Sources */,
+				D4DCF2E41FAA3860003D4497 /* ShareWorker.swift in Sources */,
 				D4DCF2D21FAA20C7003D4497 /* Array+Extensions.swift in Sources */,
 				D4BBFF801F929892009615E7 /* Likes.swift in Sources */,
 				D4BBFF8B1F929892009615E7 /* Utils.swift in Sources */,
@@ -1914,6 +1919,7 @@
 				D4BBFEED1F929891009615E7 /* Response.swift in Sources */,
 				D4BBFED51F929891009615E7 /* JSON.swift in Sources */,
 				D4BBFEFE1F929891009615E7 /* QueryBuilder.swift in Sources */,
+				D4DCF2E31FAA3860003D4497 /* ShareWorker.swift in Sources */,
 				D4BBFEEE1F929891009615E7 /* VKError.swift in Sources */,
 				D4BBFEC51F929891009615E7 /* Apps.swift in Sources */,
 				D4BBFEE81F929891009615E7 /* TwoVariationsMethod.swift in Sources */,
