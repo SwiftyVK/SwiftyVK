@@ -53,11 +53,14 @@ final class SharePresenterImpl: SharePresenter {
                         onError: {
                             controller?.enablePostButton(true)
 
-                            controller?.showError(
-                                title: NSLocalizedString("Error", bundle: Resources.bundle, comment: ""),
-                                message: NSLocalizedString("Something went wrong", bundle: Resources.bundle, comment: ""),
-                                buttontext: NSLocalizedString("Close", bundle: Resources.bundle, comment: "")
-                            )
+                            if context.canShowError {
+                                controller?.showError(
+                                    title: NSLocalizedString("Error", bundle: Resources.bundle, comment: ""),
+                                    message: NSLocalizedString("Something went wrong", bundle: Resources.bundle, comment: ""),
+                                    buttontext: NSLocalizedString("Close", bundle: Resources.bundle, comment: "")
+                                )
+                            }
+                            
                             onError($0)
                         }
                     )

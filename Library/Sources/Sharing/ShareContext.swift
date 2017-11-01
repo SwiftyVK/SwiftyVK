@@ -3,6 +3,7 @@ public struct ShareContext: Equatable {
     var text: String?
     let images: [ShareImage]
     let link: ShareLink?
+    let canShowError: Bool
     
     var hasAttachments: Bool {
         return images.isEmpty || link != nil
@@ -11,11 +12,13 @@ public struct ShareContext: Equatable {
     public init(
         text: String? = nil,
         images: [ShareImage] = [],
-        link: ShareLink? = nil
+        link: ShareLink? = nil,
+        canShowError: Bool = true
         ) {
         self.text = text
         self.images = images
         self.link = link
+        self.canShowError = canShowError
     }
     
     public static func == (lhs: ShareContext, rhs: ShareContext) -> Bool {
