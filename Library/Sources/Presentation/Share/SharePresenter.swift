@@ -31,6 +31,7 @@ final class SharePresenterImpl: SharePresenter {
         ) {
         let semaphore = DispatchSemaphore(value: 0)
         let controller = controllerMaker.shareController()
+        var posted = false
         var context = context
         
         shareWorker.add(link: context.link)
@@ -46,10 +47,12 @@ final class SharePresenterImpl: SharePresenter {
                         context: context,
                         in: session,
                         onSuccess: {
+                            posted = true
                             controller?.close()
                             try onSuccess($0)
                         },
                         onError: {
+                            posted = true
                             controller?.enablePostButton(true)
 
                             if context.canShowError {
@@ -65,6 +68,10 @@ final class SharePresenterImpl: SharePresenter {
                     )
                 },
                 onDismiss: {
+                    if !posted {
+                        onError(.sharingWasDismissed)
+                    }
+                    
                     shareWorker.clear(context: context)
                     semaphore.signal()
                 }

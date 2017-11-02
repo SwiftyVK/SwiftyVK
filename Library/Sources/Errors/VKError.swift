@@ -41,6 +41,7 @@ public indirect enum VKError: Error {
     case authorizationCancelled
     case authorizationFailed
     case captchaWasDismissed
+    case sharingWasDismissed
     
     func toApi() -> ApiError? {
         switch self {
