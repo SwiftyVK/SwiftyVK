@@ -4,6 +4,7 @@ public struct ShareContext: Equatable {
     let images: [ShareImage]
     let link: ShareLink?
     let canShowError: Bool
+    var preferences = [ShareContextPreference]()
     
     var hasAttachments: Bool {
         return images.isEmpty || link != nil
@@ -85,4 +86,14 @@ public final class ShareImage: Equatable {
 enum ShareImageUploadState: Equatable {
     case uploaded
     case failed
+}
+
+final class ShareContextPreference {
+    let name: String
+    var active: Bool
+    
+    init(name: String, active: Bool) {
+        self.name = name
+        self.active = active
+    }
 }

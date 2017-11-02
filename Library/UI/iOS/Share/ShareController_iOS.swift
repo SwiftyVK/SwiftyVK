@@ -3,7 +3,6 @@ import UIKit
 final class ShareControllerIOS: UIViewController, ShareController {
     
     @IBOutlet weak var roundedContainer: UIView?
-    
     private weak var nextController: ShareController?
     
     override func viewWillAppear(_ animated: Bool) {

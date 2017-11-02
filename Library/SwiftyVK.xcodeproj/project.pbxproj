@@ -230,6 +230,7 @@
 		D4AB8D931F6044190099FC42 /* LongPollTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB8D921F6044190099FC42 /* LongPollTaskTests.swift */; };
 		D4AB8D9B1F6048EA0099FC42 /* longPoll.updates.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D941F6048B50099FC42 /* longPoll.updates.json */; };
 		D4AB8D9D1F6055290099FC42 /* longPoll.failed.1.withTs.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D9C1F6055290099FC42 /* longPoll.failed.1.withTs.json */; };
+		D4B122961FAB563300F0BE36 /* SharePreferencesController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B122951FAB563300F0BE36 /* SharePreferencesController_iOS.swift */; };
 		D4B44EA51FA38A5100E85E31 /* ShareNavigationController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B44EA41FA38A5100E85E31 /* ShareNavigationController_iOS.swift */; };
 		D4BBFEAB1F929891009615E7 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDFE1F9297AA009615E7 /* Storage.swift */; };
 		D4BBFEAC1F929891009615E7 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDFF1F9297AA009615E7 /* Messages.swift */; };
@@ -441,6 +442,7 @@
 		D4CA9B761F66CA890085E4F3 /* longPoll.getServer.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4CA9B751F66CA890085E4F3 /* longPoll.getServer.success.json */; };
 		D4DADE071F9F9AE9004F159E /* ShareContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DADE061F9F9AE9004F159E /* ShareContext.swift */; };
 		D4DADE081F9F9AE9004F159E /* ShareContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DADE061F9F9AE9004F159E /* ShareContext.swift */; };
+		D4DC124C1FAB542B00D977D8 /* SharePreferencesCell_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DC124B1FAB542B00D977D8 /* SharePreferencesCell_iOS.swift */; };
 		D4DCF2D11FAA20B0003D4497 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DCF2D01FAA20B0003D4497 /* Array+Extensions.swift */; };
 		D4DCF2D21FAA20C7003D4497 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DCF2D01FAA20B0003D4497 /* Array+Extensions.swift */; };
 		D4DCF2D61FAA2C18003D4497 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4DCF2D91FAA2C18003D4497 /* Localizable.strings */; };
@@ -639,6 +641,7 @@
 		D4AB8D921F6044190099FC42 /* LongPollTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollTaskTests.swift; sourceTree = "<group>"; };
 		D4AB8D941F6048B50099FC42 /* longPoll.updates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = longPoll.updates.json; sourceTree = "<group>"; };
 		D4AB8D9C1F6055290099FC42 /* longPoll.failed.1.withTs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.1.withTs.json; sourceTree = "<group>"; };
+		D4B122951FAB563300F0BE36 /* SharePreferencesController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePreferencesController_iOS.swift; sourceTree = "<group>"; };
 		D4B44EA41FA38A5100E85E31 /* ShareNavigationController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareNavigationController_iOS.swift; sourceTree = "<group>"; };
 		D4BBFDA51F9297A9009615E7 /* KeychainProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
 		D4BBFDA61F9297A9009615E7 /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
@@ -757,6 +760,7 @@
 		D4CA9B731F66BED90085E4F3 /* LongPollMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollMock.swift; sourceTree = "<group>"; };
 		D4CA9B751F66CA890085E4F3 /* longPoll.getServer.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.getServer.success.json; sourceTree = "<group>"; };
 		D4DADE061F9F9AE9004F159E /* ShareContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareContext.swift; sourceTree = "<group>"; };
+		D4DC124B1FAB542B00D977D8 /* SharePreferencesCell_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePreferencesCell_iOS.swift; sourceTree = "<group>"; };
 		D4DCF2D01FAA20B0003D4497 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		D4DCF2D81FAA2C18003D4497 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4DCF2DA1FAA2C1E003D4497 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -966,6 +970,8 @@
 				D49E594C1FA1087B005B3C97 /* SharePreviewController_iOS.swift */,
 				D423E0481FA640D90083C8FB /* ShareImageCollectionView_iOS.swift */,
 				D423E04B1FA6414F0083C8FB /* ShareImageCollectionCell_iOS.swift */,
+				D4B122951FAB563300F0BE36 /* SharePreferencesController_iOS.swift */,
+				D4DC124B1FAB542B00D977D8 /* SharePreferencesCell_iOS.swift */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -1756,6 +1762,7 @@
 				D46FB4201F929E31000CEAEB /* WebPresenter.swift in Sources */,
 				D4BBFFD41F929893009615E7 /* Lock.swift in Sources */,
 				D4BBFF7E1F929892009615E7 /* Photos.swift in Sources */,
+				D4B122961FAB563300F0BE36 /* SharePreferencesController_iOS.swift in Sources */,
 				D4BBFFCA1F929893009615E7 /* Authorizator.swift in Sources */,
 				D4BBFFD01F929893009615E7 /* SessionState.swift in Sources */,
 				D4BBFFB41F929893009615E7 /* ApiError.swift in Sources */,
@@ -1792,6 +1799,7 @@
 				D46FB4321F929E4E000CEAEB /* CaptchaController_iOS.swift in Sources */,
 				D4BBFFA21F929893009615E7 /* VKFileManager.swift in Sources */,
 				D46FB42B1F929E3C000CEAEB /* WebController_iOS.swift in Sources */,
+				D4DC124C1FAB542B00D977D8 /* SharePreferencesCell_iOS.swift in Sources */,
 				D423E0491FA640D90083C8FB /* ShareImageCollectionView_iOS.swift in Sources */,
 				D4BBFFB51F929893009615E7 /* Response.swift in Sources */,
 				D4BBFF9D1F929893009615E7 /* JSON.swift in Sources */,

@@ -17,24 +17,23 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     private var onDismiss: (() -> ())?
     private var rightButton: UIBarButtonItem?
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    override func viewDidLoad() {
+        super.viewDidLoad()
         messageTextView?.delegate = self
         separatorHeight?.constant = 1 / UIScreen.main.nativeScale
-        imageCollection?.set(images: context.images)
-        
-        messageTextView?.text = context.message
-        
-        linkTitle?.text = context.link?.title
-        linkUrl?.text = context.link?.url.absoluteString
-        
-        updateSendButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateView()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        onDismiss?()
+        
+        if isMovingFromParentViewController {
+            onDismiss?()
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -44,10 +43,31 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         linkViewHeight?.constant = context.link != nil ? 51 : 0
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let preferencesController = segue.destination as? SharePreferencesControllerIOS {
+            preferencesController.set(preferences: context.preferences)
+        }
+    }
+    
     func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> (), onDismiss: @escaping () -> ()) {
         self.context = context
         self.onPost = onPost
         self.onDismiss = onDismiss
+        
+        DispatchQueue.safelyOnMain {
+            updateView()
+        }
+    }
+    
+    private func updateView() {
+        imageCollection?.set(images: context.images)
+        
+        messageTextView?.text = context.message
+        
+        linkTitle?.text = context.link?.title
+        linkUrl?.text = context.link?.url.absoluteString
+        
+        updateSendButton()
     }
     
     func enablePostButton(_ enable: Bool) {

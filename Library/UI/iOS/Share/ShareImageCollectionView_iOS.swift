@@ -1,11 +1,12 @@
 import UIKit
 
-final class ShareImageCollectionViewIOS: UICollectionView, UICollectionViewDataSource {
+final class ShareImageCollectionViewIOS: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
     
     private var images = NSMutableArray()
     
     override func awakeFromNib() {
         dataSource = self
+        delegate = self
     }
     
     func set(images: [ShareImage]) {
@@ -29,19 +30,20 @@ final class ShareImageCollectionViewIOS: UICollectionView, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return dequeueReusableCell(withReuseIdentifier: "ShareImageCell", for: indexPath)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let index = indexPath.item
         
-        guard let cell = dequeueReusableCell(
-            withReuseIdentifier: "ShareImageCell",
-            for: indexPath) as? ShareImageCollectionCellIOS,
+        guard
+            let cell = cell as? ShareImageCollectionCellIOS,
             let image = images.object(at: index) as? ShareImage
             else {
-                return UICollectionViewCell()
+                return
         }
         
-        
         cell.set(image: image)
-        
-        return cell
     }
 }

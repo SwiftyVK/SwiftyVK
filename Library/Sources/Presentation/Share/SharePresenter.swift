@@ -31,6 +31,7 @@ final class SharePresenterImpl: SharePresenter {
         ) {
         let semaphore = DispatchSemaphore(value: 0)
         let controller = controllerMaker.shareController()
+        var context = context
         
         shareWorker.add(link: context.link)
         shareWorker.upload(images: context.images, in: session)
