@@ -21,4 +21,8 @@ final class ShareNavigationControllerIOS: UINavigationController, ShareControlle
     func showError(title: String, message: String, buttontext: String) {
         nextController?.showError(title: title, message: message, buttontext: buttontext)
     }
+    
+    deinit {
+        print("DEINIT", type(of: self))
+    }
 }

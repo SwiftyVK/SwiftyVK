@@ -14,7 +14,6 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     
     private var context = ShareContext()
     private var onPost: ((ShareContext) -> ())?
-    private var onDismiss: (() -> ())?
     private var rightButton: UIBarButtonItem?
     
     override func viewDidLoad() {
@@ -26,14 +25,6 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateView()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        if isMovingFromParentViewController {
-            onDismiss?()
-        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -52,7 +43,6 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> (), onDismiss: @escaping () -> ()) {
         self.context = context
         self.onPost = onPost
-        self.onDismiss = onDismiss
         
         DispatchQueue.safelyOnMain {
             updateView()
@@ -124,5 +114,9 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         }
         
         return true
+    }
+    
+    deinit {
+        print("DEINIT", type(of: self))
     }
 }

@@ -4,6 +4,7 @@ final class ShareControllerIOS: UIViewController, ShareController {
     
     @IBOutlet weak var roundedContainer: UIView?
     private weak var nextController: ShareController?
+    private var onDismiss: (() -> ())?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -12,7 +13,13 @@ final class ShareControllerIOS: UIViewController, ShareController {
         roundedContainer?.clipsToBounds = true
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        onDismiss?()
+    }
+    
     func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> (), onDismiss: @escaping () -> ()) {
+        self.onDismiss = onDismiss
         nextController?.share(context, onPost: onPost, onDismiss: onDismiss)
     }
     
@@ -33,4 +40,9 @@ final class ShareControllerIOS: UIViewController, ShareController {
             self.nextController = nextController
         }
     }
+    
+    deinit {
+        print("DEINIT", type(of: self))
+    }
 }
+

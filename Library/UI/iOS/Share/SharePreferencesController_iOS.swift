@@ -41,4 +41,8 @@ final class SharePreferencesControllerIOS: UIViewController, SharePreferencesCon
         
         cell.set(preference: preferences[indexPath.row])
     }
+    
+    deinit {
+        print("DEINIT", type(of: self))
+    }
 }

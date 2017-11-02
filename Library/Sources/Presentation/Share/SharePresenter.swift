@@ -73,4 +73,8 @@ final class SharePresenterImpl: SharePresenter {
             semaphore.wait()
         }
     }
+    
+    deinit {
+        print("DEINIT", type(of: self))
+    }
 }
