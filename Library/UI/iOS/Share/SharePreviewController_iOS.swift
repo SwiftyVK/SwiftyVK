@@ -114,7 +114,10 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     }
     
     @IBAction func donePressed(_ sender: Any) {
-        onPost?(context)
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            guard let strongSelf = self else { return }
+            self?.onPost?(strongSelf.context)
+        }
     }
     
     @IBAction func cancelPressed(_ sender: Any) {

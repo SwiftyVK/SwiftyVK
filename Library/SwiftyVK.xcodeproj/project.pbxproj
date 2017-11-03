@@ -451,6 +451,8 @@
 		D4DCF2E41FAA3860003D4497 /* ShareWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DCF2E21FAA3860003D4497 /* ShareWorker.swift */; };
 		D4ED8BA91FACAD6A00B3FDA5 /* SendableMethod+Await.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED8BA81FACAD6A00B3FDA5 /* SendableMethod+Await.swift */; };
 		D4ED8BAA1FACAD6A00B3FDA5 /* SendableMethod+Await.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED8BA81FACAD6A00B3FDA5 /* SendableMethod+Await.swift */; };
+		D4ED8BAC1FACC7E400B3FDA5 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED8BAB1FACC7E400B3FDA5 /* Result.swift */; };
+		D4ED8BAD1FACC7E400B3FDA5 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED8BAB1FACC7E400B3FDA5 /* Result.swift */; };
 		D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */; };
 		D4F49D421F2DF5B10037B875 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D411F2DF5B10037B875 /* JsonReader.swift */; };
 		D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
@@ -774,6 +776,7 @@
 		D4DCF2E01FAA2C25003D4497 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4DCF2E21FAA3860003D4497 /* ShareWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareWorker.swift; sourceTree = "<group>"; };
 		D4ED8BA81FACAD6A00B3FDA5 /* SendableMethod+Await.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SendableMethod+Await.swift"; sourceTree = "<group>"; };
+		D4ED8BAB1FACC7E400B3FDA5 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorTests.swift; sourceTree = "<group>"; };
 		D4F49D411F2DF5B10037B875 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		D4F49D441F2E0EF60037B875 /* apiError.correct.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.correct.json; sourceTree = "<group>"; };
@@ -1069,6 +1072,7 @@
 				D4BBFDA91F9297A9009615E7 /* ConnectionObserver.swift */,
 				D4BBFDAA1F9297A9009615E7 /* Atomic.swift */,
 				D4BBFDAB1F9297A9009615E7 /* Resources.swift */,
+				D4ED8BAB1FACC7E400B3FDA5 /* Result.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1809,6 +1813,7 @@
 				D4BBFFB51F929893009615E7 /* Response.swift in Sources */,
 				D4BBFF9D1F929893009615E7 /* JSON.swift in Sources */,
 				D4BBFFC61F929893009615E7 /* QueryBuilder.swift in Sources */,
+				D4ED8BAD1FACC7E400B3FDA5 /* Result.swift in Sources */,
 				D44C84191FA267210029EA7B /* DisclosuredButton_iOS.swift in Sources */,
 				D4BBFFB61F929893009615E7 /* VKError.swift in Sources */,
 				D4BBFF8D1F929892009615E7 /* Apps.swift in Sources */,
@@ -1859,6 +1864,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4ED8BAC1FACC7E400B3FDA5 /* Result.swift in Sources */,
 				D4BBFF0B1F929891009615E7 /* IDGenerator.swift in Sources */,
 				D4BBFF071F929891009615E7 /* SessionConfig.swift in Sources */,
 				D4BBFECD1F929891009615E7 /* VKURLSessionTask.swift in Sources */,

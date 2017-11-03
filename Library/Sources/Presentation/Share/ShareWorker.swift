@@ -1,24 +1,13 @@
 protocol ShareWorker {
     func add(link: ShareLink?)
     func upload(images: [ShareImage], in session: Session)
-    
-    func getUserInfo(
-        in session: Session,
-        onSuccess: @escaping (ShareContextPreferencesSet) -> (),
-        onError: @escaping RequestCallbacks.Error
-    )
-    
-    func post(
-        context: ShareContext,
-        in session: Session,
-        onSuccess: @escaping RequestCallbacks.Success,
-        onError: @escaping RequestCallbacks.Error
-    )
-    
+    func getUserInfo(in session: Session) throws -> ShareContextPreferencesSet
+    func post(context: ShareContext, in session: Session) throws -> Data
     func clear(context: ShareContext)
 }
 
 final class ShareWorkerImpl: ShareWorker {
+    
     private var group = DispatchGroup()
     private var attachements = [String]()
     private var tasks = [Task]()
@@ -29,25 +18,15 @@ final class ShareWorkerImpl: ShareWorker {
         }
     }
     
-    func getUserInfo(
-        in session: Session,
-        onSuccess: @escaping (ShareContextPreferencesSet) -> (),
-        onError: @escaping RequestCallbacks.Error
-        ) {
+    func getUserInfo(in session: Session) throws -> ShareContextPreferencesSet {
+        let data = try VK.API.Users.get([Parameter.fields: "exports"]).await()
+        let json = try JSON(data: data)
         
-        VK.API.Users.get([Parameter.fields: "exports"])
-            .onSuccess {
-                let json = try JSON(data: $0)
-                
-                onSuccess(ShareContextPreferencesSet(
-                    twitter: json.forcedBool("0, exports, twitter"),
-                    facebook: json.forcedBool("0, exports, facebook"),
-                    livejournal: json.forcedBool("0, exports, livejournal")
-                    )
-                )
-            }
-            .onError { onError($0) }
-            .send(in: session)
+        return ShareContextPreferencesSet(
+            twitter: json.forcedBool("0, exports, twitter"),
+            facebook: json.forcedBool("0, exports, facebook"),
+            livejournal: json.forcedBool("0, exports, livejournal")
+        )
     }
     
     func upload(images: [ShareImage], in session: Session)  {
@@ -68,32 +47,23 @@ final class ShareWorkerImpl: ShareWorker {
         }
     }
     
-    func post(
-        context: ShareContext,
-        in session: Session,
-        onSuccess: @escaping RequestCallbacks.Success,
-        onError: @escaping RequestCallbacks.Error
-        ) {
-        DispatchQueue.global(qos: .utility).async { [weak self] in
-            self?.group.wait()
-            
-            let friendsOnly = context.preferences
-                .first { $0.key == "friendsOnly" }?.active ?? false
-            
-            let services = context.preferences
-                .filter { $0.key != "friendsOnly" && $0.active == true }
-                .map { $0.key }
-            
-            self?.tasks += VK.API.Wall.post([
-                .message: context.message ?? context.link?.title,
-                .friendsOnly : String(friendsOnly),
-                .services: services.joined(separator: ","),
-                .attachments: self?.attachements.joined(separator: ",")
-                ])
-                .onSuccess(onSuccess)
-                .onError(onError)
-                .send(in: session)
-        }
+    func post(context: ShareContext, in session: Session) throws -> Data {
+        group.wait()
+        
+        let friendsOnly = context.preferences
+            .first { $0.key == "friendsOnly" }?.active ?? false
+        
+        let services = context.preferences
+            .filter { $0.key != "friendsOnly" && $0.active == true }
+            .map { $0.key }
+        
+        return try VK.API.Wall.post([
+            .message: context.message ?? context.link?.title,
+            .friendsOnly : String(friendsOnly),
+            .services: services.joined(separator: ","),
+            .attachments: attachements.joined(separator: ",")
+            ])
+            .await(in: session)
     }
     
     func clear(context: ShareContext) {

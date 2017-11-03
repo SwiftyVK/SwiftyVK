@@ -226,8 +226,16 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         }
         
         let share = {
-            let presenter = self.sharePresenterMaker.sharePresenter()
-            presenter.share(context, in: self, onSuccess: onSuccess, onError: onError)
+            DispatchQueue.global(qos: .utility).async {
+                do {
+                    let presenter = self.sharePresenterMaker.sharePresenter()
+                    let data = try presenter.share(context, in: self)
+                    try onSuccess(data)
+                }
+                catch let error {
+                    onError(error.toVK())
+                }
+            }
         }
         
         guard state >= .authorized else {

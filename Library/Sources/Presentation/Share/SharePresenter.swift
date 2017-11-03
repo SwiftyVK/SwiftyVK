@@ -1,10 +1,5 @@
 protocol SharePresenter {
-    func share(
-        _ context: ShareContext,
-        in session: Session,
-        onSuccess: @escaping RequestCallbacks.Success,
-        onError: @escaping RequestCallbacks.Error
-    )
+    func share(_ context: ShareContext, in session: Session) throws -> Data
 }
 
 final class SharePresenterImpl: SharePresenter {
@@ -23,87 +18,77 @@ final class SharePresenterImpl: SharePresenter {
     }
     
     
-    func share(
-        _ context: ShareContext,
-        in session: Session,
-        onSuccess: @escaping RequestCallbacks.Success,
-        onError: @escaping RequestCallbacks.Error
-        ) {
-        let semaphore = DispatchSemaphore(value: 0)
+    func share(_ context: ShareContext, in session: Session) throws -> Data {
         let controller = controllerMaker.shareController()
-        var posted = false
         var context = context
         
-        uiSyncQueue.async { [weak controller, shareWorker]  in
+        return try uiSyncQueue.sync {
             controller?.showPlaceholder(true)
             
-            shareWorker.getUserInfo(
-                in: session,
-                onSuccess: {
-                    controller?.showPlaceholder(false)
-                    shareWorker.add(link: context.link)
-                    shareWorker.upload(images: context.images, in: session)
-                    
-                    context.preferences.append(ShareContextPreference(key: "friendsOnly", name: "friendsOnly", active: false))
-                    
-                    if $0.facebook {
-                        context.preferences.append(ShareContextPreference(key: "facebook", name: "facebook", active: $0.facebook))
-                    }
-                    
-                    if $0.twitter {
-                        context.preferences.append(ShareContextPreference(key: "twitter", name: "twitter", active: $0.twitter))
-                    }
-                    
-                    if $0.livejournal {
-                        context.preferences.append(ShareContextPreference(key: "livejournal", name: "livejournal", active: $0.livejournal))
-                    }
-                    
-                    controller?.share(
-                        context,
-                        onPost: { context in
-                            controller?.enablePostButton(false)
-                            
-                            shareWorker.post(
-                                context: context,
-                                in: session,
-                                onSuccess: {
-                                    posted = true
-                                    controller?.close()
-                                    try onSuccess($0)
-                                },
-                                onError: {
-                                    posted = true
-                                    controller?.enablePostButton(true)
-                                    
-                                    if context.canShowError {
-                                        controller?.showError(
-                                            title: NSLocalizedString("Error", bundle: Resources.bundle, comment: ""),
-                                            message: NSLocalizedString("Something went wrong", bundle: Resources.bundle, comment: ""),
-                                            buttontext: NSLocalizedString("Close", bundle: Resources.bundle, comment: "")
-                                        )
-                                    }
-                                    
-                                    onError($0)
-                            }
-                            )
-                        },
-                        onDismiss: {
-                            if !posted {
-                                onError(.sharingWasDismissed)
-                            }
-                            
-                            shareWorker.clear(context: context)
-                            semaphore.signal()
-                        }
-                    )
-                },
-                onError: {
-                    onError($0)
-                    semaphore.signal()
-                }
-            )
+            let preferences = try shareWorker.getUserInfo(in: session)
             
-            semaphore.wait()
+            controller?.showPlaceholder(false)
+            shareWorker.add(link: context.link)
+            shareWorker.upload(images: context.images, in: session)
+            
+            context.preferences.append(ShareContextPreference(key: "friendsOnly", name: "friendsOnly", active: false))
+            
+            if preferences.facebook {
+                context.preferences.append(ShareContextPreference(key: "facebook", name: "facebook", active: preferences.facebook))
+            }
+            
+            if preferences.twitter {
+                context.preferences.append(ShareContextPreference(key: "twitter", name: "twitter", active: preferences.twitter))
+            }
+            
+            if preferences.livejournal {
+                context.preferences.append(ShareContextPreference(key: "livejournal", name: "livejournal", active: preferences.livejournal))
+            }
+
+            return try present(controller: controller, context: context, in: session)
+        }
+    }
+    
+    private func present(controller: ShareController?, context: ShareContext, in session: Session) throws -> Data {
+        let semaphore = DispatchSemaphore(value: 0)
+        var result: Result<Data, VKError>?
+
+        controller?.share(
+            context,
+            onPost: { [weak self, weak controller, shareWorker] in
+                controller?.enablePostButton(false)
+
+                do {
+                    result = try .data(shareWorker.post(context: $0, in: session))
+                    controller?.close()
+                } catch let caughtError {
+                    controller?.enablePostButton(true)
+                    self?.showError(controller: controller, context: context)
+                    result = .error(caughtError.toVK())
+                }
+            },
+            onDismiss: { [shareWorker] in
+                shareWorker.clear(context: context)
+                semaphore.signal()
+            }
+        )
+        
+        semaphore.wait()
+        
+        guard let data = try result?.unwrap() else {
+            throw VKError.sharingWasDismissed
+        }
+        
+        return data
+    }
+    
+    private func showError(controller: ShareController?, context: ShareContext) {
+        if context.canShowError {
+            controller?.showError(
+                title: NSLocalizedString("Error", bundle: Resources.bundle, comment: ""),
+                message: NSLocalizedString("Something went wrong", bundle: Resources.bundle, comment: ""),
+                buttontext: NSLocalizedString("Close", bundle: Resources.bundle, comment: "")
+            )
         }
     }
     
