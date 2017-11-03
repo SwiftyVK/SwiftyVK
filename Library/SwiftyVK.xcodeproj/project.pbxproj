@@ -449,6 +449,8 @@
 		D4DCF2D71FAA2C18003D4497 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4DCF2D91FAA2C18003D4497 /* Localizable.strings */; };
 		D4DCF2E31FAA3860003D4497 /* ShareWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DCF2E21FAA3860003D4497 /* ShareWorker.swift */; };
 		D4DCF2E41FAA3860003D4497 /* ShareWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DCF2E21FAA3860003D4497 /* ShareWorker.swift */; };
+		D4ED8BA91FACAD6A00B3FDA5 /* SendableMethod+Await.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED8BA81FACAD6A00B3FDA5 /* SendableMethod+Await.swift */; };
+		D4ED8BAA1FACAD6A00B3FDA5 /* SendableMethod+Await.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED8BA81FACAD6A00B3FDA5 /* SendableMethod+Await.swift */; };
 		D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */; };
 		D4F49D421F2DF5B10037B875 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D411F2DF5B10037B875 /* JsonReader.swift */; };
 		D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
@@ -771,6 +773,7 @@
 		D4DCF2DF1FAA2C24003D4497 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4DCF2E01FAA2C25003D4497 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4DCF2E21FAA3860003D4497 /* ShareWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareWorker.swift; sourceTree = "<group>"; };
+		D4ED8BA81FACAD6A00B3FDA5 /* SendableMethod+Await.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SendableMethod+Await.swift"; sourceTree = "<group>"; };
 		D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorTests.swift; sourceTree = "<group>"; };
 		D4F49D411F2DF5B10037B875 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		D4F49D441F2E0EF60037B875 /* apiError.correct.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.correct.json; sourceTree = "<group>"; };
@@ -1119,6 +1122,7 @@
 				D4BBFDC41F9297A9009615E7 /* TwoVariationsMethod.swift */,
 				D4BBFDC51F9297A9009615E7 /* ThreeVariationsMethod.swift */,
 				D4BBFDC61F9297A9009615E7 /* BasicMethod.swift */,
+				D4ED8BA81FACAD6A00B3FDA5 /* SendableMethod+Await.swift */,
 			);
 			path = Methods;
 			sourceTree = "<group>";
@@ -1759,6 +1763,7 @@
 				D4BBFF921F929892009615E7 /* Account.swift in Sources */,
 				D4BBFFAF1F929893009615E7 /* OneVariationsMethod.swift in Sources */,
 				D4BBFFC21F929893009615E7 /* UrlRequestBuilder.swift in Sources */,
+				D4ED8BAA1FACAD6A00B3FDA5 /* SendableMethod+Await.swift in Sources */,
 				D46FB4201F929E31000CEAEB /* WebPresenter.swift in Sources */,
 				D4BBFFD41F929893009615E7 /* Lock.swift in Sources */,
 				D4BBFF7E1F929892009615E7 /* Photos.swift in Sources */,
@@ -1885,6 +1890,7 @@
 				D4BBFEF01F929891009615E7 /* RequestConfig.swift in Sources */,
 				D4BBFEB41F929891009615E7 /* Places.swift in Sources */,
 				D4BBFECA1F929891009615E7 /* Account.swift in Sources */,
+				D4ED8BA91FACAD6A00B3FDA5 /* SendableMethod+Await.swift in Sources */,
 				D4BBFEE71F929891009615E7 /* OneVariationsMethod.swift in Sources */,
 				D4BBFEFA1F929891009615E7 /* UrlRequestBuilder.swift in Sources */,
 				D46FB41F1F929E31000CEAEB /* WebPresenter.swift in Sources */,
