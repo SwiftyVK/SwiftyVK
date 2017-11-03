@@ -2,7 +2,7 @@ import UIKit
 
 final class SharePreferencesControllerIOS: UIViewController, SharePreferencesController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView?
-    
+
     var preferences = [ShareContextPreference]()
     
     override func viewDidLoad() {

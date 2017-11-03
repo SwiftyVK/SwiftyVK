@@ -10,6 +10,10 @@ final class ShareNavigationControllerIOS: UINavigationController, ShareControlle
         nextController?.share(context, onPost: onPost, onDismiss: onDismiss)
     }
     
+    func showPlaceholder(_ enable: Bool) {
+        nextController?.showPlaceholder(enable)
+    }
+    
     func enablePostButton(_ enable: Bool) {
         nextController?.enablePostButton(enable)
     }

@@ -34,45 +34,71 @@ final class SharePresenterImpl: SharePresenter {
         var posted = false
         var context = context
         
-        shareWorker.add(link: context.link)
-        shareWorker.upload(images: context.images, in: session)
-        
         uiSyncQueue.async { [weak controller, shareWorker]  in
-            controller?.share(
-                context,
-                onPost: { context in
-                    controller?.enablePostButton(false)
+            controller?.showPlaceholder(true)
+            
+            shareWorker.getUserInfo(
+                in: session,
+                onSuccess: {
+                    controller?.showPlaceholder(false)
+                    shareWorker.add(link: context.link)
+                    shareWorker.upload(images: context.images, in: session)
                     
-                    shareWorker.post(
-                        context: context,
-                        in: session,
-                        onSuccess: {
-                            posted = true
-                            controller?.close()
-                            try onSuccess($0)
+                    context.preferences.append(ShareContextPreference(key: "friendsOnly", name: "friendsOnly", active: false))
+                    
+                    if $0.facebook {
+                        context.preferences.append(ShareContextPreference(key: "facebook", name: "facebook", active: $0.facebook))
+                    }
+                    
+                    if $0.twitter {
+                        context.preferences.append(ShareContextPreference(key: "twitter", name: "twitter", active: $0.twitter))
+                    }
+                    
+                    if $0.livejournal {
+                        context.preferences.append(ShareContextPreference(key: "livejournal", name: "livejournal", active: $0.livejournal))
+                    }
+                    
+                    controller?.share(
+                        context,
+                        onPost: { context in
+                            controller?.enablePostButton(false)
+                            
+                            shareWorker.post(
+                                context: context,
+                                in: session,
+                                onSuccess: {
+                                    posted = true
+                                    controller?.close()
+                                    try onSuccess($0)
+                                },
+                                onError: {
+                                    posted = true
+                                    controller?.enablePostButton(true)
+                                    
+                                    if context.canShowError {
+                                        controller?.showError(
+                                            title: NSLocalizedString("Error", bundle: Resources.bundle, comment: ""),
+                                            message: NSLocalizedString("Something went wrong", bundle: Resources.bundle, comment: ""),
+                                            buttontext: NSLocalizedString("Close", bundle: Resources.bundle, comment: "")
+                                        )
+                                    }
+                                    
+                                    onError($0)
+                            }
+                            )
                         },
-                        onError: {
-                            posted = true
-                            controller?.enablePostButton(true)
-
-                            if context.canShowError {
-                                controller?.showError(
-                                    title: NSLocalizedString("Error", bundle: Resources.bundle, comment: ""),
-                                    message: NSLocalizedString("Something went wrong", bundle: Resources.bundle, comment: ""),
-                                    buttontext: NSLocalizedString("Close", bundle: Resources.bundle, comment: "")
-                                )
+                        onDismiss: {
+                            if !posted {
+                                onError(.sharingWasDismissed)
                             }
                             
-                            onError($0)
+                            shareWorker.clear(context: context)
+                            semaphore.signal()
                         }
                     )
                 },
-                onDismiss: {
-                    if !posted {
-                        onError(.sharingWasDismissed)
-                    }
-                    
-                    shareWorker.clear(context: context)
+                onError: {
+                    onError($0)
                     semaphore.signal()
                 }
             )

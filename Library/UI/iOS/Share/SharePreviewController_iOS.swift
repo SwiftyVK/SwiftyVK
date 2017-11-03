@@ -7,6 +7,8 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     @IBOutlet weak var linkUrl: UILabel?
     @IBOutlet weak var imageCollection: ShareImageCollectionViewIOS?
     @IBOutlet weak var sendButton: UIBarButtonItem?
+    @IBOutlet weak var placeholderView: UIView?
+    @IBOutlet weak var placeholderIndicator: UIActivityIndicatorView?
     
     @IBOutlet weak var separatorHeight: NSLayoutConstraint?
     @IBOutlet weak var linkViewHeight: NSLayoutConstraint?
@@ -58,6 +60,17 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         linkUrl?.text = context.link?.url.absoluteString
         
         updateSendButton()
+    }
+    
+    func showPlaceholder(_ enable: Bool) {
+        enablePostButton(!enable)
+        
+        DispatchQueue.safelyOnMain {
+            UIView.animate(withDuration: 0.3) {
+                self.placeholderView?.alpha = enable ? 1 : 0
+            }
+            
+        }
     }
     
     func enablePostButton(_ enable: Bool) {
