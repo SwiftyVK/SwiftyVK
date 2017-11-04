@@ -1,3 +1,7 @@
 "Error" = "Error";
-"Something went wrong" = "Something went wrong";
+"SomethingWentWrong" = "Something went wrong";
 "Close" = "Close";
+"FriendsOnly" = "Only for friends";
+"ExportTwitter" = "Export to Twitter";
+"ExportFacebook" = "Export to Facebook";
+"ExportLivejournal" = "Export to LiveJournal";

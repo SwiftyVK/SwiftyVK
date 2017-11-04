@@ -2,7 +2,7 @@ extension SendableMethod {
     /// Send request synchronously.
     /// DO NOT USE IT IN MAIN THREAD!
     /// - parameter session: Session in which the request will be sent
-    public func await(in session: Session? = nil) throws -> Data {
+    public func await(in session: Session) throws -> Data {
         guard !Thread.isMainThread else {
             throw VKError.cantAwaitOnMainThread
         }
@@ -29,13 +29,7 @@ extension SendableMethod {
             semaphore.signal()
         }
         
-        if let session = session {
-            request.toMethod().send(in: session)
-        }
-        else {
-            request.toMethod().send()
-        }
-        
+        request.toMethod().send(in: session)
         semaphore.wait()
         
         if let error = error {
@@ -46,5 +40,13 @@ extension SendableMethod {
         }
         
         throw VKError.unexpectedResponse
+    }
+    
+    public func await() throws -> Data {
+        guard let session = VK.sessions?.default else {
+            fatalError("You must call VK.setUp function to start using SwiftyVK!")
+        }
+        
+        return try await(in: session)
     }
 }

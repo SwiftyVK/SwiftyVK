@@ -23,28 +23,12 @@ final class SharePresenterImpl: SharePresenter {
         var context = context
         
         return try uiSyncQueue.sync {
+            defer { shareWorker.clear(context: context) }
             controller?.showPlaceholder(true)
-            
-            let preferences = try shareWorker.getUserInfo(in: session)
-            
-            controller?.showPlaceholder(false)
-            shareWorker.add(link: context.link)
             shareWorker.upload(images: context.images, in: session)
-            
-            context.preferences.append(ShareContextPreference(key: "friendsOnly", name: "friendsOnly", active: false))
-            
-            if preferences.facebook {
-                context.preferences.append(ShareContextPreference(key: "facebook", name: "facebook", active: preferences.facebook))
-            }
-            
-            if preferences.twitter {
-                context.preferences.append(ShareContextPreference(key: "twitter", name: "twitter", active: preferences.twitter))
-            }
-            
-            if preferences.livejournal {
-                context.preferences.append(ShareContextPreference(key: "livejournal", name: "livejournal", active: preferences.livejournal))
-            }
-
+            shareWorker.add(link: context.link)
+            context.preferences = try shareWorker.getPrefrences(in: session)
+            controller?.showPlaceholder(false)
             return try present(controller: controller, context: context, in: session)
         }
     }
@@ -62,13 +46,15 @@ final class SharePresenterImpl: SharePresenter {
                     result = try .data(shareWorker.post(context: $0, in: session))
                     controller?.close()
                 } catch let caughtError {
+                    if context.canShowError {
+                        self?.showError(controller: controller, context: context)
+                    }
+                    
                     controller?.enablePostButton(true)
-                    self?.showError(controller: controller, context: context)
                     result = .error(caughtError.toVK())
                 }
             },
-            onDismiss: { [shareWorker] in
-                shareWorker.clear(context: context)
+            onDismiss: {
                 semaphore.signal()
             }
         )
@@ -85,9 +71,9 @@ final class SharePresenterImpl: SharePresenter {
     private func showError(controller: ShareController?, context: ShareContext) {
         if context.canShowError {
             controller?.showError(
-                title: NSLocalizedString("Error", bundle: Resources.bundle, comment: ""),
-                message: NSLocalizedString("Something went wrong", bundle: Resources.bundle, comment: ""),
-                buttontext: NSLocalizedString("Close", bundle: Resources.bundle, comment: "")
+                title: Resources.localizedString(for: "Error"),
+                message: Resources.localizedString(for: "SomethingWentWrong"),
+                buttontext: Resources.localizedString(for: "Close")
             )
         }
     }

@@ -1,7 +1,7 @@
 protocol ShareWorker {
     func add(link: ShareLink?)
     func upload(images: [ShareImage], in session: Session)
-    func getUserInfo(in session: Session) throws -> ShareContextPreferencesSet
+    func getPrefrences(in session: Session) throws -> [ShareContextPreference]
     func post(context: ShareContext, in session: Session) throws -> Data
     func clear(context: ShareContext)
 }
@@ -10,7 +10,7 @@ final class ShareWorkerImpl: ShareWorker {
     
     private var group = DispatchGroup()
     private var attachements = [String]()
-    private var tasks = [Task]()
+    private var imageTasks = [Task]()
     
     func add(link: ShareLink?) {
         if let link = link?.url.absoluteString {
@@ -18,15 +18,42 @@ final class ShareWorkerImpl: ShareWorker {
         }
     }
     
-    func getUserInfo(in session: Session) throws -> ShareContextPreferencesSet {
-        let data = try VK.API.Users.get([Parameter.fields: "exports"]).await()
+    func getPrefrences(in session: Session) throws -> [ShareContextPreference] {
+        let data = try VK.API.Users.get([Parameter.fields: "exports"]).await(in: session)
         let json = try JSON(data: data)
+        var preferences = [ShareContextPreference]()
         
-        return ShareContextPreferencesSet(
-            twitter: json.forcedBool("0, exports, twitter"),
-            facebook: json.forcedBool("0, exports, facebook"),
-            livejournal: json.forcedBool("0, exports, livejournal")
+        preferences += ShareContextPreference(
+            key: "friendsOnly",
+            name: Resources.localizedString(for: "FriendsOnly"),
+            active: false
         )
+        
+        if let twitterExport = json.bool("0, exports, twitter") {
+            preferences += ShareContextPreference(
+                key: "twitter",
+                name: Resources.localizedString(for: "ExportTwitter"),
+                active: twitterExport
+            )
+        }
+        
+        if let facebookExport = json.bool("0, exports, facebook") {
+            preferences += ShareContextPreference(
+                key: "facebook",
+                name: Resources.localizedString(for: "ExportFacebook"),
+                active: facebookExport
+            )
+        }
+        
+        if let livejournalExport = json.bool("0, exports, livejournal") {
+            preferences += ShareContextPreference(
+                key: "livejournal",
+                name: Resources.localizedString(for: "ExportLivejournal"),
+                active: livejournalExport
+            )
+        }
+        
+        return preferences
     }
     
     func upload(images: [ShareImage], in session: Session)  {
@@ -35,7 +62,7 @@ final class ShareWorkerImpl: ShareWorker {
         for image in images {
             image.state = .uploading
             
-            tasks += VK.API.Upload.Photo.toWall(.image(data: image.data, type: image.type), to: .user(id: ""))
+            imageTasks += VK.API.Upload.Photo.toWall(.image(data: image.data, type: image.type), to: .user(id: ""))
                 .onSuccess { [weak self] data in
                     image.state = try self?.parseImage(from: data) ?? .failed
                 }
@@ -67,7 +94,7 @@ final class ShareWorkerImpl: ShareWorker {
     }
     
     func clear(context: ShareContext) {
-        tasks.forEach { $0.cancel() }
+        imageTasks.forEach { $0.cancel() }
         
         context.images
             .filter { $0.state == .uploading }
