@@ -56,7 +56,7 @@ final class ShareWorkerImpl: ShareWorker {
         return preferences
     }
     
-    func upload(images: [ShareImage], in session: Session)  {
+    func upload(images: [ShareImage], in session: Session) {
         images.forEach { _ in group.enter() }
         
         for image in images {
@@ -87,7 +87,7 @@ final class ShareWorkerImpl: ShareWorker {
         
         let postTask = VK.API.Wall.post([
             .message: context.message ?? context.link?.title,
-            .friendsOnly : friendsOnly ? "1" : "0",
+            .friendsOnly: friendsOnly ? "1" : "0",
             .services: services.joined(separator: ","),
             .attachments: attachements.joined(separator: ",")
             ])

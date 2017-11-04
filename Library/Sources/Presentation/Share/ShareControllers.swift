@@ -13,7 +13,6 @@ protocol ShareController: class {
     func close()
 }
 
-
 protocol SharePreferencesController: class {
     func set(preferences: [ShareContextPreference])
 }

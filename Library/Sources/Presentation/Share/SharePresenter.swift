@@ -17,7 +17,6 @@ final class SharePresenterImpl: SharePresenter {
         self.controllerMaker = controllerMaker
     }
     
-    
     func share(_ context: ShareContext, in session: Session) throws -> Data {
         let controller = controllerMaker.shareController()
         var context = context
@@ -46,7 +45,8 @@ final class SharePresenterImpl: SharePresenter {
                     guard let data = try shareWorker.post(context: $0, in: session) else { return }
                     result = .data(data)
                     controller?.close()
-                } catch let caughtError {
+                }
+                catch let caughtError {
                     if context.canShowError {
                         self?.showError(controller: controller, context: context)
                     }

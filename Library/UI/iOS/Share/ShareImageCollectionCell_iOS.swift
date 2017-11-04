@@ -2,11 +2,12 @@ import UIKit
 
 final class ShareImageCollectionCellIOS: UICollectionViewCell {
     
-    @IBOutlet weak var imageView: UIImageView?
-    @IBOutlet weak var overlayView: UIView?
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView?
+    @IBOutlet private weak var imageView: UIImageView?
+    @IBOutlet private weak var overlayView: UIView?
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView?
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         layer.cornerRadius = 10
         layer.masksToBounds = true
         layer.borderColor = UIColor.lightGray.cgColor

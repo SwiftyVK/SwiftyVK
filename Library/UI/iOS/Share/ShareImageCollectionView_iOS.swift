@@ -5,6 +5,7 @@ final class ShareImageCollectionViewIOS: UICollectionView, UICollectionViewDataS
     private var images = NSMutableArray()
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         dataSource = self
         delegate = self
     }
@@ -29,12 +30,18 @@ final class ShareImageCollectionViewIOS: UICollectionView, UICollectionViewDataS
         return images.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+        ) -> UICollectionViewCell {
         return dequeueReusableCell(withReuseIdentifier: "ShareImageCell", for: indexPath)
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+        ) {
         let index = indexPath.item
         
         guard

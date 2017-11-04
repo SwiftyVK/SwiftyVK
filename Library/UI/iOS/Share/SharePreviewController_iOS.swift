@@ -2,16 +2,16 @@ import UIKit
 
 final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, ShareController {
 
-    @IBOutlet weak var messageTextView: UITextView?
-    @IBOutlet weak var linkTitle: UILabel?
-    @IBOutlet weak var linkUrl: UILabel?
-    @IBOutlet weak var imageCollection: ShareImageCollectionViewIOS?
-    @IBOutlet weak var sendButton: UIBarButtonItem?
-    @IBOutlet weak var placeholderView: UIView?
-    @IBOutlet weak var placeholderIndicator: UIActivityIndicatorView?
+    @IBOutlet private weak var messageTextView: UITextView?
+    @IBOutlet private weak var linkTitle: UILabel?
+    @IBOutlet private weak var linkUrl: UILabel?
+    @IBOutlet private weak var imageCollection: ShareImageCollectionViewIOS?
+    @IBOutlet private weak var sendButton: UIBarButtonItem?
+    @IBOutlet private weak var placeholderView: UIView?
+    @IBOutlet private weak var placeholderIndicator: UIActivityIndicatorView?
     
-    @IBOutlet weak var linkViewHeight: NSLayoutConstraint?
-    @IBOutlet weak var imageCollectionHeight: NSLayoutConstraint?
+    @IBOutlet private weak var linkViewHeight: NSLayoutConstraint?
+    @IBOutlet private weak var imageCollectionHeight: NSLayoutConstraint?
     
     private var context = ShareContext()
     private var onPost: ((ShareContext) -> ())?
@@ -98,7 +98,7 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         DispatchQueue.safelyOnMain {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: buttontext, style: .default, handler: nil))
-            present(alert, animated: true, completion: nil) 
+            present(alert, animated: true, completion: nil)
         }
     }
     

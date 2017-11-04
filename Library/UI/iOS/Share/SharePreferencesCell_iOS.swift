@@ -1,8 +1,8 @@
 import UIKit
 
 final class SharePreferencesCellIOS: UITableViewCell {
-    @IBOutlet weak var nameLabel: UILabel?
-    @IBOutlet weak var stateSwitcher: UISwitch?
+    @IBOutlet private weak var nameLabel: UILabel?
+    @IBOutlet private weak var stateSwitcher: UISwitch?
     
     private var preference: ShareContextPreference?
     

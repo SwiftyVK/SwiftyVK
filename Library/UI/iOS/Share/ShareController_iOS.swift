@@ -2,7 +2,7 @@ import UIKit
 
 final class ShareControllerIOS: UIViewController, ShareController {
     
-    @IBOutlet weak var roundedContainer: UIView?
+    @IBOutlet private weak var roundedContainer: UIView?
     private weak var nextController: ShareController?
     private var onDismiss: (() -> ())?
     
@@ -49,4 +49,3 @@ final class ShareControllerIOS: UIViewController, ShareController {
         print("DEINIT", type(of: self))
     }
 }
-
