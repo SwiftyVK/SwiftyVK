@@ -174,7 +174,7 @@
                                 <rect key="frame" x="0.0" y="642" width="374" height="1"/>
                                 <color key="backgroundColor" red="0.83597430469138612" green="0.834634800869546" blue="0.85803259613626948" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="msd-ls-E0A"/>
+                                    <constraint firstAttribute="height" constant="1" id="msd-ls-E0A" customClass="OnePixelConstraintIOS" customModule="SwiftyVK"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="7WS-t7-NmA">
@@ -346,7 +346,6 @@
                         <outlet property="placeholderIndicator" destination="RPt-4K-ZFa" id="Bp2-Qy-z05"/>
                         <outlet property="placeholderView" destination="eMq-zr-nut" id="HWT-Qt-QhK"/>
                         <outlet property="sendButton" destination="Qc3-nV-l5B" id="LjG-mP-nYh"/>
-                        <outlet property="separatorHeight" destination="msd-ls-E0A" id="DB2-oC-coM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ejr-QZ-HOd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -389,11 +388,11 @@
                                                         <action selector="onStateChange:" destination="sr7-oP-3dj" eventType="valueChanged" id="kKG-US-yDa"/>
                                                     </connections>
                                                 </switch>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztD-Wu-KJi">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztD-Wu-KJi" userLabel="Separator">
                                                     <rect key="frame" x="15" y="43" width="344" height="1"/>
                                                     <color key="backgroundColor" red="0.8359743047" green="0.83463480089999997" blue="0.85803259610000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="tYT-t2-DAn"/>
+                                                        <constraint firstAttribute="height" constant="1" id="tYT-t2-DAn" customClass="OnePixelConstraintIOS" customModule="SwiftyVK"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>

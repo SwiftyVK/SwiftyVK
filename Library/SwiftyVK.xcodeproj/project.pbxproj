@@ -105,6 +105,7 @@
 		D44EC0181F55DC4A00F8BB4A /* ConnectionObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */; };
 		D461D9481FADAC0900AA0960 /* ShareWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D461D9471FADAC0900AA0960 /* ShareWorkerMock.swift */; };
 		D461D9491FADAC0900AA0960 /* ShareWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D461D9471FADAC0900AA0960 /* ShareWorkerMock.swift */; };
+		D461D94B1FADB6A500AA0960 /* OnePixelConstraint_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D461D94A1FADB6A500AA0960 /* OnePixelConstraint_iOS.swift */; };
 		D46263A21F9FAB4100333DC3 /* SharePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */; };
 		D46263A31F9FAB4100333DC3 /* SharePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */; };
 		D46FB3E61F929D7A000CEAEB /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */; };
@@ -622,6 +623,7 @@
 		D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNotificationCenterMock.swift; sourceTree = "<group>"; };
 		D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionObserverTests.swift; sourceTree = "<group>"; };
 		D461D9471FADAC0900AA0960 /* ShareWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareWorkerMock.swift; sourceTree = "<group>"; };
+		D461D94A1FADB6A500AA0960 /* OnePixelConstraint_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePixelConstraint_iOS.swift; sourceTree = "<group>"; };
 		D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenterTests.swift; sourceTree = "<group>"; };
 		D46FB3E11F929D7A000CEAEB /* SwiftyVK_tests_iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyVK_tests_iOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47601141F2E218B005356E5 /* response.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.empty.json; sourceTree = "<group>"; };
@@ -990,6 +992,7 @@
 			isa = PBXGroup;
 			children = (
 				D44C84181FA267210029EA7B /* DisclosuredButton_iOS.swift */,
+				D461D94A1FADB6A500AA0960 /* OnePixelConstraint_iOS.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1783,6 +1786,7 @@
 				D4BBFFBB1F929893009615E7 /* RequestCallbacks.swift in Sources */,
 				D4BBFFA51F929893009615E7 /* LongPollEvent.swift in Sources */,
 				D4BBFF961F929893009615E7 /* String+Extensions.swift in Sources */,
+				D461D94B1FADB6A500AA0960 /* OnePixelConstraint_iOS.swift in Sources */,
 				D4BBFF911F929892009615E7 /* Video.swift in Sources */,
 				D4BBFF741F929892009615E7 /* Messages.swift in Sources */,
 				D4BBFFCB1F929893009615E7 /* SessionsHolder.swift in Sources */,
