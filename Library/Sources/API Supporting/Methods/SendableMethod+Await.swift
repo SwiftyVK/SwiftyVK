@@ -43,10 +43,6 @@ extension SendableMethod {
     }
     
     public func await() throws -> Data {
-        guard let session = VK.sessions?.default else {
-            fatalError("You must call VK.setUp function to start using SwiftyVK!")
-        }
-        
-        return try await(in: session)
+        return try await(in: VK.sessions.default)
     }
 }

@@ -9,8 +9,12 @@ public final class VK {
     }
     
     /// Returns SwiftyVK user sessions
-    public static var sessions: SessionsHolder? {
-        return dependencies?.sessionsHolder
+    public static var sessions: SessionsHolder {
+        guard let sessionsHolder = dependencies?.sessionsHolder else {
+            fatalError("You must call VK.setUp function to start using SwiftyVK!")
+        }
+        
+        return sessionsHolder
     }
 
     static var dependenciesType: DependenciesHolder.Type = DependenciesImpl.self

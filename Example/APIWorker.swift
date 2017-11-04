@@ -28,7 +28,7 @@ final class APIWorker {
     }
     
     class func authorize() {
-        VK.sessions?.default.logIn(
+        VK.sessions.default.logIn(
             onSuccess: { info in
                 print("SwiftyVK: success authorize with", info)
             },
@@ -39,7 +39,7 @@ final class APIWorker {
     }
     
     class func logout() {
-        VK.sessions?.default.logOut()
+        VK.sessions.default.logOut()
         print("SwiftyVK: LogOut")
     }
     
@@ -100,7 +100,7 @@ final class APIWorker {
                 return
         }
         
-        VK.sessions?.default.share(
+        VK.sessions.default.share(
             ShareContext(
                 text: "This post made with #SwiftyVK 🖖🏽",
                 images: [
