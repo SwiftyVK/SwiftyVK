@@ -10,7 +10,6 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     @IBOutlet weak var placeholderView: UIView?
     @IBOutlet weak var placeholderIndicator: UIActivityIndicatorView?
     
-    @IBOutlet weak var separatorHeight: NSLayoutConstraint?
     @IBOutlet weak var linkViewHeight: NSLayoutConstraint?
     @IBOutlet weak var imageCollectionHeight: NSLayoutConstraint?
     
@@ -21,7 +20,6 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     override func viewDidLoad() {
         super.viewDidLoad()
         messageTextView?.delegate = self
-        separatorHeight?.constant = 1 / UIScreen.main.nativeScale
     }
     
     override func viewWillAppear(_ animated: Bool) {

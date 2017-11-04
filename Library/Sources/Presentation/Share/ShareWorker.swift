@@ -24,14 +24,14 @@ final class ShareWorkerImpl: ShareWorker {
         var preferences = [ShareContextPreference]()
         
         preferences += ShareContextPreference(
-            key: "friendsOnly",
+            key: SettingKeys.friendsOnly.rawValue,
             name: Resources.localizedString(for: "FriendsOnly"),
             active: false
         )
         
         if let twitterExport = json.bool("0, exports, twitter") {
             preferences += ShareContextPreference(
-                key: "twitter",
+                key: SettingKeys.twitter.rawValue,
                 name: Resources.localizedString(for: "ExportTwitter"),
                 active: twitterExport
             )
@@ -39,7 +39,7 @@ final class ShareWorkerImpl: ShareWorker {
         
         if let facebookExport = json.bool("0, exports, facebook") {
             preferences += ShareContextPreference(
-                key: "facebook",
+                key: SettingKeys.facebook.rawValue,
                 name: Resources.localizedString(for: "ExportFacebook"),
                 active: facebookExport
             )
@@ -47,7 +47,7 @@ final class ShareWorkerImpl: ShareWorker {
         
         if let livejournalExport = json.bool("0, exports, livejournal") {
             preferences += ShareContextPreference(
-                key: "livejournal",
+                key: SettingKeys.livejournal.rawValue,
                 name: Resources.localizedString(for: "ExportLivejournal"),
                 active: livejournalExport
             )
@@ -78,15 +78,15 @@ final class ShareWorkerImpl: ShareWorker {
         group.wait()
         
         let friendsOnly = context.preferences
-            .first { $0.key == "friendsOnly" }?.active ?? false
+            .first { $0.key == SettingKeys.friendsOnly.rawValue }?.active ?? false
         
         let services = context.preferences
-            .filter { $0.key != "friendsOnly" && $0.active == true }
+            .filter { $0.key != SettingKeys.friendsOnly.rawValue && $0.active == true }
             .map { $0.key }
         
         return try VK.API.Wall.post([
             .message: context.message ?? context.link?.title,
-            .friendsOnly : String(friendsOnly),
+            .friendsOnly : friendsOnly ? "1" : "0",
             .services: services.joined(separator: ","),
             .attachments: attachements.joined(separator: ",")
             ])
@@ -118,4 +118,11 @@ final class ShareWorkerImpl: ShareWorker {
         
         return .uploaded
     }
+}
+
+private enum SettingKeys: String {
+    case friendsOnly
+    case facebook
+    case twitter
+    case livejournal
 }
