@@ -2,7 +2,7 @@ protocol ShareWorker {
     func add(link: ShareLink?)
     func upload(images: [ShareImage], in session: Session)
     func getPrefrences(in session: Session) throws -> [ShareContextPreference]
-    func post(context: ShareContext, in session: Session) throws -> Data
+    func post(context: ShareContext, in session: Session) throws -> Data?
     func clear(context: ShareContext)
 }
 
@@ -19,7 +19,7 @@ final class ShareWorkerImpl: ShareWorker {
     }
     
     func getPrefrences(in session: Session) throws -> [ShareContextPreference] {
-        let data = try VK.API.Users.get([Parameter.fields: "exports"]).await(in: session)
+        let data = try VK.API.Users.get([Parameter.fields: "exports"]).synchronously().send(in: session)
         let json = try JSON(data: data)
         var preferences = [ShareContextPreference]()
         
@@ -74,7 +74,7 @@ final class ShareWorkerImpl: ShareWorker {
         }
     }
     
-    func post(context: ShareContext, in session: Session) throws -> Data {
+    func post(context: ShareContext, in session: Session) throws -> Data? {
         group.wait()
         
         let friendsOnly = context.preferences
@@ -84,13 +84,16 @@ final class ShareWorkerImpl: ShareWorker {
             .filter { $0.key != SettingKeys.friendsOnly.rawValue && $0.active == true }
             .map { $0.key }
         
-        return try VK.API.Wall.post([
+        let postTask = VK.API.Wall.post([
             .message: context.message ?? context.link?.title,
             .friendsOnly : friendsOnly ? "1" : "0",
             .services: services.joined(separator: ","),
             .attachments: attachements.joined(separator: ",")
             ])
-            .await(in: session)
+            .synchronously()
+        
+        imageTasks += postTask
+        return try postTask.send(in: session)
     }
     
     func clear(context: ShareContext) {

@@ -46,7 +46,7 @@
                                                     <constraint firstAttribute="width" secondItem="Vs6-Iw-Cuw" secondAttribute="height" multiplier="5:2" id="cne-fh-hLT"/>
                                                 </constraints>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" highlighted="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter code from the image" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Eur-XY-eQs">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" highlighted="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter code from the image" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" minimumFontSize="100" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Eur-XY-eQs">
                                                 <rect key="frame" x="0.0" y="110" width="250" height="30"/>
                                                 <color key="backgroundColor" red="0.94525331440000004" green="0.94525331440000004" blue="0.94525331440000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -325,7 +325,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EJP-UA-uLX">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="8YO-qC-DgY">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="8YO-qC-DgY">
                             <connections>
                                 <action selector="cancelPressed:" destination="3ao-WD-33z" id="O5Q-QA-W5F"/>
                             </connections>

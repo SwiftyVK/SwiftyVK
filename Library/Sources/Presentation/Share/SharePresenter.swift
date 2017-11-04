@@ -43,7 +43,10 @@ final class SharePresenterImpl: SharePresenter {
                 controller?.enablePostButton(false)
 
                 do {
-                    result = try .data(shareWorker.post(context: $0, in: session))
+                    if let data = try shareWorker.post(context: $0, in: session) {
+                        result = .data(data)
+                    }
+
                     controller?.close()
                 } catch let caughtError {
                     if context.canShowError {

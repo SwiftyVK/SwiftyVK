@@ -1,13 +1,30 @@
-extension SendableMethod {
+public final class SynchronouslyTask: Task {
+    private var request: Request
+    private var task: Task?
+    
+    public var state: TaskState {
+        return task?.state ?? .created
+    }
+    
+    init(request: Request) {
+        self.request = request
+    }
+    
     /// Send request synchronously.
     /// DO NOT USE IT IN MAIN THREAD!
+    /// AND REQUEST SHOUL NOT CONTAINS CALLBACKS!
     /// - parameter session: Session in which the request will be sent
-    public func await(in session: Session) throws -> Data {
+    public func send() throws -> Data? {
+        return try send(in: VK.sessions.default)
+    }
+    
+    /// Send request synchronously.
+    /// DO NOT USE IT IN MAIN THREAD!
+    /// AND REQUEST SHOULD NOT CONTAINS CALLBACKS!
+    public func send(in session: Session) throws -> Data? {
         guard !Thread.isMainThread else {
             throw VKError.cantAwaitOnMainThread
         }
-        
-        let request = toRequest()
         
         guard
             request.callbacks.onError == nil,
@@ -28,19 +45,13 @@ extension SendableMethod {
             semaphore.signal()
         }
         
-        request.toMethod().send(in: session)
+        task = request.toMethod().send(in: session)
         semaphore.wait()
-        
-        guard let unwrappedResult = try result?.unwrap() else {
-            throw VKError.unexpectedResponse
-        }
-        
-        return unwrappedResult
+
+        return try result?.unwrap()
     }
     
-    /// Send request synchronously.
-    /// DO NOT USE IT IN MAIN THREAD!
-    public func await() throws -> Data {
-        return try await(in: VK.sessions.default)
+    public func cancel() {
+        task?.cancel()
     }
 }

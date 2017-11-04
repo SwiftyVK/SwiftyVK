@@ -16,6 +16,11 @@ extension SendableMethod {
     func send(in session: Session) -> Task {
         return session.send(method: self)
     }
+    
+    /// Returns convert request to synchronously version.
+    public func synchronously() -> SynchronouslyTask {
+        return SynchronouslyTask(request: toRequest())
+    }
 }
 
 /// Protocol constraint which allows build chains of requests

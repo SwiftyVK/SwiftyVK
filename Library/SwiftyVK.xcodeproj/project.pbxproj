@@ -443,6 +443,8 @@
 		D4C032B11F520C1A005AB59A /* URLRequestBuilderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */; };
 		D4CA9B741F66BED90085E4F3 /* LongPollMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CA9B731F66BED90085E4F3 /* LongPollMock.swift */; };
 		D4CA9B761F66CA890085E4F3 /* longPoll.getServer.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4CA9B751F66CA890085E4F3 /* longPoll.getServer.success.json */; };
+		D4D2C3491FADC196002D0687 /* SynchronouslyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D2C3481FADC196002D0687 /* SynchronouslyTask.swift */; };
+		D4D2C34A1FADC196002D0687 /* SynchronouslyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D2C3481FADC196002D0687 /* SynchronouslyTask.swift */; };
 		D4DADE071F9F9AE9004F159E /* ShareContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DADE061F9F9AE9004F159E /* ShareContext.swift */; };
 		D4DADE081F9F9AE9004F159E /* ShareContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DADE061F9F9AE9004F159E /* ShareContext.swift */; };
 		D4DC124C1FAB542B00D977D8 /* SharePreferencesCell_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DC124B1FAB542B00D977D8 /* SharePreferencesCell_iOS.swift */; };
@@ -452,8 +454,6 @@
 		D4DCF2D71FAA2C18003D4497 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4DCF2D91FAA2C18003D4497 /* Localizable.strings */; };
 		D4DCF2E31FAA3860003D4497 /* ShareWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DCF2E21FAA3860003D4497 /* ShareWorker.swift */; };
 		D4DCF2E41FAA3860003D4497 /* ShareWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DCF2E21FAA3860003D4497 /* ShareWorker.swift */; };
-		D4ED8BA91FACAD6A00B3FDA5 /* SendableMethod+Await.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED8BA81FACAD6A00B3FDA5 /* SendableMethod+Await.swift */; };
-		D4ED8BAA1FACAD6A00B3FDA5 /* SendableMethod+Await.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED8BA81FACAD6A00B3FDA5 /* SendableMethod+Await.swift */; };
 		D4ED8BAC1FACC7E400B3FDA5 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED8BAB1FACC7E400B3FDA5 /* Result.swift */; };
 		D4ED8BAD1FACC7E400B3FDA5 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED8BAB1FACC7E400B3FDA5 /* Result.swift */; };
 		D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */; };
@@ -768,6 +768,7 @@
 		D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderMock.swift; sourceTree = "<group>"; };
 		D4CA9B731F66BED90085E4F3 /* LongPollMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollMock.swift; sourceTree = "<group>"; };
 		D4CA9B751F66CA890085E4F3 /* longPoll.getServer.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.getServer.success.json; sourceTree = "<group>"; };
+		D4D2C3481FADC196002D0687 /* SynchronouslyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronouslyTask.swift; sourceTree = "<group>"; };
 		D4DADE061F9F9AE9004F159E /* ShareContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareContext.swift; sourceTree = "<group>"; };
 		D4DC124B1FAB542B00D977D8 /* SharePreferencesCell_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePreferencesCell_iOS.swift; sourceTree = "<group>"; };
 		D4DCF2D01FAA20B0003D4497 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -780,7 +781,6 @@
 		D4DCF2DF1FAA2C24003D4497 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4DCF2E01FAA2C25003D4497 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4DCF2E21FAA3860003D4497 /* ShareWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareWorker.swift; sourceTree = "<group>"; };
-		D4ED8BA81FACAD6A00B3FDA5 /* SendableMethod+Await.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SendableMethod+Await.swift"; sourceTree = "<group>"; };
 		D4ED8BAB1FACC7E400B3FDA5 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorTests.swift; sourceTree = "<group>"; };
 		D4F49D411F2DF5B10037B875 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
@@ -1133,7 +1133,6 @@
 				D4BBFDC41F9297A9009615E7 /* TwoVariationsMethod.swift */,
 				D4BBFDC51F9297A9009615E7 /* ThreeVariationsMethod.swift */,
 				D4BBFDC61F9297A9009615E7 /* BasicMethod.swift */,
-				D4ED8BA81FACAD6A00B3FDA5 /* SendableMethod+Await.swift */,
 			);
 			path = Methods;
 			sourceTree = "<group>";
@@ -1301,6 +1300,7 @@
 			children = (
 				D4BBFDD71F9297A9009615E7 /* TaskSheduler.swift */,
 				D4BBFDDC1F9297A9009615E7 /* Task.swift */,
+				D4D2C3481FADC196002D0687 /* SynchronouslyTask.swift */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -1775,7 +1775,6 @@
 				D4BBFF921F929892009615E7 /* Account.swift in Sources */,
 				D4BBFFAF1F929893009615E7 /* OneVariationsMethod.swift in Sources */,
 				D4BBFFC21F929893009615E7 /* UrlRequestBuilder.swift in Sources */,
-				D4ED8BAA1FACAD6A00B3FDA5 /* SendableMethod+Await.swift in Sources */,
 				D46FB4201F929E31000CEAEB /* WebPresenter.swift in Sources */,
 				D4BBFFD41F929893009615E7 /* Lock.swift in Sources */,
 				D4BBFF7E1F929892009615E7 /* Photos.swift in Sources */,
@@ -1802,6 +1801,7 @@
 				D4BBFFA11F929893009615E7 /* Collections+Extensions.swift in Sources */,
 				D4BBFF991F929893009615E7 /* VKViewController.swift in Sources */,
 				D48F789E1F9FAABD0092931E /* ShareControllers.swift in Sources */,
+				D4D2C34A1FADC196002D0687 /* SynchronouslyTask.swift in Sources */,
 				D4BBFFBC1F929893009615E7 /* TokenParser.swift in Sources */,
 				D4BBFF781F929892009615E7 /* Board.swift in Sources */,
 				D4BBFFC01F929893009615E7 /* TaskSheduler.swift in Sources */,
@@ -1905,7 +1905,6 @@
 				D4BBFEF01F929891009615E7 /* RequestConfig.swift in Sources */,
 				D4BBFEB41F929891009615E7 /* Places.swift in Sources */,
 				D4BBFECA1F929891009615E7 /* Account.swift in Sources */,
-				D4ED8BA91FACAD6A00B3FDA5 /* SendableMethod+Await.swift in Sources */,
 				D4BBFEE71F929891009615E7 /* OneVariationsMethod.swift in Sources */,
 				D4BBFEFA1F929891009615E7 /* UrlRequestBuilder.swift in Sources */,
 				D46FB41F1F929E31000CEAEB /* WebPresenter.swift in Sources */,
@@ -1977,6 +1976,7 @@
 				D46FB4241F929E3C000CEAEB /* WebController_macOS.swift in Sources */,
 				D4BBFEEB1F929891009615E7 /* Scopes.swift in Sources */,
 				D4BBFED61F929891009615E7 /* URLOpener.swift in Sources */,
+				D4D2C3491FADC196002D0687 /* SynchronouslyTask.swift in Sources */,
 				D4BBFEB51F929891009615E7 /* Custom.swift in Sources */,
 				D4BBFEB21F929891009615E7 /* Leads.swift in Sources */,
 				D4BBFEE61F929891009615E7 /* Method.swift in Sources */,
@@ -2358,6 +2358,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IBSC_NOTICES = NO;
+				IBSC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info/SwiftyVK_resources.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -2403,6 +2405,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IBSC_NOTICES = NO;
+				IBSC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info/SwiftyVK_resources.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -2453,6 +2457,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IBSC_NOTICES = NO;
+				IBSC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info/SwiftyVK_resources.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2499,6 +2505,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IBSC_NOTICES = NO;
+				IBSC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info/SwiftyVK_resources.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
