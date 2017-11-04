@@ -25,7 +25,6 @@ public indirect enum VKError: Error {
     case wrongUrl
     case cantAwaitOnMainThread
     case cantAwaitRequestWithSettedCallbacks
-    case awaitIsCancel
     
     // MARK: - UI Errors
     case cantBuildWebViewUrl(String)

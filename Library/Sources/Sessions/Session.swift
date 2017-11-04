@@ -223,6 +223,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         }
         catch let error {
             onError(error.toVK())
+            
         }
         
         let share = {
@@ -232,8 +233,9 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
                     let data = try presenter.share(context, in: self)
                     try onSuccess(data)
                 }
-                catch let error {
+                catch {
                     onError(error.toVK())
+                    
                 }
             }
         }

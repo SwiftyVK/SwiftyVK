@@ -61,12 +61,13 @@ final class ShareWorkerImpl: ShareWorker {
         
         for image in images {
             image.state = .uploading
+            let media = Media.image(data: image.data, type: image.type)
             
-            imageTasks += VK.API.Upload.Photo.toWall(.image(data: image.data, type: image.type), to: .user(id: ""))
+            imageTasks += VK.API.Upload.Photo.toWall(media, to: .user(id: ""))
                 .onSuccess { [weak self] data in
                     image.state = try self?.parseImage(from: data) ?? .failed
                 }
-                .onError { [weak self]  _ in
+                .onError { [weak self] _ in
                     defer { self?.group.leave() }
                     image.state = .failed
                 }
@@ -105,16 +106,14 @@ final class ShareWorkerImpl: ShareWorker {
     }
     
     private func parseImage(from data: Data) throws -> ShareImageUploadState {
-        defer { self.group.leave() }
+        defer { group.leave() }
         
         let json = try JSON(data: data)
         
         guard
             let photoId = json.int("0, id")?.toString(),
             let ownerId = json.int("0, owner_id")?.toString()
-            else {
-                return .failed
-        }
+            else { return .failed }
         
         let imageId = String(format: "photo%@_%@", ownerId, photoId)
         attachements.append(imageId)
