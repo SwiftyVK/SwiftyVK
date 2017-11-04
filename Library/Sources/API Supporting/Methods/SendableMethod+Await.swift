@@ -17,29 +17,25 @@ extension SendableMethod {
         }
         
         let semaphore = DispatchSemaphore(value: 0)
-        var data: Data?
-        var error: VKError?
+        var result: Result<Data, VKError>?
         
         request.callbacks.onSuccess = {
-            data = $0
+            result = .data($0)
             semaphore.signal()
         }
         request.callbacks.onError = {
-            error = $0
+            result = .error($0)
             semaphore.signal()
         }
         
         request.toMethod().send(in: session)
         semaphore.wait()
         
-        if let error = error {
-            throw error
-        }
-        if let data = data {
-            return data
+        guard let unwrappedResult = try result?.unwrap() else {
+            throw VKError.unexpectedResponse
         }
         
-        throw VKError.unexpectedResponse
+        return unwrappedResult
     }
     
     /// Send request synchronously.
