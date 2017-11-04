@@ -153,28 +153,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="374" height="686"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TfK-bE-GVM" customClass="DisclosuredButtonIOS" customModule="SwiftyVK">
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TfK-bE-GVM" customClass="DisclosuredButtonIOS" customModule="SwiftyVK">
                                 <rect key="frame" x="0.0" y="642" width="374" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="8XF-mA-rSE"/>
                                 </constraints>
-                                <state key="normal" image="disclosureIndicator">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Post settings">
-                                            <attributes>
-                                                <color key="NSColor" red="0.21857154187817263" green="0.21857154187817263" blue="0.21857154187817263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="18" name=".SFNSText"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" firstLineHeadIndent="15" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                <fontDescription key="fontDescription" name=".SFNSText" family=".SF NS Text" pointSize="18"/>
+                                <state key="normal" title="Post settings" image="disclosureIndicator">
+                                    <color key="titleColor" red="0.21857154187817263" green="0.21857154187817263" blue="0.21857154187817263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <state key="selected">
-                                    <attributedString key="attributedTitle"/>
-                                </state>
-                                <state key="highlighted" image="disclosureIndicatorHiglighted" backgroundImage="selectedColor">
-                                    <attributedString key="attributedTitle"/>
-                                </state>
+                                <state key="highlighted" image="disclosureIndicatorHiglighted" backgroundImage="selectedColor"/>
                                 <connections>
                                     <segue destination="Set-lV-CID" kind="show" id="Tea-As-iS5">
                                         <segue key="commit" inheritsFrom="parent" id="jlg-nZ-Gpe"/>
@@ -517,7 +505,7 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8mo-Su-QDT" customClass="WebViewWrapperIOS" customModule="SwiftyVK">
-                                <rect key="frame" x="20" y="55" width="374" height="666"/>
+                                <rect key="frame" x="20" y="35" width="374" height="686"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gGk-nH-7dO">

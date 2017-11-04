@@ -25,9 +25,9 @@ final class SharePresenterImpl: SharePresenter {
         return try uiSyncQueue.sync {
             defer { shareWorker.clear(context: context) }
             controller?.showPlaceholder(true)
+            context.preferences = try shareWorker.getPrefrences(in: session)
             shareWorker.upload(images: context.images, in: session)
             shareWorker.add(link: context.link)
-            context.preferences = try shareWorker.getPrefrences(in: session)
             controller?.showPlaceholder(false)
             return try present(controller: controller, context: context, in: session)
         }
