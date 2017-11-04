@@ -42,6 +42,8 @@ extension SendableMethod {
         throw VKError.unexpectedResponse
     }
     
+    /// Send request synchronously.
+    /// DO NOT USE IT IN MAIN THREAD!
     public func await() throws -> Data {
         return try await(in: VK.sessions.default)
     }
