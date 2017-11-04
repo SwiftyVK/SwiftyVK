@@ -398,6 +398,7 @@ final class SessionTests: XCTestCase {
         let context = makeContext()
         let shareContext = ShareContext()
         var shareCallCount = 0
+        let exp = self.expectation(description: "")
         
         context.authorizator.onAuthorize = { _, _, _, _ in
             return TokenMock()
@@ -405,11 +406,12 @@ final class SessionTests: XCTestCase {
         
         context.sharePresenterMaker.onMake = {
             let presenter = SharePresenterMock()
-            presenter.onShare = { _shareContext, session, _, _ in
+            presenter.onShare = { _shareContext in
                 // Then
                 XCTAssertEqual(_shareContext, shareContext)
-                XCTAssertEqual(session.id, context.session.id)
                 shareCallCount += 1
+                exp.fulfill()
+                return Data()
             }
             return presenter
         }
@@ -418,10 +420,11 @@ final class SessionTests: XCTestCase {
         
         context.session.share(
             shareContext,
-            onSuccess: {},
+            onSuccess: { _ in },
             onError: { _ in }
         )
         // Then
+        waitForExpectations(timeout: 5)
         XCTAssertEqual(shareCallCount, 1)
     }
     
@@ -438,19 +441,19 @@ final class SessionTests: XCTestCase {
         
         context.sharePresenterMaker.onMake = {
             let presenter = SharePresenterMock()
-            presenter.onShare = { _shareContext, session, _, _ in
+            presenter.onShare = { _shareContext in
                 // Then
                 XCTAssertEqual(_shareContext, shareContext)
-                XCTAssertEqual(session.id, context.session.id)
                 shareCallCount += 1
                 exp.fulfill()
+                return Data()
             }
             return presenter
         }
         // When
         context.session.share(
             shareContext,
-            onSuccess: {},
+            onSuccess: { _ in },
             onError: { _ in }
         )
         // Then
@@ -471,7 +474,7 @@ final class SessionTests: XCTestCase {
         // When
         context.session.share(
             shareContext,
-            onSuccess: {},
+            onSuccess: { _ in },
             onError: {
                 // Then
                 XCTAssertEqual($0, VKError.cantParseTokenInfo(""))
@@ -496,7 +499,7 @@ final class SessionTests: XCTestCase {
         // When
         context.session.share(
             shareContext,
-            onSuccess: {},
+            onSuccess: { _ in },
             onError: { _ in }
         )
     }

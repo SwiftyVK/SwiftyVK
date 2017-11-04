@@ -2,10 +2,9 @@
 import XCTest
 
 final class SharePresenterMock: SharePresenter {
-
-    var onShare: ((ShareContext, Session, @escaping () -> (), @escaping RequestCallbacks.Error) -> ())?
+    var onShare: ((ShareContext) throws -> Data)?
     
-    func share(_ context: ShareContext, in session: Session, onSuccess: @escaping () -> (), onError: @escaping RequestCallbacks.Error) {
-        onShare?(context, session, onSuccess, onError)
+    func share(_ context: ShareContext, in session: Session) throws -> Data {
+        return try onShare?(context) ?? Data()
     }
 }

@@ -51,7 +51,7 @@ final class CustomMethodTests: XCTestCase {
         // Given
         var sendCallCount = 0
         
-        (VK.sessions?.default as? SessionMock)?.onSend = { request in
+        (VK.sessions.default as? SessionMock)?.onSend = { request in
             sendCallCount += 1
         }
         // When

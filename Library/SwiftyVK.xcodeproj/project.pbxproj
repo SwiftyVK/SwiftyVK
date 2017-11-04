@@ -103,6 +103,8 @@
 		D44EC0121F55D4DF00F8BB4A /* VKReachabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */; };
 		D44EC0161F55D50600F8BB4A /* VKNotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */; };
 		D44EC0181F55DC4A00F8BB4A /* ConnectionObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */; };
+		D461D9481FADAC0900AA0960 /* ShareWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D461D9471FADAC0900AA0960 /* ShareWorkerMock.swift */; };
+		D461D9491FADAC0900AA0960 /* ShareWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D461D9471FADAC0900AA0960 /* ShareWorkerMock.swift */; };
 		D46263A21F9FAB4100333DC3 /* SharePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */; };
 		D46263A31F9FAB4100333DC3 /* SharePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */; };
 		D46FB3E61F929D7A000CEAEB /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */; };
@@ -619,6 +621,7 @@
 		D44EC00F1F55D44700F8BB4A /* VKReachabilityMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKReachabilityMock.swift; sourceTree = "<group>"; };
 		D44EC0131F55D50200F8BB4A /* VKNotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNotificationCenterMock.swift; sourceTree = "<group>"; };
 		D44EC0171F55DC4A00F8BB4A /* ConnectionObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionObserverTests.swift; sourceTree = "<group>"; };
+		D461D9471FADAC0900AA0960 /* ShareWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareWorkerMock.swift; sourceTree = "<group>"; };
 		D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenterTests.swift; sourceTree = "<group>"; };
 		D46FB3E11F929D7A000CEAEB /* SwiftyVK_tests_iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyVK_tests_iOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47601141F2E218B005356E5 /* response.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.empty.json; sourceTree = "<group>"; };
@@ -888,6 +891,7 @@
 				D43E658A1F7D524A00AF48C8 /* CookiesHolderMock.swift */,
 				D48F78991F9FA51C0092931E /* SharePresenterMock.swift */,
 				D41B3CFF1F9FB48C00177075 /* ShareControllerMock.swift */,
+				D461D9471FADAC0900AA0960 /* ShareWorkerMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1673,6 +1677,7 @@
 				A2433A461EA542100058BB6D /* AttemptShedulerTests.swift in Sources */,
 				A2E5C5DB1ECCAFC800652262 /* SessionsHolderTests.swift in Sources */,
 				D4C032B11F520C1A005AB59A /* URLRequestBuilderMock.swift in Sources */,
+				D461D9481FADAC0900AA0960 /* ShareWorkerMock.swift in Sources */,
 				A25A19C91EE4112700CF13AF /* SwiftyVKDelegateMock.swift in Sources */,
 				D4321D8B1F5F0587001AFE9F /* FullVariationsMethodTests.swift in Sources */,
 				A2433A481EA542620058BB6D /* AttemptMock.swift in Sources */,
@@ -2014,6 +2019,7 @@
 				D46FB44A1F929EE6000CEAEB /* URLSessionMock.swift in Sources */,
 				D46FB4441F929EE6000CEAEB /* TokenParserMock.swift in Sources */,
 				D46FB4361F929EE6000CEAEB /* AttemptMock.swift in Sources */,
+				D461D9491FADAC0900AA0960 /* ShareWorkerMock.swift in Sources */,
 				D46FB3EC1F929DBC000CEAEB /* AuthorizatorTests.swift in Sources */,
 				D46FB4011F929DBC000CEAEB /* ApiMethodTests.swift in Sources */,
 				D46FB3FA1F929DBC000CEAEB /* CaptchaPresenterTests.swift in Sources */,
