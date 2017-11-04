@@ -1,4 +1,4 @@
-protocol ShareWorker {
+protocol ShareWorker: class {
     func add(link: ShareLink?)
     func upload(images: [ShareImage], in session: Session)
     func getPrefrences(in session: Session) throws -> [ShareContextPreference]
@@ -66,10 +66,11 @@ final class ShareWorkerImpl: ShareWorker {
             imageTasks += VK.API.Upload.Photo.toWall(media, to: .user(id: ""))
                 .onSuccess { [weak self] data in
                     image.state = try self?.parseImage(from: data) ?? .failed
+                    self?.group.leave()
                 }
                 .onError { [weak self] _ in
-                    defer { self?.group.leave() }
                     image.state = .failed
+                    self?.group.leave()
                 }
                 .send(in: session)
         }
@@ -106,8 +107,6 @@ final class ShareWorkerImpl: ShareWorker {
     }
     
     private func parseImage(from data: Data) throws -> ShareImageUploadState {
-        defer { group.leave() }
-        
         let json = try JSON(data: data)
         
         guard
