@@ -74,7 +74,7 @@ final class LongPollTaskImpl: Operation, LongPollTask {
     func handleError(code: Int, response: JSON) {
         switch code {
         case 1:
-            guard let newTs = response.string("ts") else {
+            guard let newTs = response.int("ts")?.toString() else {
                 onError(.unknown)
                 semaphore.signal()
                 return
