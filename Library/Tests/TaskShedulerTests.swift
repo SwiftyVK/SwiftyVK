@@ -20,10 +20,12 @@ final class TaskShedulerTests: XCTestCase {
     
     func test_executeMinimumSerialOpearations_forOneSecond() {
         // When
-        let samples = sheduleSamples(count: operationCount, concurrent: false)
+        let group = DispatchGroup()
+        for _ in 0..<operationCount { group.enter() }
+        let samples = sheduleSamples(count: operationCount, concurrent: false, completion: { group.leave() })
         // Then
-        Thread.sleep(forTimeInterval: totalRunTime)
-        
+        _ = group.wait(timeout: .now() + 1)
+
         XCTAssertLessThan(samples.filter { $0.isFinished }.count, operationCount,
             "Operations should be executed serially"
         )
@@ -44,13 +46,17 @@ final class TaskShedulerTests: XCTestCase {
     
     func test_exeuteRandomOperations() {
         // Given
-        let group = DispatchGroup()
-        for _ in 0..<operationCount { group.enter() }
+        let serialGroup = DispatchGroup()
+        let concurrentGroup = DispatchGroup()
+        for _ in 0..<operationCount { serialGroup.enter() }
+        for _ in 0..<operationCount { concurrentGroup.enter() }
         // When
-        let serial = sheduleSamples(count: operationCount, concurrent: false, completion: { group.leave() })
-        let concurrent = sheduleSamples(count: operationCount, concurrent: true)
-        Thread.sleep(forTimeInterval: totalRunTime)
+        let serial = sheduleSamples(count: operationCount, concurrent: false, completion: { serialGroup.leave() })
+        let concurrent = sheduleSamples(count: operationCount, concurrent: true, completion: { concurrentGroup.leave() })
+        
         // Then
+        _ = concurrentGroup.wait(timeout: .now() + totalRunTime)
+        
         XCTAssertLessThan( serial.filter { $0.isFinished }.count, operationCount,
             "Operations should be executed serially"
         )
@@ -59,7 +65,7 @@ final class TaskShedulerTests: XCTestCase {
             "All concurrent operations should be executed"
         )
         
-        _ = group.wait(timeout: .now() + totalRunTime * 10)
+        _ = serialGroup.wait(timeout: .now() + totalRunTime * 10)
 
         XCTAssertEqual(serial.filter { $0.isFinished }.count, operationCount,
             "All serial operations should be executed"

@@ -3,27 +3,6 @@ import XCTest
 
 final class SessionTests: XCTestCase {
     
-    private func syncLogIn(
-        session: Session,
-        onSuccess: @escaping ([String : String]) -> (),
-        onError: @escaping (VKError)-> ()
-        ) {
-        let exp = expectation(description: "")
-        
-        session.logIn(
-            onSuccess: { info in
-                onSuccess(info)
-                exp.fulfill()
-            },
-            onError: { error in
-                onError(error)
-                exp.fulfill()
-            }
-        )
-        
-        waitForExpectations(timeout: 10)
-    }
-    
     func test_sheduleTask_once() {
         // Given
         let context = makeContext()
@@ -194,7 +173,34 @@ final class SessionTests: XCTestCase {
         XCTAssertEqual(context.session.state, .authorized)
     }
     
-    func test_tokenCreatedNotificationCalled_whenTokenCreated() {
+    func test_state_isAuthorized_whenSessionRestored() {
+        // Given
+        let sessionId = String.random(20)
+        let context = makeContext(sessionId: sessionId)
+        
+        context.authorizator.onGetSavedToken = { givenSessionId in
+            XCTAssertEqual(givenSessionId, sessionId)
+            return TokenMock()
+        }
+        
+        // Then
+        let state = context.makeSession().state
+        // When
+        XCTAssertEqual(state, .authorized)
+    }
+    
+    func test_state_isInitiated_whenSessionNotRestored() {
+        // Given
+        let sessionId = String.random(20)
+        let context = makeContext(sessionId: sessionId)
+        
+        // Then
+        let state = context.makeSession().state
+        // When
+        XCTAssertEqual(state, .initiated)
+    }
+    
+    func test_onVKTokenCreated_calledOnce_whenTokenCreated() {
         // Given
         let context = makeContext()
         var onVKTokenCreatedCallCount = 0
@@ -216,7 +222,29 @@ final class SessionTests: XCTestCase {
         XCTAssertEqual(onVKTokenCreatedCallCount, 1)
     }
     
-    func test_tokenUpdatedNotificationCalled_whenTokenUpdated() {
+    func test_onVKTokenCreated_callOnce_whenSessionRestored() {
+        // Given
+        let sessionId = String.random(20)
+        let context = makeContext(sessionId: sessionId)
+        let exp = expectation(description: "")
+        
+        context.authorizator.onGetSavedToken = { givenSessionId in
+            XCTAssertEqual(givenSessionId, sessionId)
+            return TokenMock()
+        }
+        
+        context.delegate.onVKTokenCreated = { givenSessionId, info in
+            XCTAssertEqual(givenSessionId, sessionId)
+            exp.fulfill()
+        }
+        
+        // Then
+        _ = context.makeSession()
+        // When
+        waitForExpectations(timeout: 5)
+    }
+    
+    func test_onVKTokenUpdated_calledOnce_whenTokenUpdated() {
         // Given
         let context = makeContext()
         var onVKTokenUpdatedCallCount = 0
@@ -240,7 +268,7 @@ final class SessionTests: XCTestCase {
         XCTAssertEqual(onVKTokenUpdatedCallCount, 1)
     }
     
-    func test_tokenRemovedNotificationCalled_whenTokenRemoved() {
+    func test_onVKTokenRemoved_calledOnce_whenTokenRemoved() {
         // Given
         let context = makeContext()
         var onVKDidLogOutCallCount = 0
@@ -370,7 +398,7 @@ final class SessionTests: XCTestCase {
         }
         // When
         do {
-            try context.session.logIn(revoke: false)
+            _ = try context.session.logIn(revoke: false)
             _ = try context.session.captcha(rawUrlToImage: "")
         } catch let error {
             XCTFail("Unexpected error: \(error)")
@@ -503,9 +531,32 @@ final class SessionTests: XCTestCase {
             onError: { _ in }
         )
     }
+    
+    private func syncLogIn(
+        session: Session,
+        onSuccess: @escaping ([String : String]) -> (),
+        onError: @escaping (VKError)-> ()
+        ) {
+        let exp = expectation(description: "")
+        
+        session.logIn(
+            onSuccess: { info in
+                onSuccess(info)
+                exp.fulfill()
+            },
+            onError: { error in
+                onError(error)
+                exp.fulfill()
+            }
+        )
+        
+        waitForExpectations(timeout: 10)
+    }
+    
 }
 
-private func makeContext() -> (
+private func makeContext(sessionId: String? = nil) -> (
+    makeSession: () -> SessionImpl,
     session: SessionImpl,
     taskSheduler: TaskShedulerMock,
     attemptSheduler: AttemptShedulerMock,
@@ -514,29 +565,40 @@ private func makeContext() -> (
     delegate: SwiftyVKDelegateMock,
     sharePresenterMaker: SharePresenterMakerMock
     ) {
-    let taskSheduler = TaskShedulerMock()
-    let attemptSheduler = AttemptShedulerMock()
-    let authorizator = AuthorizatorMock()
-    let taskMaker = TaskMakerMock()
-    let captchaPresenter = CaptchaPresenterMock()
-    let sessionSaver = SessionsHolderMock()
-    let delegate = SwiftyVKDelegateMock()
-    let longPollMaker = LongPollMakerMock()
-    let sharePresenterMaker = SharePresenterMakerMock()
-    
-    let session = SessionImpl(
-        id: .random(20),
-        config: .default,
-        taskSheduler: taskSheduler,
-        attemptSheduler: attemptSheduler,
-        authorizator: authorizator,
-        taskMaker: taskMaker,
-        captchaPresenter: captchaPresenter,
-        sharePresenterMaker: sharePresenterMaker,
-        sessionSaver: sessionSaver,
-        longPollMaker: longPollMaker,
-        delegate: delegate
-    )
-    
-    return (session, taskSheduler, attemptSheduler, authorizator, captchaPresenter, delegate, sharePresenterMaker)
+        let taskSheduler = TaskShedulerMock()
+        let attemptSheduler = AttemptShedulerMock()
+        let authorizator = AuthorizatorMock()
+        let taskMaker = TaskMakerMock()
+        let captchaPresenter = CaptchaPresenterMock()
+        let sharePresenterMaker = SharePresenterMakerMock()
+        let sessionSaver = SessionsHolderMock()
+        let delegate = SwiftyVKDelegateMock()
+        let longPollMaker = LongPollMakerMock()
+        
+        let makeSession = {
+            SessionImpl(
+                id: sessionId ?? .random(20),
+                config: .default,
+                taskSheduler: taskSheduler,
+                attemptSheduler: attemptSheduler,
+                authorizator: authorizator,
+                taskMaker: taskMaker,
+                captchaPresenter: captchaPresenter,
+                sharePresenterMaker: sharePresenterMaker,
+                sessionSaver: sessionSaver,
+                longPollMaker: longPollMaker,
+                delegate: delegate
+            )
+        }
+        
+        return (
+            makeSession,
+            makeSession(),
+            taskSheduler,
+            attemptSheduler,
+            authorizator,
+            captchaPresenter,
+            delegate,
+            sharePresenterMaker
+        )
 }

@@ -23,7 +23,7 @@ final class ApiMethodTests: XCTestCase {
         let parameter = [Parameter.userId: "1"]
         let parameters = APIScope.Users.get(parameter).toRequest().type.parameters
         // Then
-        XCTAssertEqual(parameters?[Parameter.userId] ?? "", "1")
+        XCTAssertEqual(parameters?[Parameter.userId.rawValue] ?? "", "1")
     }
     
     func test_callSessionSend_whenMethodSended() {

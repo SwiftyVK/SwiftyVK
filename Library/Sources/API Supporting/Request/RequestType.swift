@@ -1,5 +1,5 @@
 enum RequestType {
-    case api(method: String, parameters: Parameters)
+    case api(method: String, parameters: [String: String])
     case url(String)
     case upload(url: String, media: [Media], partType: PartType)
 }
