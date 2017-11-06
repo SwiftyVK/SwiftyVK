@@ -1,8 +1,14 @@
 # 🚫 **ISSUE TEMPLATE** 🚫
 
-🚫 If this template is not filled out with right info, your issue ***will be closed without any comments!***
+🚫 Thanks for using SwiftyVK.
 
-🚫 Please fill all fields below and delete this title.
+🚫 Support for this project takes a lot of my time. 
+
+🚫 Please, be attentive, fill template and delete this title to let me cope with the issue faster. 
+
+🚫 Issues without filled description, environment and checklist ***will be closed without any comments***
+
+🚫 Thank you for understanding.
 
 ---
 
@@ -21,15 +27,14 @@ Describe the issue in detail here
  SwiftyVK version        | exact version e.g. 2.0.0
  Integration Method      | e.g. carthage/cocoapods/manually
  
- ### Checklist
+  ### Checklist
  
- Set [x] in box if you checked this:
+ Check all points of list below and set [x] on each checked point:
  
 * [ ] I have looked and not find decision at [README.md](./README.md)
-* [ ] I have looked and not find decision at [Example project](./Example)
-* [ ] I have not find duplicates of this issue on [issues list](https://github.com/west0r/SwiftyVK/issues) 
-* [ ] I made an understandable short title
-* [ ] I made an exhaustive description
-* [ ] I completely described the environment 
+* [ ] I have looked and reproduce this behaviour in [Example project](./Example)
+* [ ] I have not find duplicates of this issue in [issues list](https://github.com/west0r/SwiftyVK/issues) 
+* [ ] I made an understandable short title and exhaustive description
+* [ ] I attach stack traces or errors description
+* [ ] I completely describe the environment 
 * [ ] I have full filled out this issue template
-* [ ] I use english language
