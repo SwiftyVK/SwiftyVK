@@ -140,19 +140,22 @@ final class DependenciesImpl: Dependencies {
         )
     }()
     
-    func webController() -> WebController? {
-        return viewController(name: "Web")
+    func webController(onDismiss: (() -> ())?) -> WebController {
+        return viewController(name: "Web", onDismiss: onDismiss)
     }
     
-    func captchaController() -> CaptchaController? {
-        return viewController(name: "Captcha")
+    func captchaController(onDismiss: (() -> ())?) -> CaptchaController {
+        return viewController(name: "Captcha", onDismiss: onDismiss)
     }
     
-    func shareController() -> ShareController? {
-        return viewController(name: "Share")
+    func shareController(onDismiss: (() -> ())?) -> ShareController {
+        return viewController(name: "Share", onDismiss: onDismiss)
     }
     
-    private func viewController<ControllerType>(name: String) -> ControllerType? {
+    private func viewController<ControllerType>(
+        name: String,
+        onDismiss: (() -> ())?
+        ) -> ControllerType {
         var controller: VKViewController?
         
         #if os(iOS)
@@ -169,7 +172,11 @@ final class DependenciesImpl: Dependencies {
             let unwrappedController = controller,
             let resultController = unwrappedController as? ControllerType
             else {
-            return nil
+            preconditionFailure("Can't find \(name) controller")
+        }
+        
+        if let dismisableController = resultController as? DismisableController {
+            dismisableController.onDismiss = onDismiss
         }
         
         DispatchQueue.safelyOnMain {
@@ -248,6 +255,8 @@ final class DependenciesImpl: Dependencies {
         return SharePresenterImpl(
             uiSyncQueue: uiSyncQueue,
             shareWorker: ShareWorkerImpl(),
-            controllerMaker: self)
+            controllerMaker: self,
+            reachability: Reachability()
+        )
     }
 }

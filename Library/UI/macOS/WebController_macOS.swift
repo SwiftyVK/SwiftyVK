@@ -8,7 +8,7 @@ final class WebControllerMacOS: NSViewController, WKNavigationDelegate, WebContr
     
     private var currentRequest: URLRequest?
     private var onResult: ((WebControllerResult) -> ())?
-    private var onDismiss: (() -> ())?
+    var onDismiss: (() -> ())?
 
     override func viewDidAppear() {
         super.viewDidAppear()
@@ -22,10 +22,9 @@ final class WebControllerMacOS: NSViewController, WKNavigationDelegate, WebContr
         onDismiss?()
     }
     
-    func load(urlRequest: URLRequest, onResult: @escaping (WebControllerResult) -> (), onDismiss: @escaping () -> ()) {
+    func load(urlRequest: URLRequest, onResult: @escaping (WebControllerResult) -> ()) {
         self.currentRequest = urlRequest
         self.onResult = onResult
-        self.onDismiss = onDismiss
         
         DispatchQueue.main.sync {
             preloader?.startAnimation(nil)

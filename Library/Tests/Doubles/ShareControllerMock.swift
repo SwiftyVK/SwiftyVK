@@ -2,15 +2,19 @@
 import XCTest
 
 final class ShareControllerMock: ShareController {
-
-    var onShare: ((ShareContext, @escaping (ShareContext) -> (), @escaping () -> ()) -> ())?
     
-    func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> (), onDismiss: @escaping () -> ()) {
-      onShare?(context, onPost, onDismiss)
+    var onDismiss: (() -> ())?
+    var onShare: ((ShareContext, (ShareContext) -> ()) -> ())?
+    
+    func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> ()) {
+      onShare?(context, onPost)
     }
     
     func showPlaceholder(_ enable: Bool) {
         
+    }
+    
+    func showWaitForConnection() {
     }
     
     func enablePostButton(_ enable: Bool) {

@@ -2,6 +2,7 @@
 import XCTest
 
 final class ShareWorkerMock: ShareWorker {
+    
     func add(link: ShareLink?) {
     }
     
@@ -12,8 +13,8 @@ final class ShareWorkerMock: ShareWorker {
         return []
     }
     
-    func post(context: ShareContext, in session: Session) throws -> Data {
-        return Data()
+    func post(context: ShareContext, in session: Session) throws -> Data? {
+        return nil
     }
     
     func clear(context: ShareContext) {

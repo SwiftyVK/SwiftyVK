@@ -35,9 +35,7 @@ final class DependenciesTests: XCTestCase {
         // Given
         let context = makeContext()
         // When
-        guard let object = context.factory.webController() else {
-            return XCTFail("Object not created")
-        }
+        let object = context.factory.webController(onDismiss: nil)
         // Then
         #if os(iOS)
             XCTAssertTrue(type(of: object) == WebControllerIOS.self)
@@ -50,9 +48,7 @@ final class DependenciesTests: XCTestCase {
         // Given
         let context = makeContext()
         // When
-        guard let object = context.factory.captchaController() else {
-            return XCTFail("Object not created")
-        }
+        let object = context.factory.captchaController(onDismiss: nil)
         // Then
         #if os(iOS)
             XCTAssertTrue(type(of: object) == CaptchaControllerIOS.self)

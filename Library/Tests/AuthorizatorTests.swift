@@ -254,7 +254,7 @@ final class AuthorizatorTests: XCTestCase {
         
         context.webPresenter.onPresesent = { _ in
             Thread.sleep(forTimeInterval: 0.2)
-            throw VKError.cantMakeWebController
+            throw VKError.unexpectedResponse
         }
         
         context.vkApp.onHandle = { url, string in

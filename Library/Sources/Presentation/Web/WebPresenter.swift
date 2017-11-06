@@ -38,7 +38,6 @@ final class WebPresenterImpl: WebPresenter {
         self.timeout = timeout
     }
     
-    // swiftlint:disable cyclomatic_complexity next
     func presentWith(urlRequest: URLRequest) throws -> String {
         let semaphore = DispatchSemaphore(value: 0)
         var fails: Int = 0
@@ -46,8 +45,8 @@ final class WebPresenterImpl: WebPresenter {
         
         return try uiSyncQueue.sync {
             
-            guard let controller = controllerMaker.webController() else {
-                throw VKError.cantMakeWebController
+            let controller = controllerMaker.webController {
+                semaphore.signal()
             }
             
             let originalPath = urlRequest.url?.path ?? ""
@@ -83,10 +82,6 @@ final class WebPresenterImpl: WebPresenter {
                     if finalResult != nil {
                         strongSelf.currentController?.dismiss()
                     }
-                },
-                
-                onDismiss: {
-                    semaphore.signal()
                 }
             )
             

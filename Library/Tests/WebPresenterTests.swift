@@ -24,8 +24,8 @@ final class WebPresenterTests: XCTestCase {
         
         context.webControllerMaker.onMake = {
             let controller = WebControllerMock()
-            
-            controller.onLoad = { url, onResult, onDismiss in
+
+            controller.onLoad = { url, onResult in
                 onResult(.response(url))
             }
             
@@ -39,23 +39,6 @@ final class WebPresenterTests: XCTestCase {
         XCTAssertEqual(result, "access_token=test")
     }
     
-    func test_load_throwCantMakeWebViewController_whenControllerDontMake() {
-        // Given
-        let context = makeContext()
-        
-        context.webControllerMaker.onMake = {
-            return nil
-        }
-        // When
-        do {
-            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#cancel=1")!)
-            XCTFail("Expression should throw error")
-        } catch let error {
-            // Then
-            XCTAssertEqual(error.asVK, VKError.cantMakeWebController)
-        }
-    }
-    
     func test_load_throwWrongAuthUrl_whenUrlIsNil() {
         // Given
         let context = makeContext()
@@ -63,7 +46,7 @@ final class WebPresenterTests: XCTestCase {
         context.webControllerMaker.onMake = {
             let controller = WebControllerMock()
             
-            controller.onLoad = { url, onResult, onDismiss in
+            controller.onLoad = { url, onResult in
                 onResult(.response(nil))
             }
             
@@ -103,7 +86,7 @@ final class WebPresenterTests: XCTestCase {
         context.webControllerMaker.onMake = {
             let controller = WebControllerMock()
             
-            controller.onLoad = { url, onResult, onDismiss in
+            controller.onLoad = { url, onResult in
                 onResult(.response(url))
             }
             
@@ -126,7 +109,7 @@ final class WebPresenterTests: XCTestCase {
         context.webControllerMaker.onMake = {
             let controller = WebControllerMock()
             
-            controller.onLoad = { url, onResult, onDismiss in
+            controller.onLoad = { url, onResult in
                 onResult(.response(url))
             }
             
@@ -149,7 +132,7 @@ final class WebPresenterTests: XCTestCase {
         context.webControllerMaker.onMake = {
             let controller = WebControllerMock()
             
-            controller.onLoad = { url, onResult, onDismiss in
+            controller.onLoad = { url, onResult in
                 onResult(.response(url))
             }
             
@@ -172,7 +155,7 @@ final class WebPresenterTests: XCTestCase {
         context.webControllerMaker.onMake = {
             let controller = WebControllerMock()
             
-            controller.onLoad = { url, onResult, onDismiss in
+            controller.onLoad = { url, onResult in
                 onResult(.response(url))
             }
             
@@ -193,7 +176,7 @@ final class WebPresenterTests: XCTestCase {
             let controller = WebControllerMock()
             var onResultBlock: ((WebControllerResult) -> ())?
             
-            controller.onLoad = { url, onResult, onDismiss in
+            controller.onLoad = { url, onResult in
                 onResultBlock = onResult
                 
                 var nerUrl = url
@@ -230,7 +213,7 @@ final class WebPresenterTests: XCTestCase {
             let controller = WebControllerMock()
             var onResultBlock: ((WebControllerResult) -> ())?
             
-            controller.onLoad = { url, onResult, onDismiss in
+            controller.onLoad = { url, onResult in
                 loadCount += 1
                 onResultBlock = onResult
                 onResultBlock?(.error(.authorizationFailed))
@@ -262,7 +245,7 @@ final class WebPresenterTests: XCTestCase {
         context.webControllerMaker.onMake = {
             let controller = WebControllerMock()
             
-            controller.onLoad = { url, onResult, onDismiss in
+            controller.onLoad = { url, onResult in
                 onResult(.response(url))
                 
                 DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
@@ -290,7 +273,7 @@ final class WebPresenterTests: XCTestCase {
         context.webControllerMaker.onMake = {
             let controller = WebControllerMock()
             
-            controller.onLoad = { url, onResult, onDismiss in
+            controller.onLoad = { url, onResult in
                 context.presenter.dismiss()
                 
                 DispatchQueue.global().asyncAfter(deadline: .now() + 1) {

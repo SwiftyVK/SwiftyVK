@@ -2,7 +2,13 @@ import Cocoa
 
 final class ShareControllerMacOS: NSViewController, ShareController {
     
-    func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> (), onDismiss: @escaping () -> ()) {
+    var onDismiss: (() -> ())?
+    
+    func showWaitForConnection() {
+        
+    }
+    
+    func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> ()) {
         
     }
     

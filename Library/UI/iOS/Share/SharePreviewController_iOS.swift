@@ -9,6 +9,7 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     @IBOutlet private weak var sendButton: UIBarButtonItem?
     @IBOutlet private weak var placeholderView: UIView?
     @IBOutlet private weak var placeholderIndicator: UIActivityIndicatorView?
+    @IBOutlet private weak var noConnectionLabel: UILabel?
     
     @IBOutlet private weak var linkViewHeight: NSLayoutConstraint?
     @IBOutlet private weak var imageCollectionHeight: NSLayoutConstraint?
@@ -16,6 +17,7 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     private var context = ShareContext()
     private var onPost: ((ShareContext) -> ())?
     private var rightButton: UIBarButtonItem?
+    var onDismiss: (() -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +42,7 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         }
     }
     
-    func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> (), onDismiss: @escaping () -> ()) {
+    func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> ()) {
         self.context = context
         self.onPost = onPost
         
@@ -67,7 +69,14 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
             UIView.animate(withDuration: 0.3) {
                 self.placeholderView?.alpha = enable ? 1 : 0
             }
-            
+        }
+    }
+    
+    func showWaitForConnection() {
+        DispatchQueue.safelyOnMain {
+            UIView.animate(withDuration: 0.3) {
+                self.noConnectionLabel?.alpha = 1
+            }
         }
     }
     

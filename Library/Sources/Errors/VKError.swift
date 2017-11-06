@@ -29,8 +29,6 @@ public indirect enum VKError: Error {
     // MARK: - UI Errors
     case cantBuildWebViewUrl(String)
     case cantBuildVKAppUrl(String)
-    case cantMakeWebController
-    case cantMakeCaptchaController
     case captchaPresenterTimedOut
     case cantMakeCapthaImageUrl(String)
     case cantLoadCaptchaImage(Error)

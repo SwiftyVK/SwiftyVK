@@ -8,4 +8,10 @@ final class VKReachabilityMock: VKReachability {
     func startNotifier() throws {
         try onStartNotifier?()
     }
+    
+    func waitForReachable(onWait: (() -> ())) {
+    }
+    
+    func stopWaitForReachable() {
+    }
 }

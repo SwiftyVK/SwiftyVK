@@ -32,8 +32,9 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
             var result: String?
             var dismissed = false
             
-            guard let controller = currentController ?? controllerMaker.captchaController() else {
-                throw VKError.cantMakeCaptchaController
+            let controller = currentController ?? controllerMaker.captchaController {
+                dismissed = true
+                semaphore.signal()
             }
             
             currentController = controller
@@ -53,10 +54,6 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
                     else {
                         semaphore.signal()
                     }
-                },
-                onDismiss: {
-                    dismissed = true
-                    semaphore.signal()
                 }
             )
             

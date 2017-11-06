@@ -7,3 +7,7 @@
     /// Multiplatform ViewController
     public typealias VKViewController = UIViewController
 #endif
+
+protocol DismisableController: class {
+    var onDismiss: (() -> ())? { get set }
+}

@@ -40,11 +40,15 @@ protocol TokenMaker: class {
 }
 
 protocol WebControllerMaker: class {
-    func webController() -> WebController?
+    func webController(onDismiss: (() -> ())?) -> WebController
 }
 
 protocol CaptchaControllerMaker {
-    func captchaController() -> CaptchaController?
+    func captchaController(onDismiss: (() -> ())?) -> CaptchaController
+}
+
+protocol ShareControllerMaker {
+    func shareController(onDismiss: (() -> ())?) -> ShareController
 }
 
 protocol LongPollTaskMaker {
@@ -57,8 +61,4 @@ protocol LongPollMaker {
 
 protocol SharePresenterMaker {
     func sharePresenter() -> SharePresenter
-}
-
-protocol ShareControllerMaker {
-    func shareController() -> ShareController?
 }

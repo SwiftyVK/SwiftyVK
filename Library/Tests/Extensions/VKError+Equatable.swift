@@ -20,8 +20,6 @@ extension VKError: Equatable {
         (.sessionAlreadyAuthorized, .sessionAlreadyAuthorized),
         (.cantBuildWebViewUrl, .cantBuildWebViewUrl),
         (.cantBuildVKAppUrl, .cantBuildVKAppUrl),
-        (.cantMakeWebController, .cantMakeWebController),
-        (.cantMakeCaptchaController, .cantMakeCaptchaController),
         (.captchaPresenterTimedOut, .captchaPresenterTimedOut),
         (.webPresenterTimedOut, .webPresenterTimedOut),
         (.cantLoadCaptchaImage, .cantLoadCaptchaImage),

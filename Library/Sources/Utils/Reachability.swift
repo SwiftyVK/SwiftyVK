@@ -67,6 +67,7 @@ public class Reachability {
         }
     }
     
+    var semaphore = DispatchSemaphore(value: 0)
     public var whenReachable: NetworkReachable?
     public var whenUnreachable: NetworkUnreachable?
     public var reachableOnWWAN: Bool
@@ -130,7 +131,7 @@ public class Reachability {
     
     deinit {
         stopNotifier()
-        
+        semaphore.signal()
         reachabilityRef = nil
         whenReachable = nil
         whenUnreachable = nil

@@ -239,7 +239,6 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
                 }
                 catch {
                     onError(error.toVK())
-                    
                 }
             }
         }

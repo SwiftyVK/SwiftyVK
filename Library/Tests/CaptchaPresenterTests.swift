@@ -17,20 +17,6 @@ final class CaptchaPresenterTests: XCTestCase {
         return (presenter, controllerMaker, urlSession)
     }
     
-    
-    func test_present_throwCantMakeCaptchaController() {
-        // Given
-        let context = makeContext()
-        // When
-        do {
-            _ = try context.presenter.present(rawCaptchaUrl: "", dismissOnFinish: false)
-            XCTFail("Expression should throw error")
-        } catch let error {
-            // Then
-            XCTAssertEqual(error.asVK, VKError.cantMakeCaptchaController)
-        }
-    }
-    
     func test_present_controllerPrepareCalledOnce() {
         // Given
         let context = makeContext()
@@ -96,7 +82,7 @@ final class CaptchaPresenterTests: XCTestCase {
         context.webControllerMaker.onMake = {
             let controller = CaptchaControllerMock()
             
-            controller.onPresent = { data, onResult, onDismiss in
+            controller.onPresent = { data, onResult in
                 onResult("test")
             }
             
@@ -120,7 +106,7 @@ final class CaptchaPresenterTests: XCTestCase {
         context.webControllerMaker.onMake = {
             let controller = CaptchaControllerMock()
             
-            controller.onPresent = { data, onResult, onDismiss in
+            controller.onPresent = { data, onResult in
                 onResult("test")
             }
             
@@ -145,7 +131,7 @@ final class CaptchaPresenterTests: XCTestCase {
         context.webControllerMaker.onMake = {
             let controller = CaptchaControllerMock()
             
-            controller.onPresent = { data, onResult, onDismiss in
+            controller.onPresent = { data, onResult in
                 onResult("test")
             }
             
@@ -172,7 +158,7 @@ final class CaptchaPresenterTests: XCTestCase {
         context.webControllerMaker.onMake = {
             let controller = CaptchaControllerMock()
             
-            controller.onPresent = { data, onResult, onDismiss in
+            controller.onPresent = { data, onResult in
                 context.presenter.dismiss()
             }
             

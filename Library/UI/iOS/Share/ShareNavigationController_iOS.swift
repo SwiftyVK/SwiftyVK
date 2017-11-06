@@ -2,16 +2,26 @@ import UIKit
 
 final class ShareNavigationControllerIOS: UINavigationController, ShareController {
     
-    private var nextController: ShareController? {
-        return viewControllers.first as? ShareController
+    var onDismiss: (() -> ())? {
+        get { return nextController?.onDismiss }
+        set { nextController?.onDismiss = newValue }
     }
     
-    func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> (), onDismiss: @escaping () -> ()) {
-        nextController?.share(context, onPost: onPost, onDismiss: onDismiss)
+    private var nextController: ShareController? {
+        get { return viewControllers.first as? ShareController }
+        set {}
+    }
+    
+    func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> ()) {
+        nextController?.share(context, onPost: onPost)
     }
     
     func showPlaceholder(_ enable: Bool) {
         nextController?.showPlaceholder(enable)
+    }
+    
+    func showWaitForConnection() {
+        nextController?.showWaitForConnection()
     }
     
     func enablePostButton(_ enable: Bool) {

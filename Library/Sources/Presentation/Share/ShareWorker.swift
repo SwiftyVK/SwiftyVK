@@ -7,7 +7,6 @@ protocol ShareWorker: class {
 }
 
 final class ShareWorkerImpl: ShareWorker {
-    
     private var group = DispatchGroup()
     private var attachements = [String]()
     private var imageTasks = [Task]()
@@ -68,7 +67,8 @@ final class ShareWorkerImpl: ShareWorker {
                     image.state = try self?.parseImage(from: data) ?? .failed
                     self?.group.leave()
                 }
-                .onError { [weak self] _ in
+                .onError { [weak self] error in
+                    print("image not uploaded with error: \(error)")
                     image.state = .failed
                     self?.group.leave()
                 }

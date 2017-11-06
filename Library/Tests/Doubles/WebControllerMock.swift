@@ -2,16 +2,16 @@
 
 final class WebControllerMock: WebController {
     
-    var onLoad: ((URL?, @escaping (WebControllerResult) -> (), () -> ()) -> ())?
+    var onLoad: ((URL?, @escaping (WebControllerResult) -> ()) -> ())?
     var onGoBack: (() -> ())?
     var onReload: (() -> ())?
     var onDismiss: (() -> ())?
     
     private var realOnDismiss: (() -> ())?
     
-    func load(urlRequest: URLRequest, onResult: @escaping (WebControllerResult) -> (), onDismiss: @escaping () -> ()) {
+    func load(urlRequest: URLRequest, onResult: @escaping (WebControllerResult) -> ()) {
         realOnDismiss = onDismiss
-        onLoad?(urlRequest.url, onResult, onDismiss)
+        onLoad?(urlRequest.url, onResult)
     }
     
     func reload() {

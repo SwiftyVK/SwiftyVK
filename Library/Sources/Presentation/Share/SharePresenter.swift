@@ -6,34 +6,57 @@ final class SharePresenterImpl: SharePresenter {
     private let uiSyncQueue: DispatchQueue
     private let controllerMaker: ShareControllerMaker
     private let shareWorker: ShareWorker
+    private let reachability: VKReachability?
     
     init(
         uiSyncQueue: DispatchQueue,
         shareWorker: ShareWorker,
-        controllerMaker: ShareControllerMaker
+        controllerMaker: ShareControllerMaker,
+        reachability: VKReachability?
         ) {
         self.uiSyncQueue = uiSyncQueue
         self.shareWorker = shareWorker
         self.controllerMaker = controllerMaker
+        self.reachability = reachability
     }
     
     func share(_ context: ShareContext, in session: Session) throws -> Data {
-        let controller = controllerMaker.shareController()
+        let semaphore = DispatchSemaphore(value: 0)
         var context = context
+
+        let controller = controllerMaker.shareController { [weak self] in
+            self?.reachability?.stopWaitForReachable()
+            semaphore.signal()
+        }
         
         return try uiSyncQueue.sync {
             defer { shareWorker.clear(context: context) }
-            controller?.showPlaceholder(true)
+            controller.showPlaceholder(true)
+            
+            reachability?.waitForReachable { [weak controller] in
+                controller?.showWaitForConnection()
+            }
+            
             context.preferences = try shareWorker.getPrefrences(in: session)
             shareWorker.upload(images: context.images, in: session)
             shareWorker.add(link: context.link)
-            controller?.showPlaceholder(false)
-            return try present(controller: controller, context: context, in: session)
+            controller.showPlaceholder(false)
+            
+            return try present(
+                controller: controller,
+                context: context,
+                semaphore: semaphore,
+                in: session
+            )
         }
     }
     
-    private func present(controller: ShareController?, context: ShareContext, in session: Session) throws -> Data {
-        let semaphore = DispatchSemaphore(value: 0)
+    private func present(
+        controller: ShareController?,
+        context: ShareContext,
+        semaphore: DispatchSemaphore,
+        in session: Session
+        ) throws -> Data {
         var result: Result<Data, VKError>?
 
         controller?.share(
@@ -54,14 +77,11 @@ final class SharePresenterImpl: SharePresenter {
                     controller?.enablePostButton(true)
                     result = .error(caughtError.toVK())
                 }
-            },
-            onDismiss: {
-                semaphore.signal()
             }
         )
-        
+
         semaphore.wait()
-        
+
         guard let data = try result?.unwrap() else {
             throw VKError.sharingWasDismissed
         }
