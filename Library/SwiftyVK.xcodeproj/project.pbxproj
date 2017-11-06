@@ -235,6 +235,8 @@
 		D4AB8D9D1F6055290099FC42 /* longPoll.failed.1.withTs.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D9C1F6055290099FC42 /* longPoll.failed.1.withTs.json */; };
 		D4B122961FAB563300F0BE36 /* SharePreferencesController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B122951FAB563300F0BE36 /* SharePreferencesController_iOS.swift */; };
 		D4B44EA51FA38A5100E85E31 /* ShareNavigationController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B44EA41FA38A5100E85E31 /* ShareNavigationController_iOS.swift */; };
+		D4B850331FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */; };
+		D4B850341FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */; };
 		D4BBFEAB1F929891009615E7 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDFE1F9297AA009615E7 /* Storage.swift */; };
 		D4BBFEAC1F929891009615E7 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFDFF1F9297AA009615E7 /* Messages.swift */; };
 		D4BBFEAD1F929891009615E7 /* Notifacations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBFE001F9297AA009615E7 /* Notifacations.swift */; };
@@ -652,6 +654,7 @@
 		D4AB8D9C1F6055290099FC42 /* longPoll.failed.1.withTs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.1.withTs.json; sourceTree = "<group>"; };
 		D4B122951FAB563300F0BE36 /* SharePreferencesController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePreferencesController_iOS.swift; sourceTree = "<group>"; };
 		D4B44EA41FA38A5100E85E31 /* ShareNavigationController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareNavigationController_iOS.swift; sourceTree = "<group>"; };
+		D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronouslyTaskTests.swift; sourceTree = "<group>"; };
 		D4BBFDA51F9297A9009615E7 /* KeychainProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
 		D4BBFDA61F9297A9009615E7 /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		D4BBFDA71F9297A9009615E7 /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
@@ -852,6 +855,7 @@
 				D41D5D961F62D0F800B4C8AF /* LongPollEventTests.swift */,
 				D4F56CDD1F6837BC00ACC3CF /* DependenciesTests.swift */,
 				D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */,
+				D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1728,6 +1732,7 @@
 				D41ADB051F4E015500E10D41 /* VKStack.swift in Sources */,
 				D48F789A1F9FA51C0092931E /* SharePresenterMock.swift in Sources */,
 				D4321D8D1F5F0A31001AFE9F /* OneVariationsMethodTests.swift in Sources */,
+				D4B850331FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift in Sources */,
 				A24DDAF01EB73CB6002EA273 /* BodyBuilderMock.swift in Sources */,
 				D4321D931F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift in Sources */,
 				D41ADB021F4DFEE000E10D41 /* ResourcesTests.swift in Sources */,
@@ -2071,6 +2076,7 @@
 				D46FB41E1F929DCB000CEAEB /* ApiMethod.swift in Sources */,
 				D48F789B1F9FA51C0092931E /* SharePresenterMock.swift in Sources */,
 				D46FB3FD1F929DBC000CEAEB /* ResponseTests.swift in Sources */,
+				D4B850341FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift in Sources */,
 				D46FB43B1F929EE6000CEAEB /* SessionMock.swift in Sources */,
 				D46FB4371F929EE6000CEAEB /* QueryBuilderMock.swift in Sources */,
 				D46FB3FE1F929DBC000CEAEB /* JSONTests.swift in Sources */,

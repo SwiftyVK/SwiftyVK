@@ -29,6 +29,8 @@ extension VKError: Equatable {
         (.authorizationCancelled, .authorizationCancelled),
         (.authorizationFailed, .authorizationFailed),
         (.needAuthorization, .needAuthorization),
+        (.cantAwaitOnMainThread, .cantAwaitOnMainThread),
+        (.cantAwaitRequestWithSettedCallbacks, .cantAwaitRequestWithSettedCallbacks),
         (.captchaWasDismissed, .captchaWasDismissed):
             return true
         case (_, _):
