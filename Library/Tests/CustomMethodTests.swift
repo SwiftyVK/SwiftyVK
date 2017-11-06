@@ -29,7 +29,7 @@ final class CustomMethodTests: XCTestCase {
         // When
         let parameters = APIScope.Custom.execute(code: "code").toRequest().type.parameters
         // Then
-        XCTAssertEqual(parameters?[Parameter.code] ?? "", "code")
+        XCTAssertEqual(parameters?[Parameter.code.rawValue] ?? "", "code")
     }
     
     func test_parameters_isEmpty() {
@@ -41,10 +41,10 @@ final class CustomMethodTests: XCTestCase {
     
     func test_parameters_equalsToMethodParameters() {
         // When
-        let parameter = [Parameter.userId: "1"]
+        let parameter = [Parameter.userId.rawValue: "1"]
         let parameters = APIScope.Custom.method(name: "test", parameters: parameter).toRequest().type.parameters
         // Then
-        XCTAssertEqual(parameters?[Parameter.userId] ?? "", "1")
+        XCTAssertEqual(parameters?[Parameter.userId.rawValue] ?? "", "1")
     }
     
     func test_callSessionSend_whenMethodSended() {

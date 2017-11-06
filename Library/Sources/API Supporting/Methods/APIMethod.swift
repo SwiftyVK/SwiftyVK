@@ -4,7 +4,7 @@ public protocol APIMethod: Method {}
 
 extension APIMethod {
     public func toRequest() -> Request {
-        return Request(type: .api(method: method, parameters: parameters))
+        return Request(type: .api(method: method, parameters: parameters.toRaw()))
     }
 }
 

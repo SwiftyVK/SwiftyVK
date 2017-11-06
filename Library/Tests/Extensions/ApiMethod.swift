@@ -10,7 +10,7 @@ extension RequestType {
         }
     }
     
-    var parameters: Parameters? {
+    var parameters: [String: String]? {
         switch self {
         case let .api(_, parameters):
             return parameters

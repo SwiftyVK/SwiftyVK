@@ -1,10 +1,28 @@
-/// Distionary of [Parameter: String?]
+/// Dictionary of [Parameter: String?]
 /// If value is nil it will be ignored
 public typealias Parameters = [Parameter: String?]
+public typealias RawParameters = [String: String]
 
 extension Dictionary where Key == Parameter, Value == String? {
     /// Alias to empty parameters dictionary
-    public static var empty: [Parameter: String?] {
+    public static var empty: [Parameter: String] {
+        return [:]
+    }
+    
+    func toRaw() -> RawParameters {
+        var mapped = RawParameters()
+        
+        for (key, value) in self {
+            mapped[key.rawValue] = value
+        }
+        
+        return mapped
+    }
+}
+
+extension Dictionary where Key == String, Value == String {
+    /// Alias to empty parameters dictionary
+    public static var empty: RawParameters {
         return [:]
     }
 }
