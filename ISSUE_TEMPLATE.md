@@ -32,10 +32,9 @@ Describe the issue in detail here
  Check all points of list below and set [x] on each checked point:
  
 * [ ] I have looked and not find decision at [README.md](./README.md)
-* [ ] I have looked and not find decision at [Example project](./Example)
-* [ ] I have not find duplicates of this issue on [issues list](https://github.com/west0r/SwiftyVK/issues) 
-* [ ] I made an understandable short title
-* [ ] I made an exhaustive description
-* [ ] I attached stack traces and errors description (for bugs, otherwise delete this item)
-* [ ] I completely described the environment 
+* [ ] I have looked and reproduce this behaviour in [Example project](./Example)
+* [ ] I have not find duplicates of this issue in [issues list](https://github.com/west0r/SwiftyVK/issues) 
+* [ ] I made an understandable short title and exhaustive description
+* [ ] I attach stack traces or errors description
+* [ ] I completely describe the environment 
 * [ ] I have full filled out this issue template
