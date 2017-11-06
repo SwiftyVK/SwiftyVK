@@ -34,8 +34,10 @@ final class AuthorizatorMock: Authorizator {
         return result
     }
     
+    var onGetSavedToken: ((String) -> Token)?
+    
     func getSavedToken(sessionId: String) -> Token? {
-        return nil
+        return onGetSavedToken?(sessionId)
     }
     
     var onValidate: ((String, URL) throws -> Token)?
