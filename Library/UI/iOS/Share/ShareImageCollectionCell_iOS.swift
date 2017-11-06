@@ -14,11 +14,20 @@ final class ShareImageCollectionCellIOS: UICollectionViewCell {
         layer.borderWidth = 1 / UIScreen.main.nativeScale
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        overlayView?.alpha = 0.8
+        activityIndicator?.alpha = 1
+    }
+    
     func set(image: ShareImage) {
-        imageView?.image = UIImage(data: image.data)
+        let uiImage = UIImage(data: image.data)
+        imageView?.image = uiImage
+        activityIndicator?.startAnimating()
         
         image.setOnUpload { [weak self] in
             DispatchQueue.main.async {
+                guard uiImage == self?.imageView?.image else { return }
                 UIView.animate(withDuration: 0.3) {
                     self?.overlayView?.alpha = 0
                     self?.activityIndicator?.alpha = 0
