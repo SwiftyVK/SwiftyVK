@@ -30,7 +30,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
         var urlRequest: URLRequest
         
         switch type {
-        case let .api( method, parameters):
+        case let .api(method, parameters):
             urlRequest = try make(
                 from: method,
                 parameters: parameters,
@@ -54,7 +54,7 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
     
     private func make(
         from apiMethod: String,
-        parameters: Parameters,
+        parameters: RawParameters,
         config: Config,
         capthca: Captcha?,
         token: Token?

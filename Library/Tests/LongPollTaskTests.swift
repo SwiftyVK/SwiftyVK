@@ -58,7 +58,7 @@ final class LongPollTaskTests: XCTestCase {
         XCTAssertEqual(onSuccessCallCount, 1)
     }
     
-    func test_operation_callOnErrorCallback_whenHistoryIsLost() {
+    func test_operation_callOnErrorCallback_whenHistoryIsLostWithTs() {
         // Given
         var onErrorCallCount = 0
         let data = JsonReader.read("longPoll.failed.1.withTs") ?? Data()
