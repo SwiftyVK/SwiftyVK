@@ -3,11 +3,7 @@ import XCTest
 @testable import SwiftyVK
 
 final class SynchronouslyTaskTests: XCTestCase {
-    
-    override func setUp() {
-        VKStack.mock()
-    }
-    
+
     func test_send_throwError_whenSendOnMainThread() {
         // Given
         let task = VK.API.Users.get(.empty).synchronously()
@@ -66,12 +62,10 @@ final class SynchronouslyTaskTests: XCTestCase {
     
     func test_send_returnEmptyData_whenSendindSucessed() {
         // Given
-        let task = VK.API.Users.get(.empty).synchronously()
+        let method = VK.API.Users.get(.empty)
+        let task = method.synchronously()
         let exp = expectation(description: "")
-        
-        (VK.sessions.default as? SessionMock)?.onSend = { method in
-            try? method.toRequest().callbacks.onSuccess?(Data())
-        }
+        VKStack.mock(method, data: Data())
         
         // When
         DispatchQueue.global().async {
@@ -92,13 +86,11 @@ final class SynchronouslyTaskTests: XCTestCase {
     
     func test_send_throwError_whenSendindFailed() {
         // Given
-        let task = VK.API.Users.get(.empty).synchronously()
+        let method = VK.API.Users.get(.empty)
+        let task = method.synchronously()
         let exp = expectation(description: "")
-        
-        (VK.sessions.default as? SessionMock)?.onSend = { method in
-            method.toRequest().callbacks.onError?(.unexpectedResponse)
-        }
-        
+        VKStack.mock(method, error: .unexpectedResponse)
+
         // When
         DispatchQueue.global().async {
             do {
