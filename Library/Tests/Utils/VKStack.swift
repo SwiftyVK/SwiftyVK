@@ -40,7 +40,8 @@ final class VKStack {
             let request = method.toRequest()
             
             guard let result = mocks[request] else {
-                let error = VKError.unknown(NSError(domain: "TEST", code: 0))
+                mocks[request] = nil
+                let error = VKError.unknown(NSError(domain: "NOT MOCKED \(request.type)", code: 0))
                 request.callbacks.onError?(error)
                 return
             }
@@ -48,9 +49,14 @@ final class VKStack {
             do {
                 switch result {
                 case let .result(result):
-                    try request.callbacks.onSuccess?(result.unwrap())
+                    let data = try result.unwrap()
+                    
+                    if try request.next(with: data)?.toMethod().send() == nil {
+                        try request.callbacks.onSuccess?(data)
+                    }
                 case let .clousure(clousure):
                     clousure()
+                    try? request.callbacks.onSuccess?(Data())
                 }
             }
             catch {

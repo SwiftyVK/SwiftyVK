@@ -48,6 +48,7 @@ public struct ShareLink: Equatable {
 public final class ShareImage: Equatable {
     let data: Data
     let type: ImageType
+    var id: String?
     
     var state: ShareImageUploadState = .initial {
         didSet {

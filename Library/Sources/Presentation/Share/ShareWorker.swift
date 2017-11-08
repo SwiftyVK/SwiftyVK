@@ -1,5 +1,4 @@
 protocol ShareWorker: class {
-    func add(link: ShareLink?)
     func upload(images: [ShareImage], in session: Session)
     func getPrefrences(in session: Session) throws -> [ShareContextPreference]
     func post(context: ShareContext, in session: Session) throws -> Data?
@@ -8,17 +7,10 @@ protocol ShareWorker: class {
 
 final class ShareWorkerImpl: ShareWorker {
     private var group = DispatchGroup()
-    private var attachements = [String]()
-    private var imageTasks = [Task]()
-    
-    func add(link: ShareLink?) {
-        if let link = link?.url.absoluteString {
-            attachements.append(link)
-        }
-    }
+    private(set) var tasks = [Task]()
     
     func getPrefrences(in session: Session) throws -> [ShareContextPreference] {
-        let data = try VK.API.Users.get([Parameter.fields: "exports"]).synchronously().send(in: session)
+        let data = try VK.API.Users.get([.fields: "exports"]).synchronously().send(in: session)
         let json = try JSON(data: data)
         var preferences = [ShareContextPreference]()
         
@@ -62,9 +54,10 @@ final class ShareWorkerImpl: ShareWorker {
             image.state = .uploading
             let media = Media.image(data: image.data, type: image.type)
             
-            imageTasks += VK.API.Upload.Photo.toWall(media, to: .user(id: ""))
+            tasks += VK.API.Upload.Photo.toWall(media, to: .user(id: ""))
                 .onSuccess { [weak self] data in
-                    image.state = try self?.parseImage(from: data) ?? .failed
+                    image.id = try self?.parseImage(from: data)
+                    image.state = .uploaded
                     self?.group.leave()
                 }
                 .onError { [weak self] error in
@@ -86,6 +79,12 @@ final class ShareWorkerImpl: ShareWorker {
             .filter { $0.key != SettingKeys.friendsOnly.rawValue && $0.active == true }
             .map { $0.key }
         
+        var attachements = context.images.flatMap { $0.id }
+        
+        if let link = context.link?.url.absoluteString {
+            attachements.append(link)
+        }
+        
         let postTask = VK.API.Wall.post([
             .message: context.message ?? context.link?.title,
             .friendsOnly: friendsOnly ? "1" : "0",
@@ -94,30 +93,27 @@ final class ShareWorkerImpl: ShareWorker {
             ])
             .synchronously()
         
-        imageTasks += postTask
+        tasks += postTask
         return try postTask.send(in: session)
     }
     
     func clear(context: ShareContext) {
-        imageTasks.forEach { $0.cancel() }
+        tasks.forEach { $0.cancel() }
         
         context.images
             .filter { $0.state == .uploading }
             .forEach { _ in group.leave() }
     }
     
-    private func parseImage(from data: Data) throws -> ShareImageUploadState {
+    private func parseImage(from data: Data) throws -> String {
         let json = try JSON(data: data)
         
         guard
             let photoId = json.int("0, id")?.toString(),
             let ownerId = json.int("0, owner_id")?.toString()
-            else { return .failed }
+            else { throw VKError.unexpectedResponse }
         
-        let imageId = String(format: "photo%@_%@", ownerId, photoId)
-        attachements.append(imageId)
-        
-        return .uploaded
+        return String(format: "photo%@_%@", ownerId, photoId)
     }
 }
 

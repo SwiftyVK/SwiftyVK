@@ -39,7 +39,6 @@ final class SharePresenterImpl: SharePresenter {
             
             context.preferences = try shareWorker.getPrefrences(in: session)
             shareWorker.upload(images: context.images, in: session)
-            shareWorker.add(link: context.link)
             controller.showPlaceholder(false)
             
             return try present(
