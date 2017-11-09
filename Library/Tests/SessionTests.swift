@@ -173,6 +173,39 @@ final class SessionTests: XCTestCase {
         XCTAssertEqual(context.session.state, .authorized)
     }
     
+    func test_session_saved_whenDestroyed() {
+        // Given
+        let sessionId = String.random(20)
+        let context = makeContext(sessionId: sessionId)
+        let exp = expectation(description: "")
+        
+        context.sessionSaver.onSaveState = {
+            exp.fulfill()
+        }
+        
+        // Then
+        context.session.destroy()
+        // When
+        waitForExpectations(timeout: 1)
+    }
+    
+    func test_session_saved_whenConfigChanged() {
+        // Given
+        let sessionId = String.random(20)
+        let context = makeContext(sessionId: sessionId)
+        let exp = expectation(description: "")
+        
+        context.sessionSaver.onSaveState = {
+            exp.fulfill()
+        }
+        
+        // Then
+        let session = context.session
+        session.config = .default
+        // When
+        waitForExpectations(timeout: 1)
+    }
+    
     func test_state_isAuthorized_whenSessionRestored() {
         // Given
         let sessionId = String.random(20)
@@ -450,7 +483,8 @@ private func makeContext(sessionId: String? = nil) -> (
     attemptSheduler: AttemptShedulerMock,
     authorizator: AuthorizatorMock,
     captchaPresenter: CaptchaPresenterMock,
-    delegate: SwiftyVKDelegateMock
+    delegate: SwiftyVKDelegateMock,
+    sessionSaver: SessionsHolderMock
     ) {
         let taskSheduler = TaskShedulerMock()
         let attemptSheduler = AttemptShedulerMock()
@@ -476,5 +510,5 @@ private func makeContext(sessionId: String? = nil) -> (
             )
         }
         
-        return (makeSession, makeSession(), taskSheduler, attemptSheduler, authorizator, captchaPresenter, delegate)
+        return (makeSession, makeSession(), taskSheduler, attemptSheduler, authorizator, captchaPresenter, delegate, sessionSaver)
 }

@@ -70,11 +70,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         longPollMaker.longPoll(session: self)
     }()
     
-    public var id: String {
-        didSet {
-            sessionSaver?.saveState()
-        }
-    }
+    public internal(set) var id: String
     
     var token: Token? {
         didSet {
@@ -160,7 +156,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     }
     
     public func logOut() {
-        destroy()
+        unsafeDestroy()
     }
     
     public func validate(redirectUrl: URL) throws {
@@ -257,10 +253,13 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     }
     
     func destroy() {
-        gateQueue.sync {
-            self.token = self.authorizator.reset(sessionId: self.id)
-            self.id = ""
-        }
+        gateQueue.sync { unsafeDestroy() }
+    }
+    
+    private func unsafeDestroy() {
+        self.token = self.authorizator.reset(sessionId: self.id)
+        self.id = ""
+        self.sessionSaver?.saveState()
     }
 }
 
