@@ -12,7 +12,7 @@ final class ShareControllerMacOS: NSViewController, ShareController {
         
     }
     
-    func showPlaceholder(_ enable: Bool) {
+    func showPlaceholder() {
         
     }
     

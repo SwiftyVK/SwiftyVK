@@ -21,8 +21,8 @@ final class ShareControllerIOS: UIViewController, ShareController {
         nextController?.share(context, onPost: onPost)
     }
     
-    func showPlaceholder(_ enable: Bool) {
-        nextController?.showPlaceholder(enable)
+    func showPlaceholder() {
+        nextController?.showPlaceholder()
     }
     
     func showWaitForConnection() {
@@ -45,9 +45,5 @@ final class ShareControllerIOS: UIViewController, ShareController {
         if let nextController = segue.destination as? ShareController {
             self.nextController = nextController
         }
-    }
-    
-    deinit {
-        print("DEINIT", type(of: self))
     }
 }

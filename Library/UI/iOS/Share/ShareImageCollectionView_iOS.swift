@@ -53,8 +53,4 @@ final class ShareImageCollectionViewIOS: UICollectionView, UICollectionViewDataS
         
         cell.set(image: image)
     }
-    
-    deinit {
-        print("DEINIT", type(of: self))
-    }
 }

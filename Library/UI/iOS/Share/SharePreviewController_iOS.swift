@@ -60,9 +60,14 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         linkUrl?.text = context.link?.url.absoluteString
         
         updateSendButton()
+        showPlaceholder(false)
     }
     
-    func showPlaceholder(_ enable: Bool) {
+    func showPlaceholder() {
+        showPlaceholder(true)
+    }
+    
+    private func showPlaceholder(_ enable: Bool) {
         enablePostButton(!enable)
         
         DispatchQueue.safelyOnMain {
@@ -137,9 +142,5 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         }
         
         return true
-    }
-    
-    deinit {
-        print("DEINIT", type(of: self))
     }
 }

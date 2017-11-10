@@ -121,7 +121,6 @@ final class WebPresenterImpl: WebPresenter {
         let fragment = url.fragment ?? ""
 
         if host != "vk.com" && host != "m.vk.com" && host != "oauth.vk.com" {
-            print(url)
             currentController?.goBack()
         }
         else if fragment.contains("access_token=") {

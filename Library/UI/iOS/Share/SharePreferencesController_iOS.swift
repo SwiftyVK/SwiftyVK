@@ -43,8 +43,4 @@ UIViewController, SharePreferencesController, UITableViewDataSource, UITableView
         
         cell.set(preference: preferences[indexPath.row])
     }
-    
-    deinit {
-        print("DEINIT", type(of: self))
-    }
 }

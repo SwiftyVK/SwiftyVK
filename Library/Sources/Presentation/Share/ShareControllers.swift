@@ -4,7 +4,7 @@ protocol ShareController: class, DismisableController {
         onPost: @escaping (ShareContext) -> ()
     )
     
-    func showPlaceholder(_ enable: Bool)
+    func showPlaceholder()
     func showWaitForConnection()
     func enablePostButton(_ enable: Bool)
     

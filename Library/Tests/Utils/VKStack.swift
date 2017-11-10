@@ -2,7 +2,7 @@
 
 final class VKStack {
     static let delegate = SwiftyVKDelegateMock()
-    static var mocks = [Request: MockResult]()
+    private static var mocks = [Request: MockResult]()
     
     static func mock(_ method: SendableMethod, fileName: String, file: StaticString = #file, line: UInt = #line) {
         guard let data = JsonReader.read(fileName, file: file, line: line) else { return }
@@ -27,7 +27,7 @@ final class VKStack {
         mocks[method.toRequest()] = result
     }
     
-    private static func mockSession() {
+    static func mockSession() {
         if VK.dependenciesType != DependenciesHolderMock.self {
             VK.dependenciesType = DependenciesHolderMock.self
             VK.setUp(appId: "", delegate: delegate)

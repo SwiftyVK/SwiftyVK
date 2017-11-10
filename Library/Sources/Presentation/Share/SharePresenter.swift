@@ -31,7 +31,7 @@ final class SharePresenterImpl: SharePresenter {
         
         return try uiSyncQueue.sync {
             defer { shareWorker.clear(context: context) }
-            controller.showPlaceholder(true)
+            controller.showPlaceholder()
             
             reachability?.waitForReachable { [weak controller] in
                 controller?.showWaitForConnection()
@@ -39,7 +39,6 @@ final class SharePresenterImpl: SharePresenter {
             
             context.preferences = try shareWorker.getPrefrences(in: session)
             shareWorker.upload(images: context.images, in: session)
-            controller.showPlaceholder(false)
             
             return try present(
                 controller: controller,
@@ -96,9 +95,5 @@ final class SharePresenterImpl: SharePresenter {
                 buttontext: Resources.localizedString(for: "Close")
             )
         }
-    }
-    
-    deinit {
-        print("DEINIT", type(of: self))
     }
 }

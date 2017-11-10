@@ -16,8 +16,8 @@ final class ShareNavigationControllerIOS: UINavigationController, ShareControlle
         nextController?.share(context, onPost: onPost)
     }
     
-    func showPlaceholder(_ enable: Bool) {
-        nextController?.showPlaceholder(enable)
+    func showPlaceholder() {
+        nextController?.showPlaceholder()
     }
     
     func showWaitForConnection() {
