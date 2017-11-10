@@ -100,7 +100,8 @@ final class DependenciesImpl: Dependencies {
     }
     
     var authorizator: Authorizator {
-        return sharedAuthorizator
+        get { return sharedAuthorizator }
+        set { sharedAuthorizator = newValue }
     }
     
     private lazy var sharedAuthorizator: Authorizator = {

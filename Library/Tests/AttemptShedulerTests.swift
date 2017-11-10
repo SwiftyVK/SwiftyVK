@@ -9,9 +9,11 @@ final class AttemptShedulerTests: XCTestCase {
         for _ in 0..<operationCount { group.enter() }
         // When
         let samples = sheduleSamples(count: operationCount, concurrent: true, completion: { group.leave() })
-        _ = group.wait(timeout: .now() + totalAsyncTime)
+        _ = group.wait(timeout: .now() + totalAsyncTime * 2)
         // Then
-        XCTAssertEqual(samples.map {$0.isFinished}, (0..<operationCount).map { _ in true },
+        XCTAssertEqual(
+            samples.filter {$0.isFinished} .count,
+            operationCount,
             "All concurrent operations should be executed"
         )
     }
@@ -52,7 +54,7 @@ final class AttemptShedulerTests: XCTestCase {
         let serial = sheduleSamples(count: operationCount, concurrent: false, completion: { serialGroup.leave() })
         let concurrent = sheduleSamples(count: operationCount, concurrent: true, completion: { concurrentGroup.leave() })
         // Then
-        _ = concurrentGroup.wait(timeout: .now() + totalAsyncTime * 10)
+        _ = concurrentGroup.wait(timeout: .now() + totalAsyncTime * 20)
         
         XCTAssertLessThanOrEqual(serial.filter { $0.isFinished }.count, shedulerLimit.count,
             "Operations should be executed serially"
@@ -62,7 +64,7 @@ final class AttemptShedulerTests: XCTestCase {
             "All concurrent operations should be executed"
         )
         
-        _ = serialGroup.wait(timeout: .now() + totalSyncTime * 10)
+        _ = serialGroup.wait(timeout: .now() + totalSyncTime * 20)
 
         XCTAssertEqual(serial.filter { $0.isFinished }.count, operationCount,
             "All serial operations should be executed"

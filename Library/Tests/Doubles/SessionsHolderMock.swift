@@ -8,13 +8,24 @@ final class SessionsHolderMock: SessionSaver, SessionsHolder {
         return [`default`]
     }
     
+    var onMake: ((SessionConfig) -> ())?
+    
     func make(config: SessionConfig) -> Session {
+        onMake?(config)
         return `default`
     }
     
-    func destroy(session: Session) throws {}
+    var onDestroy: ((Session) throws -> ())?
+    
+    func destroy(session: Session) throws {
+        try onDestroy?(session)
+    }
     
     func markAsDefault(session: Session) {}
     
-    func saveState() {}
+    var onSaveState: (() -> ())?
+    
+    func saveState() {
+        onSaveState?()
+    }
 }

@@ -44,14 +44,14 @@ final class APIWorker {
     class func captcha() {
         VK.API.Custom.method(name: "captcha.force")
             .onSuccess { print("SwiftyVK: captcha.force successed with \n \(JSON($0))") }
-            .onError { print("SwiftyVK: captcha.force failed with \n \(JSON($0))") }
+            .onError { print("SwiftyVK: captcha.force failed with \n \($0)") }
             .send()
     }
     
     class func validation() {
         VK.API.Custom.method(name: "account.testValidation")
             .onSuccess { print("SwiftyVK: account.testValidation successed with \n \(JSON($0))") }
-            .onError { print("SwiftyVK: account.testValidation failed with \n \(JSON($0))") }
+            .onError { print("SwiftyVK: account.testValidation failed with \n \($0)") }
             .send()
     }
     
@@ -59,14 +59,14 @@ final class APIWorker {
         VK.API.Users.get(.empty)
             .configure(with: Config.init(httpMethod: .POST))
             .onSuccess { print("SwiftyVK: users.get successed with \n \(JSON($0))") }
-            .onError { print("SwiftyVK: friends.get fail \n \(JSON($0))") }
+            .onError { print("SwiftyVK: friends.get fail \n \($0)") }
             .send()
     }
     
     class func friendsGet() {
         VK.API.Friends.get(.empty)
             .onSuccess { print("SwiftyVK: friends.get successed with \n \(JSON($0))") }
-            .onError { print("SwiftyVK: friends.get failed with \n \(JSON($0))") }
+            .onError { print("SwiftyVK: friends.get failed with \n \($0)") }
             .send()
     }
     
@@ -83,7 +83,7 @@ final class APIWorker {
         
         VK.API.Upload.Photo.toWall(media, to: .user(id: "4680178"))
             .onSuccess { print("SwiftyVK: upload successed with \n \(JSON($0))") }
-            .onError { print("SwiftyVK: upload failed with \n \(JSON($0))")}
+            .onError { print("SwiftyVK: upload failed with \n \($0)")}
             .onProgress { print($0) }
             .send()
     }

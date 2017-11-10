@@ -41,6 +41,7 @@ protocol DestroyableSession: Session {
 
 protocol ApiErrorExecutor {
     func logIn(revoke: Bool) throws -> [String: String]
+    func invalidate()
     func validate(redirectUrl: URL) throws
     func captcha(rawUrlToImage: String, dismissOnFinish: Bool) throws -> String
 }
@@ -70,13 +71,9 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         longPollMaker.longPoll(session: self)
     }()
     
-    public var id: String {
-        didSet {
-            sessionSaver?.saveState()
-        }
-    }
+    public internal(set) var id: String
     
-    var token: Token? {
+    private(set) var token: Token? {
         didSet {
             sendTokenChangeEvent(from: oldValue, to: token)
         }
@@ -139,16 +136,16 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     func logIn(revoke: Bool) throws -> [String: String] {
         try throwIfDestroyed()
         try throwIfAuthorized()
-        let tokenExists = token != nil
         
-        token = try authorizator.authorize(
+        let token = try authorizator.authorize(
             sessionId: id,
             config: config,
-            revoke: revoke,
-            tokenExists: tokenExists
+            revoke: revoke
         )
         
-        return token?.info ?? [:]
+        self.token = token
+        
+        return token.info
     }
     
     public func logIn(rawToken: String, expires: TimeInterval) throws {
@@ -159,8 +156,12 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         }
     }
     
+    func invalidate() {
+        token?.invalidate()
+    }
+    
     public func logOut() {
-        destroy()
+        unsafeDestroy()
     }
     
     public func validate(redirectUrl: URL) throws {
@@ -257,10 +258,13 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     }
     
     func destroy() {
-        gateQueue.sync {
-            self.token = self.authorizator.reset(sessionId: self.id)
-            self.id = ""
-        }
+        gateQueue.sync { unsafeDestroy() }
+    }
+    
+    private func unsafeDestroy() {
+        self.token = self.authorizator.reset(sessionId: self.id)
+        self.id = ""
+        self.sessionSaver?.saveState()
     }
 }
 

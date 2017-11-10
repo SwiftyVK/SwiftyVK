@@ -3,12 +3,13 @@ protocol Token: class, NSCoding {
     var isValid: Bool { get }
     
     func get() -> String?
+    func invalidate()
 }
 
 final class TokenImpl: NSObject, Token {
-    
+
     private let token: String
-    private let expires: Expires
+    private var expires: Expires
     let info: [String: String]
     
     var isValid: Bool {
@@ -27,6 +28,10 @@ final class TokenImpl: NSObject, Token {
     
     func get() -> String? {
         return isValid ? token : nil
+    }
+    
+    func invalidate() {
+        expires = .during(created: Date().timeIntervalSince1970 - 100, expires: 1)
     }
     
     func encode(with aCoder: NSCoder) {

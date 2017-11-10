@@ -13,6 +13,7 @@ final class ApiErrorHandlerImpl: ApiErrorHandler {
     func handle(error: ApiError) throws -> ApiErrorHandlerResult {
         switch error.code {
         case 5:
+            executor.invalidate()
             _ = try executor.logIn(revoke: false)
             return .none
         case 14:
