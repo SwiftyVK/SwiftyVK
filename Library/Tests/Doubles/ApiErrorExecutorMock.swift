@@ -14,6 +14,12 @@ final class ApiErrorExecutorMock: ApiErrorExecutor {
         try onValidate?()
     }
     
+    var onInvalidate: (() -> ())?
+    
+    func invalidate() {
+        onInvalidate?()
+    }
+    
     var onCaptcha: (() throws -> String)?
     
     func captcha(rawUrlToImage: String, dismissOnFinish: Bool) throws -> String {

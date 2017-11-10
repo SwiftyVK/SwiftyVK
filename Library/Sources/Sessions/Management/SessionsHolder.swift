@@ -26,15 +26,13 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     private var sessions = NSHashTable<AnyObject>(options: .strongMemory)
     
     public var `default`: Session {
-        get {
-            if let realDefault = storedDefault, realDefault.state > .destroyed {
-                return realDefault
-            }
-            
-            let oldConfig = storedDefault?.config ?? .default
-            sessions.remove(storedDefault)
-            return makeSession(config: oldConfig, makeDefault: true)
+        if let realDefault = storedDefault, realDefault.state > .destroyed {
+            return realDefault
         }
+        
+        let oldConfig = storedDefault?.config ?? .default
+        sessions.remove(storedDefault)
+        return makeSession(config: oldConfig, makeDefault: true)
     }
     
     private weak var storedDefault: Session?

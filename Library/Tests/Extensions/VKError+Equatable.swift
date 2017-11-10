@@ -30,7 +30,6 @@ extension VKError: Equatable {
         (.authorizationDenied, .authorizationDenied),
         (.authorizationCancelled, .authorizationCancelled),
         (.authorizationFailed, .authorizationFailed),
-        (.needAuthorization, .needAuthorization),
         (.captchaWasDismissed, .captchaWasDismissed):
             return true
         case (_, _):

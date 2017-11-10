@@ -1,6 +1,6 @@
 protocol Authorizator: class {
     func getSavedToken(sessionId: String) -> Token?
-    func authorize(sessionId: String, config: SessionConfig, revoke: Bool, tokenExists: Bool) throws -> Token
+    func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Token
     func authorize(sessionId: String, rawToken: String, expires: TimeInterval) throws -> Token
     func validate(sessionId: String, url: URL) throws -> Token
     func reset(sessionId: String) -> Token?
@@ -45,15 +45,8 @@ final class AuthorizatorImpl: Authorizator {
         self.cookiesHolder = cookiesHolder
     }
     
-    func authorize(sessionId: String, config: SessionConfig, revoke: Bool, tokenExists: Bool) throws -> Token {
+    func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Token {
         return try queue.sync {
-            if let token = getSavedToken(sessionId: sessionId) {
-                return token
-            }
-            
-            guard revoke || tokenExists else {
-                throw VKError.needAuthorization
-            }
             
             guard let scopes = delegate?.vkNeedsScopes(for: sessionId).rawValue else {
                 throw VKError.vkDelegateNotFound
@@ -83,7 +76,9 @@ final class AuthorizatorImpl: Authorizator {
     }
     
     func getSavedToken(sessionId: String) -> Token? {
-        return tokenStorage.getFor(sessionId: sessionId)
+        return queue.sync {
+            tokenStorage.getFor(sessionId: sessionId)
+        }
     }
     
     func authorize(sessionId: String, rawToken: String, expires: TimeInterval) throws -> Token {

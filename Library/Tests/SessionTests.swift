@@ -55,7 +55,7 @@ final class SessionTests: XCTestCase {
         // Given
         let context = makeContext()
 
-        context.authorizator.onAuthorize = { _, _, _, _ in
+        context.authorizator.onAuthorize = { _, _, _ in
             return TokenMock()
         }
         // When
@@ -77,7 +77,7 @@ final class SessionTests: XCTestCase {
         // Given
         let context = makeContext()
 
-        context.authorizator.onAuthorize = { _, _, _, _ in
+        context.authorizator.onAuthorize = { _, _, _ in
             throw VKError.authorizationFailed
         }
         // When
@@ -99,7 +99,7 @@ final class SessionTests: XCTestCase {
         // Given
         let context = makeContext()
 
-        context.authorizator.onAuthorize = { _, _, _, _ in
+        context.authorizator.onAuthorize = { _, _, _ in
             throw NSError(domain: "", code: 0, userInfo: nil)
         }
         // When
@@ -347,7 +347,7 @@ final class SessionTests: XCTestCase {
         // Given
         let context = makeContext()
 
-        context.authorizator.onAuthorize = { _, _, _, _ in
+        context.authorizator.onAuthorize = { _, _, _ in
             return TokenMock()
         }
         // When
@@ -398,7 +398,7 @@ final class SessionTests: XCTestCase {
         // Given
         let context = makeContext()
         
-        context.authorizator.onAuthorize = { _, _, _, _ in
+        context.authorizator.onAuthorize = { _, _, _ in
             return TokenMock()
         }
         
@@ -421,7 +421,7 @@ final class SessionTests: XCTestCase {
         var onPresentCallCount = 0
         let context = makeContext()
         
-        context.authorizator.onAuthorize = { _, _, _, _ in
+        context.authorizator.onAuthorize = { _, _, _ in
             return TokenMock()
         }
         
@@ -452,6 +452,32 @@ final class SessionTests: XCTestCase {
         context.session.dismissCaptcha()
         // Then
         XCTAssertEqual(onDismissCallCount, 1)
+    }
+    
+    func test_invalidate_callTokenInvalidate() {
+        // Given
+        let context = makeContext()
+        let exp = expectation(description: "")
+        
+        let token = TokenMock()
+        
+        token.onInvalidate = {
+            exp.fulfill()
+        }
+        
+        context.authorizator.onAuthorize = { _, _, _ in
+            return token
+        }
+        
+        // When
+        do {
+            _ = try context.session.logIn(revoke: false)
+            context.session.invalidate()
+        } catch let error {
+            XCTFail("Unexpected error: \(error)")
+        }
+        // Then
+        waitForExpectations(timeout: 1)
     }
     
     private func syncLogIn(

@@ -29,6 +29,13 @@ final class TokenTests: XCTestCase {
         XCTAssertNil(token.get())
     }
     
+    func test_invalidate_isNotValid() {
+        let token = TokenImpl(token: "test", expires: 100, info: ["test" : "test"])
+        // When
+        token.invalidate()
+        // Then
+        XCTAssertFalse(token.isValid)
+    }
     
     func test_getInfo() {
         // When
