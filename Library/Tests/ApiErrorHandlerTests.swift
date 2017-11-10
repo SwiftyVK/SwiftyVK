@@ -24,6 +24,26 @@ final class ApiErrorHandlerTests: XCTestCase {
         }
     }
     
+    func test_callInvalidate_whenHandledAccessDeniedError() {
+        // Given
+        let context = makeContext()
+        let error = ApiError(code: 5)
+        let exp = expectation(description: "")
+        
+        context.executor.onInvalidate = {
+            exp.fulfill()
+        }
+        // When
+        do {
+            _ = try context.handler.handle(error: error)
+            // Then
+        } catch let error {
+            XCTFail("Expression throw unexpected error \(error)")
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+    
     func test_callCaptcha_whenHandledCaptchaNeededError() {
         // Given
         let context = makeContext()

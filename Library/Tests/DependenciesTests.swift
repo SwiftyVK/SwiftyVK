@@ -4,7 +4,7 @@ import XCTest
 
 final class DependenciesTests: XCTestCase {
     
-    func test_maleAuthorizator_typeIsAuthorizatorImpl() {
+    func test_makeAuthorizator_typeIsAuthorizatorImpl() {
         // Given
         let context = makeContext()
         // When
@@ -25,6 +25,8 @@ final class DependenciesTests: XCTestCase {
     func test_makeSession_typeIsSessionImpl() {
         // Given
         let context = makeContext()
+        context.factory.sessionsStorage = SessionsStorageMock()
+        context.factory.authorizator = AuthorizatorMock()
         // When
         let object = context.factory.session(id: "", config: .default, sessionSaver: SessionsHolderMock())
         // Then
@@ -66,7 +68,7 @@ final class DependenciesTests: XCTestCase {
         XCTAssertTrue(type(of: object) == TaskImpl.self)
     }
     
-    func test_longPollTask_typeIsLongPollTaskImpl() {
+    func test_makeLongPollTask_typeIsLongPollTaskImpl() {
         // Given
         let context = makeContext()
         // When

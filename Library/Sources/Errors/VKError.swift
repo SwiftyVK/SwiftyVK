@@ -15,8 +15,7 @@ public indirect enum VKError: Error {
     case sessionAlreadyDestroyed(Session)
     case sessionAlreadyAuthorized(Session)
     case sessionIsNotAuthorized(Session)
-    case needAuthorization
-    
+
     // MARK: - Request errors
     case unexpectedResponse
     case jsonNotParsed(Error)

@@ -26,33 +26,16 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     private var sessions = NSHashTable<AnyObject>(options: .strongMemory)
     
     public var `default`: Session {
-        get {
-            if storedDefault.state == .destroyed {
-                sessions.remove(storedDefault)
-                
-                storedDefault = self.sessionMaker.session(
-                    id: .random(20),
-                    config: storedDefault.config,
-                    sessionSaver: self
-                )
-                
-                sessions.add(storedDefault)
-            }
-            
-            return storedDefault
+        if let realDefault = storedDefault, realDefault.state > .destroyed {
+            return realDefault
         }
-        set {
-            storedDefault = newValue
-        }
+        
+        let oldConfig = storedDefault?.config ?? .default
+        sessions.remove(storedDefault)
+        return makeSession(config: oldConfig, makeDefault: true)
     }
     
-    lazy private var storedDefault: Session = {
-        self.sessionMaker.session(
-            id: .random(20),
-            config: .default,
-            sessionSaver: self
-        )
-    }()
+    private weak var storedDefault: Session?
     
     public var all: [Session] {
         return sessions.allObjects.flatMap { $0 as? Session }
@@ -66,8 +49,6 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
         self.sessionsStorage = sessionsStorage
         
         restoreState()
-        self.sessions.add(`default`)
-        saveState()
     }
     
     func make() -> Session {
@@ -75,13 +56,28 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     }
     
     public func make(config: SessionConfig) -> Session {
+        return makeSession(config: config)
+    }
+    
+    @discardableResult
+    private func makeSession(
+        id: String = .random(20),
+        config: SessionConfig = .default,
+        makeDefault: Bool = false
+        ) -> Session {
+        
         let session = sessionMaker.session(
-            id: .random(20),
+            id: id,
             config: config,
             sessionSaver: self
         )
         
         sessions.add(session)
+        
+        if makeDefault {
+            storedDefault = session
+        }
+        
         saveState()
         return session
     }
@@ -100,13 +96,14 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
             throw VKError.sessionAlreadyDestroyed(session)
         }
         
-        self.default = session
+        self.storedDefault = session
+        saveState()
     }
     
     func saveState() {
-        let encodedSessions = self.all.map {
-            EncodedSession(isDefault: $0 == self.`default`, id: $0.id, config: $0.config)
-        }
+        let encodedSessions = self.all
+            .map { EncodedSession(isDefault: $0.id == storedDefault?.id, id: $0.id, config: $0.config) }
+            .filter { !$0.id.isEmpty }
         
         do {
             try self.sessionsStorage.save(sessions: encodedSessions)
@@ -118,21 +115,11 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     
     private func restoreState() {
         do {
-            let decodedSessions = try sessionsStorage.restore()
+            let restored = try sessionsStorage.restore()
+            
+            restored
                 .filter { !$0.id.isEmpty }
-            
-            decodedSessions
-                .filter { !$0.isDefault }
-                .map { sessionMaker.session(id: $0.id, config: $0.config, sessionSaver: self) }
-                .forEach { sessions.add($0) }
-            
-            if let defaultSession = decodedSessions
-                .first(where: { $0.isDefault })
-                .map({ sessionMaker.session(id: $0.id, config: $0.config, sessionSaver: self) }) {
-                sessions.add(defaultSession)
-                `default` = defaultSession
-            }
-            
+                .forEach { makeSession(id: $0.id, config: $0.config, makeDefault: $0.isDefault) }
         }
         catch let error {
             print("Restore sessions failed with error: \(error)")

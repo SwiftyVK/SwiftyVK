@@ -8,6 +8,8 @@ final class TokenStorageTests: XCTestCase {
         let repository = TokenStorageImpl(serviceKey: "")
         let id = "testId"
         // When
+        repository.removeFor(sessionId: id)
+
         let token = TokenMock()
         
         do {

@@ -73,9 +73,11 @@ final class TaskImpl: Operation, Task, OperationConvertible {
         guard !self.isCancelled else { return }
         
         switch error {
-        case .captchaWasDismissed:
-            perform(error: error)
-            return
+        case .captchaWasDismissed,
+             .authorizationDenied,
+             .authorizationCancelled,
+             .authorizationFailed:
+            return perform(error: error)
         default:
             break
         }

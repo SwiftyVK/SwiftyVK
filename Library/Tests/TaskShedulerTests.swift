@@ -12,8 +12,8 @@ final class TaskShedulerTests: XCTestCase {
         _ = group.wait(timeout: .now() + totalRunTime)
         // Then        
         XCTAssertEqual(
-            samples.map {$0.isFinished},
-            (0..<operationCount).map { _ in true },
+            samples.filter {$0.isFinished} .count,
+            operationCount,
             "All concurrent operations should be executed"
         )
     }

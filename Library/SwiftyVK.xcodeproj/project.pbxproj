@@ -95,6 +95,8 @@
 		D4321D8F1F5F0B34001AFE9F /* TwoVariationsMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4321D8E1F5F0B34001AFE9F /* TwoVariationsMethodTests.swift */; };
 		D4321D911F5F0D67001AFE9F /* BasicMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4321D901F5F0D67001AFE9F /* BasicMethodTests.swift */; };
 		D4321D931F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4321D921F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift */; };
+		D439AEE71FB4B80E00F3152B /* SessionConfig+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D439AEE61FB4B80E00F3152B /* SessionConfig+Equatable.swift */; };
+		D439AEE81FB4B80E00F3152B /* SessionConfig+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D439AEE61FB4B80E00F3152B /* SessionConfig+Equatable.swift */; };
 		D43E658D1F7D526100AF48C8 /* CookiesHolderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43E658A1F7D524A00AF48C8 /* CookiesHolderMock.swift */; };
 		D44348F91F3B71F5008B2B50 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44348F71F3B70F4008B2B50 /* JSONTests.swift */; };
 		D44AD0D71FB208600053AD59 /* Media+TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44AD0D61FB208600053AD59 /* Media+TestExtensions.swift */; };
@@ -629,6 +631,7 @@
 		D4321D8E1F5F0B34001AFE9F /* TwoVariationsMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoVariationsMethodTests.swift; sourceTree = "<group>"; };
 		D4321D901F5F0D67001AFE9F /* BasicMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicMethodTests.swift; sourceTree = "<group>"; };
 		D4321D921F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeVariationsMethodTests.swift; sourceTree = "<group>"; };
+		D439AEE61FB4B80E00F3152B /* SessionConfig+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SessionConfig+Equatable.swift"; sourceTree = "<group>"; };
 		D43E658A1F7D524A00AF48C8 /* CookiesHolderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookiesHolderMock.swift; sourceTree = "<group>"; };
 		D44348F71F3B70F4008B2B50 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		D44AD0D61FB208600053AD59 /* Media+TestExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Media+TestExtensions.swift"; sourceTree = "<group>"; };
@@ -994,6 +997,7 @@
 				D49795A81F4DFB9E00921A21 /* ApiError+TextExtensions.swift */,
 				D49795AA1F4DFC2400921A21 /* RequestType+TestExtensions.swift */,
 				D44AD0D61FB208600053AD59 /* Media+TestExtensions.swift */,
+				D439AEE61FB4B80E00F3152B /* SessionConfig+Equatable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1757,6 +1761,7 @@
 				D49795A91F4DFB9E00921A21 /* ApiError+TextExtensions.swift in Sources */,
 				A2B40DFD1EA693B700106AE3 /* UrlRequestBuilderTests.swift in Sources */,
 				A25A19D01EE4233D00CF13AF /* TokenParserTests.swift in Sources */,
+				D439AEE71FB4B80E00F3152B /* SessionConfig+Equatable.swift in Sources */,
 				D4306B2F1F5484380050D165 /* Response.swift in Sources */,
 				D41D5D971F62D0F800B4C8AF /* LongPollEventTests.swift in Sources */,
 				A2E34DBF1ED1F6FE0041E663 /* TokenStorageMock.swift in Sources */,
@@ -2104,6 +2109,7 @@
 				D46FB3F71F929DBC000CEAEB /* VKAppProxyTests.swift in Sources */,
 				D46FB41C1F929DCB000CEAEB /* VKError+TestExtensions.swift in Sources */,
 				D46FB41D1F929DCB000CEAEB /* ApiError+TextExtensions.swift in Sources */,
+				D439AEE81FB4B80E00F3152B /* SessionConfig+Equatable.swift in Sources */,
 				D46FB4061F929DBC000CEAEB /* ConnectionObserverTests.swift in Sources */,
 				D46FB3F01F929DBC000CEAEB /* UrlRequestBuilderTests.swift in Sources */,
 				D46FB4481F929EE6000CEAEB /* CaptchaControllerMock.swift in Sources */,

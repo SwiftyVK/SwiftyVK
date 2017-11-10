@@ -23,6 +23,12 @@ final class SessionMock: Session, TaskSession, DestroyableSession, ApiErrorExecu
         
     }
     
+    var onInvalidate: (() -> ())?
+    
+    func invalidate() {
+        onInvalidate?()
+    }
+    
     func logOut() {}
     
     var onSend: ((SendableMethod) -> ())?

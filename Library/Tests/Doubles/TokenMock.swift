@@ -1,6 +1,7 @@
 @testable import SwiftyVK
 
 final class TokenMock: NSObject, Token {
+    
     var token: String?
     var isValid: Bool
 
@@ -18,6 +19,12 @@ final class TokenMock: NSObject, Token {
     
     func get() -> String? {
         return token
+    }
+    
+    var onInvalidate: (() -> ())?
+    
+    func invalidate() {
+        onInvalidate?()
     }
     
     func encode(with aCoder: NSCoder) {
