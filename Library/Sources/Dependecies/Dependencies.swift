@@ -41,14 +41,14 @@ protocol WebControllerMaker: class {
     func webController() -> WebController?
 }
 
-protocol CaptchaControllerMaker {
+protocol CaptchaControllerMaker: class {
     func captchaController() -> CaptchaController?
 }
 
-protocol LongPollTaskMaker {
+protocol LongPollTaskMaker: class {
     func longPollTask(session: Session?, data: LongPollTaskData) -> LongPollTask
 }
 
-protocol LongPollMaker {
+protocol LongPollMaker: class {
     func longPoll(session: Session) -> LongPoll
 }

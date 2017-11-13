@@ -82,8 +82,8 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     private let taskSheduler: TaskSheduler
     private let attemptSheduler: AttemptSheduler
     private let authorizator: Authorizator
-    private let taskMaker: TaskMaker
-    private let longPollMaker: LongPollMaker
+    private unowned var taskMaker: TaskMaker
+    private unowned var longPollMaker: LongPollMaker
     private let captchaPresenter: CaptchaPresenter
     private weak var sessionSaver: SessionSaver?
     private weak var delegate: SwiftyVKSessionDelegate?
@@ -228,14 +228,17 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     }
     
     private func sendTokenChangeEvent(from oldToken: Token?, to newToken: Token?) {
-        if oldToken != nil, let newToken = newToken {
-            delegate?.vkTokenUpdated(for: id, info: newToken.info)
-        }
-        else if let newToken = newToken {
-            delegate?.vkTokenCreated(for: id, info: newToken.info)
-        }
-        else if oldToken != nil {
-            delegate?.vkTokenRemoved(for: id)
+    
+        DispatchQueue.global().async { [id] in
+            if oldToken != nil, let newToken = newToken {
+                self.delegate?.vkTokenUpdated(for: id, info: newToken.info)
+            }
+            else if let newToken = newToken {
+                self.delegate?.vkTokenCreated(for: id, info: newToken.info)
+            }
+            else if oldToken != nil {
+                self.delegate?.vkTokenRemoved(for: id)
+            }
         }
     }
     

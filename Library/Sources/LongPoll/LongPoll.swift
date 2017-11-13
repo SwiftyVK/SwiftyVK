@@ -16,7 +16,7 @@ public protocol LongPoll {
 public final class LongPollImpl: LongPoll {
     
     private weak var session: Session?
-    private let operationMaker: LongPollTaskMaker
+    private weak var operationMaker: LongPollTaskMaker?
     private let connectionObserver: ConnectionObserver?
     private let getInfoDelay: TimeInterval
     
@@ -150,7 +150,7 @@ public final class LongPollImpl: LongPoll {
             let data = taskData
             else { return }
         
-        let operation = operationMaker.longPollTask(session: session, data: data)
+        guard let operation = operationMaker?.longPollTask(session: session, data: data) else { return }
         updatingQueue.addOperation(operation.toOperation())
     }
     
