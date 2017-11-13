@@ -233,26 +233,23 @@ final class SessionTests: XCTestCase {
         XCTAssertEqual(state, .initiated)
     }
     
-    func test_onVKTokenCreated_calledOnce_whenTokenCreated() {
+    func test_onVKTokenCreated_calledOnce_whenTokenCreated() throws {
         // Given
+        let exp = expectation(description: "")
         let context = makeContext()
-        var onVKTokenCreatedCallCount = 0
         
         context.delegate.onVKTokenCreated = { _, _ in
-            onVKTokenCreatedCallCount += 1
+            exp.fulfill()
         }
         
         context.authorizator.onRawAuthorize = { _, _, _ in
             return TokenMock()
         }
         // When
-        do {
-            try context.session.logIn(rawToken: "", expires: 0)
-        } catch let error {
-            XCTFail("Unexpected error \(error)")
-        }
+        try context.session.logIn(rawToken: "", expires: 0)
+
         // Then
-        XCTAssertEqual(onVKTokenCreatedCallCount, 1)
+        waitForExpectations(timeout: 5)
     }
     
     func test_onVKTokenCreated_callOnce_whenSessionRestored() {
@@ -277,13 +274,13 @@ final class SessionTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
     
-    func test_onVKTokenUpdated_calledOnce_whenTokenUpdated() {
+    func test_onVKTokenUpdated_calledOnce_whenTokenUpdated() throws {
         // Given
+        let exp = expectation(description: "")
         let context = makeContext()
-        var onVKTokenUpdatedCallCount = 0
         
         context.delegate.onVKTokenUpdated = { _, _ in
-            onVKTokenUpdatedCallCount += 1
+            exp.fulfill()
         }
         
         context.authorizator.onRawAuthorize = { _, _, _ in
@@ -291,14 +288,10 @@ final class SessionTests: XCTestCase {
         }
         
         // When
-        do {
-            try context.session.logIn(rawToken: "", expires: 0)
-            try context.session.logIn(rawToken: "", expires: 0)
-        } catch let error {
-            XCTFail("Unexpected error \(error)")
-        }
+        try context.session.logIn(rawToken: "", expires: 0)
+        try context.session.logIn(rawToken: "", expires: 0)
         // Then
-        XCTAssertEqual(onVKTokenUpdatedCallCount, 1)
+        waitForExpectations(timeout: 5)
     }
     
     func test_onVKTokenRemoved_calledOnce_whenTokenRemoved() {
