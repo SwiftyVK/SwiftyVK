@@ -1,7 +1,7 @@
 import Foundation
 
 /// Atomic container for any Equatable value. Synchronized with Lock.
-final class Atomic<Value> where Value: Equatable {
+final class Atomic<Value> {
     
     private var value: Value
     private var lock: Lock = MultiplatrormLock()
@@ -18,8 +18,6 @@ final class Atomic<Value> where Value: Equatable {
     /// Wrap new value atomically
     /// - parameter newValue: any Equatable value
     func wrap(_ newValue: Value) {
-        guard value != newValue else { return }
-        
         lock.perform {
             let oldValue = value
             willWrap?(oldValue)
@@ -60,8 +58,6 @@ final class Atomic<Value> where Value: Equatable {
         try lock.perform {
             let oldValue = value
             let newValue = try scope(value)
-            
-            guard newValue != oldValue else { return }
             
             willWrap?(oldValue)
             value = newValue
