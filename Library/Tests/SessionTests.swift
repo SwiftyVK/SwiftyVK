@@ -294,13 +294,13 @@ final class SessionTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
     
-    func test_onVKTokenRemoved_calledOnce_whenTokenRemoved() {
+    func test_onVKTokenRemoved_calledOnce_whenTokenRemoved() throws {
         // Given
+        let exp = expectation(description: "")
         let context = makeContext()
-        var onVKDidLogOutCallCount = 0
         
         context.delegate.onVKTokenRemoved = { _ in
-            onVKDidLogOutCallCount += 1
+            exp.fulfill()
         }
         
         context.authorizator.onRawAuthorize = { _, _, _ in
@@ -308,14 +308,10 @@ final class SessionTests: XCTestCase {
         }
         
         // When
-        do {
-            try context.session.logIn(rawToken: "", expires: 0)
-            context.session.logOut()
-        } catch let error {
-            XCTFail("Unexpected error \(error)")
-        }
+        try context.session.logIn(rawToken: "", expires: 0)
+        context.session.logOut()
         // Then
-        XCTAssertEqual(onVKDidLogOutCallCount, 1)
+        waitForExpectations(timeout: 5)
     }
     
     func test_logInWithRawToken() {
