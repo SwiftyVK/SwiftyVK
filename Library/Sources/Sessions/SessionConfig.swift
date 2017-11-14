@@ -1,7 +1,7 @@
 /// Respesent config of VK user session
 public struct SessionConfig: Codable {
     /// Current default supported apiVersion
-    public static let currentApiVersion = "5.68"
+    public static let currentApiVersion = "5.69"
     
     /// Config with default values
     public static let `default` = SessionConfig()
