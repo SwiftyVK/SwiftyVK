@@ -38,6 +38,7 @@ final class WebPresenterImpl: WebPresenter {
         self.timeout = timeout
     }
     
+    // swiftlint:disable cyclomatic_complexity next
     func presentWith(urlRequest: URLRequest) throws -> String {
         guard let controllerMaker = controllerMaker else { throw VKError.weakObjectWasDeallocated }
 

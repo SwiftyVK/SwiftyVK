@@ -23,7 +23,7 @@ UIViewController, SharePreferencesController, UITableViewDataSource, UITableView
     func set(preferences: [ShareContextPreference]) {
         self.preferences = preferences
         
-        DispatchQueue.safelyOnMain {
+        DispatchQueue.anywayOnMain {
             tableView?.reloadData()
         }
     }

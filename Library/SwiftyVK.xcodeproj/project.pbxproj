@@ -472,6 +472,7 @@
 		D4DCF2E41FAA3860003D4497 /* ShareWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DCF2E21FAA3860003D4497 /* ShareWorker.swift */; };
 		D4ED8BAC1FACC7E400B3FDA5 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED8BAB1FACC7E400B3FDA5 /* Result.swift */; };
 		D4ED8BAD1FACC7E400B3FDA5 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED8BAB1FACC7E400B3FDA5 /* Result.swift */; };
+		D4EF420B1FB5EC350025FD53 /* MultilineTextField_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EF420A1FB5EC350025FD53 /* MultilineTextField_macOS.swift */; };
 		D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */; };
 		D4F49D421F2DF5B10037B875 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D411F2DF5B10037B875 /* JsonReader.swift */; };
 		D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
@@ -806,6 +807,7 @@
 		D4DCF2E01FAA2C25003D4497 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4DCF2E21FAA3860003D4497 /* ShareWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareWorker.swift; sourceTree = "<group>"; };
 		D4ED8BAB1FACC7E400B3FDA5 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		D4EF420A1FB5EC350025FD53 /* MultilineTextField_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField_macOS.swift; sourceTree = "<group>"; };
 		D4F49D3E1F2DF53F0037B875 /* ApiErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorTests.swift; sourceTree = "<group>"; };
 		D4F49D411F2DF5B10037B875 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		D4F49D441F2E0EF60037B875 /* apiError.correct.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.correct.json; sourceTree = "<group>"; };
@@ -1016,6 +1018,14 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
+		D449F6221FB5EBF50074746F /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				D486E3411FA0E64E002134EB /* ShareController_macOS.swift */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
 		D44C84171FA267060029EA7B /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -1065,6 +1075,14 @@
 			path = Management;
 			sourceTree = "<group>";
 		};
+		D4733D801FBB44FB00669D1F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D4EF420A1FB5EC350025FD53 /* MultilineTextField_macOS.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		D47E1CC71F92B079002BB2AC /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1080,7 +1098,8 @@
 				D4BBFDB31F9297A9009615E7 /* WebViewWrapper_macOS.swift */,
 				D4BBFDB11F9297A9009615E7 /* WebController_macOS.swift */,
 				D4BBFDB71F9297A9009615E7 /* CaptchaController_macOS.swift */,
-				D486E3411FA0E64E002134EB /* ShareController_macOS.swift */,
+				D449F6221FB5EBF50074746F /* Share */,
+				D4733D801FBB44FB00669D1F /* Components */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -1942,6 +1961,7 @@
 				D4BBFF061F929891009615E7 /* Token.swift in Sources */,
 				D4BBFEE21F929891009615E7 /* DependenciesImpl.swift in Sources */,
 				D4DADE071F9F9AE9004F159E /* ShareContext.swift in Sources */,
+				D4EF420B1FB5EC350025FD53 /* MultilineTextField_macOS.swift in Sources */,
 				D4BBFEC01F929891009615E7 /* Friends.swift in Sources */,
 				D46FB4261F929E3C000CEAEB /* WebViewWrapper_macOS.swift in Sources */,
 				D4BBFEC61F929891009615E7 /* Market.swift in Sources */,

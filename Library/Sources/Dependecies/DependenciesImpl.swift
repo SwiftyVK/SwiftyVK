@@ -190,7 +190,7 @@ final class DependenciesImpl: Dependencies {
             dismisableController.onDismiss = onDismiss
         }
         
-        DispatchQueue.safelyOnMain {
+        DispatchQueue.anywayOnMain {
             self.delegate?.vkNeedToPresent(viewController: unwrappedController)
         }
         

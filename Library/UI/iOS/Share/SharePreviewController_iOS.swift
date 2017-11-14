@@ -29,6 +29,11 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         updateView()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        onDismiss?()
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
@@ -46,7 +51,7 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         self.context = context
         self.onPost = onPost
         
-        DispatchQueue.safelyOnMain {
+        DispatchQueue.anywayOnMain {
             updateView()
         }
     }
@@ -59,8 +64,8 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         linkTitle?.text = context.link?.title
         linkUrl?.text = context.link?.url.absoluteString
         
-        updateSendButton()
         showPlaceholder(false)
+        updateSendButton()
     }
     
     func showPlaceholder() {
@@ -70,7 +75,7 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     private func showPlaceholder(_ enable: Bool) {
         enablePostButton(!enable)
         
-        DispatchQueue.safelyOnMain {
+        DispatchQueue.anywayOnMain {
             UIView.animate(withDuration: 0.3) {
                 self.placeholderView?.alpha = enable ? 1 : 0
             }
@@ -78,7 +83,7 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     }
     
     func showWaitForConnection() {
-        DispatchQueue.safelyOnMain {
+        DispatchQueue.anywayOnMain {
             UIView.animate(withDuration: 0.3) {
                 self.noConnectionLabel?.alpha = 1
             }
@@ -86,7 +91,7 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     }
     
     func enablePostButton(_ enable: Bool) {
-        DispatchQueue.safelyOnMain {
+        DispatchQueue.anywayOnMain {
             if enable {
                 navigationItem.setRightBarButton(rightButton, animated: true)
                 rightButton = nil
@@ -102,14 +107,14 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     }
     
     func close() {
-        DispatchQueue.safelyOnMain {
+        DispatchQueue.anywayOnMain {
             messageTextView?.endEditing(true)
             navigationController?.dismiss(animated: true, completion: nil)
         }
     }
     
     func showError(title: String, message: String, buttontext: String) {
-        DispatchQueue.safelyOnMain {
+        DispatchQueue.anywayOnMain {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: buttontext, style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
