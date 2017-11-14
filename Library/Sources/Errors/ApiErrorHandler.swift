@@ -6,8 +6,6 @@ final class ApiErrorHandlerImpl: ApiErrorHandler {
     
     private let executor: ApiErrorExecutor
     
-    
-    
     init(executor: ApiErrorExecutor) {
         self.executor = executor
     }
