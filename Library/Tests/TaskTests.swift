@@ -259,7 +259,17 @@ final class TaskTests: XCTestCase {
         // Then
         XCTAssertEqual(context.task.description, "task #1, state: created")
     }
+    
+    override func setUp() {
+        attemptMaker = AttemptMakerMock()
+    }
+    
+    override func tearDown() {
+        attemptMaker = nil
+    }
 }
+
+private var attemptMaker: AttemptMakerMock!
 
 private func makeContext(
     configure: ((AttemptCallbacks) -> ())? = nil,
@@ -275,7 +285,6 @@ private func makeContext(
     ) {
         let urlRequestBuilder = URLRequestBuilderMock()
         let taskSession = SessionMock()
-        let attemptMaker = AttemptMakerMock()
         let apiErrorHandler = ApiErrorHandlerMock()
         let config = Config(handleErrors: handleErrors).overriden(with: .upload)
         

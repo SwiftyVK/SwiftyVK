@@ -54,11 +54,21 @@ final class DependenciesImpl: Dependencies {
     }
     
     lazy var sessionsHolder: SessionsHolder & SessionSaver = {
-        SessionsHolderImpl(
-            sessionMaker: self,
-            sessionsStorage: self.sessionsStorage
-        )
+        atomicSessionHolder.modify {
+            $0 ?? SessionsHolderImpl(
+                sessionMaker: self,
+                sessionsStorage: self.sessionsStorage
+            )
+        }
+        
+        guard let holder = atomicSessionHolder.unwrap() else {
+            fatalError("Holder was not created")
+        }
+        
+        return holder
     }()
+    
+    private var atomicSessionHolder = Atomic<(SessionsHolder & SessionSaver)?>(nil)
     
     lazy var sessionsStorage: SessionsStorage = {
         SessionsStorageImpl(

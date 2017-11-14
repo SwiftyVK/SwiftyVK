@@ -14,8 +14,8 @@ final class AuthorizatorImpl: Authorizator {
     private let webRedirectUrl = "https://oauth.vk.com/blank.html"
     
     private let appId: String
-    private let tokenStorage: TokenStorage
-    private let tokenMaker: TokenMaker
+    private var tokenStorage: TokenStorage
+    private weak var tokenMaker: TokenMaker?
     private let tokenParser: TokenParser
     private let vkAppProxy: VKAppProxy
     private let webPresenter: WebPresenter
@@ -83,6 +83,10 @@ final class AuthorizatorImpl: Authorizator {
     
     func authorize(sessionId: String, rawToken: String, expires: TimeInterval) throws -> Token {
         return try queue.sync {
+            guard let tokenMaker = tokenMaker else {
+                throw VKError.weakObjectWasDeallocated
+            }
+            
             let token = tokenMaker.token(token: rawToken, expires: expires, info: [:])
             try tokenStorage.save(token, for:  sessionId)
             return token
@@ -155,6 +159,10 @@ final class AuthorizatorImpl: Authorizator {
     private func makeToken(tokenInfo: String) throws -> Token {
         guard let parsingResult = tokenParser.parse(tokenInfo: tokenInfo) else {
             throw VKError.cantParseTokenInfo(tokenInfo)
+        }
+        
+        guard let tokenMaker = tokenMaker else {
+            throw VKError.weakObjectWasDeallocated
         }
         
         return tokenMaker.token(

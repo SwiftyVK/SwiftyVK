@@ -1,8 +1,11 @@
 excluded:
+  - Example
   - Tests
+  - Library/Tests
   - Carthage
   - Pods
   - Sources/Utils/Reachability.swift
+  - Library/Sources/Utils/Reachability.swift
 
 disabled_rules:
   - void_return

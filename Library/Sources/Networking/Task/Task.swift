@@ -34,7 +34,7 @@ final class TaskImpl: Operation, Task, OperationConvertible {
     private let semaphore = DispatchSemaphore(value: 0)
     private var sendAttempts = 0
     private let urlRequestBuilder: UrlRequestBuilder
-    private let attemptMaker: AttemptMaker
+    private weak var attemptMaker: AttemptMaker?
     private let apiErrorHandler: ApiErrorHandler
     private weak var currentAttempt: Attempt?
     
@@ -108,6 +108,11 @@ final class TaskImpl: Operation, Task, OperationConvertible {
             capthca: captcha,
             token: session.token
         )
+        
+        guard let attemptMaker = attemptMaker else {
+            semaphore.signal()
+            return
+        }
         
         let newAttempt = attemptMaker.attempt(
             request: urlRequest,

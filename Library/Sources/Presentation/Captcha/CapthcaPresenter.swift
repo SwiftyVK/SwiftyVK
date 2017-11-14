@@ -8,7 +8,7 @@ protocol CaptchaPresenter {
 final class CaptchaPresenterImpl: CaptchaPresenter {
     
     private let uiSyncQueue: DispatchQueue
-    private let controllerMaker: CaptchaControllerMaker
+    private weak var controllerMaker: CaptchaControllerMaker?
     private weak var currentController: CaptchaController?
     private let timeout: TimeInterval
     private let urlSession: VKURLSession
@@ -26,6 +26,8 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
     }
     
     func present(rawCaptchaUrl: String, dismissOnFinish: Bool) throws -> String {
+        guard let controllerMaker = controllerMaker else { throw VKError.weakObjectWasDeallocated }
+        
         let semaphore = DispatchSemaphore(value: 0)
         
         return try uiSyncQueue.sync {

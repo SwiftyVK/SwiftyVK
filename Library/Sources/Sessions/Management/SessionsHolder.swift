@@ -1,7 +1,7 @@
 import Foundation
 
 /// Storage of VK user sessions
-public protocol SessionsHolder: class {
+public protocol SessionsHolder: class, AnyObject {
     /// Default VK user session
     var `default`: Session { get }
     
@@ -21,7 +21,7 @@ protocol SessionSaver: class {
 
 public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     
-    private let sessionMaker: SessionMaker
+    private unowned var sessionMaker: SessionMaker
     private let sessionsStorage: SessionsStorage
     private var sessions = NSHashTable<AnyObject>(options: .strongMemory)
     

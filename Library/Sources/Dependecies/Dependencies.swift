@@ -43,19 +43,19 @@ protocol WebControllerMaker: class {
     func webController(onDismiss: (() -> ())?) -> WebController
 }
 
-protocol CaptchaControllerMaker {
+protocol CaptchaControllerMaker: class {
     func captchaController(onDismiss: (() -> ())?) -> CaptchaController
 }
 
-protocol ShareControllerMaker {
+protocol ShareControllerMaker: class {
     func shareController(onDismiss: (() -> ())?) -> ShareController
 }
 
-protocol LongPollTaskMaker {
+protocol LongPollTaskMaker: class {
     func longPollTask(session: Session?, data: LongPollTaskData) -> LongPollTask
 }
 
-protocol LongPollMaker {
+protocol LongPollMaker: class {
     func longPoll(session: Session) -> LongPoll
 }
 
