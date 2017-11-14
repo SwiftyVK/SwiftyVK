@@ -21,7 +21,7 @@ private enum HandledResult {
 
 final class WebPresenterImpl: WebPresenter {
     private let uiSyncQueue: DispatchQueue
-    private let controllerMaker: WebControllerMaker
+    private weak var controllerMaker: WebControllerMaker?
     private weak var currentController: WebController?
     private let maxFails: Int
     private let timeout: TimeInterval
@@ -40,6 +40,8 @@ final class WebPresenterImpl: WebPresenter {
     
     // swiftlint:disable cyclomatic_complexity next
     func presentWith(urlRequest: URLRequest) throws -> String {
+        guard let controllerMaker = controllerMaker else { throw VKError.weakObjectWasDeallocated }
+
         let semaphore = DispatchSemaphore(value: 0)
         var fails: Int = 0
         var finalResult: WebPresenterResult?

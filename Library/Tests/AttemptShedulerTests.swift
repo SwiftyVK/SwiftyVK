@@ -8,14 +8,10 @@ final class AttemptShedulerTests: XCTestCase {
         let group = DispatchGroup()
         for _ in 0..<operationCount { group.enter() }
         // When
-        let samples = sheduleSamples(count: operationCount, concurrent: true, completion: { group.leave() })
-        _ = group.wait(timeout: .now() + totalAsyncTime * 2)
+        _ = sheduleSamples(count: operationCount, concurrent: true, completion: { group.leave() })
+        let result = group.wait(timeout: .now() + totalAsyncTime * 2)
         // Then
-        XCTAssertEqual(
-            samples.filter {$0.isFinished} .count,
-            operationCount,
-            "All concurrent operations should be executed"
-        )
+        XCTAssertEqual(result, .success, "All concurrent operations should be executed")
     }
     
     func test_executeMinimumSerialOpearations_forOneSecond() {
@@ -36,12 +32,10 @@ final class AttemptShedulerTests: XCTestCase {
         let group = DispatchGroup()
         for _ in 0..<operationCount { group.enter() }
         // When
-        let samples = sheduleSamples(count: operationCount, concurrent: false, completion: { group.leave() })
-        _ = group.wait(timeout: .now() + totalSyncTime * 10)
+        _ = sheduleSamples(count: operationCount, concurrent: false, completion: { group.leave() })
+        let result = group.wait(timeout: .now() + totalSyncTime * 10)
         // Then
-        XCTAssertEqual(samples.filter { $0.isFinished }.count, operationCount,
-            "All operations should be executed"
-        )
+        XCTAssertEqual(result, .success, "All operations should be executed")
     }
     
     func test_exeuteRandomOperations() {
@@ -54,14 +48,12 @@ final class AttemptShedulerTests: XCTestCase {
         let serial = sheduleSamples(count: operationCount, concurrent: false, completion: { serialGroup.leave() })
         let concurrent = sheduleSamples(count: operationCount, concurrent: true, completion: { concurrentGroup.leave() })
         // Then
-        _ = concurrentGroup.wait(timeout: .now() + totalAsyncTime * 20)
+        let resutl1 = concurrentGroup.wait(timeout: .now() + totalAsyncTime * 20)
+        
+        XCTAssertEqual(resutl1, .success, "All concurrent operations should be executed")
         
         XCTAssertLessThanOrEqual(serial.filter { $0.isFinished }.count, shedulerLimit.count,
             "Operations should be executed serially"
-        )
-        
-        XCTAssertEqual(concurrent.map {$0.isFinished}, (0..<operationCount).map { _ in true },
-            "All concurrent operations should be executed"
         )
         
         _ = serialGroup.wait(timeout: .now() + totalSyncTime * 20)
