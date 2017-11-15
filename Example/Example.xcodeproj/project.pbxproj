@@ -772,7 +772,7 @@
 				A2527E601BD139E200F65412 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A2527E731BD13A3B00F65412 /* Build configuration list for PBXNativeTarget "SwiftyVK-Example-OSX" */ = {
 			isa = XCConfigurationList;
@@ -781,7 +781,7 @@
 				A2527E751BD13A3B00F65412 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A2527E891BD13A5300F65412 /* Build configuration list for PBXNativeTarget "SwiftyVK-Example-iOS" */ = {
 			isa = XCConfigurationList;
@@ -790,7 +790,7 @@
 				A2527E8B1BD13A5300F65412 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

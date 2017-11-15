@@ -98,6 +98,10 @@
 		D439AEE71FB4B80E00F3152B /* SessionConfig+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D439AEE61FB4B80E00F3152B /* SessionConfig+Equatable.swift */; };
 		D439AEE81FB4B80E00F3152B /* SessionConfig+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D439AEE61FB4B80E00F3152B /* SessionConfig+Equatable.swift */; };
 		D43E658D1F7D526100AF48C8 /* CookiesHolderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43E658A1F7D524A00AF48C8 /* CookiesHolderMock.swift */; };
+		D43FAF6E1FBB5B410068AA5F /* SharePreferencesCell_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FAF6D1FBB5B410068AA5F /* SharePreferencesCell_macOS.swift */; };
+		D441C9DE1FBC82730071A425 /* JSSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D441C9DD1FBC82730071A425 /* JSSwitch.swift */; };
+		D441C9E01FBC86B80071A425 /* OnePixelConstraint_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D441C9DF1FBC86B80071A425 /* OnePixelConstraint_macOS.swift */; };
+		D4427A441FBC87C200060A5A /* ColoredBackgroundView_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4427A431FBC87C200060A5A /* ColoredBackgroundView_macOS.swift */; };
 		D44348F91F3B71F5008B2B50 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44348F71F3B70F4008B2B50 /* JSONTests.swift */; };
 		D44AD0D71FB208600053AD59 /* Media+TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44AD0D61FB208600053AD59 /* Media+TestExtensions.swift */; };
 		D44AD0D81FB208600053AD59 /* Media+TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44AD0D61FB208600053AD59 /* Media+TestExtensions.swift */; };
@@ -212,6 +216,7 @@
 		D46FB4521F929EE6000CEAEB /* ConnectionObserverMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665431F6198C0000E6934 /* ConnectionObserverMock.swift */; };
 		D46FB4531F929EE6000CEAEB /* LongPollMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CA9B731F66BED90085E4F3 /* LongPollMock.swift */; };
 		D46FB4541F929EE6000CEAEB /* CookiesHolderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43E658A1F7D524A00AF48C8 /* CookiesHolderMock.swift */; };
+		D4733D851FBB594100669D1F /* SharePreferencesController_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4733D841FBB594100669D1F /* SharePreferencesController_macOS.swift */; };
 		D47601161F2E219A005356E5 /* response.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601141F2E218B005356E5 /* response.empty.json */; };
 		D47601191F2E21E2005356E5 /* apiError.withoutCode.json in Resources */ = {isa = PBXBuildFile; fileRef = D47601181F2E21DD005356E5 /* apiError.withoutCode.json */; };
 		D476011B1F2E2229005356E5 /* apiError.withoutMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */; };
@@ -634,6 +639,10 @@
 		D4321D921F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeVariationsMethodTests.swift; sourceTree = "<group>"; };
 		D439AEE61FB4B80E00F3152B /* SessionConfig+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SessionConfig+Equatable.swift"; sourceTree = "<group>"; };
 		D43E658A1F7D524A00AF48C8 /* CookiesHolderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookiesHolderMock.swift; sourceTree = "<group>"; };
+		D43FAF6D1FBB5B410068AA5F /* SharePreferencesCell_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePreferencesCell_macOS.swift; sourceTree = "<group>"; };
+		D441C9DD1FBC82730071A425 /* JSSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSSwitch.swift; sourceTree = "<group>"; };
+		D441C9DF1FBC86B80071A425 /* OnePixelConstraint_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePixelConstraint_macOS.swift; sourceTree = "<group>"; };
+		D4427A431FBC87C200060A5A /* ColoredBackgroundView_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredBackgroundView_macOS.swift; sourceTree = "<group>"; };
 		D44348F71F3B70F4008B2B50 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		D44AD0D61FB208600053AD59 /* Media+TestExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Media+TestExtensions.swift"; sourceTree = "<group>"; };
 		D44AD0D91FB215720053AD59 /* users.get.success.withExports.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = users.get.success.withExports.json; sourceTree = "<group>"; };
@@ -646,6 +655,7 @@
 		D461D94A1FADB6A500AA0960 /* OnePixelConstraint_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePixelConstraint_iOS.swift; sourceTree = "<group>"; };
 		D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenterTests.swift; sourceTree = "<group>"; };
 		D46FB3E11F929D7A000CEAEB /* SwiftyVK_tests_iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyVK_tests_iOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4733D841FBB594100669D1F /* SharePreferencesController_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePreferencesController_macOS.swift; sourceTree = "<group>"; };
 		D47601141F2E218B005356E5 /* response.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.empty.json; sourceTree = "<group>"; };
 		D47601181F2E21DD005356E5 /* apiError.withoutCode.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutCode.json; sourceTree = "<group>"; };
 		D476011A1F2E2227005356E5 /* apiError.withoutMessage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.withoutMessage.json; sourceTree = "<group>"; };
@@ -1022,6 +1032,8 @@
 			isa = PBXGroup;
 			children = (
 				D486E3411FA0E64E002134EB /* ShareController_macOS.swift */,
+				D4733D841FBB594100669D1F /* SharePreferencesController_macOS.swift */,
+				D43FAF6D1FBB5B410068AA5F /* SharePreferencesCell_macOS.swift */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -1078,7 +1090,10 @@
 		D4733D801FBB44FB00669D1F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				D441C9DD1FBC82730071A425 /* JSSwitch.swift */,
 				D4EF420A1FB5EC350025FD53 /* MultilineTextField_macOS.swift */,
+				D441C9DF1FBC86B80071A425 /* OnePixelConstraint_macOS.swift */,
+				D4427A431FBC87C200060A5A /* ColoredBackgroundView_macOS.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1944,9 +1959,11 @@
 				D4BBFEF11F929891009615E7 /* Request.swift in Sources */,
 				D4BBFEF91F929891009615E7 /* Attempt.swift in Sources */,
 				D46FB42F1F929E4E000CEAEB /* CaptchaController.swift in Sources */,
+				D4733D851FBB594100669D1F /* SharePreferencesController_macOS.swift in Sources */,
 				D4BBFEC71F929891009615E7 /* Audio.swift in Sources */,
 				D4BBFEBD1F929891009615E7 /* Ads.swift in Sources */,
 				D4BBFED71F929891009615E7 /* VKAppProxy.swift in Sources */,
+				D43FAF6E1FBB5B410068AA5F /* SharePreferencesCell_macOS.swift in Sources */,
 				D4BBFED31F929891009615E7 /* OperationConvertible.swift in Sources */,
 				D46FB42C1F929E4E000CEAEB /* CapthcaPresenter.swift in Sources */,
 				D4BBFEBA1F929891009615E7 /* Docs.swift in Sources */,
@@ -1980,6 +1997,7 @@
 				D4BBFEF31F929891009615E7 /* RequestCallbacks.swift in Sources */,
 				D4BBFEDD1F929891009615E7 /* LongPollEvent.swift in Sources */,
 				D4BBFECE1F929891009615E7 /* String+Extensions.swift in Sources */,
+				D441C9DE1FBC82730071A425 /* JSSwitch.swift in Sources */,
 				D4BBFEC91F929891009615E7 /* Video.swift in Sources */,
 				D4BBFEAC1F929891009615E7 /* Messages.swift in Sources */,
 				D4BBFF031F929891009615E7 /* SessionsHolder.swift in Sources */,
@@ -2020,6 +2038,7 @@
 				D4BBFEF71F929891009615E7 /* MultipartBodyBuilder.swift in Sources */,
 				D48F78971F9FA0FC0092931E /* SharePresenter.swift in Sources */,
 				D4BBFEFC1F929891009615E7 /* AttemptSheduler.swift in Sources */,
+				D4427A441FBC87C200060A5A /* ColoredBackgroundView_macOS.swift in Sources */,
 				D4BBFF101F929891009615E7 /* Resources.swift in Sources */,
 				D4BBFEBB1F929891009615E7 /* Fave.swift in Sources */,
 				D4BBFEE01F929891009615E7 /* Dependencies.swift in Sources */,
@@ -2044,6 +2063,7 @@
 				D4BBFEB51F929891009615E7 /* Custom.swift in Sources */,
 				D4BBFEB21F929891009615E7 /* Leads.swift in Sources */,
 				D4BBFEE61F929891009615E7 /* Method.swift in Sources */,
+				D441C9E01FBC86B80071A425 /* OnePixelConstraint_macOS.swift in Sources */,
 				D4BBFEBE1F929891009615E7 /* Database.swift in Sources */,
 				D4BBFF0F1F929891009615E7 /* Atomic.swift in Sources */,
 				D46FB4251F929E3C000CEAEB /* WebController.swift in Sources */,
@@ -2911,7 +2931,7 @@
 				A21F10BA1DCDFCF6003EFDDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A23708C41EA52F0D00103212 /* Build configuration list for PBXNativeTarget "SwiftyVK_tests_macOS" */ = {
 			isa = XCConfigurationList;
@@ -2920,7 +2940,7 @@
 				A23708C31EA52F0D00103212 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A2527D291BD1123E00F65412 /* Build configuration list for PBXProject "SwiftyVK" */ = {
 			isa = XCConfigurationList;
@@ -2929,7 +2949,7 @@
 				A2527D2B1BD1123E00F65412 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A2527D4E1BD1130D00F65412 /* Build configuration list for PBXNativeTarget "SwiftyVK_resources_macOS" */ = {
 			isa = XCConfigurationList;
@@ -2938,7 +2958,7 @@
 				A2527D501BD1130D00F65412 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A2527D581BD1134600F65412 /* Build configuration list for PBXNativeTarget "SwiftyVK_resources_iOS" */ = {
 			isa = XCConfigurationList;
@@ -2947,7 +2967,7 @@
 				A2527D5A1BD1134600F65412 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A2EB6EA01BD180DD008E7D86 /* Build configuration list for PBXNativeTarget "SwiftyVK_iOS" */ = {
 			isa = XCConfigurationList;
@@ -2956,7 +2976,7 @@
 				A2EB6EA21BD180DD008E7D86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A2EB6EAD1BD180EA008E7D86 /* Build configuration list for PBXNativeTarget "SwiftyVK_macOS" */ = {
 			isa = XCConfigurationList;
@@ -2965,7 +2985,7 @@
 				A2EB6EAF1BD180EA008E7D86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D46FB3E91F929D7A000CEAEB /* Build configuration list for PBXNativeTarget "SwiftyVK_tests_iOS" */ = {
 			isa = XCConfigurationList;
@@ -2974,7 +2994,7 @@
 				D46FB3EB1F929D7A000CEAEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

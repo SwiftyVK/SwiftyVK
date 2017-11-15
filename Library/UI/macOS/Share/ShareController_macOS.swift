@@ -4,7 +4,8 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
     @IBOutlet private weak var messageTextField: MultilineTextFieldMacOS?
     @IBOutlet private weak var doneButton: NSButton?
     @IBOutlet private weak var doneActivity: NSProgressIndicator?
-    
+    @IBOutlet private weak var buttonsView: NSView?
+
     private var context: ShareContext = ShareContext()
     private var onPost: ((ShareContext) -> ())?
 
@@ -15,11 +16,24 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
         super.viewDidLoad()
         doneButton?.alphaValue = 0
         updateView()
+        buttonsView?.wantsLayer = true
+        buttonsView?.layer?.backgroundColor = NSColor(
+            calibratedRed: 0.314,
+            green: 0.448,
+            blue: 0.6,
+            alpha: 1
+            ).cgColor
     }
     
     override func viewDidDisappear() {
         super.viewDidDisappear()
         onDismiss?()
+    }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if let preferencesController = segue.destinationController as? SharePreferencesControllerMacOS {
+            preferencesController.set(preferences: context.preferences)
+        }
     }
     
     func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> ()) {
@@ -32,6 +46,7 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
     private func updateView() {
         DispatchQueue.anywayOnMain {
             messageTextField?.stringValue = context.message ?? ""
+            messageTextField?.window?.makeFirstResponder(nil)
         }
         
         showPlaceholder(false)
