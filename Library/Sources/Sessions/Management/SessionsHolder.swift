@@ -1,7 +1,7 @@
 import Foundation
 
 /// Storage of VK user sessions
-public protocol SessionsHolder: class, AnyObject {
+public protocol SessionsHolder: class {
     /// Default VK user session
     var `default`: Session { get }
     
