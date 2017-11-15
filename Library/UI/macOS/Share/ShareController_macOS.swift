@@ -7,6 +7,9 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
     @IBOutlet private weak var buttonsView: NSView?
     @IBOutlet private weak var linkTitleLabel: NSTextField?
     @IBOutlet private weak var linkAdressLabel: NSTextField?
+    @IBOutlet private weak var progressIndicator: NSProgressIndicator?
+    @IBOutlet private weak var placeholderView: ColoredBackgroundViewMacOS?
+    @IBOutlet private weak var noConnectionLabel: NSTextField?
     
     private var context: ShareContext = ShareContext()
     private var onPost: ((ShareContext) -> ())?
@@ -17,7 +20,10 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
         messageTextField?.delegate = self
         super.viewDidLoad()
         doneButton?.alphaValue = 0
+        noConnectionLabel?.alphaValue = 0
+        placeholderView?.alphaValue = 0
         updateView()
+        progressIndicator?.startAnimation(nil)
         buttonsView?.wantsLayer = true
         buttonsView?.layer?.backgroundColor = NSColor(
             calibratedRed: 0.314,
@@ -65,11 +71,9 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
     private func showPlaceholder(_ enable: Bool) {
         enablePostButton(!enable)
         
-//        DispatchQueue.anywayOnMain {
-//            UIView.animate(withDuration: 0.3) {
-//                self.placeholderView?.alpha = enable ? 1 : 0
-//            }
-//        }
+        DispatchQueue.anywayOnMain {
+            self.placeholderView?.animator().alphaValue = enable ? 1 : 0
+        }
     }
     
     func enablePostButton(_ enable: Bool) {
@@ -92,7 +96,9 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
     }
     
     func showWaitForConnection() {
-        
+        DispatchQueue.anywayOnMain {
+            self.noConnectionLabel?.animator().alphaValue = 1
+        }
     }
     
     func close() {

@@ -250,12 +250,43 @@ Gw
                                     <constraint firstItem="h6U-bW-2wk" firstAttribute="centerY" secondItem="k50-t7-Kdi" secondAttribute="centerY" id="zUI-Tr-lJU"/>
                                 </constraints>
                             </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="taY-Ad-LpS" userLabel="Placeholder View" customClass="ColoredBackgroundViewMacOS" customModule="SwiftyVK">
+                                <rect key="frame" x="0.0" y="0.0" width="500" height="310"/>
+                                <subviews>
+                                    <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Mca-EW-2HR">
+                                        <rect key="frame" x="234" y="159" width="32" height="32"/>
+                                    </progressIndicator>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pt9-5l-Lh2">
+                                        <rect key="frame" x="140" y="125" width="220" height="19"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Check your internet connection" id="pdI-Kn-alk">
+                                            <font key="font" metaFont="system" size="15"/>
+                                            <color key="textColor" red="0.31228798629999999" green="0.44764596220000002" blue="0.59886246919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Mca-EW-2HR" firstAttribute="centerX" secondItem="taY-Ad-LpS" secondAttribute="centerX" id="F93-A4-q9G"/>
+                                    <constraint firstItem="Mca-EW-2HR" firstAttribute="centerY" secondItem="taY-Ad-LpS" secondAttribute="centerY" constant="-20" id="S35-jj-18W"/>
+                                    <constraint firstItem="Pt9-5l-Lh2" firstAttribute="centerX" secondItem="taY-Ad-LpS" secondAttribute="centerX" id="Ysn-7W-Ip9"/>
+                                    <constraint firstItem="Pt9-5l-Lh2" firstAttribute="top" secondItem="Mca-EW-2HR" secondAttribute="bottom" constant="15" id="k71-UN-6fb"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Xk5-Ik-8aC" firstAttribute="leading" secondItem="xXZ-Ui-ar3" secondAttribute="leading" id="6dI-PX-X92"/>
+                            <constraint firstAttribute="trailing" secondItem="taY-Ad-LpS" secondAttribute="trailing" id="CZM-F2-noK"/>
                             <constraint firstItem="k50-t7-Kdi" firstAttribute="top" secondItem="xXZ-Ui-ar3" secondAttribute="top" id="E4W-c8-jHq"/>
                             <constraint firstItem="k50-t7-Kdi" firstAttribute="leading" secondItem="xXZ-Ui-ar3" secondAttribute="leading" id="Kt1-aj-j2E"/>
+                            <constraint firstItem="taY-Ad-LpS" firstAttribute="top" secondItem="k50-t7-Kdi" secondAttribute="bottom" id="OoB-6Z-dLY"/>
                             <constraint firstAttribute="bottom" secondItem="Xk5-Ik-8aC" secondAttribute="bottom" id="aZf-7r-MrN"/>
+                            <constraint firstItem="taY-Ad-LpS" firstAttribute="leading" secondItem="xXZ-Ui-ar3" secondAttribute="leading" id="bkr-oh-gJ8"/>
+                            <constraint firstAttribute="bottom" secondItem="taY-Ad-LpS" secondAttribute="bottom" id="cxU-nx-xC3"/>
                             <constraint firstAttribute="trailing" secondItem="k50-t7-Kdi" secondAttribute="trailing" id="hPY-Rw-W32"/>
                             <constraint firstItem="Xk5-Ik-8aC" firstAttribute="top" secondItem="k50-t7-Kdi" secondAttribute="bottom" id="oKO-JY-b8k"/>
                             <constraint firstAttribute="trailing" secondItem="Xk5-Ik-8aC" secondAttribute="trailing" id="sxS-Dv-NVS"/>
@@ -268,6 +299,10 @@ Gw
                         <outlet property="linkAdressLabel" destination="Bu7-XJ-4aw" id="bXa-A1-1Rp"/>
                         <outlet property="linkTitleLabel" destination="KGi-ba-acW" id="qfN-Aw-rjI"/>
                         <outlet property="messageTextField" destination="1ds-iT-SIJ" id="LF7-RC-pTo"/>
+                        <outlet property="noConnectionLabel" destination="Pt9-5l-Lh2" id="W9M-mI-zmb"/>
+                        <outlet property="placeholderViee" destination="taY-Ad-LpS" id="qbI-oj-B6o"/>
+                        <outlet property="placeholderView" destination="taY-Ad-LpS" id="AoG-AH-6q3"/>
+                        <outlet property="progressIndicator" destination="Mca-EW-2HR" id="VU7-cX-8lx"/>
                     </connections>
                 </viewController>
                 <customObject id="qe1-H6-U2a" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
