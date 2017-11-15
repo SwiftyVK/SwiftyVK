@@ -17,7 +17,8 @@ enum Response {
             
             if successData.isEmpty {
                 self = .success(data)
-            } else {
+            }
+            else {
                 self = .success(successData)
             }
         }
