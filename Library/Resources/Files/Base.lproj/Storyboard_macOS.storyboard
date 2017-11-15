@@ -121,7 +121,7 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="500" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xk5-Ik-8aC">
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="allowed" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="Xk5-Ik-8aC">
                                 <rect key="frame" x="0.0" y="0.0" width="500" height="310"/>
                                 <clipView key="contentView" id="1bE-GM-FGE">
                                     <rect key="frame" x="1" y="1" width="498" height="308"/>
@@ -131,17 +131,50 @@ Gw
                                             <rect key="frame" x="0.0" y="0.0" width="498" height="308"/>
                                             <subviews>
                                                 <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1ds-iT-SIJ" customClass="MultilineTextFieldMacOS" customModule="SwiftyVK">
-                                                    <rect key="frame" x="15" y="276" width="468" height="17"/>
+                                                    <rect key="frame" x="15" y="274" width="468" height="19"/>
                                                     <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" drawsBackground="YES" id="xRY-JN-EMj">
-                                                        <font key="font" metaFont="system"/>
+                                                        <font key="font" metaFont="system" size="16"/>
                                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
+                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="Efi-UK-fqF" userLabel="Link View">
+                                                    <rect key="frame" x="15" y="15" width="468" height="43"/>
+                                                    <subviews>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KGi-ba-acW">
+                                                            <rect key="frame" x="-2" y="24" width="44" height="19"/>
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="Xkv-Wa-F8e">
+                                                                <font key="font" metaFont="system" size="16"/>
+                                                                <color key="textColor" red="0.31228798629999999" green="0.44764596220000002" blue="0.59886246919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bu7-XJ-4aw">
+                                                            <rect key="frame" x="-2" y="0.0" width="44" height="19"/>
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="qNW-Og-8Lo">
+                                                                <font key="font" metaFont="system" size="16"/>
+                                                                <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KGi-ba-acW" secondAttribute="trailing" constant="20" symbolic="YES" id="CC9-fO-cj2"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Bu7-XJ-4aw" secondAttribute="trailing" constant="20" symbolic="YES" id="CLo-3Z-btI"/>
+                                                        <constraint firstItem="KGi-ba-acW" firstAttribute="top" secondItem="Efi-UK-fqF" secondAttribute="top" id="QKb-X1-2hf"/>
+                                                        <constraint firstItem="Bu7-XJ-4aw" firstAttribute="top" secondItem="KGi-ba-acW" secondAttribute="bottom" constant="5" id="hcK-Un-5jC"/>
+                                                        <constraint firstItem="Bu7-XJ-4aw" firstAttribute="leading" secondItem="Efi-UK-fqF" secondAttribute="leading" id="pUO-VS-nqA"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Bu7-XJ-4aw" secondAttribute="bottom" id="qGL-5t-poU"/>
+                                                        <constraint firstItem="KGi-ba-acW" firstAttribute="leading" secondItem="Efi-UK-fqF" secondAttribute="leading" id="y5X-og-Ym5"/>
+                                                    </constraints>
+                                                </customView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="1ds-iT-SIJ" secondAttribute="trailing" constant="15" id="7zH-3V-NMa"/>
                                                 <constraint firstItem="1ds-iT-SIJ" firstAttribute="leading" secondItem="UPV-Z3-Q74" secondAttribute="leading" constant="15" id="FLM-5h-Pih"/>
+                                                <constraint firstItem="Efi-UK-fqF" firstAttribute="leading" secondItem="UPV-Z3-Q74" secondAttribute="leading" constant="15" id="i7W-qt-geB"/>
+                                                <constraint firstAttribute="bottom" secondItem="Efi-UK-fqF" secondAttribute="bottom" constant="15" id="nPh-vO-K4x"/>
+                                                <constraint firstAttribute="trailing" secondItem="Efi-UK-fqF" secondAttribute="trailing" constant="15" id="vMc-6X-hdA"/>
                                                 <constraint firstItem="1ds-iT-SIJ" firstAttribute="top" secondItem="UPV-Z3-Q74" secondAttribute="top" constant="15" id="x3X-iZ-7T6"/>
                                             </constraints>
                                         </view>
@@ -232,6 +265,8 @@ Gw
                         <outlet property="buttonsView" destination="k50-t7-Kdi" id="sZd-kY-6sx"/>
                         <outlet property="doneActivity" destination="eEX-3K-53l" id="bIc-uq-nkM"/>
                         <outlet property="doneButton" destination="1Hr-oL-t2R" id="SyH-0b-fmx"/>
+                        <outlet property="linkAdressLabel" destination="Bu7-XJ-4aw" id="bXa-A1-1Rp"/>
+                        <outlet property="linkTitleLabel" destination="KGi-ba-acW" id="qfN-Aw-rjI"/>
                         <outlet property="messageTextField" destination="1ds-iT-SIJ" id="LF7-RC-pTo"/>
                     </connections>
                 </viewController>

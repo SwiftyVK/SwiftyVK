@@ -5,7 +5,9 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
     @IBOutlet private weak var doneButton: NSButton?
     @IBOutlet private weak var doneActivity: NSProgressIndicator?
     @IBOutlet private weak var buttonsView: NSView?
-
+    @IBOutlet private weak var linkTitleLabel: NSTextField?
+    @IBOutlet private weak var linkAdressLabel: NSTextField?
+    
     private var context: ShareContext = ShareContext()
     private var onPost: ((ShareContext) -> ())?
 
@@ -47,6 +49,9 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
         DispatchQueue.anywayOnMain {
             messageTextField?.stringValue = context.message ?? ""
             messageTextField?.window?.makeFirstResponder(nil)
+            linkTitleLabel?.stringValue = context.link?.title ?? ""
+            linkAdressLabel?.stringValue = context.link?.url.absoluteString ?? ""
+
         }
         
         showPlaceholder(false)
