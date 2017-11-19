@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2u4-1Z-mxL">
+                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="XVd-hx-Wvf"/>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="2u4-1Z-mxL" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="AMY-5U-3Vc"/>
+                <constraint firstAttribute="trailing" secondItem="2u4-1Z-mxL" secondAttribute="trailing" id="JAa-5T-P6I"/>
+                <constraint firstAttribute="bottom" secondItem="2u4-1Z-mxL" secondAttribute="bottom" id="dii-gD-D4q"/>
+                <constraint firstItem="2u4-1Z-mxL" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="wBw-xa-dQP"/>
+            </constraints>
+            <point key="canvasLocation" x="-50" y="83"/>
+        </customView>
+        <collectionViewItem id="qc8-Z0-uI4" customClass="ShareImageCollectionViewItemMacOS" customModule="SwiftyVK">
+            <connections>
+                <outlet property="imageView" destination="2u4-1Z-mxL" id="vZd-mE-FGr"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="ghw-zS-xcR"/>
+            </connections>
+        </collectionViewItem>
+    </objects>
+</document>

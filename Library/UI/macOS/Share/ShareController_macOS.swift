@@ -10,6 +10,7 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
     @IBOutlet private weak var progressIndicator: NSProgressIndicator?
     @IBOutlet private weak var placeholderView: ColoredBackgroundViewMacOS?
     @IBOutlet private weak var noConnectionLabel: NSTextField?
+    @IBOutlet private weak var imagesCollectionView: ShareImageCollectionViewMacOS?
     
     private var context: ShareContext = ShareContext()
     private var onPost: ((ShareContext) -> ())?
@@ -17,12 +18,11 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
     var onDismiss: (() -> ())?
     
     override func viewDidLoad() {
-        messageTextField?.delegate = self
         super.viewDidLoad()
+        messageTextField?.delegate = self
         doneButton?.alphaValue = 0
         noConnectionLabel?.alphaValue = 0
         placeholderView?.alphaValue = 0
-        updateView()
         progressIndicator?.startAnimation(nil)
         buttonsView?.wantsLayer = true
         buttonsView?.layer?.backgroundColor = NSColor(
@@ -55,9 +55,12 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
         DispatchQueue.anywayOnMain {
             messageTextField?.stringValue = context.message ?? ""
             messageTextField?.window?.makeFirstResponder(nil)
+            imagesCollectionView?.set(images: context.images)
             linkTitleLabel?.stringValue = context.link?.title ?? ""
             linkAdressLabel?.stringValue = context.link?.url.absoluteString ?? ""
-
+            DispatchQueue.anywayOnMain {
+                messageTextField?.invalidateIntrinsicContentSize()
+            }
         }
         
         showPlaceholder(false)

@@ -75,6 +75,8 @@
 		D4040E2D1F62C12000025E24 /* longPoll.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */; };
 		D40B451E1F979C80000221DE /* longPoll.failed.2.json in Resources */ = {isa = PBXBuildFile; fileRef = D40B451D1F979C80000221DE /* longPoll.failed.2.json */; };
 		D40B451F1F979C80000221DE /* longPoll.failed.2.json in Resources */ = {isa = PBXBuildFile; fileRef = D40B451D1F979C80000221DE /* longPoll.failed.2.json */; };
+		D4142BDD1FBDE875009CB511 /* ShareImageCollectionView_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4142BDC1FBDE875009CB511 /* ShareImageCollectionView_macOS.swift */; };
+		D414E7171FBF39BB0022B744 /* ShareImageCollectionViewItem_macOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = D414E7141FBF39AF0022B744 /* ShareImageCollectionViewItem_macOS.xib */; };
 		D41665401F6192CA000E6934 /* LongPollTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D416653F1F6192CA000E6934 /* LongPollTaskMock.swift */; };
 		D41665421F6193BD000E6934 /* LongPollTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665411F6193BD000E6934 /* LongPollTests.swift */; };
 		D41665441F6198C0000E6934 /* ConnectionObserverMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41665431F6198C0000E6934 /* ConnectionObserverMock.swift */; };
@@ -88,6 +90,7 @@
 		D423E0471FA63CE40083C8FB /* Error+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D423E0451FA63CE40083C8FB /* Error+Extensions.swift */; };
 		D423E0491FA640D90083C8FB /* ShareImageCollectionView_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D423E0481FA640D90083C8FB /* ShareImageCollectionView_iOS.swift */; };
 		D423E04C1FA6414F0083C8FB /* ShareImageCollectionCell_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D423E04B1FA6414F0083C8FB /* ShareImageCollectionCell_iOS.swift */; };
+		D42B120A1FC1B97800DB7879 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42B12091FC1B97800DB7879 /* NSImage+Extensions.swift */; };
 		D4306B2D1F547BC70050D165 /* ApiErrorHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4306B2C1F547BC70050D165 /* ApiErrorHandlerMock.swift */; };
 		D4306B2F1F5484380050D165 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4306B2E1F5484380050D165 /* Response.swift */; };
 		D4321D8B1F5F0587001AFE9F /* FullVariationsMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4321D8A1F5F0587001AFE9F /* FullVariationsMethodTests.swift */; };
@@ -118,6 +121,7 @@
 		D461D94B1FADB6A500AA0960 /* OnePixelConstraint_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D461D94A1FADB6A500AA0960 /* OnePixelConstraint_iOS.swift */; };
 		D46263A21F9FAB4100333DC3 /* SharePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */; };
 		D46263A31F9FAB4100333DC3 /* SharePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */; };
+		D4637F0D1FBDF1DD00D89CE7 /* ShareImageCollectionViewItem_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4637F0C1FBDF1DD00D89CE7 /* ShareImageCollectionViewItem_macOS.swift */; };
 		D46FB3E61F929D7A000CEAEB /* SwiftyVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2EB6E9B1BD180DD008E7D86 /* SwiftyVK.framework */; };
 		D46FB3EC1F929DBC000CEAEB /* AuthorizatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19D21EE438FB00CF13AF /* AuthorizatorTests.swift */; };
 		D46FB3ED1F929DBC000CEAEB /* TokenParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A19CF1EE4233D00CF13AF /* TokenParserTests.swift */; };
@@ -619,6 +623,8 @@
 		A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaPresenterMock.swift; sourceTree = "<group>"; };
 		D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.empty.json; sourceTree = "<group>"; };
 		D40B451D1F979C80000221DE /* longPoll.failed.2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.2.json; sourceTree = "<group>"; };
+		D4142BDC1FBDE875009CB511 /* ShareImageCollectionView_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageCollectionView_macOS.swift; sourceTree = "<group>"; };
+		D414E7141FBF39AF0022B744 /* ShareImageCollectionViewItem_macOS.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareImageCollectionViewItem_macOS.xib; sourceTree = "<group>"; };
 		D416653F1F6192CA000E6934 /* LongPollTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollTaskMock.swift; sourceTree = "<group>"; };
 		D41665411F6193BD000E6934 /* LongPollTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollTests.swift; sourceTree = "<group>"; };
 		D41665431F6198C0000E6934 /* ConnectionObserverMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionObserverMock.swift; sourceTree = "<group>"; };
@@ -630,6 +636,7 @@
 		D423E0451FA63CE40083C8FB /* Error+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Extensions.swift"; sourceTree = "<group>"; };
 		D423E0481FA640D90083C8FB /* ShareImageCollectionView_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageCollectionView_iOS.swift; sourceTree = "<group>"; };
 		D423E04B1FA6414F0083C8FB /* ShareImageCollectionCell_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageCollectionCell_iOS.swift; sourceTree = "<group>"; };
+		D42B12091FC1B97800DB7879 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		D4306B2C1F547BC70050D165 /* ApiErrorHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorHandlerMock.swift; sourceTree = "<group>"; };
 		D4306B2E1F5484380050D165 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		D4321D8A1F5F0587001AFE9F /* FullVariationsMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullVariationsMethodTests.swift; sourceTree = "<group>"; };
@@ -654,6 +661,7 @@
 		D461D9471FADAC0900AA0960 /* ShareWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareWorkerMock.swift; sourceTree = "<group>"; };
 		D461D94A1FADB6A500AA0960 /* OnePixelConstraint_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePixelConstraint_iOS.swift; sourceTree = "<group>"; };
 		D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenterTests.swift; sourceTree = "<group>"; };
+		D4637F0C1FBDF1DD00D89CE7 /* ShareImageCollectionViewItem_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageCollectionViewItem_macOS.swift; sourceTree = "<group>"; };
 		D46FB3E11F929D7A000CEAEB /* SwiftyVK_tests_iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyVK_tests_iOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4733D841FBB594100669D1F /* SharePreferencesController_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePreferencesController_macOS.swift; sourceTree = "<group>"; };
 		D47601141F2E218B005356E5 /* response.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.empty.json; sourceTree = "<group>"; };
@@ -984,6 +992,7 @@
 			isa = PBXGroup;
 			children = (
 				D4DCF2D91FAA2C18003D4497 /* Localizable.strings */,
+				D414E7141FBF39AF0022B744 /* ShareImageCollectionViewItem_macOS.xib */,
 				A2B727941EED682E005B17AE /* Storyboard_iOS.storyboard */,
 				A2B727A71EED68EF005B17AE /* Storyboard_macOS.storyboard */,
 				A2D15A931EEE96840063D6F2 /* Asset.xcassets */,
@@ -1034,6 +1043,8 @@
 				D486E3411FA0E64E002134EB /* ShareController_macOS.swift */,
 				D4733D841FBB594100669D1F /* SharePreferencesController_macOS.swift */,
 				D43FAF6D1FBB5B410068AA5F /* SharePreferencesCell_macOS.swift */,
+				D4142BDC1FBDE875009CB511 /* ShareImageCollectionView_macOS.swift */,
+				D4637F0C1FBDF1DD00D89CE7 /* ShareImageCollectionViewItem_macOS.swift */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -1094,6 +1105,7 @@
 				D4EF420A1FB5EC350025FD53 /* MultilineTextField_macOS.swift */,
 				D441C9DF1FBC86B80071A425 /* OnePixelConstraint_macOS.swift */,
 				D4427A431FBC87C200060A5A /* ColoredBackgroundView_macOS.swift */,
+				D42B12091FC1B97800DB7879 /* NSImage+Extensions.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1638,6 +1650,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2D15A941EEE96840063D6F2 /* Asset.xcassets in Resources */,
+				D414E7171FBF39BB0022B744 /* ShareImageCollectionViewItem_macOS.xib in Resources */,
 				D4DCF2D61FAA2C18003D4497 /* Localizable.strings in Resources */,
 				A2B727A51EED68EF005B17AE /* Storyboard_macOS.storyboard in Resources */,
 			);
@@ -1956,12 +1969,14 @@
 				D4BBFF071F929891009615E7 /* SessionConfig.swift in Sources */,
 				D4BBFECD1F929891009615E7 /* VKURLSessionTask.swift in Sources */,
 				D4BBFEF21F929891009615E7 /* RequestType.swift in Sources */,
+				D4637F0D1FBDF1DD00D89CE7 /* ShareImageCollectionViewItem_macOS.swift in Sources */,
 				D4BBFEF11F929891009615E7 /* Request.swift in Sources */,
 				D4BBFEF91F929891009615E7 /* Attempt.swift in Sources */,
 				D46FB42F1F929E4E000CEAEB /* CaptchaController.swift in Sources */,
 				D4733D851FBB594100669D1F /* SharePreferencesController_macOS.swift in Sources */,
 				D4BBFEC71F929891009615E7 /* Audio.swift in Sources */,
 				D4BBFEBD1F929891009615E7 /* Ads.swift in Sources */,
+				D42B120A1FC1B97800DB7879 /* NSImage+Extensions.swift in Sources */,
 				D4BBFED71F929891009615E7 /* VKAppProxy.swift in Sources */,
 				D43FAF6E1FBB5B410068AA5F /* SharePreferencesCell_macOS.swift in Sources */,
 				D4BBFED31F929891009615E7 /* OperationConvertible.swift in Sources */,
@@ -1977,6 +1992,7 @@
 				D4BBFEB11F929891009615E7 /* Notes.swift in Sources */,
 				D4BBFF061F929891009615E7 /* Token.swift in Sources */,
 				D4BBFEE21F929891009615E7 /* DependenciesImpl.swift in Sources */,
+				D4142BDD1FBDE875009CB511 /* ShareImageCollectionView_macOS.swift in Sources */,
 				D4DADE071F9F9AE9004F159E /* ShareContext.swift in Sources */,
 				D4EF420B1FB5EC350025FD53 /* MultilineTextField_macOS.swift in Sources */,
 				D4BBFEC01F929891009615E7 /* Friends.swift in Sources */,
@@ -2450,7 +2466,7 @@
 				IBSC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info/SwiftyVK_resources.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK_resources";
@@ -2497,7 +2513,7 @@
 				IBSC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info/SwiftyVK_resources.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK_resources";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2772,7 +2788,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info/SwiftyVK_macOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies -Onone";
@@ -2829,7 +2845,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info/SwiftyVK_macOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies -Onone";
 				PRODUCT_BUNDLE_IDENTIFIER = "WE-St0r.SwiftyVK";

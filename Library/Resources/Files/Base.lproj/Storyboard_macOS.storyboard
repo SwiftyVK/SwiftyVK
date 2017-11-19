@@ -121,25 +121,54 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="500" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="allowed" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="Xk5-Ik-8aC">
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="allowed" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="Xk5-Ik-8aC" userLabel="Share scroll">
                                 <rect key="frame" x="0.0" y="0.0" width="500" height="310"/>
-                                <clipView key="contentView" id="1bE-GM-FGE">
+                                <clipView key="contentView" id="1bE-GM-FGE" userLabel="Content">
                                     <rect key="frame" x="1" y="1" width="498" height="308"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <view translatesAutoresizingMaskIntoConstraints="NO" id="UPV-Z3-Q74">
-                                            <rect key="frame" x="0.0" y="0.0" width="498" height="308"/>
+                                        <view translatesAutoresizingMaskIntoConstraints="NO" id="UPV-Z3-Q74" userLabel="coloredView" customClass="ColoredBackgroundViewMacOS" customModule="SwiftyVK">
+                                            <rect key="frame" x="0.0" y="51" width="498" height="257"/>
                                             <subviews>
+                                                <scrollView wantsLayer="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Is-IK-Tep" userLabel="Images collection">
+                                                    <rect key="frame" x="15" y="43" width="468" height="180"/>
+                                                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Nb1-wP-wyB" userLabel="Content">
+                                                        <rect key="frame" x="0.0" y="0.0" width="468" height="180"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <collectionView id="tTN-FH-CY1" customClass="ShareImageCollectionViewMacOS" customModule="SwiftyVK">
+                                                                <rect key="frame" x="0.0" y="0.0" width="468" height="180"/>
+                                                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" scrollDirection="horizontal" id="fV5-C7-EoX">
+                                                                    <size key="itemSize" width="150" height="150"/>
+                                                                </collectionViewFlowLayout>
+                                                                <color key="primaryBackgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
+                                                            </collectionView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    </clipView>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="180" id="bVP-3r-ig1"/>
+                                                    </constraints>
+                                                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="bh8-KB-Ub1">
+                                                        <rect key="frame" x="-100" y="-100" width="233" height="15"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="kcj-Dd-dYd">
+                                                        <rect key="frame" x="-100" y="-100" width="15" height="143"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                </scrollView>
                                                 <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1ds-iT-SIJ" customClass="MultilineTextFieldMacOS" customModule="SwiftyVK">
-                                                    <rect key="frame" x="15" y="274" width="468" height="19"/>
+                                                    <rect key="frame" x="15" y="223" width="468" height="19"/>
                                                     <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" drawsBackground="YES" id="xRY-JN-EMj">
                                                         <font key="font" metaFont="system" size="16"/>
                                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                                     </textFieldCell>
                                                 </textField>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Efi-UK-fqF" userLabel="Link View">
-                                                    <rect key="frame" x="15" y="15" width="468" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="468" height="43"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KGi-ba-acW">
                                                             <rect key="frame" x="-2" y="24" width="44" height="19"/>
@@ -170,18 +199,26 @@ Gw
                                                 </customView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="1Is-IK-Tep" firstAttribute="top" secondItem="1ds-iT-SIJ" secondAttribute="bottom" id="7AH-XR-fzD"/>
                                                 <constraint firstAttribute="trailing" secondItem="1ds-iT-SIJ" secondAttribute="trailing" constant="15" id="7zH-3V-NMa"/>
+                                                <constraint firstItem="Efi-UK-fqF" firstAttribute="top" secondItem="1Is-IK-Tep" secondAttribute="bottom" id="8Dy-OP-dMn"/>
                                                 <constraint firstItem="1ds-iT-SIJ" firstAttribute="leading" secondItem="UPV-Z3-Q74" secondAttribute="leading" constant="15" id="FLM-5h-Pih"/>
+                                                <constraint firstAttribute="trailing" secondItem="1Is-IK-Tep" secondAttribute="trailing" constant="15" id="G2G-dV-CzF"/>
+                                                <constraint firstItem="1Is-IK-Tep" firstAttribute="leading" secondItem="UPV-Z3-Q74" secondAttribute="leading" constant="15" id="WXT-Tw-Zz9"/>
                                                 <constraint firstItem="Efi-UK-fqF" firstAttribute="leading" secondItem="UPV-Z3-Q74" secondAttribute="leading" constant="15" id="i7W-qt-geB"/>
-                                                <constraint firstAttribute="bottom" secondItem="Efi-UK-fqF" secondAttribute="bottom" constant="15" id="nPh-vO-K4x"/>
                                                 <constraint firstAttribute="trailing" secondItem="Efi-UK-fqF" secondAttribute="trailing" constant="15" id="vMc-6X-hdA"/>
                                                 <constraint firstItem="1ds-iT-SIJ" firstAttribute="top" secondItem="UPV-Z3-Q74" secondAttribute="top" constant="15" id="x3X-iZ-7T6"/>
+                                                <constraint firstAttribute="bottom" secondItem="Efi-UK-fqF" secondAttribute="bottom" id="zV4-3s-GL7"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="deviceWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="UPV-Z3-Q74" firstAttribute="leading" secondItem="1bE-GM-FGE" secondAttribute="leading" id="2TF-rq-5iX"/>
-                                        <constraint firstAttribute="bottom" secondItem="UPV-Z3-Q74" secondAttribute="bottom" id="5Sy-nn-Ldt"/>
                                         <constraint firstItem="UPV-Z3-Q74" firstAttribute="top" secondItem="1bE-GM-FGE" secondAttribute="top" id="l4N-Ib-4hu"/>
                                         <constraint firstAttribute="trailing" secondItem="UPV-Z3-Q74" secondAttribute="trailing" id="zHr-vw-i8W"/>
                                     </constraints>
@@ -296,12 +333,12 @@ Gw
                         <outlet property="buttonsView" destination="k50-t7-Kdi" id="sZd-kY-6sx"/>
                         <outlet property="doneActivity" destination="eEX-3K-53l" id="bIc-uq-nkM"/>
                         <outlet property="doneButton" destination="1Hr-oL-t2R" id="SyH-0b-fmx"/>
+                        <outlet property="imagesCollectionView" destination="tTN-FH-CY1" id="cLx-cW-GOF"/>
                         <outlet property="linkAdressLabel" destination="Bu7-XJ-4aw" id="bXa-A1-1Rp"/>
                         <outlet property="linkTitleLabel" destination="KGi-ba-acW" id="qfN-Aw-rjI"/>
                         <outlet property="messageTextField" destination="1ds-iT-SIJ" id="LF7-RC-pTo"/>
                         <outlet property="noConnectionLabel" destination="Pt9-5l-Lh2" id="W9M-mI-zmb"/>
-                        <outlet property="placeholderViee" destination="taY-Ad-LpS" id="qbI-oj-B6o"/>
-                        <outlet property="placeholderView" destination="taY-Ad-LpS" id="AoG-AH-6q3"/>
+                        <outlet property="placeholderView" destination="taY-Ad-LpS" id="UWb-La-5fl"/>
                         <outlet property="progressIndicator" destination="Mca-EW-2HR" id="VU7-cX-8lx"/>
                     </connections>
                 </viewController>

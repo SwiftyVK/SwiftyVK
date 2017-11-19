@@ -228,7 +228,6 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         }
         catch let error {
             onError(error.toVK())
-            
         }
         
         let share = {

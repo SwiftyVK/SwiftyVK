@@ -7,4 +7,3 @@ class OnePixelConstraintMacOS: NSLayoutConstraint {
         constant = 1 / (NSScreen.main?.backingScaleFactor ?? 1)
     }
 }
-
