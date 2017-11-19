@@ -17,10 +17,27 @@
                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="XVd-hx-Wvf"/>
                 </imageView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="UH3-1n-lsD" customClass="ColoredBackgroundViewMacOS" customModule="SwiftyVK">
+                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customView>
+                <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="oMM-l9-j4k">
+                    <rect key="frame" x="34" y="34" width="32" height="32"/>
+                </progressIndicator>
             </subviews>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="UH3-1n-lsD" secondAttribute="bottom" id="1u7-Z1-tev"/>
+                <constraint firstItem="UH3-1n-lsD" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="2SA-BK-xYl"/>
                 <constraint firstItem="2u4-1Z-mxL" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="AMY-5U-3Vc"/>
+                <constraint firstAttribute="trailing" secondItem="UH3-1n-lsD" secondAttribute="trailing" id="BkV-a6-aPR"/>
                 <constraint firstAttribute="trailing" secondItem="2u4-1Z-mxL" secondAttribute="trailing" id="JAa-5T-P6I"/>
+                <constraint firstItem="oMM-l9-j4k" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="Mqe-Un-D8b"/>
+                <constraint firstItem="oMM-l9-j4k" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="SWk-aq-Uuj"/>
+                <constraint firstItem="UH3-1n-lsD" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="XtX-n3-95R"/>
                 <constraint firstAttribute="bottom" secondItem="2u4-1Z-mxL" secondAttribute="bottom" id="dii-gD-D4q"/>
                 <constraint firstItem="2u4-1Z-mxL" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="wBw-xa-dQP"/>
             </constraints>
@@ -28,7 +45,9 @@
         </customView>
         <collectionViewItem id="qc8-Z0-uI4" customClass="ShareImageCollectionViewItemMacOS" customModule="SwiftyVK">
             <connections>
+                <outlet property="activityIndicator" destination="oMM-l9-j4k" id="Ss4-6X-pq4"/>
                 <outlet property="imageView" destination="2u4-1Z-mxL" id="vZd-mE-FGr"/>
+                <outlet property="overlayView" destination="UH3-1n-lsD" id="M5K-DP-2CS"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="ghw-zS-xcR"/>
             </connections>
         </collectionViewItem>

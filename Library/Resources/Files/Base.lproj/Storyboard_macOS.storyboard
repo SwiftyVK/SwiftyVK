@@ -130,7 +130,7 @@ Gw
                                         <view translatesAutoresizingMaskIntoConstraints="NO" id="UPV-Z3-Q74" userLabel="coloredView" customClass="ColoredBackgroundViewMacOS" customModule="SwiftyVK">
                                             <rect key="frame" x="0.0" y="51" width="498" height="257"/>
                                             <subviews>
-                                                <scrollView wantsLayer="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Is-IK-Tep" userLabel="Images collection">
+                                                <scrollView wantsLayer="YES" borderType="none" horizontalLineScroll="0.0" horizontalPageScroll="0.0" verticalLineScroll="0.0" verticalPageScroll="0.0" hasHorizontalScroller="NO" hasVerticalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Is-IK-Tep" userLabel="Images scroll">
                                                     <rect key="frame" x="15" y="43" width="468" height="180"/>
                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Nb1-wP-wyB" userLabel="Content">
                                                         <rect key="frame" x="0.0" y="0.0" width="468" height="180"/>

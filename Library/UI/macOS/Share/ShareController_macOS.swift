@@ -25,6 +25,7 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
         placeholderView?.alphaValue = 0
         progressIndicator?.startAnimation(nil)
         buttonsView?.wantsLayer = true
+
         buttonsView?.layer?.backgroundColor = NSColor(
             calibratedRed: 0.314,
             green: 0.448,
@@ -125,7 +126,7 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
     }
     
     @IBAction func cancelPressed(_ sender: Any) {
-        self.dismiss(sender)
+        close()
     }
 
     override func controlTextDidChange(_ notification: Notification) {

@@ -138,7 +138,7 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     }
     
     @IBAction func cancelPressed(_ sender: Any) {
-        navigationController?.dismiss(animated: true, completion: nil)
+        close()
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
