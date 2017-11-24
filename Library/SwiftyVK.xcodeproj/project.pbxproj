@@ -75,6 +75,7 @@
 		D4040E2D1F62C12000025E24 /* longPoll.empty.json in Resources */ = {isa = PBXBuildFile; fileRef = D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */; };
 		D40B451E1F979C80000221DE /* longPoll.failed.2.json in Resources */ = {isa = PBXBuildFile; fileRef = D40B451D1F979C80000221DE /* longPoll.failed.2.json */; };
 		D40B451F1F979C80000221DE /* longPoll.failed.2.json in Resources */ = {isa = PBXBuildFile; fileRef = D40B451D1F979C80000221DE /* longPoll.failed.2.json */; };
+		D40E04071FC1CF8700DBB35A /* FlippedScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40E04061FC1CF8700DBB35A /* FlippedScrollView.swift */; };
 		D4142BDD1FBDE875009CB511 /* ShareImageCollectionView_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4142BDC1FBDE875009CB511 /* ShareImageCollectionView_macOS.swift */; };
 		D414E7171FBF39BB0022B744 /* ShareImageCollectionViewItem_macOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = D414E7141FBF39AF0022B744 /* ShareImageCollectionViewItem_macOS.xib */; };
 		D41665401F6192CA000E6934 /* LongPollTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D416653F1F6192CA000E6934 /* LongPollTaskMock.swift */; };
@@ -623,6 +624,7 @@
 		A2F7B5541EF18C5C006AF76C /* CaptchaPresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaPresenterMock.swift; sourceTree = "<group>"; };
 		D4040E2C1F62C0CB00025E24 /* longPoll.empty.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.empty.json; sourceTree = "<group>"; };
 		D40B451D1F979C80000221DE /* longPoll.failed.2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.2.json; sourceTree = "<group>"; };
+		D40E04061FC1CF8700DBB35A /* FlippedScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlippedScrollView.swift; sourceTree = "<group>"; };
 		D4142BDC1FBDE875009CB511 /* ShareImageCollectionView_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageCollectionView_macOS.swift; sourceTree = "<group>"; };
 		D414E7141FBF39AF0022B744 /* ShareImageCollectionViewItem_macOS.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareImageCollectionViewItem_macOS.xib; sourceTree = "<group>"; };
 		D416653F1F6192CA000E6934 /* LongPollTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollTaskMock.swift; sourceTree = "<group>"; };
@@ -1106,6 +1108,7 @@
 				D441C9DF1FBC86B80071A425 /* OnePixelConstraint_macOS.swift */,
 				D4427A431FBC87C200060A5A /* ColoredBackgroundView_macOS.swift */,
 				D42B12091FC1B97800DB7879 /* NSImage+Extensions.swift */,
+				D40E04061FC1CF8700DBB35A /* FlippedScrollView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -2028,6 +2031,7 @@
 				D4BBFF091F929891009615E7 /* SwiftyVKDelegate.swift in Sources */,
 				D4BBFED91F929891009615E7 /* Collections+Extensions.swift in Sources */,
 				D48F789D1F9FAABD0092931E /* ShareControllers.swift in Sources */,
+				D40E04071FC1CF8700DBB35A /* FlippedScrollView.swift in Sources */,
 				D4BBFED11F929891009615E7 /* VKViewController.swift in Sources */,
 				D4BBFEF41F929891009615E7 /* TokenParser.swift in Sources */,
 				D4BBFEB01F929891009615E7 /* Board.swift in Sources */,
