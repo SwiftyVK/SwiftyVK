@@ -16,7 +16,7 @@ final class ApiErrorHandlerTests: XCTestCase {
         }
         // When
         do {
-            _ = try context.handler.handle(error: error)
+            _ = try context.handler.handle(error: error, token: nil)
             // Then
             XCTAssertEqual(onLogInCallCount, 1)
         } catch let error {
@@ -30,12 +30,13 @@ final class ApiErrorHandlerTests: XCTestCase {
         let error = ApiError(code: 5)
         let exp = expectation(description: "")
         
-        context.executor.onInvalidate = {
+        let token = TokenMock()
+        token.onInvalidate = {
             exp.fulfill()
         }
         // When
         do {
-            _ = try context.handler.handle(error: error)
+            _ = try context.handler.handle(error: error, token: token)
             // Then
         } catch let error {
             XCTFail("Expression throw unexpected error \(error)")
@@ -62,7 +63,7 @@ final class ApiErrorHandlerTests: XCTestCase {
         }
         // When
         do {
-            _ = try context.handler.handle(error: error)
+            _ = try context.handler.handle(error: error, token: nil)
             // Then
             XCTAssertEqual(onCaptchaCallCount, 1)
         } catch let error {
@@ -77,7 +78,7 @@ final class ApiErrorHandlerTests: XCTestCase {
 
         // When
         do {
-            _ = try context.handler.handle(error: error)
+            _ = try context.handler.handle(error: error, token: nil)
             // Then
             XCTFail("Expression should throw error")
         } catch let throwedError {
@@ -101,7 +102,7 @@ final class ApiErrorHandlerTests: XCTestCase {
         }
         // When
         do {
-            _ = try context.handler.handle(error: error)
+            _ = try context.handler.handle(error: error, token: nil)
             // Then
             XCTAssertEqual(onValidateCallCount, 1)
         } catch let error {
@@ -116,7 +117,7 @@ final class ApiErrorHandlerTests: XCTestCase {
         
         // When
         do {
-            _ = try context.handler.handle(error: error)
+            _ = try context.handler.handle(error: error, token: nil)
             // Then
             XCTFail("Expression should throw error")
         } catch let throwedError {
@@ -130,7 +131,7 @@ final class ApiErrorHandlerTests: XCTestCase {
         let error = ApiError(code: 0)
         // When
         do {
-            _ = try context.handler.handle(error: error)
+            _ = try context.handler.handle(error: error, token: nil)
             // Then
             XCTFail("Expression should throw error")
         } catch let throwedError {

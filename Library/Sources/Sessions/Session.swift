@@ -41,7 +41,6 @@ protocol DestroyableSession: Session {
 
 protocol ApiErrorExecutor {
     func logIn(revoke: Bool) throws -> [String: String]
-    func invalidate()
     func validate(redirectUrl: URL) throws
     func captcha(rawUrlToImage: String, dismissOnFinish: Bool) throws -> String
 }
@@ -155,11 +154,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
             token = try authorizator.authorize(sessionId: id, rawToken: rawToken, expires: expires)
         }
     }
-    
-    func invalidate() {
-        token?.invalidate()
-    }
-    
+
     public func logOut() {
         unsafeDestroy()
     }
@@ -201,7 +196,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     
         do {
             try throwIfDestroyed()
-            try shedule(task: task, concurrent: request.canSentConcurrently)
+            try shedule(task: task)
         }
         catch let error as VKError {
             request.callbacks.onError?(error)
@@ -213,10 +208,10 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         return task
     }
     
-    func shedule(task: Task, concurrent: Bool) throws {
+    func shedule(task: Task) throws {
         try gateQueue.sync {
             try throwIfDestroyed()
-            taskSheduler.shedule(task: task, concurrent: concurrent)
+            taskSheduler.shedule(task: task)
         }
     }
     

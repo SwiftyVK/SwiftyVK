@@ -1,5 +1,5 @@
 protocol ApiErrorHandler {
-    func handle(error: ApiError) throws -> ApiErrorHandlerResult
+    func handle(error: ApiError, token: Token?) throws -> ApiErrorHandlerResult
 }
 
 final class ApiErrorHandlerImpl: ApiErrorHandler {
@@ -10,10 +10,10 @@ final class ApiErrorHandlerImpl: ApiErrorHandler {
         self.executor = executor
     }
     
-    func handle(error: ApiError) throws -> ApiErrorHandlerResult {
+    func handle(error: ApiError, token: Token?) throws -> ApiErrorHandlerResult {
         switch error.code {
         case 5:
-            executor.invalidate()
+            token?.invalidate()
             _ = try executor.logIn(revoke: false)
             return .none
         case 14:

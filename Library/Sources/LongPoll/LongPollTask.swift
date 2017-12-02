@@ -51,7 +51,7 @@ final class LongPollTaskImpl: Operation, LongPollTask {
                     strongSelf.handleError(code: errorCode, response: response)
                 }
                 else {
-                    let newTs = response.forcedString("ts")
+                    let newTs = response.forcedInt("ts").toString()
                     let updates: [Any] = response.array("updates") ?? []
                     
                     strongSelf.onResponse(updates.map { JSON(value: $0) })
