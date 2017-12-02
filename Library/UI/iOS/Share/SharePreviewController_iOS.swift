@@ -6,7 +6,7 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     @IBOutlet private weak var linkTitle: UILabel?
     @IBOutlet private weak var linkUrl: UILabel?
     @IBOutlet private weak var imageCollection: ShareImageCollectionViewIOS?
-    @IBOutlet private weak var sendButton: UIBarButtonItem?
+    @IBOutlet private var sendButton: UIBarButtonItem?
     @IBOutlet private weak var placeholderView: UIView?
     @IBOutlet private weak var placeholderIndicator: UIActivityIndicatorView?
     @IBOutlet private weak var noConnectionLabel: UILabel?
@@ -93,11 +93,9 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
     func enablePostButton(_ enable: Bool) {
         DispatchQueue.anywayOnMain {
             if enable {
-                navigationItem.setRightBarButton(rightButton, animated: true)
-                rightButton = nil
+                navigationItem.setRightBarButton(sendButton, animated: true)
             }
             else {
-                rightButton = navigationItem.rightBarButtonItem
                 let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
                 let barButton = UIBarButtonItem(customView: activityIndicator)
                 navigationItem.setRightBarButton(barButton, animated: true)
