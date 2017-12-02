@@ -41,7 +41,6 @@ protocol DestroyableSession: Session {
 
 protocol ApiErrorExecutor {
     func logIn(revoke: Bool) throws -> [String: String]
-    func invalidate()
     func validate(redirectUrl: URL) throws
     func captcha(rawUrlToImage: String, dismissOnFinish: Bool) throws -> String
 }
@@ -155,11 +154,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
             token = try authorizator.authorize(sessionId: id, rawToken: rawToken, expires: expires)
         }
     }
-    
-    func invalidate() {
-        token?.invalidate()
-    }
-    
+
     public func logOut() {
         unsafeDestroy()
     }
