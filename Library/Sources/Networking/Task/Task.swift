@@ -13,21 +13,9 @@ public protocol Task {
 final class TaskImpl: Operation, Task, OperationConvertible {
     
     let id: Int64
-    
-    override var isFinished: Bool {
-        switch state {
-        case .finished, .failed, .cancelled:
-            return true
-        case .created, .sended:
-            return false
-        }
-    }
-    
-    var state: TaskState = .created {
-        willSet { willChangeValue(forKey: "isFinished") }
-        didSet { didChangeValue(forKey: "isFinished") }
-    }
-    
+
+    var state: TaskState = .created
+
     override var description: String {
         return "task #\(id), state: \(state)"
     }
