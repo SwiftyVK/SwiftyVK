@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -250,7 +250,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDu-eD-Jpl">
-                                                        <rect key="frame" x="15" y="20.666666666666657" width="344" height="19.333333333333343"/>
+                                                        <rect key="frame" x="15" y="20.666666666666657" width="344" height="19.333333333333329"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                         <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -298,9 +298,18 @@
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="RPt-4K-ZFa">
                                         <rect key="frame" x="177" y="279" width="20" height="20"/>
                                     </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please check your internet connection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8xB-w3-nmP">
+                                        <rect key="frame" x="15" y="314" width="344" height="24"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                        <color key="textColor" red="0.31228798629999999" green="0.44764596220000002" blue="0.59886246919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="8xB-w3-nmP" firstAttribute="top" secondItem="RPt-4K-ZFa" secondAttribute="bottom" constant="15" id="DI3-Y6-PY6"/>
+                                    <constraint firstAttribute="trailing" secondItem="8xB-w3-nmP" secondAttribute="trailing" constant="15" id="LYv-Rb-UBo"/>
+                                    <constraint firstItem="8xB-w3-nmP" firstAttribute="leading" secondItem="eMq-zr-nut" secondAttribute="leading" constant="15" id="T32-gT-D6s"/>
                                     <constraint firstItem="RPt-4K-ZFa" firstAttribute="centerX" secondItem="eMq-zr-nut" secondAttribute="centerX" id="uf6-YU-MKV"/>
                                     <constraint firstItem="RPt-4K-ZFa" firstAttribute="centerY" secondItem="eMq-zr-nut" secondAttribute="centerY" id="z7j-zX-se5"/>
                                 </constraints>
@@ -343,6 +352,7 @@
                         <outlet property="linkUrl" destination="fDu-eD-Jpl" id="Vcm-Np-6nK"/>
                         <outlet property="linkViewHeight" destination="2GZ-4Z-fs1" id="ebS-Vp-jwT"/>
                         <outlet property="messageTextView" destination="MGr-xq-tp4" id="ies-0U-2hE"/>
+                        <outlet property="noConnectionLabel" destination="8xB-w3-nmP" id="3ZK-4h-IvX"/>
                         <outlet property="placeholderIndicator" destination="RPt-4K-ZFa" id="Bp2-Qy-z05"/>
                         <outlet property="placeholderView" destination="eMq-zr-nut" id="HWT-Qt-QhK"/>
                         <outlet property="sendButton" destination="Qc3-nV-l5B" id="LjG-mP-nYh"/>
@@ -376,7 +386,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FqU-7k-Mse">
-                                                    <rect key="frame" x="15" y="12.999999999999998" width="280" height="18.333333333333329"/>
+                                                    <rect key="frame" x="15" y="16" width="280" height="12"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
