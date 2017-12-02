@@ -284,7 +284,7 @@ final class LongPollTests: XCTestCase {
         context.longPoll.start { events in
             if taskCount == 1 {
                 guard case .forcedStop? = events.first else {
-                    return XCTFail("Unexpected event: \(events.first)")
+                    return XCTFail("Unexpected events: \(events)")
                 }
                 
                 expectation.fulfill()
