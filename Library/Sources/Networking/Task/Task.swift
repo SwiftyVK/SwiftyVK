@@ -13,16 +13,6 @@ public protocol Task {
 final class TaskImpl: Operation, Task, OperationConvertible {
     
     let id: Int64
-    
-    override var isFinished: Bool {
-        switch state {
-        case .finished, .failed, .cancelled:
-            return true
-        case .created, .sended:
-            return false
-        }
-    }
-    
     var state: TaskState = .created
     
     override var description: String {
@@ -37,6 +27,7 @@ final class TaskImpl: Operation, Task, OperationConvertible {
     private weak var attemptMaker: AttemptMaker?
     private let apiErrorHandler: ApiErrorHandler
     private weak var currentAttempt: Attempt?
+    private weak var currentToken: Token?
     
     init(
         id: Int64,
@@ -120,6 +111,7 @@ final class TaskImpl: Operation, Task, OperationConvertible {
         )
 
         currentAttempt = newAttempt
+        currentToken = session.token
         try session.shedule(attempt: newAttempt, concurrent: currentRequest.canSentConcurrently)
     }
     
@@ -172,7 +164,7 @@ final class TaskImpl: Operation, Task, OperationConvertible {
         }
         
         tryToPerform {
-            let result = try apiErrorHandler.handle(error: apiError)
+            let result = try apiErrorHandler.handle(error: apiError, token: currentToken)
             
             switch result {
             case .none:

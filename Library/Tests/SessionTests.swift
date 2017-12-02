@@ -8,7 +8,7 @@ final class SessionTests: XCTestCase {
         let context = makeContext()
         let task = TaskMock()
         // Then
-        try? context.session.shedule(task: task, concurrent: true)
+        try? context.session.shedule(task: task)
         // When
         XCTAssertEqual(context.taskSheduler.sheduleCallCount, 1)
     }
@@ -554,33 +554,6 @@ final class SessionTests: XCTestCase {
         )
         // Then
     }
-    
-    func test_invalidate_callTokenInvalidate() {
-        // Given
-        let context = makeContext()
-        let exp = expectation(description: "")
-        
-        let token = TokenMock()
-        
-        token.onInvalidate = {
-            exp.fulfill()
-        }
-        
-        context.authorizator.onAuthorize = { _, _, _ in
-            return token
-        }
-        
-        // When
-        do {
-            _ = try context.session.logIn(revoke: false)
-            context.session.invalidate()
-        } catch let error {
-            XCTFail("Unexpected error: \(error)")
-        }
-        // Then
-        waitForExpectations(timeout: 1)
-    }
-    
     private func syncLogIn(
         session: Session,
         onSuccess: @escaping ([String : String]) -> (),
