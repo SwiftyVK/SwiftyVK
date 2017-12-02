@@ -201,7 +201,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     
         do {
             try throwIfDestroyed()
-            try shedule(task: task, concurrent: request.canSentConcurrently)
+            try shedule(task: task)
         }
         catch let error as VKError {
             request.callbacks.onError?(error)
@@ -213,10 +213,10 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         return task
     }
     
-    func shedule(task: Task, concurrent: Bool) throws {
+    func shedule(task: Task) throws {
         try gateQueue.sync {
             try throwIfDestroyed()
-            taskSheduler.shedule(task: task, concurrent: concurrent)
+            taskSheduler.shedule(task: task)
         }
     }
     

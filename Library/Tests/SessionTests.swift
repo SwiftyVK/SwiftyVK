@@ -8,7 +8,7 @@ final class SessionTests: XCTestCase {
         let context = makeContext()
         let task = TaskMock()
         // Then
-        try? context.session.shedule(task: task, concurrent: true)
+        try? context.session.shedule(task: task)
         // When
         XCTAssertEqual(context.taskSheduler.sheduleCallCount, 1)
     }

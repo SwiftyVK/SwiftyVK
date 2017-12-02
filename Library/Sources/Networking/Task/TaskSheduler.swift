@@ -1,29 +1,17 @@
 protocol TaskSheduler: class {
-    func shedule(task: Task, concurrent: Bool)
+    func shedule(task: Task)
 }
 
 final class TaskShedulerImpl: TaskSheduler {
     
-    private lazy var serialQueue: OperationQueue = {
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 1
-        return queue
-    }()
-    
-    private lazy var concurrentQueue: OperationQueue = {
+    private lazy var taskQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = .max
         return queue
     }()
     
-    func shedule(task: Task, concurrent: Bool) {
+    func shedule(task: Task) {
         let operation = (task as? OperationConvertible)?.toOperation()
-        
-        if concurrent {
-            operation.flatMap { concurrentQueue.addOperation($0) }
-        }
-        else {
-            operation.flatMap { serialQueue.addOperation($0) }
-        }
+        operation.flatMap { taskQueue.addOperation($0) }
     }
 }
