@@ -5,7 +5,7 @@
     <img src="https://img.shields.io/badge/Swift-4.0.0-orange.svg?style=flat" alt="Swift">
   </a>
   <a href="https://vk.com/dev/versions">
-    <img src="https://img.shields.io/badge/VK_API-5.68-blue.svg?style=flat" alt="VK API">
+    <img src="https://img.shields.io/badge/VK_API-5.69-blue.svg?style=flat" alt="VK API">
   </a>
   <a href="http://cocoadocs.org/docsets/SwiftyVK">
     <img src="https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat" alt="Platform">
