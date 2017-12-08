@@ -63,4 +63,11 @@ final class ShareImageCollectionViewMacOS: NSCollectionView, NSCollectionViewDel
         
         item.set(image: image)
     }
+    
+    // This dummy method fix collection view crash ¯\_(ツ)_/¯
+    func collectionView(
+        _ collectionView: NSCollectionView,
+        didEndDisplaying item: NSCollectionViewItem,
+        forRepresentedObjectAt indexPath: IndexPath
+        ) { }
 }
