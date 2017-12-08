@@ -225,27 +225,35 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
             onError(error.toVK())
         }
         
-        let share = {
-            DispatchQueue.global(qos: .utility).async {
-                do {
-                    let presenter = self.sharePresenterMaker.sharePresenter()
-                    let data = try presenter.share(context, in: self)
-                    try onSuccess(data)
-                }
-                catch {
-                    onError(error.toVK())
-                }
-            }
+        if state >= .authorized {
+            forceShare(context, onSuccess: onSuccess, onError: onError)
         }
-        
-        guard state >= .authorized else {
-            return logIn(
-                onSuccess: { _ in share() },
+        else {
+            logIn(
+                onSuccess: { [weak self] _ in
+                    self?.forceShare(context, onSuccess: onSuccess, onError: onError)
+                },
                 onError: { onError($0) }
             )
         }
-        
-        share()
+    }
+    
+    public func forceShare(
+        _ context: ShareContext,
+        onSuccess: @escaping RequestCallbacks.Success,
+        onError: @escaping RequestCallbacks.Error
+        ) {
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            do {
+                guard let strongSelf = self else { return }
+                let presenter = strongSelf.sharePresenterMaker.sharePresenter()
+                let data = try presenter.share(context, in: strongSelf)
+                try onSuccess(data)
+            }
+            catch {
+                onError(error.toVK())
+            }
+        }
     }
     
     func shedule(task: Task) throws {
