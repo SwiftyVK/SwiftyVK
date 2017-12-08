@@ -349,6 +349,7 @@ public enum Parameter: String, Hashable {
     case settings
     case groupsCanPost = "groups_can_post"
     case lpVersion = "lp_version"
+    case filters
     
     public var hashValue: Int {
         return self.rawValue.hashValue

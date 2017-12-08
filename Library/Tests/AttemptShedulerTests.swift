@@ -46,7 +46,7 @@ final class AttemptShedulerTests: XCTestCase {
         for _ in 0..<operationCount { concurrentGroup.enter() }
         // When
         let serial = sheduleSamples(count: operationCount, concurrent: false, completion: { serialGroup.leave() })
-        let concurrent = sheduleSamples(count: operationCount, concurrent: true, completion: { concurrentGroup.leave() })
+        _ = sheduleSamples(count: operationCount, concurrent: true, completion: { concurrentGroup.leave() })
         // Then
         let resutl1 = concurrentGroup.wait(timeout: .now() + totalAsyncTime * 20)
         
