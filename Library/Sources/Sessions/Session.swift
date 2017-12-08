@@ -91,7 +91,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     private unowned var taskMaker: TaskMaker
     private unowned var longPollMaker: LongPollMaker
     private let captchaPresenter: CaptchaPresenter
-    private let sharePresenterMaker: SharePresenterMaker
+    private weak var sharePresenterMaker: SharePresenterMaker?
     private weak var sessionSaver: SessionSaver?
     private weak var delegate: SwiftyVKSessionDelegate?
     private let gateQueue = DispatchQueue(label: "SwiftyVK.sessionQueue")
@@ -246,7 +246,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         DispatchQueue.global(qos: .utility).async { [weak self] in
             do {
                 guard let strongSelf = self else { return }
-                let presenter = strongSelf.sharePresenterMaker.sharePresenter()
+                guard let presenter = strongSelf.sharePresenterMaker?.sharePresenter() else { return }
                 let data = try presenter.share(context, in: strongSelf)
                 try onSuccess(data)
             }

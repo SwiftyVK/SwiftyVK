@@ -59,6 +59,6 @@ protocol LongPollMaker: class {
     func longPoll(session: Session) -> LongPoll
 }
 
-protocol SharePresenterMaker {
+protocol SharePresenterMaker: class {
     func sharePresenter() -> SharePresenter
 }
