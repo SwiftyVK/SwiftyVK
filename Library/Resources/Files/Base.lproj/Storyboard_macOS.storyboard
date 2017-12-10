@@ -128,22 +128,22 @@ Gw
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view translatesAutoresizingMaskIntoConstraints="NO" id="UPV-Z3-Q74" userLabel="coloredView">
-                                            <rect key="frame" x="15" y="75" width="468" height="233"/>
+                                            <rect key="frame" x="15" y="65" width="468" height="243"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="pEe-k8-6KI">
-                                                    <rect key="frame" x="0.0" y="183" width="468" height="50"/>
+                                                    <rect key="frame" x="0.0" y="193" width="468" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="eXS-5O-EAe"/>
                                                     </constraints>
                                                 </customView>
-                                                <scrollView wantsLayer="YES" borderType="none" horizontalLineScroll="0.0" horizontalPageScroll="0.0" verticalLineScroll="0.0" verticalPageScroll="0.0" hasVerticalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Is-IK-Tep" userLabel="Images scroll">
-                                                    <rect key="frame" x="0.0" y="43" width="468" height="140"/>
+                                                <scrollView wantsLayer="YES" borderType="none" horizontalLineScroll="0.0" horizontalPageScroll="0.0" verticalLineScroll="0.0" verticalPageScroll="0.0" hasVerticalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Is-IK-Tep" userLabel="Images scroll" customClass="OnlyHorizontallyScrolView" customModule="SwiftyVK">
+                                                    <rect key="frame" x="0.0" y="58" width="468" height="135"/>
                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Nb1-wP-wyB" userLabel="Content">
-                                                        <rect key="frame" x="0.0" y="0.0" width="468" height="140"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="468" height="135"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <collectionView id="tTN-FH-CY1" customClass="ShareImageCollectionViewMacOS" customModule="SwiftyVK">
-                                                                <rect key="frame" x="0.0" y="0.0" width="468" height="140"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="468" height="120"/>
                                                                 <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" scrollDirection="horizontal" id="fV5-C7-EoX">
                                                                     <size key="itemSize" width="120" height="120"/>
@@ -152,12 +152,13 @@ Gw
                                                             </collectionView>
                                                         </subviews>
                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        <edgeInsets key="contentInsets" left="0.0" right="0.0" top="15" bottom="0.0"/>
                                                     </clipView>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="140" id="bVP-3r-ig1"/>
+                                                        <constraint firstAttribute="height" constant="135" id="bVP-3r-ig1"/>
                                                     </constraints>
                                                     <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="bh8-KB-Ub1">
-                                                        <rect key="frame" x="0.0" y="124" width="468" height="16"/>
+                                                        <rect key="frame" x="0.0" y="119" width="468" height="16"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="kcj-Dd-dYd">
@@ -166,7 +167,7 @@ Gw
                                                     </scroller>
                                                 </scrollView>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Efi-UK-fqF" userLabel="Link View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="468" height="43"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="468" height="58"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KGi-ba-acW">
                                                             <rect key="frame" x="-2" y="24" width="44" height="19"/>
@@ -188,10 +189,10 @@ Gw
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KGi-ba-acW" secondAttribute="trailing" constant="20" symbolic="YES" id="CC9-fO-cj2"/>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Bu7-XJ-4aw" secondAttribute="trailing" constant="20" symbolic="YES" id="CLo-3Z-btI"/>
-                                                        <constraint firstItem="KGi-ba-acW" firstAttribute="top" secondItem="Efi-UK-fqF" secondAttribute="top" id="QKb-X1-2hf"/>
+                                                        <constraint firstItem="KGi-ba-acW" firstAttribute="top" secondItem="Efi-UK-fqF" secondAttribute="top" constant="15" id="QKb-X1-2hf"/>
+                                                        <constraint firstAttribute="height" constant="58" id="bDp-Lf-7rl"/>
                                                         <constraint firstItem="Bu7-XJ-4aw" firstAttribute="top" secondItem="KGi-ba-acW" secondAttribute="bottom" constant="5" id="hcK-Un-5jC"/>
                                                         <constraint firstItem="Bu7-XJ-4aw" firstAttribute="leading" secondItem="Efi-UK-fqF" secondAttribute="leading" id="pUO-VS-nqA"/>
-                                                        <constraint firstAttribute="bottom" secondItem="Bu7-XJ-4aw" secondAttribute="bottom" id="qGL-5t-poU"/>
                                                         <constraint firstItem="KGi-ba-acW" firstAttribute="leading" secondItem="Efi-UK-fqF" secondAttribute="leading" id="y5X-og-Ym5"/>
                                                     </constraints>
                                                 </customView>
@@ -329,13 +330,15 @@ Gw
                         <outlet property="doneActivity" destination="eEX-3K-53l" id="bIc-uq-nkM"/>
                         <outlet property="doneButton" destination="1Hr-oL-t2R" id="SyH-0b-fmx"/>
                         <outlet property="imagesCollectionView" destination="tTN-FH-CY1" id="cLx-cW-GOF"/>
+                        <outlet property="imagesHeightConstraint" destination="bVP-3r-ig1" id="eca-BI-QY9"/>
                         <outlet property="linkAdressLabel" destination="Bu7-XJ-4aw" id="bXa-A1-1Rp"/>
                         <outlet property="linkTitleLabel" destination="KGi-ba-acW" id="qfN-Aw-rjI"/>
                         <outlet property="noConnectionLabel" destination="Pt9-5l-Lh2" id="W9M-mI-zmb"/>
                         <outlet property="placeholderView" destination="taY-Ad-LpS" id="UWb-La-5fl"/>
                         <outlet property="progressIndicator" destination="Mca-EW-2HR" id="VU7-cX-8lx"/>
                         <outlet property="textViewContainer" destination="pEe-k8-6KI" id="5jQ-n3-FYy"/>
-                        <outlet property="textViewHeightConstrain" destination="eXS-5O-EAe" id="gnB-x3-GgU"/>
+                        <outlet property="textViewHeightConstraint" destination="eXS-5O-EAe" id="gnB-x3-GgU"/>
+                        <outlet property="tlinkHeightConstraint" destination="bDp-Lf-7rl" id="V9M-0l-amu"/>
                     </connections>
                 </viewController>
                 <customObject id="qe1-H6-U2a" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

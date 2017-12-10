@@ -2,7 +2,7 @@ import Cocoa
 
 final class ShareControllerMacOS: NSViewController, ShareController, NSTextViewDelegate {
     @IBOutlet private weak var textViewContainer: NSView?
-    @IBOutlet private weak var textViewHeightConstrain: NSLayoutConstraint?
+    @IBOutlet private weak var textViewHeightConstraint: NSLayoutConstraint?
     @IBOutlet private weak var doneButton: NSButton?
     @IBOutlet private weak var doneActivity: NSProgressIndicator?
     @IBOutlet private weak var buttonsView: NSView?
@@ -12,6 +12,8 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextViewD
     @IBOutlet private weak var placeholderView: ColoredBackgroundViewMacOS?
     @IBOutlet private weak var noConnectionLabel: NSTextField?
     @IBOutlet private weak var imagesCollectionView: ShareImageCollectionViewMacOS?
+    @IBOutlet private weak var imagesHeightConstraint: NSLayoutConstraint?
+    @IBOutlet private weak var tlinkHeightConstraint: NSLayoutConstraint?
     private var textView: NSTextView?
     
     private var context: ShareContext = ShareContext()
@@ -35,6 +37,7 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextViewD
             ).cgColor
         
         setUpTextView()
+        imagesCollectionView?.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setUpTextView() {
@@ -45,6 +48,11 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextViewD
         textView.isEditable = true
         textView.delegate = self
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = NSFont.systemFont(ofSize: 16)
+        textView.usesRuler = false
+        textView.isRichText = false
+        textView.textContainerInset = .zero
+        textView.textContainer?.lineFragmentPadding = 0
         
         textViewContainer.addSubview(textView)
         
@@ -53,12 +61,19 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextViewD
         textView.trailingAnchor.constraint(equalTo: textViewContainer.trailingAnchor).isActive = true
         textView.bottomAnchor.constraint(equalTo: textViewContainer.bottomAnchor).isActive = true
         
-        textViewHeightConstrain?.isActive = false
+        textViewHeightConstraint?.isActive = false
     }
     
     override func viewDidDisappear() {
         super.viewDidDisappear()
         onDismiss?()
+    }
+    
+    override func viewWillLayout() {
+        super.viewWillLayout()
+        
+        imagesHeightConstraint?.constant = context.images.isEmpty ? 0 : 135
+        tlinkHeightConstraint?.constant = context.link != nil ? 58 : 0
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {

@@ -239,6 +239,7 @@
 		D486E3401FA0E623002134EB /* ShareController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486E33F1FA0E623002134EB /* ShareController_iOS.swift */; };
 		D486E3421FA0E64E002134EB /* ShareController_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486E3411FA0E64E002134EB /* ShareController_macOS.swift */; };
 		D48E55AF1FDD703D00215F52 /* DynamicTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48E55AE1FDD703D00215F52 /* DynamicTextView.swift */; };
+		D48E55B21FDD78F000215F52 /* OnlyHorizontallyScrolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48E55B11FDD78F000215F52 /* OnlyHorizontallyScrolView.swift */; };
 		D48F78971F9FA0FC0092931E /* SharePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78961F9FA0FC0092931E /* SharePresenter.swift */; };
 		D48F78981F9FA0FC0092931E /* SharePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78961F9FA0FC0092931E /* SharePresenter.swift */; };
 		D48F789A1F9FA51C0092931E /* SharePresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F78991F9FA51C0092931E /* SharePresenterMock.swift */; };
@@ -680,6 +681,7 @@
 		D486E33F1FA0E623002134EB /* ShareController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController_iOS.swift; sourceTree = "<group>"; };
 		D486E3411FA0E64E002134EB /* ShareController_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController_macOS.swift; sourceTree = "<group>"; };
 		D48E55AE1FDD703D00215F52 /* DynamicTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTextView.swift; sourceTree = "<group>"; };
+		D48E55B11FDD78F000215F52 /* OnlyHorizontallyScrolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyHorizontallyScrolView.swift; sourceTree = "<group>"; };
 		D48F78961F9FA0FC0092931E /* SharePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenter.swift; sourceTree = "<group>"; };
 		D48F78991F9FA51C0092931E /* SharePresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenterMock.swift; sourceTree = "<group>"; };
 		D48F789C1F9FAABD0092931E /* ShareControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareControllers.swift; sourceTree = "<group>"; };
@@ -1103,6 +1105,7 @@
 		D4733D801FBB44FB00669D1F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				D48E55B11FDD78F000215F52 /* OnlyHorizontallyScrolView.swift */,
 				D441C9DD1FBC82730071A425 /* JSSwitch.swift */,
 				D441C9DF1FBC86B80071A425 /* OnePixelConstraint_macOS.swift */,
 				D4427A431FBC87C200060A5A /* ColoredBackgroundView_macOS.swift */,
@@ -2003,6 +2006,7 @@
 				D4BBFEC81F929891009615E7 /* Wall.swift in Sources */,
 				D4BBFEF01F929891009615E7 /* RequestConfig.swift in Sources */,
 				D4BBFEB41F929891009615E7 /* Places.swift in Sources */,
+				D48E55B21FDD78F000215F52 /* OnlyHorizontallyScrolView.swift in Sources */,
 				D4BBFECA1F929891009615E7 /* Account.swift in Sources */,
 				D4BBFEE71F929891009615E7 /* OneVariationsMethod.swift in Sources */,
 				D4BBFEFA1F929891009615E7 /* UrlRequestBuilder.swift in Sources */,
