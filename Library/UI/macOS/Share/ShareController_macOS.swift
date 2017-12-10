@@ -129,7 +129,14 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextViewD
     }
     
     func showError(title: String, message: String, buttontext: String) {
-        
+        DispatchQueue.anywayOnMain {
+            guard let window = view.window else { return }
+            let alert = NSAlert()
+            alert.messageText = message
+            alert.addButton(withTitle: buttontext)
+            alert.alertStyle = .warning
+            alert.beginSheetModal(for: window, completionHandler: nil)
+        }
     }
     
     func showWaitForConnection() {
