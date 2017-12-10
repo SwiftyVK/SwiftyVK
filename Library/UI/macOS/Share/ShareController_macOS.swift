@@ -1,7 +1,8 @@
 import Cocoa
 
-final class ShareControllerMacOS: NSViewController, ShareController, NSTextFieldDelegate {
-    @IBOutlet private weak var messageTextField: MultilineTextFieldMacOS?
+final class ShareControllerMacOS: NSViewController, ShareController, NSTextViewDelegate {
+    @IBOutlet private weak var textViewContainer: NSView?
+    @IBOutlet private weak var textViewHeightConstrain: NSLayoutConstraint?
     @IBOutlet private weak var doneButton: NSButton?
     @IBOutlet private weak var doneActivity: NSProgressIndicator?
     @IBOutlet private weak var buttonsView: NSView?
@@ -11,6 +12,7 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
     @IBOutlet private weak var placeholderView: ColoredBackgroundViewMacOS?
     @IBOutlet private weak var noConnectionLabel: NSTextField?
     @IBOutlet private weak var imagesCollectionView: ShareImageCollectionViewMacOS?
+    private var textView: NSTextView?
     
     private var context: ShareContext = ShareContext()
     private var onPost: ((ShareContext) -> ())?
@@ -19,7 +21,6 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        messageTextField?.delegate = self
         doneButton?.alphaValue = 0
         noConnectionLabel?.alphaValue = 0
         placeholderView?.alphaValue = 0
@@ -32,6 +33,27 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
             blue: 0.6,
             alpha: 1
             ).cgColor
+        
+        setUpTextView()
+    }
+    
+    private func setUpTextView() {
+        textView = DynamicTextView()
+        
+        guard let textView = textView, let textViewContainer = textViewContainer else { return }
+        
+        textView.isEditable = true
+        textView.delegate = self
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        textViewContainer.addSubview(textView)
+        
+        textView.topAnchor.constraint(equalTo: textViewContainer.topAnchor).isActive = true
+        textView.leadingAnchor.constraint(equalTo: textViewContainer.leadingAnchor).isActive = true
+        textView.trailingAnchor.constraint(equalTo: textViewContainer.trailingAnchor).isActive = true
+        textView.bottomAnchor.constraint(equalTo: textViewContainer.bottomAnchor).isActive = true
+        
+        textViewHeightConstrain?.isActive = false
     }
     
     override func viewDidDisappear() {
@@ -54,14 +76,10 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
     
     private func updateView() {
         DispatchQueue.anywayOnMain {
-            messageTextField?.stringValue = context.message ?? ""
-            messageTextField?.window?.makeFirstResponder(nil)
+            textView?.string = context.message ?? ""
             imagesCollectionView?.set(images: context.images)
             linkTitleLabel?.stringValue = context.link?.title ?? ""
             linkAdressLabel?.stringValue = context.link?.url.absoluteString ?? ""
-            DispatchQueue.anywayOnMain {
-                messageTextField?.invalidateIntrinsicContentSize()
-            }
         }
         
         showPlaceholder(false)
@@ -107,14 +125,13 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
     
     func close() {
         DispatchQueue.anywayOnMain {
-            messageTextField?.resignFirstResponder()
             self.dismiss(self)
         }
     }
     
     private func updateSendButton() {
         DispatchQueue.anywayOnMain {
-            doneButton?.isEnabled = messageTextField?.stringValue.isEmpty == false || context.hasAttachments
+            doneButton?.isEnabled = textView?.string.isEmpty == false || context.hasAttachments
         }
     }
     
@@ -130,6 +147,12 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextField
     }
 
     override func controlTextDidChange(_ notification: Notification) {
+        guard let field = notification.object as? NSTextField else { return }
+        context.message = field.stringValue
+        updateSendButton()
+    }
+    
+    func textDidChange(_ notification: Notification) {
         guard let field = notification.object as? NSTextField else { return }
         context.message = field.stringValue
         updateSendButton()
