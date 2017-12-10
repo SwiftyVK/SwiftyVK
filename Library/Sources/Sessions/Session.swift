@@ -131,10 +131,14 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         gateQueue.async {
             do {
                 let info = try self.logIn(revoke: true)
-                onSuccess(info)
+                DispatchQueue.global().async {
+                    onSuccess(info)
+                }
             }
             catch let error {
-                onError(error.toVK())
+                DispatchQueue.global().async {
+                    onError(error.toVK())
+                }
             }
         }
     }
