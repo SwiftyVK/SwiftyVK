@@ -1,4 +1,4 @@
-protocol CaptchaController: class, DismisableController {
+protocol CaptchaController: DismisableController {
     func prepareForPresent()
     func present(imageData: Data, onResult: @escaping (String) -> ())
     func dismiss()

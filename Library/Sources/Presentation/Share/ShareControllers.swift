@@ -1,4 +1,4 @@
-protocol ShareController: class, DismisableController {
+protocol ShareController: DismisableController {
     func share(
         _ context: ShareContext,
         onPost: @escaping (ShareContext) -> ()
