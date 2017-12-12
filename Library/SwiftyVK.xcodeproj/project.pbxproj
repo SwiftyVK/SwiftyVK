@@ -603,7 +603,6 @@
 		A2B727A21EED6873005B17AE /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Storyboard_iOS.strings; sourceTree = "<group>"; };
 		A2B727A41EED6874005B17AE /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/Storyboard_iOS.strings; sourceTree = "<group>"; };
 		A2B727A61EED68EF005B17AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard_macOS.storyboard; sourceTree = "<group>"; };
-		A2B727A91EED68F1005B17AE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Storyboard_macOS.strings; sourceTree = "<group>"; };
 		A2B727AB1EED68F2005B17AE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Storyboard_macOS.strings; sourceTree = "<group>"; };
 		A2B727AD1EED68F3005B17AE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Storyboard_macOS.strings; sourceTree = "<group>"; };
 		A2B727AF1EED68F4005B17AE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Storyboard_macOS.strings; sourceTree = "<group>"; };
@@ -696,6 +695,7 @@
 		D4AB8D921F6044190099FC42 /* LongPollTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollTaskTests.swift; sourceTree = "<group>"; };
 		D4AB8D941F6048B50099FC42 /* longPoll.updates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = longPoll.updates.json; sourceTree = "<group>"; };
 		D4AB8D9C1F6055290099FC42 /* longPoll.failed.1.withTs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.failed.1.withTs.json; sourceTree = "<group>"; };
+		D4B0854A1FE03BFC00F0EB3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Storyboard_macOS.strings; sourceTree = "<group>"; };
 		D4B122951FAB563300F0BE36 /* SharePreferencesController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePreferencesController_iOS.swift; sourceTree = "<group>"; };
 		D4B44EA41FA38A5100E85E31 /* ShareNavigationController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareNavigationController_iOS.swift; sourceTree = "<group>"; };
 		D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronouslyTaskTests.swift; sourceTree = "<group>"; };
@@ -2247,7 +2247,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				A2B727A61EED68EF005B17AE /* Base */,
-				A2B727A91EED68F1005B17AE /* en */,
 				A2B727AB1EED68F2005B17AE /* ru */,
 				A2B727AD1EED68F3005B17AE /* de */,
 				A2B727AF1EED68F4005B17AE /* es */,
@@ -2255,6 +2254,7 @@
 				A2B727B31EED68F6005B17AE /* it */,
 				A2B727B51EED68F7005B17AE /* uk */,
 				A2B727B71EED68F8005B17AE /* be */,
+				D4B0854A1FE03BFC00F0EB3D /* en */,
 			);
 			name = Storyboard_macOS.storyboard;
 			sourceTree = "<group>";

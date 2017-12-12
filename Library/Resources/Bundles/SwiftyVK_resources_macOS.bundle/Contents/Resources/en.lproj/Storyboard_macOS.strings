@@ -1,4 +1,15 @@
 
+/* Class = "NSButtonCell"; title = "Preferences"; ObjectID = "Jqf-gH-F3V"; */
+"Jqf-gH-F3V.title" = "Preferences";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "d8O-3w-97y"; */
+"d8O-3w-97y.title" = "Cancel";
+
 /* Class = "NSTextFieldCell"; placeholderString = "Enter code from the image"; ObjectID = "hXf-ia-qTL"; */
 "hXf-ia-qTL.placeholderString" = "Enter code from the image";
-"8xB-w3-nmP.text" = "Please check your internet connection";
+
+/* Class = "NSButtonCell"; title = "Done"; ObjectID = "hoJ-PL-0Mg"; */
+"hoJ-PL-0Mg.title" = "Done";
+
+/* Class = "NSTextFieldCell"; title = "Check your internet connection"; ObjectID = "pdI-Kn-alk"; */
+"pdI-Kn-alk.title" = "Check your internet connection";
