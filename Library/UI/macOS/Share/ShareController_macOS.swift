@@ -46,6 +46,7 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextViewD
         guard let textView = textView, let textViewContainer = textViewContainer else { return }
         
         textView.isEditable = true
+        textView.isSelectable = true
         textView.delegate = self
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = NSFont.systemFont(ofSize: 16)
@@ -92,6 +93,7 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextViewD
     private func updateView() {
         DispatchQueue.anywayOnMain {
             textView?.string = context.message ?? ""
+            view.window?.makeFirstResponder(textView)
             imagesCollectionView?.set(images: context.images)
             linkTitleLabel?.stringValue = context.link?.title ?? ""
             linkAdressLabel?.stringValue = context.link?.url.absoluteString ?? ""
