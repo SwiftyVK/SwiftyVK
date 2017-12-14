@@ -11,24 +11,67 @@
             <objects>
                 <viewController storyboardIdentifier="Web" id="2x6-4U-608" customClass="WebControllerMacOS" customModule="SwiftyVK" sceneMemberID="viewController">
                     <customView key="view" id="fL7-e2-4bl">
-                        <rect key="frame" x="0.0" y="0.0" width="500" height="350"/>
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="344"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="s7g-ar-psG" customClass="WebViewWrapperMacOs" customModule="SwiftyVK">
-                                <rect key="frame" x="0.0" y="0.0" width="500" height="350"/>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="PyW-vz-2Lk" customClass="ColoredBackgroundViewMacOS" customModule="SwiftyVK">
+                                <rect key="frame" x="0.0" y="300" width="500" height="44"/>
+                                <subviews>
+                                    <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3eG-SA-oj3" customClass="ColoredTextButton" customModule="SwiftyVK">
+                                        <rect key="frame" x="20" y="13" width="46" height="17"/>
+                                        <buttonCell key="cell" type="bevel" title="Cancel" bezelStyle="regularSquare" alignment="center" focusRingType="none" inset="2" id="iMg-DZ-KIX">
+                                            <behavior key="behavior" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                                <real key="value" value="16"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="deviceWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                                <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="alternateTitleColor">
+                                                <color key="value" red="0.8359743047" green="0.83463480089999997" blue="0.85803259610000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="cancelPressed:" target="2x6-4U-608" id="i2A-Zw-rrm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="350" id="1vR-Rb-RIx"/>
+                                    <constraint firstItem="3eG-SA-oj3" firstAttribute="centerY" secondItem="PyW-vz-2Lk" secondAttribute="centerY" id="BD1-D0-jOz"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3eG-SA-oj3" secondAttribute="trailing" constant="20" id="FMR-CG-UV1"/>
+                                    <constraint firstItem="3eG-SA-oj3" firstAttribute="leading" secondItem="PyW-vz-2Lk" secondAttribute="leading" constant="20" id="kUK-aI-SN6"/>
+                                    <constraint firstAttribute="height" constant="44" id="kXE-jY-Hgd"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                        <color key="value" red="0.31228798629999999" green="0.44764596220000002" blue="0.59886246919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="s7g-ar-psG" customClass="WebViewWrapperMacOs" customModule="SwiftyVK">
+                                <rect key="frame" x="0.0" y="0.0" width="500" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="1vR-Rb-RIx"/>
                                     <constraint firstAttribute="width" constant="500" id="jF7-JJ-Kst"/>
                                 </constraints>
                             </customView>
                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="4L5-mP-HPw">
-                                <rect key="frame" x="234" y="159" width="32" height="32"/>
+                                <rect key="frame" x="234" y="156" width="32" height="32"/>
                             </progressIndicator>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="s7g-ar-psG" firstAttribute="top" secondItem="PyW-vz-2Lk" secondAttribute="bottom" id="8dw-eK-Sbp"/>
                             <constraint firstItem="4L5-mP-HPw" firstAttribute="centerY" secondItem="fL7-e2-4bl" secondAttribute="centerY" id="9Oq-QQ-1ws"/>
+                            <constraint firstAttribute="trailing" secondItem="PyW-vz-2Lk" secondAttribute="trailing" id="Ib6-T7-5NK"/>
+                            <constraint firstItem="PyW-vz-2Lk" firstAttribute="top" secondItem="fL7-e2-4bl" secondAttribute="top" id="Luj-OD-Fk8"/>
                             <constraint firstItem="4L5-mP-HPw" firstAttribute="centerX" secondItem="fL7-e2-4bl" secondAttribute="centerX" id="WrN-Gn-8Zp"/>
-                            <constraint firstItem="s7g-ar-psG" firstAttribute="top" secondItem="fL7-e2-4bl" secondAttribute="top" id="hw0-x4-Ijy"/>
+                            <constraint firstItem="PyW-vz-2Lk" firstAttribute="leading" secondItem="fL7-e2-4bl" secondAttribute="leading" id="hNO-EA-skp"/>
                             <constraint firstItem="s7g-ar-psG" firstAttribute="leading" secondItem="fL7-e2-4bl" secondAttribute="leading" id="wjC-wv-F0l"/>
                             <constraint firstAttribute="trailing" secondItem="s7g-ar-psG" secondAttribute="trailing" id="x3B-yl-qsK"/>
                             <constraint firstAttribute="bottom" secondItem="s7g-ar-psG" secondAttribute="bottom" id="yzx-AW-iOi"/>

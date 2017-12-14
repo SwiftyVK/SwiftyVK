@@ -54,6 +54,10 @@ final class WebControllerMacOS: NSViewController, WKNavigationDelegate, WebContr
         }
     }
     
+    @IBAction func cancelPressed(_ sender: Any) {
+        onResult?(.error(.authorizationCancelled))
+    }
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation?) {
         preloader?.stopAnimation(nil)
         onResult?(.response(webView.url))

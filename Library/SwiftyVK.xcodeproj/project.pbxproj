@@ -471,6 +471,7 @@
 		D4C032B11F520C1A005AB59A /* URLRequestBuilderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */; };
 		D4CA9B741F66BED90085E4F3 /* LongPollMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CA9B731F66BED90085E4F3 /* LongPollMock.swift */; };
 		D4CA9B761F66CA890085E4F3 /* longPoll.getServer.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4CA9B751F66CA890085E4F3 /* longPoll.getServer.success.json */; };
+		D4CE13F21FE2D23F0022785C /* ColoredTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CE13F11FE2D23F0022785C /* ColoredTextButton.swift */; };
 		D4D2C3491FADC196002D0687 /* SynchronouslyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D2C3481FADC196002D0687 /* SynchronouslyTask.swift */; };
 		D4D2C34A1FADC196002D0687 /* SynchronouslyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D2C3481FADC196002D0687 /* SynchronouslyTask.swift */; };
 		D4DADE071F9F9AE9004F159E /* ShareContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DADE061F9F9AE9004F159E /* ShareContext.swift */; };
@@ -816,6 +817,7 @@
 		D4C032B01F520C1A005AB59A /* URLRequestBuilderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderMock.swift; sourceTree = "<group>"; };
 		D4CA9B731F66BED90085E4F3 /* LongPollMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPollMock.swift; sourceTree = "<group>"; };
 		D4CA9B751F66CA890085E4F3 /* longPoll.getServer.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = longPoll.getServer.success.json; sourceTree = "<group>"; };
+		D4CE13F11FE2D23F0022785C /* ColoredTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredTextButton.swift; sourceTree = "<group>"; };
 		D4D2C3481FADC196002D0687 /* SynchronouslyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronouslyTask.swift; sourceTree = "<group>"; };
 		D4DADE061F9F9AE9004F159E /* ShareContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareContext.swift; sourceTree = "<group>"; };
 		D4DC124B1FAB542B00D977D8 /* SharePreferencesCell_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePreferencesCell_iOS.swift; sourceTree = "<group>"; };
@@ -1112,6 +1114,7 @@
 				D42B12091FC1B97800DB7879 /* NSImage+Extensions.swift */,
 				D40E04061FC1CF8700DBB35A /* FlippedScrollView.swift */,
 				D48E55AE1FDD703D00215F52 /* DynamicTextView.swift */,
+				D4CE13F11FE2D23F0022785C /* ColoredTextButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -2009,6 +2012,7 @@
 				D48E55B21FDD78F000215F52 /* OnlyHorizontallyScrolView.swift in Sources */,
 				D4BBFECA1F929891009615E7 /* Account.swift in Sources */,
 				D4BBFEE71F929891009615E7 /* OneVariationsMethod.swift in Sources */,
+				D4CE13F21FE2D23F0022785C /* ColoredTextButton.swift in Sources */,
 				D4BBFEFA1F929891009615E7 /* UrlRequestBuilder.swift in Sources */,
 				D46FB41F1F929E31000CEAEB /* WebPresenter.swift in Sources */,
 				D4BBFF0C1F929891009615E7 /* Lock.swift in Sources */,
