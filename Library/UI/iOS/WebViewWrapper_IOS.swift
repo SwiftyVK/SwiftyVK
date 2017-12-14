@@ -12,6 +12,12 @@ final class WebViewWrapperIOS: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        webView.frame = bounds
+        
+        webView.frame = CGRect(
+            x: bounds.minX,
+            y: bounds.minY + 44,
+            width: bounds.width,
+            height: bounds.height - 44
+        )
     }
 }
