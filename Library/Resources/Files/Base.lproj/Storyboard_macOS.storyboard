@@ -18,10 +18,10 @@
                                 <rect key="frame" x="0.0" y="300" width="500" height="44"/>
                                 <subviews>
                                     <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3eG-SA-oj3" customClass="ColoredTextButton" customModule="SwiftyVK">
-                                        <rect key="frame" x="20" y="13" width="46" height="17"/>
+                                        <rect key="frame" x="20" y="13" width="54" height="19"/>
                                         <buttonCell key="cell" type="bevel" title="Cancel" bezelStyle="regularSquare" alignment="center" focusRingType="none" inset="2" id="iMg-DZ-KIX">
                                             <behavior key="behavior" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
+                                            <font key="font" metaFont="system" size="16"/>
                                         </buttonCell>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
@@ -279,31 +279,47 @@ Gw
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="k50-t7-Kdi">
                                 <rect key="frame" x="0.0" y="310" width="500" height="40"/>
                                 <subviews>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h6U-bW-2wk">
-                                        <rect key="frame" x="9" y="3" width="82" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="d8O-3w-97y">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
+                                    <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h6U-bW-2wk" customClass="ColoredTextButton" customModule="SwiftyVK">
+                                        <rect key="frame" x="15" y="4" width="54" height="32"/>
+                                        <buttonCell key="cell" type="bevel" title="Cancel" bezelStyle="rounded" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="d8O-3w-97y">
+                                            <behavior key="behavior" lightByContents="YES"/>
+                                            <font key="font" metaFont="system" size="16"/>
                                         </buttonCell>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                                <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="alternateTitleColor">
+                                                <color key="value" red="0.8359743047" green="0.83463480089999997" blue="0.85803259610000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="cancelPressed:" target="rSV-5S-pQz" id="7SU-ei-NAl"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MFG-sU-qBd">
-                                        <rect key="frame" x="303" y="2" width="113" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Preferences" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Jqf-gH-F3V">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
+                                    <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MFG-sU-qBd" customClass="ColoredTextButton" customModule="SwiftyVK">
+                                        <rect key="frame" x="335" y="4" width="92" height="32"/>
+                                        <buttonCell key="cell" type="bevel" title="Preferences" bezelStyle="rounded" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="Jqf-gH-F3V">
+                                            <behavior key="behavior" lightByContents="YES"/>
+                                            <font key="font" metaFont="system" size="16"/>
                                         </buttonCell>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                                <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="alternateTitleColor">
+                                                <color key="value" red="0.8359743047" green="0.83463480089999997" blue="0.85803259610000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <segue destination="E5U-hY-FhT" kind="popover" popoverAnchorView="MFG-sU-qBd" popoverBehavior="t" preferredEdge="maxY" id="ltV-Dg-FDO"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Hr-oL-t2R">
-                                        <rect key="frame" x="419" y="3" width="72" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hoJ-PL-0Mg">
+                                    <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Hr-oL-t2R" customClass="ColoredTextButton" customModule="SwiftyVK">
+                                        <rect key="frame" x="442" y="11" width="43" height="19"/>
+                                        <buttonCell key="cell" type="bevel" title="Done" bezelStyle="regularSquare" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="hoJ-PL-0Mg">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
+                                            <font key="font" metaFont="system" size="16"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="donePressed:" target="rSV-5S-pQz" id="AWm-8Y-IQa"/>
