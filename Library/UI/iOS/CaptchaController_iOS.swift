@@ -11,6 +11,12 @@ final class CaptchaControllerIOS: UIViewController, UITextFieldDelegate, Captcha
     var onDismiss: (() -> ())?
     private var appeared = false
     
+    var isDisplayed: Bool {
+        return DispatchQueue.anywayOnMain {
+            isViewLoaded && view.window != nil
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

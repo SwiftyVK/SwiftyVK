@@ -8,6 +8,12 @@ final class CaptchaControllerMacOS: NSViewController, NSTextFieldDelegate, Captc
     @IBOutlet private weak var closeButton: NSButton?
     private var onResult: ((String) -> ())?
     var onDismiss: (() -> ())?
+   
+    var isDisplayed: Bool {
+        return DispatchQueue.anywayOnMain {
+            isViewLoaded && view.window != nil
+        }
+    }
     
     override func viewWillAppear() {
         super.viewWillAppear()

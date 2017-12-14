@@ -10,6 +10,11 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
     private let uiSyncQueue: DispatchQueue
     private weak var controllerMaker: CaptchaControllerMaker?
     private weak var currentController: CaptchaController?
+    
+    private var displayedController: CaptchaController? {
+        return currentController?.isDisplayed == true ? currentController : nil
+    }
+    
     private let timeout: TimeInterval
     private let urlSession: VKURLSession
     
@@ -34,7 +39,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
             var result: String?
             var dismissed = false
             
-            let controller = currentController ?? controllerMaker.captchaController {
+            let controller = displayedController ?? controllerMaker.captchaController {
                 dismissed = true
                 semaphore.signal()
             }
