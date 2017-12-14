@@ -6,6 +6,8 @@ excluded:
   - Pods
   - Sources/Utils/Reachability.swift
   - Library/Sources/Utils/Reachability.swift
+  - UI/macOS/Components/JSSwitch.swift
+  - Library/UI/macOS/Components/JSSwitch.swift
 
 disabled_rules:
   - void_return
