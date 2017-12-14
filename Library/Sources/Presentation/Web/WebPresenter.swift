@@ -146,6 +146,10 @@ final class WebPresenterImpl: WebPresenter {
     }
     
     private func handle(error: VKError, fails: Int) throws -> HandledResult {
+        if case .authorizationCancelled = error {
+            throw error
+        }
+        
         guard fails >= maxFails - 1 else {
             return .fail
         }
