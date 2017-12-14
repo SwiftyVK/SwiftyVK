@@ -1,7 +1,8 @@
 @testable import SwiftyVK
 
 final class CaptchaControllerMock: CaptchaController {
-
+    
+    var isDisplayed: Bool = true
     var onPrepareForPresent: (() -> ())?
     var onPresent: ((Data, (String) -> ()) -> ())?
     var onDismiss: (() -> ())?
