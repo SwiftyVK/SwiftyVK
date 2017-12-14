@@ -29,8 +29,7 @@ final class ShareImageCollectionViewItemMacOS: NSCollectionViewItem {
             DispatchQueue.main.async {
                 guard nsImage == self?.imageView?.image else { return }
                 
-                NSAnimationContext.runAnimationGroup(
-                    { _ in
+                NSAnimationContext.runAnimationGroup({ _ in
                         self?.overlayView?.animator().alphaValue = 0
                         self?.activityIndicator?.animator().alphaValue = 0
                     },

@@ -46,7 +46,6 @@ final class SharePreferencesControllerMacOS: NSViewController, NSTableViewDelega
         return view
     }
     
-    
     func selectionShouldChange(in tableView: NSTableView) -> Bool {
         return false
     }
