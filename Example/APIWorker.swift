@@ -107,12 +107,6 @@ final class APIWorker {
                     ShareImage(data: data, type: .jpg),
                     ShareImage(data: data, type: .jpg),
                     ShareImage(data: data, type: .jpg),
-                    ShareImage(data: data, type: .jpg),
-                    ShareImage(data: data, type: .jpg),
-                    ShareImage(data: data, type: .jpg),
-                    ShareImage(data: data, type: .jpg),
-                    ShareImage(data: data, type: .jpg),
-                    ShareImage(data: data, type: .jpg)
                 ],
                 link: ShareLink(
                     title: "Follow the white rabbit",
