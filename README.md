@@ -149,7 +149,7 @@ SwiftyVK provides several ways to authorize user. Choose the one that's more sui
 If you have previously received user token, just pass it to the following method:
 
 ```swift
-VK.sessions?.default.logIn(rawToken: String, expires: TimeInterval)
+VK.sessions.default.logIn(rawToken: String, expires: TimeInterval)
 
 // Start working with SwiftyVK session here
 ```
@@ -160,7 +160,7 @@ VK.sessions?.default.logIn(rawToken: String, expires: TimeInterval)
 This is a standard authorization method which shows web view with oAuth dialog. Suitable for most cases.
 
 ```swift
-VK.sessions?.default.logIn(
+VK.sessions.default.logIn(
       onSuccess: { _ in
         // Start working with SwiftyVK session here
       },
@@ -360,7 +360,7 @@ or for the whole session
 
 ```swift
 // Set default apiVersion value for all requests in default session
-VK.sessions?.default.config.apiVersion = "5.68"
+VK.sessions.default.config.apiVersion = "5.68"
 ```
 
 You may change following configuration properties:
@@ -413,7 +413,7 @@ With SwiftyVK you can interact with VK [LongPoll](https://vk.com/dev/using_longp
 Just call:
 
 ```swift
-VK.sessions?.default.longPoll.start {
+VK.sessions.default.longPoll.start {
     // This callback will be executed each time
     // long poll client receives a set of new events
     print($0)
@@ -427,7 +427,7 @@ LongPollEvent is an enum with associated value of type `Data` in each case.
 You can parse this data to JSON using your favorite parser like this:
 
 ```swift
-VK.sessions?.default.longPoll.start {
+VK.sessions.default.longPoll.start {
     for event in $0 {
         switch event {
             case let .type1(data):
@@ -453,7 +453,7 @@ Use this case to **refresh data that could have beeen updated while network was 
 
 If you don't need to receive LongPoll updates anymore, just call this function:
 ```swift
-VK.sessions?.default.longPoll.stop()
+VK.sessions.default.longPoll.stop()
 ```
 
 ## **FAQ**
