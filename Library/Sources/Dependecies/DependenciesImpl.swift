@@ -183,7 +183,7 @@ final class DependenciesImpl: Dependencies {
             let unwrappedController = controller,
             let resultController = unwrappedController as? ControllerType
             else {
-            preconditionFailure("Can't find \(name) controller")
+            fatalError("Can't find \(name) controller")
         }
         
         if let dismisableController = resultController as? DismisableController {
