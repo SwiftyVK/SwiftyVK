@@ -52,6 +52,7 @@ public final class Request {
         
         nextRequest.config = config.overriden(with: nextRequest.config)
         nextRequest.nextRequests = nextRequests
+        nextRequests = []
         
         return nextRequest
     }

@@ -3,7 +3,11 @@ import XCTest
 
 final class DependenciesHolderMock: DependenciesHolder {
     
-    init(appId: String, delegate: SwiftyVKDelegate?) {}
+    var onInit: ((String, SwiftyVKDelegate?) -> ())?
+    
+    init(appId: String, delegate: SwiftyVKDelegate?) {
+        onInit?(appId, delegate)
+    }
     
     private let sessionsHolderMock = SessionsHolderMock()
     

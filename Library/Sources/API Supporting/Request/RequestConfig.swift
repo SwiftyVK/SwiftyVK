@@ -63,6 +63,7 @@ public struct Config {
         handleErrors: Bool? = nil
         ) {
         self.httpMethod = httpMethod
+        _apiVersion = apiVersion
         _language = language
         _attemptsMaxLimit = attemptsMaxLimit
         _attemptTimeout = attemptTimeout
