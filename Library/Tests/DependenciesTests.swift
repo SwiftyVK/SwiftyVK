@@ -37,9 +37,7 @@ final class DependenciesTests: XCTestCase {
         // Given
         let context = makeContext()
         // When
-        guard let object = context.factory.webController() else {
-            return XCTFail("Object not created")
-        }
+        let object = context.factory.webController(onDismiss: nil)
         // Then
         #if os(iOS)
             XCTAssertTrue(type(of: object) == WebControllerIOS.self)
@@ -52,14 +50,25 @@ final class DependenciesTests: XCTestCase {
         // Given
         let context = makeContext()
         // When
-        guard let object = context.factory.captchaController() else {
-            return XCTFail("Object not created")
-        }
+        let object = context.factory.captchaController(onDismiss: nil)
         // Then
         #if os(iOS)
             XCTAssertTrue(type(of: object) == CaptchaControllerIOS.self)
         #elseif os(macOS)
             XCTAssertTrue(type(of: object) == CaptchaControllerMacOS.self)
+        #endif
+    }
+    
+    func test_makeShareController_typeIsShareControllerImpl() {
+        // Given
+        let context = makeContext()
+        // When
+        let object = context.factory.shareController(onDismiss: nil)
+        // Then
+        #if os(iOS)
+            XCTAssertTrue(type(of: object) == ShareControllerIOS.self)
+        #elseif os(macOS)
+            XCTAssertTrue(type(of: object) == ShareControllerMacOS.self)
         #endif
     }
     
@@ -100,6 +109,15 @@ final class DependenciesTests: XCTestCase {
         let object = context.factory.token(token: "", expires: 0, info: [:])
         // Then
         XCTAssertTrue(type(of: object) == TokenImpl.self)
+    }
+    
+    func test_makeSharePresenter_typeIsSharePresenterImpl() {
+        // Given
+        let context = makeContext()
+        // When
+        let object = context.factory.sharePresenter()
+        // Then
+        XCTAssertTrue(type(of: object) == SharePresenterImpl.self)
     }
 }
 

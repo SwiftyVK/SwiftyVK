@@ -3,7 +3,11 @@ import XCTest
 
 final class DependenciesHolderMock: DependenciesHolder {
     
-    init(appId: String, delegate: SwiftyVKDelegate?) {}
+    var onInit: ((String, SwiftyVKDelegate?) -> ())?
+    
+    init(appId: String, delegate: SwiftyVKDelegate?) {
+        onInit?(appId, delegate)
+    }
     
     private let sessionsHolderMock = SessionsHolderMock()
     
@@ -63,19 +67,36 @@ final class TokenMakerMock: TokenMaker {
 
 final class WebControllerMakerMock: WebControllerMaker {
     
-    var onMake: (() -> WebController?)?
+    var onMake: (() -> WebController)?
     
-    func webController() -> WebController? {
-        return onMake?()
+    func webController(onDismiss: (() -> ())?) -> WebController {
+        guard let result = onMake?() else {
+            XCTFail("onMake not defined")
+            return WebControllerMock()
+        }
+        
+        result.onDismiss = onDismiss
+        return result
     }
 }
 
 final class CaptchaControllerMakerMock: CaptchaControllerMaker {
     
-    var onMake: (() -> CaptchaController?)?
+    var onMake: (() -> CaptchaController)?
     
-    func captchaController() -> CaptchaController? {
-        return onMake?()
+    func captchaController(onDismiss: (() -> ())?) -> CaptchaController {
+        guard let result = onMake?() else {
+            XCTFail("onMake not defined")
+            return CaptchaControllerMock()
+        }
+        
+        let prevOnDismiss = result.onDismiss
+        
+        result.onDismiss = {
+            prevOnDismiss?()
+            onDismiss?()
+        }
+        return result
     }
 }
 
@@ -109,4 +130,32 @@ final class LongPollMakerMock: LongPollMaker {
         return result
     }
 
+}
+
+final class SharePresenterMakerMock: SharePresenterMaker {
+    
+    var onMake: (() -> SharePresenter)?
+    
+    func sharePresenter() -> SharePresenter {
+        guard let result = onMake?() else {
+            XCTFail("onMake not defined")
+            return SharePresenterMock()
+        }
+        
+        return result
+    }
+}
+
+final class ShareControllerMakerMock: ShareControllerMaker {
+    
+    var onMake: (((() -> ())?) -> ShareController)?
+    
+    func shareController(onDismiss: (() -> ())?) -> ShareController {
+        guard let result = onMake?(onDismiss) else {
+            XCTFail("onMake not defined")
+            return ShareControllerMock()
+        }
+        
+        return result
+    }
 }

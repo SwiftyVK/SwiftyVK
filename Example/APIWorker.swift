@@ -20,13 +20,15 @@ final class APIWorker {
             uploadPhoto()
         case 7:
             validation()
+        case 8:
+            share()
         default:
             print("Unrecognized action!")
         }
     }
     
     class func authorize() {
-        VK.sessions?.default.logIn(
+        VK.sessions.default.logIn(
             onSuccess: { info in
                 print("SwiftyVK: success authorize with", info)
             },
@@ -37,7 +39,7 @@ final class APIWorker {
     }
     
     class func logout() {
-        VK.sessions?.default.logOut()
+        VK.sessions.default.logOut()
         print("SwiftyVK: LogOut")
     }
     
@@ -86,5 +88,33 @@ final class APIWorker {
             .onError { print("SwiftyVK: upload failed with \n \($0)")}
             .onProgress { print($0) }
             .send()
+    }
+    
+    class func share() {
+        guard
+            let pathToImage = Bundle.main.path(forResource: "testImage", ofType: "png"),
+            let data = try? Data(contentsOf: URL(fileURLWithPath: pathToImage)),
+            let link = URL(string: "https://en.wikipedia.org/wiki/Hyperspace")
+            else {
+                print("Can not find testImage.png")
+                return
+        }
+        
+        VK.sessions.default.share(
+            ShareContext(
+                text: "This post made with #SwiftyVK 🖖🏽",
+                images: [
+                    ShareImage(data: data, type: .jpg),
+                    ShareImage(data: data, type: .jpg),
+                    ShareImage(data: data, type: .jpg),
+                ],
+                link: ShareLink(
+                    title: "Follow the white rabbit",
+                    url: link
+                )
+            ),
+            onSuccess: { print("SwiftyVK: successfully shared with \n \(JSON($0))") },
+            onError: { print("SwiftyVK: share failed with \n \($0)") }
+        )
     }
 }

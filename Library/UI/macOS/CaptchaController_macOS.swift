@@ -1,6 +1,5 @@
 import Cocoa
 
-@objc
 final class CaptchaControllerMacOS: NSViewController, NSTextFieldDelegate, CaptchaController {
     
     @IBOutlet private weak var imageView: NSImageView?
@@ -8,7 +7,13 @@ final class CaptchaControllerMacOS: NSViewController, NSTextFieldDelegate, Captc
     @IBOutlet private weak var preloader: NSProgressIndicator?
     @IBOutlet private weak var closeButton: NSButton?
     private var onResult: ((String) -> ())?
-    private var onDismiss: (() -> ())?
+    var onDismiss: (() -> ())?
+   
+    var isDisplayed: Bool {
+        return DispatchQueue.anywayOnMain {
+            isViewLoaded && view.window != nil
+        }
+    }
     
     override func viewWillAppear() {
         super.viewWillAppear()
@@ -43,15 +48,15 @@ final class CaptchaControllerMacOS: NSViewController, NSTextFieldDelegate, Captc
         }
     }
     
-    func present(imageData: Data, onResult: @escaping (String) -> (), onDismiss: @escaping () -> ()) {
+    func present(imageData: Data, onResult: @escaping (String) -> ()) {
         DispatchQueue.main.sync {
             imageView?.image = NSImage(data: imageData)
             textField?.stringValue = ""
             textField?.becomeFirstResponder()
             preloader?.stopAnimation(nil)
         }
+        
         self.onResult = onResult
-        self.onDismiss = onDismiss
     }
     
     @IBAction func dismissByButtonTap(_ sender: Any) {

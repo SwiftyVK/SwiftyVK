@@ -54,7 +54,7 @@ final class SessionTests: XCTestCase {
     func test_logIn_shouldBeAuthorized_whenAuthorizatorReturnsToken() {
         // Given
         let context = makeContext()
-
+        
         context.authorizator.onAuthorize = { _, _, _ in
             return TokenMock()
         }
@@ -62,10 +62,10 @@ final class SessionTests: XCTestCase {
         syncLogIn(
             session: context.session,
             onSuccess: { info in
-            },
+        },
             onError: { error in
                 XCTFail("\(error)")
-            }
+        }
         )
         
         // Then
@@ -76,7 +76,7 @@ final class SessionTests: XCTestCase {
     func test_logIn_shouldBeFail_whenAuthorizatorThrowsError() {
         // Given
         let context = makeContext()
-
+        
         context.authorizator.onAuthorize = { _, _, _ in
             throw VKError.authorizationFailed
         }
@@ -85,10 +85,10 @@ final class SessionTests: XCTestCase {
             session: context.session,
             onSuccess: { info in
                 XCTFail("Log in sould be fail")
-            },
+        },
             onError: { error in
                 XCTAssertEqual(error.asVK, VKError.authorizationFailed)
-            }
+        }
         )
         
         XCTAssertEqual(context.session.state, .initiated)
@@ -98,7 +98,7 @@ final class SessionTests: XCTestCase {
     func test_logIn_shouldBeFail_whenAuthorizatorThrowsUnknownError() {
         // Given
         let context = makeContext()
-
+        
         context.authorizator.onAuthorize = { _, _, _ in
             throw NSError(domain: "", code: 0, userInfo: nil)
         }
@@ -107,10 +107,10 @@ final class SessionTests: XCTestCase {
             session: context.session,
             onSuccess: { info in
                 XCTFail("Log in sould be fail")
-            },
+        },
             onError: { error in
                 XCTAssertEqual((error as NSError).code, 0)
-            }
+        }
         )
         
         XCTAssertEqual(context.session.state, .initiated)
@@ -127,10 +127,10 @@ final class SessionTests: XCTestCase {
             session: context.session,
             onSuccess: { info in
                 XCTFail("Log in sould be fail")
-            },
+        },
             onError: { error in
                 XCTAssertEqual(error.asVK, VKError.sessionAlreadyDestroyed(context.session))
-            }
+        }
         )
         // Then
         XCTAssertEqual(context.session.state, .destroyed)
@@ -335,7 +335,7 @@ final class SessionTests: XCTestCase {
     func test_logOut() {
         // Given
         let context = makeContext()
-
+        
         context.authorizator.onAuthorize = { _, _, _ in
             return TokenMock()
         }
@@ -343,10 +343,10 @@ final class SessionTests: XCTestCase {
         syncLogIn(
             session: context.session,
             onSuccess: { info in
-            },
+        },
             onError: { error in
                 XCTFail("\(error)")
-            }
+        }
         )
         
         context.session.logOut()
@@ -442,7 +442,118 @@ final class SessionTests: XCTestCase {
         // Then
         XCTAssertEqual(onDismissCallCount, 1)
     }
-
+    
+    func test_share_presenterCalled_whenSessionAuthorized() {
+        // Given
+        let context = makeContext()
+        let shareContext = ShareContext()
+        var shareCallCount = 0
+        let exp = self.expectation(description: "")
+        
+        context.authorizator.onAuthorize = { _, _, _ in
+            return TokenMock()
+        }
+        
+        context.sharePresenterMaker.onMake = {
+            let presenter = SharePresenterMock()
+            presenter.onShare = { _shareContext in
+                // Then
+                XCTAssertEqual(_shareContext, shareContext)
+                shareCallCount += 1
+                exp.fulfill()
+                return Data()
+            }
+            return presenter
+        }
+        // When
+        _ = try? context.session.logIn(revoke: false)
+        
+        context.session.share(
+            shareContext,
+            onSuccess: { _ in },
+            onError: { _ in }
+        )
+        // Then
+        waitForExpectations(timeout: 5)
+        XCTAssertEqual(shareCallCount, 1)
+    }
+    
+    func test_share_shareCalled_whenSessionAuthorizedOnSharing() {
+        // Given
+        let context = makeContext()
+        let shareContext = ShareContext()
+        var shareCallCount = 0
+        let exp = self.expectation(description: "")
+        
+        context.authorizator.onAuthorize = { _, _, _ in
+            return TokenMock()
+        }
+        
+        context.sharePresenterMaker.onMake = {
+            let presenter = SharePresenterMock()
+            presenter.onShare = { _shareContext in
+                // Then
+                XCTAssertEqual(_shareContext, shareContext)
+                shareCallCount += 1
+                exp.fulfill()
+                return Data()
+            }
+            return presenter
+        }
+        // When
+        context.session.share(
+            shareContext,
+            onSuccess: { _ in },
+            onError: { _ in }
+        )
+        // Then
+        waitForExpectations(timeout: 5)
+        XCTAssertEqual(shareCallCount, 1)
+    }
+    
+    func test_share_shareReturnsError_whenSessionNotAuthorizedOnSharing() {
+        // Given
+        let context = makeContext()
+        let shareContext = ShareContext()
+        let exp = self.expectation(description: "")
+        
+        context.authorizator.onAuthorize = { _, _, _ in
+            throw VKError.cantParseTokenInfo("")
+        }
+        
+        // When
+        context.session.share(
+            shareContext,
+            onSuccess: { _ in },
+            onError: {
+                // Then
+                XCTAssertEqual($0, VKError.cantParseTokenInfo(""))
+                exp.fulfill()
+        }
+        )
+        
+        waitForExpectations(timeout: 5)
+    }
+    
+    func test_share_presenterNotCalled_whenSessionDestroyed() {
+        // Given
+        let context = makeContext()
+        let shareContext = ShareContext()
+        context.session.destroy()
+        
+        context.sharePresenterMaker.onMake = {
+            // Then
+            XCTFail("Session already destroyed")
+            return SharePresenterMock()
+        }
+        // When
+        context.session.share(
+            shareContext,
+            onSuccess: { _ in },
+            onError: { _ in }
+        )
+        // Then
+    }
     private func syncLogIn(
         session: Session,
         onSuccess: @escaping ([String : String]) -> (),
@@ -454,15 +565,16 @@ final class SessionTests: XCTestCase {
             onSuccess: { info in
                 onSuccess(info)
                 exp.fulfill()
-            },
+        },
             onError: { error in
                 onError(error)
                 exp.fulfill()
-            }
+        }
         )
         
         waitForExpectations(timeout: 10)
     }
+    
 }
 
 private func makeContext(sessionId: String? = nil) -> (
@@ -473,6 +585,7 @@ private func makeContext(sessionId: String? = nil) -> (
     authorizator: AuthorizatorMock,
     captchaPresenter: CaptchaPresenterMock,
     delegate: SwiftyVKDelegateMock,
+    sharePresenterMaker: SharePresenterMakerMock,
     sessionSaver: SessionsHolderMock
     ) {
         let taskSheduler = TaskShedulerMock()
@@ -480,6 +593,7 @@ private func makeContext(sessionId: String? = nil) -> (
         let authorizator = AuthorizatorMock()
         let taskMaker = TaskMakerMock()
         let captchaPresenter = CaptchaPresenterMock()
+        let sharePresenterMaker = SharePresenterMakerMock()
         let sessionSaver = SessionsHolderMock()
         let delegate = SwiftyVKDelegateMock()
         let longPollMaker = LongPollMakerMock()
@@ -493,11 +607,22 @@ private func makeContext(sessionId: String? = nil) -> (
                 authorizator: authorizator,
                 taskMaker: taskMaker,
                 captchaPresenter: captchaPresenter,
+                sharePresenterMaker: sharePresenterMaker,
                 sessionSaver: sessionSaver,
                 longPollMaker: longPollMaker,
                 delegate: delegate
             )
         }
         
-        return (makeSession, makeSession(), taskSheduler, attemptSheduler, authorizator, captchaPresenter, delegate, sessionSaver)
+        return (
+            makeSession,
+            makeSession(),
+            taskSheduler,
+            attemptSheduler,
+            authorizator,
+            captchaPresenter,
+            delegate,
+            sharePresenterMaker,
+            sessionSaver
+        )
 }

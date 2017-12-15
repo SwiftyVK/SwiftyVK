@@ -36,4 +36,8 @@ struct Resources {
     static func withSuffix(_ name: String) -> String {
         return name + pathSuffix
     }
+    
+    static func localizedString(for key: String) -> String {
+        return NSLocalizedString(key, bundle: bundle, comment: "")
+    }
 }

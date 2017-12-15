@@ -8,7 +8,7 @@ final class WebControllerIOS: UIViewController, WKNavigationDelegate, WebControl
     
     private var currentRequest: URLRequest?
     private var onResult: ((WebControllerResult) -> ())?
-    private var onDismiss: (() -> ())?
+    var onDismiss: (() -> ())?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,10 +27,9 @@ final class WebControllerIOS: UIViewController, WKNavigationDelegate, WebControl
         onDismiss?()
     }
     
-    func load(urlRequest: URLRequest, onResult: @escaping (WebControllerResult) -> (), onDismiss: @escaping () -> ()) {
+    func load(urlRequest: URLRequest, onResult: @escaping (WebControllerResult) -> ()) {
         self.currentRequest = urlRequest
         self.onResult = onResult
-        self.onDismiss = onDismiss
         
         DispatchQueue.main.sync {
             preloader?.startAnimating()
@@ -58,6 +57,10 @@ final class WebControllerIOS: UIViewController, WKNavigationDelegate, WebControl
         DispatchQueue.main.async {
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    @IBAction func cancellPressed(_ sender: Any) {
+        onResult?(.error(.authorizationCancelled))
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation?) {

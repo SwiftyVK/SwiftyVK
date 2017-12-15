@@ -9,16 +9,17 @@ extension SendableMethod {
     /// Shedule request to sending
     @discardableResult
     public func send() -> Task {
-        guard let session = VK.sessions?.default else {
-            fatalError("You must call VK.setUp function to start using SwiftyVK!")
-        }
-        
-        return send(in: session)
+        return send(in: VK.sessions.default)
     }
     
     @discardableResult
     func send(in session: Session) -> Task {
         return session.send(method: self)
+    }
+    
+    /// Returns convert request to synchronously version.
+    public func synchronously() -> SynchronouslyTask {
+        return SynchronouslyTask(request: toRequest())
     }
 }
 

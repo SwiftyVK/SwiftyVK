@@ -8,8 +8,14 @@ final class CaptchaControllerIOS: UIViewController, UITextFieldDelegate, Captcha
     @IBOutlet private weak var closeButton: UIButton?
     @IBOutlet private weak var containerBottomConstraint: NSLayoutConstraint?
     private var onResult: ((String) -> ())?
-    private var onDismiss: (() -> ())?
+    var onDismiss: (() -> ())?
     private var appeared = false
+    
+    var isDisplayed: Bool {
+        return DispatchQueue.anywayOnMain {
+            isViewLoaded && view.window != nil
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -69,7 +75,7 @@ final class CaptchaControllerIOS: UIViewController, UITextFieldDelegate, Captcha
         }
     }
     
-    func present(imageData: Data, onResult: @escaping (String) -> (), onDismiss: @escaping () -> ()) {
+    func present(imageData: Data, onResult: @escaping (String) -> ()) {
         DispatchQueue.main.sync {
             imageView?.image = UIImage(data: imageData)
             textField?.alpha = 1
@@ -77,7 +83,6 @@ final class CaptchaControllerIOS: UIViewController, UITextFieldDelegate, Captcha
         }
         
         self.onResult = onResult
-        self.onDismiss = onDismiss
     }
     
     @IBAction func dismissByButton(_ sender: Any) {

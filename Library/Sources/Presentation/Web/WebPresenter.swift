@@ -48,8 +48,8 @@ final class WebPresenterImpl: WebPresenter {
         
         return try uiSyncQueue.sync {
             
-            guard let controller = controllerMaker.webController() else {
-                throw VKError.cantMakeWebController
+            let controller = controllerMaker.webController {
+                semaphore.signal()
             }
             
             let originalPath = urlRequest.url?.path ?? ""
@@ -78,20 +78,13 @@ final class WebPresenterImpl: WebPresenter {
                         }
                         
                     }
-                    catch let error as VKError {
-                        finalResult = .error(error)
-                    }
                     catch let error {
-                        finalResult = .error(.unknown(error))
+                        finalResult = .error(error.toVK())
                     }
                     
                     if finalResult != nil {
                         strongSelf.currentController?.dismiss()
                     }
-                },
-                
-                onDismiss: {
-                    semaphore.signal()
                 }
             )
             
@@ -131,7 +124,6 @@ final class WebPresenterImpl: WebPresenter {
         let fragment = url.fragment ?? ""
 
         if host != "vk.com" && host != "m.vk.com" && host != "oauth.vk.com" {
-            print(url)
             currentController?.goBack()
         }
         else if fragment.contains("access_token=") {
@@ -154,6 +146,10 @@ final class WebPresenterImpl: WebPresenter {
     }
     
     private func handle(error: VKError, fails: Int) throws -> HandledResult {
+        if case .authorizationCancelled = error {
+            throw error
+        }
+        
         guard fails >= maxFails - 1 else {
             return .fail
         }

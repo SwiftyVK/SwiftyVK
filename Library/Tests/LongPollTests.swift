@@ -35,7 +35,9 @@ final class LongPollTests: XCTestCase {
         
         context.connectionObserver.onSubscribe = { _, callbacks in
             callbacks.onConnect()
-            callbacks.onDisconnect()
+            DispatchQueue.global().async {
+                callbacks.onDisconnect()
+            }
         }
 
         // When

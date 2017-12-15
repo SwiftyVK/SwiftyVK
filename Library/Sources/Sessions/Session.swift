@@ -26,6 +26,13 @@ public protocol Session: class {
     /// - parameter method: VK API method
     @discardableResult
     func send(method: SendableMethod) -> Task
+    
+    /// Show share dialog
+    func share(
+        _ context: ShareContext,
+        onSuccess: @escaping RequestCallbacks.Success,
+        onError: @escaping RequestCallbacks.Error
+    )
 }
 
 protocol TaskSession {
@@ -84,6 +91,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     private unowned var taskMaker: TaskMaker
     private unowned var longPollMaker: LongPollMaker
     private let captchaPresenter: CaptchaPresenter
+    private weak var sharePresenterMaker: SharePresenterMaker?
     private weak var sessionSaver: SessionSaver?
     private weak var delegate: SwiftyVKSessionDelegate?
     private let gateQueue = DispatchQueue(label: "SwiftyVK.sessionQueue")
@@ -96,6 +104,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         authorizator: Authorizator,
         taskMaker: TaskMaker,
         captchaPresenter: CaptchaPresenter,
+        sharePresenterMaker: SharePresenterMaker,
         sessionSaver: SessionSaver,
         longPollMaker: LongPollMaker,
         delegate: SwiftyVKSessionDelegate?
@@ -108,6 +117,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         self.taskMaker = taskMaker
         self.longPollMaker = longPollMaker
         self.captchaPresenter = captchaPresenter
+        self.sharePresenterMaker = sharePresenterMaker
         self.sessionSaver = sessionSaver
         self.delegate = delegate
         
@@ -121,13 +131,14 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         gateQueue.async {
             do {
                 let info = try self.logIn(revoke: true)
-                onSuccess(info)
-            }
-            catch let error as VKError {
-                onError(error)
+                DispatchQueue.global().async {
+                    onSuccess(info)
+                }
             }
             catch let error {
-                onError(.unknown(error))
+                DispatchQueue.global().async {
+                    onError(error.toVK())
+                }
             }
         }
     }
@@ -154,7 +165,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
             token = try authorizator.authorize(sessionId: id, rawToken: rawToken, expires: expires)
         }
     }
-
+    
     public func logOut() {
         unsafeDestroy()
     }
@@ -198,14 +209,55 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
             try throwIfDestroyed()
             try shedule(task: task)
         }
-        catch let error as VKError {
-            request.callbacks.onError?(error)
-        }
         catch let error {
-            request.callbacks.onError?(.unknown(error))
+            request.callbacks.onError?(error.toVK())
         }
         
         return task
+    }
+    
+    public func share(
+        _ context: ShareContext,
+        onSuccess: @escaping RequestCallbacks.Success,
+        onError: @escaping RequestCallbacks.Error
+        ) {
+        
+        do {
+            try throwIfDestroyed()
+        }
+        catch let error {
+            onError(error.toVK())
+        }
+        
+        if state >= .authorized {
+            forceShare(context, onSuccess: onSuccess, onError: onError)
+        }
+        else {
+            logIn(
+                onSuccess: { [weak self] _ in
+                    self?.forceShare(context, onSuccess: onSuccess, onError: onError)
+                },
+                onError: { onError($0) }
+            )
+        }
+    }
+    
+    public func forceShare(
+        _ context: ShareContext,
+        onSuccess: @escaping RequestCallbacks.Success,
+        onError: @escaping RequestCallbacks.Error
+        ) {
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            do {
+                guard let strongSelf = self else { return }
+                guard let presenter = strongSelf.sharePresenterMaker?.sharePresenter() else { return }
+                let data = try presenter.share(context, in: strongSelf)
+                try onSuccess(data)
+            }
+            catch {
+                onError(error.toVK())
+            }
+        }
     }
     
     func shedule(task: Task) throws {

@@ -50,14 +50,14 @@ final class CustomMethodTests: XCTestCase {
     func test_callSessionSend_whenMethodSended() {
         // Given
         var sendCallCount = 0
-        
-        (VK.sessions?.default as? SessionMock)?.onSend = { request in
-            sendCallCount += 1
-        }
+        let method = APIScope.Custom.method(name: "test")
+        VKStack.mock(method) { sendCallCount += 1 }
         // When
-        APIScope.Custom.method(name: "test").send()
+        method.send()
         // Then
         XCTAssertEqual(sendCallCount, 1)
+        
+        VKStack.removeAllMocks()
     }
 }
 

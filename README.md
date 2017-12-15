@@ -39,9 +39,9 @@
   - [Implement SwiftyVKDelegate](#implement-swiftyvkdelegate)
   - [Setting up VK application](#setting-up-vk-application)
   - [Authorization](#authorization)
-      - [Raw token string](#raw-token-string)
       - [oAuth WebView](#oauth-webview)
       - [Official VK Application](#official-vk-application)
+      - [Raw token string](#raw-token-string)
 * [Interaction with VK API](#interaction-with-vk-api)
   - [Request](#request)
   - [Parameters](#parameters)
@@ -56,6 +56,7 @@
     - [Start LongPoll](#start-longpoll)
     - [Handle updates](#handle-updates)
     - [Stop LongPoll](#stop-longpoll)
+* [Share dialog](#share-dialog)
 * [FAQ](#faq)
 * [License](#license)
 
@@ -145,22 +146,11 @@ VK.setUp(appId: String, delegate: SwiftyVKDelegate)
 
 SwiftyVK provides several ways to authorize user. Choose the one that's more suitable for you.
 
-### Raw token string
-If you have previously received user token, just pass it to the following method:
-
-```swift
-VK.sessions?.default.logIn(rawToken: String, expires: TimeInterval)
-
-// Start working with SwiftyVK session here
-```
-
-`TimeInterval` is a time, after which the token will no longer be valid. Pass `0` if you want token to never expire.
-
 ### oAuth WebView
 This is a standard authorization method which shows web view with oAuth dialog. Suitable for most cases.
 
 ```swift
-VK.sessions?.default.logIn(
+VK.sessions.default.logIn(
       onSuccess: { _ in
         // Start working with SwiftyVK session here
       },
@@ -223,6 +213,17 @@ func application(
 4. Authorize as described in [oAuth WebView](#oauth-webview).
 
     ***If user denies authorization in VK App, SwiftyVK will present oAuth dialog***
+
+### Raw token string
+If you have previously received user token, just pass it to the following method:
+
+```swift
+VK.sessions.default.logIn(rawToken: String, expires: TimeInterval)
+
+// Start working with SwiftyVK session here
+```
+
+`TimeInterval` is a time, after which the token will no longer be valid. Pass `0` if you want token to never expire.
 
 ## **Interaction with VK API**
 
@@ -360,7 +361,7 @@ or for the whole session
 
 ```swift
 // Set default apiVersion value for all requests in default session
-VK.sessions?.default.config.apiVersion = "5.68"
+VK.sessions.default.config.apiVersion = "5.68"
 ```
 
 You may change following configuration properties:
@@ -413,7 +414,7 @@ With SwiftyVK you can interact with VK [LongPoll](https://vk.com/dev/using_longp
 Just call:
 
 ```swift
-VK.sessions?.default.longPoll.start {
+VK.sessions.default.longPoll.start {
     // This callback will be executed each time
     // long poll client receives a set of new events
     print($0)
@@ -427,7 +428,7 @@ LongPollEvent is an enum with associated value of type `Data` in each case.
 You can parse this data to JSON using your favorite parser like this:
 
 ```swift
-VK.sessions?.default.longPoll.start {
+VK.sessions.default.longPoll.start {
     for event in $0 {
         switch event {
             case let .type1(data):
@@ -447,14 +448,40 @@ LongPollEvent has two special cases:
 `.historyMayBeLost` - returned when LongPoll was disconnected from server for a long time
 and either `lpKey` or `timestamp` is outdated.
 You do not need to reconnect LongPoll manually, client will do it itself.
-Use this case to **refresh data that could have beeen updated while network was unavailable**.
+Use this case to **refresh data that could have been updated while network was unavailable**.
 
 ## Stop LongPoll
 
 If you don't need to receive LongPoll updates anymore, just call this function:
 ```swift
-VK.sessions?.default.longPoll.stop()
+VK.sessions.default.longPoll.stop()
 ```
+
+## **Share dialog**
+
+With SwiftyVK can make a post to user wall. To do this, you need:
+
+- [Implement SwiftyVKDelegate](#implement-swiftyvkdelegate)
+- [SetUp VK application](#setting-up-vk-application)
+- Present share dialog with context:
+
+```swift
+VK.sessions.default.share(
+    ShareContext(
+        text: "This post made with #SwiftyVK 🖖🏽",
+        images: [
+            ShareImage(data: data, type: .jpg), // JPG image representation
+        ],
+        link: ShareLink(
+            title: "Follow the white rabbit", // Link description
+            url: link // URL to site
+        )
+    ),
+    onSuccess: { /* Handle response */ },
+    onError: { /* Handle error */ }
+```
+
+***Images and link are optional, text is required***
 
 ## **FAQ**
 

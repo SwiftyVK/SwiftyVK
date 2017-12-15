@@ -14,6 +14,15 @@ public final class Request {
         }
     }
     
+    var isUploading: Bool {
+        switch type {
+        case .api, .url:
+            return false
+        case .upload:
+            return true
+        }
+    }
+    
     init(
         type: RequestType,
         config: Config = .default,
@@ -43,6 +52,7 @@ public final class Request {
         
         nextRequest.config = config.overriden(with: nextRequest.config)
         nextRequest.nextRequests = nextRequests
+        nextRequests = []
         
         return nextRequest
     }

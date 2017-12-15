@@ -1,5 +1,5 @@
-protocol WebController: class {
-    func load(urlRequest: URLRequest, onResult: @escaping (WebControllerResult) -> (), onDismiss: @escaping () -> ())
+protocol WebController: DismisableController {
+    func load(urlRequest: URLRequest, onResult: @escaping (WebControllerResult) -> ())
     func reload()
     func goBack()
     func dismiss()

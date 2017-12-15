@@ -2,8 +2,9 @@
 
 final class CaptchaControllerMock: CaptchaController {
     
+    var isDisplayed: Bool = true
     var onPrepareForPresent: (() -> ())?
-    var onPresent: ((Data, (String) -> (), () -> ()) -> ())?
+    var onPresent: ((Data, (String) -> ()) -> ())?
     var onDismiss: (() -> ())?
     private var onRealDismiss: (() -> ())?
     
@@ -11,9 +12,8 @@ final class CaptchaControllerMock: CaptchaController {
         onPrepareForPresent?()
     }
     
-    func present(imageData: Data, onResult: @escaping (String) -> (), onDismiss: @escaping () -> ()) {
-        onRealDismiss = onDismiss
-        onPresent?(imageData, onResult, onDismiss)
+    func present(imageData: Data, onResult: @escaping (String) -> ()) {
+        onPresent?(imageData, onResult)
     }
     
     func dismiss() {

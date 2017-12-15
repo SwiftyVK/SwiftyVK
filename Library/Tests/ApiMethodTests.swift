@@ -28,14 +28,11 @@ final class ApiMethodTests: XCTestCase {
     
     func test_callSessionSend_whenMethodSended() {
         // Given
-        VKStack.mock()
         var sendCallCount = 0
-        
-        (VK.sessions?.default as? SessionMock)?.onSend = { request in
-            sendCallCount += 1
-        }
+        let method = APIScope.Users.get(.empty)
+        VKStack.mock(method) { sendCallCount += 1 }
         // When
-        APIScope.Users.get(.empty).send()
+        method.send()
         // Then
         XCTAssertEqual(sendCallCount, 1)
     }

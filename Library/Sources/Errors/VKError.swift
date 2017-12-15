@@ -22,12 +22,12 @@ public indirect enum VKError: Error {
     case urlRequestError(Error)
     case captchaResultIsNil
     case wrongUrl
+    case cantAwaitOnMainThread
+    case cantAwaitRequestWithSettedCallbacks
     
     // MARK: - UI Errors
     case cantBuildWebViewUrl(String)
     case cantBuildVKAppUrl(String)
-    case cantMakeWebController
-    case cantMakeCaptchaController
     case captchaPresenterTimedOut
     case cantMakeCapthaImageUrl(String)
     case cantLoadCaptchaImage(Error)
@@ -40,6 +40,7 @@ public indirect enum VKError: Error {
     case authorizationCancelled
     case authorizationFailed
     case captchaWasDismissed
+    case sharingWasDismissed
     
     case weakObjectWasDeallocated
     

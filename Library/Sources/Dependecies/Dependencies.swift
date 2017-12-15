@@ -7,7 +7,9 @@ protocol Dependencies:
     WebControllerMaker,
     CaptchaControllerMaker,
     LongPollTaskMaker,
-    LongPollMaker { }
+    LongPollMaker,
+    SharePresenterMaker,
+    ShareControllerMaker { }
 
 protocol DependenciesHolder: SessionsHolderHolder, AuthorizatorHolder {
     init(appId: String, delegate: SwiftyVKDelegate?)
@@ -38,11 +40,15 @@ protocol TokenMaker: class {
 }
 
 protocol WebControllerMaker: class {
-    func webController() -> WebController?
+    func webController(onDismiss: (() -> ())?) -> WebController
 }
 
 protocol CaptchaControllerMaker: class {
-    func captchaController() -> CaptchaController?
+    func captchaController(onDismiss: (() -> ())?) -> CaptchaController
+}
+
+protocol ShareControllerMaker: class {
+    func shareController(onDismiss: (() -> ())?) -> ShareController
 }
 
 protocol LongPollTaskMaker: class {
@@ -51,4 +57,8 @@ protocol LongPollTaskMaker: class {
 
 protocol LongPollMaker: class {
     func longPoll(session: Session) -> LongPoll
+}
+
+protocol SharePresenterMaker: class {
+    func sharePresenter() -> SharePresenter
 }

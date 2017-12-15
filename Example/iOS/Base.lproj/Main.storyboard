@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QE8-nE-Wxk">
-                                <rect key="frame" x="100" y="207.5" width="175" height="252"/>
+                                <rect key="frame" x="100" y="189.5" width="175" height="288"/>
                                 <subviews>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yix-Dv-nXN">
                                         <rect key="frame" x="0.0" y="0.0" width="175" height="36"/>
@@ -56,8 +56,16 @@
                                             <action selector="buttonDown:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8jC-E4-OOS"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Kh-8o-KUN">
+                                    <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3g-RA-kyd">
                                         <rect key="frame" x="0.0" y="144" width="175" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Share"/>
+                                        <connections>
+                                            <action selector="buttonDown:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qpl-ON-Vi2"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Kh-8o-KUN">
+                                        <rect key="frame" x="0.0" y="180" width="175" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="users.get"/>
                                         <connections>
@@ -65,7 +73,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vli-Na-e0N">
-                                        <rect key="frame" x="0.0" y="180" width="175" height="36"/>
+                                        <rect key="frame" x="0.0" y="216" width="175" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="friends.get"/>
                                         <connections>
@@ -73,7 +81,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kUH-eh-OBo">
-                                        <rect key="frame" x="0.0" y="216" width="175" height="36"/>
+                                        <rect key="frame" x="0.0" y="252" width="175" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="upload photo to wall"/>
                                         <connections>
