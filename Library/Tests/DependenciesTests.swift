@@ -59,6 +59,19 @@ final class DependenciesTests: XCTestCase {
         #endif
     }
     
+    func test_makeShareController_typeIsShareControllerImpl() {
+        // Given
+        let context = makeContext()
+        // When
+        let object = context.factory.shareController(onDismiss: nil)
+        // Then
+        #if os(iOS)
+            XCTAssertTrue(type(of: object) == ShareControllerIOS.self)
+        #elseif os(macOS)
+            XCTAssertTrue(type(of: object) == ShareControllerMacOS.self)
+        #endif
+    }
+    
     func test_makeTask_typeIsTaskImpl() {
         // Given
         let context = makeContext()
@@ -96,6 +109,15 @@ final class DependenciesTests: XCTestCase {
         let object = context.factory.token(token: "", expires: 0, info: [:])
         // Then
         XCTAssertTrue(type(of: object) == TokenImpl.self)
+    }
+    
+    func test_makeSharePresenter_typeIsSharePresenterImpl() {
+        // Given
+        let context = makeContext()
+        // When
+        let object = context.factory.sharePresenter()
+        // Then
+        XCTAssertTrue(type(of: object) == SharePresenterImpl.self)
     }
 }
 
