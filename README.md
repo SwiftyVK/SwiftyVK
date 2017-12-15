@@ -39,9 +39,9 @@
   - [Implement SwiftyVKDelegate](#implement-swiftyvkdelegate)
   - [Setting up VK application](#setting-up-vk-application)
   - [Authorization](#authorization)
-      - [Raw token string](#raw-token-string)
       - [oAuth WebView](#oauth-webview)
       - [Official VK Application](#official-vk-application)
+      - [Raw token string](#raw-token-string)
 * [Interaction with VK API](#interaction-with-vk-api)
   - [Request](#request)
   - [Parameters](#parameters)
@@ -146,17 +146,6 @@ VK.setUp(appId: String, delegate: SwiftyVKDelegate)
 
 SwiftyVK provides several ways to authorize user. Choose the one that's more suitable for you.
 
-### Raw token string
-If you have previously received user token, just pass it to the following method:
-
-```swift
-VK.sessions.default.logIn(rawToken: String, expires: TimeInterval)
-
-// Start working with SwiftyVK session here
-```
-
-`TimeInterval` is a time, after which the token will no longer be valid. Pass `0` if you want token to never expire.
-
 ### oAuth WebView
 This is a standard authorization method which shows web view with oAuth dialog. Suitable for most cases.
 
@@ -224,6 +213,17 @@ func application(
 4. Authorize as described in [oAuth WebView](#oauth-webview).
 
     ***If user denies authorization in VK App, SwiftyVK will present oAuth dialog***
+
+### Raw token string
+If you have previously received user token, just pass it to the following method:
+
+```swift
+VK.sessions.default.logIn(rawToken: String, expires: TimeInterval)
+
+// Start working with SwiftyVK session here
+```
+
+`TimeInterval` is a time, after which the token will no longer be valid. Pass `0` if you want token to never expire.
 
 ## **Interaction with VK API**
 
