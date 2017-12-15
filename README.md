@@ -56,6 +56,7 @@
     - [Start LongPoll](#start-longpoll)
     - [Handle updates](#handle-updates)
     - [Stop LongPoll](#stop-longpoll)
+* [Share dialog](#share-dialog)
 * [FAQ](#faq)
 * [License](#license)
 
@@ -447,7 +448,7 @@ LongPollEvent has two special cases:
 `.historyMayBeLost` - returned when LongPoll was disconnected from server for a long time
 and either `lpKey` or `timestamp` is outdated.
 You do not need to reconnect LongPoll manually, client will do it itself.
-Use this case to **refresh data that could have beeen updated while network was unavailable**.
+Use this case to **refresh data that could have been updated while network was unavailable**.
 
 ## Stop LongPoll
 
@@ -455,6 +456,32 @@ If you don't need to receive LongPoll updates anymore, just call this function:
 ```swift
 VK.sessions.default.longPoll.stop()
 ```
+
+## **Share dialog**
+
+With SwiftyVK can make a post to user wall. To do this, you need:
+
+- [Implement SwiftyVKDelegate](#implement-swiftyvkdelegate)
+- [SetUp VK application](#setting-up-vk-application)
+- Present share dialog with context:
+
+```swift
+VK.sessions.default.share(
+    ShareContext(
+        text: "This post made with #SwiftyVK 🖖🏽",
+        images: [
+            ShareImage(data: data, type: .jpg), // JPG image representation
+        ],
+        link: ShareLink(
+            title: "Follow the white rabbit", // Link description
+            url: link // URL to site
+        )
+    ),
+    onSuccess: { /* Handle response */ },
+    onError: { /* Handle error */ }
+```
+
+***Images and link are optional, text is required***
 
 ## **FAQ**
 
