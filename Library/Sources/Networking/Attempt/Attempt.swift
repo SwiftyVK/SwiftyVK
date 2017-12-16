@@ -30,20 +30,23 @@ final class AttemptImpl: Operation, Attempt {
         let semaphore = DispatchSemaphore(value: 0)
         
         let completion: (Data?, URLResponse?, Error?) -> () = { [weak self] data, response, error in
-            defer {
-                semaphore.signal()
-            }
-            
-            guard let strongSelf = self, !strongSelf.isCancelled else { return }
-            
-            if let error = error {
-                strongSelf.callbacks.onFinish(.error(.urlRequestError(error)))
-            }
-            else if let data = data {
-                strongSelf.callbacks.onFinish(Response(data))
-            }
-            else {
-                strongSelf.callbacks.onFinish(.error(.unexpectedResponse))
+            /// Because URLSession executes completions in their own serial queue
+            DispatchQueue.global(qos: .utility).async {
+                defer {
+                    semaphore.signal()
+                }
+                
+                guard let strongSelf = self, !strongSelf.isCancelled else { return }
+
+                if let error = error {
+                    strongSelf.callbacks.onFinish(.error(.urlRequestError(error)))
+                }
+                else if let data = data {
+                    strongSelf.callbacks.onFinish(Response(data))
+                }
+                else {
+                    strongSelf.callbacks.onFinish(.error(.unexpectedResponse))
+                }
             }
         }
         
