@@ -117,12 +117,16 @@ final class TaskImpl: Operation, Task, OperationConvertible {
     
     private func handleSent(_ current: Int64, of expected: Int64) {
         guard !isCancelled && currentRequest.config.handleProgress else { return }
-        currentRequest.callbacks.onProgress?(.sent(current: current, of: expected))
+        currentRequest.config.callbacksQueue.sync {
+            currentRequest.callbacks.onProgress?(.sent(current: current, of: expected))
+        }
     }
     
     private func handleReceive(_ current: Int64, of expected: Int64) {
         guard !isCancelled && currentRequest.config.handleProgress else { return }
-        currentRequest.callbacks.onProgress?(.recieve(current: current, of: expected))
+        currentRequest.config.callbacksQueue.sync {
+            currentRequest.callbacks.onProgress?(.recieve(current: current, of: expected))
+        }
     }
     
     private func handleResult(_ result: Response) {
@@ -189,16 +193,22 @@ final class TaskImpl: Operation, Task, OperationConvertible {
     
     private func perform(error: VKError) {
         guard !isCancelled && !isFinished else { return }
-        state = .failed(error)
-        currentRequest.callbacks.onError?(error)
-        semaphore.signal()
+        
+        currentRequest.config.callbacksQueue.sync {
+            currentRequest.callbacks.onError?(error)
+            state = .failed(error)
+            semaphore.signal()
+        }
     }
     
     private func perform(response: Data) throws {
         guard !isCancelled && !isFinished else { return }
-        try currentRequest.callbacks.onSuccess?(response)
-        state = .finished(response)
-        semaphore.signal()
+        
+        try currentRequest.config.callbacksQueue.sync {
+            try currentRequest.callbacks.onSuccess?(response)
+            state = .finished(response)
+            semaphore.signal()
+        }
     }
 }
 
