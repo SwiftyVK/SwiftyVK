@@ -432,5 +432,35 @@ extension APIScope {
             
             return Methods.SuccessableFailableProgressableConfigurable(method.request)
         }
+        
+        /// Upload audio for using in messages.send method
+        public static func toAudioMessage(_ media: Media) -> Methods.SuccessableFailableProgressableConfigurable {
+            
+            let method = APIScope.Docs.getMessagesUploadServer ([
+                .type: "audio_message"
+                ])
+                .chain {
+                    let response = try JSON(data: $0)
+                    
+                    return Request(
+                        type: .upload(
+                            url: response.forcedString("upload_url"),
+                            media: [media],
+                            partType: .file
+                        ),
+                        config: .upload
+                        )
+                        .toMethod()
+                }
+                .chain {
+                    let response = try JSON(data: $0)
+                    
+                    return APIScope.Docs.save([
+                        .file: response.forcedString("file")
+                        ])
+            }
+            
+            return Methods.SuccessableFailableProgressableConfigurable(method.request)
+        }
     }
 }
