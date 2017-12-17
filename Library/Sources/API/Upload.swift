@@ -70,6 +70,43 @@ extension APIScope {
                 return Methods.SuccessableFailableProgressableConfigurable(method.request)
             }
             
+            /// Upload chat main photo
+            public static func toChatMain(
+                _ media: Media,
+                to chatId: Int,
+                crop: PhotoCrop? = nil
+                ) -> Methods.SuccessableFailableProgressableConfigurable {
+                
+                let method = APIScope.Photos.getChatUploadServer([
+                    .chatId: String(chatId),
+                    .cropX: crop?.x,
+                    .cropY: crop?.y,
+                    .cropWidth: crop?.w
+                    ])
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return Request(
+                            type: .upload(
+                                url: response.forcedString("upload_url"),
+                                media: [media],
+                                partType: .file
+                            ),
+                            config: .upload
+                            )
+                            .toMethod()
+                    }
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return APIScope.Messages.setChatPhoto([
+                            .file: response.forcedString("response")
+                            ])
+                    }
+                
+                return Methods.SuccessableFailableProgressableConfigurable(method.request)
+            }
+            
             /// Upload photo to user album
             public static func toAlbum(
                 _ media: [Media],
