@@ -25,6 +25,7 @@ public enum UploadTarget {
 }
 
 public typealias PhotoCrop = (x: String?, y: String?, w: String?)
+public typealias CoverCrop = (x: String, y: String, x2: String, y2: String)
 
 // swiftlint:disable next nesting
 // swiftlint:disable next type_body_length
@@ -103,6 +104,45 @@ extension APIScope {
                             .file: response.forcedString("response")
                             ])
                     }
+                
+                return Methods.SuccessableFailableProgressableConfigurable(method.request)
+            }
+            
+            /// Upload photo to group cover
+            public static func toGroupCover(
+                _ media: Media,
+                to groupId: Int,
+                crop: CoverCrop
+                ) -> Methods.SuccessableFailableProgressableConfigurable {
+                
+                let method = APIScope.Photos.getOwnerCoverPhotoUploadServer([
+                    .groupId: String(groupId),
+                    .cropX: crop.x,
+                    .cropY: crop.y,
+                    .cropX2: crop.x2,
+                    .cropY2: crop.y2
+                    ])
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return Request(
+                            type: .upload(
+                                url: response.forcedString("upload_url"),
+                                media: [media],
+                                partType: .photo
+                            ),
+                            config: .upload
+                            )
+                            .toMethod()
+                    }
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return APIScope.Photos.saveOwnerCoverPhoto([
+                            .photo: response.forcedString("photo"),
+                            .hash: response.forcedString("hash")
+                            ])
+                }
                 
                 return Methods.SuccessableFailableProgressableConfigurable(method.request)
             }
