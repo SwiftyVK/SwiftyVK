@@ -13,15 +13,64 @@ public enum UploadTarget {
             return (userId: nil, groupId: id)
         }
     }
+    
+    var signed: String {
+        switch self {
+        case .user(let id):
+            return id
+        case .group(let id):
+            return "-" + id
+        }
+    }
 }
 
+public typealias PhotoCrop = (x: String?, y: String?, w: String?)
+
 // swiftlint:disable next nesting
+// swiftlint:disable next type_body_length
 extension APIScope {
-    //Metods to upload Mediafiles. More info - https://vk.com/dev/upload_files
+    /// Metods to upload Mediafiles. More info - https://vk.com/dev/upload_files
     public struct Upload {
         ///Methods to upload photo
         public struct Photo {
-            ///Upload photo to user album
+            /// Upload photo to user or group avatar
+            public static func toMain(
+                _ media: Media,
+                to target: UploadTarget,
+                crop: PhotoCrop? = nil
+                ) -> Methods.SuccessableFailableProgressableConfigurable {
+                
+                let method = APIScope.Photos.getOwnerPhotoUploadServer([
+                    .ownerId: target.signed
+                    ])
+                    .chain {
+                        let response = try JSON(data: $0)
+                        let crop = crop.flatMap { "&_square_crop=\($0.x ?? ""),\($0.y ?? ""),\($0.w ?? "")" } ?? ""
+                        
+                        return Request(
+                            type: .upload(
+                                url: response.forcedString("upload_url") + crop,
+                                media: [media],
+                                partType: .photo
+                            ),
+                            config: .upload
+                            )
+                            .toMethod()
+                    }
+                    .chain {
+                        let response = try JSON(data: $0)
+                        
+                        return APIScope.Photos.saveOwnerPhoto([
+                            .server: response.forcedInt("server").toString(),
+                            .photo: response.forcedString("photo"),
+                            .hash: response.forcedString("hash")
+                            ])
+                    }
+                
+                return Methods.SuccessableFailableProgressableConfigurable(method.request)
+            }
+            
+            /// Upload photo to user album
             public static func toAlbum(
                 _ media: [Media],
                 to target: UploadTarget,
@@ -101,7 +150,7 @@ extension APIScope {
             /// Upload photo for using in market.add or market.edit methods
             public static func toMarket(
                 _ media: Media,
-                mainPhotoConfig: (cropX: String?, cropY: String?, cropW: String?)?,
+                mainPhotoCrop: PhotoCrop?,
                 groupId: String
                 ) -> Methods.SuccessableFailableProgressableConfigurable {
                 
@@ -129,10 +178,10 @@ extension APIScope {
                             .hash: response.forcedString("hash"),
                             .cropData: response.forcedString("crop_data"),
                             .cropHash: response.forcedString("crop_hash"),
-                            .mainPhoto: (mainPhotoConfig != nil ? "1" : "0"),
-                            .cropX: mainPhotoConfig?.cropX,
-                            .cropY: mainPhotoConfig?.cropY,
-                            .cropWidth: mainPhotoConfig?.cropW
+                            .mainPhoto: (mainPhotoCrop != nil ? "1" : "0"),
+                            .cropX: mainPhotoCrop?.x,
+                            .cropY: mainPhotoCrop?.y,
+                            .cropWidth: mainPhotoCrop?.w
                             ])
                     }
                 
