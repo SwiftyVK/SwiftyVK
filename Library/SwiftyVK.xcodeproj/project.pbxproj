@@ -261,6 +261,8 @@
 		D4AB8D9D1F6055290099FC42 /* longPoll.failed.1.withTs.json in Resources */ = {isa = PBXBuildFile; fileRef = D4AB8D9C1F6055290099FC42 /* longPoll.failed.1.withTs.json */; };
 		D4B122961FAB563300F0BE36 /* SharePreferencesController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B122951FAB563300F0BE36 /* SharePreferencesController_iOS.swift */; };
 		D4B44EA51FA38A5100E85E31 /* ShareNavigationController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B44EA41FA38A5100E85E31 /* ShareNavigationController_iOS.swift */; };
+		D4B5B6491FE8210100282542 /* photos.upload.toWall.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B6461FE81DD800282542 /* photos.upload.toWall.success.json */; };
+		D4B5B64A1FE8210A00282542 /* photos.upload.toWall.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B6461FE81DD800282542 /* photos.upload.toWall.success.json */; };
 		D4B850331FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */; };
 		D4B850341FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */; };
 		D4B850381FB0DB8700EF02F0 /* ShareWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B850371FB0DB8700EF02F0 /* ShareWorkerTests.swift */; };
@@ -491,6 +493,8 @@
 		D4F49D421F2DF5B10037B875 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49D411F2DF5B10037B875 /* JsonReader.swift */; };
 		D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F49D441F2E0EF60037B875 /* apiError.correct.json */; };
 		D4F56CDE1F6837BC00ACC3CF /* DependenciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F56CDD1F6837BC00ACC3CF /* DependenciesTests.swift */; };
+		D4FCAE811FE68AC200E7D1E7 /* UploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FCAE801FE68AC200E7D1E7 /* UploadTests.swift */; };
+		D4FCAE821FE68AC200E7D1E7 /* UploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FCAE801FE68AC200E7D1E7 /* UploadTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -702,6 +706,7 @@
 		D4B0854A1FE03BFC00F0EB3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Storyboard_macOS.strings; sourceTree = "<group>"; };
 		D4B122951FAB563300F0BE36 /* SharePreferencesController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePreferencesController_iOS.swift; sourceTree = "<group>"; };
 		D4B44EA41FA38A5100E85E31 /* ShareNavigationController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareNavigationController_iOS.swift; sourceTree = "<group>"; };
+		D4B5B6461FE81DD800282542 /* photos.upload.toWall.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = photos.upload.toWall.success.json; sourceTree = "<group>"; };
 		D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronouslyTaskTests.swift; sourceTree = "<group>"; };
 		D4B850371FB0DB8700EF02F0 /* ShareWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareWorkerTests.swift; sourceTree = "<group>"; };
 		D4BBFDA51F9297A9009615E7 /* KeychainProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
@@ -839,6 +844,7 @@
 		D4F49D411F2DF5B10037B875 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		D4F49D441F2E0EF60037B875 /* apiError.correct.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.correct.json; sourceTree = "<group>"; };
 		D4F56CDD1F6837BC00ACC3CF /* DependenciesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependenciesTests.swift; sourceTree = "<group>"; };
+		D4FCAE801FE68AC200E7D1E7 /* UploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -907,6 +913,7 @@
 				D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */,
 				D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */,
 				D4B850371FB0DB8700EF02F0 /* ShareWorkerTests.swift */,
+				D4FCAE801FE68AC200E7D1E7 /* UploadTests.swift */,
 				D477065B1FE4274800D72930 /* RequestTests.swift */,
 			);
 			path = Tests;
@@ -1427,6 +1434,7 @@
 				D44AD0D91FB215720053AD59 /* users.get.success.withExports.json */,
 				D48518A11FB21B1F00BD7186 /* users.get.success.withoutExports.json */,
 				D48518A41FB21E5500BD7186 /* photos.getWallUploadServer.success.json */,
+				D4B5B6461FE81DD800282542 /* photos.upload.toWall.success.json */,
 				D48518A71FB221CE00BD7186 /* photos.saveWallPhoto.success.json */,
 			);
 			path = Data;
@@ -1641,6 +1649,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D44AD0DC1FB216870053AD59 /* users.get.success.withExports.json in Resources */,
+				D4B5B64A1FE8210A00282542 /* photos.upload.toWall.success.json in Resources */,
 				D47601191F2E21E2005356E5 /* apiError.withoutCode.json in Resources */,
 				D4CA9B761F66CA890085E4F3 /* longPoll.getServer.success.json in Resources */,
 				D476011D1F2E22CA005356E5 /* empty.json in Resources */,
@@ -1699,6 +1708,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4B5B6491FE8210100282542 /* photos.upload.toWall.success.json in Resources */,
 				D46FB4191F929DC6000CEAEB /* longPoll.empty.json in Resources */,
 				D46FB4181F929DC6000CEAEB /* longPoll.updates.json in Resources */,
 				D46FB4131F929DC6000CEAEB /* empty.json in Resources */,
@@ -1763,6 +1773,7 @@
 				D44348F91F3B71F5008B2B50 /* JSONTests.swift in Sources */,
 				D484C9321F4B337E00C9651C /* AttemptTests.swift in Sources */,
 				D4321D8F1F5F0B34001AFE9F /* TwoVariationsMethodTests.swift in Sources */,
+				D4FCAE811FE68AC200E7D1E7 /* UploadTests.swift in Sources */,
 				A25A19CB1EE4126E00CF13AF /* DependencyFactoryMock.swift in Sources */,
 				A2F6F8E51EDDF00400933DBC /* AtomicTests.swift in Sources */,
 				D46263A21F9FAB4100333DC3 /* SharePresenterTests.swift in Sources */,
@@ -2123,6 +2134,7 @@
 				D46FB4431F929EE6000CEAEB /* DependencyFactoryMock.swift in Sources */,
 				D46FB4461F929EE6000CEAEB /* WebPresenterMock.swift in Sources */,
 				D46FB40A1F929DBC000CEAEB /* FullVariationsMethodTests.swift in Sources */,
+				D4FCAE821FE68AC200E7D1E7 /* UploadTests.swift in Sources */,
 				D46FB4041F929DBC000CEAEB /* ResourcesTests.swift in Sources */,
 				D46FB4451F929EE6000CEAEB /* VKAppProxyMock.swift in Sources */,
 				D46263A31F9FAB4100333DC3 /* SharePresenterTests.swift in Sources */,

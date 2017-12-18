@@ -67,12 +67,12 @@ final class ShareWorkerTests: XCTestCase {
         )
         
         VKStack.mock(
-            Request(type: .upload(url: "", media: [.image(data: image.data, type: image.type)], partType: .photo)).toMethod(),
-            fileName: "photos.getWallUploadServer.success"
+            Request(type: .upload(url: "https://test.vk.com", media: [.image(data: image.data, type: image.type)], partType: .photo)).toMethod(),
+            fileName: "photos.upload.toWall.success"
         )
         
         VKStack.mock(
-            VK.API.Photos.saveWallPhoto([.userId: "", .hash: "", .server: "0", .photo: ""]),
+            VK.API.Photos.saveWallPhoto([.userId: "", .hash: "testHash", .server: "1234567890", .photo: "testPhoto"]),
             fileName: "photos.saveWallPhoto.success"
         )
         

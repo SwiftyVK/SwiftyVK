@@ -1,7 +1,5 @@
 {
-    "response": {
-        "upload_url": "https://test.vk.com",
-        "album_id": 100,
-        "user_id": 100
-    }
+    "upload_url": "https://test.vk.com",
+    "album_id": 101,
+    "user_id": 102
 }

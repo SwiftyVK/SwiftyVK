@@ -47,7 +47,7 @@ final class MultipartBodyBuilderImpl: MultipartBodyBuilder {
     }
 }
 
-enum PartType {
+enum PartType: String {
     case photo
     case video
     case file
