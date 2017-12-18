@@ -263,6 +263,12 @@
 		D4B44EA51FA38A5100E85E31 /* ShareNavigationController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B44EA41FA38A5100E85E31 /* ShareNavigationController_iOS.swift */; };
 		D4B5B6491FE8210100282542 /* photos.upload.toWall.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B6461FE81DD800282542 /* photos.upload.toWall.success.json */; };
 		D4B5B64A1FE8210A00282542 /* photos.upload.toWall.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B6461FE81DD800282542 /* photos.upload.toWall.success.json */; };
+		D4B5B64C1FE82BD900282542 /* photos.getOwnerPhotoUploadServer.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B64B1FE82BD900282542 /* photos.getOwnerPhotoUploadServer.success.json */; };
+		D4B5B64D1FE82BD900282542 /* photos.getOwnerPhotoUploadServer.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B64B1FE82BD900282542 /* photos.getOwnerPhotoUploadServer.success.json */; };
+		D4B5B64F1FE82C4500282542 /* photos.uploadOwnerPhoto.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B64E1FE82C4500282542 /* photos.uploadOwnerPhoto.success.json */; };
+		D4B5B6501FE82C4500282542 /* photos.uploadOwnerPhoto.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B64E1FE82C4500282542 /* photos.uploadOwnerPhoto.success.json */; };
+		D4B5B6521FE82CCF00282542 /* photos.saveOwnerPhoto.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B6511FE82CCF00282542 /* photos.saveOwnerPhoto.success.json */; };
+		D4B5B6531FE82CCF00282542 /* photos.saveOwnerPhoto.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B6511FE82CCF00282542 /* photos.saveOwnerPhoto.success.json */; };
 		D4B850331FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */; };
 		D4B850341FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */; };
 		D4B850381FB0DB8700EF02F0 /* ShareWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B850371FB0DB8700EF02F0 /* ShareWorkerTests.swift */; };
@@ -707,6 +713,9 @@
 		D4B122951FAB563300F0BE36 /* SharePreferencesController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePreferencesController_iOS.swift; sourceTree = "<group>"; };
 		D4B44EA41FA38A5100E85E31 /* ShareNavigationController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareNavigationController_iOS.swift; sourceTree = "<group>"; };
 		D4B5B6461FE81DD800282542 /* photos.upload.toWall.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = photos.upload.toWall.success.json; sourceTree = "<group>"; };
+		D4B5B64B1FE82BD900282542 /* photos.getOwnerPhotoUploadServer.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = photos.getOwnerPhotoUploadServer.success.json; sourceTree = "<group>"; };
+		D4B5B64E1FE82C4500282542 /* photos.uploadOwnerPhoto.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = photos.uploadOwnerPhoto.success.json; sourceTree = "<group>"; };
+		D4B5B6511FE82CCF00282542 /* photos.saveOwnerPhoto.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = photos.saveOwnerPhoto.success.json; sourceTree = "<group>"; };
 		D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronouslyTaskTests.swift; sourceTree = "<group>"; };
 		D4B850371FB0DB8700EF02F0 /* ShareWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareWorkerTests.swift; sourceTree = "<group>"; };
 		D4BBFDA51F9297A9009615E7 /* KeychainProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
@@ -1436,6 +1445,9 @@
 				D48518A41FB21E5500BD7186 /* photos.getWallUploadServer.success.json */,
 				D4B5B6461FE81DD800282542 /* photos.upload.toWall.success.json */,
 				D48518A71FB221CE00BD7186 /* photos.saveWallPhoto.success.json */,
+				D4B5B64B1FE82BD900282542 /* photos.getOwnerPhotoUploadServer.success.json */,
+				D4B5B64E1FE82C4500282542 /* photos.uploadOwnerPhoto.success.json */,
+				D4B5B6511FE82CCF00282542 /* photos.saveOwnerPhoto.success.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1649,6 +1661,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D44AD0DC1FB216870053AD59 /* users.get.success.withExports.json in Resources */,
+				D4B5B6521FE82CCF00282542 /* photos.saveOwnerPhoto.success.json in Resources */,
 				D4B5B64A1FE8210A00282542 /* photos.upload.toWall.success.json in Resources */,
 				D47601191F2E21E2005356E5 /* apiError.withoutCode.json in Resources */,
 				D4CA9B761F66CA890085E4F3 /* longPoll.getServer.success.json in Resources */,
@@ -1657,11 +1670,13 @@
 				D4AB8D9D1F6055290099FC42 /* longPoll.failed.1.withTs.json in Resources */,
 				D47601161F2E219A005356E5 /* response.empty.json in Resources */,
 				D4F49D451F2E0F400037B875 /* apiError.correct.json in Resources */,
+				D4B5B64F1FE82C4500282542 /* photos.uploadOwnerPhoto.success.json in Resources */,
 				D48518A51FB21E5500BD7186 /* photos.getWallUploadServer.success.json in Resources */,
 				D48518A21FB21B1F00BD7186 /* users.get.success.withoutExports.json in Resources */,
 				D476011B1F2E2229005356E5 /* apiError.withoutMessage.json in Resources */,
 				D4AB8D9B1F6048EA0099FC42 /* longPoll.updates.json in Resources */,
 				D48518A81FB221CE00BD7186 /* photos.saveWallPhoto.success.json in Resources */,
+				D4B5B64C1FE82BD900282542 /* photos.getOwnerPhotoUploadServer.success.json in Resources */,
 				D44C80EE1F967F85004E3CF4 /* longPoll.failed.1.json in Resources */,
 				D4040E2D1F62C12000025E24 /* longPoll.empty.json in Resources */,
 			);
@@ -1709,6 +1724,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4B5B6491FE8210100282542 /* photos.upload.toWall.success.json in Resources */,
+				D4B5B6531FE82CCF00282542 /* photos.saveOwnerPhoto.success.json in Resources */,
 				D46FB4191F929DC6000CEAEB /* longPoll.empty.json in Resources */,
 				D46FB4181F929DC6000CEAEB /* longPoll.updates.json in Resources */,
 				D46FB4131F929DC6000CEAEB /* empty.json in Resources */,
@@ -1717,11 +1733,13 @@
 				D46FB4161F929DC6000CEAEB /* apiError.withoutCode.json in Resources */,
 				D48518A61FB21E5500BD7186 /* photos.getWallUploadServer.success.json in Resources */,
 				D46FB4141F929DC6000CEAEB /* response.empty.json in Resources */,
+				D4B5B6501FE82C4500282542 /* photos.uploadOwnerPhoto.success.json in Resources */,
 				D44AD0DD1FB216870053AD59 /* users.get.success.withExports.json in Resources */,
 				D48518A31FB21B1F00BD7186 /* users.get.success.withoutExports.json in Resources */,
 				D46FB41A1F929DC6000CEAEB /* longPoll.failed.1.withTs.json in Resources */,
 				D48518A91FB221CE00BD7186 /* photos.saveWallPhoto.success.json in Resources */,
 				D46FB41B1F929DC6000CEAEB /* apiError.correct.json in Resources */,
+				D4B5B64D1FE82BD900282542 /* photos.getOwnerPhotoUploadServer.success.json in Resources */,
 				D44C80EF1F967F86004E3CF4 /* longPoll.failed.1.json in Resources */,
 				D46FB4171F929DC6000CEAEB /* longPoll.getServer.success.json in Resources */,
 			);

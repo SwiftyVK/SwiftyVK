@@ -35,12 +35,18 @@ extension RequestType: Equatable, Hashable {
     public var hashValue: Int {
         switch self {
         case let .api(method, parameters):
-            return method.hashValue ^ parameters.reduce(0) { $0 ^ $1.key.hashValue ^ $1.value.hashValue }
+            return method.hashValue ^ Set(parameters.map { $0.key + $0.value }).hashValue
         case let .url(url):
             return url.hashValue
         case let .upload(url, media, partType):
-            print(url, url.hashValue)
-            return url.hashValue ^ media.reduce(0) { $0 ^ $1.data.hashValue } ^ partType.hashValue
+            return url.hashValue ^ Set(media).hashValue ^ partType.hashValue
         }
+    }
+}
+
+extension Media: Hashable {
+    
+    public var hashValue: Int {
+       return type.hashValue ^ data.hashValue
     }
 }
