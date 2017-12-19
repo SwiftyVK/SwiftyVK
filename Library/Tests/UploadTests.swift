@@ -294,4 +294,45 @@ final class UploadTests: XCTestCase {
         
         XCTAssertTrue(response?.bool("result") ?? false)
     }
+    
+    func test_audio() {
+        // Given
+        let exp = expectation(description: "")
+        let media = Media.audio(data: Data())
+        var response: JSON?
+        
+        VKStack.mock(
+            VK.API.Audio.getUploadServer(.empty),
+            fileName: "upload.getServer.success"
+        )
+        
+        VKStack.mock(
+            .upload(url: "https://test.vk.com", media: [media], partType: .file),
+            fileName: "upload.audio.success"
+        )
+        
+        VKStack.mock(
+            VK.API.Audio.save([
+                .audio: "testAudio",
+                .server: "999",
+                .hash: "testHash",
+                .artist: "testArtist",
+                .title: "testTitle"
+                ]),
+            fileName: "upload.save.success"
+        )
+        
+        // When
+        VK.API.Upload.audio(media, artist: "testArtist", title: "testTitle")
+            .onSuccess {
+                response = try? JSON(data: $0)
+                exp.fulfill()
+            }
+            .send()
+        
+        // Then
+        waitForExpectations(timeout: 5)
+        
+        XCTAssertTrue(response?.bool("result") ?? false)
+    }
 }

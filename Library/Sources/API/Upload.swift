@@ -399,7 +399,7 @@ extension APIScope {
             return Methods.SuccessableFailableProgressableConfigurable(method.request)
         }
 
-        ///Upload document
+        /// Upload document
         public static func document(
             _ media: Media,
             groupId: String? = nil,
