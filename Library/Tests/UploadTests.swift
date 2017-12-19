@@ -298,7 +298,7 @@ final class UploadTests: XCTestCase {
     func test_audio() {
         // Given
         let exp = expectation(description: "")
-        let media = Media.audio(data: Data())
+        let media = Media.audio(data: Data(), type: .mp3)
         var response: JSON?
         
         VKStack.mock(
@@ -453,7 +453,7 @@ final class UploadTests: XCTestCase {
     func test_toAudioMessage() {
         // Given
         let exp = expectation(description: "")
-        let media = Media.audio(data: Data())
+        let media = Media.audio(data: Data(), type: .ogg)
         var response: JSON?
         
         VKStack.mock(
