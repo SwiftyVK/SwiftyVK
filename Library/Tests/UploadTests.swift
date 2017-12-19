@@ -1,5 +1,6 @@
 import Foundation
 import XCTest
+import CoreLocation
 @testable import SwiftyVK
 
 final class UploadTests: XCTestCase {
@@ -16,17 +17,17 @@ final class UploadTests: XCTestCase {
         
         VKStack.mock(
             VK.API.Photos.getWallUploadServer([.userId: "1"]),
-            fileName: "photos.getWallUploadServer.success"
+            fileName: "upload.getServer.success"
         )
         
         VKStack.mock(
-            Request(type: .upload(url: "https://test.vk.com", media: [media], partType: .photo)).toMethod(),
-            fileName: "photos.upload.toWall.success"
+            .upload(url: "https://test.vk.com", media: [media], partType: .photo),
+            fileName: "upload.photos.toWall.success"
         )
         
         VKStack.mock(
-            VK.API.Photos.saveWallPhoto([.userId: "1", .hash: "testHash", .server: "1234567890", .photo: "testPhoto"]),
-            fileName: "photos.saveWallPhoto.success"
+            VK.API.Photos.saveWallPhoto([.userId: "1", .hash: "testHash", .server: "999", .photo: "testPhoto"]),
+            fileName: "upload.save.success"
         )
         
         // When
@@ -40,7 +41,7 @@ final class UploadTests: XCTestCase {
         // Then
         waitForExpectations(timeout: 5)
         
-        XCTAssertEqual(response?.int("0,id"), 100)
+        XCTAssertTrue(response?.bool("result") ?? false)
     }
     
     func test_photo_toMain() {
@@ -51,17 +52,17 @@ final class UploadTests: XCTestCase {
         
         VKStack.mock(
             VK.API.Photos.getOwnerPhotoUploadServer([.ownerId: "1"]),
-            fileName: "photos.getOwnerPhotoUploadServer.success"
+            fileName: "upload.getServer.success"
         )
         
         VKStack.mock(
-            Request(type: .upload(url: "https://test.vk.com/page&_square_crop=10,20,30", media: [media], partType: .photo)).toMethod(),
-            fileName: "photos.uploadOwnerPhoto.success"
+            .upload(url: "https://test.vk.com&_square_crop=10,20,30", media: [media], partType: .photo),
+            fileName: "upload.photos.ownerPhoto.success"
         )
         
         VKStack.mock(
             VK.API.Photos.saveOwnerPhoto([.server: "999", .photo: "testPhoto", .hash: "testHash"]),
-            fileName: "photos.saveOwnerPhoto.success"
+            fileName: "upload.save.success"
         )
         
         // When
@@ -75,6 +76,61 @@ final class UploadTests: XCTestCase {
         // Then
         waitForExpectations(timeout: 5)
         
-        XCTAssertEqual(response?.int("0,id"), 100)
+        XCTAssertTrue(response?.bool("result") ?? false)
+    }
+    
+    func test_photo_toAlbum() {
+        // Given
+        let exp = expectation(description: "")
+        let media = Media.image(data: Data(), type: .jpg)
+        var response: JSON?
+        
+        VKStack.mock(
+            VK.API.Photos.getUploadServer([.albumId: "testAlbumId", .groupId: "1"]),
+            fileName: "upload.getServer.success"
+        )
+        
+        VKStack.mock(
+            .upload(
+                url: "https://test.vk.com",
+                media: [media],
+                partType: .indexedFile
+            ),
+            fileName: "upload.photos.toAlbum.success"
+        )
+        
+        VKStack.mock(
+            VK.API.Photos.save([
+                .groupId: "1",
+                .albumId: "testAlbumId",
+                .server: "999",
+                .photosList: "testPhotosList",
+                .hash: "testHash",
+                .aid: "888",
+                .latitude: "1.0",
+                .longitude: "2.0",
+                .caption: "testCaption"
+                ]),
+            fileName: "upload.save.success"
+        )
+        
+        // When
+        VK.API.Upload.Photo.toAlbum(
+            [media],
+            to: .group(id: "1"),
+            albumId: "testAlbumId",
+            caption: "testCaption",
+            location: CLLocationCoordinate2D(latitude: 1, longitude: 2)
+            )
+            .onSuccess {
+                response = try? JSON(data: $0)
+                exp.fulfill()
+            }
+            .send()
+        
+        // Then
+        waitForExpectations(timeout: 5)
+        
+        XCTAssertTrue(response?.bool("result") ?? false)
     }
 }

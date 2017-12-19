@@ -39,7 +39,7 @@ extension RequestType: Equatable, Hashable {
         case let .url(url):
             return url.hashValue
         case let .upload(url, media, partType):
-            return url.hashValue ^ Set(media).hashValue ^ partType.hashValue
+            return url.hashValue ^ partType.hashValue ^ Set(media).hashValue
         }
     }
 }
