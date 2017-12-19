@@ -1,0 +1,7 @@
+{
+    "server": 999,
+    "photo": "testPhoto",
+    "hash": "testHash",
+    "crop_data": "testCropData",
+    "crop_hash": "testCropHash"
+}
