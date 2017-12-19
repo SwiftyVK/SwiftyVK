@@ -275,6 +275,8 @@
 		D4B5B66E1FE971CE00282542 /* upload.photos.toMarket.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B66C1FE971CE00282542 /* upload.photos.toMarket.success.json */; };
 		D4B5B6701FE974E000282542 /* upload.audio.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B66F1FE974E000282542 /* upload.audio.success.json */; };
 		D4B5B6711FE974E000282542 /* upload.audio.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B66F1FE974E000282542 /* upload.audio.success.json */; };
+		D4B5B6761FE9782200282542 /* upload.document.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B6751FE9782200282542 /* upload.document.success.json */; };
+		D4B5B6771FE9782200282542 /* upload.document.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B6751FE9782200282542 /* upload.document.success.json */; };
 		D4B850331FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */; };
 		D4B850341FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */; };
 		D4B850381FB0DB8700EF02F0 /* ShareWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B850371FB0DB8700EF02F0 /* ShareWorkerTests.swift */; };
@@ -725,6 +727,7 @@
 		D4B5B6691FE9706400282542 /* upload.photos.toChatMain.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = upload.photos.toChatMain.success.json; sourceTree = "<group>"; };
 		D4B5B66C1FE971CE00282542 /* upload.photos.toMarket.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = upload.photos.toMarket.success.json; sourceTree = "<group>"; };
 		D4B5B66F1FE974E000282542 /* upload.audio.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = upload.audio.success.json; sourceTree = "<group>"; };
+		D4B5B6751FE9782200282542 /* upload.document.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = upload.document.success.json; sourceTree = "<group>"; };
 		D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronouslyTaskTests.swift; sourceTree = "<group>"; };
 		D4B850371FB0DB8700EF02F0 /* ShareWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareWorkerTests.swift; sourceTree = "<group>"; };
 		D4BBFDA51F9297A9009615E7 /* KeychainProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
@@ -1460,6 +1463,7 @@
 				D4B5B6691FE9706400282542 /* upload.photos.toChatMain.success.json */,
 				D4B5B66C1FE971CE00282542 /* upload.photos.toMarket.success.json */,
 				D4B5B66F1FE974E000282542 /* upload.audio.success.json */,
+				D4B5B6751FE9782200282542 /* upload.document.success.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1692,6 +1696,7 @@
 				D4AB8D9B1F6048EA0099FC42 /* longPoll.updates.json in Resources */,
 				D48518A81FB221CE00BD7186 /* upload.photos.saveWallPhoto.success.json in Resources */,
 				D44C80EE1F967F85004E3CF4 /* longPoll.failed.1.json in Resources */,
+				D4B5B6761FE9782200282542 /* upload.document.success.json in Resources */,
 				D4B5B6671FE9654700282542 /* upload.photos.toAlbum.success.json in Resources */,
 				D4040E2D1F62C12000025E24 /* longPoll.empty.json in Resources */,
 			);
@@ -1758,6 +1763,7 @@
 				D48518A91FB221CE00BD7186 /* upload.photos.saveWallPhoto.success.json in Resources */,
 				D46FB41B1F929DC6000CEAEB /* apiError.correct.json in Resources */,
 				D4B5B6681FE9654D00282542 /* upload.photos.toAlbum.success.json in Resources */,
+				D4B5B6771FE9782200282542 /* upload.document.success.json in Resources */,
 				D44C80EF1F967F86004E3CF4 /* longPoll.failed.1.json in Resources */,
 				D46FB4171F929DC6000CEAEB /* longPoll.getServer.success.json in Resources */,
 			);

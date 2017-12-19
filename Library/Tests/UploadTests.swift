@@ -365,4 +365,44 @@ final class UploadTests: XCTestCase {
         
         XCTAssertTrue(response?.bool("result") ?? false)
     }
+    
+    
+    func test_document() {
+        // Given
+        let exp = expectation(description: "")
+        let media = Media.document(data: Data(), type: "testType")
+        var response: JSON?
+        
+        VKStack.mock(
+            VK.API.Docs.getUploadServer([.groupId: "1"]),
+            fileName: "upload.getServer.success"
+        )
+        
+        VKStack.mock(
+            .upload(url: "https://test.vk.com", media: [media], partType: .file),
+            fileName: "upload.document.success"
+        )
+        
+        VKStack.mock(
+            VK.API.Docs.save([
+                .file: "testFile",
+                .title: "testTitle",
+                .tags: "testTags"
+                ]),
+            fileName: "upload.save.success"
+        )
+        
+        // When
+        VK.API.Upload.document(media, groupId: "1", title: "testTitle", tags: "testTags")
+            .onSuccess {
+                response = try? JSON(data: $0)
+                exp.fulfill()
+            }
+            .send()
+        
+        // Then
+        waitForExpectations(timeout: 5)
+        
+        XCTAssertTrue(response?.bool("result") ?? false)
+    }
 }
