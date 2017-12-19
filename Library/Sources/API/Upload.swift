@@ -142,7 +142,7 @@ extension APIScope {
                             .photo: response.forcedString("photo"),
                             .hash: response.forcedString("hash")
                             ])
-                }
+                    }
                 
                 return Methods.SuccessableFailableProgressableConfigurable(method.request)
             }
@@ -459,7 +459,7 @@ extension APIScope {
                     return APIScope.Docs.save([
                         .file: response.forcedString("file")
                         ])
-            }
+                }
             
             return Methods.SuccessableFailableProgressableConfigurable(method.request)
         }
