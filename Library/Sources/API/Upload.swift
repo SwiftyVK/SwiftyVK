@@ -195,9 +195,10 @@ extension APIScope {
             }
             
             /// Upload photo for using in messages.send method
-            public static func toMessage(_ media: Media) -> Methods.SuccessableFailableProgressableConfigurable {
+            public static func toMessage(_ media: Media, peerId: String? = nil
+                ) -> Methods.SuccessableFailableProgressableConfigurable {
                 
-                let method = APIScope.Photos.getMessagesUploadServer(.empty)
+                let method = APIScope.Photos.getMessagesUploadServer([.peerId: peerId])
                     .chain {
                         let response = try JSON(data: $0)
                         

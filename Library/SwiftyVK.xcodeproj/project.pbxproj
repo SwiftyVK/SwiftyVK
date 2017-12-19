@@ -269,6 +269,8 @@
 		D4B5B6531FE82CCF00282542 /* upload.save.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B6511FE82CCF00282542 /* upload.save.success.json */; };
 		D4B5B6671FE9654700282542 /* upload.photos.toAlbum.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B6601FE9624200282542 /* upload.photos.toAlbum.success.json */; };
 		D4B5B6681FE9654D00282542 /* upload.photos.toAlbum.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B6601FE9624200282542 /* upload.photos.toAlbum.success.json */; };
+		D4B5B66A1FE9706400282542 /* upload.photos.toChatMain.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B6691FE9706400282542 /* upload.photos.toChatMain.success.json */; };
+		D4B5B66B1FE9706400282542 /* upload.photos.toChatMain.success.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B5B6691FE9706400282542 /* upload.photos.toChatMain.success.json */; };
 		D4B850331FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */; };
 		D4B850341FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */; };
 		D4B850381FB0DB8700EF02F0 /* ShareWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B850371FB0DB8700EF02F0 /* ShareWorkerTests.swift */; };
@@ -716,6 +718,7 @@
 		D4B5B64E1FE82C4500282542 /* upload.photos.ownerPhoto.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = upload.photos.ownerPhoto.success.json; sourceTree = "<group>"; };
 		D4B5B6511FE82CCF00282542 /* upload.save.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = upload.save.success.json; sourceTree = "<group>"; };
 		D4B5B6601FE9624200282542 /* upload.photos.toAlbum.success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = upload.photos.toAlbum.success.json; sourceTree = "<group>"; };
+		D4B5B6691FE9706400282542 /* upload.photos.toChatMain.success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = upload.photos.toChatMain.success.json; sourceTree = "<group>"; };
 		D4B850321FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronouslyTaskTests.swift; sourceTree = "<group>"; };
 		D4B850371FB0DB8700EF02F0 /* ShareWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareWorkerTests.swift; sourceTree = "<group>"; };
 		D4BBFDA51F9297A9009615E7 /* KeychainProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
@@ -1448,6 +1451,7 @@
 				D4B5B6601FE9624200282542 /* upload.photos.toAlbum.success.json */,
 				D4B5B6461FE81DD800282542 /* upload.photos.toWall.success.json */,
 				D4B5B64E1FE82C4500282542 /* upload.photos.ownerPhoto.success.json */,
+				D4B5B6691FE9706400282542 /* upload.photos.toChatMain.success.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1664,6 +1668,7 @@
 				D4B5B6521FE82CCF00282542 /* upload.save.success.json in Resources */,
 				D4B5B64A1FE8210A00282542 /* upload.photos.toWall.success.json in Resources */,
 				D47601191F2E21E2005356E5 /* apiError.withoutCode.json in Resources */,
+				D4B5B66A1FE9706400282542 /* upload.photos.toChatMain.success.json in Resources */,
 				D4CA9B761F66CA890085E4F3 /* longPoll.getServer.success.json in Resources */,
 				D476011D1F2E22CA005356E5 /* empty.json in Resources */,
 				D40B451E1F979C80000221DE /* longPoll.failed.2.json in Resources */,
@@ -1727,6 +1732,7 @@
 				D4B5B6531FE82CCF00282542 /* upload.save.success.json in Resources */,
 				D46FB4191F929DC6000CEAEB /* longPoll.empty.json in Resources */,
 				D46FB4181F929DC6000CEAEB /* longPoll.updates.json in Resources */,
+				D4B5B66B1FE9706400282542 /* upload.photos.toChatMain.success.json in Resources */,
 				D46FB4131F929DC6000CEAEB /* empty.json in Resources */,
 				D40B451F1F979C80000221DE /* longPoll.failed.2.json in Resources */,
 				D46FB4151F929DC6000CEAEB /* apiError.withoutMessage.json in Resources */,
