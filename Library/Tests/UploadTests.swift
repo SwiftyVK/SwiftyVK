@@ -405,4 +405,48 @@ final class UploadTests: XCTestCase {
         
         XCTAssertTrue(response?.bool("result") ?? false)
     }
+    
+    func test_photo_toGroupCover() {
+        // Given
+        let exp = expectation(description: "")
+        let media = Media.image(data: Data(), type: .jpg)
+        var response: JSON?
+        
+        VKStack.mock(
+            VK.API.Photos.getOwnerCoverPhotoUploadServer([
+                .groupId: "1",
+                .cropX: "10",
+                .cropY: "20",
+                .cropX2: "30",
+                .cropY2: "40"
+                ]),
+            fileName: "upload.getServer.success"
+        )
+        
+        VKStack.mock(
+            .upload(url: "https://test.vk.com", media: [media], partType: .photo),
+            fileName: "upload.photos.toMarket.success"
+        )
+        
+        VKStack.mock(
+            VK.API.Photos.saveOwnerCoverPhoto([
+                .photo: "testPhoto",
+                .hash: "testHash",
+                ]),
+            fileName: "upload.save.success"
+        )
+        
+        // When
+        VK.API.Upload.Photo.toGroupCover(media, to: 1, crop: (x: "10", y: "20", x2: "30", y2: "40"))
+            .onSuccess {
+                response = try? JSON(data: $0)
+                exp.fulfill()
+            }
+            .send()
+        
+        // Then
+        waitForExpectations(timeout: 5)
+        
+        XCTAssertTrue(response?.bool("result") ?? false)
+    }
 }
