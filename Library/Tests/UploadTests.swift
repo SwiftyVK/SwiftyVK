@@ -133,4 +133,39 @@ final class UploadTests: XCTestCase {
         
         XCTAssertTrue(response?.bool("result") ?? false)
     }
+    
+    func test_photo_toMessage() {
+        // Given
+        let exp = expectation(description: "")
+        let media = Media.image(data: Data(), type: .jpg)
+        var response: JSON?
+        
+        VKStack.mock(
+            VK.API.Photos.getMessagesUploadServer([.peerId: "1"]),
+            fileName: "upload.getServer.success"
+        )
+        
+        VKStack.mock(
+            .upload(url: "https://test.vk.com", media: [media], partType: .photo),
+            fileName: "upload.photos.toWall.success"
+        )
+        
+        VKStack.mock(
+            VK.API.Photos.saveMessagesPhoto([.hash: "testHash", .server: "999", .photo: "testPhoto"]),
+            fileName: "upload.save.success"
+        )
+        
+        // When
+        VK.API.Upload.Photo.toMessage(media, peerId: "1")
+            .onSuccess {
+                response = try? JSON(data: $0)
+                exp.fulfill()
+            }
+            .send()
+        
+        // Then
+        waitForExpectations(timeout: 5)
+        
+        XCTAssertTrue(response?.bool("result") ?? false)
+    }
 }
