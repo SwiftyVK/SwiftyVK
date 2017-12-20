@@ -25,8 +25,8 @@ extension RequestType: Equatable, Hashable {
             return firstMethod == secondMethod && firstParameters == secondParameters
         case let (.url(firstUrl), .url(secondUrl)):
             return firstUrl == secondUrl
-        case let (.upload(firstUrl, firstMedia, _), .upload(secondUrl, secondMedia, _)):
-            return firstUrl == secondUrl && firstMedia == secondMedia
+        case let (.upload(firstUrl, firstMedia, firstPartType), .upload(secondUrl, secondMedia, secondPartType)):
+            return firstUrl == secondUrl && firstMedia == secondMedia && firstPartType == secondPartType
         default:
             return false
         }
@@ -35,11 +35,18 @@ extension RequestType: Equatable, Hashable {
     public var hashValue: Int {
         switch self {
         case let .api(method, parameters):
-            return method.hashValue ^ parameters.reduce(0) { $0 ^ $1.key.hashValue ^ $1.value.hashValue }
+            return method.hashValue ^ Set(parameters.map { $0.key + $0.value }).hashValue
         case let .url(url):
             return url.hashValue
-        case let .upload(url, media, _):
-            return url.hashValue ^ media.reduce(0) { $0 ^ $1.data.hashValue }
+        case let .upload(url, media, partType):
+            return url.hashValue ^ partType.hashValue ^ Set(media).hashValue
         }
+    }
+}
+
+extension Media: Hashable {
+    
+    public var hashValue: Int {
+       return type.hashValue ^ data.hashValue
     }
 }

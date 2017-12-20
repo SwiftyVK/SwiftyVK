@@ -66,7 +66,7 @@ final class AttemptApiQueue: OperationQueue {
         
         guard oldSended > 0 else { return }
         
-        while !waited.isEmpty {
+        while sended < limit.count && !waited.isEmpty {
             sended += 1
             let op = waited.removeFirst()
             super.addOperation(op)

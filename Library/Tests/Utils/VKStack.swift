@@ -3,6 +3,11 @@
 final class VKStack {
     static let delegate = SwiftyVKDelegateMock()
     private static var mocks = [Request: MockResult]()
+   
+    static func mock(_ requestType: RequestType, fileName: String, file: StaticString = #file, line: UInt = #line) {
+        guard let data = JsonReader.read(fileName, file: file, line: line) else { return }
+        mock(Request(type: requestType).toMethod(), result: .result(.data(data)))
+    }
     
     static func mock(_ method: SendableMethod, fileName: String, file: StaticString = #file, line: UInt = #line) {
         guard let data = JsonReader.read(fileName, file: file, line: line) else { return }

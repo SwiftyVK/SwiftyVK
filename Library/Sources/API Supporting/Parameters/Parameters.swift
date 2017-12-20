@@ -136,6 +136,8 @@ public enum Parameter: String, Hashable {
     case chatId = "chat_id"
     case cropX = "crop_x"
     case cropY = "crop_y"
+    case cropX2 = "crop_x2"
+    case cropY2 = "crop_y2"
     case cropWidth = "crop_width"
     case server
     case hash

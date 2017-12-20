@@ -4,7 +4,7 @@ import Foundation
 /// Used for MIME type generation
 public enum Media: CustomStringConvertible {
     case image(data: Data, type: ImageType)
-    case audio(data: Data)
+    case audio(data: Data, type: AudioType)
     case video(data: Data)
     case document(data: Data, type: String)
     
@@ -14,8 +14,8 @@ public enum Media: CustomStringConvertible {
             return type.rawValue
         case .document(_, let type):
             return type
-        case .audio:
-            return "mp3"
+        case .audio(_, let type):
+            return type.rawValue
         case .video:
             return "video"
         }
@@ -27,7 +27,7 @@ public enum Media: CustomStringConvertible {
             return data
         case .document(let data, _):
             return data
-        case .audio(let data):
+        case .audio(let data, _):
             return data
         case .video(let data):
             return data
@@ -46,4 +46,9 @@ public enum ImageType: String {
     case png
     case bmp
     case gif
+}
+
+public enum AudioType: String {
+    case mp3
+    case ogg
 }

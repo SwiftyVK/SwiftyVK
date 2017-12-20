@@ -30,6 +30,8 @@ public struct Config {
         return _handleErrors ?? sessionConfig?.handleErrors ?? true
     }
     
+    var callbacksQueue: DispatchQueue
+    
     private(set) var handleProgress: Bool = false
     
     private var _apiVersion: String?
@@ -60,7 +62,8 @@ public struct Config {
         language: Language? = nil,
         attemptsMaxLimit: AttemptLimit? = nil,
         attemptTimeout: TimeInterval? = nil,
-        handleErrors: Bool? = nil
+        handleErrors: Bool? = nil,
+        callbacksQueue: DispatchQueue = .global()
         ) {
         self.httpMethod = httpMethod
         _apiVersion = apiVersion
@@ -68,6 +71,7 @@ public struct Config {
         _attemptsMaxLimit = attemptsMaxLimit
         _attemptTimeout = attemptTimeout
         _handleErrors = handleErrors
+        self.callbacksQueue = callbacksQueue
     }
     
     mutating func inject(sessionConfig: SessionConfig) {
@@ -81,7 +85,8 @@ public struct Config {
             language: other._language ?? _language,
             attemptsMaxLimit: other._attemptsMaxLimit ?? _attemptsMaxLimit,
             attemptTimeout: other._attemptTimeout ?? _attemptTimeout,
-            handleErrors: other._handleErrors ?? _handleErrors
+            handleErrors: other._handleErrors ?? _handleErrors,
+            callbacksQueue: other.callbacksQueue
         )
         
         newConfig.handleProgress = other.handleProgress
