@@ -38,7 +38,7 @@ final class AttemptImpl: Operation, Attempt {
                 
                 guard let strongSelf = self, !strongSelf.isCancelled else { return }
 
-                if let error = error {
+                if let error = error as NSError?, error.code != NSURLErrorCancelled {
                     strongSelf.callbacks.onFinish(.error(.urlRequestError(error)))
                 }
                 else if let data = data {
