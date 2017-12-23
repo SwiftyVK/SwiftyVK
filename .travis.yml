@@ -15,6 +15,7 @@ jobs:
         - travis_retry xcodebuild -workspace SwiftyVK.xcworkspace -scheme SwiftyVK_iOS -destination "platform=iOS Simulator,name=iPhone 7 Plus" -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" test | xcpretty -f `xcpretty-travis-formatter`
       after_success:
         - bash <(curl -s https://codecov.io/bash)
+        - npm install -g codeclimate-test-reporter
         - codeclimate-test-reporter
 # ==============================================================================
     - stage: test
@@ -23,6 +24,7 @@ jobs:
         - travis_retry xcodebuild -workspace SwiftyVK.xcworkspace -scheme SwiftyVK_macOS -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_TESTABILITY=YES test | xcpretty -f `xcpretty-travis-formatter`
       after_success:
         - bash <(curl -s https://codecov.io/bash)
+        - npm install -g codeclimate-test-reporter
         - codeclimate-test-reporter
 # ==============================================================================
     - stage: deploy
