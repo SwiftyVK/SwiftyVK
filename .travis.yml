@@ -3,10 +3,6 @@ os: osx
 osx_image: xcode9
 xcode_sdk: iphonesimulator10.2
 
-branches:
-  only:
-    - master
-
 before_script:
   - set -o pipefail
 
@@ -30,10 +26,8 @@ jobs:
     - stage: GitHub Release
       deploy:
         provider: releases
-        api_key:
-          secure: $GH_TOKEN
+        api_key: $GH_TOKEN
         on:
-          repo: SwiftyVK/SwiftyVK
           tags: true
         skip_cleanup: true
         script:
@@ -48,7 +42,6 @@ jobs:
       deploy:
         provider: script
         on:
-          repo: SwiftyVK/SwiftyVK
           tags: true
         skip_cleanup: true
         script:
