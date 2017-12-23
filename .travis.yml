@@ -10,6 +10,7 @@ jobs:
   include:
 # ==============================================================================
     - stage: test
+      name: iOS Tests
       env: JOB=iOS Tests
       script:
         - travis_retry xcodebuild -workspace SwiftyVK.xcworkspace -scheme SwiftyVK_iOS -destination "platform=iOS Simulator,name=iPhone 7 Plus" -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" test | xcpretty -f `xcpretty-travis-formatter`
@@ -19,6 +20,7 @@ jobs:
         - codeclimate-test-reporter
 # ==============================================================================
     - stage: test
+      name: macOS Tests
       env: JOB=macOS Tests
       script:
         - travis_retry xcodebuild -workspace SwiftyVK.xcworkspace -scheme SwiftyVK_macOS -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_TESTABILITY=YES test | xcpretty -f `xcpretty-travis-formatter`
@@ -28,7 +30,9 @@ jobs:
         - codeclimate-test-reporter
 # ==============================================================================
     - stage: deploy
+      name: Carthage deploy
       env: JOB=Carthage
+      if: tag IS present
       before_deploy:
         - carthage build --no-skip-current --platform mac, ios
         - carthage archive SwiftyVK
@@ -41,7 +45,9 @@ jobs:
         file: SwiftyVK.framework.zip
 # ==============================================================================
     - stage: deploy
+      name: CocoaPods deploy
       env: JOB=CocoaPods
+      if: tag IS present
       deploy:
         provider: script
         script: pod trunk push
