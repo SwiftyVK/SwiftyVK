@@ -9,42 +9,42 @@ before_script:
 jobs:
   include:
 
-    - stage: test
-      env: JOB=iOS Tests
-      script:
-        - travis_retry xcodebuild -workspace SwiftyVK.xcworkspace -scheme SwiftyVK_iOS -destination "platform=iOS Simulator,name=iPhone 7 Plus" -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" test | xcpretty -f `xcpretty-travis-formatter`
-      after_success:
-        - bash <(curl -s https://codecov.io/bash)
-
-    - stage: test
-      env: JOB=macOS Tests
-      script:
-        - travis_retry xcodebuild -workspace SwiftyVK.xcworkspace -scheme SwiftyVK_macOS -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_TESTABILITY=YES test | xcpretty -f `xcpretty-travis-formatter`
-      after_success:
-        - bash <(curl -s https://codecov.io/bash)
+    # - stage: test
+    #   env: JOB=iOS Tests
+    #   script:
+    #     - travis_retry xcodebuild -workspace SwiftyVK.xcworkspace -scheme SwiftyVK_iOS -destination "platform=iOS Simulator,name=iPhone 7 Plus" -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" test | xcpretty -f `xcpretty-travis-formatter`
+    #   after_success:
+    #     - bash <(curl -s https://codecov.io/bash)
+    #
+    # - stage: test
+    #   env: JOB=macOS Tests
+    #   script:
+    #     - travis_retry xcodebuild -workspace SwiftyVK.xcworkspace -scheme SwiftyVK_macOS -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_TESTABILITY=YES test | xcpretty -f `xcpretty-travis-formatter`
+    #   after_success:
+    #     - bash <(curl -s https://codecov.io/bash)
 
     - stage: GitHub Release
+      before_deploy:
+        # - brew update
+        # - brew outdated carthage || brew upgrade carthage
+        # - carthage version
+        - carthage build --no-skip-current --platform mac, ios
+        - carthage archive SwiftyVK
       deploy:
         provider: releases
         api_key: $GH_TOKEN
         on:
           tags: true
         skip_cleanup: true
-        script:
-          - brew update
-          - brew outdated carthage || brew upgrade carthage
-          - carthage version
-          - carthage build --no-skip-current --platform mac, ios
-          - carthage archive SwiftyVK
         file: SwiftyVK.framework.zip
 
-    - stage: CocoaPods Release
-      deploy:
-        provider: script
-        on:
-          tags: true
-        skip_cleanup: true
-        script:
-          - source ~/.rvm/scripts/rvm
-          - rvm use default
-          - pod trunk push
+    # - stage: CocoaPods Release
+    #   deploy:
+    #     provider: script
+    #     on:
+    #       tags: true
+    #     skip_cleanup: true
+    #     script:
+    #       - source ~/.rvm/scripts/rvm
+    #       - rvm use default
+    #       - pod trunk push
