@@ -22,10 +22,10 @@
 		A2527E871BD13A5300F65412 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2527E851BD13A5300F65412 /* LaunchScreen.storyboard */; };
 		A2527EBD1BD13F7E00F65412 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527EBC1BD13F7E00F65412 /* APIWorker.swift */; };
 		A2527EBE1BD13F7E00F65412 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527EBC1BD13F7E00F65412 /* APIWorker.swift */; };
+		D4586DB71FEE7FC10094667B /* testImage.png in Resources */ = {isa = PBXBuildFile; fileRef = D4586DB61FEE7FC10094667B /* testImage.png */; };
+		D4586DB81FEE7FC10094667B /* testImage.png in Resources */ = {isa = PBXBuildFile; fileRef = D4586DB61FEE7FC10094667B /* testImage.png */; };
 		D4BBF0351F9D10CC00AC425C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D47E1CD41F92B3F5002BB2AC /* Assets.xcassets */; };
 		D4BBF0361F9D10CC00AC425C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D47E1CD41F92B3F5002BB2AC /* Assets.xcassets */; };
-		D4DADDFB1F9F937E004F159E /* testImage.png in Resources */ = {isa = PBXBuildFile; fileRef = D4DADDF31F9F92A2004F159E /* testImage.png */; };
-		D4DADDFC1F9F937E004F159E /* testImage.png in Resources */ = {isa = PBXBuildFile; fileRef = D4DADDF31F9F92A2004F159E /* testImage.png */; };
 		D4DADDFE1F9F93D9004F159E /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DADDFD1F9F93D9004F159E /* SwiftyJSON.swift */; };
 		D4DADDFF1F9F93D9004F159E /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DADDFD1F9F93D9004F159E /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
@@ -152,8 +152,8 @@
 		A2527EBC1BD13F7E00F65412 /* APIWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = APIWorker.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A2EB6F3C1BD186F9008E7D86 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		A2EB6F3D1BD186F9008E7D86 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D4586DB61FEE7FC10094667B /* testImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = testImage.png; path = Example/testImage.png; sourceTree = "<group>"; };
 		D47E1CD41F92B3F5002BB2AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Example/Assets.xcassets; sourceTree = "<group>"; };
-		D4DADDF31F9F92A2004F159E /* testImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testImage.png; sourceTree = "<group>"; };
 		D4DADDFD1F9F93D9004F159E /* SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,7 +193,7 @@
 		A25221041BD17B450047C638 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D4DADDF31F9F92A2004F159E /* testImage.png */,
+				D4586DB61FEE7FC10094667B /* testImage.png */,
 				D47E1CD41F92B3F5002BB2AC /* Assets.xcassets */,
 				A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */,
 				A2527E6A1BD13A3B00F65412 /* OSX */,
@@ -397,7 +397,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4DADDFB1F9F937E004F159E /* testImage.png in Resources */,
+				D4586DB71FEE7FC10094667B /* testImage.png in Resources */,
 				D4BBF0351F9D10CC00AC425C /* Assets.xcassets in Resources */,
 				A204446C1EE2DFE700612E57 /* Main.storyboard in Resources */,
 			);
@@ -410,7 +410,7 @@
 				A2527E871BD13A5300F65412 /* LaunchScreen.storyboard in Resources */,
 				D4BBF0361F9D10CC00AC425C /* Assets.xcassets in Resources */,
 				A2527E821BD13A5300F65412 /* Main.storyboard in Resources */,
-				D4DADDFC1F9F937E004F159E /* testImage.png in Resources */,
+				D4586DB81FEE7FC10094667B /* testImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
