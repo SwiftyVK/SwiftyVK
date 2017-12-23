@@ -16,6 +16,11 @@
     <a href="https://github.com/Carthage/Carthage">
     <img src="https://img.shields.io/badge/Carthage-supported-brightgreen.svg" alt="Carthage compatible">
   </a>
+    <a href="./LICENSE.txt">
+    <img src="https://img.shields.io/badge/license-MIT-lightgrey.svg" alt="License">
+  </a>
+</p>
+<p align="center">
     <a href="https://travis-ci.org/SwiftyVK/SwiftyVK">
     <img src="https://travis-ci.org/SwiftyVK/SwiftyVK.svg?branch=master" alt="Build status">
   </a>
@@ -23,10 +28,7 @@
     <img src="https://codecov.io/gh/SwiftyVK/SwiftyVK/branch/master/graph/badge.svg" alt="Codecov" />
   </a>
     <a href="https://codebeat.co/projects/github-com-swiftyvk-swiftyvk">
-    <img src="https://codebeat.co/badges/e9f1cca3-b81d-4c6d-9129-50205465cb8a" alt="codebeat badge" >
-  </a>
-    <a href="./LICENSE.txt">
-    <img src="https://img.shields.io/badge/license-MIT-lightgrey.svg" alt="License">
+    <img src="https://codebeat.co/badges/e9f1cca3-b81d-4c6d-9129-50205465cb8a" alt="Codebeat" >
   </a>
 </p>
 
