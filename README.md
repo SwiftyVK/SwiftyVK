@@ -27,7 +27,7 @@
     <a href="https://codecov.io/gh/SwiftyVK/SwiftyVK">
     <img src="https://codecov.io/gh/SwiftyVK/SwiftyVK/branch/master/graph/badge.svg" alt="Codecov" />
   </a>
-    <a href="https://codebeat.co/projects/github-com-swiftyvk-swiftyvk">
+    <a href="https://codebeat.co/projects/github-com-swiftyvk-swiftyvk-master">
     <img src="https://codebeat.co/badges/e9f1cca3-b81d-4c6d-9129-50205465cb8a" alt="Codebeat" >
   </a>
 </p>
