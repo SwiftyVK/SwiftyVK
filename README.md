@@ -37,9 +37,9 @@
 ## Table of contents
 * [Requirements](#requirements)
 * [Integration](#integration)
-  - [Manually](#manually)
+  - [Carthage (recomended)](#carthage-recomended)
   - [CocoaPods](#cocoapods)
-  - [Carthage](#carthage)
+  - [Manually](#manually)
 * [Getting started](#getting-started)
   - [Implement SwiftyVKDelegate](#implement-swiftyvkdelegate)
   - [Setting up VK application](#setting-up-vk-application)
@@ -76,9 +76,10 @@
 
 ## **Integration**
 
-### Manually
-  1. Just drag **SwiftyVK.framework** or include the whole **SwiftyVK.xcodeproj** into project
-  2. Link **SwiftyVK.framework** with application in **Your target preferences -> General -> Embedded binaries**
+### [Carthage](https://github.com/Carthage/Carthage) (recomended)
+```
+github "SwiftyVK/SwiftyVK"
+```
 
 ### [CocoaPods](https://github.com/CocoaPods/CocoaPods)
 ```ruby
@@ -89,10 +90,9 @@ target '$MySuperApp$' do
 end
 ```
 
-### [Carthage](https://github.com/Carthage/Carthage)
-```
-github "SwiftyVK/SwiftyVK"
-```
+### Manually
+  1. Just drag **SwiftyVK.framework** or include the whole **SwiftyVK.xcodeproj** into project
+  2. Link **SwiftyVK.framework** with application in **Your target preferences -> General -> Embedded binaries**
 
 ## **Getting started**
 ### Implement SwiftyVKDelegate
