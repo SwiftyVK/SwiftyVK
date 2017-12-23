@@ -1,20 +1,14 @@
 [![SwiftyVK](./SwiftyVK_logo.png)](./)
 
 <p align="center">
+    <a href="http://cocoadocs.org/docsets/SwiftyVK">
+    <img src="https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat" alt="Platform">
+  </a>
   <a href="https://developer.apple.com/swift/">
     <img src="https://img.shields.io/badge/Swift-4.0.0-orange.svg?style=flat" alt="Swift">
   </a>
-  <a href="https://vk.com/dev/versions">
+    <a href="https://vk.com/dev/versions">
     <img src="https://img.shields.io/badge/VK_API-5.69-blue.svg?style=flat" alt="VK API">
-  </a>
-  <a href="http://cocoadocs.org/docsets/SwiftyVK">
-    <img src="https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat" alt="Platform">
-  </a>
-    <a href="https://travis-ci.org/SwiftyVK/SwiftyVK">
-    <img src="https://travis-ci.org/SwiftyVK/SwiftyVK.svg?branch=master" alt="Build status">
-  </a>
-    <a href="https://codecov.io/gh/SwiftyVK/SwiftyVK">
-    <img src="https://codecov.io/gh/SwiftyVK/SwiftyVK/branch/master/graph/badge.svg" alt="Codecov" />
   </a>
     <a href="https://cocoapods.org/pods/SwiftyVK">
     <img src="https://img.shields.io/cocoapods/v/SwiftyVK.svg?style=flat" alt="Cocoapods compatible">
@@ -24,6 +18,17 @@
   </a>
     <a href="./LICENSE.txt">
     <img src="https://img.shields.io/badge/license-MIT-lightgrey.svg" alt="License">
+  </a>
+</p>
+<p align="center">
+    <a href="https://travis-ci.org/SwiftyVK/SwiftyVK">
+    <img src="https://travis-ci.org/SwiftyVK/SwiftyVK.svg?branch=master" alt="Build status">
+  </a>
+    <a href="https://codecov.io/gh/SwiftyVK/SwiftyVK">
+    <img src="https://codecov.io/gh/SwiftyVK/SwiftyVK/branch/master/graph/badge.svg" alt="Codecov" />
+  </a>
+    <a href="https://codebeat.co/projects/github-com-swiftyvk-swiftyvk">
+    <img src="https://codebeat.co/badges/e9f1cca3-b81d-4c6d-9129-50205465cb8a" alt="Codebeat" >
   </a>
 </p>
 
