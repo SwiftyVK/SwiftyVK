@@ -401,7 +401,14 @@ VK.API.Upload.Photo.toWall(media, to: .user(id: "4680178"))
     .onProgress {
         // This callback available only for uploading requests
         // Use it to handle uploading status and show it to user
-    }
+        
+        switch $0 {
+            case let .sent(current, of):
+                print("sent", current, "of": of)
+            case let .recieve(current, of):
+                print("recieve", current, "of": of)
+        }
+    } 
     .send()
 ```
 
