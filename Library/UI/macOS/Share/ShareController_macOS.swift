@@ -1,5 +1,6 @@
 import Cocoa
 
+@available(iOS 8.0, macOS 10.11, *)
 final class ShareControllerMacOS: NSViewController, ShareController, NSTextViewDelegate {
     @IBOutlet private weak var textViewContainer: NSView?
     @IBOutlet private weak var textViewHeightConstraint: NSLayoutConstraint?

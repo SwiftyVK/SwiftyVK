@@ -482,6 +482,7 @@ VK.sessions.default.share(
 ```
 
 ***Images and link are optional, text is required***
+***Sharing not available on macOS 10.10. If you want to use it, please make pull request to this repo.***
 
 ## **FAQ**
 
