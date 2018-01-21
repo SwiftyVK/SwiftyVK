@@ -142,7 +142,8 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
             }
         }
     }
-    
+   
+    @discardableResult
     func logIn(revoke: Bool) throws -> [String: String] {
         try throwIfDestroyed()
         try throwIfAuthorized()
@@ -270,6 +271,11 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     func shedule(attempt: Attempt, concurrent: Bool) throws {
         try gateQueue.sync {
             try throwIfDestroyed()
+            
+            if token?.isValid == false {
+                try logIn(revoke: false)
+            }
+            
             attemptSheduler.shedule(attempt: attempt, concurrent: concurrent)
         }
     }
