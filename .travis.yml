@@ -3,55 +3,45 @@ os: osx
 osx_image: xcode9
 xcode_sdk: iphonesimulator10.2
 
-branches:
-  only:
-    - master
-
 before_script:
   - set -o pipefail
 
 jobs:
   include:
-
+# ==============================================================================
     - stage: test
+      if: NOT (tag IS present)
       env: JOB=iOS Tests
       script:
         - travis_retry xcodebuild -workspace SwiftyVK.xcworkspace -scheme SwiftyVK_iOS -destination "platform=iOS Simulator,name=iPhone 7 Plus" -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" test | xcpretty -f `xcpretty-travis-formatter`
       after_success:
         - bash <(curl -s https://codecov.io/bash)
-
+# ==============================================================================
     - stage: test
+      if: NOT (tag IS present)
       env: JOB=macOS Tests
       script:
         - travis_retry xcodebuild -workspace SwiftyVK.xcworkspace -scheme SwiftyVK_macOS -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_TESTABILITY=YES test | xcpretty -f `xcpretty-travis-formatter`
       after_success:
         - bash <(curl -s https://codecov.io/bash)
-
-    - stage: GitHub Release
+# ==============================================================================
+    - stage: deploy
+      if: tag IS present
+      env: JOB=Carthage
+      before_deploy:
+        - carthage build --no-skip-current --platform mac, ios
+        - carthage archive SwiftyVK
       deploy:
         provider: releases
-        api_key:
-          secure: $GH_TOKEN
-        on:
-          repo: SwiftyVK/SwiftyVK
-          tags: true
+        api_key: $GH_TOKEN
         skip_cleanup: true
-        script:
-          - brew update
-          - brew outdated carthage || brew upgrade carthage
-          - carthage version
-          - carthage build --no-skip-current --platform mac, ios
-          - carthage archive SwiftyVK
         file: SwiftyVK.framework.zip
-
-    - stage: CocoaPods Release
+# ==============================================================================
+    - stage: deploy
+      if: tag IS present
+      env: JOB=CocoaPods
       deploy:
         provider: script
-        on:
-          repo: SwiftyVK/SwiftyVK
-          tags: true
+        script: pod trunk push
         skip_cleanup: true
-        script:
-          - source ~/.rvm/scripts/rvm
-          - rvm use default
-          - pod trunk push
+# ==============================================================================

@@ -4,7 +4,7 @@ codecov:
 coverage:
   precision: 2
   round: up
-  range: "90...100"
+  range: "75...100"
 
   ignore:
     - "Example/.*"
