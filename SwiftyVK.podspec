@@ -16,4 +16,5 @@ Pod::Spec.new do |s|
   s.osx.source_files        = "Library/UI/macOS"
   s.ios.resources           = "Library/Resources/Bundles/SwiftyVK_resources_iOS.bundle"
   s.osx.resources           = "Library/Resources/Bundles/SwiftyVK_resources_macOS.bundle"
+  s.static_framework        = true
 end
