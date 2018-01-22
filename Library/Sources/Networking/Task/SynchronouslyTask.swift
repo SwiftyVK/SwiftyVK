@@ -1,3 +1,5 @@
+import Foundation
+
 public final class SynchronouslyTask: Task {
     private var request: Request
     private var task: Task?

@@ -1,3 +1,5 @@
+import Foundation
+
 /// Protocol constraint which allows send request
 public protocol SendableMethod {
     /// For internal using only

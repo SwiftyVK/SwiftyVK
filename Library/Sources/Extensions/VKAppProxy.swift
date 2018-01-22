@@ -1,3 +1,5 @@
+import Foundation
+
 protocol VKAppProxy: class {
     func send(query: String) throws -> Bool
     func handle(url: URL, app: String?) -> String?

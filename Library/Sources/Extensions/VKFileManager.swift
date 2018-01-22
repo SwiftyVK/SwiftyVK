@@ -1,3 +1,5 @@
+import Foundation
+
 protocol VKFileManager {
     func url(
         for directory: FileManager.SearchPathDirectory,

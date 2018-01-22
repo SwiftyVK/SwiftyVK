@@ -1,3 +1,5 @@
+import Foundation
+
 protocol TaskSheduler: class {
     func shedule(task: Task)
 }

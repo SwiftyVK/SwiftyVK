@@ -1,3 +1,5 @@
+import Foundation
+
 protocol ShareWorker: class {
     func upload(images: [ShareImage], in session: Session)
     func getPrefrences(in session: Session) throws -> [ShareContextPreference]

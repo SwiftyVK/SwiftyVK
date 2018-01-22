@@ -1,3 +1,5 @@
+import Foundation
+
 public struct RequestCallbacks {
     /// Clousure (Data) throws -> ()
     public typealias Success = (Data) throws -> ()

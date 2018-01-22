@@ -1,3 +1,5 @@
+import Foundation
+
 typealias Captcha = (sid: String, key: String)
 
 protocol QueryBuilder {

@@ -1,3 +1,5 @@
+import Foundation
+
 protocol IDGenerator {
     func next() -> Int64
 }

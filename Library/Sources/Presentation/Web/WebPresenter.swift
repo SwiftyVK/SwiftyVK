@@ -1,3 +1,5 @@
+import Foundation
+
 protocol WebPresenter: class {
     func presentWith(urlRequest: URLRequest) throws -> String
     func dismiss()

@@ -1,3 +1,5 @@
+import Foundation
+
 /// VK user session
 public protocol Session: class {
     /// Internal SwiftyVK session identifier

@@ -1,3 +1,5 @@
+import Foundation
+
 protocol CookiesHolder {
     func replace(for session: String, url: URL)
     func restore(for url: URL)

@@ -1,3 +1,5 @@
+import Foundation
+
 extension String {
     
     static func random(_ length: Int) -> String {

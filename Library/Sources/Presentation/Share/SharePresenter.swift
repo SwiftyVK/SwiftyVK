@@ -1,3 +1,5 @@
+import Foundation
+
 protocol SharePresenter {
     func share(_ context: ShareContext, in session: Session) throws -> Data
 }

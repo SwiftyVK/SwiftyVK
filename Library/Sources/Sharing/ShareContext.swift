@@ -1,3 +1,5 @@
+import Foundation
+
 public struct ShareContext: Equatable {
     
     var message: String?
