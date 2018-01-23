@@ -1,5 +1,14 @@
 # Change Log
 
+## [3.1.3](https://github.com/SwiftyVK/SwiftyVK/releases/tag/3.1.3) (2018-01-23)
+[Full Changelog](https://github.com/SwiftyVK/SwiftyVK/compare/3.1.2...3.1.3)
+
+[Core] Update invalid token before request will be sent, close #121
+
+[macOS] Decrease macOS development target back to 10.10, close #123
+
+[Cocoapods] Support for building as a static library
+
 ## [3.1.2](https://github.com/SwiftyVK/SwiftyVK/tree/3.1.2) (2017-12-23)
 [Full Changelog](https://github.com/SwiftyVK/SwiftyVK/compare/3.1.1...3.1.2)
 
