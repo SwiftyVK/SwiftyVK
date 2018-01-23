@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.version                 = "3.1.2"
+  s.version                 = "3.1.3"
   s.name                    = "SwiftyVK"
   s.summary                 = "Easy and powerful way to interact with VK API for iOS and macOS"
   s.homepage                = "https://github.com/SwiftyVK/SwiftyVK"
@@ -16,4 +16,5 @@ Pod::Spec.new do |s|
   s.osx.source_files        = "Library/UI/macOS"
   s.ios.resources           = "Library/Resources/Bundles/SwiftyVK_resources_iOS.bundle"
   s.osx.resources           = "Library/Resources/Bundles/SwiftyVK_resources_macOS.bundle"
+  s.static_framework        = true
 end

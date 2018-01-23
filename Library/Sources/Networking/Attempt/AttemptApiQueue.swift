@@ -1,3 +1,5 @@
+import Foundation
+
 final class AttemptApiQueue: OperationQueue {
     
     var limit: AttemptLimit

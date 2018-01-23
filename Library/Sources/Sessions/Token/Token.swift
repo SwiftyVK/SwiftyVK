@@ -1,3 +1,5 @@
+import Foundation
+
 protocol Token: class, NSCoding {
     var info: [String: String] { get }
     var isValid: Bool { get }

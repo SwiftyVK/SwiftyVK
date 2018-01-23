@@ -1,3 +1,5 @@
+import Foundation
+
 protocol CookiesStorage: class {
     func save(_: [HTTPCookie], for sessionId: String) throws
     func getFor(sessionId: String) -> [HTTPCookie]?

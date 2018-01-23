@@ -1,3 +1,5 @@
+import Foundation
+
 protocol Dependencies:
     DependenciesHolder,
     SessionMaker,

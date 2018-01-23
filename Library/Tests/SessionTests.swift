@@ -23,6 +23,29 @@ final class SessionTests: XCTestCase {
         XCTAssertEqual(context.attemptSheduler.sheduleCallCount, 1)
     }
     
+    func test_sheduleAttempt_updateToken_whenExistedNotValid() throws {
+        // Given
+        let authExp = expectation(description: "")
+        let context = makeContext()
+        let attempt = AttemptMock()
+        
+        context.authorizator.onAuthorize = { _, _, revoke in
+            let token = TokenMock(token: "", valid: !revoke)
+            
+            if !revoke {
+                authExp.fulfill()
+            }
+            
+            return token
+        }
+
+        // When
+        try context.session.logIn(revoke: true)
+        try context.session.shedule(attempt: attempt, concurrent: true)
+        // Then
+        waitForExpectations(timeout: 1)
+    }
+    
     func test_sendTask_once() {
         // Given
         let context = makeContext()
@@ -505,7 +528,7 @@ final class SessionTests: XCTestCase {
             shareContext,
             onSuccess: { _ in },
             onError: { _ in }
-        )
+            )
         // Then
         waitForExpectations(timeout: 5)
         XCTAssertEqual(shareCallCount, 1)
@@ -529,7 +552,7 @@ final class SessionTests: XCTestCase {
                 // Then
                 XCTAssertEqual($0, VKError.cantParseTokenInfo(""))
                 exp.fulfill()
-        }
+            }
         )
         
         waitForExpectations(timeout: 5)
@@ -552,8 +575,8 @@ final class SessionTests: XCTestCase {
             onSuccess: { _ in },
             onError: { _ in }
         )
-        // Then
     }
+    
     private func syncLogIn(
         session: Session,
         onSuccess: @escaping ([String : String]) -> (),
@@ -565,11 +588,11 @@ final class SessionTests: XCTestCase {
             onSuccess: { info in
                 onSuccess(info)
                 exp.fulfill()
-        },
+            },
             onError: { error in
                 onError(error)
                 exp.fulfill()
-        }
+            }
         )
         
         waitForExpectations(timeout: 10)

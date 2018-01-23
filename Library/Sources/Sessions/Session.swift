@@ -1,3 +1,5 @@
+import Foundation
+
 /// VK user session
 public protocol Session: class {
     /// Internal SwiftyVK session identifier
@@ -28,6 +30,7 @@ public protocol Session: class {
     func send(method: SendableMethod) -> Task
     
     /// Show share dialog
+    @available(iOS 8.0, macOS 10.11, *)
     func share(
         _ context: ShareContext,
         onSuccess: @escaping RequestCallbacks.Success,
@@ -142,7 +145,8 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
             }
         }
     }
-    
+   
+    @discardableResult
     func logIn(revoke: Bool) throws -> [String: String] {
         try throwIfDestroyed()
         try throwIfAuthorized()
@@ -270,6 +274,11 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     func shedule(attempt: Attempt, concurrent: Bool) throws {
         try gateQueue.sync {
             try throwIfDestroyed()
+            
+            if token?.isValid == false {
+                try logIn(revoke: false)
+            }
+            
             attemptSheduler.shedule(attempt: attempt, concurrent: concurrent)
         }
     }

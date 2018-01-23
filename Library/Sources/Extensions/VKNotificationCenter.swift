@@ -1,3 +1,5 @@
+import Foundation
+
 protocol VKNotificationCenter {
     func addObserver(
         forName name: NSNotification.Name?,

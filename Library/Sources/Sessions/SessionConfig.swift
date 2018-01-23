@@ -1,3 +1,5 @@
+import Foundation
+
 /// Respesent config of VK user session
 public struct SessionConfig: Codable {
     /// Current default supported apiVersion

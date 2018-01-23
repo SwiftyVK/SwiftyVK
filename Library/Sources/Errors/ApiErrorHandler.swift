@@ -1,3 +1,5 @@
+import Foundation
+
 protocol ApiErrorHandler {
     func handle(error: ApiError, token: Token?) throws -> ApiErrorHandlerResult
 }

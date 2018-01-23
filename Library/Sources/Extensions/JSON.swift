@@ -1,3 +1,5 @@
+import Foundation
+
 final class JSON: JSONContainer, CustomStringConvertible {
     
     var description: String {

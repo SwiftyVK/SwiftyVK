@@ -1,3 +1,5 @@
+import Foundation
+
 protocol VKHTTPCookieStorage {
     func cookies(for: URL) -> [HTTPCookie]?
     func deleteCookie(_: HTTPCookie)

@@ -1,3 +1,5 @@
+import Foundation
+
 protocol VKURLSession {
     var configuration: URLSessionConfiguration { get }
     

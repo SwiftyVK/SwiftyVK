@@ -1,3 +1,5 @@
+import Foundation
+
 protocol CaptchaController: DismisableController {
     var isDisplayed: Bool { get }
     

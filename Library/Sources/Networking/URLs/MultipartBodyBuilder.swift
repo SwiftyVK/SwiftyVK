@@ -1,3 +1,5 @@
+import Foundation
+
 protocol MultipartBodyBuilder {
     var boundary: String { get }
     

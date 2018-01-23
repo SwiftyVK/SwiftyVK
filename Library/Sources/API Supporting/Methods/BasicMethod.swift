@@ -1,3 +1,5 @@
+import Foundation
+
 extension Methods {
     public class Basic: SendableMethod {
         let request: Request

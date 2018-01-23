@@ -1,3 +1,5 @@
+import Foundation
+
 class KeychainProvider<EntityType> {
     
     let serviceKey: String

@@ -1,3 +1,5 @@
+import Foundation
+
 public protocol OperationConvertible {
     func toOperation() -> Operation
     func cancel()

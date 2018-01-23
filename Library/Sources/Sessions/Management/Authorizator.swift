@@ -1,3 +1,5 @@
+import Foundation
+
 protocol Authorizator: class {
     func getSavedToken(sessionId: String) -> Token?
     func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Token
