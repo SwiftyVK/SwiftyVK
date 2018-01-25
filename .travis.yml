@@ -36,6 +36,8 @@ jobs:
         api_key: $GH_TOKEN
         skip_cleanup: true
         file: SwiftyVK.framework.zip
+        on:
+          all_branches: true
 # ==============================================================================
     - stage: deploy
       if: tag IS present
@@ -44,4 +46,6 @@ jobs:
         provider: script
         script: pod trunk push
         skip_cleanup: true
+        on:
+          all_branches: true
 # ==============================================================================
