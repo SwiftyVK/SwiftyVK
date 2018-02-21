@@ -1,20 +1,14 @@
 [![SwiftyVK](./SwiftyVK_logo.png)](./)
 
 <p align="center">
+    <a href="http://cocoadocs.org/docsets/SwiftyVK">
+    <img src="https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat" alt="Platform">
+  </a>
   <a href="https://developer.apple.com/swift/">
     <img src="https://img.shields.io/badge/Swift-4.0.0-orange.svg?style=flat" alt="Swift">
   </a>
-  <a href="https://vk.com/dev/versions">
+    <a href="https://vk.com/dev/versions">
     <img src="https://img.shields.io/badge/VK_API-5.69-blue.svg?style=flat" alt="VK API">
-  </a>
-  <a href="http://cocoadocs.org/docsets/SwiftyVK">
-    <img src="https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat" alt="Platform">
-  </a>
-    <a href="https://travis-ci.org/SwiftyVK/SwiftyVK">
-    <img src="https://travis-ci.org/SwiftyVK/SwiftyVK.svg?branch=master" alt="Build status">
-  </a>
-    <a href="https://codecov.io/gh/SwiftyVK/SwiftyVK">
-    <img src="https://codecov.io/gh/SwiftyVK/SwiftyVK/branch/master/graph/badge.svg" alt="Codecov" />
   </a>
     <a href="https://cocoapods.org/pods/SwiftyVK">
     <img src="https://img.shields.io/cocoapods/v/SwiftyVK.svg?style=flat" alt="Cocoapods compatible">
@@ -26,15 +20,26 @@
     <img src="https://img.shields.io/badge/license-MIT-lightgrey.svg" alt="License">
   </a>
 </p>
+<p align="center">
+    <a href="https://travis-ci.org/SwiftyVK/SwiftyVK">
+    <img src="https://travis-ci.org/SwiftyVK/SwiftyVK.svg?branch=master" alt="Build status">
+  </a>
+    <a href="https://codecov.io/gh/SwiftyVK/SwiftyVK">
+    <img src="https://codecov.io/gh/SwiftyVK/SwiftyVK/branch/master/graph/badge.svg" alt="Codecov" />
+  </a>
+    <a href="https://codebeat.co/projects/github-com-swiftyvk-swiftyvk-master">
+    <img src="https://codebeat.co/badges/e9f1cca3-b81d-4c6d-9129-50205465cb8a" alt="Codebeat" >
+  </a>
+</p>
 
 # Easy and powerful way to interact with [VK API](https://vk.com/dev) for iOS and macOS.
 
 ## Table of contents
 * [Requirements](#requirements)
 * [Integration](#integration)
-  - [Manually](#manually)
+  - [Carthage (recomended)](#carthage-recomended)
   - [CocoaPods](#cocoapods)
-  - [Carthage](#carthage)
+  - [Manually](#manually)
 * [Getting started](#getting-started)
   - [Implement SwiftyVKDelegate](#implement-swiftyvkdelegate)
   - [Setting up VK application](#setting-up-vk-application)
@@ -71,9 +76,10 @@
 
 ## **Integration**
 
-### Manually
-  1. Just drag **SwiftyVK.framework** or include the whole **SwiftyVK.xcodeproj** into project
-  2. Link **SwiftyVK.framework** with application in **Your target preferences -> General -> Embedded binaries**
+### [Carthage](https://github.com/Carthage/Carthage) (recomended)
+```
+github "SwiftyVK/SwiftyVK"
+```
 
 ### [CocoaPods](https://github.com/CocoaPods/CocoaPods)
 ```ruby
@@ -84,10 +90,9 @@ target '$MySuperApp$' do
 end
 ```
 
-### [Carthage](https://github.com/Carthage/Carthage)
-```
-github "SwiftyVK/SwiftyVK"
-```
+### Manually
+  1. Just drag **SwiftyVK.framework** or include the whole **SwiftyVK.xcodeproj** into project
+  2. Link **SwiftyVK.framework** with application in **Your target preferences -> General -> Embedded binaries**
 
 ## **Getting started**
 ### Implement SwiftyVKDelegate
@@ -396,7 +401,14 @@ VK.API.Upload.Photo.toWall(media, to: .user(id: "4680178"))
     .onProgress {
         // This callback available only for uploading requests
         // Use it to handle uploading status and show it to user
-    }
+        
+        switch $0 {
+            case let .sent(current, of):
+                print("sent", current, "of": of)
+            case let .recieve(current, of):
+                print("recieve", current, "of": of)
+        }
+    } 
     .send()
 ```
 
