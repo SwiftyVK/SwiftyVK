@@ -3,13 +3,13 @@ import Foundation
 /// Respesent config of VK user session
 public struct SessionConfig: Codable {
     /// Current default supported apiVersion
-    public static let currentApiVersion = "5.69"
+    public static let defaultApiVersion = "5.73"
     
     /// Config with default values
     public static let `default` = SessionConfig()
     
     /// VK API version. By default uses latest version.
-    public var apiVersion = SessionConfig.currentApiVersion
+    public var apiVersion = SessionConfig.defaultApiVersion
     /// Response language.
     public var language: Language
     public var attemptsMaxLimit: AttemptLimit
@@ -36,14 +36,14 @@ public struct SessionConfig: Codable {
     /// - parameter handleErrors: Allows automatically handle specific VK errors
     /// like authorization, captcha, validation nedеed and present dialog to user for resolve this situation.
     public init(
-        apiVersion: String? = SessionConfig.currentApiVersion,
+        apiVersion: String? = SessionConfig.defaultApiVersion,
         language: Language? = .default,
         attemptsMaxLimit: AttemptLimit? = .default,
         attemptsPerSecLimit: AttemptLimit? = .default,
         attemptTimeout: TimeInterval? = 10,
         handleErrors: Bool? = true
         ) {
-        self.apiVersion = apiVersion ?? SessionConfig.currentApiVersion
+        self.apiVersion = apiVersion ?? SessionConfig.defaultApiVersion
         self.language = language ?? .default
         self.attemptsMaxLimit = attemptsMaxLimit ?? .default
         self.attemptsPerSecLimit = attemptsPerSecLimit ?? .default
