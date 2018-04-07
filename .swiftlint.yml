@@ -38,7 +38,7 @@ opt_in_rules:
   - implicit_return
   # - conditional_returns_on_newline
   - unneeded_parentheses_in_closure_argument
-  - let_var_whitespace
+  # - let_var_whitespace
   # - extension_access_modifier
   # - explicit_top_level_acl
   - vertical_parameter_alignment_on_call
@@ -48,8 +48,6 @@ opt_in_rules:
   - attributes
   # - explicit_enum_raw_value
   # - explicit_top_level_acl
-  # - explicit_type_interface
-  # - extension_access_modifier
   - joined_default_parameter
   # - literal_expression_end_indentation
   - multiline_arguments
@@ -63,6 +61,9 @@ opt_in_rules:
   - sorted_imports
   - strict_fileprivate
   # - trailing_closure
+  - discouraged_object_literal
+  # - discouraged_optional_boolean
+  # - explicit_acl
 
 file_length:
   warning: 500

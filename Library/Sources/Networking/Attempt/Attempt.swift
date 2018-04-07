@@ -95,7 +95,6 @@ struct AttemptCallbacks {
     let onSent: (_ total: Int64, _ of: Int64) -> ()
     let onRecive: (_ total: Int64, _ of: Int64) -> ()
     
-    // swiftlint:disable next multiline_parameters
     init(
         onFinish: @escaping ((Response) -> ()) = { _ in },
         onSent: @escaping ((_ total: Int64, _ of: Int64) -> ()) = { _, _ in },

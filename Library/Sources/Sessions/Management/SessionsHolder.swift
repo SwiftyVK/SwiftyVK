@@ -38,7 +38,7 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     private weak var storedDefault: Session?
     
     public var all: [Session] {
-        return sessions.allObjects.flatMap { $0 as? Session }
+        return sessions.allObjects.compactMap { $0 as? Session }
     }
     
     init(
