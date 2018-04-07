@@ -81,7 +81,7 @@ final class ShareWorkerImpl: ShareWorker {
             .filter { $0.key != SettingKeys.friendsOnly.rawValue && $0.active == true }
             .map { $0.key }
         
-        var attachements = context.images.flatMap { $0.id }
+        var attachements = context.images.compactMap { $0.id }
         
         if let link = context.link?.url.absoluteString {
             attachements.append(link)

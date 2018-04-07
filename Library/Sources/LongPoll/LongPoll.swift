@@ -132,7 +132,7 @@ public final class LongPollImpl: LongPoll {
                 lpKey: connectionInfo.lpKey,
                 onResponse: { updates in
                     guard self?.isActive == true else { return }
-                    let events = updates.flatMap { LongPollEvent(json: $0) }
+                    let events = updates.compactMap { LongPollEvent(json: $0) }
                     self?.onReceiveEvents?(events)
                 },
                 onError: { self?.handleError($0) }
