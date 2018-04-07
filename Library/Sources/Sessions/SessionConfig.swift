@@ -3,7 +3,7 @@ import Foundation
 /// Respesent config of VK user session
 public struct SessionConfig: Codable {
     /// Current default supported apiVersion
-    public static let defaultApiVersion = "5.73"
+    public static let defaultApiVersion = "5.74"
     
     /// Config with default values
     public static let `default` = SessionConfig()
