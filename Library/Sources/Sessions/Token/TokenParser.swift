@@ -14,9 +14,9 @@ final class TokenParserImpl: TokenParser {
         let components = tokenInfo.components(separatedBy: "&")
         
         components.forEach { component in
-            let ComponentPair = component.components(separatedBy: "=")
+            let componentPair = component.components(separatedBy: "=")
             
-            if let key = ComponentPair.first, let value = ComponentPair.last {
+            if let key = componentPair.first, let value = componentPair.last {
                 
                 switch key {
                 case "access_token":
