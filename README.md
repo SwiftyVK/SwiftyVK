@@ -190,6 +190,19 @@ If a user has the official VK app installed on their device, SwiftyVK can be aut
 
 
   - For iOS 9 and below
+  
+ ```swift
+func application(
+    _ application: UIApplication,
+    open url: URL,
+    sourceApplication: String?,
+    annotation: Any
+    ) -> Bool {
+    VK.handle(url: url, sourceApplication: sourceApplication)
+    return true
+}
+```
+  - For iOS 10 and above
 
 ```swift
 func application(
@@ -199,19 +212,6 @@ func application(
     ) -> Bool {
     let app = options[.sourceApplication] as? String
     VK.handle(url: url, sourceApplication: app)
-    return true
-}
-```
-  - For iOS 10 and above
-
-```swift
-func application(
-    _ application: UIApplication,
-    open url: URL,
-    sourceApplication: String?,
-    annotation: Any
-    ) -> Bool {
-    VK.handle(url: url, sourceApplication: sourceApplication)
     return true
 }
 ```
