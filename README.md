@@ -34,6 +34,17 @@
 
 # Easy and powerful way to interact with [VK API](https://vk.com/dev) for iOS and macOS.
 
+## Key features
+
+😊 It's not `ios-vk-sdk`<br />
+🍏 One library for iOS and mac OS<br />
+🤘 Fully written in swift and do not contain any Objective-C code<br />
+🎮 Very simple interface maded with care about those who will use it<br />
+⛑ Fylly stong typed that you can not shoot yourself in the leg<br />
+🏆 High code quality with lot of unit tests, linter integration and CI<br />
+🚀 Frequent updates and bug fixes<br />
+🔊 LongPoll support<br />
+
 ## Table of contents
 * [Requirements](#requirements)
 * [Integration](#integration)
