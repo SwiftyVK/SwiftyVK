@@ -146,7 +146,7 @@ final class ShareWorkerTests: XCTestCase {
                 .message: message,
                 .friendsOnly: "0",
                 .services: services,
-                .attachments: images.flatMap { $0.id }.joined(separator: ",") + "," + shareLink.url.absoluteString
+                .attachments: images.compactMap { $0.id }.joined(separator: ",") + "," + shareLink.url.absoluteString
                 ]),
             data: Data()
         )

@@ -57,7 +57,7 @@ final class LongPollTests: XCTestCase {
             let json: [Any] = data.toJson()?.array("updates") else {
                 return XCTFail()
         }
-        let updates = json.flatMap { JSON(value: $0) } .dropFirst().toArray()
+        let updates = json.compactMap { JSON(value: $0) } .dropFirst().toArray()
         
         let expectation = self.expectation(description: "")
         let context = makeContext()

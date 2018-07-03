@@ -11,9 +11,9 @@ final class LongPollEventTests: XCTestCase {
             let json: [Any] = data.toJson()?.array("updates") else {
                 return XCTFail()
         }
-        let updates = json.flatMap { JSON(value: $0) } .dropFirst().toArray()
+        let updates = json.compactMap { JSON(value: $0) } .dropFirst().toArray()
         // When
-        let events = updates.flatMap { LongPollEvent(json: $0) }
+        let events = updates.compactMap { LongPollEvent(json: $0) }
         // Then
         XCTAssertFalse(updates.isEmpty)
         XCTAssertEqual(events.count, updates.count)
@@ -28,7 +28,7 @@ final class LongPollEventTests: XCTestCase {
         guard
             let data = JsonReader.read("longPoll.updates"),
             let json: [Any] = data.toJson()?.array("updates"),
-            let update = json.flatMap({ JSON(value: $0) }).first else {
+            let update = json.compactMap({ JSON(value: $0) }).first else {
                 return XCTFail()
         }
         // When
@@ -44,9 +44,9 @@ final class LongPollEventTests: XCTestCase {
             let json: [Any] = data.toJson()?.array("updates") else {
                 return XCTFail()
         }
-        let updates = json.flatMap({ JSON(value: $0) })
+        let updates = json.compactMap({ JSON(value: $0) })
         // When
-        let events = updates.flatMap { LongPollEvent(json: $0) }
+        let events = updates.compactMap { LongPollEvent(json: $0) }
         // Then
         XCTAssertTrue(events.isEmpty)
     }
