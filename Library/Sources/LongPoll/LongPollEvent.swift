@@ -8,6 +8,7 @@ public enum LongPollEvent {
     case type2(data: Data)
     case type3(data: Data)
     case type4(data: Data)
+    case type5(data: Data)
     case type6(data: Data)
     case type7(data: Data)
     case type8(data: Data)
@@ -18,6 +19,7 @@ public enum LongPollEvent {
     case type13(data: Data)
     case type14(data: Data)
     case type51(data: Data)
+    case type52(data: Data)
     case type61(data: Data)
     case type62(data: Data)
     case type70(data: Data)
@@ -48,6 +50,8 @@ public enum LongPollEvent {
             self = .type4(data: updatesData)
         case 6:
             self = .type6(data: updatesData)
+        case 5:
+            self = .type5(data: updatesData)
         case 7:
             self = .type7(data: updatesData)
         case 8:
@@ -66,6 +70,8 @@ public enum LongPollEvent {
             self = .type14(data: updatesData)
         case 51:
             self = .type51(data: updatesData)
+        case 52:
+            self = .type52(data: updatesData)
         case 61:
             self = .type61(data: updatesData)
         case 62:
