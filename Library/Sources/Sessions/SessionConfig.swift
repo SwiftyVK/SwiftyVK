@@ -3,7 +3,7 @@ import Foundation
 /// Respesent config of VK user session
 public struct SessionConfig: Codable {
     /// Current default supported apiVersion
-    public static let defaultApiVersion = "5.78"
+    public static let defaultApiVersion = "5.80"
     
     /// Config with default values
     public static let `default` = SessionConfig()
@@ -23,7 +23,7 @@ public struct SessionConfig: Codable {
     
     let sdkVersion = "1.3.17"
     
-    /// Init new sconfig
+    /// Init new config
     /// - parameter apiVersion: VK API version. By default uses latest version.
     /// If you need different version - change this value.
     ///

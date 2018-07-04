@@ -1,4 +1,4 @@
 fail_on_violations: true
 
 swift:
-    config_file: ./Library/.swiftlint.yml
+    config_file: .swiftlint.yml

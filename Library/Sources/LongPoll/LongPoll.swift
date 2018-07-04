@@ -1,5 +1,14 @@
 import Foundation
 
+public enum LongPollVersion: String {
+    static let latest = LongPollVersion.third
+
+    case zero = "0"
+    case first = "1"
+    case second = "2"
+    case third = "3"
+}
+
 /// Long poll client
 public protocol LongPoll {
     /// Is long poll can handle events
@@ -7,10 +16,16 @@ public protocol LongPoll {
     
     /// Start recieve long poll events
     /// parameters onReceiveEvents: clousure ehich executes when long poll recieve set of events
-    func start(onReceiveEvents: @escaping ([LongPollEvent]) -> ())
+    func start(version: LongPollVersion, onReceiveEvents: @escaping ([LongPollEvent]) -> ())
     
     /// Stop recieve long poll events
     func stop()
+}
+
+extension LongPoll {
+    func start(version: LongPollVersion = .latest, onReceiveEvents: @escaping ([LongPollEvent]) -> ()) {
+        start(version: version, onReceiveEvents: onReceiveEvents)
+    }
 }
 
 public final class LongPollImpl: LongPoll {
@@ -30,6 +45,7 @@ public final class LongPollImpl: LongPoll {
     private var isConnected = false
     private var onReceiveEvents: (([LongPollEvent]) -> ())?
     private var taskData: LongPollTaskData?
+    private var version: LongPollVersion = .first
     
     init(
         session: Session?,
@@ -54,7 +70,7 @@ public final class LongPollImpl: LongPoll {
         }()
     }
     
-    public func start(onReceiveEvents: @escaping ([LongPollEvent]) -> ()) {
+    public func start(version: LongPollVersion, onReceiveEvents: @escaping ([LongPollEvent]) -> ()) {
         synchronyQueue.sync {
             guard !isActive else { return }
             
@@ -164,7 +180,11 @@ public final class LongPollImpl: LongPoll {
         
         var result: (server: String, lpKey: String, ts: String)?
         
-        APIScope.Messages.getLongPollServer([.useSsl: "0", .needPts: "1", .lpVersion: "2"])
+        APIScope.Messages.getLongPollServer([
+            .useSsl: "0",
+            .needPts: "1",
+            .lpVersion: version.rawValue
+            ])
             .configure(with: Config(attemptsMaxLimit: 1, handleErrors: false))
             .onSuccess { data in
                 defer { semaphore.signal() }
