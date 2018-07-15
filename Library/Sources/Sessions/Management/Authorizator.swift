@@ -24,7 +24,7 @@ final class AuthorizatorImpl: Authorizator {
     private let cookiesHolder: CookiesHolder?
     private weak var delegate: SwiftyVKAuthorizatorDelegate?
     
-    private(set) var handledToken: Token?
+    private(set) var vkAppToken: Token?
     private var requestTimeout: TimeInterval = 10
     
     init(
@@ -48,6 +48,8 @@ final class AuthorizatorImpl: Authorizator {
     }
     
     func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Token {
+        defer { vkAppToken = nil }
+        
         return try queue.sync {
             
             guard let scopes = delegate?.vkNeedsScopes(for: sessionId).rawValue else {
@@ -62,10 +64,6 @@ final class AuthorizatorImpl: Authorizator {
                 revoke: revoke
             )
             
-            if try vkAppProxy.send(query: vkAppAuthQuery) {
-                Thread.sleep(forTimeInterval: 0.1)
-            }
-            
             let webAuthRequest = try makeWebAuthRequest(
                 sessionId: sessionId,
                 config: config,
@@ -73,6 +71,7 @@ final class AuthorizatorImpl: Authorizator {
                 revoke: revoke
             )
             
+            try vkAppProxy.send(query: vkAppAuthQuery)
             return try getToken(sessionId: sessionId, request: webAuthRequest)
         }
     }
@@ -118,23 +117,26 @@ final class AuthorizatorImpl: Authorizator {
     func handle(url: URL, app: String?) {
         guard
             let tokenInfo = vkAppProxy.handle(url: url, app: app),
-            let handledToken = try? makeToken(tokenInfo: tokenInfo) else
+            let vkAppToken = try? makeToken(tokenInfo: tokenInfo) else
         {
             return
         }
         
-        self.handledToken = handledToken
+        self.vkAppToken = vkAppToken
         webPresenter.dismiss()
     }
     
     private func getToken(sessionId: String, request: URLRequest) throws -> Token {
-        defer {
-            handledToken = nil
-            webPresenter.dismiss()
-        }
+        defer { webPresenter.dismiss() }
         
-        let token: Token
-        
+        let token = try vkAppToken ?? webToken(sessionId: sessionId, request: request)
+        try tokenStorage.save(token, for:  sessionId)
+        return token
+    }
+    
+    private func webToken(sessionId: String, request: URLRequest) throws -> Token {
+        defer { webPresenter.dismiss() }
+
         guard let url = request.url else {
             throw VKError.authorizationUrlIsNil
         }
@@ -142,20 +144,19 @@ final class AuthorizatorImpl: Authorizator {
         do {
             cookiesHolder?.replace(for: sessionId, url: url)
             let tokenInfo = try webPresenter.presentWith(urlRequest: request)
-            token = try makeToken(tokenInfo: tokenInfo)
+            let token = try makeToken(tokenInfo: tokenInfo)
             cookiesHolder?.save(for: sessionId, url: url)
+            return token
         }
-        catch let error {
-            guard let handledToken = handledToken else {
+        catch {
+            guard let vkAppToken = vkAppToken else {
                 cookiesHolder?.restore(for: url)
                 throw error
             }
             
-            token = handledToken
+            return vkAppToken
         }
         
-        try tokenStorage.save(token, for:  sessionId)
-        return token
     }
     
     private func makeToken(tokenInfo: String) throws -> Token {

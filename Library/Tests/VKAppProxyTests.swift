@@ -5,39 +5,78 @@ final class VKAppProxyTests: XCTestCase {
     
     private let appId = "1234567890"
     
-    var proxyObjects: (URLOpenerMock, VKAppProxyImpl) {
+    var proxyObjects: (URLOpenerMock, AppLifecycleProviderMock, VKAppProxyImpl) {
         let urlOpener = URLOpenerMock()
-        let vkProxy = VKAppProxyImpl(appId: appId, urlOpener: urlOpener)
-        return (urlOpener, vkProxy)
+        let appLifecycleProvider = AppLifecycleProviderMock()
+        
+        let vkProxy = VKAppProxyImpl(
+            appId: appId,
+            urlOpener: urlOpener,
+            appLifecycleProvider: appLifecycleProvider
+        )
+        
+        return (urlOpener, appLifecycleProvider, vkProxy)
     }
     
     func test_openUrl_shoudBeSuccess() {
         // Given
-        let (urlOpener, vkProxy) = proxyObjects
-        // When
+        let (urlOpener, appLifecycleProvider, vkProxy) = proxyObjects
         urlOpener.allowCanOpenUrl = true
         urlOpener.allowOpenURL = true
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.01) {
+            appLifecycleProvider.notify(state: .inactive)
+        }
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+            appLifecycleProvider.notify(state: .active)
+        }
+        
+        // When
         let result = try? vkProxy.send(query: "test")
         // Then
         XCTAssertTrue(result ?? false)
     }
     
-    func test_openUrl_withCantOpenUrl_shouldBeFail() {
+    func test_openUrl_shoudBeFail_whenAppDoesntBringToInnactive() {
         // Given
-        let (urlOpener, vkProxy) = proxyObjects
-        // When
-        urlOpener.allowCanOpenUrl = false
+        let (urlOpener, _, vkProxy) = proxyObjects
+        urlOpener.allowCanOpenUrl = true
         urlOpener.allowOpenURL = true
+        
+        // When
         let result = try? vkProxy.send(query: "test")
         // Then
         XCTAssertFalse(result ?? false)
     }
     
+    func test_openUrl_shoudBeSuccess_whenAppDoesntBringToActive() {
+        // Given
+        let (urlOpener, _, vkProxy) = proxyObjects
+        urlOpener.allowCanOpenUrl = true
+        urlOpener.allowOpenURL = true
+        // When
+        let result = try? vkProxy.send(query: "test")
+        // Then
+        XCTAssertFalse(result ?? false)
+    }
+    
+    func test_openUrl_withCantOpenUrl_shouldBeFail() {
+        // Given
+        let (urlOpener, _, vkProxy) = proxyObjects
+        urlOpener.allowCanOpenUrl = false
+        urlOpener.allowOpenURL = true
+        // When
+        let result = try? vkProxy.send(query: "test")
+        // Then
+        XCTAssertFalse(result ?? true)
+    }
+    
     func test_recieveUrl_withVKClient_shouldBeSuccess() {
         // Given
-        let (_, vkProxy) = proxyObjects
-        // When
+        let (_, _, vkProxy) = proxyObjects
         let url = URL(string: "vk\(appId)://test/test#access_token=1234567890")!
+        // When
         let result = vkProxy.handle(url: url, app: "com.vk.vkclient")
         // Then
         XCTAssertEqual(result, "access_token=1234567890")
@@ -45,9 +84,9 @@ final class VKAppProxyTests: XCTestCase {
     
     func test_recieveUrl_withVKHdClient_shouldBeSuccess() {
         // Given
-        let (_, vkProxy) = proxyObjects
-        // When
+        let (_, _, vkProxy) = proxyObjects
         let url = URL(string: "vk\(appId)://test/test#access_token=1234567890")!
+        // When
         let result = vkProxy.handle(url: url, app: "com.vk.vkhd")
         // Then
         XCTAssertEqual(result, "access_token=1234567890")
@@ -55,9 +94,9 @@ final class VKAppProxyTests: XCTestCase {
     
     func test_recieveUrl_withWrongClient_shouldBeFail() {
         // Given
-        let (_, vkProxy) = proxyObjects
-        // When
+        let (_, _, vkProxy) = proxyObjects
         let url = URL(string: "vk\(appId)://test/test#access_token=1234567890")!
+        // When
         let result = vkProxy.handle(url: url, app: "com.vk.wrongClient")
         // Then
         XCTAssertNil(result)
@@ -65,9 +104,9 @@ final class VKAppProxyTests: XCTestCase {
     
     func test_recieveUrl_withWrongScheme_shouldBeFail() {
         // Given
-        let (_, vkProxy) = proxyObjects
-        // When
+        let (_, _, vkProxy) = proxyObjects
         let url = URL(string: "vkWrongScheme://test/test#access_token=1234567890")!
+        // When
         let result = vkProxy.handle(url: url, app: "com.vk.vkclient")
         // Then
         XCTAssertNil(result)
@@ -75,9 +114,9 @@ final class VKAppProxyTests: XCTestCase {
     
     func test_recieveUrl_withoutTokenFragment_shouldBeFail() {
         // Given
-        let (_, vkProxy) = proxyObjects
-        // When
+        let (_, _, vkProxy) = proxyObjects
         let url = URL(string: "vk\(appId)://test/test?access_token=1234567890")!
+        // When
         let result = vkProxy.handle(url: url, app: "com.vk.vkclient")
         // Then
         XCTAssertNil(result)

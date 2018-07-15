@@ -118,10 +118,13 @@ final class DependenciesImpl: Dependencies {
     private lazy var sharedAuthorizator: Authorizator = {
         
         let urlOpener: URLOpener
+        let appLifecycleProvider: AppLifecycleProvider
         
         #if os(iOS)
+            appLifecycleProvider = IOSAppLifecycleProvider()
             urlOpener = UIApplication.shared
         #elseif os(macOS)
+            appLifecycleProvider = MacOSAppLifecycleProvider()
             urlOpener = URLOpenerMacOS()
         #endif
         
@@ -129,7 +132,8 @@ final class DependenciesImpl: Dependencies {
         
         let vkAppProxy = VKAppProxyImpl(
             appId: self.appId,
-            urlOpener: urlOpener
+            urlOpener: urlOpener,
+            appLifecycleProvider: appLifecycleProvider
         )
         
         let webPresenter = WebPresenterImpl(
