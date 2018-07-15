@@ -207,7 +207,7 @@ final class AuthorizatorTests: XCTestCase {
         // When
         context.authorizator.handle(url: URL(string: "http://examp.le")!, app: "")
         // Then
-        XCTAssertNil(context.authorizator.handledToken)
+        XCTAssertNil(context.authorizator.vkAppToken)
     }
     
     func test_authorize_withHandledToken_shouldBeAuthorized() {
