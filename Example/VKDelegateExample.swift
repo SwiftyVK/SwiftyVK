@@ -6,8 +6,6 @@ import SwiftyVK
     import UIKit
 #endif
 
-
-
 final class VKDelegateExample: SwiftyVKDelegate {
     
     let appId = "4994842"
@@ -22,6 +20,9 @@ final class VKDelegateExample: SwiftyVKDelegate {
     }
 
     func vkNeedToPresent(viewController: VKViewController) {
+        // This code works only for simplest cases and one screen applications
+        // If you have application with two or more screens, you should use different implementation
+        // HINT: google it - get top most UIViewController
         #if os(macOS)
             if let contentController = NSApplication.shared.keyWindow?.contentViewController {
                 contentController.presentViewControllerAsSheet(viewController)

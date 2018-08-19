@@ -34,6 +34,19 @@
 
 # Easy and powerful way to interact with [VK API](https://vk.com/dev) for iOS and macOS.
 
+## Key features
+
+<p align="center">
+😊 It's not <b>ios-vk-sdk</b> 😊<br />
+🍏 One library for iOS and mac OS 🍏<br />
+🤘 Fully written in swift and do not contain any Objective-C code 🤘<br />
+🎮 Very simple interface maded with care about those who will use it 🎮<br />
+⛑ Fylly stong typed that you can not shoot yourself in the leg ⛑<br />
+🏆 High code quality with lot of unit tests, linter integration and CI 🏆<br />
+🚀 Frequent updates and bug fixes 🚀<br />
+🔊 LongPoll support 🔊<br />
+</p>
+
 ## Table of contents
 * [Requirements](#requirements)
 * [Integration](#integration)
@@ -190,6 +203,19 @@ If a user has the official VK app installed on their device, SwiftyVK can be aut
 
 
   - For iOS 9 and below
+  
+ ```swift
+func application(
+    _ application: UIApplication,
+    open url: URL,
+    sourceApplication: String?,
+    annotation: Any
+    ) -> Bool {
+    VK.handle(url: url, sourceApplication: sourceApplication)
+    return true
+}
+```
+  - For iOS 10 and above
 
 ```swift
 func application(
@@ -199,19 +225,6 @@ func application(
     ) -> Bool {
     let app = options[.sourceApplication] as? String
     VK.handle(url: url, sourceApplication: app)
-    return true
-}
-```
-  - For iOS 10 and above
-
-```swift
-func application(
-    _ application: UIApplication,
-    open url: URL,
-    sourceApplication: String?,
-    annotation: Any
-    ) -> Bool {
-    VK.handle(url: url, sourceApplication: sourceApplication)
     return true
 }
 ```
