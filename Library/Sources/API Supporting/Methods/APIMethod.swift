@@ -14,10 +14,10 @@ extension APIMethod {
     }
     
     var method: String {
-        return "\(group).\(Mirror(reflecting: self).children.first?.label ?? String())"
+        return "\(group).\(caseName(of: self))"
     }
     
     var parameters: Parameters {
-        return Mirror(reflecting: self).children.first?.value as? Parameters ?? .empty
+        return associatedValue(of: self) ?? .empty
     }
 }
