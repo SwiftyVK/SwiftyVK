@@ -73,9 +73,14 @@ final class QueryBuilderTests: XCTestCase {
         
         // When
         let encodedQuery = builder.makeQuery(parameters: [Parameter.message.rawValue: rawMessage])
-        let encodedMesage = encodedQuery.components(separatedBy: "&")[2].components(separatedBy: "=")[1]
+        
+        let encodedMesage = encodedQuery
+            .components(separatedBy: "&")
+            .first { $0.starts(with: "message") }?
+            .components(separatedBy: "=")
+            .last
         
         // Then
-        XCTAssertEqual(rawMessage, encodedMesage.removingPercentEncoding)
+        XCTAssertEqual(rawMessage, encodedMesage?.removingPercentEncoding)
     }
 }
