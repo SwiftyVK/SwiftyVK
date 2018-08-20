@@ -12,13 +12,13 @@ var vkDelegateReference : SwiftyVKDelegate?
     final class AppDelegate : UIResponder, UIApplicationDelegate {
         var window: UIWindow?
         
-        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
             vkDelegateReference = VKDelegateExample()
             return true
         }
         
         @available(iOS 9.0, *)
-        func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
             let app = options[.sourceApplication] as? String
             VK.handle(url: url, sourceApplication: app)
             return true

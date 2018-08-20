@@ -23,8 +23,8 @@ final class DependenciesImpl: Dependencies {
         
         #if os(iOS)
             let appStateCenter = NotificationCenter.default
-            let activeNotificationName = Notification.Name.UIApplicationDidBecomeActive
-            let inactiveNotificationName = Notification.Name.UIApplicationWillResignActive
+            let activeNotificationName = UIApplication.didBecomeActiveNotification
+            let inactiveNotificationName = UIApplication.willResignActiveNotification
         #elseif os(macOS)
             let appStateCenter = NSWorkspace.shared.notificationCenter
             let activeNotificationName = NSWorkspace.willSleepNotification
@@ -179,7 +179,7 @@ final class DependenciesImpl: Dependencies {
                 )
         #elseif os(macOS)
             controller = storyboard().instantiateController(
-                withIdentifier: NSStoryboard.SceneIdentifier(rawValue: name)
+                withIdentifier: name
                 ) as? VKViewController
         #endif
         
@@ -203,7 +203,7 @@ final class DependenciesImpl: Dependencies {
     
     func storyboard() -> VKStoryboard {
         #if os(macOS)
-            let name = NSStoryboard.Name(rawValue: Resources.withSuffix("Storyboard"))
+            let name = Resources.withSuffix("Storyboard")
         #elseif os(iOS)
             let name = Resources.withSuffix("Storyboard")
         #endif

@@ -11,7 +11,7 @@ UIViewController, SharePreferencesController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         tableView?.dataSource = self
         tableView?.delegate = self
-        tableView?.rowHeight = UITableViewAutomaticDimension
+        tableView?.rowHeight = UITableView.automaticDimension
         tableView?.estimatedRowHeight = 44
     }
     
