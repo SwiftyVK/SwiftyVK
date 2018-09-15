@@ -20,7 +20,7 @@ final class AppLifecycleProviderTests: XCTestCase {
         }
         
         NotificationCenter.default.post(
-            name: NSNotification.Name.UIApplicationDidBecomeActive,
+            name: UIApplication.didBecomeActiveNotification,
             object: UIApplication.shared
         )
         
@@ -43,7 +43,7 @@ final class AppLifecycleProviderTests: XCTestCase {
         }
         
         NotificationCenter.default.post(
-            name: NSNotification.Name.UIApplicationWillResignActive,
+            name: UIApplication.willResignActiveNotification,
             object: UIApplication.shared
         )
         
@@ -66,7 +66,7 @@ final class AppLifecycleProviderTests: XCTestCase {
         }
         
         NotificationCenter.default.post(
-            name: NSNotification.Name.UIApplicationDidEnterBackground,
+            name: UIApplication.didEnterBackgroundNotification,
             object: UIApplication.shared
         )
         
@@ -89,7 +89,7 @@ final class AppLifecycleProviderTests: XCTestCase {
         }
         
         NotificationCenter.default.post(
-            name: NSNotification.Name.UIApplicationWillEnterForeground,
+            name: UIApplication.willEnterForegroundNotification,
             object: UIApplication.shared
         )
         
@@ -115,7 +115,7 @@ final class AppLifecycleProviderTests: XCTestCase {
         provider.unsubscribe(object)
         
         NotificationCenter.default.post(
-            name: NSNotification.Name.UIApplicationDidBecomeActive,
+            name: UIApplication.didBecomeActiveNotification,
             object: UIApplication.shared
         )
         
