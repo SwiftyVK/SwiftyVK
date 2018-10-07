@@ -6,6 +6,7 @@ final class WebControllerMock: WebController {
     var onGoBack: (() -> ())?
     var onReload: (() -> ())?
     var onDismiss: (() -> ())?
+    var onDeinit: (() -> ())?
     
     private var realOnDismiss: (() -> ())?
     
@@ -25,5 +26,9 @@ final class WebControllerMock: WebController {
     func dismiss() {
         onDismiss?()
         realOnDismiss?()
+    }
+    
+    deinit {
+        onDeinit?()
     }
 }

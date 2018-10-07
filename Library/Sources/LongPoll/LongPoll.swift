@@ -195,7 +195,7 @@ public final class LongPollImpl: LongPoll {
                     let lpKey = response.string("key")
                     else { return }
                 
-                let ts = response.forcedInt("ts").toString()
+                let ts = response.int("ts")?.toString() ?? response.forcedString("ts")
                 result = (server, lpKey, ts)
             }
             .onError { _ in

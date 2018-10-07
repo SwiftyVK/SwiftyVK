@@ -353,6 +353,7 @@ public enum Parameter: String, Hashable {
     case lpVersion = "lp_version"
     case filters
     case serverId = "server_id"
+    case memberId = "member_id"
     
     public var hashValue: Int {
         return self.rawValue.hashValue
