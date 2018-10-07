@@ -39,8 +39,8 @@
 <p align="center">
 😊 It's not <b>ios-vk-sdk</b> 😊<br />
 🍏 One library for iOS and mac OS 🍏<br />
-🤘 Fully written in swift and do not contain any Objective-C code 🤘<br />
-🎮 Very simple interface maded with care about those who will use it 🎮<br />
+🤘 Fully written in swift and don't contains any Objective-C code 🤘<br />
+🎮 Very simple interface, made with care about those who will use it 🎮<br />
 ⛑ Fylly stong typed that you can not shoot yourself in the leg ⛑<br />
 🏆 High code quality with lot of unit tests, linter integration and CI 🏆<br />
 🚀 Frequent updates and bug fixes 🚀<br />
