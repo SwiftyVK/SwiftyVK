@@ -48,10 +48,13 @@ final class WebPresenterImpl: WebPresenter {
         var result: WebPresenterResult?
         
         return try uiSyncQueue.sync {
-            
             let controller = controllerMaker.webController {
                 semaphore.signal()
             }
+            
+            // This is a hack to avoid crash while WebKit deinitializing not in the main thread
+            // https://github.com/SwiftyVK/SwiftyVK/issues/142
+            defer { releaseInMainThreadAfterDelay(controller) }
             
             let originalPath = urlRequest.url?.path ?? ""
             currentController = controller
@@ -165,6 +168,12 @@ final class WebPresenterImpl: WebPresenter {
         }
         
         throw error
+    }
+    
+    private func releaseInMainThreadAfterDelay(_ controller: WebController) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            controller.dismiss()
+        }
     }
     
     func dismiss() {
