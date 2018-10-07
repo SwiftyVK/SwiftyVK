@@ -15,7 +15,7 @@ private enum WebPresenterResult {
     case error(VKError)
 }
 
-private enum HandledResult {
+private enum ResponseParsingResult {
     case response(String)
     case fail
     case nothing
@@ -40,13 +40,12 @@ final class WebPresenterImpl: WebPresenter {
         self.timeout = timeout
     }
     
-    // swiftlint:disable cyclomatic_complexity next
     func presentWith(urlRequest: URLRequest) throws -> String {
         guard let controllerMaker = controllerMaker else { throw VKError.weakObjectWasDeallocated }
 
         let semaphore = DispatchSemaphore(value: 0)
         var fails: Int = 0
-        var finalResult: WebPresenterResult?
+        var result: WebPresenterResult?
         
         return try uiSyncQueue.sync {
             
@@ -59,34 +58,13 @@ final class WebPresenterImpl: WebPresenter {
             
             controller.load(
                 urlRequest: urlRequest,
-                onResult: { [weak self] result in
-                    guard let strongSelf = self else { return }
-                    
-                    do {
-                        let handledResult = try strongSelf.handle(
-                            result: result,
-                            fails: fails,
-                            originalPath: originalPath
-                        )
-                        
-                        switch handledResult {
-                        case let .response(value):
-                            finalResult = .response(value)
-                        case .fail:
-                            fails += 1
-                            strongSelf.currentController?.reload()
-                        case .nothing:
-                            break
-                        }
-                        
-                    }
-                    catch let error {
-                        finalResult = .error(error.toVK())
-                    }
-                    
-                    if finalResult != nil {
-                        strongSelf.currentController?.dismiss()
-                    }
+                onResult: { [weak self] in
+                    self?.handle(
+                        result: $0,
+                        originalPath: originalPath,
+                        fails: &fails,
+                        finalResult: &result
+                    )
                 }
             )
             
@@ -97,7 +75,7 @@ final class WebPresenterImpl: WebPresenter {
                 break
             }
             
-            switch finalResult {
+            switch result {
             case .response(let response)?:
                 return response
             case .error(let error)?:
@@ -108,16 +86,46 @@ final class WebPresenterImpl: WebPresenter {
         }
     }
     
-    private func handle(result: WebControllerResult, fails: Int, originalPath: String) throws -> HandledResult {
-        switch result {
-        case .response(let url):
-            return try handle(url: url, originalPath: originalPath)
-        case .error(let error):
-            return try handle(error: error, fails: fails)
+    private func handle(
+        result: WebControllerResult,
+        originalPath: String,
+        fails: inout Int,
+        finalResult: inout WebPresenterResult?
+    ) {
+        do {
+            let parsedResult: ResponseParsingResult
+            
+            switch result {
+            case .response(let url):
+                parsedResult = try parse(url: url, originalPath: originalPath)
+            case .error(let error):
+                parsedResult = try parse(error: error, fails: fails)
+            }
+            
+            switch parsedResult {
+            case let .response(value):
+                finalResult = .response(value)
+                
+            case .fail:
+                fails += 1
+                currentController?.reload()
+                
+            case .nothing:
+                break
+                
+            }
+        }
+            
+        catch let error {
+            finalResult = .error(error.toVK())
+        }
+        
+        if finalResult != nil {
+            currentController?.dismiss()
         }
     }
     
-    private func handle(url maybeUrl: URL?, originalPath: String) throws -> HandledResult {
+    private func parse(url maybeUrl: URL?, originalPath: String) throws -> ResponseParsingResult {
         guard let url = maybeUrl else {
             throw VKError.authorizationUrlIsNil
         }
@@ -147,7 +155,7 @@ final class WebPresenterImpl: WebPresenter {
         return .nothing
     }
     
-    private func handle(error: VKError, fails: Int) throws -> HandledResult {
+    private func parse(error: VKError, fails: Int) throws -> ResponseParsingResult {
         if case .authorizationCancelled = error {
             throw error
         }
