@@ -296,6 +296,35 @@ final class WebPresenterTests: XCTestCase {
             XCTAssertEqual(error.asVK, VKError.webPresenterResultIsNil)
         }
     }
+    
+    func test_deinit_controllerInMainThread() throws {
+        // Given
+        let context = makeContext()
+        let exp = expectation(description: "")
+        
+        context.webControllerMaker.onMake = {
+            let controller = WebControllerMock()
+            
+            controller.onLoad = { url, onResult in
+                onResult(.response(url))
+            }
+            
+            controller.onDeinit = {
+                // Then
+                XCTAssertTrue(Thread.isMainThread)
+                exp.fulfill()
+            }
+            
+            return controller
+        }
+        
+        // When
+        DispatchQueue.global().async {
+            _ = try? context.presenter.presentWith(urlRequest: self.urlRequest(string: "http://vk.com#access_token=test")!)
+        }
+        
+        waitForExpectations(timeout: 10)
+    }
 }
 
 
