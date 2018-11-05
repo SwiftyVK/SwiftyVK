@@ -10,8 +10,8 @@ final class DependenciesImpl: Dependencies {
     
     private let appId: String
     private weak var delegate: SwiftyVKDelegate?
-	private let name: String?
-	private let configPath: String
+    private let customBundleName: String?
+    private let customConfigPath: String?
     
     private let longPollTaskTimeout: TimeInterval = 30
     private let uiSyncQueue = DispatchQueue(label: "SwiftyVK.uiSyncQueue")
@@ -50,11 +50,11 @@ final class DependenciesImpl: Dependencies {
         )
     }()
     
-	init(appId: String, delegate: SwiftyVKDelegate?, bundleName: String? = nil, configPath: String? = nil) {
+    init(appId: String, delegate: SwiftyVKDelegate?, bundleName: String?, configPath: String?) {
         self.appId = appId
         self.delegate = delegate
-		self.name = bundleName
-		self.configPath = configPath ?? "SwiftyVKState"
+        self.customBundleName = bundleName
+        self.customConfigPath = configPath
     }
     
     lazy var sessionsHolder: SessionsHolder & SessionSaver = {
@@ -78,7 +78,7 @@ final class DependenciesImpl: Dependencies {
         SessionsStorageImpl(
             fileManager: FileManager(),
             bundleName: self.bundleName,
-            configName: self.configPath
+            configName: self.customConfigPath ?? "SwiftyVKState"
         )
     }()
     
@@ -87,7 +87,7 @@ final class DependenciesImpl: Dependencies {
     }()
     
     private lazy var bundleName: String = {
-		name ?? Bundle.main.infoDictionary?[String(kCFBundleNameKey)] as? String ?? "SwiftyVK"
+        customBundleName ?? Bundle.main.infoDictionary?[String(kCFBundleNameKey)] as? String ?? "SwiftyVK"
     }()
     
     func session(id: String, config: SessionConfig, sessionSaver: SessionSaver) -> Session {
@@ -179,7 +179,7 @@ final class DependenciesImpl: Dependencies {
         
         #if os(iOS)
             controller = storyboard().instantiateViewController(
-                withIdentifier: name
+                withIdentifier: customBundleName
                 )
         #elseif os(macOS)
             controller = storyboard().instantiateController(
@@ -209,7 +209,7 @@ final class DependenciesImpl: Dependencies {
         #if os(macOS)
             let name = NSStoryboard.Name(rawValue: Resources.withSuffix("Storyboard"))
         #elseif os(iOS)
-            let name = Resources.withSuffix("Storyboard")
+            let customBundleName = Resources.withSuffix("Storyboard")
         #endif
         
         return VKStoryboard(

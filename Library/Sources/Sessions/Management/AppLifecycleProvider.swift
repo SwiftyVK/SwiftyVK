@@ -19,28 +19,28 @@ final class IOSAppLifecycleProvider: AppLifecycleProvider {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleDidBecomeActive),
-            name: NSNotification.Name.UIApplicationDidBecomeActive,
+            customBundleName: NSNotification.Name.UIApplicationDidBecomeActive,
             object: application
         )
         
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleWillResignActive),
-            name: NSNotification.Name.UIApplicationWillResignActive,
+            customBundleName: NSNotification.Name.UIApplicationWillResignActive,
             object: application
         )
         
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleDidEnterBackground),
-            name: NSNotification.Name.UIApplicationDidEnterBackground,
+            customBundleName: NSNotification.Name.UIApplicationDidEnterBackground,
             object: application
         )
         
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleWillEnterForeground),
-            name: NSNotification.Name.UIApplicationWillEnterForeground,
+            customBundleName: NSNotification.Name.UIApplicationWillEnterForeground,
             object: application
         )
     }
