@@ -14,7 +14,7 @@ protocol Dependencies:
     ShareControllerMaker { }
 
 protocol DependenciesHolder: SessionsHolderHolder, AuthorizatorHolder {
-    init(appId: String, delegate: SwiftyVKDelegate?)
+    init(appId: String, delegate: SwiftyVKDelegate?, bundleName: String?, configPath: String?)
 }
 
 protocol SessionsHolderHolder: class {

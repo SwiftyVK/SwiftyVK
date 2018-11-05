@@ -2,12 +2,12 @@ import Foundation
 
 /// SwiftyVK entry point
 public final class VK {
-    public static func setUp(appId: String, delegate: SwiftyVKDelegate) {
+    public static func setUp(appId: String, delegate: SwiftyVKDelegate, bundleName: String? = nil, configPath: String? = nil) {
         guard dependencies == nil else {
             return
         }
         
-        dependencies = dependenciesType.init(appId: appId, delegate: delegate)
+        dependencies = dependenciesType.init(appId: appId, delegate: delegate, bundleName: bundleName, configPath: configPath)
     }
     
     /// Returns SwiftyVK user sessions
