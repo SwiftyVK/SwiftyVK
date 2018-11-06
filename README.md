@@ -32,7 +32,7 @@
   </a>
 </p>
 <p align="center">
-   <a href="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=Donate%20for%20SwiftyVK&targets-hint=&default-sum=&button-text=14&payment-type-choice=on&mobile-payment-type-choice=on&hint=&successURL=&quickpay=shop&account=41001399791481">
+   <a href="https://money.yandex.ru/to/41001399791481">
     <img src="https://img.shields.io/badge/Donate-💰-lightgrey.svg" alt="Donale">
 </p>  
 
