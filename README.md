@@ -31,6 +31,10 @@
     <img src="https://codebeat.co/badges/e9f1cca3-b81d-4c6d-9129-50205465cb8a" alt="Codebeat" >
   </a>
 </p>
+<p align="center">
+   <a href="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=Donate%20for%20SwiftyVK&targets-hint=&default-sum=&button-text=14&payment-type-choice=on&mobile-payment-type-choice=on&hint=&successURL=&quickpay=shop&account=41001399791481">
+    <img src="https://img.shields.io/badge/Donate-💰-lightgrey.svg" alt="Donale">
+</p>  
 
 # Easy and powerful way to interact with [VK API](https://vk.com/dev) for iOS and macOS.
 
