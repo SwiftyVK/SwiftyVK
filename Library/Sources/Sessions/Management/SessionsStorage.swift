@@ -40,7 +40,7 @@ final class SessionsStorageImpl: SessionsStorage {
     }
     
     func configurationUrl() throws -> URL {
-		if configName.starts(with: "/") {
+        if configName.starts(with: "/") {
             return URL(fileURLWithPath: configName)
         }
         return try fileManager.url(
