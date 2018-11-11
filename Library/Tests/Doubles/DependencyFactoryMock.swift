@@ -5,7 +5,7 @@ final class DependenciesHolderMock: DependenciesHolder {
     
     var onInit: ((String, SwiftyVKDelegate?) -> ())?
     
-    init(appId: String, delegate: SwiftyVKDelegate?) {
+    init(appId: String, delegate: SwiftyVKDelegate?, bundleName: String?, configPath: String?) {
         onInit?(appId, delegate)
     }
     
