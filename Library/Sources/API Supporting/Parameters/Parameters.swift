@@ -354,6 +354,9 @@ public enum Parameter: String, Hashable {
     case filters
     case serverId = "server_id"
     case memberId = "member_id"
+    case timestampFrom = "timestamp_from"
+    case timestampTo = "timestamp_to"
+    case statsGroups = "stats_groups"
     
     public var hashValue: Int {
         return self.rawValue.hashValue
