@@ -126,6 +126,8 @@
 		D46263A21F9FAB4100333DC3 /* SharePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */; };
 		D46263A31F9FAB4100333DC3 /* SharePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */; };
 		D4637F0D1FBDF1DD00D89CE7 /* ShareImageCollectionViewItem_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4637F0C1FBDF1DD00D89CE7 /* ShareImageCollectionViewItem_macOS.swift */; };
+		D467D905212A824E00A438F1 /* Reflecting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D904212A824E00A438F1 /* Reflecting.swift */; };
+		D467D906212A824E00A438F1 /* Reflecting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D904212A824E00A438F1 /* Reflecting.swift */; };
 		D46C4D7420FBA2BA0091752F /* AppLifecycleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42DEEE320FA3E9200EE7478 /* AppLifecycleProvider.swift */; };
 		D46C4D7620FBAF600091752F /* AppLifecycleProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46C4D7520FBAF600091752F /* AppLifecycleProviderMock.swift */; };
 		D46C4D7720FBAF600091752F /* AppLifecycleProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46C4D7520FBAF600091752F /* AppLifecycleProviderMock.swift */; };
@@ -694,6 +696,7 @@
 		D461D94A1FADB6A500AA0960 /* OnePixelConstraint_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePixelConstraint_iOS.swift; sourceTree = "<group>"; };
 		D46263A11F9FAB4100333DC3 /* SharePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenterTests.swift; sourceTree = "<group>"; };
 		D4637F0C1FBDF1DD00D89CE7 /* ShareImageCollectionViewItem_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageCollectionViewItem_macOS.swift; sourceTree = "<group>"; };
+		D467D904212A824E00A438F1 /* Reflecting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reflecting.swift; sourceTree = "<group>"; };
 		D46C4D7520FBAF600091752F /* AppLifecycleProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifecycleProviderMock.swift; sourceTree = "<group>"; };
 		D46C4D7820FBB3E80091752F /* AppLifecycleProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifecycleProviderTests.swift; sourceTree = "<group>"; };
 		D46FB3E11F929D7A000CEAEB /* SwiftyVK_tests_iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyVK_tests_iOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1210,6 +1213,7 @@
 				D4BBFDAA1F9297A9009615E7 /* Atomic.swift */,
 				D4BBFDAB1F9297A9009615E7 /* Resources.swift */,
 				D4ED8BAB1FACC7E400B3FDA5 /* Result.swift */,
+				D467D904212A824E00A438F1 /* Reflecting.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1616,7 +1620,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1010;
 				TargetAttributes = {
 					A21F10B81DCDFCF6003EFDDC = {
 						CreatedOnToolsVersion = 8.1;
@@ -1640,17 +1644,18 @@
 					A2EB6E9A1BD180DD008E7D86 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = 842SSJ357W;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 					};
 					A2EB6EA71BD180E9008E7D86 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = 842SSJ357W;
 						DevelopmentTeamName = "Алексей Кудрявцев (Personal Team)";
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 					};
 					D46FB3E01F929D7A000CEAEB = {
 						CreatedOnToolsVersion = 9.0;
 						DevelopmentTeam = 744972ET87;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1813,7 +1818,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"../.swiftlint.yml\"\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"../.swiftlint.yml\"\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1961,6 +1966,7 @@
 				D4BBFFA51F929893009615E7 /* LongPollEvent.swift in Sources */,
 				D4BBFF961F929893009615E7 /* String+Extensions.swift in Sources */,
 				D461D94B1FADB6A500AA0960 /* OnePixelConstraint_iOS.swift in Sources */,
+				D467D906212A824E00A438F1 /* Reflecting.swift in Sources */,
 				D4BBFF911F929892009615E7 /* Video.swift in Sources */,
 				D4BBFF741F929892009615E7 /* Messages.swift in Sources */,
 				D4BBFFCB1F929893009615E7 /* SessionsHolder.swift in Sources */,
@@ -2167,6 +2173,7 @@
 				D4BBFED61F929891009615E7 /* URLOpener.swift in Sources */,
 				D4D2C3491FADC196002D0687 /* SynchronouslyTask.swift in Sources */,
 				D4BBFEB51F929891009615E7 /* Custom.swift in Sources */,
+				D467D905212A824E00A438F1 /* Reflecting.swift in Sources */,
 				D4BBFEB21F929891009615E7 /* Leads.swift in Sources */,
 				D4BBFEE61F929891009615E7 /* Method.swift in Sources */,
 				D441C9E01FBC86B80071A425 /* OnePixelConstraint_macOS.swift in Sources */,
@@ -2486,8 +2493,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = "-Onone -Xfrontend -debug-time-function-bodies";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				OTHER_SWIFT_FLAGS = " -Xfrontend -debug-time-function-bodies ";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Debug;
 		};
@@ -2523,7 +2530,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_SWIFT_FLAGS = "-Onone -Xfrontend -debug-time-function-bodies";
+				OTHER_SWIFT_FLAGS = " -Xfrontend -debug-time-function-bodies ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
@@ -2776,8 +2783,7 @@
 				PRODUCT_NAME = SwiftyVK;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2828,8 +2834,7 @@
 				PRODUCT_NAME = SwiftyVK;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2890,8 +2895,7 @@
 				PRODUCT_NAME = SwiftyVK;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2944,8 +2948,7 @@
 				PRODUCT_NAME = SwiftyVK;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2986,7 +2989,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3021,7 +3024,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "west0r.SwiftyVK-tests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

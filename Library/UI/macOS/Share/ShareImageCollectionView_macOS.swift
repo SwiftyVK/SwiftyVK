@@ -9,7 +9,7 @@ final class ShareImageCollectionViewMacOS: NSCollectionView, NSCollectionViewDel
         super.awakeFromNib()
         
         let nib = NSNib(
-            nibNamed: NSNib.Name(rawValue: "ShareImageCollectionViewItem_macOS"),
+            nibNamed: "ShareImageCollectionViewItem_macOS",
             bundle: Resources.bundle
         )
         register(

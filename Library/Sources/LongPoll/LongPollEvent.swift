@@ -27,7 +27,7 @@ public enum LongPollEvent {
     case type114(data: Data)
     
     var data: Data? {
-        return Mirror(reflecting: self).children.first?.value as? Data
+        return associatedValue(of: self)
     }
     
     // swiftlint:disable cyclomatic_complexity next
