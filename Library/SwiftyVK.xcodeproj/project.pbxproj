@@ -1620,7 +1620,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1010;
 				TargetAttributes = {
 					A21F10B81DCDFCF6003EFDDC = {
 						CreatedOnToolsVersion = 8.1;
@@ -2531,7 +2531,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_SWIFT_FLAGS = " -Xfrontend -debug-time-function-bodies ";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
