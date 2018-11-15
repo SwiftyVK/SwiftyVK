@@ -24,8 +24,44 @@ final class SessionStorageTests: XCTestCase {
             if fileManager.fileExists(atPath: fileUrl.path) {
                 try fileManager.removeItem(at: fileUrl)
             }
-        } catch let error {
+        }
+        catch let error {
             XCTFail("Config not removed with error: \(error)")
+        }
+    }
+    
+    func test_configPath_withRalativePath_haveBuildedCorreclty() {
+        let storage = SessionsStorageImpl(
+            fileManager: FileManager(),
+            bundleName: "SwiftyVKTests",
+            configName: "SwiftyVKConfig")
+        
+        do {
+            let configUrl = try storage.configurationUrl()
+            XCTAssertEqual(configUrl.lastPathComponent, "SwiftyVKConfig.plist")
+            XCTAssertEqual(configUrl.pathComponents.dropLast().last, "SwiftyVKTests")
+            XCTAssertEqual(configUrl.pathComponents.dropLast().dropLast().last, "Application Support")
+        }
+        catch let error {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+    
+    func test_configPath_withAbsolutePath_haveBuildedCorreclty() {
+        do {
+            let configPath = try FileManager.default.url(
+                for: FileManager.SearchPathDirectory.applicationDirectory,
+                in: FileManager.SearchPathDomainMask.allDomainsMask,
+                appropriateFor: nil,
+                create: false)
+                .appendingPathComponent("state.xml")
+            
+            let storage = SessionsStorageImpl(fileManager: FileManager(), bundleName: "", configName: configPath.path)
+            
+            XCTAssertEqual(try storage.configurationUrl().path, configPath.path)
+        }
+        catch let error {
+            XCTFail("Unexpected error: \(error)")
         }
     }
     
@@ -39,7 +75,8 @@ final class SessionStorageTests: XCTestCase {
             let restoredSessions = try storage.restore()
             // Then
             XCTAssertEqual(session.id, restoredSessions.first?.id)
-        } catch let error {
+        }
+        catch let error {
             XCTFail("Unexpected error: \(error)")
         }
     }
@@ -52,7 +89,8 @@ final class SessionStorageTests: XCTestCase {
             _ = try storage.restore()
             // Then
             XCTFail("Expression should throw error")
-        } catch let error {
+        }
+        catch let error {
             XCTAssertEqual((error as NSError).domain, NSCocoaErrorDomain)
             XCTAssertEqual((error as NSError).code, 260)
         }

@@ -10,6 +10,8 @@ final class DependenciesImpl: Dependencies {
     
     private let appId: String
     private weak var delegate: SwiftyVKDelegate?
+    private let customBundleName: String?
+    private let customConfigPath: String?
     
     private let longPollTaskTimeout: TimeInterval = 30
     private let uiSyncQueue = DispatchQueue(label: "SwiftyVK.uiSyncQueue")
@@ -48,9 +50,11 @@ final class DependenciesImpl: Dependencies {
         )
     }()
     
-    init(appId: String, delegate: SwiftyVKDelegate?) {
+    init(appId: String, delegate: SwiftyVKDelegate?, bundleName: String?, configPath: String?) {
         self.appId = appId
         self.delegate = delegate
+        self.customBundleName = bundleName
+        self.customConfigPath = configPath
     }
     
     lazy var sessionsHolder: SessionsHolder & SessionSaver = {
@@ -74,7 +78,7 @@ final class DependenciesImpl: Dependencies {
         SessionsStorageImpl(
             fileManager: FileManager(),
             bundleName: self.bundleName,
-            configName: "SwiftyVKState"
+            configName: self.customConfigPath ?? "SwiftyVKState"
         )
     }()
     
@@ -83,7 +87,7 @@ final class DependenciesImpl: Dependencies {
     }()
     
     private lazy var bundleName: String = {
-        Bundle.main.infoDictionary?[String(kCFBundleNameKey)] as? String ?? "SwiftyVK"
+        customBundleName ?? Bundle.main.infoDictionary?[String(kCFBundleNameKey)] as? String ?? "SwiftyVK"
     }()
     
     func session(id: String, config: SessionConfig, sessionSaver: SessionSaver) -> Session {
@@ -129,7 +133,7 @@ final class DependenciesImpl: Dependencies {
         #endif
         
         let tokenStorge = TokenStorageImpl(serviceKey: self.bundleName + "_Token")
-        
+		
         let vkAppProxy = VKAppProxyImpl(
             appId: self.appId,
             urlOpener: urlOpener,
