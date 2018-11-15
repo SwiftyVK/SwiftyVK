@@ -30,11 +30,12 @@ final class SessionStorageTests: XCTestCase {
         }
     }
     
-    func test_configPath_name() {
+    func test_configPath_withRalativePath_haveBuildedCorreclty() {
         let storage = SessionsStorageImpl(
             fileManager: FileManager(),
             bundleName: "SwiftyVKTests",
             configName: "SwiftyVKConfig")
+        
         do {
             let configUrl = try storage.configurationUrl()
             XCTAssertEqual(configUrl.lastPathComponent, "SwiftyVKConfig.plist")
@@ -46,15 +47,17 @@ final class SessionStorageTests: XCTestCase {
         }
     }
     
-    func test_configPath_absolute() {
+    func test_configPath_withAbsolutePath_haveBuildedCorreclty() {
         do {
             let configPath = try FileManager.default.url(
-                for: FileManager.SearchPathDirectory.trashDirectory,
+                for: FileManager.SearchPathDirectory.applicationDirectory,
                 in: FileManager.SearchPathDomainMask.allDomainsMask,
                 appropriateFor: nil,
                 create: false)
                 .appendingPathComponent("state.xml")
+            
             let storage = SessionsStorageImpl(fileManager: FileManager(), bundleName: "", configName: configPath.path)
+            
             XCTAssertEqual(try storage.configurationUrl().path, configPath.path)
         }
         catch let error {

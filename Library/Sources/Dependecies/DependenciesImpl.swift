@@ -179,7 +179,7 @@ final class DependenciesImpl: Dependencies {
         
         #if os(iOS)
             controller = storyboard().instantiateViewController(
-                withIdentifier: customBundleName
+                withIdentifier: name
                 )
         #elseif os(macOS)
             controller = storyboard().instantiateController(
@@ -209,7 +209,7 @@ final class DependenciesImpl: Dependencies {
         #if os(macOS)
             let name = NSStoryboard.Name(rawValue: Resources.withSuffix("Storyboard"))
         #elseif os(iOS)
-            let customBundleName = Resources.withSuffix("Storyboard")
+            let name = Resources.withSuffix("Storyboard")
         #endif
         
         return VKStoryboard(
