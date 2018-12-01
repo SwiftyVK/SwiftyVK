@@ -37,7 +37,8 @@
 <p align="center">
    <a href="https://money.yandex.ru/to/41001399791481">
     <img src="https://img.shields.io/badge/Donate-💰-lightgrey.svg" alt="Donale">
-</p>  
+   </a>
+</p>
 
 # Easy and powerful way to interact with [VK API](https://vk.com/dev) for iOS and macOS.
 
