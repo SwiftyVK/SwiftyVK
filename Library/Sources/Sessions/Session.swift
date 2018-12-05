@@ -11,6 +11,8 @@ public protocol Session: class {
     var state: SessionState { get }
     /// Long poll client for this session
     var longPoll: LongPoll { get }
+    /// token of current user
+    var token: Token? { get }
     
     /// Log in user with oAuth or VK app
     /// - parameter onSuccess: clousure which will be executed when user sucessfully logged.
@@ -82,7 +84,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     
     public internal(set) var id: String
     
-    private(set) var token: Token? {
+    private(set) public var token: Token? {
         didSet {
             sendTokenChangeEvent(from: oldValue, to: token)
         }
