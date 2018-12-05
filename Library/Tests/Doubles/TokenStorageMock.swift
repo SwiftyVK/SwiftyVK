@@ -2,15 +2,15 @@
 
 final class TokenStorageMock: TokenStorage {
     
-    var onSave: ((Token, String) -> ())?
-    var onGet: ((String) -> Token?)?
+    var onSave: ((InvalidatableToken, String) -> ())?
+    var onGet: ((String) -> InvalidatableToken?)?
     var onRemove: ((String) -> ())?
     
-    func save(_ token: Token, for sessionId: String) {
+    func save(_ token: InvalidatableToken, for sessionId: String) {
         onSave?(token, sessionId)
     }
     
-    func getFor(sessionId: String) -> Token? {
+    func getFor(sessionId: String) -> InvalidatableToken? {
         return onGet?(sessionId)
     }
     

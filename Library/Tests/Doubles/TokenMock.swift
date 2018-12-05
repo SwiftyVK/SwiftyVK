@@ -1,6 +1,6 @@
 @testable import SwiftyVK
 
-final class TokenMock: NSObject, Token {
+final class TokenMock: NSObject, InvalidatableToken {
     
     var token: String?
     var isValid: Bool
