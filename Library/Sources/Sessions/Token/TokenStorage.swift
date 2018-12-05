@@ -1,7 +1,7 @@
 protocol TokenStorage: class {
-    func save(_: Token, for sessionId: String) throws
-    func getFor(sessionId: String) -> Token?
+    func save(_: InvalidatableToken, for sessionId: String) throws
+    func getFor(sessionId: String) -> InvalidatableToken?
     func removeFor(sessionId: String)
 }
 
-final class TokenStorageImpl: KeychainProvider<Token>, TokenStorage {}
+final class TokenStorageImpl: KeychainProvider<InvalidatableToken>, TokenStorage {}

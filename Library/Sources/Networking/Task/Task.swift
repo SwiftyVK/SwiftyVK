@@ -27,7 +27,7 @@ final class TaskImpl: Operation, Task, OperationConvertible {
     private weak var attemptMaker: AttemptMaker?
     private let apiErrorHandler: ApiErrorHandler
     private weak var currentAttempt: Attempt?
-    private weak var currentToken: Token?
+    private weak var currentToken: InvalidatableToken?
     
     init(
         id: Int64,

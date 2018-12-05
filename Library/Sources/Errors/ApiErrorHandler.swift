@@ -1,7 +1,7 @@
 import Foundation
 
 protocol ApiErrorHandler {
-    func handle(error: ApiError, token: Token?) throws -> ApiErrorHandlerResult
+    func handle(error: ApiError, token: InvalidatableToken?) throws -> ApiErrorHandlerResult
 }
 
 final class ApiErrorHandlerImpl: ApiErrorHandler {
@@ -12,7 +12,7 @@ final class ApiErrorHandlerImpl: ApiErrorHandler {
         self.executor = executor
     }
     
-    func handle(error: ApiError, token: Token?) throws -> ApiErrorHandlerResult {
+    func handle(error: ApiError, token: InvalidatableToken?) throws -> ApiErrorHandlerResult {
         switch error.code {
         case 5:
             token?.invalidate()

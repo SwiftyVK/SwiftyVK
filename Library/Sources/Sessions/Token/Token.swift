@@ -1,14 +1,17 @@
 import Foundation
 
-public protocol Token: class, NSCoding {
+public protocol Token: class {
     var info: [String: String] { get }
     var isValid: Bool { get }
     
     func get() -> String?
+}
+
+protocol InvalidatableToken: NSCoding, Token {
     func invalidate()
 }
 
-final class TokenImpl: NSObject, Token {
+final class TokenImpl: NSObject, InvalidatableToken {
 
     private let token: String
     private var expires: Expires

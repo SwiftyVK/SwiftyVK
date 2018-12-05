@@ -12,7 +12,7 @@ public protocol Session: class {
     /// Long poll client for this session
     var longPoll: LongPoll { get }
     /// token of current user
-    var token: Token? { get }
+    var accessToken: Token? { get }
     
     /// Log in user with oAuth or VK app
     /// - parameter onSuccess: clousure which will be executed when user sucessfully logged.
@@ -41,7 +41,7 @@ public protocol Session: class {
 }
 
 protocol TaskSession {
-    var token: Token? { get }
+    var token: InvalidatableToken? { get }
     
     func shedule(attempt: Attempt, concurrent: Bool) throws
     func dismissCaptcha()
@@ -84,10 +84,14 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     
     public internal(set) var id: String
     
-    private(set) public var token: Token? {
+    private(set) var token: InvalidatableToken? {
         didSet {
             sendTokenChangeEvent(from: oldValue, to: token)
         }
+    }
+    
+    public var accessToken: Token? {
+        return token
     }
 
     private let taskSheduler: TaskSheduler
