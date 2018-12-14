@@ -53,9 +53,9 @@ final class SessionMakerMock: SessionMaker {
 
 final class TokenMakerMock: TokenMaker {
     
-    var onMake: ((String, TimeInterval, [String : String]) -> InvalidatableToken)?
+    var onMake: ((String, TimeInterval, [String: String]) -> InvalidatableToken)?
     
-    func token(token: String, expires: TimeInterval, info: [String : String]) -> InvalidatableToken {
+    func token(token: String, expires: TimeInterval, info: [String: String]) -> InvalidatableToken {
         guard let result = onMake?(token, expires, info) else {
             XCTFail("onMake not defined")
             return TokenMock()
