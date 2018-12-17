@@ -584,10 +584,10 @@ final class SessionTests: XCTestCase {
             return TokenMock()
         }
         
-        // Then
+        // When
         _ = try? context.session.logIn(revoke: false)
         
-        // When
+        // Then
         XCTAssert(context.session.token != nil)
         XCTAssert(context.session.token === context.session.accessToken)
     }
