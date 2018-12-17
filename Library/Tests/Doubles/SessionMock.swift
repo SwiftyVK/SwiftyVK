@@ -1,10 +1,11 @@
 @testable import SwiftyVK
 
 final class SessionMock: Session, TaskSession, DestroyableSession, ApiErrorExecutor {
+    var accessToken: Token?
     
     var longPoll: LongPoll = LongPollMock()
     
-    var token: Token?
+    var token: InvalidatableToken?
     
     let id = String.random(20)
     var config = SessionConfig()

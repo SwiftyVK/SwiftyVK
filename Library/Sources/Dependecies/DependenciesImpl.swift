@@ -254,7 +254,7 @@ final class DependenciesImpl: Dependencies {
         )
     }
     
-    func token(token: String, expires: TimeInterval, info: [String: String]) -> Token {
+    func token(token: String, expires: TimeInterval, info: [String: String]) -> InvalidatableToken {
         return TokenImpl(
             token: token,
             expires: expires,

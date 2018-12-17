@@ -6,9 +6,9 @@ final class AuthorizatorMock: Authorizator {
     var authorizeShouldThrows = false
     var authorizeCallCount = 0
     
-    var onAuthorize: ((String, SessionConfig, Bool) throws -> Token)?
+    var onAuthorize: ((String, SessionConfig, Bool) throws -> InvalidatableToken)?
     
-    func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Token {
+    func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> InvalidatableToken {
         authorizeCallCount += 1
         
         guard let result = try onAuthorize?(sessionId, config, revoke) else {
@@ -21,9 +21,9 @@ final class AuthorizatorMock: Authorizator {
     
     var authorizeWithRawTokenCallCount = 0
     
-    var onRawAuthorize: ((String, String, TimeInterval) -> Token)?
+    var onRawAuthorize: ((String, String, TimeInterval) -> InvalidatableToken)?
     
-    func authorize(sessionId: String, rawToken: String, expires: TimeInterval) -> Token {
+    func authorize(sessionId: String, rawToken: String, expires: TimeInterval) -> InvalidatableToken {
         authorizeWithRawTokenCallCount += 1
         
         guard let result = onRawAuthorize?(sessionId, rawToken, expires) else {
@@ -34,15 +34,15 @@ final class AuthorizatorMock: Authorizator {
         return result
     }
     
-    var onGetSavedToken: ((String) -> Token)?
+    var onGetSavedToken: ((String) -> InvalidatableToken)?
     
-    func getSavedToken(sessionId: String) -> Token? {
+    func getSavedToken(sessionId: String) -> InvalidatableToken? {
         return onGetSavedToken?(sessionId)
     }
     
-    var onValidate: ((String, URL) throws -> Token)?
+    var onValidate: ((String, URL) throws -> InvalidatableToken)?
     
-    func validate(sessionId: String, url: URL) throws -> Token {
+    func validate(sessionId: String, url: URL) throws -> InvalidatableToken {
         guard let result = try onValidate?(sessionId, url) else {
             XCTFail("onAuthorize not defined")
             return TokenMock()
@@ -51,7 +51,7 @@ final class AuthorizatorMock: Authorizator {
         return result
     }
     
-    func reset(sessionId: String) -> Token? {
+    func reset(sessionId: String) -> InvalidatableToken? {
         return nil
     }
     
