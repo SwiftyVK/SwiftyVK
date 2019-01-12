@@ -47,9 +47,9 @@
 <p align="center">
 😊 It's not <b>ios-vk-sdk</b> 😊<br />
 🍏 One library for iOS and mac OS 🍏<br />
-🤘 Fully written in swift and don't contains any Objective-C code 🤘<br />
+🤘 Fully written in Swift and doesn't contain any Objective-C code 🤘<br />
 🎮 Very simple interface, made with care about those who will use it 🎮<br />
-⛑ Fylly stong typed that you can not shoot yourself in the leg ⛑<br />
+⛑ Fully strong typed that you can not shoot yourself in the leg ⛑<br />
 🏆 High code quality with lot of unit tests, linter integration and CI 🏆<br />
 🚀 Frequent updates and bug fixes 🚀<br />
 🔊 LongPoll support 🔊<br />
@@ -58,7 +58,7 @@
 ## Table of contents
 * [Requirements](#requirements)
 * [Integration](#integration)
-  - [Carthage (recomended)](#carthage-recomended)
+  - [Carthage (recommended)](#carthage-recomended)
   - [CocoaPods](#cocoapods)
   - [Manually](#manually)
 * [Getting started](#getting-started)
@@ -97,7 +97,7 @@
 
 ## **Integration**
 
-### [Carthage](https://github.com/Carthage/Carthage) (recomended)
+### [Carthage](https://github.com/Carthage/Carthage) (recommended)
 ```
 github "SwiftyVK/SwiftyVK"
 ```
@@ -254,7 +254,7 @@ VK.sessions.default.logIn(rawToken: String, expires: TimeInterval)
 ## **Interaction with VK API**
 
 SwiftyVK provides a very simple interface for interaction with VK API.
-All requests are performed asynchronouly in a private queue by API scheduler
+All requests are performed asynchronously in a private queue by API scheduler
 (the scheduler sends no more than 3 requests per second by default).
 You can just send a request and get a response without a lot of work.
 
