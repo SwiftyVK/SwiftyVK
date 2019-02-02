@@ -70,7 +70,7 @@ final class CaptchaControllerMacOS: NSViewController, NSTextFieldDelegate, Captc
     }
     
     @objc
-    override func controlTextDidEndEditing(_ obj: Notification) {
+    func controlTextDidEndEditing(_ obj: Notification) {
         guard
             imageView?.image != nil,
             let result = textField?.stringValue,

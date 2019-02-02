@@ -5,10 +5,10 @@
     <img src="https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat" alt="Platform">
   </a>
   <a href="https://developer.apple.com/swift/">
-    <img src="https://img.shields.io/badge/Swift-4.1.0-orange.svg?style=flat" alt="Swift">
+    <img src="https://img.shields.io/badge/Swift-4.2.0-orange.svg?style=flat" alt="Swift">
   </a>
     <a href="https://vk.com/dev/versions">
-    <img src="https://img.shields.io/badge/VK_API-5.85-blue.svg?style=flat" alt="VK API">
+    <img src="https://img.shields.io/badge/VK_API-5.92-blue.svg?style=flat" alt="VK API">
   </a>
     <a href="https://cocoapods.org/pods/SwiftyVK">
     <img src="https://img.shields.io/cocoapods/v/SwiftyVK.svg?style=flat" alt="Cocoapods compatible">
@@ -37,7 +37,8 @@
 <p align="center">
    <a href="https://money.yandex.ru/to/41001399791481">
     <img src="https://img.shields.io/badge/Donate-💰-lightgrey.svg" alt="Donale">
-</p>  
+   </a>
+</p>
 
 # Easy and powerful way to interact with [VK API](https://vk.com/dev) for iOS and macOS.
 
@@ -46,9 +47,9 @@
 <p align="center">
 😊 It's not <b>ios-vk-sdk</b> 😊<br />
 🍏 One library for iOS and mac OS 🍏<br />
-🤘 Fully written in swift and don't contains any Objective-C code 🤘<br />
+🤘 Fully written in Swift and doesn't contain any Objective-C code 🤘<br />
 🎮 Very simple interface, made with care about those who will use it 🎮<br />
-⛑ Fylly stong typed that you can not shoot yourself in the leg ⛑<br />
+⛑ Fully strong typed that you can not shoot yourself in the leg ⛑<br />
 🏆 High code quality with lot of unit tests, linter integration and CI 🏆<br />
 🚀 Frequent updates and bug fixes 🚀<br />
 🔊 LongPoll support 🔊<br />
@@ -57,7 +58,7 @@
 ## Table of contents
 * [Requirements](#requirements)
 * [Integration](#integration)
-  - [Carthage (recomended)](#carthage-recomended)
+  - [Carthage (recommended)](#carthage-recomended)
   - [CocoaPods](#cocoapods)
   - [Manually](#manually)
 * [Getting started](#getting-started)
@@ -96,7 +97,7 @@
 
 ## **Integration**
 
-### [Carthage](https://github.com/Carthage/Carthage) (recomended)
+### [Carthage](https://github.com/Carthage/Carthage) (recommended)
 ```
 github "SwiftyVK/SwiftyVK"
 ```
@@ -253,7 +254,7 @@ VK.sessions.default.logIn(rawToken: String, expires: TimeInterval)
 ## **Interaction with VK API**
 
 SwiftyVK provides a very simple interface for interaction with VK API.
-All requests are performed asynchronouly in a private queue by API scheduler
+All requests are performed asynchronously in a private queue by API scheduler
 (the scheduler sends no more than 3 requests per second by default).
 You can just send a request and get a response without a lot of work.
 

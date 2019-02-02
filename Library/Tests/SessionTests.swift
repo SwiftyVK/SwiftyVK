@@ -577,6 +577,21 @@ final class SessionTests: XCTestCase {
         )
     }
     
+    func test_accessToken_and_token_equal() {
+        // Given
+        let context = makeContext()
+        context.authorizator.onAuthorize = { _, _, _ in
+            return TokenMock()
+        }
+        
+        // When
+        _ = try? context.session.logIn(revoke: false)
+        
+        // Then
+        XCTAssert(context.session.token != nil)
+        XCTAssert(context.session.token === context.session.accessToken)
+    }
+    
     private func syncLogIn(
         session: Session,
         onSuccess: @escaping ([String : String]) -> (),

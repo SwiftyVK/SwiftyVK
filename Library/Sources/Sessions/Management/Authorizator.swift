@@ -1,11 +1,11 @@
 import Foundation
 
 protocol Authorizator: class {
-    func getSavedToken(sessionId: String) -> Token?
-    func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Token
-    func authorize(sessionId: String, rawToken: String, expires: TimeInterval) throws -> Token
-    func validate(sessionId: String, url: URL) throws -> Token
-    func reset(sessionId: String) -> Token?
+    func getSavedToken(sessionId: String) -> InvalidatableToken?
+    func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> InvalidatableToken
+    func authorize(sessionId: String, rawToken: String, expires: TimeInterval) throws -> InvalidatableToken
+    func validate(sessionId: String, url: URL) throws -> InvalidatableToken
+    func reset(sessionId: String) -> InvalidatableToken?
     func handle(url: URL, app: String?)
 }
 
@@ -24,7 +24,7 @@ final class AuthorizatorImpl: Authorizator {
     private let cookiesHolder: CookiesHolder?
     private weak var delegate: SwiftyVKAuthorizatorDelegate?
     
-    private(set) var vkAppToken: Token?
+    private(set) var vkAppToken: InvalidatableToken?
     private var requestTimeout: TimeInterval = 10
     
     init(
@@ -47,7 +47,7 @@ final class AuthorizatorImpl: Authorizator {
         self.cookiesHolder = cookiesHolder
     }
     
-    func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Token {
+    func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> InvalidatableToken {
         defer { vkAppToken = nil }
         
         return try queue.sync {
@@ -76,13 +76,13 @@ final class AuthorizatorImpl: Authorizator {
         }
     }
     
-    func getSavedToken(sessionId: String) -> Token? {
+    func getSavedToken(sessionId: String) -> InvalidatableToken? {
         return queue.sync {
             tokenStorage.getFor(sessionId: sessionId)
         }
     }
     
-    func authorize(sessionId: String, rawToken: String, expires: TimeInterval) throws -> Token {
+    func authorize(sessionId: String, rawToken: String, expires: TimeInterval) throws -> InvalidatableToken {
         return try queue.sync {
             guard let tokenMaker = tokenMaker else {
                 throw VKError.weakObjectWasDeallocated
@@ -94,7 +94,7 @@ final class AuthorizatorImpl: Authorizator {
         }
     }
     
-    func validate(sessionId: String, url: URL) throws -> Token {
+    func validate(sessionId: String, url: URL) throws -> InvalidatableToken {
         return try queue.sync {
             let validationRequest = URLRequest(
                 url: url,
@@ -106,7 +106,7 @@ final class AuthorizatorImpl: Authorizator {
         }
     }
     
-    func reset(sessionId: String) -> Token? {
+    func reset(sessionId: String) -> InvalidatableToken? {
         return queue.sync {
             tokenStorage.removeFor(sessionId: sessionId)
             cookiesHolder?.remove(for: sessionId)
@@ -126,7 +126,7 @@ final class AuthorizatorImpl: Authorizator {
         webPresenter.dismiss()
     }
     
-    private func getToken(sessionId: String, request: URLRequest) throws -> Token {
+    private func getToken(sessionId: String, request: URLRequest) throws -> InvalidatableToken {
         defer { webPresenter.dismiss() }
         
         let token = try vkAppToken ?? webToken(sessionId: sessionId, request: request)
@@ -134,7 +134,7 @@ final class AuthorizatorImpl: Authorizator {
         return token
     }
     
-    private func webToken(sessionId: String, request: URLRequest) throws -> Token {
+    private func webToken(sessionId: String, request: URLRequest) throws -> InvalidatableToken {
         defer { webPresenter.dismiss() }
 
         guard let url = request.url else {
@@ -159,7 +159,7 @@ final class AuthorizatorImpl: Authorizator {
         
     }
     
-    private func makeToken(tokenInfo: String) throws -> Token {
+    private func makeToken(tokenInfo: String) throws -> InvalidatableToken {
         guard let parsingResult = tokenParser.parse(tokenInfo: tokenInfo) else {
             throw VKError.cantParseTokenInfo(tokenInfo)
         }

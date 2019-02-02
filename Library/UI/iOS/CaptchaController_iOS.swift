@@ -44,7 +44,7 @@ final class CaptchaControllerIOS: UIViewController, UITextFieldDelegate, Captcha
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillChange),
-            name: .UIKeyboardWillChangeFrame,
+            name: UIResponder.keyboardWillChangeFrameNotification,
             object: nil
         )
     }
@@ -112,10 +112,10 @@ final class CaptchaControllerIOS: UIViewController, UITextFieldDelegate, Captcha
     private func keyboardWillChange(notification: Notification) {
         guard
             let info = (notification as NSNotification).userInfo,
-            let animationDuration = (info[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
-            let keyboardFrameEnd = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
-            let viewAnimationCurveValue = (info[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.intValue,
-            let viewAnimationCurve = UIViewAnimationCurve(rawValue: viewAnimationCurveValue)
+            let animationDuration = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
+            let keyboardFrameEnd = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+            let viewAnimationCurveValue = (info[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.intValue,
+            let viewAnimationCurve = UIView.AnimationCurve(rawValue: viewAnimationCurveValue)
             else {
                 return
         }

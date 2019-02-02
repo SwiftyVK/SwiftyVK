@@ -171,7 +171,8 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextViewD
         close()
     }
 
-    override func controlTextDidChange(_ notification: Notification) {
+    @objc
+    func controlTextDidChange(_ notification: Notification) {
         guard let field = notification.object as? NSTextField else { return }
         context.message = field.stringValue
         updateSendButton()
