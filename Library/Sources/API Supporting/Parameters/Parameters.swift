@@ -351,6 +351,7 @@ public enum Parameter: String, Hashable {
     case settings
     case groupsCanPost = "groups_can_post"
     case lpVersion = "lp_version"
+    case filter
     case filters
     case serverId = "server_id"
     case memberId = "member_id"
