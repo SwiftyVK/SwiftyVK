@@ -33,6 +33,9 @@ final class SessionsStorageImpl: SessionsStorage {
     func restore() throws -> [EncodedSession] {
         return try gateQueue.sync {
             let fileUrl = try configurationUrl()
+            
+            guard fileManager.fileExists(atPath: fileUrl.path) else { return [] }
+            
             let rawData = try Data(contentsOf: fileUrl)
             let sessions = try PropertyListDecoder().decode([EncodedSession].self, from: rawData)
             return sessions
