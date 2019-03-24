@@ -27,6 +27,14 @@ public struct ApiError: Equatable {
         otherInfo = makeOtherInfo(from: json.forcedDictionary("error"))
     }
     
+    // Only for unit tests
+    init(code: Int, otherInfo: [String: String] = [:]) {
+        self.code = code
+        self.message = ""
+        self.requestParams = [:]
+        self.otherInfo = otherInfo
+    }
+    
     var toVK: VKError {
         return .api(self)
     }

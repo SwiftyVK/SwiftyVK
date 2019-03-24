@@ -222,6 +222,7 @@ public enum Parameter: String, Hashable {
     case reposts
     case lastCommentsCount = "last_comments_count"
     case itemId = "item_id"
+    case itemIds = "item_ids"
     case noReposts = "no_reposts"
     case pageUrl = "page_url"
     case key
