@@ -81,18 +81,17 @@ final class SessionStorageTests: XCTestCase {
         }
     }
     
-    func test_throwError_whenRestoreWithoutSave() {
+    func test_returnEmptyArray_whenRestoreWithoutSave() {
         // Given
         let storage = makeStorage()
         // When
         do {
-            _ = try storage.restore()
+            let sessions = try storage.restore()
             // Then
-            XCTFail("Expression should throw error")
+            XCTAssertTrue(sessions.isEmpty)
         }
         catch let error {
-            XCTAssertEqual((error as NSError).domain, NSCocoaErrorDomain)
-            XCTAssertEqual((error as NSError).code, 260)
+            XCTFail("Unexpected error: \(error)")
         }
     }
 }
