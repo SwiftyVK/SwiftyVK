@@ -519,7 +519,7 @@ VK.sessions.default.share(
 
 ## **FAQ**
 
-For now this section is empty...
+[I can't find some API method or parameter in library](https://github.com/SwiftyVK/SwiftyVK/wiki/I-can't-find-some-API-method-or-parameter-in-library)
 
 ## **License**
 
