@@ -63,7 +63,7 @@ final class ShareWorkerImpl: ShareWorker {
                     self?.group.leave()
                 }
                 .onError { [weak self] error in
-                    print("image not uploaded with error: \(error)")
+                    print("SwiftyVK: Image not uploaded with error: \(error)")
                     image.state = .failed
                     self?.group.leave()
                 }

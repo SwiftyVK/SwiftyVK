@@ -34,7 +34,10 @@ final class SessionsStorageImpl: SessionsStorage {
         return try gateQueue.sync {
             let fileUrl = try configurationUrl()
             
-            guard fileManager.fileExists(atPath: fileUrl.path) else { return [] }
+            guard fileManager.fileExists(atPath: fileUrl.path) else {
+                print("SwiftyVK: Session not restored because file not exists yet")
+                return []
+            }
             
             let rawData = try Data(contentsOf: fileUrl)
             let sessions = try PropertyListDecoder().decode([EncodedSession].self, from: rawData)

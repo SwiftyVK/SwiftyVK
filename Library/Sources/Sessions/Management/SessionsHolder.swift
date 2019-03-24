@@ -109,7 +109,7 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
             try self.sessionsStorage.save(sessions: encodedSessions)
         }
         catch let error {
-            print("Sessions not saved with error: \(error)")
+            print("SwiftyVK: Sessions not saved with an error: \(error)")
         }
     }
     
@@ -122,7 +122,7 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
                 .forEach { makeSession(id: $0.id, config: $0.config, makeDefault: $0.isDefault) }
         }
         catch let error {
-            print("Restore sessions failed with error: \(error)")
+            print("SwiftyVK: Sessions not rerstored with an error: \(error)")
         }
     }
 }
