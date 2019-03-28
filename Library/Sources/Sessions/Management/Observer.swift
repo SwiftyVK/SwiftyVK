@@ -43,10 +43,10 @@ private class Weak<T>: Hashable {
     init(disposable: AnyObject) {
         self.disposable = disposable
     }
-    
-    var hashValue: Int {
-        if let disposable = disposable { return ObjectIdentifier(disposable).hashValue }
-        return 0
+
+    public func hash(into hasher: inout Hasher) {
+        let hash = disposable.flatMap { ObjectIdentifier($0).hashValue } ?? 0
+        hasher.combine(hash)
     }
     
     static func == (lhs: Weak<T>, rhs: Weak<T>) -> Bool {

@@ -19,7 +19,7 @@ class KeychainProvider<EntityType> {
         else if #available(iOS 2.0, OSX 10.11, *) {
             data = NSKeyedArchiver.archivedData(withRootObject: entity)
         }
-        else {  
+        else {
             // Because Xcode 10 has a bug - http://openradar.appspot.com/49262697
             // swiftlint:disable next compiler_protocol_init
             let selector = Selector(stringLiteral: "archivedDataWithRootObject:")
@@ -41,7 +41,8 @@ class KeychainProvider<EntityType> {
     func getFor(sessionId: String) -> EntityType? {
         let keychainQuery = keychainParamsFor(sessionId: sessionId)
         
-        keychainQuery.setObject(kCFBooleanTrue, forKey: NSString(format: kSecReturnData))
+        // swiftlint:disable next force_unwrapping
+        keychainQuery.setObject(kCFBooleanTrue!, forKey: NSString(format: kSecReturnData))
         keychainQuery.setObject(kSecMatchLimitOne, forKey: NSString(format: kSecMatchLimit))
         
         var keychainResult: AnyObject?

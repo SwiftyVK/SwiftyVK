@@ -13,7 +13,7 @@ extension Request: Hashable {
         return lhs.type == rhs.type
     }
     
-    public var hashValue: Int {
-        return type.hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(type.hashValue)
     }
 }

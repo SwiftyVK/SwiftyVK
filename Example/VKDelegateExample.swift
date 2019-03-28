@@ -25,7 +25,7 @@ final class VKDelegateExample: SwiftyVKDelegate {
         // HINT: google it - get top most UIViewController
         #if os(macOS)
             if let contentController = NSApplication.shared.keyWindow?.contentViewController {
-                contentController.presentViewControllerAsSheet(viewController)
+                contentController.presentAsSheet(viewController)
             }
         #elseif os(iOS)
             if let rootController = UIApplication.shared.keyWindow?.rootViewController {
