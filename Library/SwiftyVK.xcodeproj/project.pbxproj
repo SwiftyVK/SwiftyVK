@@ -1208,7 +1208,6 @@
 				D4BBFDA91F9297A9009615E7 /* ConnectionObserver.swift */,
 				D4BBFDAA1F9297A9009615E7 /* Atomic.swift */,
 				D4BBFDAB1F9297A9009615E7 /* Resources.swift */,
-				D4ED8BAB1FACC7E400B3FDA5 /* Result.swift */,
 				D467D904212A824E00A438F1 /* Reflecting.swift */,
 			);
 			path = Utils;
@@ -1304,6 +1303,7 @@
 		D4BBFDEB1F9297A9009615E7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D4ED8BAB1FACC7E400B3FDA5 /* Result.swift */,
 				D4BBFDEC1F9297A9009615E7 /* VKURLSession.swift */,
 				D4BBFDED1F9297A9009615E7 /* VKURLSessionTask.swift */,
 				D4BBFDEE1F9297A9009615E7 /* String+Extensions.swift */,
