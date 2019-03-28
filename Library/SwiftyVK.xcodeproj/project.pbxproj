@@ -92,8 +92,8 @@
 		D423E04C1FA6414F0083C8FB /* ShareImageCollectionCell_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D423E04B1FA6414F0083C8FB /* ShareImageCollectionCell_iOS.swift */; };
 		D42B120A1FC1B97800DB7879 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42B12091FC1B97800DB7879 /* NSImage+Extensions.swift */; };
 		D42DEEE420FA3E9300EE7478 /* AppLifecycleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42DEEE320FA3E9200EE7478 /* AppLifecycleProvider.swift */; };
-		D42DEEE620FA41A100EE7478 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42DEEE520FA41A100EE7478 /* Observer.swift */; };
-		D42DEEE720FA41A100EE7478 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42DEEE520FA41A100EE7478 /* Observer.swift */; };
+		D42DEEE620FA41A100EE7478 /* ParameterizedObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42DEEE520FA41A100EE7478 /* ParameterizedObserver.swift */; };
+		D42DEEE720FA41A100EE7478 /* ParameterizedObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42DEEE520FA41A100EE7478 /* ParameterizedObserver.swift */; };
 		D4306B2D1F547BC70050D165 /* ApiErrorHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4306B2C1F547BC70050D165 /* ApiErrorHandlerMock.swift */; };
 		D4306B2F1F5484380050D165 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4306B2E1F5484380050D165 /* Response.swift */; };
 		D4321D8B1F5F0587001AFE9F /* FullVariationsMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4321D8A1F5F0587001AFE9F /* FullVariationsMethodTests.swift */; };
@@ -667,7 +667,7 @@
 		D423E04B1FA6414F0083C8FB /* ShareImageCollectionCell_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageCollectionCell_iOS.swift; sourceTree = "<group>"; };
 		D42B12091FC1B97800DB7879 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		D42DEEE320FA3E9200EE7478 /* AppLifecycleProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLifecycleProvider.swift; sourceTree = "<group>"; };
-		D42DEEE520FA41A100EE7478 /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		D42DEEE520FA41A100EE7478 /* ParameterizedObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterizedObserver.swift; sourceTree = "<group>"; };
 		D4306B2C1F547BC70050D165 /* ApiErrorHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorHandlerMock.swift; sourceTree = "<group>"; };
 		D4306B2E1F5484380050D165 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		D4321D8A1F5F0587001AFE9F /* FullVariationsMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullVariationsMethodTests.swift; sourceTree = "<group>"; };
@@ -1140,8 +1140,6 @@
 		D46FB3DB1F929C7A000CEAEB /* Management */ = {
 			isa = PBXGroup;
 			children = (
-				D42DEEE320FA3E9200EE7478 /* AppLifecycleProvider.swift */,
-				D42DEEE520FA41A100EE7478 /* Observer.swift */,
 				D4BBFDE21F9297A9009615E7 /* Authorizator.swift */,
 				D4BBFDDF1F9297A9009615E7 /* SessionsStorage.swift */,
 				D4BBFDE31F9297A9009615E7 /* SessionsHolder.swift */,
@@ -1201,6 +1199,8 @@
 		D4BBFDA41F9297A9009615E7 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				D42DEEE320FA3E9200EE7478 /* AppLifecycleProvider.swift */,
+				D42DEEE520FA41A100EE7478 /* ParameterizedObserver.swift */,
 				D4BBFDA51F9297A9009615E7 /* KeychainProvider.swift */,
 				D4BBFDA61F9297A9009615E7 /* IDGenerator.swift */,
 				D4BBFDA71F9297A9009615E7 /* Lock.swift */,
@@ -1996,7 +1996,7 @@
 				D4DC124C1FAB542B00D977D8 /* SharePreferencesCell_iOS.swift in Sources */,
 				D423E0491FA640D90083C8FB /* ShareImageCollectionView_iOS.swift in Sources */,
 				D4BBFFB51F929893009615E7 /* Response.swift in Sources */,
-				D42DEEE720FA41A100EE7478 /* Observer.swift in Sources */,
+				D42DEEE720FA41A100EE7478 /* ParameterizedObserver.swift in Sources */,
 				D4BBFF9D1F929893009615E7 /* JSON.swift in Sources */,
 				D4BBFFC61F929893009615E7 /* QueryBuilder.swift in Sources */,
 				D4ED8BAD1FACC7E400B3FDA5 /* Result.swift in Sources */,
@@ -2131,7 +2131,7 @@
 				D4BBFEFD1F929891009615E7 /* Task.swift in Sources */,
 				D48E55AF1FDD703D00215F52 /* DynamicTextView.swift in Sources */,
 				D4BBFF0E1F929891009615E7 /* ConnectionObserver.swift in Sources */,
-				D42DEEE620FA41A100EE7478 /* Observer.swift in Sources */,
+				D42DEEE620FA41A100EE7478 /* ParameterizedObserver.swift in Sources */,
 				D4BBFEDA1F929891009615E7 /* VKFileManager.swift in Sources */,
 				D4BBFEED1F929891009615E7 /* Response.swift in Sources */,
 				D4BBFED51F929891009615E7 /* JSON.swift in Sources */,
