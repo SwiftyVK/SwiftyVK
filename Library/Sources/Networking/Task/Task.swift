@@ -1,6 +1,6 @@
 import Foundation
 
-/// Represents sended VK API request task
+/// Represents sent VK API request task
 public protocol Task {
     /// State of sending
     var state: TaskState { get }
@@ -47,7 +47,7 @@ final class TaskImpl: Operation, Task, OperationConvertible {
     }
     
     override func main() {
-        state = .sended
+        state = .sent
         tryToSend()
         semaphore.wait()
         session.dismissCaptcha()
@@ -215,7 +215,7 @@ final class TaskImpl: Operation, Task, OperationConvertible {
 /// Represents state of VK API request task
 public enum TaskState {
     case created
-    case sended
+    case sent
     case finished(Data)
     case failed(VKError)
     case cancelled

@@ -32,7 +32,7 @@ public protocol Method: ChainableMethod {}
 
 extension Method {
     /// Set onSuccess callback
-    /// - parameter clousure: callback which will be executed when request is successfully sended
+    /// - parameter clousure: callback which will be executed when request is successfully sent
     public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> Methods.FailableConfigurable {
         let request = toRequest()
         request.callbacks.onSuccess = clousure

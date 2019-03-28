@@ -1,7 +1,7 @@
 extension Methods {
     public final class Successable: Basic {
         /// Set onSuccess callback
-        /// - parameter clousure: callback which will be executed when request is successfully sended
+        /// - parameter clousure: callback which will be executed when request is successfully sent
         public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> Basic {
             return withOnSuccess(clousure)
         }

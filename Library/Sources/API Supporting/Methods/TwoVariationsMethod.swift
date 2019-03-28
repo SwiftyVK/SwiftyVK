@@ -1,7 +1,7 @@
 extension Methods {
     public final class SuccessableFailable: Basic, ChainableMethod {
         /// Set onSuccess callback
-        /// - parameter clousure: callback which will be executed when request is successfully sended 
+        /// - parameter clousure: callback which will be executed when request is successfully sent 
         public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> Failable {
             return withOnSuccess(clousure)
         }
@@ -15,7 +15,7 @@ extension Methods {
     
     public final class SuccessableProgressable: Basic {
         /// Set onSuccess callback
-        /// - parameter clousure: callback which will be executed when request is successfully sended 
+        /// - parameter clousure: callback which will be executed when request is successfully sent 
         public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> Progressable {
             return withOnSuccess(clousure)
         }
@@ -29,7 +29,7 @@ extension Methods {
     
     public final class SuccessableConfigurable: Basic {
         /// Set onSuccess callback
-        /// - parameter clousure: callback which will be executed when request is successfully sended 
+        /// - parameter clousure: callback which will be executed when request is successfully sent 
         public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> Configurable {
             return withOnSuccess(clousure)
         }
