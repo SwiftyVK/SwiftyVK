@@ -26,6 +26,10 @@ public final class VK {
         
         return sessionsHolder
     }
+    
+    public static func releaseDependencies() {
+        dependencies = nil
+    }
 
     static var dependenciesType: DependenciesHolder.Type = DependenciesImpl.self
     private static var dependencies: DependenciesHolder?
