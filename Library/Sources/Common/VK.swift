@@ -27,6 +27,7 @@ public final class VK {
         return sessionsHolder
     }
     
+    /// Free up all resources
     public static func release() {
         dependencies = nil
     }
