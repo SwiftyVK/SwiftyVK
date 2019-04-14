@@ -168,6 +168,16 @@ class VKDelegateExample: SwiftyVKDelegate {
 VK.setUp(appId: String, delegate: SwiftyVKDelegate)
 ```
 
+### Releasing
+
+in order to free up resources that holds SwiftyVK use:
+
+```swift
+VK.release()
+```
+note you must setup it again for further using
+
+
 ## **Authorization**
 
 SwiftyVK provides several ways to authorize user. Choose the one that's more suitable for you.
