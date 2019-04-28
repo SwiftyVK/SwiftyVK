@@ -6,20 +6,20 @@ final class VKStack {
    
     static func mock(_ requestType: RequestType, fileName: String, file: StaticString = #file, line: UInt = #line) {
         guard let data = JsonReader.read(fileName, file: file, line: line) else { return }
-        mock(Request(type: requestType).toMethod(), result: .result(.data(data)))
+        mock(Request(type: requestType).toMethod(), result: .result(.success(data)))
     }
     
     static func mock(_ method: SendableMethod, fileName: String, file: StaticString = #file, line: UInt = #line) {
         guard let data = JsonReader.read(fileName, file: file, line: line) else { return }
-        mock(method, result: .result(.data(data)))
+        mock(method, result: .result(.success(data)))
     }
     
     static func mock(_ method: SendableMethod, data: Data) {
-        mock(method, result: .result(.data(data)))
+        mock(method, result: .result(.success(data)))
     }
     
     static func mock(_ method: SendableMethod, error: VKError) {
-        mock(method, result: .result(.error(error)))
+        mock(method, result: .result(.failure(error)))
     }
     
     static func mock(_ method: SendableMethod, clousure: @escaping () -> ()) {
