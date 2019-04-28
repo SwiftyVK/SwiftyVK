@@ -19,6 +19,7 @@ private enum ResponseParsingResult {
     case response(String)
     case fail
     case nothing
+    case wrongPage
 }
 
 private final class LoadingState {
@@ -117,6 +118,8 @@ final class WebPresenterImpl: WebPresenter {
             case .nothing:
                 break
                 
+            case .wrongPage:
+                currentController?.goBack()
             }
         }
             
@@ -133,12 +136,16 @@ final class WebPresenterImpl: WebPresenter {
         guard let url = maybeUrl else {
             throw VKError.authorizationUrlIsNil
         }
-        
+                
         let host = url.host ?? ""
         let fragment = url.fragment ?? ""
-
+        let query = url.query ?? ""
+        
         if host != "vk.com" && host != "m.vk.com" && host != "oauth.vk.com" {
-            currentController?.goBack()
+            return .wrongPage
+        }
+        if fragment.isEmpty && query.isEmpty {
+            return .fail
         }
         else if fragment.contains("access_token=") {
             return .response(fragment)
