@@ -39,11 +39,11 @@ public final class SynchronouslyTask: Task {
         var result: Result<Data, VKError>?
         
         request.callbacks.onSuccess = {
-            result = .data($0)
+            result = .success($0)
             semaphore.signal()
         }
         request.callbacks.onError = {
-            result = .error($0)
+            result = .failure($0)
             semaphore.signal()
         }
         

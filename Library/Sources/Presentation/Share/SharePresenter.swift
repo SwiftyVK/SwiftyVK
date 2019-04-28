@@ -66,7 +66,7 @@ final class SharePresenterImpl: SharePresenter {
 
                 do {
                     guard let data = try shareWorker?.post(context: $0, in: session) else { return }
-                    result = .data(data)
+                    result = .success(data)
                     controller?.close()
                 }
                 catch let caughtError {
@@ -75,7 +75,7 @@ final class SharePresenterImpl: SharePresenter {
                     }
                     
                     controller?.enablePostButton(true)
-                    result = .error(caughtError.toVK())
+                    result = .failure(caughtError.toVK())
                 }
             }
         )

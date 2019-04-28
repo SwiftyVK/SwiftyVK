@@ -7,7 +7,7 @@ final class AttemptApiQueue: OperationQueue {
     private let counterQueue = DispatchQueue(label: "SwiftyVK.counterQueue", qos: .userInitiated)
     private let gateQueue = DispatchQueue(label: "SwiftyVK.attemptApi.gateQueue", qos: .userInitiated)
     
-    private var sended = 0
+    private var sent = 0
     private var waited = [Operation]()
     private var dropCounterTimer: DispatchSourceTimer?
     
@@ -39,9 +39,9 @@ final class AttemptApiQueue: OperationQueue {
             runDropCounterTimer()
         }
         
-        if limit.count < 1 || sended < limit.count {
+        if limit.count < 1 || sent < limit.count {
             super.addOperation(operation)
-            sended += 1
+            sent += 1
         }
         else {
             waited.append(operation)
@@ -63,13 +63,13 @@ final class AttemptApiQueue: OperationQueue {
             }
         }
         
-        let oldSended = sended
-        sended = 0
+        let oldSent = sent
+        sent = 0
         
-        guard oldSended > 0 else { return }
+        guard oldSent > 0 else { return }
         
-        while sended < limit.count && !waited.isEmpty {
-            sended += 1
+        while sent < limit.count && !waited.isEmpty {
+            sent += 1
             let op = waited.removeFirst()
             super.addOperation(op)
         }

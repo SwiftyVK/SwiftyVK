@@ -32,21 +32,25 @@ extension RequestType: Equatable, Hashable {
         }
     }
     
-    public var hashValue: Int {
+    public func hash(into hasher: inout Hasher) {
+        let hash: Int
+        
         switch self {
         case let .api(method, parameters):
-            return method.hashValue ^ Set(parameters.map { $0.key + $0.value }).hashValue
+            hash = method.hashValue ^ Set(parameters.map { $0.key + $0.value }).hashValue
         case let .url(url):
-            return url.hashValue
+            hash = url.hashValue
         case let .upload(url, media, partType):
-            return url.hashValue ^ partType.hashValue ^ Set(media).hashValue
+            hash = url.hashValue ^ partType.hashValue ^ Set(media).hashValue
         }
+        
+        hasher.combine(hash)
     }
 }
 
 extension Media: Hashable {
     
-    public var hashValue: Int {
-       return type.hashValue ^ data.hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(type.hashValue ^ data.hashValue)
     }
 }

@@ -1,6 +1,7 @@
 @testable import SwiftyVK
 
 final class SessionMock: Session, TaskSession, DestroyableSession, ApiErrorExecutor {
+
     var accessToken: Token?
     
     var longPoll: LongPoll = LongPollMock()
@@ -70,5 +71,8 @@ final class SessionMock: Session, TaskSession, DestroyableSession, ApiErrorExecu
     }
     
     func share(_ context: ShareContext, onSuccess: @escaping RequestCallbacks.Success, onError: @escaping RequestCallbacks.Error) {
+    }
+    
+    func share(_ context: ShareContext, onSuccess: @escaping ([String : Any]) throws -> (), onError: @escaping RequestCallbacks.Error) {
     }
 }
