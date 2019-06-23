@@ -1,29 +1,36 @@
 final class ParameterizedObserver<T> {
     
     private var containers = Set<Weak<T>>()
+    private let lock = MultiplatrormLock()
     
     func subscribe(_ object: AnyObject, handler: @escaping (T) -> ()) {
-        let container = Weak<T>(disposable: object, handler: handler)
-        
-        guard !containers.contains(container) else {
-            assertionFailure("Observer for this disposable already exists")
-            return
+        lock.perform {
+            let container = Weak<T>(disposable: object, handler: handler)
+            
+            guard !containers.contains(container) else {
+                assertionFailure("Observer for this disposable already exists")
+                return
+            }
+            
+            containers.insert(container)
         }
-        
-        containers.insert(container)
     }
     
     func unsubscribe(_ object: AnyObject) {
-        containers.remove(Weak<T>(disposable: object))
+        lock.perform {
+            containers.remove(Weak<T>(disposable: object))
+        }
     }
     
     func notify(with object: T) {
         var disposables = [AnyObject]()
         var handlers = [(T) -> ()]()
         
-        disposables = containers.compactMap { $0.disposable }
-        containers = containers.filter { $0.disposable != nil }
-        handlers = containers.compactMap { $0.handler }
+        lock.perform {
+            disposables = containers.compactMap { $0.disposable }
+            containers = containers.filter { $0.disposable != nil }
+            handlers = containers.compactMap { $0.handler }
+        }
         
         withExtendedLifetime(disposables) {
             handlers.forEach { $0(object) }
