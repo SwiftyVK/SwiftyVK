@@ -222,7 +222,7 @@ final class AuthorizatorImpl: Authorizator {
             + "v\(config.apiVersion)&"
             + "sdk_version=\(config.sdkVersion)"
             + "\(redirect)&"
-            + "response_type=token&"
+            + "response_type=code&"
             + "revoke=\(revoke ? 1 : 0)"
     }
 }
