@@ -32,7 +32,7 @@ extension VKError: Equatable {
         (.cantAwaitRequestWithSettedCallbacks, .cantAwaitRequestWithSettedCallbacks),
         (.captchaWasDismissed, .captchaWasDismissed):
             return true
-        case (_, _):
+        default:
             return false
         }
     }

@@ -76,7 +76,11 @@ final class VKAppProxyImpl: VKAppProxy {
     }
     
     func handle(url: URL, app: String?) -> String? {
-        guard (app == "com.vk.vkclient" || app == "com.vk.vkhd") && url.scheme == "vk\(appId)" else {
+        let isAppCorrect = (app == "com.vk.vkclient" || app == "com.vk.vkhd" || app == nil)
+        let isSchemeCorrect = url.scheme == "vk\(appId)"
+        let isHostCorrect = url.host == "authorize"
+        
+        guard isAppCorrect && isSchemeCorrect && isHostCorrect else {
             return nil
         }
         
