@@ -8,7 +8,7 @@
     <img src="https://img.shields.io/badge/Swift-4.2.0-orange.svg?style=flat" alt="Swift">
   </a>
     <a href="https://vk.com/dev/versions">
-    <img src="https://img.shields.io/badge/VK_API-5.92-blue.svg?style=flat" alt="VK API">
+    <img src="https://img.shields.io/badge/VK_API->5.92-blue.svg?style=flat" alt="VK API">
   </a>
     <a href="https://cocoapods.org/pods/SwiftyVK">
     <img src="https://img.shields.io/cocoapods/v/SwiftyVK.svg?style=flat" alt="Cocoapods compatible">

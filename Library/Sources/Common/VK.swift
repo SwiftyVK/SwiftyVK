@@ -6,7 +6,8 @@ public final class VK {
             appId: String,
             delegate: SwiftyVKDelegate,
             bundleName: String? = nil,
-            configPath: String? = nil) {
+            configPath: String? = nil
+    ) {
         guard dependencies == nil else {
             return
         }
@@ -15,7 +16,8 @@ public final class VK {
             appId: appId,
             delegate: delegate,
             bundleName: bundleName,
-            configPath: configPath)
+            configPath: configPath
+        )
     }
     
     /// Returns SwiftyVK user sessions

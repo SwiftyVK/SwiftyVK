@@ -174,35 +174,35 @@ final class DependenciesImpl: Dependencies {
     private func viewController<ControllerType>(
         name: String,
         onDismiss: (() -> ())?
-        ) -> ControllerType {
+    ) -> ControllerType {
         var controller: VKViewController?
         
-        #if os(iOS)
-            controller = storyboard().instantiateViewController(
-                withIdentifier: name
-                )
-        #elseif os(macOS)
-            controller = storyboard().instantiateController(
-                withIdentifier: name
-                ) as? VKViewController
-        #endif
+        return DispatchQueue.anywayOnMain {
+            #if os(iOS)
+                controller = storyboard().instantiateViewController(
+                    withIdentifier: name
+                    )
+            #elseif os(macOS)
+                controller = storyboard().instantiateController(
+                    withIdentifier: name
+                    ) as? VKViewController
+            #endif
+            
+            guard
+                let unwrappedController = controller,
+                let resultController = unwrappedController as? ControllerType
+                else {
+                fatalError("Can't find \(name) controller")
+            }
+            
+            if let dismisableController = resultController as? DismisableController {
+                dismisableController.onDismiss = onDismiss
+            }
         
-        guard
-            let unwrappedController = controller,
-            let resultController = unwrappedController as? ControllerType
-            else {
-            fatalError("Can't find \(name) controller")
-        }
-        
-        if let dismisableController = resultController as? DismisableController {
-            dismisableController.onDismiss = onDismiss
-        }
-        
-        DispatchQueue.anywayOnMain {
             self.delegate?.vkNeedToPresent(viewController: unwrappedController)
+            
+            return resultController
         }
-        
-        return resultController
     }
     
     func storyboard() -> VKStoryboard {

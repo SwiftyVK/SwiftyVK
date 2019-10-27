@@ -75,7 +75,7 @@ final class VKAppProxyTests: XCTestCase {
     func test_recieveUrl_withVKClient_shouldBeSuccess() {
         // Given
         let (_, _, vkProxy) = proxyObjects
-        let url = URL(string: "vk\(appId)://test/test#access_token=1234567890")!
+        let url = URL(string: "vk\(appId)://authorize/test#access_token=1234567890")!
         // When
         let result = vkProxy.handle(url: url, app: "com.vk.vkclient")
         // Then
@@ -85,7 +85,7 @@ final class VKAppProxyTests: XCTestCase {
     func test_recieveUrl_withVKHdClient_shouldBeSuccess() {
         // Given
         let (_, _, vkProxy) = proxyObjects
-        let url = URL(string: "vk\(appId)://test/test#access_token=1234567890")!
+        let url = URL(string: "vk\(appId)://authorize/test#access_token=1234567890")!
         // When
         let result = vkProxy.handle(url: url, app: "com.vk.vkhd")
         // Then
@@ -100,6 +100,26 @@ final class VKAppProxyTests: XCTestCase {
         let result = vkProxy.handle(url: url, app: "com.vk.wrongClient")
         // Then
         XCTAssertNil(result)
+    }
+    
+    func test_recieveUrl_withEmptyClient_shouldBeFail() {
+        // Given
+        let (_, _, vkProxy) = proxyObjects
+        let url = URL(string: "vk\(appId)://test/test#access_token=1234567890")!
+        // When
+        let result = vkProxy.handle(url: url, app: nil)
+        // Then
+        XCTAssertNil(result)
+    }
+    
+    func test_recieveUrl_withEmptyClientAndRightHost_shouldBeSuccess() {
+        // Given
+        let (_, _, vkProxy) = proxyObjects
+        let url = URL(string: "vk\(appId)://authorize/test#access_token=1234567890")!
+        // When
+        let result = vkProxy.handle(url: url, app: nil)
+        // Then
+        XCTAssertEqual(result, "access_token=1234567890")
     }
     
     func test_recieveUrl_withWrongScheme_shouldBeFail() {
