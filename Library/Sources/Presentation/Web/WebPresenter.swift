@@ -147,6 +147,9 @@ final class WebPresenterImpl: WebPresenter {
         if fragment.isEmpty && query.isEmpty {
             return .fail
         }
+        else if fragment.contains("code=") {
+            return .response(fragment)
+        }
         else if fragment.contains("access_token=") {
             return .response(fragment)
         }

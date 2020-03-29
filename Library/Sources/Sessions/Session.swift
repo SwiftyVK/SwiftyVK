@@ -14,6 +14,14 @@ public protocol Session: class {
     /// token of current user
     var accessToken: Token? { get }
     
+    /// Log in user with oAuth to get authorization code
+    /// https://vk.com/dev/authcode_flow_user
+    /// Only uses WebView due to hardcoded `response_type` in VK iOS & Android apps
+    /// - parameter onSuccess: clousure which will be executed when user sucessfully logged.
+    /// Returns only authorization code to be used on your server side.
+    /// - parameter onError: clousure which will be executed when logging failed.
+    /// Returns cause of failure.
+    func logInCode(onSuccess: @escaping ([String: String]) -> (), onError: @escaping RequestCallbacks.Error)
     /// Log in user with oAuth or VK app
     /// - parameter onSuccess: clousure which will be executed when user sucessfully logged.
     /// Returns info about logged user.
@@ -150,6 +158,38 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
                 }
             }
         }
+    }
+    
+    public func logInCode(onSuccess: @escaping ([String: String]) -> (), onError: @escaping RequestCallbacks.Error) {
+        gateQueue.async {
+            do {
+                let info = try self.logInCode(revoke: true)
+                DispatchQueue.global().async {
+                    onSuccess(info)
+                }
+            }
+            catch let error {
+                DispatchQueue.global().async {
+                    onError(error.toVK())
+                }
+            }
+        }
+    }
+    
+    @discardableResult
+    func logInCode(revoke: Bool) throws -> [String: String] {
+        try throwIfDestroyed()
+        try throwIfAuthorized()
+        
+        let code = try authorizator.authorizeCode(
+            sessionId: id,
+            config: config,
+            revoke: revoke
+        )
+        
+        sendCodeReceiveEvent(code: code)
+        
+        return code.info
     }
    
     @discardableResult
@@ -300,6 +340,14 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
             }
             else if oldToken != nil {
                 self.delegate?.vkTokenRemoved(for: id)
+            }
+        }
+    }
+    
+    private func sendCodeReceiveEvent(code: Code?) {
+        DispatchQueue.global().async { [id] in
+            if let newCode = code {
+                self.delegate?.vkCodeCreated(for: id, info: newCode.info)
             }
         }
     }

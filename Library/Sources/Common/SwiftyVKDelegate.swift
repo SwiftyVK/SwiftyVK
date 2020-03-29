@@ -30,6 +30,11 @@ public protocol SwiftyVKSessionDelegate: class {
     /// Use this point to cancel all SwiftyVK requests and remove session data
     /// parameter sessionId: SwiftyVK session identifier
     func vkTokenRemoved(for sessionId: String)
+    
+    /// Called when user grant access and SwiftyVK gets new code
+    /// Can be used for authorize user on your server side
+    /// parameter sessionId: SwiftyVK session identifier
+    func vkCodeCreated(for sessionId: String, info: [String: String])
 }
 
 extension SwiftyVKSessionDelegate {
@@ -40,4 +45,5 @@ extension SwiftyVKSessionDelegate {
     public func vkTokenCreated(for sessionId: String, info: [String: String]) {}
     public func vkTokenUpdated(for sessionId: String, info: [String: String]) {}
     public func vkTokenRemoved(for sessionId: String) {}
+    public func vkCodeCreated(for sessionId: String, info: [String: String]) {}
 }

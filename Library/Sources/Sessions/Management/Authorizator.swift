@@ -4,6 +4,7 @@ protocol Authorizator: class {
     func getSavedToken(sessionId: String) -> InvalidatableToken?
     func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> InvalidatableToken
     func authorize(sessionId: String, rawToken: String, expires: TimeInterval) throws -> InvalidatableToken
+    func authorizeCode(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Code
     func validate(sessionId: String, url: URL) throws -> InvalidatableToken
     func reset(sessionId: String) -> InvalidatableToken?
     func handle(url: URL, app: String?)
@@ -18,7 +19,9 @@ final class AuthorizatorImpl: Authorizator {
     private let appId: String
     private var tokenStorage: TokenStorage
     private weak var tokenMaker: TokenMaker?
+    private weak var codeMaker: CodeMaker?
     private let tokenParser: TokenParser
+    private let codeParser: CodeParser
     private let vkAppProxy: VKAppProxy
     private let webPresenter: WebPresenter
     private let cookiesHolder: CookiesHolder?
@@ -35,7 +38,9 @@ final class AuthorizatorImpl: Authorizator {
         tokenParser: TokenParser,
         vkAppProxy: VKAppProxy,
         webPresenter: WebPresenter,
-        cookiesHolder: CookiesHolder?
+        cookiesHolder: CookiesHolder?,
+        codeParser: CodeParser,
+        codeMaker: CodeMaker
         ) {
         self.appId = appId
         self.delegate = delegate
@@ -45,6 +50,26 @@ final class AuthorizatorImpl: Authorizator {
         self.vkAppProxy = vkAppProxy
         self.webPresenter = webPresenter
         self.cookiesHolder = cookiesHolder
+        self.codeParser = codeParser
+        self.codeMaker = codeMaker
+    }
+    
+    func authorizeCode(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Code {
+        return try queue.sync {
+            guard let scopes = delegate?.vkNeedsScopes(for: sessionId).rawValue else {
+                throw VKError.vkDelegateNotFound
+            }
+            
+            let webAuthRequest = try makeWebAuthRequest(
+                sessionId: sessionId,
+                config: config,
+                scopes: scopes,
+                revoke: revoke,
+                responseType: "code"
+            )
+            
+            return try getCode(request: webAuthRequest)
+        }
     }
     
     func authorize(sessionId: String, config: SessionConfig, revoke: Bool) throws -> InvalidatableToken {
@@ -61,14 +86,16 @@ final class AuthorizatorImpl: Authorizator {
                 config: config,
                 scopes: scopes,
                 redirectUrl: nil,
-                revoke: revoke
+                revoke: revoke,
+                responseType: "token" // VK iOS & Android Apps do not support any response type except 'token'
             )
             
             let webAuthRequest = try makeWebAuthRequest(
                 sessionId: sessionId,
                 config: config,
                 scopes: scopes,
-                revoke: revoke
+                revoke: revoke,
+                responseType: "token"
             )
             
             try vkAppProxy.send(query: vkAppAuthQuery)
@@ -134,6 +161,29 @@ final class AuthorizatorImpl: Authorizator {
         return token
     }
     
+    private func getCode(request: URLRequest) throws -> Code {
+        defer { webPresenter.dismiss() }
+        return try webCode(request: request)
+    }
+    
+    private func webCode(request: URLRequest) throws -> Code {
+        defer { webPresenter.dismiss() }
+        
+        guard request.url != nil else {
+            throw VKError.authorizationUrlIsNil
+        }
+        
+        do {
+            let codeInfo = try webPresenter.presentWith(urlRequest: request)
+            let code = try makeCode(codeInfo: codeInfo)
+            return code
+        }
+        catch {
+            throw error
+        }
+        
+    }
+    
     private func webToken(sessionId: String, request: URLRequest) throws -> InvalidatableToken {
         defer { webPresenter.dismiss() }
 
@@ -159,6 +209,21 @@ final class AuthorizatorImpl: Authorizator {
         
     }
     
+    private func makeCode(codeInfo: String) throws -> Code {
+        guard let parsingResult = codeParser.parse(codeInfo: codeInfo) else {
+            throw VKError.cantParseTokenInfo(codeInfo)
+        }
+        
+        guard let codeMaker = codeMaker else {
+            throw VKError.weakObjectWasDeallocated
+        }
+        
+        return codeMaker.code(
+            code: parsingResult.code,
+            info: parsingResult.info
+        )
+    }
+    
     private func makeToken(tokenInfo: String) throws -> InvalidatableToken {
         guard let parsingResult = tokenParser.parse(tokenInfo: tokenInfo) else {
             throw VKError.cantParseTokenInfo(tokenInfo)
@@ -179,14 +244,16 @@ final class AuthorizatorImpl: Authorizator {
         sessionId: String,
         config: SessionConfig,
         scopes: Int,
-        revoke: Bool
+        revoke: Bool,
+        responseType: String
         ) throws -> URLRequest {
         let webQuery = try makeAuthQuery(
             sessionId: sessionId,
             config: config,
             scopes: scopes,
             redirectUrl: webRedirectUrl,
-            revoke: revoke
+            revoke: revoke,
+            responseType: responseType
         )
         
         guard let url = URL(string: webAuthorizeUrl + webQuery) else {
@@ -205,7 +272,8 @@ final class AuthorizatorImpl: Authorizator {
         config: SessionConfig,
         scopes: Int,
         redirectUrl: String?,
-        revoke: Bool
+        revoke: Bool,
+        responseType: String
         ) throws -> String {
         let redirect: String
         
@@ -222,7 +290,7 @@ final class AuthorizatorImpl: Authorizator {
             + "v\(config.apiVersion)&"
             + "sdk_version=\(config.sdkVersion)"
             + "\(redirect)&"
-            + "response_type=token&"
+            + "response_type=\(responseType)&"
             + "revoke=\(revoke ? 1 : 0)"
     }
 }
