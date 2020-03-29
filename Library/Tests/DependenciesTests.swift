@@ -111,6 +111,15 @@ final class DependenciesTests: XCTestCase {
         XCTAssertTrue(type(of: object) == TokenImpl.self)
     }
     
+    func test_makeCode_typeIsCodeImpl() {
+        // Given
+        let context = makeContext()
+        // When
+        let object = context.factory.code(code: "", info: [:])
+        // Then
+        XCTAssertTrue(type(of: object) == CodeImpl.self)
+    }
+    
     func test_makeSharePresenter_typeIsSharePresenterImpl() {
         // Given
         let context = makeContext()
