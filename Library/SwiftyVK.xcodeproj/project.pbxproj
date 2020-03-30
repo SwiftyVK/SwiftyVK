@@ -24,6 +24,16 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1394A0302432942E000B6227 /* CodeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1394A02E2432942E000B6227 /* CodeParser.swift */; };
+		1394A0312432942E000B6227 /* CodeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1394A02E2432942E000B6227 /* CodeParser.swift */; };
+		1394A0322432942E000B6227 /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1394A02F2432942E000B6227 /* Code.swift */; };
+		1394A0332432942E000B6227 /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1394A02F2432942E000B6227 /* Code.swift */; };
+		1394A03524329505000B6227 /* CodeParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1394A03424329505000B6227 /* CodeParserTest.swift */; };
+		1394A03624329505000B6227 /* CodeParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1394A03424329505000B6227 /* CodeParserTest.swift */; };
+		1394A03924329549000B6227 /* CodeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1394A03724329549000B6227 /* CodeMock.swift */; };
+		1394A03A24329549000B6227 /* CodeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1394A03724329549000B6227 /* CodeMock.swift */; };
+		1394A03B24329549000B6227 /* CodeParserMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1394A03824329549000B6227 /* CodeParserMock.swift */; };
+		1394A03C24329549000B6227 /* CodeParserMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1394A03824329549000B6227 /* CodeParserMock.swift */; };
 		A20CDD941EF667B000271276 /* CaptchaPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDD931EF667B000271276 /* CaptchaPresenterTests.swift */; };
 		A20CDD961EF66AEC00271276 /* CaptchaControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDD951EF66AEC00271276 /* CaptchaControllerMock.swift */; };
 		A22179C81EBA3DBD006B71FD /* AttemptShedulerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */; };
@@ -589,6 +599,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1394A02E2432942E000B6227 /* CodeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeParser.swift; sourceTree = "<group>"; };
+		1394A02F2432942E000B6227 /* Code.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
+		1394A03424329505000B6227 /* CodeParserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeParserTest.swift; sourceTree = "<group>"; };
+		1394A03724329549000B6227 /* CodeMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeMock.swift; sourceTree = "<group>"; };
+		1394A03824329549000B6227 /* CodeParserMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeParserMock.swift; sourceTree = "<group>"; };
 		A20CDD931EF667B000271276 /* CaptchaPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaPresenterTests.swift; sourceTree = "<group>"; };
 		A20CDD951EF66AEC00271276 /* CaptchaControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaControllerMock.swift; sourceTree = "<group>"; };
 		A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptShedulerMock.swift; sourceTree = "<group>"; };
@@ -899,6 +914,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1394A02D2432942E000B6227 /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				1394A02E2432942E000B6227 /* CodeParser.swift */,
+				1394A02F2432942E000B6227 /* Code.swift */,
+			);
+			path = Code;
+			sourceTree = "<group>";
+		};
 		A23708C51EA52F9C00103212 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -908,6 +932,7 @@
 				A2433A421EA5331A0058BB6D /* Doubles */,
 				A25A19D21EE438FB00CF13AF /* AuthorizatorTests.swift */,
 				A25A19CF1EE4233D00CF13AF /* TokenParserTests.swift */,
+				1394A03424329505000B6227 /* CodeParserTest.swift */,
 				A23708C61EA5309700103212 /* TaskShedulerTests.swift */,
 				A2433A451EA542100058BB6D /* AttemptShedulerTests.swift */,
 				A2B40DFC1EA693B700106AE3 /* UrlRequestBuilderTests.swift */,
@@ -955,6 +980,8 @@
 		A2433A421EA5331A0058BB6D /* Doubles */ = {
 			isa = PBXGroup;
 			children = (
+				1394A03724329549000B6227 /* CodeMock.swift */,
+				1394A03824329549000B6227 /* CodeParserMock.swift */,
 				A2433A431EA533500058BB6D /* TaskMock.swift */,
 				A2433A471EA542620058BB6D /* AttemptMock.swift */,
 				A24DDAEB1EB73C9E002EA273 /* QueryBuilderMock.swift */,
@@ -1291,6 +1318,7 @@
 		D4BBFDDE1F9297A9009615E7 /* Sessions */ = {
 			isa = PBXGroup;
 			children = (
+				1394A02D2432942E000B6227 /* Code */,
 				D46FB3D81F929AB7000CEAEB /* Token */,
 				D46FB3DB1F929C7A000CEAEB /* Management */,
 				D4BBFDE01F9297A9009615E7 /* Session.swift */,
@@ -1841,6 +1869,7 @@
 				A23E692C1EDAEC5800AA3B3B /* VKAppProxyTests.swift in Sources */,
 				D484C9411F4B3E8300C9651C /* VKURLSessionTaskMock.swift in Sources */,
 				A2B805581EDDB313004DA7EB /* WebPresenterTests.swift in Sources */,
+				1394A03924329549000B6227 /* CodeMock.swift in Sources */,
 				D4B850381FB0DB8700EF02F0 /* ShareWorkerTests.swift in Sources */,
 				A22179CA1EBA4059006B71FD /* SessionTests.swift in Sources */,
 				A2E5C5D91ECCAD4800652262 /* SessionsHolderMock.swift in Sources */,
@@ -1878,6 +1907,7 @@
 				D44AD0D71FB208600053AD59 /* Media+TestExtensions.swift in Sources */,
 				A20CDD941EF667B000271276 /* CaptchaPresenterTests.swift in Sources */,
 				D44EC0161F55D50600F8BB4A /* VKNotificationCenterMock.swift in Sources */,
+				1394A03524329505000B6227 /* CodeParserTest.swift in Sources */,
 				D41B3D001F9FB48C00177075 /* ShareControllerMock.swift in Sources */,
 				D4F49D3F1F2DF53F0037B875 /* ApiErrorTests.swift in Sources */,
 				A2B805561EDDB01C004DA7EB /* WebControllerMock.swift in Sources */,
@@ -1902,6 +1932,7 @@
 				D48F789A1F9FA51C0092931E /* SharePresenterMock.swift in Sources */,
 				D4321D8D1F5F0A31001AFE9F /* OneVariationsMethodTests.swift in Sources */,
 				D4B850331FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift in Sources */,
+				1394A03B24329549000B6227 /* CodeParserMock.swift in Sources */,
 				A24DDAF01EB73CB6002EA273 /* BodyBuilderMock.swift in Sources */,
 				D4321D931F5F0D7C001AFE9F /* ThreeVariationsMethodTests.swift in Sources */,
 				D41ADB021F4DFEE000E10D41 /* ResourcesTests.swift in Sources */,
@@ -1965,6 +1996,7 @@
 				D4BBFF911F929892009615E7 /* Video.swift in Sources */,
 				D4BBFF741F929892009615E7 /* Messages.swift in Sources */,
 				D4BBFFCB1F929893009615E7 /* SessionsHolder.swift in Sources */,
+				1394A0332432942E000B6227 /* Code.swift in Sources */,
 				D4BBFFA91F929893009615E7 /* CookiesStorage.swift in Sources */,
 				D4BBFFA31F929893009615E7 /* GCD+Extensions.swift in Sources */,
 				D4BBFFBD1F929893009615E7 /* CookiesHolder.swift in Sources */,
@@ -1993,6 +2025,7 @@
 				D46FB4321F929E4E000CEAEB /* CaptchaController_iOS.swift in Sources */,
 				D4BBFFA21F929893009615E7 /* VKFileManager.swift in Sources */,
 				D46FB42B1F929E3C000CEAEB /* WebController_iOS.swift in Sources */,
+				1394A0312432942E000B6227 /* CodeParser.swift in Sources */,
 				D4DC124C1FAB542B00D977D8 /* SharePreferencesCell_iOS.swift in Sources */,
 				D423E0491FA640D90083C8FB /* ShareImageCollectionView_iOS.swift in Sources */,
 				D4BBFFB51F929893009615E7 /* Response.swift in Sources */,
@@ -2079,10 +2112,12 @@
 				D4BBFF061F929891009615E7 /* Token.swift in Sources */,
 				D4BBFEE21F929891009615E7 /* DependenciesImpl.swift in Sources */,
 				D4142BDD1FBDE875009CB511 /* ShareImageCollectionView_macOS.swift in Sources */,
+				1394A0302432942E000B6227 /* CodeParser.swift in Sources */,
 				D4DADE071F9F9AE9004F159E /* ShareContext.swift in Sources */,
 				D4BBFEC01F929891009615E7 /* Friends.swift in Sources */,
 				D46FB4261F929E3C000CEAEB /* WebViewWrapper_macOS.swift in Sources */,
 				D4BBFEC61F929891009615E7 /* Market.swift in Sources */,
+				1394A0322432942E000B6227 /* Code.swift in Sources */,
 				D4BBFEC81F929891009615E7 /* Wall.swift in Sources */,
 				D4BBFEF01F929891009615E7 /* RequestConfig.swift in Sources */,
 				D4BBFEB41F929891009615E7 /* Places.swift in Sources */,
@@ -2222,6 +2257,7 @@
 				D46FB4011F929DBC000CEAEB /* ApiMethodTests.swift in Sources */,
 				D46FB3FA1F929DBC000CEAEB /* CaptchaPresenterTests.swift in Sources */,
 				D46FB3F81F929DBC000CEAEB /* WebPresenterTests.swift in Sources */,
+				1394A03A24329549000B6227 /* CodeMock.swift in Sources */,
 				D477065D1FE4274800D72930 /* RequestTests.swift in Sources */,
 				D46FB4091F929DBC000CEAEB /* ThreeVariationsMethodTests.swift in Sources */,
 				D46FB4051F929DBC000CEAEB /* TaskTests.swift in Sources */,
@@ -2246,6 +2282,7 @@
 				D44AD0D81FB208600053AD59 /* Media+TestExtensions.swift in Sources */,
 				D46FB40E1F929DBC000CEAEB /* LongPollEventTests.swift in Sources */,
 				D46FB3F31F929DBC000CEAEB /* SessionTests.swift in Sources */,
+				1394A03C24329549000B6227 /* CodeParserMock.swift in Sources */,
 				D41B3D011F9FB48C00177075 /* ShareControllerMock.swift in Sources */,
 				D46FB4071F929DBC000CEAEB /* OneVariationsMethodTests.swift in Sources */,
 				D46FB4491F929EE6000CEAEB /* SessionStorageMock.swift in Sources */,
@@ -2267,6 +2304,7 @@
 				D46FB3F61F929DBC000CEAEB /* TokenStorageTests.swift in Sources */,
 				D46FB41E1F929DCB000CEAEB /* RequestType+TestExtensions.swift in Sources */,
 				D48F789B1F9FA51C0092931E /* SharePresenterMock.swift in Sources */,
+				1394A03624329505000B6227 /* CodeParserTest.swift in Sources */,
 				D46FB3FD1F929DBC000CEAEB /* ResponseTests.swift in Sources */,
 				D4B850341FB0A78C00EF02F0 /* SynchronouslyTaskTests.swift in Sources */,
 				D46FB43B1F929EE6000CEAEB /* SessionMock.swift in Sources */,
