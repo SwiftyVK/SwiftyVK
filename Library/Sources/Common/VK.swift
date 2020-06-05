@@ -29,9 +29,9 @@ public final class VK {
         return sessionsHolder
     }
 
-    /// Does `VK.setUp` already called and `VK` have an active session
-    public static var hasActiveSession: Bool {
-        return dependencies?.sessionsHolder != nil
+    /// Does `VK.setUp` already called
+    public static var needToSetUp: Bool {
+        return dependencies?.sessionsHolder == nil
     }
 
     /// Free up all SwiftyVK's resources and release memory
