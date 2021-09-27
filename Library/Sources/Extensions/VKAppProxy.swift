@@ -1,8 +1,9 @@
 import Foundation
 
-protocol VKAppProxy: class {
+protocol VKAppProxy: AnyObject {
     @discardableResult
-    func send(query: String) throws -> Bool
+    func send(query: String) -> Bool
+    func canSend(query: String) -> Bool
     func handle(url: URL, app: String?) -> String?
 }
 
@@ -28,8 +29,8 @@ final class VKAppProxyImpl: VKAppProxy {
     }
     
     @discardableResult
-    func send(query: String) throws -> Bool {
-        guard try openVkApp(query: query) else {
+    func send(query: String) -> Bool {
+        guard openVkApp(query: query) else {
             return false
         }
         
@@ -43,17 +44,37 @@ final class VKAppProxyImpl: VKAppProxy {
         
         return true
     }
-    
-    private func openVkApp(query: String) throws -> Bool {
-        guard let url = URL(string: baseUrl + query) else {
-            throw VKError.cantBuildVKAppUrl(baseUrl + query)
+
+    func canSend(query: String) -> Bool {
+        guard let url = vkAppURL(using: query) else {
+            return false
         }
-        
+
+        guard  urlOpener.canOpenURL(url) else {
+            return false
+        }
+
+        return true
+    }
+
+    private func vkAppURL(using query: String) -> URL? {
+        guard let url = URL(string: baseUrl + query) else {
+            return nil
+        }
+
+        guard  urlOpener.canOpenURL(url) else {
+            return nil
+        }
+
+        return url
+    }
+
+    private func openVkApp(query: String) -> Bool {
         return DispatchQueue.anywayOnMain {
-            guard  urlOpener.canOpenURL(url) else {
+            guard let url = vkAppURL(using: query) else {
                 return false
             }
-            
+
             guard urlOpener.openURL(url) else {
                 return false
             }
