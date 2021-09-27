@@ -46,15 +46,17 @@ final class VKAppProxyImpl: VKAppProxy {
     }
 
     func canSend(query: String) -> Bool {
-        guard let url = vkAppURL(using: query) else {
-            return false
-        }
+        return DispatchQueue.anywayOnMain {
+            guard let url = vkAppURL(using: query) else {
+                return false
+            }
 
-        guard  urlOpener.canOpenURL(url) else {
-            return false
-        }
+            guard  urlOpener.canOpenURL(url) else {
+                return false
+            }
 
-        return true
+            return true
+        }
     }
 
     private func vkAppURL(using query: String) -> URL? {
