@@ -65,6 +65,20 @@ final class TokenMakerMock: TokenMaker {
     }
 }
 
+final class CodeMakerMock: CodeMaker {
+    
+    var onMake: ((String, [String: String]) -> Code)?
+    
+    func code(code: String, info: [String: String]) -> Code {
+        guard let result = onMake?(code, info) else {
+            XCTFail("onMake not defined")
+            return CodeMock()
+        }
+        
+        return result
+    }
+}
+
 final class WebControllerMakerMock: WebControllerMaker {
     
     var onMake: (() -> WebController)?

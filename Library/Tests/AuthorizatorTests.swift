@@ -12,7 +12,9 @@ final class AuthorizatorTests: XCTestCase {
         vkApp: VKAppProxyMock,
         webPresenter: WebPresenterMock,
         sessionId: String,
-        sessionConfig: SessionConfig
+        sessionConfig: SessionConfig,
+        codeParser: CodeParserMock,
+        codeMaker: CodeMakerMock
         ) {
             let delegate = SwiftyVKDelegateMock()
             let storage = TokenStorageMock()
@@ -22,6 +24,8 @@ final class AuthorizatorTests: XCTestCase {
             let webPresenter = WebPresenterMock()
             let session = SessionMock()
             let cookiesHolder = CookiesHolderMock()
+            let codeParserMock = CodeParserMock()
+            let codeMakerMock = CodeMakerMock()
             
             let authorizator = AuthorizatorImpl(
                 appId: "1234567890",
@@ -31,7 +35,9 @@ final class AuthorizatorTests: XCTestCase {
                 tokenParser: parser,
                 vkAppProxy: vkApp,
                 webPresenter: webPresenter,
-                cookiesHolder: cookiesHolder
+                cookiesHolder: cookiesHolder,
+                codeParser: codeParserMock,
+                codeMaker: codeMakerMock
             )
             
             return (
@@ -43,7 +49,9 @@ final class AuthorizatorTests: XCTestCase {
                 vkApp,
                 webPresenter,
                 session.id,
-                session.config
+                session.config,
+                codeParserMock,
+                codeMakerMock
             )
     }
     
@@ -80,6 +88,23 @@ final class AuthorizatorTests: XCTestCase {
         }
     }
     
+    func test_authorize_errorOnParseCode() {
+        // Given
+        let context = makeContext()
+        // When
+        do {
+            _ = try context.authorizator.authorizeCode(
+                sessionId: context.sessionId,
+                config: context.sessionConfig,
+                revoke: false
+            )
+            // Then
+            XCTFail("Code above should throw error")
+        } catch let error {
+            XCTAssertEqual(error.asVK, VKError.cantParseTokenInfo(""))
+        }
+    }
+    
     func test_authorize_withSucessfullCreatedToken() {
         // Given
         let context = makeContext()
@@ -99,6 +124,27 @@ final class AuthorizatorTests: XCTestCase {
         )
         // Then
         XCTAssertNotNil(token)
+    }
+    
+    func test_authorize_withSucessfullCreatedCode() {
+        // Given
+        let context = makeContext()
+        
+        context.codeMaker.onMake = { _, _ in
+            return CodeMock()
+        }
+        
+        context.codeParser.onParse = { _ in
+            return ("code", [:])
+        }
+        // When
+        let code = try? context.authorizator.authorizeCode(
+            sessionId: context.sessionId,
+            config: context.sessionConfig,
+            revoke: false
+        )
+        // Then
+        XCTAssertNotNil(code)
     }
     
     func test_authorize_withDelegateWillLoginCallCount() {

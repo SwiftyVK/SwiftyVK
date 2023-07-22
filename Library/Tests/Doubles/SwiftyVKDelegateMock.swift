@@ -6,6 +6,7 @@ final class SwiftyVKDelegateMock: SwiftyVKDelegate {
     var onVKTokenCreated: ((String, [String : String]) -> ())?
     var onVKTokenUpdated: ((String, [String : String]) -> ())?
     var onVKTokenRemoved: ((String) -> ())?
+    var onVKCodeCreated: ((String, [String : String]) -> ())?
     
     func vkNeedToPresent(viewController: VKViewController) {
         vkNeedToPresent?(viewController)
@@ -25,5 +26,9 @@ final class SwiftyVKDelegateMock: SwiftyVKDelegate {
     
     func vkTokenRemoved(for sessionId: String) {
         onVKTokenRemoved?(sessionId)
+    }
+    
+    func vkCodeCreated(for sessionId: String, info: [String : String]) {
+        onVKCodeCreated?(sessionId, info)
     }
 }

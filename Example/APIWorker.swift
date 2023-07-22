@@ -22,6 +22,8 @@ final class APIWorker {
             validation()
         case 8:
             share()
+        case 9:
+            authorizeCode()
         default:
             print("Unrecognized action!")
         }
@@ -34,6 +36,17 @@ final class APIWorker {
             },
             onError: { error in
                 print("SwiftyVK: authorize failed with", error)
+            }
+        )
+    }
+    
+    class func authorizeCode() {
+        VK.sessions.default.logInCode(
+            onSuccess: { info in
+                print("SwiftyVK: code: success authorize with", info)
+            },
+            onError: { error in
+                print("SwiftyVK: code: authorize failed with", error)
             }
         )
     }

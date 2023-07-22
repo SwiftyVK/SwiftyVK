@@ -6,6 +6,7 @@ protocol Dependencies:
     TaskMaker,
     AttemptMaker,
     TokenMaker,
+    CodeMaker,
     WebControllerMaker,
     CaptchaControllerMaker,
     LongPollTaskMaker,
@@ -45,6 +46,10 @@ protocol AttemptMaker: class {
 
 protocol TokenMaker: class {
     func token(token: String, expires: TimeInterval, info: [String: String]) -> InvalidatableToken
+}
+
+protocol CodeMaker: class {
+    func code(code: String, info: [String: String]) -> Code
 }
 
 protocol WebControllerMaker: class {

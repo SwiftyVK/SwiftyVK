@@ -39,6 +39,27 @@ final class WebPresenterTests: XCTestCase {
         XCTAssertEqual(result, "access_token=test")
     }
     
+    func test_load_returnCode_whenCodeRecieved() {
+        // Given
+        let context = makeContext()
+        
+        context.webControllerMaker.onMake = {
+            let controller = WebControllerMock()
+
+            controller.onLoad = { url, onResult in
+                onResult(.response(url))
+            }
+            
+            return controller
+        }
+        // When
+        let result = try? context.presenter.presentWith(
+            urlRequest: urlRequest(string: "http://vk.com#code=test")!
+        )
+        // Then
+        XCTAssertEqual(result, "code=test")
+    }
+    
     func test_load_throwWrongAuthUrl_whenUrlIsNil() {
         // Given
         let context = makeContext()

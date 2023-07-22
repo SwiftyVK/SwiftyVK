@@ -19,6 +19,19 @@ final class AuthorizatorMock: Authorizator {
         return result
     }
     
+    var onAuthorizeCode: ((String, SessionConfig, Bool) throws -> Code)?
+    
+    func authorizeCode(sessionId: String, config: SessionConfig, revoke: Bool) throws -> Code {
+        authorizeCallCount += 1
+        
+        guard let result = try onAuthorizeCode?(sessionId, config, revoke) else {
+            XCTFail("onAuthorize not defined")
+            return CodeMock()
+        }
+
+        return result
+    }
+    
     var authorizeWithRawTokenCallCount = 0
     
     var onRawAuthorize: ((String, String, TimeInterval) -> InvalidatableToken)?

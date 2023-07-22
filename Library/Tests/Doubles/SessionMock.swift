@@ -25,6 +25,10 @@ final class SessionMock: Session, TaskSession, DestroyableSession, ApiErrorExecu
         
     }
     
+    func logInCode(onSuccess: @escaping ([String : String]) -> (), onError: @escaping RequestCallbacks.Error) {
+        
+    }
+    
     var onInvalidate: (() -> ())?
     
     func invalidate() {

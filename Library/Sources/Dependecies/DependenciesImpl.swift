@@ -155,7 +155,9 @@ final class DependenciesImpl: Dependencies {
             tokenParser: TokenParserImpl(),
             vkAppProxy: vkAppProxy,
             webPresenter: webPresenter,
-            cookiesHolder: nil
+            cookiesHolder: nil,
+            codeParser: CodeParserImpl(),
+            codeMaker: self
         )
     }()
     
@@ -260,6 +262,10 @@ final class DependenciesImpl: Dependencies {
             expires: expires,
             info: info
         )
+    }
+    
+    func code(code: String, info: [String : String]) -> Code {
+        return CodeImpl(code: code, info: info)
     }
     
     private func urlRequestBuilder() -> UrlRequestBuilder {
