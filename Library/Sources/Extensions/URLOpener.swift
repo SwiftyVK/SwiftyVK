@@ -23,17 +23,17 @@ protocol URLOpener {
 #elseif os(iOS)
     final class URLOpenerIOS: URLOpener {
         func canOpenURL(_ url: URL) -> Bool {
-            return UIApplication.shared.canOpenURL(url)
+            UIApplication.shared.canOpenURL(url)
         }
 
         func openURL(_ url: URL) -> Bool {
             if #available(iOS 10.0, *) {
                 UIApplication.shared.open(url)
                 return true
-            } else {
+            }
+            else {
                 return UIApplication.shared.openURL(url)
             }
         }
     }
 #endif
-
