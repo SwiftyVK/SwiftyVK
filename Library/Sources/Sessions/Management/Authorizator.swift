@@ -144,7 +144,7 @@ final class AuthorizatorImpl: Authorizator {
         if vkAppProxy.canSend(query: appAuthQuery) {
             vkAppProxy.send(query: appAuthQuery)
             guard let vkAppToken = vkAppToken else {
-                throw VKError.authorizationCancelled
+                throw VKError.vkAppTokenIsNil
             }
 
             token = vkAppToken
