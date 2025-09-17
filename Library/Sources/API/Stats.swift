@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/stats
+    /// https://vk.ru/dev/stats
     public enum Stats: APIMethod {
         case get(Parameters)
         case getPostReach(Parameters)

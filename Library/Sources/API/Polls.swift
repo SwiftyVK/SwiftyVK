@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/polls
+    /// https://vk.ru/dev/polls
     public enum Polls: APIMethod {
         case addVote(Parameters)
         case create(Parameters)

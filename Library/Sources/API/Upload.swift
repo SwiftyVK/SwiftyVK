@@ -30,7 +30,7 @@ public typealias CoverCrop = (x: String, y: String, x2: String, y2: String)
 // swiftlint:disable next nesting
 // swiftlint:disable next type_body_length
 extension APIScope {
-    /// Metods to upload Mediafiles. More info - https://vk.com/dev/upload_files
+    /// Metods to upload Mediafiles. More info - https://vk.ru/dev/upload_files
     public struct Upload {
         ///Methods to upload photo
         public struct Photo {

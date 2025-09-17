@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/video
+    /// https://vk.ru/dev/video
     public enum Video: APIMethod {
         case add(Parameters)
         case addAlbum(Parameters)

@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/likes
+    /// https://vk.ru/dev/likes
     public enum Likes: APIMethod {
         case add(Parameters)
         case delete(Parameters)

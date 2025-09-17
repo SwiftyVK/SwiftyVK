@@ -67,7 +67,7 @@ final class ShareWorkerTests: XCTestCase {
         )
         
         VKStack.mock(
-            .upload(url: "https://test.vk.com", media: [.image(data: image.data, type: image.type)], partType: .photo),
+            .upload(url: "https://test.vk.ru", media: [.image(data: image.data, type: image.type)], partType: .photo),
             fileName: "upload.photos.toWall.success"
         )
         

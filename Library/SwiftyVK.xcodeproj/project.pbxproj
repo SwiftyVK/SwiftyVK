@@ -24,6 +24,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+        D5AAA1012345678901234567 /* VKDomains.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AAA0012345678901234567 /* VKDomains.swift */; };
+        D5AAA2012345678901234567 /* VKDomains.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AAA0012345678901234567 /* VKDomains.swift */; };
 		A20CDD941EF667B000271276 /* CaptchaPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDD931EF667B000271276 /* CaptchaPresenterTests.swift */; };
 		A20CDD961EF66AEC00271276 /* CaptchaControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDD951EF66AEC00271276 /* CaptchaControllerMock.swift */; };
 		A22179C81EBA3DBD006B71FD /* AttemptShedulerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */; };
@@ -769,7 +771,8 @@
 		D4BBFDC41F9297A9009615E7 /* TwoVariationsMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoVariationsMethod.swift; sourceTree = "<group>"; };
 		D4BBFDC51F9297A9009615E7 /* ThreeVariationsMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeVariationsMethod.swift; sourceTree = "<group>"; };
 		D4BBFDC61F9297A9009615E7 /* BasicMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicMethod.swift; sourceTree = "<group>"; };
-		D4BBFDC71F9297A9009615E7 /* Scopes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scopes.swift; sourceTree = "<group>"; };
+        D4BBFDC71F9297A9009615E7 /* Scopes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scopes.swift; sourceTree = "<group>"; };
+        D5AAA0012345678901234567 /* VKDomains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKDomains.swift; sourceTree = "<group>"; };
 		D4BBFDC91F9297A9009615E7 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		D4BBFDCA1F9297A9009615E7 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		D4BBFDCB1F9297A9009615E7 /* VKError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKError.swift; sourceTree = "<group>"; };
@@ -1386,16 +1389,17 @@
 			path = Dependecies;
 			sourceTree = "<group>";
 		};
-		D4BBFFDC1F929955009615E7 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				D4BBFDC71F9297A9009615E7 /* Scopes.swift */,
-				D4BBFDEA1F9297A9009615E7 /* SwiftyVKDelegate.swift */,
-				D4BBFDE91F9297A9009615E7 /* VK.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
+        D4BBFFDC1F929955009615E7 /* Common */ = {
+            isa = PBXGroup;
+            children = (
+                D5AAA0012345678901234567 /* VKDomains.swift */,
+                D4BBFDC71F9297A9009615E7 /* Scopes.swift */,
+                D4BBFDEA1F9297A9009615E7 /* SwiftyVKDelegate.swift */,
+                D4BBFDE91F9297A9009615E7 /* VK.swift */,
+            );
+            path = Common;
+            sourceTree = "<group>";
+        };
 		D4BBFFDD1F9299BC009615E7 /* Cookies */ = {
 			isa = PBXGroup;
 			children = (
@@ -1625,7 +1629,7 @@
 					};
 					A23708B91EA52F0D00103212 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 744972ET87;
+						DevelopmentTeam = 842SSJ357W;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -1650,7 +1654,7 @@
 					};
 					D46FB3E01F929D7A000CEAEB = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = 744972ET87;
+						DevelopmentTeam = 842SSJ357W;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
@@ -1910,10 +1914,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A2EB6E961BD180DD008E7D86 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+        A2EB6E961BD180DD008E7D86 /* Sources */ = {
+            isa = PBXSourcesBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
 				D4BBFFD31F929893009615E7 /* IDGenerator.swift in Sources */,
 				D4B44EA51FA38A5100E85E31 /* ShareNavigationController_iOS.swift in Sources */,
 				D4BBFFCF1F929893009615E7 /* SessionConfig.swift in Sources */,
@@ -2028,8 +2032,9 @@
 				D4BBFFCC1F929893009615E7 /* EncodedSession.swift in Sources */,
 				D4BBFF9C1F929893009615E7 /* CharacterSet+Extensions.swift in Sources */,
 				D4BBFFB31F929893009615E7 /* Scopes.swift in Sources */,
-				D4BBFF9E1F929893009615E7 /* URLOpener.swift in Sources */,
-				D486E3401FA0E623002134EB /* ShareController_iOS.swift in Sources */,
+                D4BBFF9E1F929893009615E7 /* URLOpener.swift in Sources */,
+                D5AAA2012345678901234567 /* VKDomains.swift in Sources */,
+                D486E3401FA0E623002134EB /* ShareController_iOS.swift in Sources */,
 				D4BBFF7D1F929892009615E7 /* Custom.swift in Sources */,
 				D4BBFF7A1F929892009615E7 /* Leads.swift in Sources */,
 				D4BBFFAE1F929893009615E7 /* Method.swift in Sources */,
@@ -2046,10 +2051,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A2EB6EA31BD180E9008E7D86 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+        A2EB6EA31BD180E9008E7D86 /* Sources */ = {
+            isa = PBXSourcesBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
 				D4ED8BAC1FACC7E400B3FDA5 /* Result.swift in Sources */,
 				D4BBFF0B1F929891009615E7 /* IDGenerator.swift in Sources */,
 				D4BBFF071F929891009615E7 /* SessionConfig.swift in Sources */,
@@ -2096,8 +2101,9 @@
 				D4BBFEB61F929891009615E7 /* Photos.swift in Sources */,
 				D4BBFF021F929891009615E7 /* Authorizator.swift in Sources */,
 				D4BBFF081F929891009615E7 /* SessionState.swift in Sources */,
-				D4BBFEEC1F929891009615E7 /* ApiError.swift in Sources */,
-				D4BBFEF31F929891009615E7 /* RequestCallbacks.swift in Sources */,
+                D4BBFEEC1F929891009615E7 /* ApiError.swift in Sources */,
+                D5AAA1012345678901234567 /* VKDomains.swift in Sources */,
+                D4BBFEF31F929891009615E7 /* RequestCallbacks.swift in Sources */,
 				D4BBFEDD1F929891009615E7 /* LongPollEvent.swift in Sources */,
 				D4BBFECE1F929891009615E7 /* String+Extensions.swift in Sources */,
 				D441C9DE1FBC82730071A425 /* JSSwitch.swift in Sources */,

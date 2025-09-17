@@ -67,7 +67,7 @@ final class CaptchaPresenterTests: XCTestCase {
         }
         // When
         do {
-            _ = try context.presenter.present(rawCaptchaUrl: "http://vk.com", dismissOnFinish: false)
+            _ = try context.presenter.present(rawCaptchaUrl: "http://vk.ru", dismissOnFinish: false)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
@@ -93,7 +93,7 @@ final class CaptchaPresenterTests: XCTestCase {
             return (data: Data(), response: nil, error: nil)
         }
         // When
-        let result = try? context.presenter.present(rawCaptchaUrl: "http://vk.com", dismissOnFinish: false)
+        let result = try? context.presenter.present(rawCaptchaUrl: "http://vk.ru", dismissOnFinish: false)
         // Then
         XCTAssertEqual(result, "test")
     }
@@ -118,7 +118,7 @@ final class CaptchaPresenterTests: XCTestCase {
             
         }
         // When
-        _ = try? context.presenter.present(rawCaptchaUrl: "http://vk.com", dismissOnFinish: false)
+        _ = try? context.presenter.present(rawCaptchaUrl: "http://vk.ru", dismissOnFinish: false)
         // Then
         XCTAssertEqual(dismissCallCount, 0)
     }
@@ -146,7 +146,7 @@ final class CaptchaPresenterTests: XCTestCase {
             return (data: Data(), response: nil, error: nil)
         }
         // When
-        _ = try? context.presenter.present(rawCaptchaUrl: "http://vk.com", dismissOnFinish: true)
+        _ = try? context.presenter.present(rawCaptchaUrl: "http://vk.ru", dismissOnFinish: true)
         // Then
         XCTAssertEqual(dismissCallCount, 1)
     }
@@ -171,7 +171,7 @@ final class CaptchaPresenterTests: XCTestCase {
         }
         // When
         do {
-            _ = try context.presenter.present(rawCaptchaUrl: "http://vk.com", dismissOnFinish: false)
+            _ = try context.presenter.present(rawCaptchaUrl: "http://vk.ru", dismissOnFinish: false)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then

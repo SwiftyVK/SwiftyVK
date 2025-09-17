@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/storage
+    /// https://vk.ru/dev/storage
     public enum Storage: APIMethod {
         case get(Parameters)
         case getKeys(Parameters)
