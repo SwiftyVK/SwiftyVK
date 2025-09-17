@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/search
+    /// https://vk.ru/dev/search
     public enum Search: APIMethod {
         case getHints(Parameters)
     }

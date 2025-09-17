@@ -12,7 +12,7 @@ extension APIScope {
             return CustomMethod(method: name, parameters: parameters)
         }
         
-        /// Allows execute https://vk.com/dev/execute
+        /// Allows execute https://vk.ru/dev/execute
         public static func execute(code: String, parameters: RawParameters = .empty) -> CustomMethod {
             var parameters = parameters
             parameters["code"] = code

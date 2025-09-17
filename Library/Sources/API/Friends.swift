@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/friends
+    /// https://vk.ru/dev/friends
     public enum Friends: APIMethod {
         case add(Parameters)
         case addList(Parameters)

@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/ads
+    /// https://vk.ru/dev/ads
     public enum Ads: APIMethod {
         case addOfficeUsers(Parameters)
         case checkLink(Parameters)

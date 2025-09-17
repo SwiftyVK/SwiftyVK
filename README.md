@@ -7,7 +7,7 @@
   <a href="https://developer.apple.com/swift/">
     <img src="https://img.shields.io/badge/Swift-5.0-orange.svg?style=flat" alt="Swift">
   </a>
-    <a href="https://vk.com/dev/versions">
+    <a href="https://vk.ru/dev/versions">
     <img src="https://img.shields.io/badge/VK_API->5.92-blue.svg?style=flat" alt="VK API">
   </a>
     <a href="https://cocoapods.org/pods/SwiftyVK">
@@ -40,7 +40,7 @@
    </a>
 </p>
 
-# Easy and powerful way to interact with [VK API](https://vk.com/dev) for iOS and macOS.
+# Easy and powerful way to interact with [VK API](https://vk.ru/dev) for iOS and macOS.
 
 ## Key features
 
@@ -160,7 +160,7 @@ class VKDelegateExample: SwiftyVKDelegate {
 
 ### Setting up VK application
 
-1. [Create new standalone application](https://vk.com/editapp?act=create)
+1. [Create new standalone application](https://vk.ru/editapp?act=create)
 2. Save `application ID` from **Preferences -> Application ID**
 3. Set up **SwiftyVK** with `application ID` and `VKDelegate` obtained in the previous steps:
 
@@ -215,7 +215,7 @@ If a user has the official VK app installed on their device, SwiftyVK can be aut
 2. Copy `Application Bundle` from
 *Xcode -> $App Target$ -> General -> Bundle Identifier* (e.g. com.developer.applicationName)
 2. Set copied `Application Bundle` to
-*https://vk.com/apps?act=manage -> Edit App -> Settings -> App Bundle ID for iOS* field
+*https://vk.ru/apps?act=manage -> Edit App -> Settings -> App Bundle ID for iOS* field
 
 4. Add the following code to AppDelegate:
 
@@ -268,14 +268,14 @@ All requests are performed asynchronously in a private queue by API scheduler
 (the scheduler sends no more than 3 requests per second by default).
 You can just send a request and get a response without a lot of work.
 
-All API methods are listed [here](https://vk.com/dev/methods)
+All API methods are listed [here](https://vk.ru/dev/methods)
 
 Let's look closer to requests syntax:
 
 ### Request
 The basic request calls look like **VK.methodGroup.methodName()**.
 
-For example, to [get short info about current user](https://vk.com/dev/users.get):
+For example, to [get short info about current user](https://vk.ru/dev/users.get):
 
 ```swift
 VK.API.Users.get(.empty)
@@ -405,7 +405,7 @@ You may change following configuration properties:
 Property            | Default               | Description
 :-------------      | -------------         | :-------------
 `httpMethod`        | `.GET`                | [HTTP method](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods). You can use `GET` or `POST`. For big body (e.g. long message text in `message.send` method) use `POST` method.  
-`apiVersion`        | `latest version`      | [VK API version](https://vk.com/dev/versions). By default uses latest version. If you need different version - change this value.
+`apiVersion`        | `latest version`      | [VK API version](https://vk.ru/dev/versions). By default uses latest version. If you need different version - change this value.
 `language`          | `User system language`| Language of response. For EN `Pavel Durov`, for RU `Павел Дуров`.
 `attemptsMaxLimit`  | `3`                   | Maximum number of attempts to send request before returning an error.
 `attemptTimeout`    | `10`                  | Timeout in seconds of waiting for a response before returning an error.
@@ -448,12 +448,12 @@ VK.API.Upload.Photo.toWall(media, to: .user(id: "4680178"))
 
 e.g `VK.API.Upload.Photo.toMessage` will return `photoId`
 which you can use in `messages.send` method.
-See [docs](https://vk.com/dev/upload_files) for more info.
+See [docs](https://vk.ru/dev/upload_files) for more info.
 ## **Interaction with LongPoll**
 
 ## Start LongPoll
 
-With SwiftyVK you can interact with VK [LongPoll](https://vk.com/dev/using_longpoll) server very easily.
+With SwiftyVK you can interact with VK [LongPoll](https://vk.ru/dev/using_longpoll) server very easily.
 Just call:
 
 ```swift
@@ -466,7 +466,7 @@ VK.sessions.default.longPoll.start {
 
 ## Handle updates
 
-Data format is described [here](https://vk.com/dev/using_longpoll).
+Data format is described [here](https://vk.ru/dev/using_longpoll).
 LongPollEvent is an enum with associated value of type `Data` in each case.
 You can parse this data to JSON using your favorite parser like this:
 

@@ -1,6 +1,6 @@
 import Foundation
 
-/// Represents Error recieved from VK API. More info - https://vk.com/dev/errors
+/// Represents Error recieved from VK API. More info - https://vk.ru/dev/errors
 public struct ApiError: Equatable {
     /// Error code
     public let code: Int

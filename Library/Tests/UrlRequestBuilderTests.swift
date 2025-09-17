@@ -46,7 +46,7 @@ final class UrlRequestBuilderTests: XCTestCase {
         
         // Then
         XCTAssertEqual(sample.scheme, "https")
-        XCTAssertEqual(sample.host, "api.vk.com")
+        XCTAssertEqual(sample.host, "api.vk.ru")
         XCTAssertEqual(sample.path, "/method/" + methodName)
         XCTAssertEqual(sample.query, queryBuilder.parameters)
 

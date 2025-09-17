@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/newsfeed
+    /// https://vk.ru/dev/newsfeed
     public enum NewsFeed: APIMethod {
         case addBan(Parameters)
         case deleteBan(Parameters)

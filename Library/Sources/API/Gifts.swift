@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/gifts
+    /// https://vk.ru/dev/gifts
     public enum Gifts: APIMethod {
         case get(Parameters)
     }

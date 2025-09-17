@@ -141,7 +141,7 @@ final class WebPresenterImpl: WebPresenter {
         let fragment = url.fragment ?? ""
         let query = url.query ?? ""
         
-        if host != "vk.com" && host != "m.vk.com" && host != "oauth.vk.com" {
+        if !VKDomains.allowedAuthHosts.contains(host) {
             return .wrongPage
         }
         if fragment.isEmpty && query.isEmpty {

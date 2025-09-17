@@ -7,7 +7,7 @@ protocol UrlRequestBuilder {
 
 final class UrlRequestBuilderImpl: UrlRequestBuilder {
     
-    private let baseUrl = "https://api.vk.com/method/"
+    private let baseUrl = VKDomains.apiMethodBase
     
     private let queryBuilder: QueryBuilder
     private let bodyBuilder: MultipartBodyBuilder
