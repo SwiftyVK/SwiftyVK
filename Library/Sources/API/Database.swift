@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/database
+    /// https://vk.ru/dev/database
     public enum Database: APIMethod {
         case getChairs(Parameters)
         case getCities(Parameters)

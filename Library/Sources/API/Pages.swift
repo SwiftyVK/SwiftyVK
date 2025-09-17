@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/pages
+    /// https://vk.ru/dev/pages
     public enum Pages: APIMethod {
         case clearCache(Parameters)
         case get(Parameters)

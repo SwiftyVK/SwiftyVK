@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/audio
+    /// https://vk.ru/dev/audio
     public enum Audio: APIMethod {
         case get(Parameters)
         case getById(Parameters)

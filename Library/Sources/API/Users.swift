@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/users
+    /// https://vk.ru/dev/users
     public enum Users: APIMethod {
         case get(Parameters)
         case getFollowers(Parameters)

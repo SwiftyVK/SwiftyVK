@@ -21,7 +21,7 @@ final class UploadTests: XCTestCase {
         )
         
         VKStack.mock(
-            .upload(url: "https://test.vk.com", media: [media], partType: .photo),
+            .upload(url: "https://test.vk.ru", media: [media], partType: .photo),
             fileName: "upload.photos.toWall.success"
         )
         
@@ -56,7 +56,7 @@ final class UploadTests: XCTestCase {
         )
         
         VKStack.mock(
-            .upload(url: "https://test.vk.com&_square_crop=10,20,30", media: [media], partType: .photo),
+            .upload(url: "https://test.vk.ru&_square_crop=10,20,30", media: [media], partType: .photo),
             fileName: "upload.photos.ownerPhoto.success"
         )
         
@@ -92,7 +92,7 @@ final class UploadTests: XCTestCase {
         
         VKStack.mock(
             .upload(
-                url: "https://test.vk.com",
+                url: "https://test.vk.ru",
                 media: [media],
                 partType: .indexedFile
             ),
@@ -146,7 +146,7 @@ final class UploadTests: XCTestCase {
         )
         
         VKStack.mock(
-            .upload(url: "https://test.vk.com", media: [media], partType: .photo),
+            .upload(url: "https://test.vk.ru", media: [media], partType: .photo),
             fileName: "upload.photos.toWall.success"
         )
         
@@ -186,7 +186,7 @@ final class UploadTests: XCTestCase {
         )
         
         VKStack.mock(
-            .upload(url: "https://test.vk.com", media: [media], partType: .file),
+            .upload(url: "https://test.vk.ru", media: [media], partType: .file),
             fileName: "upload.photos.toChatMain.success"
         )
         
@@ -221,7 +221,7 @@ final class UploadTests: XCTestCase {
         )
         
         VKStack.mock(
-            .upload(url: "https://test.vk.com", media: [media], partType: .file),
+            .upload(url: "https://test.vk.ru", media: [media], partType: .file),
             fileName: "upload.photos.toMarket.success"
         )
         
@@ -267,7 +267,7 @@ final class UploadTests: XCTestCase {
         )
         
         VKStack.mock(
-            .upload(url: "https://test.vk.com", media: [media], partType: .file),
+            .upload(url: "https://test.vk.ru", media: [media], partType: .file),
             fileName: "upload.photos.toMarket.success"
         )
         
@@ -307,7 +307,7 @@ final class UploadTests: XCTestCase {
         )
         
         VKStack.mock(
-            .upload(url: "https://test.vk.com", media: [media], partType: .file),
+            .upload(url: "https://test.vk.ru", media: [media], partType: .file),
             fileName: "upload.audio.success"
         )
         
@@ -348,7 +348,7 @@ final class UploadTests: XCTestCase {
         )
         
         VKStack.mock(
-            .upload(url: "https://test.vk.com", media: [media], partType: .video),
+            .upload(url: "https://test.vk.ru", media: [media], partType: .video),
             fileName: "upload.save.success"
         )
         
@@ -379,7 +379,7 @@ final class UploadTests: XCTestCase {
         )
         
         VKStack.mock(
-            .upload(url: "https://test.vk.com", media: [media], partType: .file),
+            .upload(url: "https://test.vk.ru", media: [media], partType: .file),
             fileName: "upload.document.success"
         )
         
@@ -424,7 +424,7 @@ final class UploadTests: XCTestCase {
         )
         
         VKStack.mock(
-            .upload(url: "https://test.vk.com", media: [media], partType: .photo),
+            .upload(url: "https://test.vk.ru", media: [media], partType: .photo),
             fileName: "upload.photos.toMarket.success"
         )
         
@@ -462,7 +462,7 @@ final class UploadTests: XCTestCase {
         )
         
         VKStack.mock(
-            .upload(url: "https://test.vk.com", media: [media], partType: .file),
+            .upload(url: "https://test.vk.ru", media: [media], partType: .file),
             fileName: "upload.document.success"
         )
         

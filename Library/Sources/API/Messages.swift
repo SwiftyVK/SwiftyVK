@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/messages
+    /// https://vk.ru/dev/messages
     public enum Messages: APIMethod {
         case addChatUser(Parameters)
         case allowMessagesFromGroup(Parameters)

@@ -12,8 +12,8 @@ protocol Authorizator: class {
 final class AuthorizatorImpl: Authorizator {
     
     private let queue = DispatchQueue(label: "SwiftyVK.authorizatorQueue")
-    private let webAuthorizeUrl = "https://oauth.vk.com/authorize?"
-    private let webRedirectUrl = "https://oauth.vk.com/blank.html"
+    private let webAuthorizeUrl = VKDomains.oauthAuthorizeUrl
+    private let webRedirectUrl = VKDomains.oauthRedirectUrl
     
     private let appId: String
     private var tokenStorage: TokenStorage

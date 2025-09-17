@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/account
+    /// https://vk.ru/dev/account
     public enum Account: APIMethod {
         case banUser(Parameters)
         case changePassword(Parameters)

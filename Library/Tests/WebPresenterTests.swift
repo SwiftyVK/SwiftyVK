@@ -33,7 +33,7 @@ final class WebPresenterTests: XCTestCase {
         }
         // When
         let result = try? context.presenter.presentWith(
-            urlRequest: urlRequest(string: "http://vk.com#access_token=test")!
+            urlRequest: urlRequest(string: "http://vk.ru#access_token=test")!
         )
         // Then
         XCTAssertEqual(result, "access_token=test")
@@ -54,7 +54,7 @@ final class WebPresenterTests: XCTestCase {
         }
         // When
         do {
-            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_denied")!)
+            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.ru#access_denied")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
@@ -71,7 +71,7 @@ final class WebPresenterTests: XCTestCase {
         }
         // When
         do {
-            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_denied")!)
+            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.ru#access_denied")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
@@ -94,7 +94,7 @@ final class WebPresenterTests: XCTestCase {
         }
         // When
         do {
-            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_denied")!)
+            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.ru#access_denied")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
@@ -117,7 +117,7 @@ final class WebPresenterTests: XCTestCase {
         }
         // When
         do {
-            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#cancel=1")!)
+            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.ru#cancel=1")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
@@ -140,7 +140,7 @@ final class WebPresenterTests: XCTestCase {
         }
         // When
         do {
-            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#fail=1")!)
+            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.ru#fail=1")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
@@ -162,7 +162,7 @@ final class WebPresenterTests: XCTestCase {
             return controller
         }
         // When
-        let result = try? context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#success=1")!)
+        let result = try? context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.ru#success=1")!)
         // Then
         XCTAssertEqual(result, "success=1")
     }
@@ -191,14 +191,14 @@ final class WebPresenterTests: XCTestCase {
             controller.onGoBack = {
                 goBackCallCount += 1
                 DispatchQueue.global().async {
-                    onResultBlock?(.response(URL(string: "http://vk.com#success=1")!))
+                    onResultBlock?(.response(URL(string: "http://vk.ru#success=1")!))
                 }
             }
             
             return controller
         }
         // When
-        let result = try? context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com/test1")!)
+        let result = try? context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.ru/test1")!)
         // Then
         XCTAssertEqual(result, "success=1")
         XCTAssertEqual(goBackCallCount, 1)
@@ -228,7 +228,7 @@ final class WebPresenterTests: XCTestCase {
         }
         // When
         do {
-            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com?api_validation_test")!)
+            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.ru?api_validation_test")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
@@ -260,7 +260,7 @@ final class WebPresenterTests: XCTestCase {
             return controller
         }
         // When
-        let result = try? context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_token=test")!)
+        let result = try? context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.ru#access_token=test")!)
         // Then
         XCTAssertEqual(result, "access_token=test")
     }
@@ -289,7 +289,7 @@ final class WebPresenterTests: XCTestCase {
         }
         // When
         do {
-            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.com#access_token=test")!)
+            _ = try context.presenter.presentWith(urlRequest: urlRequest(string: "http://vk.ru#access_token=test")!)
             XCTFail("Expression should throw error")
         } catch let error {
             // Then
@@ -320,11 +320,10 @@ final class WebPresenterTests: XCTestCase {
         
         // When
         DispatchQueue.global().async {
-            _ = try? context.presenter.presentWith(urlRequest: self.urlRequest(string: "http://vk.com#access_token=test")!)
+            _ = try? context.presenter.presentWith(urlRequest: self.urlRequest(string: "http://vk.ru#access_token=test")!)
         }
         
         waitForExpectations(timeout: 10)
     }
 }
-
 

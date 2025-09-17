@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/leads
+    /// https://vk.ru/dev/leads
     public enum Leads: APIMethod {
         case checkUser(Parameters)
         case complete(Parameters)

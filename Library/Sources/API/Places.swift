@@ -1,5 +1,5 @@
 extension APIScope {
-    /// https://vk.com/dev/places
+    /// https://vk.ru/dev/places
     public enum Places: APIMethod {
         case add(Parameters)
         case checkin(Parameters)
