@@ -1,3 +1,4 @@
+#if os(iOS)
 import UIKit
 
 final class ShareImageCollectionViewIOS: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -54,3 +55,5 @@ final class ShareImageCollectionViewIOS: UICollectionView, UICollectionViewDataS
         cell.set(image: image)
     }
 }
+
+#endif

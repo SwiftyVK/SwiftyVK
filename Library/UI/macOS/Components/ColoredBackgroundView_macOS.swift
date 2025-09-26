@@ -1,3 +1,4 @@
+#if os(macOS)
 import Cocoa
 
 @IBDesignable
@@ -12,3 +13,5 @@ final class ColoredBackgroundViewMacOS: NSView {
         }
     }
 }
+
+#endif

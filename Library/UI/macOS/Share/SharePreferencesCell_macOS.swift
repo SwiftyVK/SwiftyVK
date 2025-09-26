@@ -1,3 +1,4 @@
+#if os(macOS)
 import Cocoa
 
 final class SharePreferencesCellMacOS: NSView {
@@ -22,3 +23,5 @@ final class SharePreferencesCellMacOS: NSView {
         preference?.active = sender.on
     }
 }
+
+#endif

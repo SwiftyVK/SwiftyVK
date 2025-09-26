@@ -1,3 +1,4 @@
+#if os(macOS)
 //
 //  JSSwitch.swift
 //  JSSwitch
@@ -174,3 +175,5 @@ public class JSSwitch: NSControl {
         sendAction(action, to: target)
 	}
 }
+
+#endif

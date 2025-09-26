@@ -1,3 +1,4 @@
+#if os(macOS)
 import Cocoa
 import WebKit
 
@@ -15,3 +16,5 @@ final class WebViewWrapperMacOs: NSView {
         webView.frame = bounds
     }
 }
+
+#endif

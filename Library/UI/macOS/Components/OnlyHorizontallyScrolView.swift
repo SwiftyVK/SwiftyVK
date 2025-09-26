@@ -1,3 +1,4 @@
+#if os(macOS)
 import Cocoa
 
 class OnlyHorizontallyScrolView: NSScrollView {
@@ -17,3 +18,5 @@ class OnlyHorizontallyScrolView: NSScrollView {
         positionAxisY = event.deltaY
     }
 }
+
+#endif

@@ -1,3 +1,4 @@
+#if os(iOS)
 import UIKit
 
 final class ShareNavigationControllerIOS: UINavigationController, ShareController {
@@ -40,3 +41,5 @@ final class ShareNavigationControllerIOS: UINavigationController, ShareControlle
         print("DEINIT", type(of: self))
     }
 }
+
+#endif

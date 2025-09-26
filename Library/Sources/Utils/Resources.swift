@@ -18,18 +18,25 @@ struct Resources {
     static let bundle: Bundle = {
         let name = "SwiftyVK_resources" + pathSuffix
         let bundleType = "bundle"
-        
+
+        if
+            let url = Bundle.module.url(forResource: name, withExtension: bundleType),
+            let bundle = Bundle(url: url) {
+            return bundle
+        }
+
         if
             let path = Bundle.main.path(forResource: name, ofType: bundleType),
             let bundle = Bundle(path: path) {
             return bundle
         }
-        else if
+
+        if
             let path = Bundle(for: ResourceTestClass.self).path(forResource: name, ofType: bundleType),
             let bundle = Bundle(path: path) {
             return bundle
         }
-        
+
         return Bundle.main
     }()
     

@@ -1,3 +1,4 @@
+#if os(iOS)
 import UIKit
 
 final class ShareImageCollectionCellIOS: UICollectionViewCell {
@@ -45,3 +46,5 @@ final class ShareImageCollectionCellIOS: UICollectionViewCell {
         }
     }
 }
+
+#endif

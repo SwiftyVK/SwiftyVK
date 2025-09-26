@@ -1,3 +1,4 @@
+#if os(macOS)
 import Cocoa
 
 final class SharePreferencesControllerMacOS: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
@@ -50,3 +51,5 @@ final class SharePreferencesControllerMacOS: NSViewController, NSTableViewDelega
         return false
     }
 }
+
+#endif

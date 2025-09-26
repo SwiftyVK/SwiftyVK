@@ -1,3 +1,4 @@
+#if os(macOS)
 import Cocoa
 
 extension NSImage {
@@ -37,3 +38,5 @@ extension NSImage {
         return squaredImage
     }
 }
+
+#endif

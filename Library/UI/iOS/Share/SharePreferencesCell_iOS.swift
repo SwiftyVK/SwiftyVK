@@ -1,3 +1,4 @@
+#if os(iOS)
 import UIKit
 
 final class SharePreferencesCellIOS: UITableViewCell {
@@ -16,3 +17,5 @@ final class SharePreferencesCellIOS: UITableViewCell {
         preference?.active = sender.isOn
     }
 }
+
+#endif

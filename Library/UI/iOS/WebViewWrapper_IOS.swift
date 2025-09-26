@@ -1,3 +1,4 @@
+#if os(iOS)
 import UIKit
 import WebKit
 
@@ -21,3 +22,5 @@ final class WebViewWrapperIOS: UIView {
         )
     }
 }
+
+#endif

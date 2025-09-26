@@ -1,3 +1,4 @@
+#if os(iOS)
 import UIKit
 import WebKit
 
@@ -72,3 +73,5 @@ final class WebControllerIOS: UIViewController, WKNavigationDelegate, WebControl
         onResult?(.error(.webControllerError(error)))
     }
 }
+
+#endif

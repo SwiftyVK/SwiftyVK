@@ -1,3 +1,4 @@
+#if os(iOS)
 import UIKit
 
 final class CaptchaControllerIOS: UIViewController, UITextFieldDelegate, CaptchaController {
@@ -131,3 +132,5 @@ final class CaptchaControllerIOS: UIViewController, UITextFieldDelegate, Captcha
         UIView.commitAnimations()
     }
 }
+
+#endif
