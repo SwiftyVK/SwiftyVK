@@ -142,9 +142,12 @@ final class AuthorizatorImpl: Authorizator {
 
         let token: InvalidatableToken
         if vkAppProxy.canSend(query: appAuthQuery) {
-            vkAppProxy.send(query: appAuthQuery)
+            guard vkAppProxy.send(query: appAuthQuery) else {
+                throw VKError.vkAppFailedToOpen
+            }
+
             guard let vkAppToken = vkAppToken else {
-                throw VKError.vkAppTokenIsNil
+                throw VKError.vkAppTokenNotReceived
             }
 
             token = vkAppToken

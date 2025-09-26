@@ -28,6 +28,8 @@ extension VKError: Equatable {
         (.authorizationDenied, .authorizationDenied),
         (.authorizationCancelled, .authorizationCancelled),
         (.authorizationFailed, .authorizationFailed),
+        (.vkAppFailedToOpen, .vkAppFailedToOpen),
+        (.vkAppTokenNotReceived, .vkAppTokenNotReceived),
         (.cantAwaitOnMainThread, .cantAwaitOnMainThread),
         (.cantAwaitRequestWithSettedCallbacks, .cantAwaitRequestWithSettedCallbacks),
         (.captchaWasDismissed, .captchaWasDismissed):

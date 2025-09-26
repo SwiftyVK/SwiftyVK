@@ -39,6 +39,8 @@ public indirect enum VKError: Error {
     case authorizationDenied
     case authorizationCancelled
     case authorizationFailed
+    case vkAppFailedToOpen
+    case vkAppTokenNotReceived
     case captchaWasDismissed
     case sharingWasDismissed
     case vkAppTokenIsNil
