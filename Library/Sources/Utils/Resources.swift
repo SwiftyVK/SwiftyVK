@@ -19,11 +19,13 @@ struct Resources {
         let name = "SwiftyVK_resources" + pathSuffix
         let bundleType = "bundle"
 
+        #if SWIFT_PACKAGE
         if
             let url = Bundle.module.url(forResource: name, withExtension: bundleType),
             let bundle = Bundle(url: url) {
             return bundle
         }
+        #endif
 
         if
             let path = Bundle.main.path(forResource: name, ofType: bundleType),
