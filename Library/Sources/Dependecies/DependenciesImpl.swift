@@ -126,7 +126,7 @@ final class DependenciesImpl: Dependencies {
         
         #if os(iOS)
             appLifecycleProvider = IOSAppLifecycleProvider()
-            urlOpener = URLOpenerIOS()
+        urlOpener = URLOpenerIOS()
         #elseif os(macOS)
             appLifecycleProvider = MacOSAppLifecycleProvider()
             urlOpener = URLOpenerMacOS()
