@@ -24,8 +24,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-        D5AAA1012345678901234567 /* VKDomains.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AAA0012345678901234567 /* VKDomains.swift */; };
-        D5AAA2012345678901234567 /* VKDomains.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AAA0012345678901234567 /* VKDomains.swift */; };
+		0C94F10F43004C07967A3969 /* WebViewUserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63A468D471C4C709D41D3EF /* WebViewUserAgent.swift */; };
 		A20CDD941EF667B000271276 /* CaptchaPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDD931EF667B000271276 /* CaptchaPresenterTests.swift */; };
 		A20CDD961EF66AEC00271276 /* CaptchaControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDD951EF66AEC00271276 /* CaptchaControllerMock.swift */; };
 		A22179C81EBA3DBD006B71FD /* AttemptShedulerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */; };
@@ -518,6 +517,9 @@
 		D4F56CDE1F6837BC00ACC3CF /* DependenciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F56CDD1F6837BC00ACC3CF /* DependenciesTests.swift */; };
 		D4FCAE811FE68AC200E7D1E7 /* UploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FCAE801FE68AC200E7D1E7 /* UploadTests.swift */; };
 		D4FCAE821FE68AC200E7D1E7 /* UploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FCAE801FE68AC200E7D1E7 /* UploadTests.swift */; };
+		D5AAA1012345678901234567 /* VKDomains.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AAA0012345678901234567 /* VKDomains.swift */; };
+		D5AAA2012345678901234567 /* VKDomains.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AAA0012345678901234567 /* VKDomains.swift */; };
+		E5515D9777C444F59808027F /* WebViewUserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63A468D471C4C709D41D3EF /* WebViewUserAgent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -771,8 +773,7 @@
 		D4BBFDC41F9297A9009615E7 /* TwoVariationsMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoVariationsMethod.swift; sourceTree = "<group>"; };
 		D4BBFDC51F9297A9009615E7 /* ThreeVariationsMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeVariationsMethod.swift; sourceTree = "<group>"; };
 		D4BBFDC61F9297A9009615E7 /* BasicMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicMethod.swift; sourceTree = "<group>"; };
-        D4BBFDC71F9297A9009615E7 /* Scopes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scopes.swift; sourceTree = "<group>"; };
-        D5AAA0012345678901234567 /* VKDomains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKDomains.swift; sourceTree = "<group>"; };
+		D4BBFDC71F9297A9009615E7 /* Scopes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scopes.swift; sourceTree = "<group>"; };
 		D4BBFDC91F9297A9009615E7 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		D4BBFDCA1F9297A9009615E7 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		D4BBFDCB1F9297A9009615E7 /* VKError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKError.swift; sourceTree = "<group>"; };
@@ -880,6 +881,8 @@
 		D4F49D441F2E0EF60037B875 /* apiError.correct.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apiError.correct.json; sourceTree = "<group>"; };
 		D4F56CDD1F6837BC00ACC3CF /* DependenciesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependenciesTests.swift; sourceTree = "<group>"; };
 		D4FCAE801FE68AC200E7D1E7 /* UploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTests.swift; sourceTree = "<group>"; };
+		D5AAA0012345678901234567 /* VKDomains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKDomains.swift; sourceTree = "<group>"; };
+		F63A468D471C4C709D41D3EF /* WebViewUserAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewUserAgent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1171,6 +1174,7 @@
 			children = (
 				D47E1CC91F92B08D002BB2AC /* iOS */,
 				D47E1CC81F92B087002BB2AC /* macOS */,
+				F63A468D471C4C709D41D3EF /* WebViewUserAgent.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1389,17 +1393,17 @@
 			path = Dependecies;
 			sourceTree = "<group>";
 		};
-        D4BBFFDC1F929955009615E7 /* Common */ = {
-            isa = PBXGroup;
-            children = (
-                D5AAA0012345678901234567 /* VKDomains.swift */,
-                D4BBFDC71F9297A9009615E7 /* Scopes.swift */,
-                D4BBFDEA1F9297A9009615E7 /* SwiftyVKDelegate.swift */,
-                D4BBFDE91F9297A9009615E7 /* VK.swift */,
-            );
-            path = Common;
-            sourceTree = "<group>";
-        };
+		D4BBFFDC1F929955009615E7 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D5AAA0012345678901234567 /* VKDomains.swift */,
+				D4BBFDC71F9297A9009615E7 /* Scopes.swift */,
+				D4BBFDEA1F9297A9009615E7 /* SwiftyVKDelegate.swift */,
+				D4BBFDE91F9297A9009615E7 /* VK.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		D4BBFFDD1F9299BC009615E7 /* Cookies */ = {
 			isa = PBXGroup;
 			children = (
@@ -1914,10 +1918,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-        A2EB6E961BD180DD008E7D86 /* Sources */ = {
-            isa = PBXSourcesBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
+		A2EB6E961BD180DD008E7D86 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 				D4BBFFD31F929893009615E7 /* IDGenerator.swift in Sources */,
 				D4B44EA51FA38A5100E85E31 /* ShareNavigationController_iOS.swift in Sources */,
 				D4BBFFCF1F929893009615E7 /* SessionConfig.swift in Sources */,
@@ -1994,6 +1998,7 @@
 				D4BBFFC51F929893009615E7 /* Task.swift in Sources */,
 				D4BBFFD61F929893009615E7 /* ConnectionObserver.swift in Sources */,
 				D46FB4221F929E35000CEAEB /* WebViewWrapper_IOS.swift in Sources */,
+				0C94F10F43004C07967A3969 /* WebViewUserAgent.swift in Sources */,
 				D46FB4321F929E4E000CEAEB /* CaptchaController_iOS.swift in Sources */,
 				D4BBFFA21F929893009615E7 /* VKFileManager.swift in Sources */,
 				D46FB42B1F929E3C000CEAEB /* WebController_iOS.swift in Sources */,
@@ -2032,9 +2037,9 @@
 				D4BBFFCC1F929893009615E7 /* EncodedSession.swift in Sources */,
 				D4BBFF9C1F929893009615E7 /* CharacterSet+Extensions.swift in Sources */,
 				D4BBFFB31F929893009615E7 /* Scopes.swift in Sources */,
-                D4BBFF9E1F929893009615E7 /* URLOpener.swift in Sources */,
-                D5AAA2012345678901234567 /* VKDomains.swift in Sources */,
-                D486E3401FA0E623002134EB /* ShareController_iOS.swift in Sources */,
+				D4BBFF9E1F929893009615E7 /* URLOpener.swift in Sources */,
+				D5AAA2012345678901234567 /* VKDomains.swift in Sources */,
+				D486E3401FA0E623002134EB /* ShareController_iOS.swift in Sources */,
 				D4BBFF7D1F929892009615E7 /* Custom.swift in Sources */,
 				D4BBFF7A1F929892009615E7 /* Leads.swift in Sources */,
 				D4BBFFAE1F929893009615E7 /* Method.swift in Sources */,
@@ -2051,10 +2056,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-        A2EB6EA31BD180E9008E7D86 /* Sources */ = {
-            isa = PBXSourcesBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
+		A2EB6EA31BD180E9008E7D86 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 				D4ED8BAC1FACC7E400B3FDA5 /* Result.swift in Sources */,
 				D4BBFF0B1F929891009615E7 /* IDGenerator.swift in Sources */,
 				D4BBFF071F929891009615E7 /* SessionConfig.swift in Sources */,
@@ -2087,6 +2092,7 @@
 				D4DADE071F9F9AE9004F159E /* ShareContext.swift in Sources */,
 				D4BBFEC01F929891009615E7 /* Friends.swift in Sources */,
 				D46FB4261F929E3C000CEAEB /* WebViewWrapper_macOS.swift in Sources */,
+				E5515D9777C444F59808027F /* WebViewUserAgent.swift in Sources */,
 				D4BBFEC61F929891009615E7 /* Market.swift in Sources */,
 				D4BBFEC81F929891009615E7 /* Wall.swift in Sources */,
 				D4BBFEF01F929891009615E7 /* RequestConfig.swift in Sources */,
@@ -2101,9 +2107,9 @@
 				D4BBFEB61F929891009615E7 /* Photos.swift in Sources */,
 				D4BBFF021F929891009615E7 /* Authorizator.swift in Sources */,
 				D4BBFF081F929891009615E7 /* SessionState.swift in Sources */,
-                D4BBFEEC1F929891009615E7 /* ApiError.swift in Sources */,
-                D5AAA1012345678901234567 /* VKDomains.swift in Sources */,
-                D4BBFEF31F929891009615E7 /* RequestCallbacks.swift in Sources */,
+				D4BBFEEC1F929891009615E7 /* ApiError.swift in Sources */,
+				D5AAA1012345678901234567 /* VKDomains.swift in Sources */,
+				D4BBFEF31F929891009615E7 /* RequestCallbacks.swift in Sources */,
 				D4BBFEDD1F929891009615E7 /* LongPollEvent.swift in Sources */,
 				D4BBFECE1F929891009615E7 /* String+Extensions.swift in Sources */,
 				D441C9DE1FBC82730071A425 /* JSSwitch.swift in Sources */,
