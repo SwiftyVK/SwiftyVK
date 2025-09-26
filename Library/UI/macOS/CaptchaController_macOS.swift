@@ -1,3 +1,4 @@
+#if os(macOS)
 import Cocoa
 
 final class CaptchaControllerMacOS: NSViewController, NSTextFieldDelegate, CaptchaController {
@@ -82,3 +83,5 @@ final class CaptchaControllerMacOS: NSViewController, NSTextFieldDelegate, Captc
         onResult?(result)
     }
 }
+
+#endif

@@ -1,3 +1,4 @@
+#if os(macOS)
 import Cocoa
 
 class DynamicTextView: NSTextView {
@@ -19,3 +20,5 @@ class DynamicTextView: NSTextView {
         invalidateIntrinsicContentSize()
     }
 }
+
+#endif

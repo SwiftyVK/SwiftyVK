@@ -1,3 +1,4 @@
+#if os(macOS)
 import Cocoa
 
 @IBDesignable
@@ -27,3 +28,5 @@ class ColoredTextButton: NSButton {
         )
     }
 }
+
+#endif

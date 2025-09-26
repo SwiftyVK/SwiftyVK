@@ -1,3 +1,4 @@
+#if os(iOS)
 import UIKit
 
 final class ShareControllerIOS: UIViewController, ShareController {
@@ -47,3 +48,5 @@ final class ShareControllerIOS: UIViewController, ShareController {
         }
     }
 }
+
+#endif

@@ -1,3 +1,4 @@
+#if os(macOS)
 import Cocoa
 
 @available(iOS 8.0, macOS 10.11, *)
@@ -184,3 +185,5 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextViewD
         updateSendButton()
     }
 }
+
+#endif

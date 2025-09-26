@@ -1,3 +1,4 @@
+#if os(iOS)
 import UIKit
 
 final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, ShareController {
@@ -147,3 +148,5 @@ final class SharePreviewControllerIOS: UIViewController, UITextViewDelegate, Sha
         return true
     }
 }
+
+#endif

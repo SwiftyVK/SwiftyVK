@@ -1,17 +1,50 @@
+// swift-tools-version: 5.7
 import PackageDescription
 
 let package = Package(
     name: "SwiftyVK",
+    defaultLocalization: "en",
+    platforms: [
+        .iOS(.v12),
+        .macOS(.v10_13)
+    ],
     products: [
         .library(
             name: "SwiftyVK",
-            targets: ["SwiftyVK_macOS", "SwiftyVK_iOS"]
+            targets: ["SwiftyVK"]
+        )
+    ],
+    targets: [
+        .target(
+            name: "SwiftyVK",
+            path: "Library",
+            exclude: [
+                "SwiftyVK.xcodeproj",
+                "Tests",
+                "Sources/SwiftyVK.h",
+                "Resources/Files",
+                "Resources/Info"
+            ],
+            sources: [
+                "Sources",
+                "UI"
+            ],
+            resources: [
+                .copy("Resources/Bundles/SwiftyVK_resources_iOS.bundle"),
+                .copy("Resources/Bundles/SwiftyVK_resources_macOS.bundle")
+            ],
+            linkerSettings: [
+                .linkedFramework("SystemConfiguration"),
+                .linkedFramework("WebKit")
+            ]
         ),
-        targets: [
-        .target(name: "SwiftyVK_macOS", dependencies: ["SwiftyVK_resources_macOS"]),
-        .target(name: "SwiftyVK_iOS", dependencies: ["SwiftyVK_resources_iOS"]),
-        .testTarget(name: "SwiftyVK_tests_macOS", dependencies: ["SwiftyVK_macOS"]),
-        .testTarget(name: "SwiftyVK_tests_iOS", dependencies: ["SwiftyVK_iOS"]),
-        ]
+        .testTarget(
+            name: "SwiftyVKTests",
+            dependencies: ["SwiftyVK"],
+            path: "Library/Tests",
+            resources: [
+                .process("Data")
+            ]
+        )
     ]
 )

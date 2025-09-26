@@ -1,3 +1,4 @@
+#if os(iOS)
 import UIKit
 
 class OnePixelConstraintIOS: NSLayoutConstraint {
@@ -7,3 +8,5 @@ class OnePixelConstraintIOS: NSLayoutConstraint {
         constant = 1 / UIScreen.main.scale
     }
 }
+
+#endif

@@ -1,3 +1,4 @@
+#if os(iOS)
 import UIKit
 
 final class SharePreferencesControllerIOS:
@@ -44,3 +45,5 @@ UIViewController, SharePreferencesController, UITableViewDataSource, UITableView
         cell.set(preference: preferences[indexPath.row])
     }
 }
+
+#endif

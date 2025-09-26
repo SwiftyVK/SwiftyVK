@@ -1,3 +1,4 @@
+#if os(iOS)
 import UIKit
 
 final class DisclosuredButtonIOS: UIButton {
@@ -20,3 +21,5 @@ final class DisclosuredButtonIOS: UIButton {
         )
     }
 }
+
+#endif

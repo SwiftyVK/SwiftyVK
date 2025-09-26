@@ -1,3 +1,4 @@
+#if os(macOS)
 import Cocoa
 
 class OnePixelConstraintMacOS: NSLayoutConstraint {
@@ -7,3 +8,5 @@ class OnePixelConstraintMacOS: NSLayoutConstraint {
         constant = 1 / (NSScreen.main?.backingScaleFactor ?? 1)
     }
 }
+
+#endif
