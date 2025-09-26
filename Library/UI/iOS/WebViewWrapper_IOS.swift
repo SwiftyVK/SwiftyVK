@@ -7,6 +7,9 @@ final class WebViewWrapperIOS: UIView {
     
     public required init?(coder: NSCoder) {
         webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
+        if #available(iOS 9.0, *) {
+            webView.customUserAgent = WebViewUserAgent.mobileSafari
+        }
         super.init(coder: coder)
         addSubview(webView)
     }
