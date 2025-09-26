@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>SwiftyVK_resources_macOS</string>
+	<string>SwiftyVK_resources_iOS</string>
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
@@ -39,6 +39,11 @@
 	<key>DTXcodeBuild</key>
 	<string>17A400</string>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.11</string>
+	<string>10.15</string>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>2</integer>
+		<integer>6</integer>
+	</array>
 </dict>
 </plist>
