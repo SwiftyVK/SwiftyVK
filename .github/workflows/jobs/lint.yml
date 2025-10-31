@@ -1,0 +1,24 @@
+name: SwiftLint
+
+on:
+  workflow_call:
+    inputs:
+      swiftlint-args:
+        description: "Arguments passed to SwiftLint"
+        required: false
+        type: string
+        default: lint --config .swiftlint.yml --reporter github-actions-logging --strict
+
+jobs:
+  lint:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: SwiftLint
+        uses: cirruslabs/swiftlint-action@v1
+        with:
+          version: latest
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          args: ${{ inputs.swiftlint-args }}

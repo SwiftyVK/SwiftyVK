@@ -23,12 +23,6 @@
          location = "group:Example/../Package.swift">
       </FileRef>
       <FileRef
-         location = "group:Library/../.hound.yml">
-      </FileRef>
-      <FileRef
-         location = "group:Example/../.travis.yml">
-      </FileRef>
-      <FileRef
          location = "group:Example/../.swiftlint.yml">
       </FileRef>
       <FileRef

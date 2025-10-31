@@ -1,0 +1,17 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+
+jobs:
+  lint:
+    uses: ./.github/workflows/jobs/lint.yml
+
+  tests:
+    needs: lint
+    uses: ./.github/workflows/jobs/test-suite.yml
+    with:
+      upload-coverage: true

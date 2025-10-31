@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  lint:
+    uses: ./.github/workflows/jobs/lint.yml
+
+  tests:
+    needs: lint
+    uses: ./.github/workflows/jobs/test-suite.yml
+    with:
+      upload-coverage: false
+
+  publish:
+    needs: tests
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          gem install xcpretty --no-document
+          brew install carthage
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: 1
+
+      - name: Build Carthage archives
+        run: |
+          carthage build --no-skip-current --platform ios,mac
+          carthage archive SwiftyVK
+
+      - name: Upload GitHub Release asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: SwiftyVK.framework.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to CocoaPods
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+        run: pod trunk push
