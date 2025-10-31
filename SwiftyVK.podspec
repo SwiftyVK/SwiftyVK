@@ -19,3 +19,4 @@ Pod::Spec.new do |s|
   s.osx.resources           = "Library/Resources/Bundles/SwiftyVK_resources_macOS.bundle"
   s.static_framework        = false
 end
+
