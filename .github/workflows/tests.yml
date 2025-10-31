@@ -1,0 +1,11 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+
+jobs:
+  tests:
+    uses: ./.github/workflows/reusable-test-suite.yml

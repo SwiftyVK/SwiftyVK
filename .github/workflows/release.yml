@@ -1,0 +1,85 @@
+name: Release
+run-name: Release ${{ inputs.version }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release (must match SwiftyVK.podspec)"
+        required: true
+        type: string
+      prerelease:
+        description: "Mark GitHub release as prerelease"
+        required: false
+        default: false
+        type: boolean
+      publish-cocoapods:
+        description: "Publish to CocoaPods trunk"
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  lint:
+    uses: ./.github/workflows/reusable-lint.yml
+
+  tests:
+    needs: lint
+    uses: ./.github/workflows/reusable-test-suite.yml
+
+  publish:
+    needs: tests
+    runs-on: macos-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify version matches podspec
+        run: |
+          SPEC_VERSION=$(grep -m1 -E "^\s*s\.version\s*=\s*\"" SwiftyVK.podspec | sed -E 's/.*\"([^\"]+)\".*/\1/')
+          echo "Podspec version: ${SPEC_VERSION}"
+          if [ -z "${SPEC_VERSION}" ]; then
+            echo "Failed to parse version from SwiftyVK.podspec" >&2
+            exit 1
+          fi
+          if [ "${SPEC_VERSION}" != "${{ inputs.version }}" ]; then
+            echo "Input version (${{ inputs.version }}) does not match podspec (${SPEC_VERSION})" >&2
+            exit 1
+          fi
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '16.x'
+
+      - name: Install dependencies
+        run: |
+          gem install xcpretty --no-document
+          gem install cocoapods --no-document
+          brew install carthage
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: 1
+
+      - name: Build Carthage archives
+        run: |
+          carthage build --no-skip-current --platform iOS,macOS
+          carthage archive SwiftyVK
+
+      - name: Upload GitHub Release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.version }}
+          target_commitish: ${{ github.sha }}
+          generate_release_notes: true
+          prerelease: ${{ inputs.prerelease }}
+          files: SwiftyVK.framework.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to CocoaPods
+        if: success() && inputs['publish-cocoapods'] == true
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+        run: pod trunk push

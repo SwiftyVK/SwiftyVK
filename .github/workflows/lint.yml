@@ -1,0 +1,11 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+
+jobs:
+  lint:
+    uses: ./.github/workflows/reusable-lint.yml
