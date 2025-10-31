@@ -1,11 +1,14 @@
 [![SwiftyVK](./SwiftyVK_logo.png)](./)
 
 <p align="center">
-    <a href="http://cocoadocs.org/docsets/SwiftyVK">
-    <img src="https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat" alt="Platform">
+    <a href="https://cocoapods.org/pods/SwiftyVK">
+    <img src="https://img.shields.io/cocoapods/p/SwiftyVK.svg?style=flat" alt="CocoaPods platforms">
   </a>
   <a href="https://developer.apple.com/swift/">
-    <img src="https://img.shields.io/badge/Swift-5.0-orange.svg?style=flat" alt="Swift">
+    <img src="https://img.shields.io/badge/Swift-5.7-orange.svg?style=flat" alt="Swift 5.7">
+  </a>
+    <a href="https://www.swift.org/package-manager/">
+    <img src="https://img.shields.io/badge/SPM-supported-brightgreen.svg?style=flat" alt="Swift Package Manager compatible">
   </a>
     <a href="https://vk.ru/dev/versions">
     <img src="https://img.shields.io/badge/VK_API->5.92-blue.svg?style=flat" alt="VK API">
@@ -58,6 +61,7 @@
 ## Table of contents
 * [Requirements](#requirements)
 * [Integration](#integration)
+  - [Swift Package Manager](#swift-package-manager)
   - [Carthage (recommended)](#carthage-recomended)
   - [CocoaPods](#cocoapods)
   - [Manually](#manually)
@@ -96,6 +100,18 @@
 * Xcode 9.0 +
 
 ## **Integration**
+
+### Swift Package Manager
+
+> Minimum deployment targets: iOS 12.0, macOS 10.13.
+
+Add SwiftyVK to your `Package.swift` dependencies and target as usual:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/SwiftyVK/SwiftyVK.git", from: "3.4.3")
+]
+```
 
 ### [Carthage](https://github.com/Carthage/Carthage) (recommended)
 ```
