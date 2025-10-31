@@ -1,0 +1,74 @@
+name: _Release Guard
+
+on:
+  workflow_call:
+    outputs:
+      podspec_version:
+        description: Version parsed from podspec
+        value: ${{ jobs.guard.outputs.podspec_version }}
+      latest_tag:
+        description: Latest git tag detected
+        value: ${{ jobs.guard.outputs.latest_tag }}
+      comparison_result:
+        description: SemVer comparison result (>, =, <)
+        value: ${{ jobs.guard.outputs.comparison_result }}
+      release_tag:
+        description: Tag to use for release (SemVer)
+        value: ${{ jobs.guard.outputs.release_tag }}
+
+jobs:
+  guard:
+    name: Check release posibility
+    runs-on: ${{ vars.UBUNTU_RUNNER }}
+    outputs:
+      podspec_version: ${{ steps.out.outputs.podspec_version }}
+      latest_tag: ${{ steps.out.outputs.latest_tag }}
+      comparison_result: ${{ steps.out.outputs.comparison_result }}
+      release_tag: ${{ steps.out.outputs.release_tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Parse podspec version
+        id: ver
+        shell: bash
+        run: |
+          set -euo pipefail
+          spec=$(grep -m1 -E '^\s*s\.version\s*=\s*"' "${{ vars.PRODUCT_NAME }}.podspec" | sed -E 's/.*"([^"]+)".*/\1/')
+          if [ -z "$spec" ]; then
+            echo "::error::Failed to parse version from ${{ vars.PRODUCT_NAME }}.podspec"; exit 1
+          fi
+          echo "podspec_version=$spec" >> "$GITHUB_OUTPUT"
+
+      - name: Get previous tag (semver)
+        id: latest
+        uses: WyriHaximus/github-action-get-previous-tag@v1
+
+      - name: Compare versions
+        id: cmp
+        uses: madhead/semver-utils@v3
+        with:
+          version: ${{ steps.ver.outputs.podspec_version }}
+          compare-to: ${{ steps.latest.outputs.tag }}
+
+      - name: Validate and export
+        id: out
+        shell: bash
+        run: |
+          set -euo pipefail
+          v='${{ steps.ver.outputs.podspec_version }}'
+          latest='${{ steps.latest.outputs.tag }}'
+          cmp='${{ steps.cmp.outputs.comparison-result }}'
+          if [ -z "$v" ]; then
+            echo "::error::Failed to parse version from ${{ vars.PRODUCT_NAME }}.podspec"; exit 1
+          fi
+          echo "podspec_version=$v" >> "$GITHUB_OUTPUT"
+          echo "latest_tag=$latest" >> "$GITHUB_OUTPUT"
+          echo "comparison_result=$cmp" >> "$GITHUB_OUTPUT"
+          echo "release_tag=$v" >> "$GITHUB_OUTPUT"
+          if [ "$cmp" != ">" ]; then
+            echo "::error::Release already exists or not higher (latest: ${latest}, podspec: ${v})"; exit 1
+          fi

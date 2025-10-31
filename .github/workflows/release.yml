@@ -1,0 +1,61 @@
+name: Release
+run-name: Release
+
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      test_mode:
+        description: "Test mode: use temp tag, draft release and cleanup; lint Pods instead of push"
+        required: false
+        default: true
+        type: boolean
+      publish-cocoapods:
+        description: "Publish to CocoaPods trunk"
+        required: false
+        default: true
+        type: boolean
+      publish-carthage:
+        description: "Build and publish Carthage archive to GitHub release"
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  guard:
+    uses: ./.github/workflows/reusable-release-guard.yml
+    secrets: inherit
+
+  lint:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.test_mode != true }}
+    needs: [guard]
+    uses: ./.github/workflows/reusable-lint.yml
+    secrets: inherit
+
+  tests:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.test_mode != true }}
+    needs: [guard]
+    uses: ./.github/workflows/reusable-test-suite.yml
+    secrets: inherit
+
+  publish:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.test_mode != true }}
+    needs: [guard, tests, lint]
+    uses: ./.github/workflows/reusable-release.yml
+    with:
+      test_mode: false
+      publish-cocoapods: ${{ inputs['publish-cocoapods'] }}
+      publish-carthage: ${{ inputs['publish-carthage'] }}
+      release_tag: ${{ needs.guard.outputs.release_tag }}
+    secrets: inherit
+
+  publish-test:
+    if: ${{ github.event_name == 'pull_request' || inputs.test_mode == true }}
+    needs: [guard]
+    uses: ./.github/workflows/reusable-release.yml
+    with:
+      test_mode: true
+      publish-cocoapods: ${{ inputs['publish-cocoapods'] }}
+      publish-carthage: ${{ inputs['publish-carthage'] }}
+      release_tag: ${{ needs.guard.outputs.release_tag }}
+    secrets: inherit

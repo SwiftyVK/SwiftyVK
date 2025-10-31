@@ -1,0 +1,66 @@
+name: _Tests
+
+on:
+  workflow_call:
+
+jobs:
+  tests:
+    name: ${{ matrix.platform }} tests 
+    runs-on: ${{ vars.MACOS_RUNNER }}
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        include:
+          - platform: iOS
+            scheme: ${{ vars.PRODUCT_NAME }}_iOS
+            destination: 'platform=iOS Simulator,OS=latest,name=iPhone 16'
+            build-settings: 'CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY='
+          - platform: macOS
+            scheme: ${{ vars.PRODUCT_NAME }}_macOS
+            destination: 'platform=macOS'
+            build-settings: 'CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= ENABLE_TESTABILITY=YES'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python for Codecov
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ vars.PYTHON_VERSION }}
+
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ vars.XCODE_VERSION }}
+
+      - name: Build
+        uses: sersoft-gmbh/xcodebuild-action@v3.2.0
+        with:
+          workspace: ${{ vars.PRODUCT_NAME }}.xcworkspace
+          scheme: ${{ matrix.scheme }}
+          destination: ${{ matrix.destination }}
+          action: build-for-testing
+          enable-code-coverage: true
+          build-settings: ${{ matrix.build-settings }}
+          output-formatter: xcbeautify --renderer github-actions
+
+      - name: Run Tests
+        uses: sersoft-gmbh/xcodebuild-action@v3.2.0
+        with:
+          workspace: ${{ vars.PRODUCT_NAME }}.xcworkspace
+          scheme: ${{ matrix.scheme }}
+          destination: ${{ matrix.destination }}
+          action: test-without-building
+          retry-tests-on-failure: true
+          test-iterations: 3
+          enable-code-coverage: true
+          build-settings: ${{ matrix.build-settings }}
+          output-formatter: xcbeautify --renderer github-actions
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5.5.1
+        with:
+          flags: ${{ matrix.platform }}
+          token: ${{ secrets.CODECOV_TOKEN }}
+          plugins: xcode
+          use_pypi: true
+          fail_ci_if_error: true

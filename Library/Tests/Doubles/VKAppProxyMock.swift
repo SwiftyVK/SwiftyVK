@@ -2,11 +2,17 @@
 
 final class VKAppProxyMock: VKAppProxy {
     
-    var onSend: ((String) throws -> Bool)?
+    var onCanSend: ((String) -> Bool)?
+    var onSend: ((String) -> Bool)?
     var onHandle: ((URL, String?) -> String?)?
     
-    func send(query: String) throws -> Bool {
-        return try onSend?(query) ?? false
+    func canSend(query: String) -> Bool {
+        return onCanSend?(query) ?? false
+    }
+    
+    @discardableResult
+    func send(query: String) -> Bool {
+        return onSend?(query) ?? false
     }
     
     func handle(url: URL, app: String?) -> String? {
