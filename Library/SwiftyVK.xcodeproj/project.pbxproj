@@ -1172,9 +1172,9 @@
 		D47E1CC71F92B079002BB2AC /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D49F2B242EB7E10D009072F7 /* Shared */,
 				D47E1CC91F92B08D002BB2AC /* iOS */,
 				D47E1CC81F92B087002BB2AC /* macOS */,
-				F63A468D471C4C709D41D3EF /* WebViewUserAgent.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1201,6 +1201,14 @@
 				D44C84171FA267060029EA7B /* Components */,
 			);
 			path = iOS;
+			sourceTree = "<group>";
+		};
+		D49F2B242EB7E10D009072F7 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				F63A468D471C4C709D41D3EF /* WebViewUserAgent.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		D4BBFDA41F9297A9009615E7 /* Utils */ = {
