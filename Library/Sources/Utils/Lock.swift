@@ -18,12 +18,7 @@ final class MultiplatrormLock: Lock {
     private let lockRef: Lock
     
     init() {
-        if #available(OSX 10.12, *, iOS 10, *, tvOS 10.0, *) {
-            lockRef = UnfairLock()
-        }
-        else {
-            lockRef = SpinLock()
-        }
+        lockRef = UnfairLock()
     }
     
     func lock() {
@@ -35,19 +30,6 @@ final class MultiplatrormLock: Lock {
     }
 }
 
-final class SpinLock: Lock {
-    private var lockRef = OS_SPINLOCK_INIT
-    
-    func lock() {
-        OSSpinLockLock(&lockRef)
-    }
-    
-    func unlock() {
-        OSSpinLockUnlock(&lockRef)
-    }
-}
-
-@available(OSX 10.12, *, iOS 10, *, tvOS 10.0, *)
 final class UnfairLock: Lock {
     var lockRer = os_unfair_lock_s()
     

@@ -95,8 +95,8 @@
 ----
 ## **Requirements**
 * Swift 4.0 +
-* iOS 8.0 +
-* macOS 10.10 +
+* iOS 12.0 +
+* macOS 10.13 +
 * Xcode 9.0 +
 
 ## **Integration**

@@ -20,7 +20,6 @@ var vkDelegateReference : SwiftyVKDelegate?
             return true
         }
         
-        @available(iOS 9.0, *)
         func application(
             _ app: UIApplication,
             open url: URL,
@@ -28,16 +27,6 @@ var vkDelegateReference : SwiftyVKDelegate?
         ) -> Bool {
             let app = options[.sourceApplication] as? String
             VK.handle(url: url, sourceApplication: app)
-            return true
-        }
-        
-        func application(
-            _ application: UIApplication,
-            open url: URL,
-            sourceApplication: String?,
-            annotation: Any
-        ) -> Bool {
-            VK.handle(url: url, sourceApplication: sourceApplication)
             return true
         }
     }

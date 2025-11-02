@@ -7,9 +7,7 @@ final class WebViewWrapperMacOs: NSView {
     
     public required init?(coder: NSCoder) {
         webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
-        if #available(macOS 10.11, *) {
-            webView.customUserAgent = WebViewUserAgent.mobileSafari
-        }
+        webView.customUserAgent = WebViewUserAgent.mobileSafari
         super.init(coder: coder)
         addSubview(webView)
     }
