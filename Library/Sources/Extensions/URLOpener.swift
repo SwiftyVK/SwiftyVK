@@ -27,13 +27,8 @@ final class URLOpenerIOS: URLOpener {
     }
 
     func openURL(_ url: URL) -> Bool {
-        if #available(iOS 10.0, *) {
-            UIApplication.shared.open(url)
-            return true
-        }
-        else {
-            return UIApplication.shared.openURL(url)
-        }
+        UIApplication.shared.open(url)
+        return true
     }
 }
 #endif

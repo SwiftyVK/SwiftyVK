@@ -91,11 +91,6 @@ final class APIWorker {
     }
     
     class func share() {
-        guard #available(iOS 8.0, macOS 10.11, *) else {
-            print("Sharing available only on iOS 8.0+ and macOS 10.11+")
-            return
-        }
-        
         guard
             let pathToImage = Bundle.main.path(forResource: "testImage", ofType: "png"),
             let data = try? Data(contentsOf: URL(fileURLWithPath: pathToImage)),

@@ -32,7 +32,6 @@ public protocol Session: class {
     func send(method: SendableMethod) -> Task
     
     /// Show share dialog
-    @available(iOS 8.0, macOS 10.11, *)
     func share(
         _ context: ShareContext,
         onSuccess: @escaping RequestCallbacks.Success,
