@@ -1,20 +1,20 @@
 /// SwiftyVK delegate
 public typealias SwiftyVKDelegate = SwiftyVKPresenterDelegate & SwiftyVKSessionDelegate & SwiftyVKAuthorizatorDelegate
 
-public protocol SwiftyVKAuthorizatorDelegate: class {
+public protocol SwiftyVKAuthorizatorDelegate: AnyObject {
     /// Called when SwiftyVK attempts get access to user account
     /// Should return set of permission scopes
     /// parameter sessionId: SwiftyVK session identifier
     func vkNeedsScopes(for sessionId: String) -> Scopes
 }
 
-public protocol SwiftyVKPresenterDelegate: class {
+public protocol SwiftyVKPresenterDelegate: AnyObject {
     /// Called when SwiftyVK wants to present UI (e.g webView or captcha)
     /// parameter viewController: view controller which should be presented from current top view controller
     func vkNeedToPresent(viewController: VKViewController)
 }
 
-public protocol SwiftyVKSessionDelegate: class {
+public protocol SwiftyVKSessionDelegate: AnyObject {
     /// Called when user grant access and SwiftyVK gets new session token
     /// Can be used for run SwiftyVK requests and save session data
     /// parameter sessionId: SwiftyVK session identifier

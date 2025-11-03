@@ -1,7 +1,7 @@
 import Foundation
 
 /// Storage of VK user sessions
-public protocol SessionsHolder: class {
+public protocol SessionsHolder: AnyObject {
     /// Default VK user session
     var `default`: Session { get }
     
@@ -15,7 +15,7 @@ public protocol SessionsHolder: class {
     //    func markAsDefault(session: Session) throws
 }
 
-protocol SessionSaver: class {
+protocol SessionSaver: AnyObject {
     func saveState()
 }
 

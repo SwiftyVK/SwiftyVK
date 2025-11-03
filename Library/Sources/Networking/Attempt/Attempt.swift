@@ -1,6 +1,6 @@
 import Foundation
 
-protocol Attempt: class, OperationConvertible {
+protocol Attempt: AnyObject, OperationConvertible {
     init(
         request: URLRequest,
         session: VKURLSession,
@@ -8,7 +8,7 @@ protocol Attempt: class, OperationConvertible {
     )
 }
 
-final class AttemptImpl: Operation, Attempt {
+final class AttemptImpl: Operation, Attempt, @unchecked Sendable {
     
     private let request: URLRequest
     private var task: VKURLSessionTask?

@@ -1,6 +1,6 @@
 import Foundation
 
-protocol CookiesStorage: class {
+protocol CookiesStorage: AnyObject {
     func save(_: [HTTPCookie], for sessionId: String) throws
     func getFor(sessionId: String) -> [HTTPCookie]?
     func removeFor(sessionId: String)

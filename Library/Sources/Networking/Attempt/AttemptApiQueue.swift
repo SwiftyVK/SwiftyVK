@@ -1,6 +1,6 @@
 import Foundation
 
-final class AttemptApiQueue: OperationQueue {
+final class AttemptApiQueue: OperationQueue, @unchecked Sendable {
     
     var limit: AttemptLimit
     

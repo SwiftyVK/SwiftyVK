@@ -121,15 +121,20 @@ final class CaptchaControllerIOS: UIViewController, UITextFieldDelegate, Captcha
                 return
         }
         
-        UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(animationDuration)
-        UIView.setAnimationCurve(viewAnimationCurve)
-        UIView.setAnimationBeginsFromCurrentState(false)
+        let options = UIView.AnimationOptions(rawValue: UInt(viewAnimationCurve.rawValue << 16))
         
-        containerBottomConstraint?.constant = keyboardFrameEnd.height
-        appeared ? view.layoutIfNeeded() : ()
-        
-        UIView.commitAnimations()
+        UIView.animate(
+            withDuration: animationDuration,
+            delay: 0,
+            options: [options],
+            animations: {
+                self.containerBottomConstraint?.constant = keyboardFrameEnd.height
+                if self.appeared {
+                    self.view.layoutIfNeeded()
+                }
+            },
+            completion: nil
+        )
     }
 }
 

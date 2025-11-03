@@ -8,6 +8,6 @@
     public typealias VKViewController = UIViewController
 #endif
 
-protocol DismisableController: class {
+protocol DismisableController: AnyObject {
     var onDismiss: (() -> ())? { get set }
 }

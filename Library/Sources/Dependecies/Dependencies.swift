@@ -23,50 +23,50 @@ extension DependenciesHolder {
     }
 }
 
-protocol SessionsHolderHolder: class {
+protocol SessionsHolderHolder: AnyObject {
     var sessionsHolder: SessionsHolder & SessionSaver { get }
 }
 
-protocol AuthorizatorHolder: class {
+protocol AuthorizatorHolder: AnyObject {
     var authorizator: Authorizator { get }
 }
 
-protocol SessionMaker: class {
+protocol SessionMaker: AnyObject {
     func session(id: String, config: SessionConfig, sessionSaver: SessionSaver) -> Session
 }
 
-protocol TaskMaker: class {
+protocol TaskMaker: AnyObject {
     func task(request: Request, session: TaskSession & ApiErrorExecutor) -> Task
 }
 
-protocol AttemptMaker: class {
+protocol AttemptMaker: AnyObject {
     func attempt(request: URLRequest, callbacks: AttemptCallbacks) -> Attempt
 }
 
-protocol TokenMaker: class {
+protocol TokenMaker: AnyObject {
     func token(token: String, expires: TimeInterval, info: [String: String]) -> InvalidatableToken
 }
 
-protocol WebControllerMaker: class {
+protocol WebControllerMaker: AnyObject {
     func webController(onDismiss: (() -> ())?) -> WebController
 }
 
-protocol CaptchaControllerMaker: class {
+protocol CaptchaControllerMaker: AnyObject {
     func captchaController(onDismiss: (() -> ())?) -> CaptchaController
 }
 
-protocol ShareControllerMaker: class {
+protocol ShareControllerMaker: AnyObject {
     func shareController(onDismiss: (() -> ())?) -> ShareController
 }
 
-protocol LongPollTaskMaker: class {
+protocol LongPollTaskMaker: AnyObject {
     func longPollTask(session: Session?, data: LongPollTaskData) -> LongPollTask
 }
 
-protocol LongPollMaker: class {
+protocol LongPollMaker: AnyObject {
     func longPoll(session: Session) -> LongPoll
 }
 
-protocol SharePresenterMaker: class {
+protocol SharePresenterMaker: AnyObject {
     func sharePresenter() -> SharePresenter
 }
