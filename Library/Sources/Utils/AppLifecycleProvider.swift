@@ -1,4 +1,4 @@
-protocol AppLifecycleProvider: class {
+protocol AppLifecycleProvider: AnyObject {
     var current: AppState? { get }
     
     func subscribe(_ object: AnyObject, handler: @escaping (AppState) -> ())

@@ -1,6 +1,6 @@
 import Foundation
 
-protocol TokenParser: class {
+protocol TokenParser: AnyObject {
     func parse(tokenInfo: String) -> (token: String, expires: TimeInterval, info: [String: String])?
 }
 

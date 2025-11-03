@@ -1,6 +1,6 @@
 import Foundation
 
-protocol TaskSheduler: class {
+protocol TaskSheduler: AnyObject {
     func shedule(task: Task)
 }
 

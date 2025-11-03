@@ -1,7 +1,7 @@
 import Foundation
 
 /// VK user session
-public protocol Session: class {
+public protocol Session: AnyObject {
     /// Internal SwiftyVK session identifier
     var id: String { get }
     /// Current session configuration.

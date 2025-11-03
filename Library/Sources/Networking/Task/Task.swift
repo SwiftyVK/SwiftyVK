@@ -10,7 +10,7 @@ public protocol Task {
     func cancel()
 }
 
-final class TaskImpl: Operation, Task, OperationConvertible {
+final class TaskImpl: Operation, Task, OperationConvertible, @unchecked Sendable {
     
     let id: Int64
     var state: TaskState = .created

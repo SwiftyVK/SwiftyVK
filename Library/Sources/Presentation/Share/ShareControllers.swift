@@ -13,6 +13,6 @@ protocol ShareController: DismisableController {
     func close()
 }
 
-protocol SharePreferencesController: class {
+protocol SharePreferencesController: AnyObject {
     func set(preferences: [ShareContextPreference])
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-protocol ShareWorker: class {
+protocol ShareWorker: AnyObject {
     func upload(images: [ShareImage], in session: Session)
     func getPrefrences(in session: Session) throws -> [ShareContextPreference]
     func post(context: ShareContext, in session: Session) throws -> Data?

@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol Token: class {
+public protocol Token: AnyObject {
     var info: [String: String] { get }
     var isValid: Bool { get }
     

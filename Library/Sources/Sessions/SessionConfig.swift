@@ -21,7 +21,7 @@ public struct SessionConfig: Codable {
     /// like authorization, captcha, validation nedеed and present dialog to user for resolve this situation.
     public var handleErrors: Bool
     
-    let sdkVersion = "1.3.17"
+    var sdkVersion = "1.3.17"
     
     /// Init new config
     /// - parameter apiVersion: VK API version. By default uses latest version.

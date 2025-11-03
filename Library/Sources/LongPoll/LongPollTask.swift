@@ -2,7 +2,7 @@ import Foundation
 
 protocol LongPollTask: OperationConvertible {}
 
-final class LongPollTaskImpl: Operation, LongPollTask {
+final class LongPollTaskImpl: Operation, LongPollTask, @unchecked Sendable {
     
     private weak var session: Session?
     private let server: String

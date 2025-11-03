@@ -1,6 +1,6 @@
 import Foundation
 
-protocol AttemptSheduler: class {
+protocol AttemptSheduler: AnyObject {
     func setLimit(to: AttemptLimit)
     func shedule(attempt: Attempt, concurrent: Bool)
 }

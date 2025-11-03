@@ -40,7 +40,7 @@ class KeychainProvider<EntityType> {
         guard let data = keychainResult as? Data else {
             return nil
         }
-        
+
         guard let entity = NSKeyedUnarchiver.unarchiveObject(with: data) as? EntityType else {
             return nil
         }
@@ -61,3 +61,4 @@ class KeychainProvider<EntityType> {
             ] as NSMutableDictionary
     }
 }
+
