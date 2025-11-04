@@ -7,11 +7,11 @@ on:
         description: Test mode (draft release + cleanup)
         required: true
         type: boolean
-      publish-cocoapods:
+      publish_cocoapods:
         description: Publish to CocoaPods trunk
         required: true
         type: boolean
-      publish-carthage:
+      publish_carthage:
         description: Build and publish Carthage archive to GitHub release
         required: true
         type: boolean
@@ -58,14 +58,14 @@ jobs:
         run: |
           brew install xcbeautify
           gem install cocoapods --no-document
-          if [ "${{ inputs['publish-carthage'] }}" = "true" ]; then
+          if [ "${{ inputs.publish_carthage }}" = "true" ]; then
             brew install carthage
           fi
         env:
           HOMEBREW_NO_AUTO_UPDATE: 1
 
       - name: Build Carthage archives
-        if: inputs['publish-carthage'] == true
+        if: inputs.publish_carthage == true
         run: |
           set -o pipefail
           # Build XCFrameworks to avoid lipo conflicts on arm64 simulator/device
@@ -98,7 +98,7 @@ jobs:
           echo "created=true" >> "$GITHUB_OUTPUT"
 
       - name: Upload Carthage archive to GitHub Release asset
-        if: inputs['publish-carthage'] == true
+        if: inputs.publish_carthage == true
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.RELEASE_TAG }}
@@ -108,7 +108,7 @@ jobs:
           files: ${{ vars.PRODUCT_NAME }}.xcframework.zip
 
       - name: Publish release to CocoaPods
-        if: success() && inputs['publish-cocoapods'] == true
+        if: success() && inputs.publish_cocoapods == true
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
         run: |
