@@ -12,4 +12,3 @@ protocol VKNotificationCenter {
 }
 
 extension NotificationCenter: VKNotificationCenter {}
-
