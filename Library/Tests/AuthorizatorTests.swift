@@ -268,7 +268,103 @@ final class AuthorizatorTests: XCTestCase {
         // Then
         XCTAssertNil(token)
     }
-}
 
+    func test_authorize_withVKApp_canSendButSendFails_shouldThrowVkAppFailedToOpen() {
+        // Given
+        let context = makeContext()
+
+        context.vkApp.onCanSend = { _ in
+            return true
+        }
+        context.vkApp.onSend = { _ in
+            return false
+        }
+
+        // When
+        do {
+            _ = try context.authorizator.authorize(
+                sessionId: context.sessionId,
+                config: context.sessionConfig,
+                revoke: false
+            )
+            // Then
+            XCTFail("Code above should throw error")
+        } catch let error {
+            XCTAssertEqual(error.asVK, VKError.vkAppFailedToOpen)
+        }
+    }
+
+    func test_authorize_withVKApp_sendSucceedsButTokenNotReceived_shouldThrowVkAppTokenNotReceived() {
+        // Given
+        let context = makeContext()
+
+        context.vkApp.onCanSend = { _ in
+            return true
+        }
+        context.vkApp.onSend = { _ in
+            return true
+        }
+
+        // When
+        do {
+            _ = try context.authorizator.authorize(
+                sessionId: context.sessionId,
+                config: context.sessionConfig,
+                revoke: false
+            )
+            // Then
+            XCTFail("Code above should throw error")
+        } catch let error {
+            XCTAssertEqual(error.asVK, VKError.vkAppTokenNotReceived)
+        }
+    }
+
+    func test_authorize_withVKApp_sendSucceeds_tokenFromHandleIsSavedAndReturned() {
+        // Given
+        let context = makeContext()
+        var saveCallCount = 0
+        var savedToken: String?
+
+        context.tokenMaker.onMake = { _, _, _ in
+            return TokenMock(token: "appToken")
+        }
+
+        context.parser.onParse = { _ in
+            return ("token", expires: 123, [:])
+        }
+
+        context.storage.onSave = { token, sessionId in
+            XCTAssertEqual(sessionId, context.sessionId)
+            saveCallCount += 1
+            savedToken = token.get()
+        }
+
+        context.vkApp.onHandle = { _, _ in
+            return "token_info"
+        }
+
+        context.vkApp.onCanSend = { _ in
+            return true
+        }
+
+        context.vkApp.onSend = { _ in
+            context.authorizator.handle(url: URL(string: "scheme://token")!, app: "vk")
+            return true
+        }
+
+        // When
+        let token = try? context.authorizator.authorize(
+            sessionId: context.sessionId,
+            config: context.sessionConfig,
+            revoke: false
+        )
+
+        // Then
+        XCTAssertNotNil(token)
+        XCTAssertEqual(token?.get(), "appToken")
+        XCTAssertEqual(savedToken, "appToken")
+        XCTAssertEqual(saveCallCount, 1)
+    }
+}
 
 
