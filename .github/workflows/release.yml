@@ -10,12 +10,12 @@ on:
         required: false
         default: true
         type: boolean
-      publish-cocoapods:
+      publish_cocoapods:
         description: "Publish to CocoaPods trunk"
         required: false
         default: true
         type: boolean
-      publish-carthage:
+      publish_carthage:
         description: "Build and publish Carthage archive to GitHub release"
         required: false
         default: true
@@ -44,8 +44,8 @@ jobs:
     uses: ./.github/workflows/reusable-release.yml
     with:
       test_mode: false
-      publish-cocoapods: ${{ inputs['publish-cocoapods'] }}
-      publish-carthage: ${{ inputs['publish-carthage'] }}
+      publish_cocoapods: ${{ inputs.publish_cocoapods }}
+      publish_carthage: ${{ inputs.publish_carthage }}
       release_tag: ${{ needs.guard.outputs.release_tag }}
     secrets: inherit
 
@@ -55,7 +55,7 @@ jobs:
     uses: ./.github/workflows/reusable-release.yml
     with:
       test_mode: true
-      publish-cocoapods: ${{ inputs['publish-cocoapods'] }}
-      publish-carthage: ${{ inputs['publish-carthage'] }}
+      publish_cocoapods: ${{ github.event_name == 'pull_request' && true || inputs.publish_cocoapods }}
+      publish_carthage: ${{ github.event_name == 'pull_request' && true || inputs.publish_carthage }}
       release_tag: ${{ needs.guard.outputs.release_tag }}
     secrets: inherit
