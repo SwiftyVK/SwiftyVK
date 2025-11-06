@@ -5,57 +5,88 @@ on:
   pull_request:
   workflow_dispatch:
     inputs:
-      test_mode:
-        description: "Test mode: use temp tag, draft release and cleanup; lint Pods instead of push"
-        required: false
+      tag:
+        description: Create tag from podspec version (only for full release)
+        required: true
         default: true
         type: boolean
-      publish_cocoapods:
-        description: "Publish to CocoaPods trunk"
-        required: false
+      release:
+        description: Create or update GitHub Release
+        required: true
         default: true
         type: boolean
-      publish_carthage:
-        description: "Build and publish Carthage archive to GitHub release"
-        required: false
+      carthage:
+        description: Build and upload Carthage archive
+        required: true
         default: true
+        type: boolean
+      pods:
+        description: CocoaPods (push if no cleanup, lint if cleanup)
+        required: true
+        default: true
+        type: boolean
+      cleanup:
+        description: Cleanup created release/tag (safe run)
+        required: true
+        default: false
+        type: boolean
+      release_draft:
+        description: Release as draft
+        required: true
+        default: false
         type: boolean
 
 jobs:
   guard:
     uses: ./.github/workflows/reusable-release-guard.yml
+    with:
+      tag: ${{ github.event_name == 'pull_request' && false || inputs.tag }}
+      release: ${{ github.event_name == 'pull_request' && true || inputs.release }}
+      carthage: ${{ github.event_name == 'pull_request' && false || inputs.carthage }}
+      pods: ${{ github.event_name == 'pull_request' && true || inputs.pods }}
+      cleanup: ${{ github.event_name == 'pull_request' && true || inputs.cleanup }}
     secrets: inherit
 
   lint:
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.test_mode != true }}
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.cleanup != true }}
     needs: [guard]
     uses: ./.github/workflows/reusable-lint.yml
     secrets: inherit
 
   tests:
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.test_mode != true }}
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.cleanup != true }}
     needs: [guard]
     uses: ./.github/workflows/reusable-test-suite.yml
     secrets: inherit
 
   publish:
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.test_mode != true }}
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     needs: [guard, tests, lint]
     uses: ./.github/workflows/reusable-release.yml
     with:
-      test_mode: false
-      publish_cocoapods: ${{ inputs.publish_cocoapods }}
-      publish_carthage: ${{ inputs.publish_carthage }}
-      release_tag: ${{ needs.guard.outputs.release_tag }}
+      tag: ${{ inputs.tag }}
+      release: ${{ inputs.release }}
+      carthage: ${{ inputs.carthage }}
+      pods: ${{ inputs.pods }}
+      cleanup: ${{ inputs.cleanup }}
+      release_draft: ${{ inputs.release_draft }}
+      release_tag: ${{ needs.guard.outputs.work_tag }}
+      is_full_release: ${{ needs.guard.outputs.is_full_release }}
+      release_existed: ${{ needs.guard.outputs.release_exists }}
     secrets: inherit
 
-  publish-test:
-    if: ${{ github.event_name == 'pull_request' || inputs.test_mode == true }}
+  publish-pr:
+    if: ${{ github.event_name == 'pull_request' }}
     needs: [guard]
     uses: ./.github/workflows/reusable-release.yml
     with:
-      test_mode: true
-      publish_cocoapods: ${{ github.event_name == 'pull_request' && true || inputs.publish_cocoapods }}
-      publish_carthage: ${{ github.event_name == 'pull_request' && true || inputs.publish_carthage }}
-      release_tag: ${{ needs.guard.outputs.release_tag }}
+      tag: false
+      release: false
+      carthage: false
+      pods: true
+      cleanup: true
+      release_draft: true
+      release_tag: ${{ needs.guard.outputs.work_tag }}
+      is_full_release: ${{ needs.guard.outputs.is_full_release }}
+      release_existed: ${{ needs.guard.outputs.release_exists }}
     secrets: inherit

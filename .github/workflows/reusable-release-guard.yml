@@ -2,6 +2,27 @@ name: _Release Guard
 
 on:
   workflow_call:
+    inputs:
+      tag:
+        description: Create git tag from podspec version
+        required: true
+        type: boolean
+      release:
+        description: Create or update GitHub Release
+        required: true
+        type: boolean
+      carthage:
+        description: Build and upload Carthage archive
+        required: true
+        type: boolean
+      pods:
+        description: Work with CocoaPods (push if no cleanup, lint if cleanup)
+        required: true
+        type: boolean
+      cleanup:
+        description: Cleanup created artifacts (release/tag)
+        required: true
+        type: boolean
     outputs:
       podspec_version:
         description: Version parsed from podspec
@@ -9,22 +30,38 @@ on:
       latest_tag:
         description: Latest git tag detected
         value: ${{ jobs.guard.outputs.latest_tag }}
-      comparison_result:
-        description: SemVer comparison result (>, =, <)
-        value: ${{ jobs.guard.outputs.comparison_result }}
-      release_tag:
-        description: Tag to use for release (SemVer)
-        value: ${{ jobs.guard.outputs.release_tag }}
+      is_full_release:
+        description: Whether the selected steps represent a full release
+        value: ${{ jobs.guard.outputs.is_full_release }}
+      work_tag:
+        description: Tag to use for this run
+        value: ${{ jobs.guard.outputs.work_tag }}
+      tag_exists:
+        description: Whether work_tag already exists as git tag
+        value: ${{ jobs.guard.outputs.tag_exists }}
+      release_exists:
+        description: Whether a GitHub Release exists for work_tag
+        value: ${{ jobs.guard.outputs.release_exists }}
+      asset_exists:
+        description: Whether the Carthage asset already exists on the release
+        value: ${{ jobs.guard.outputs.asset_exists }}
 
 jobs:
   guard:
-    name: Check release posibility
+    name: Validate plan and compute tag
     runs-on: ${{ vars.UBUNTU_RUNNER }}
+    permissions:
+      contents: read
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     outputs:
       podspec_version: ${{ steps.out.outputs.podspec_version }}
       latest_tag: ${{ steps.out.outputs.latest_tag }}
-      comparison_result: ${{ steps.out.outputs.comparison_result }}
-      release_tag: ${{ steps.out.outputs.release_tag }}
+      is_full_release: ${{ steps.out.outputs.is_full_release }}
+      work_tag: ${{ steps.out.outputs.work_tag }}
+      tag_exists: ${{ steps.out.outputs.tag_exists }}
+      release_exists: ${{ steps.out.outputs.release_exists }}
+      asset_exists: ${{ steps.out.outputs.asset_exists }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -54,21 +91,174 @@ jobs:
           version: ${{ steps.ver.outputs.podspec_version }}
           compare-to: ${{ steps.latest.outputs.tag }}
 
-      - name: Validate and export
-        id: out
+      - name: Compute plan flags
+        id: plan
         shell: bash
+        env:
+          IN_TAG: ${{ inputs.tag }}
+          IN_RELEASE: ${{ inputs.release }}
+          IN_CARTHAGE: ${{ inputs.carthage }}
+          IN_PODS: ${{ inputs.pods }}
+          IN_CLEANUP: ${{ inputs.cleanup }}
         run: |
           set -euo pipefail
-          v='${{ steps.ver.outputs.podspec_version }}'
-          latest='${{ steps.latest.outputs.tag }}'
-          cmp='${{ steps.cmp.outputs.comparison-result }}'
-          if [ -z "$v" ]; then
+          is_full_release=false
+          if [ "$IN_TAG" = "true" ] && [ "$IN_RELEASE" = "true" ] && [ "$IN_CARTHAGE" = "true" ] && [ "$IN_PODS" = "true" ] && [ "$IN_CLEANUP" != "true" ]; then
+            is_full_release=true
+          fi
+          pods_push=false
+          pods_lint=false
+          if [ "$IN_PODS" = "true" ]; then
+            if [ "$IN_CLEANUP" = "true" ]; then
+              pods_lint=true
+            else
+              pods_push=true
+            fi
+          fi
+          needs_tag=false
+          if [ "$IN_RELEASE" = "true" ] || [ "$IN_CARTHAGE" = "true" ] || [ "$pods_push" = "true" ]; then
+            needs_tag=true
+          fi
+          echo "is_full_release=$is_full_release" >> "$GITHUB_OUTPUT"
+          echo "pods_push=$pods_push" >> "$GITHUB_OUTPUT"
+          echo "pods_lint=$pods_lint" >> "$GITHUB_OUTPUT"
+          echo "needs_tag=$needs_tag" >> "$GITHUB_OUTPUT"
+
+      - name: Compute work tag
+        id: tag
+        shell: bash
+        env:
+          IN_TAG: ${{ inputs.tag }}
+          IN_CLEANUP: ${{ inputs.cleanup }}
+          IS_FULL: ${{ steps.plan.outputs.is_full_release }}
+          PODSPEC: ${{ steps.ver.outputs.podspec_version }}
+          LATEST: ${{ steps.latest.outputs.tag }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if [ "$IS_FULL" = "true" ]; then
+            work_tag="$PODSPEC"
+          else
+            if [ "$IN_TAG" = "true" ] && [ "$IN_CLEANUP" = "true" ]; then
+              short="${SHA:0:7}"
+              work_tag="test/${PODSPEC}-${short}"
+            elif [ "$IN_TAG" = "true" ]; then
+              work_tag="$PODSPEC"
+            else
+              work_tag="$LATEST"
+            fi
+          fi
+          echo "work_tag=$work_tag" >> "$GITHUB_OUTPUT"
+
+      - name: Validate podspec and full release semver
+        if: ${{ steps.plan.outputs.is_full_release == 'true' }}
+        shell: bash
+        env:
+          PODSPEC: ${{ steps.ver.outputs.podspec_version }}
+          LATEST: ${{ steps.latest.outputs.tag }}
+          CMP: ${{ steps.cmp.outputs.comparison-result }}
+        run: |
+          set -euo pipefail
+          if [ -z "$PODSPEC" ]; then
             echo "::error::Failed to parse version from ${{ vars.PRODUCT_NAME }}.podspec"; exit 1
           fi
-          echo "podspec_version=$v" >> "$GITHUB_OUTPUT"
-          echo "latest_tag=$latest" >> "$GITHUB_OUTPUT"
-          echo "comparison_result=$cmp" >> "$GITHUB_OUTPUT"
-          echo "release_tag=$v" >> "$GITHUB_OUTPUT"
-          if [ "$cmp" != ">" ]; then
-            echo "::error::Release already exists or not higher (latest: ${latest}, podspec: ${v})"; exit 1
+          if [ "$CMP" != ">" ]; then
+            echo "::error::Full release requires podspec version greater than latest tag (latest: ${LATEST}, podspec: ${PODSPEC})"; exit 1
           fi
+
+      - name: Validate tag presence when needed
+        if: ${{ steps.plan.outputs.is_full_release != 'true' && steps.plan.outputs.needs_tag == 'true' && inputs.tag != true }}
+        shell: bash
+        env:
+          LATEST: ${{ steps.latest.outputs.tag }}
+        run: |
+          set -euo pipefail
+          if [ -z "$LATEST" ]; then
+            echo "::error::No existing tag found for selected steps. Create a tag (enable 'tag') or perform a full release."; exit 1
+          fi
+
+      - name: Detect tag/release/asset existence
+        id: exists
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WORK_TAG: ${{ steps.tag.outputs.work_tag }}
+          PRODUCT_NAME: ${{ vars.PRODUCT_NAME }}
+        run: |
+          set -euo pipefail
+          tag_exists=false
+          if git rev-parse -q --verify "refs/tags/$WORK_TAG" >/dev/null 2>&1; then
+            tag_exists=true
+          fi
+          release_exists=false
+          asset_exists=false
+          if gh release view "$WORK_TAG" --json assets >/dev/null 2>&1; then
+            release_exists=true
+            if gh release view "$WORK_TAG" --json assets --jq '.assets[].name' | grep -qx "${PRODUCT_NAME}.xcframework.zip"; then
+              asset_exists=true
+            fi
+          fi
+          echo "tag_exists=$tag_exists" >> "$GITHUB_OUTPUT"
+          echo "release_exists=$release_exists" >> "$GITHUB_OUTPUT"
+          echo "asset_exists=$asset_exists" >> "$GITHUB_OUTPUT"
+
+      - name: Validate step dependencies
+        shell: bash
+        env:
+          IN_TAG: ${{ inputs.tag }}
+          IN_RELEASE: ${{ inputs.release }}
+          IN_CARTHAGE: ${{ inputs.carthage }}
+          PODS_PUSH: ${{ steps.plan.outputs.pods_push }}
+          IS_FULL: ${{ steps.plan.outputs.is_full_release }}
+          TAG_EXISTS: ${{ steps.exists.outputs.tag_exists }}
+          RELEASE_EXISTS: ${{ steps.exists.outputs.release_exists }}
+          PODSPEC: ${{ steps.ver.outputs.podspec_version }}
+          WORK_TAG: ${{ steps.tag.outputs.work_tag }}
+        run: |
+          set -euo pipefail
+          # release requires tag (existing or will be created now)
+          if [ "$IN_RELEASE" = "true" ]; then
+            if [ "$IS_FULL" = "true" ] || [ "$IN_TAG" = "true" ]; then
+              :
+            else
+              if [ "$TAG_EXISTS" != true ]; then
+                echo "::error::Selected 'release' but no existing tag found ('$WORK_TAG')."; exit 1
+              fi
+            fi
+          fi
+          # carthage requires release (existing or will be created now)
+          if [ "$IN_CARTHAGE" = "true" ]; then
+            if [ "$RELEASE_EXISTS" != true ] && [ "$IN_RELEASE" != "true" ]; then
+              echo "::error::Selected 'carthage' but no release exists for '$WORK_TAG'. Enable 'release' too or create it manually."; exit 1
+            fi
+          fi
+          # pods push requires tag; ensure podspec == work_tag unless tag created now/full
+          if [ "$PODS_PUSH" = "true" ]; then
+            if [ "$TAG_EXISTS" != true ] && [ "$IS_FULL" != "true" ] && [ "$IN_TAG" != "true" ]; then
+              echo "::error::CocoaPods push requires existing tag ('$WORK_TAG')."; exit 1
+            fi
+            if [ "$IS_FULL" != "true" ] && [ "$IN_TAG" != "true" ] && [ "$PODSPEC" != "$WORK_TAG" ]; then
+              echo "::error::CocoaPods push in non-full run requires podspec version ($PODSPEC) to equal working tag ($WORK_TAG)."; exit 1
+            fi
+          fi
+
+      - name: Export guard outputs
+        id: out
+        shell: bash
+        env:
+          PODSPEC: ${{ steps.ver.outputs.podspec_version }}
+          LATEST: ${{ steps.latest.outputs.tag }}
+          IS_FULL: ${{ steps.plan.outputs.is_full_release }}
+          WORK_TAG: ${{ steps.tag.outputs.work_tag }}
+          TAG_EXISTS: ${{ steps.exists.outputs.tag_exists }}
+          RELEASE_EXISTS: ${{ steps.exists.outputs.release_exists }}
+          ASSET_EXISTS: ${{ steps.exists.outputs.asset_exists }}
+        run: |
+          set -euo pipefail
+          echo "podspec_version=$PODSPEC" >> "$GITHUB_OUTPUT"
+          echo "latest_tag=$LATEST" >> "$GITHUB_OUTPUT"
+          echo "is_full_release=$IS_FULL" >> "$GITHUB_OUTPUT"
+          echo "work_tag=$WORK_TAG" >> "$GITHUB_OUTPUT"
+          echo "tag_exists=$TAG_EXISTS" >> "$GITHUB_OUTPUT"
+          echo "release_exists=$RELEASE_EXISTS" >> "$GITHUB_OUTPUT"
+          echo "asset_exists=$ASSET_EXISTS" >> "$GITHUB_OUTPUT"

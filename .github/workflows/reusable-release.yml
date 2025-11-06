@@ -3,30 +3,51 @@ name: _Release
 on:
   workflow_call:
     inputs:
-      test_mode:
-        description: Test mode (draft release + cleanup)
+      tag:
+        description: Create git tag from podspec version
         required: true
         type: boolean
-      publish_cocoapods:
-        description: Publish to CocoaPods trunk
+      release:
+        description: Create or update GitHub Release for the tag
         required: true
         type: boolean
-      publish_carthage:
-        description: Build and publish Carthage archive to GitHub release
+      carthage:
+        description: Build and upload Carthage archive to the release
+        required: true
+        type: boolean
+      pods:
+        description: Work with CocoaPods (push if no cleanup, lint if cleanup)
+        required: true
+        type: boolean
+      cleanup:
+        description: Cleanup created artifacts (release/tag)
+        required: true
+        type: boolean
+      release_draft:
+        description: Create/keep release as draft
         required: true
         type: boolean
       release_tag:
-        description: Release tag (SemVer X.Y.Z)
+        description: Release tag to work with (usually from guard)
         required: true
         type: string
+      is_full_release:
+        description: Computed in guard; whether this is a full release
+        required: true
+        type: boolean
+      release_existed:
+        description: Computed in guard; whether release existed before this run
+        required: true
+        type: boolean
     secrets:
       COCOAPODS_TRUNK_TOKEN:
         required: false
 
 jobs:
   release:
-    name: "Release${{ inputs.test_mode && ' (test)' || '' }}"
+    name: Release
     runs-on: ${{ vars.MACOS_RUNNER }}
+    concurrency: release-${{ inputs.release_tag }}
     permissions:
       contents: write
     env:
@@ -34,13 +55,19 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       RELEASE_TAG: ${{ inputs.release_tag }}
     steps:
-      - name: Guard branch for real release
-        if: ${{ inputs.test_mode != true }}
+      - name: Plan
+        shell: bash
+        run: |
+          echo "Selected steps: tag=${{ inputs.tag }}, release=${{ inputs.release }}, carthage=${{ inputs.carthage }}, pods=${{ inputs.pods }}, cleanup=${{ inputs.cleanup }}"
+          echo "is_full_release=${{ inputs.is_full_release }}; release_tag=${{ inputs.release_tag }}; release_draft=${{ inputs.release_draft }}; release_existed=${{ inputs.release_existed }}"
+
+      - name: Guard branch for full release tag
+        if: ${{ inputs.tag == true && inputs.is_full_release == true }}
         shell: bash
         run: |
           set -euo pipefail
           if [ "${{ github.ref_name }}" != "master" ]; then
-            echo "::error::Real release allowed only from 'master' (got '${{ github.ref_name }}')"; exit 1
+            echo "::error::Full release (tag) allowed only from 'master' (got '${{ github.ref_name }}')"; exit 1
           fi
 
       - name: Checkout
@@ -58,14 +85,34 @@ jobs:
         run: |
           brew install xcbeautify
           gem install cocoapods --no-document
-          if [ "${{ inputs.publish_carthage }}" = "true" ]; then
+          brew install gh
+          if [ "${{ inputs.carthage }}" = "true" ]; then
             brew install carthage
           fi
         env:
           HOMEBREW_NO_AUTO_UPDATE: 1
 
+      - name: Create tag
+        if: ${{ inputs.tag == true }}
+        id: create_tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "$RELEASE_TAG" -m "Release $RELEASE_TAG"
+          git push origin "$RELEASE_TAG"
+          echo "created=true" >> "$GITHUB_OUTPUT"
+
+      - name: Create or update GitHub Release
+        if: ${{ inputs.release == true }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          target_commitish: ${{ github.sha }}
+          generate_release_notes: true
+          draft: ${{ inputs.release_draft }}
+
       - name: Build Carthage archives
-        if: inputs.publish_carthage == true
+        if: ${{ inputs.carthage == true }}
         run: |
           set -o pipefail
           # Build XCFrameworks to avoid lipo conflicts on arm64 simulator/device
@@ -88,41 +135,45 @@ jobs:
             carthage archive "$PRODUCT_NAME"
           fi
 
-      - name: Create tag
-        id: create_tag
+      - name: Upload Carthage archive asset
+        if: ${{ inputs.carthage == true }}
+        shell: bash
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag -a "$RELEASE_TAG" -m "Release $RELEASE_TAG"
-          git push origin "$RELEASE_TAG"
-          echo "created=true" >> "$GITHUB_OUTPUT"
+          set -euo pipefail
+          gh release upload "$RELEASE_TAG" "${{ vars.PRODUCT_NAME }}.xcframework.zip" --clobber
 
-      - name: Upload Carthage archive to GitHub Release asset
-        if: inputs.publish_carthage == true
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          target_commitish: ${{ github.sha }}
-          generate_release_notes: true
-          draft: ${{ inputs.test_mode }}
-          files: ${{ vars.PRODUCT_NAME }}.xcframework.zip
-
-      - name: Publish release to CocoaPods
-        if: success() && inputs.publish_cocoapods == true
+      - name: CocoaPods push
+        if: ${{ inputs.pods == true && inputs.cleanup != true }}
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
         run: |
           set -o pipefail
-          if [ "${{ inputs.test_mode }}" = "true" ]; then
-            pod spec lint ${{ vars.PRODUCT_NAME }}.podspec --verbose --allow-warnings 2>&1 | xcbeautify --renderer github-actions 
-          else
-            pod trunk push --verbose 2>&1 | xcbeautify --renderer github-actions
-          fi
+          pod trunk push --verbose 2>&1 | xcbeautify --renderer github-actions
 
-      - name: Cleanup GitHub release and tag
-        if: ${{ always() && env.RELEASE_TAG != '' && (inputs.test_mode == true || (failure() && steps.create_tag.outputs.created == 'true')) }}
+      - name: CocoaPods lint
+        if: ${{ inputs.pods == true && inputs.cleanup == true }}
+        run: |
+          set -o pipefail
+          pod spec lint ${{ vars.PRODUCT_NAME }}.podspec --verbose --allow-warnings 2>&1 | xcbeautify --renderer github-actions
+
+      - name: Cleanup full release (tag + release)
+        if: ${{ always() && inputs.is_full_release == true && (inputs.cleanup == true || (failure() && steps.create_tag.outputs.created == 'true')) }}
         uses: dev-drprasad/delete-tag-and-release@v1.1
         with:
           tag_name: ${{ env.RELEASE_TAG }}
           delete_release: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cleanup created release only
+        if: ${{ always() && inputs.is_full_release != true && inputs.cleanup == true && inputs.release == true && inputs.release_existed == false }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release delete "$RELEASE_TAG" -y || true
+
+      - name: Cleanup temporary tag (dry-run)
+        if: ${{ always() && inputs.is_full_release != true && inputs.cleanup == true && inputs.tag == true }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git push origin --delete "$RELEASE_TAG" || true
