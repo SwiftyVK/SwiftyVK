@@ -5,8 +5,7 @@ let package = Package(
     name: "SwiftyVK",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v12),
-        .macOS(.v10_13)
+        .iOS(.v12)
     ],
     products: [
         .library(
@@ -17,40 +16,26 @@ let package = Package(
     targets: [
         .target(
             name: "SwiftyVK",
-            dependencies: [
-                .target(name: "SwiftyVK_resources_iOS", condition: .when(platforms: [.iOS])),
-                .target(name: "SwiftyVK_resources_macOS", condition: .when(platforms: [.macOS]))
-            ],
             path: "Library",
             exclude: [
                 "SwiftyVK.xcodeproj",
                 "Tests",
                 "Sources/SwiftyVK.h",
+                "Resources/Bundles",
                 "Resources/Files",
                 "Resources/Info",
-                "Resources/Bundles"
+                "UI/macOS"
             ],
             sources: [
                 "Sources",
                 "UI"
             ],
+            resources: [
+                .copy("Resources/Bundles/SwiftyVK_resources_iOS.bundle")
+            ],
             linkerSettings: [
                 .linkedFramework("SystemConfiguration"),
                 .linkedFramework("WebKit")
-            ]
-        ),
-        .target(
-            name: "SwiftyVK_resources_iOS",
-            path: "Sources/SwiftyVK_resources_iOS",
-            resources: [
-                .copy("../../Library/Resources/Bundles/SwiftyVK_resources_iOS.bundle")
-            ]
-        ),
-        .target(
-            name: "SwiftyVK_resources_macOS",
-            path: "Sources/SwiftyVK_resources_macOS",
-            resources: [
-                .copy("../../Library/Resources/Bundles/SwiftyVK_resources_macOS.bundle")
             ]
         ),
         .testTarget(
