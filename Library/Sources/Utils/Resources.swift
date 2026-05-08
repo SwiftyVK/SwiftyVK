@@ -20,7 +20,11 @@ struct Resources {
         let bundleType = "bundle"
 
         #if SWIFT_PACKAGE
-            return Bundle.module
+        if
+            let url = Bundle.module.url(forResource: name, withExtension: bundleType),
+            let bundle = Bundle(url: url) {
+            return bundle
+        }
         #endif
 
         if
