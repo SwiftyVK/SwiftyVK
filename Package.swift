@@ -22,7 +22,7 @@ let package = Package(
                 "SwiftyVK.xcodeproj",
                 "Tests",
                 "Sources/SwiftyVK.h",
-                "Resources/Files",
+                "Resources/Bundles",
                 "Resources/Info"
             ],
             sources: [
@@ -30,8 +30,7 @@ let package = Package(
                 "UI"
             ],
             resources: [
-                .copy("Resources/Bundles/SwiftyVK_resources_iOS.bundle"),
-                .copy("Resources/Bundles/SwiftyVK_resources_macOS.bundle")
+                .process("Resources/Files")
             ],
             linkerSettings: [
                 .linkedFramework("SystemConfiguration"),
