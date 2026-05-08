@@ -20,10 +20,12 @@ struct Resources {
         let bundleType = "bundle"
 
         #if SWIFT_PACKAGE
-        if
-            let url = Bundle.module.url(forResource: name, withExtension: bundleType),
-            let bundle = Bundle(url: url) {
-            return bundle
+        for candidate in Bundle.allBundles + Bundle.allFrameworks {
+            if
+                let path = candidate.path(forResource: name, ofType: bundleType),
+                let bundle = Bundle(path: path) {
+                return bundle
+            }
         }
         #endif
 

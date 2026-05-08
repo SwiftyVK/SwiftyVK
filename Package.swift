@@ -21,9 +21,9 @@ let package = Package(
                 "SwiftyVK.xcodeproj",
                 "Tests",
                 "Sources/SwiftyVK.h",
-                "Resources/Bundles",
                 "Resources/Files",
                 "Resources/Info",
+                "Resources/Bundles/SwiftyVK_resources_macOS.bundle",
                 "UI/macOS"
             ],
             sources: [
