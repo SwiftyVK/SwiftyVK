@@ -1,5 +1,13 @@
 import Foundation
 
+#if SWIFT_PACKAGE
+    #if os(iOS)
+        import SwiftyVKResourcesIOS
+    #elseif os(macOS)
+        import SwiftyVKResourcesMacOS
+    #endif
+#endif
+
 private class ResourceTestClass {}
 
 struct Resources {
@@ -16,16 +24,11 @@ struct Resources {
     }()
     
     static let bundle: Bundle = {
+        #if SWIFT_PACKAGE
+            return SwiftyVKResourceBundleProvider.bundle
+        #else
         let name = "SwiftyVK_resources" + pathSuffix
         let bundleType = "bundle"
-
-        #if SWIFT_PACKAGE
-        if
-            let url = Bundle.module.url(forResource: name, withExtension: bundleType),
-            let bundle = Bundle(url: url) {
-            return bundle
-        }
-        #endif
 
         if
             let path = Bundle.main.path(forResource: name, ofType: bundleType),
@@ -40,6 +43,7 @@ struct Resources {
         }
 
         return Bundle.main
+        #endif
     }()
     
     static func withSuffix(_ name: String) -> String {
