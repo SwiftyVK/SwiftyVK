@@ -103,7 +103,7 @@ Add SwiftyVK to your `Package.swift` dependencies and target as usual:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/SwiftyVK/SwiftyVK.git", from: "3.4.3")
+    .package(url: "https://github.com/SwiftyVK/SwiftyVK.git", from: "3.4.4")
 ]
 ```
 
