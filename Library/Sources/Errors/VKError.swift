@@ -24,6 +24,9 @@ public indirect enum VKError: Error {
     case wrongUrl
     case cantAwaitOnMainThread
     case cantAwaitRequestWithSettedCallbacks
+
+    // MARK: - Long Poll errors
+    case longPollAlreadyObserved
     
     // MARK: - UI Errors
     case cantBuildWebViewUrl(String)

@@ -2,10 +2,13 @@ import XCTest
 @testable import SwiftyVK
 
 final class DependenciesHolderMock: DependenciesHolder {
+
+    static weak var lastDelegate: SwiftyVKDelegate?
     
     var onInit: ((String, SwiftyVKDelegate?) -> ())?
     
     init(appId: String, delegate: SwiftyVKDelegate?, bundleName: String?, configPath: String?) {
+        Self.lastDelegate = delegate
         onInit?(appId, delegate)
     }
     
