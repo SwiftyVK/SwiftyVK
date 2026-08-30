@@ -15,6 +15,8 @@ final class TaskMock: Operation, Task, OperationConvertible {
         }
     }
     var runTime = 0.01
+    private(set) var cancelCallCount = 0
+    var onCancel: (() -> ())?
     
     override var isFinished: Bool {
         if case .finished = state {
@@ -49,7 +51,9 @@ final class TaskMock: Operation, Task, OperationConvertible {
     }
     
     override func cancel() {
+        cancelCallCount += 1
         super.cancel()
         state = .cancelled
+        onCancel?()
     }
 }
