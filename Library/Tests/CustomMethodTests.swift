@@ -3,6 +3,11 @@ import XCTest
 @testable import SwiftyVK
 
 final class CustomMethodTests: XCTestCase {
+
+    override func tearDown() {
+        VKStack.removeAllMocks()
+        super.tearDown()
+    }
     
     func test_customName_equalsToMethodName() {
         // When
@@ -56,8 +61,5 @@ final class CustomMethodTests: XCTestCase {
         method.send()
         // Then
         XCTAssertEqual(sendCallCount, 1)
-        
-        VKStack.removeAllMocks()
     }
 }
-

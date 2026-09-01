@@ -3,6 +3,11 @@ import XCTest
 @testable import SwiftyVK
 
 final class ApiMethodTests: XCTestCase {
+
+    override func tearDown() {
+        VKStack.removeAllMocks()
+        super.tearDown()
+    }
     
     func test_name_equalsToMethodName() {
         // When
