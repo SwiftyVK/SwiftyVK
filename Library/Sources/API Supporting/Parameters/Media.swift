@@ -35,7 +35,7 @@ public enum Media: CustomStringConvertible {
     }
     
     public var description: String {
-        return "Media with type \(type)"
+        "Media with type \(type)"
     }
 }
 

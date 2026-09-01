@@ -61,11 +61,11 @@ final class SharePresenterImpl: SharePresenter {
 
         controller?.share(
             context,
-            onPost: { [weak self, weak controller, weak shareWorker] in
+            onPost: { [weak self, weak controller, weak shareWorker] postContext in
                 controller?.enablePostButton(false)
 
                 do {
-                    guard let data = try shareWorker?.post(context: $0, in: session) else { return }
+                    guard let data = try shareWorker?.post(context: postContext, in: session) else { return }
                     result = .success(data)
                     controller?.close()
                 }

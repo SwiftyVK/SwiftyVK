@@ -231,15 +231,15 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         try throwIfDestroyed()
         try throwIfAuthorized()
         
-        let token = try authorizator.authorize(
+        let authorizedToken = try authorizator.authorize(
             sessionId: id,
             config: config,
             revoke: revoke
         )
         
-        self.token = token
+        self.token = authorizedToken
         
-        return token.info
+        return authorizedToken.info
     }
     
     public func logIn(rawToken: String, expires: TimeInterval) throws {
@@ -414,10 +414,10 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     private func sendTokenChangeEvent(from oldToken: Token?, to newToken: Token?) {
     
         DispatchQueue.global().async { [id] in
-            if oldToken != nil, let newToken = newToken {
+            if oldToken != nil, let newToken {
                 self.delegate?.vkTokenUpdated(for: id, info: newToken.info)
             }
-            else if let newToken = newToken {
+            else if let newToken {
                 self.delegate?.vkTokenCreated(for: id, info: newToken.info)
             }
             else if oldToken != nil {

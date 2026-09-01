@@ -27,11 +27,11 @@ final class SharePreferencesControllerMacOS: NSViewController, NSTableViewDelega
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return preferences.count
+        preferences.count
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 50
+        50
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -48,7 +48,7 @@ final class SharePreferencesControllerMacOS: NSViewController, NSTableViewDelega
     }
     
     func selectionShouldChange(in tableView: NSTableView) -> Bool {
-        return false
+        false
     }
 }
 

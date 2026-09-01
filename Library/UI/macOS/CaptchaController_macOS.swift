@@ -11,7 +11,7 @@ final class CaptchaControllerMacOS: NSViewController, NSTextFieldDelegate, Captc
     var onDismiss: (() -> ())?
    
     var isDisplayed: Bool {
-        return DispatchQueue.anywayOnMain {
+        DispatchQueue.anywayOnMain {
             isViewLoaded && view.window != nil
         }
     }

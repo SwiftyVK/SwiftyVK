@@ -54,6 +54,9 @@ jobs:
         with:
           xcode-version: ${{ vars.XCODE_VERSION }}
 
+      - name: Verify Swift 5.10 toolchain
+        run: swift package dump-package > /dev/null
+
       - name: Install dependencies
         run: |
           brew install xcbeautify

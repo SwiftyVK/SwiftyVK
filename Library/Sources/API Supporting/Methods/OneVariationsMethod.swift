@@ -3,7 +3,7 @@ extension Methods {
         /// Set onSuccess callback
         /// - parameter clousure: callback which will be executed when request is successfully sent
         public func onSuccess(_ clousure: @escaping RequestCallbacks.Success) -> Basic {
-            return withOnSuccess(clousure)
+            withOnSuccess(clousure)
         }
     }
     
@@ -11,7 +11,7 @@ extension Methods {
         /// Set onError callback
         /// - parameter clousure: callback which will be executed when request is failed
         public func onError(_ clousure: @escaping RequestCallbacks.Error) -> Basic {
-            return withOnError(clousure)
+            withOnError(clousure)
         }
     }
     
@@ -19,7 +19,7 @@ extension Methods {
         /// Set onProgress callback
         /// - parameter clousure: callback which will be executed when request upload part of file
         public func onProgress(_ clousure: @escaping RequestCallbacks.Progress) -> Basic {
-            return withOnProgress(clousure)
+            withOnProgress(clousure)
         }
     }
     
@@ -27,7 +27,7 @@ extension Methods {
         /// Set values which override session configuration for this request
         /// - parameter config: new request config
         public func configure(with config: Config) -> Basic {
-            return withConfig(config)
+            withConfig(config)
         }
     }
 }

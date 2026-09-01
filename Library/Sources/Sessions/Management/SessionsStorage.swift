@@ -31,7 +31,7 @@ final class SessionsStorageImpl: SessionsStorage {
     }
     
     func restore() throws -> [EncodedSession] {
-        return try gateQueue.sync {
+        try gateQueue.sync {
             let fileUrl = try configurationUrl()
             
             guard fileManager.fileExists(atPath: fileUrl.path) else {
@@ -40,8 +40,7 @@ final class SessionsStorageImpl: SessionsStorage {
             }
             
             let rawData = try Data(contentsOf: fileUrl)
-            let sessions = try PropertyListDecoder().decode([EncodedSession].self, from: rawData)
-            return sessions
+            return try PropertyListDecoder().decode([EncodedSession].self, from: rawData)
         }
     }
     

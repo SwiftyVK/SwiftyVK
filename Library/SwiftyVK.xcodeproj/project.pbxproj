@@ -2553,7 +2553,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = " -Xfrontend -debug-time-function-bodies ";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 5;
 			};
 			name = Debug;
 		};
@@ -2591,7 +2591,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_SWIFT_FLAGS = " -Xfrontend -debug-time-function-bodies ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 5;
 			};
 			name = Release;
 		};
@@ -2644,7 +2644,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -2692,7 +2692,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
@@ -2747,7 +2747,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -2796,7 +2796,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;

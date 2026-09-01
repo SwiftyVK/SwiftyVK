@@ -52,7 +52,7 @@ final class WebPresenterImpl: WebPresenter {
     }
     
     func presentWith(urlRequest: URLRequest) throws -> String {
-        guard let controllerMaker = controllerMaker else { throw VKError.weakObjectWasDeallocated }
+        guard let controllerMaker else { throw VKError.weakObjectWasDeallocated }
 
         let semaphore = DispatchSemaphore(value: 0)
         let state = LoadingState(originalPath: urlRequest.url?.path ?? "")
@@ -70,9 +70,9 @@ final class WebPresenterImpl: WebPresenter {
             
             controller.load(
                 urlRequest: urlRequest,
-                onResult: { [weak self] in
+                onResult: { [weak self] result in
                     self?.handle(
-                        result: $0,
+                        result: result,
                         state: state
                     )
                 }
@@ -86,9 +86,9 @@ final class WebPresenterImpl: WebPresenter {
             }
             
             switch state.result {
-            case .response(let response)?:
+            case .response(let response):
                 return response
-            case .error(let error)?:
+            case .error(let error):
                 throw error
             case nil:
                 throw VKError.webPresenterResultIsNil

@@ -15,19 +15,19 @@ public struct Config {
     let httpMethod: HttpMethod
     
     var apiVersion: String? {
-        return _apiVersion ?? sessionConfig?.apiVersion
+        _apiVersion ?? sessionConfig?.apiVersion
     }
     var language: Language {
-        return _language ?? sessionConfig?.language ?? .default
+        _language ?? sessionConfig?.language ?? .default
     }
     var attemptsMaxLimit: AttemptLimit {
-        return _attemptsMaxLimit ?? sessionConfig?.attemptsMaxLimit ?? .default
+        _attemptsMaxLimit ?? sessionConfig?.attemptsMaxLimit ?? .default
     }
     var attemptTimeout: TimeInterval {
-        return _attemptTimeout ?? sessionConfig?.attemptTimeout ?? 10
+        _attemptTimeout ?? sessionConfig?.attemptTimeout ?? 10
     }
     var handleErrors: Bool {
-        return _handleErrors ?? sessionConfig?.handleErrors ?? true
+        _handleErrors ?? sessionConfig?.handleErrors ?? true
     }
     
     var callbacksQueue: DispatchQueue

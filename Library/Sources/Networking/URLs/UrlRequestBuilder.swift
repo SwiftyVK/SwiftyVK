@@ -42,11 +42,12 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
             urlRequest.timeoutInterval = config.attemptTimeout
         case let .upload(url, media, partType):
             urlRequest = try make(from: media, url: url, partType: partType)
-            urlRequest.timeoutInterval = media.reduce(0.0) { $0 + Double($1.data.count) } * 0.001
+            urlRequest.timeoutInterval = media.reduce(0.0) { totalSize, item in
+                totalSize + Double(item.data.count)
+            } * 0.001
         case let .url(url):
             urlRequest = try make(from: url)
             urlRequest.timeoutInterval = config.attemptTimeout
-
         }
             
         return urlRequest
@@ -103,11 +104,11 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
     }
     
     private func make(from media: [Media], url: String, partType: PartType) throws -> URLRequest {
-        guard let url = URL(string: url) else {
+        guard let requestURL = URL(string: url) else {
             throw VKError.wrongUrl
         }
         
-        var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
+        var req = URLRequest(url: requestURL, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
         req.httpMethod = "POST"
         req.addValue("", forHTTPHeaderField: "Accept-Language")
         req.addValue("8bit", forHTTPHeaderField: "Content-Transfer-Encoding")
@@ -118,11 +119,11 @@ final class UrlRequestBuilderImpl: UrlRequestBuilder {
     }
     
     private func make(from url: String) throws -> URLRequest {
-        guard let url = URL(string: url) else {
+        guard let requestURL = URL(string: url) else {
             throw VKError.wrongUrl
         }
         
-        var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
+        var req = URLRequest(url: requestURL, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
         req.httpMethod = "GET"
         
         return req

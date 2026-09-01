@@ -16,7 +16,7 @@ final class TaskImpl: Operation, Task, OperationConvertible, @unchecked Sendable
     var state: TaskState = .created
     
     override var description: String {
-        return "task #\(id), state: \(state)"
+        "task #\(id), state: \(state)"
     }
     
     private var currentRequest: Request
@@ -65,9 +65,9 @@ final class TaskImpl: Operation, Task, OperationConvertible, @unchecked Sendable
         
         switch error {
         case .captchaWasDismissed,
-             .authorizationDenied,
-             .authorizationCancelled,
-             .authorizationFailed:
+            .authorizationDenied,
+            .authorizationCancelled,
+            .authorizationFailed:
             return perform(error: error)
         default:
             break
@@ -100,7 +100,7 @@ final class TaskImpl: Operation, Task, OperationConvertible, @unchecked Sendable
             token: session.token
         )
         
-        guard let attemptMaker = attemptMaker else {
+        guard let attemptMaker else {
             semaphore.signal()
             return
         }
@@ -140,7 +140,7 @@ final class TaskImpl: Operation, Task, OperationConvertible, @unchecked Sendable
                 next = try currentRequest.next(with: response)
             }
             
-            if let next = next {
+            if let next {
                 currentRequest = next
                 sendAttempts = 0
                 tryToSend()
@@ -160,7 +160,6 @@ final class TaskImpl: Operation, Task, OperationConvertible, @unchecked Sendable
         
         guard currentRequest.config.handleErrors == true else {
             return perform(error: vkError)
-            
         }
         
         guard  let apiError = vkError.toApi() else {

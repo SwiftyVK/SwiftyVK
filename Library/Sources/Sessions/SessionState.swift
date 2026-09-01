@@ -8,10 +8,10 @@ public enum SessionState: Int, Comparable, Codable {
     case authorized = 1
     
     public static func == (lhs: SessionState, rhs: SessionState) -> Bool {
-        return lhs.rawValue == rhs.rawValue
+        lhs.rawValue == rhs.rawValue
     }
 
     public static func < (lhs: SessionState, rhs: SessionState) -> Bool {
-        return lhs.rawValue < rhs.rawValue
+        lhs.rawValue < rhs.rawValue
     }
 }

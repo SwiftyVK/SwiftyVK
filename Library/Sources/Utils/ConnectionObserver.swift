@@ -123,7 +123,7 @@ internal final class ConnectionObserverImpl: ConnectionObserver {
     
     deinit {
         for observer in cocoaObservers {
-            if let observer = observer {
+            if let observer {
                 NotificationCenter.default.removeObserver(observer)
             }
         }

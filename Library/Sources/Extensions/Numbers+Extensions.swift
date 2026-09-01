@@ -1,13 +1,13 @@
 extension Double {
     
     func toString() -> String {
-        return String(self)
+        String(self)
     }
 }
 
 extension Int {
     
     func toString() -> String {
-        return String(self)
+        String(self)
     }
 }

@@ -90,8 +90,8 @@ public final class LongPollImpl: LongPoll {
     @available(iOS 13.0, macOS 10.15, *)
     public func eventsStream(version: LongPollVersion) -> AsyncThrowingStream<[LongPollEvent], Error> {
         AsyncThrowingStream { continuation in
-        do {
-            try startStreamIfNotStarted(
+            do {
+                try startStreamIfNotStarted(
                     version: version,
                     onReceiveEvents: { continuation.yield($0) }
                 )
@@ -158,7 +158,8 @@ public final class LongPollImpl: LongPoll {
                 onDisconnect: { [ weak self] in
                     self?.onDisconnect()
                 }
-        ))
+            )
+        )
     }
     
     private func onConnect() {
@@ -231,7 +232,7 @@ public final class LongPollImpl: LongPoll {
     
     private func getConnectionInfo(completion: @escaping ((server: String, lpKey: String, ts: String)) -> ()) {
         guard
-            let session = session,
+            let session,
             session.state == .authorized
             else { return }
         

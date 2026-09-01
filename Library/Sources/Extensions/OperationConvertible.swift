@@ -7,6 +7,6 @@ public protocol OperationConvertible {
 
 extension OperationConvertible where Self: Operation {
     func toOperation() -> Operation {
-        return self
+        self
     }
 }

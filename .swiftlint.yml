@@ -1,4 +1,5 @@
 excluded:
+  - .build
   - Example
   - Tests
   - Library/Tests
@@ -14,7 +15,51 @@ disabled_rules:
   - notification_center_detachment
   - block_based_kvo
 
+analyzer_rules:
+  - capture_variable
+  - unused_import
+
 opt_in_rules:
+  # Concurrency rules are opt-in in SwiftLint. Keep them enabled as the public
+  # async API grows, without imposing a broader legacy-code cleanup.
+  - async_without_await
+  - incompatible_concurrency_annotation
+  - unhandled_throwing_task
+  - redundant_sendable
+  - identical_operands
+  - unowned_variable_capture
+  - function_default_parameter_at_end
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
+  - contains_over_range_nil_comparison
+  - empty_collection_literal
+  - empty_string
+  - flatmap_over_map_reduce
+  - last_where
+  - reduce_into
+  - raw_value_for_camel_cased_codable_enum
+  - collection_alignment
+  - comma_inheritance
+  - let_var_whitespace
+  - multiline_call_arguments
+  - multiline_function_chains
+  - multiline_literal_brackets
+  - period_spacing
+  - modifier_order
+  - multiline_arguments_brackets
+  - multiline_parameters_brackets
+  - vertical_whitespace_closing_braces
+  - indentation_width
+  - direct_return
+  - optional_enum_case_matching
+  - prefer_zero_over_explicit_init
+  - self_binding
+  - shorthand_argument
+  - shorthand_optional_binding
+  - unneeded_escaping
+  - unneeded_throws_rethrows
+  - redundant_self
+  - variable_shadowing
   - force_unwrapping
   - object_literal
   - private_outlet
@@ -97,3 +142,17 @@ colon:
 large_tuple:
   warning: 5
   error: 8
+
+collection_alignment:
+  align_colons: false
+
+indentation_width:
+  indentation_width: 4
+
+self_binding:
+  bind_identifier: strongSelf
+
+shorthand_argument:
+  allow_until_line_after_opening_brace: 1
+  always_disallow_more_than_one: true
+  always_disallow_member_access: false
