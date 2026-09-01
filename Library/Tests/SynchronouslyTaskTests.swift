@@ -4,6 +4,11 @@ import XCTest
 
 final class SynchronouslyTaskTests: XCTestCase {
 
+    override func tearDown() {
+        VKStack.removeAllMocks()
+        super.tearDown()
+    }
+
     func test_send_throwError_whenSendOnMainThread() {
         // Given
         let task = VK.API.Users.get(.empty).synchronously()

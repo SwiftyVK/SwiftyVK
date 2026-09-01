@@ -33,7 +33,7 @@ final class VKStack {
     }
     
     static func mockSession() {
-        if VK.dependenciesType != DependenciesHolderMock.self {
+        if VK.dependenciesType != DependenciesHolderMock.self || VK.needToSetUp {
             VK.dependenciesType = DependenciesHolderMock.self
             VK.setUp(appId: "", delegate: delegate)
         }
@@ -72,7 +72,9 @@ final class VKStack {
     
     static func removeAllMocks() {
         mocks.removeAll()
+        guard !VK.needToSetUp else { return }
         (VK.sessions.default as? SessionMock)?.onSend = nil
+        VK.release()
     }
 }
 

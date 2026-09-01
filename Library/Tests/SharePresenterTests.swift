@@ -3,6 +3,11 @@ import XCTest
 @testable import SwiftyVK
 
 final class SharePresenterTests: XCTestCase {
+
+    override func tearDown() {
+        VKStack.removeAllMocks()
+        super.tearDown()
+    }
     
     func test_share_allFlowSteps_isCalled() {
         // Given
