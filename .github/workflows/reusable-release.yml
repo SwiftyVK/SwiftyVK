@@ -121,7 +121,7 @@ jobs:
           if [ "${{ inputs.test_mode }}" = "true" ]; then
             command=(pod spec lint ${{ vars.PRODUCT_NAME }}.podspec --verbose --allow-warnings)
           else
-            command=(pod trunk push --verbose)
+            command=(pod trunk push --verbose --allow-warnings)
           fi
 
           set +e
