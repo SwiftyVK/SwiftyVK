@@ -115,11 +115,25 @@ jobs:
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
         run: |
-          set -o pipefail
+          set -euo pipefail
+          log_file="$(mktemp)"
+          trap 'rm -f "$log_file"' EXIT
           if [ "${{ inputs.test_mode }}" = "true" ]; then
-            pod spec lint ${{ vars.PRODUCT_NAME }}.podspec --verbose --allow-warnings 2>&1 | xcbeautify --renderer github-actions 
+            command=(pod spec lint ${{ vars.PRODUCT_NAME }}.podspec --verbose --allow-warnings)
           else
-            pod trunk push --verbose 2>&1 | xcbeautify --renderer github-actions
+            command=(pod trunk push --verbose)
+          fi
+
+          set +e
+          "${command[@]}" 2>&1 | tee "$log_file" | xcbeautify --renderer github-actions
+          pod_status="${PIPESTATUS[0]}"
+          set -e
+
+          if [ "$pod_status" -ne 0 ]; then
+            echo "::group::Raw CocoaPods output"
+            cat "$log_file"
+            echo "::endgroup::"
+            exit "$pod_status"
           fi
 
       - name: Cleanup GitHub release and tag
