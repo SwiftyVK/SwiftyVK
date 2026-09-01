@@ -1,8 +1,37 @@
+import Foundation
 import SwiftyVK
 
+private let appId = "4994842"
+private func setUpVK() -> Swift.Task<Void, Never> {
+    let scopes: Scopes = [.messages, .offline, .friends, .wall, .photos, .audio, .video, .docs, .market, .email]
+    let tokenEvents = VKTokenEventsStream()
 
+    VK.setUp(
+        appId: appId,
+        scopeProvider: { _ in scopes },
+        onViewNeedsToPresent: { viewController in
+            DispatchQueue.main.async {
+                present(viewController)
+            }
+        },
+        tokenEvents: .stream(tokenEvents)
+    )
 
-var vkDelegateReference : SwiftyVKDelegate?
+    return Swift.Task {
+        for await event in tokenEvents.stream {
+            print("SwiftyVK: token event \(event)")
+        }
+    }
+}
+
+@MainActor
+private func present(_ viewController: VKViewController) {
+    #if os(macOS)
+        NSApplication.shared.keyWindow?.contentViewController?.presentAsSheet(viewController)
+    #elseif os(iOS)
+        UIApplication.shared.keyWindow?.rootViewController?.present(viewController, animated: true)
+    #endif
+}
 
 
 #if os(iOS)
@@ -11,12 +40,13 @@ var vkDelegateReference : SwiftyVKDelegate?
     @UIApplicationMain
     final class AppDelegate : UIResponder, UIApplicationDelegate {
         var window: UIWindow?
+        private var tokenEventsTask: Swift.Task<Void, Never>?
         
         func application(
             _ application: UIApplication,
             didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
         ) -> Bool {
-            vkDelegateReference = VKDelegateExample()
+            tokenEventsTask = setUpVK()
             return true
         }
         
@@ -35,9 +65,10 @@ var vkDelegateReference : SwiftyVKDelegate?
     
     @NSApplicationMain
     final class AppDelegate : NSObject, NSApplicationDelegate {
+        private var tokenEventsTask: Swift.Task<Void, Never>?
         
         func applicationDidFinishLaunching(_ aNotification: Notification) {
-            vkDelegateReference = VKDelegateExample()
+            tokenEventsTask = setUpVK()
         }
     }
 #endif

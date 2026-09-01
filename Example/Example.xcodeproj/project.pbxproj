@@ -15,8 +15,6 @@
 		A2087A621D8580B00076BB5E /* SwiftyVK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2087A581D8580940076BB5E /* SwiftyVK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A20DB7281DCCBA050030DFE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CD49B1D98143300FF2D88 /* AppDelegate.swift */; };
 		A21CD49D1D98143300FF2D88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CD49B1D98143300FF2D88 /* AppDelegate.swift */; };
-		A227371D1CF462F60042868A /* VKDelegateExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227371C1CF462F60042868A /* VKDelegateExample.swift */; };
-		A22737201CF466100042868A /* VKDelegateExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227371C1CF462F60042868A /* VKDelegateExample.swift */; };
 		A2527E7F1BD13A5300F65412 /* ViewController_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2527E7E1BD13A5300F65412 /* ViewController_iOS.swift */; };
 		A2527E821BD13A5300F65412 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2527E801BD13A5300F65412 /* Main.storyboard */; };
 		A2527E871BD13A5300F65412 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2527E851BD13A5300F65412 /* LaunchScreen.storyboard */; };
@@ -115,7 +113,6 @@
 		A20444731EE2E06400612E57 /* ViewController_macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController_macOS.swift; sourceTree = "<group>"; };
 		A2087A4E1D8580940076BB5E /* SwiftyVK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyVK.xcodeproj; path = Library/SwiftyVK.xcodeproj; sourceTree = "<group>"; };
 		A21CD49B1D98143300FF2D88 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		A227371C1CF462F60042868A /* VKDelegateExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKDelegateExample.swift; sourceTree = "<group>"; };
 		A234A41D1BE354A200856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		A234A41E1BE354A200856CA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A234A4201BE354B400856CA5 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
@@ -193,7 +190,6 @@
 			isa = PBXGroup;
 			children = (
 				A21CD49B1D98143300FF2D88 /* AppDelegate.swift */,
-				A227371C1CF462F60042868A /* VKDelegateExample.swift */,
 				A2527EBC1BD13F7E00F65412 /* APIWorker.swift */,
 				D4DADDFD1F9F93D9004F159E /* SwiftyJSON.swift */,
 				A25221041BD17B450047C638 /* Resources */,
@@ -416,7 +412,6 @@
 				A2527EBD1BD13F7E00F65412 /* APIWorker.swift in Sources */,
 				A20444741EE2E06400612E57 /* ViewController_macOS.swift in Sources */,
 				D4DADDFE1F9F93D9004F159E /* SwiftyJSON.swift in Sources */,
-				A227371D1CF462F60042868A /* VKDelegateExample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,7 +420,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2527E7F1BD13A5300F65412 /* ViewController_iOS.swift in Sources */,
-				A22737201CF466100042868A /* VKDelegateExample.swift in Sources */,
 				A2527EBE1BD13F7E00F65412 /* APIWorker.swift in Sources */,
 				D4DADDFF1F9F93D9004F159E /* SwiftyJSON.swift in Sources */,
 				A21CD49D1D98143300FF2D88 /* AppDelegate.swift in Sources */,
@@ -512,8 +506,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-					IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-					MACOSX_DEPLOYMENT_TARGET = 10.13;
+					IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+					MACOSX_DEPLOYMENT_TARGET = 10.15;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -549,8 +543,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-					IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-					MACOSX_DEPLOYMENT_TARGET = 10.13;
+					IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+					MACOSX_DEPLOYMENT_TARGET = 10.15;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 			};
@@ -597,13 +591,14 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = OSX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-					MACOSX_DEPLOYMENT_TARGET = 10.13;
+					MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "west0r.SwiftyVK.example-MacOS";
 				PRODUCT_NAME = "~SwiftyVK~";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -644,12 +639,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = OSX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-					MACOSX_DEPLOYMENT_TARGET = 10.13;
+					MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "west0r.SwiftyVK.example-MacOS";
 				PRODUCT_NAME = "~SwiftyVK~";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
+				SWIFT_STRICT_CONCURRENCY = complete;
 			};
 			name = Release;
 		};
@@ -693,13 +689,14 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-					IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+					IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "west0r.SwiftyVK.example-iOS";
 				PRODUCT_NAME = "~SwiftyVK~";
 				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -740,12 +737,13 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-					IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+					IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "west0r.SwiftyVK.example-iOS";
 				PRODUCT_NAME = "~SwiftyVK~";
 				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
