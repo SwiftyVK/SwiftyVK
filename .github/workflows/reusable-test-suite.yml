@@ -14,7 +14,7 @@ jobs:
         include:
           - platform: iOS
             scheme: ${{ vars.PRODUCT_NAME }}_iOS
-            destination: 'platform=iOS Simulator,OS=latest,name=iPhone 16'
+            destination: 'platform=iOS Simulator,OS=latest,name=iPhone 17'
             build-settings: 'CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY='
           - platform: macOS
             scheme: ${{ vars.PRODUCT_NAME }}_macOS
