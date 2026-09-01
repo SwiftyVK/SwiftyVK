@@ -38,7 +38,7 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     private weak var storedDefault: Session?
     
     public var all: [Session] {
-        return sessions.allObjects.compactMap { $0 as? Session }
+        sessions.allObjects.compactMap { $0 as? Session }
     }
     
     init(
@@ -52,11 +52,11 @@ public final class SessionsHolderImpl: SessionsHolder, SessionSaver {
     }
     
     func make() -> Session {
-        return make(config: .default)
+        make(config: .default)
     }
     
     public func make(config: SessionConfig) -> Session {
-        return makeSession(config: config)
+        makeSession(config: config)
     }
     
     @discardableResult

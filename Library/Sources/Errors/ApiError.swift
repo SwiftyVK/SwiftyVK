@@ -36,7 +36,7 @@ public struct ApiError: Equatable {
     }
     
     var toVK: VKError {
-        return .api(self)
+        .api(self)
     }
     
     private func makeRequestParams(from error: JSON) -> [String: String] {
@@ -67,6 +67,6 @@ public struct ApiError: Equatable {
     }
     
     public static func == (lhs: ApiError, rhs: ApiError) -> Bool {
-        return lhs.code == rhs.code
+        lhs.code == rhs.code
     }
 }

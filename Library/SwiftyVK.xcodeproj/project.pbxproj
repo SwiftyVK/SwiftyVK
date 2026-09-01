@@ -25,6 +25,20 @@
 
 /* Begin PBXBuildFile section */
 		0C94F10F43004C07967A3969 /* WebViewUserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63A468D471C4C709D41D3EF /* WebViewUserAgent.swift */; };
+		C0DE00000000000000000011 /* RequestStreamEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000001 /* RequestStreamEvent.swift */; };
+		C0DE00000000000000000012 /* SwiftyVKClosureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000002 /* SwiftyVKClosureDelegate.swift */; };
+		C0DE00000000000000000015 /* ContinuationBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000005 /* ContinuationBoxTests.swift */; };
+		C0DE00000000000000000016 /* ContinuationBoxRaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000006 /* ContinuationBoxRaceTests.swift */; };
+		C0DE00000000000000000017 /* SwiftyVKClosureDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000007 /* SwiftyVKClosureDelegateTests.swift */; };
+		C0DE00000000000000000018 /* VKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000008 /* VKTests.swift */; };
+		C0DE00000000000000000014 /* ContinuationBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000004 /* ContinuationBox.swift */; };
+		C0DE00000000000000000021 /* RequestStreamEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000001 /* RequestStreamEvent.swift */; };
+		C0DE00000000000000000022 /* SwiftyVKClosureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000002 /* SwiftyVKClosureDelegate.swift */; };
+		C0DE00000000000000000025 /* ContinuationBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000005 /* ContinuationBoxTests.swift */; };
+		C0DE00000000000000000026 /* ContinuationBoxRaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000006 /* ContinuationBoxRaceTests.swift */; };
+		C0DE00000000000000000027 /* SwiftyVKClosureDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000007 /* SwiftyVKClosureDelegateTests.swift */; };
+		C0DE00000000000000000028 /* VKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000008 /* VKTests.swift */; };
+		C0DE00000000000000000024 /* ContinuationBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000004 /* ContinuationBox.swift */; };
 		A20CDD941EF667B000271276 /* CaptchaPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDD931EF667B000271276 /* CaptchaPresenterTests.swift */; };
 		A20CDD961EF66AEC00271276 /* CaptchaControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDD951EF66AEC00271276 /* CaptchaControllerMock.swift */; };
 		A22179C81EBA3DBD006B71FD /* AttemptShedulerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22179C71EBA3DBD006B71FD /* AttemptShedulerMock.swift */; };
@@ -724,6 +738,13 @@
 		D497959E1F4DE40900921A21 /* ApiErrorHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorHandlerTests.swift; sourceTree = "<group>"; };
 		D49795A01F4DE57100921A21 /* ApiErrorExecutorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorExecutorMock.swift; sourceTree = "<group>"; };
 		D49795A21F4DF04000921A21 /* ApiMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiMethodTests.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000001 /* RequestStreamEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStreamEvent.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000002 /* SwiftyVKClosureDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyVKClosureDelegate.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000004 /* ContinuationBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinuationBox.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000005 /* ContinuationBoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinuationBoxTests.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000006 /* ContinuationBoxRaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinuationBoxRaceTests.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000007 /* SwiftyVKClosureDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyVKClosureDelegateTests.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000008 /* VKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKTests.swift; sourceTree = "<group>"; };
 		D49795A41F4DF86400921A21 /* CustomMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMethodTests.swift; sourceTree = "<group>"; };
 		D49795A61F4DFB3400921A21 /* VKErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKErrorTests.swift; sourceTree = "<group>"; };
 		D49795A81F4DFB9E00921A21 /* VKError+TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VKError+TextExtensions.swift"; sourceTree = "<group>"; };
@@ -920,6 +941,10 @@
 				A24DDAF11EB73E3F002EA273 /* QueryBuilderTests.swift */,
 				A25A3A2C1EB79D6100DB98DA /* MultipartBodyBuilderTests.swift */,
 				A22179C91EBA4059006B71FD /* SessionTests.swift */,
+				C0DE00000000000000000005 /* ContinuationBoxTests.swift */,
+				C0DE00000000000000000006 /* ContinuationBoxRaceTests.swift */,
+				C0DE00000000000000000007 /* SwiftyVKClosureDelegateTests.swift */,
+				C0DE00000000000000000008 /* VKTests.swift */,
 				A2E5C5DA1ECCAFC800652262 /* SessionsHolderTests.swift */,
 				A2AF16781ED1AD2E00485716 /* TokenTests.swift */,
 				A2E34DC01ED1FB2F0041E663 /* TokenStorageTests.swift */,
@@ -1214,6 +1239,7 @@
 		D4BBFDA41F9297A9009615E7 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE00000000000000000004 /* ContinuationBox.swift */,
 				D42DEEE320FA3E9200EE7478 /* AppLifecycleProvider.swift */,
 				D42DEEE520FA41A100EE7478 /* ParameterizedObserver.swift */,
 				D4BBFDA51F9297A9009615E7 /* KeychainProvider.swift */,
@@ -1288,6 +1314,7 @@
 				D4BBFDCF1F9297A9009615E7 /* Request.swift */,
 				D4BBFDD01F9297A9009615E7 /* RequestType.swift */,
 				D4BBFDD11F9297A9009615E7 /* RequestCallbacks.swift */,
+				C0DE00000000000000000001 /* RequestStreamEvent.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1408,6 +1435,7 @@
 				D4BBFDC71F9297A9009615E7 /* Scopes.swift */,
 				D4BBFDEA1F9297A9009615E7 /* SwiftyVKDelegate.swift */,
 				D4BBFDE91F9297A9009615E7 /* VK.swift */,
+				C0DE00000000000000000002 /* SwiftyVKClosureDelegate.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1861,6 +1889,10 @@
 				A2B805581EDDB313004DA7EB /* WebPresenterTests.swift in Sources */,
 				D4B850381FB0DB8700EF02F0 /* ShareWorkerTests.swift in Sources */,
 				A22179CA1EBA4059006B71FD /* SessionTests.swift in Sources */,
+				C0DE00000000000000000015 /* ContinuationBoxTests.swift in Sources */,
+				C0DE00000000000000000016 /* ContinuationBoxRaceTests.swift in Sources */,
+				C0DE00000000000000000017 /* SwiftyVKClosureDelegateTests.swift in Sources */,
+				C0DE00000000000000000018 /* VKTests.swift in Sources */,
 				A2E5C5D91ECCAD4800652262 /* SessionsHolderMock.swift in Sources */,
 				D4AB8D931F6044190099FC42 /* LongPollTaskTests.swift in Sources */,
 				A25A19D51EE43E8100CF13AF /* TokenParserMock.swift in Sources */,
@@ -1932,6 +1964,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0DE00000000000000000014 /* ContinuationBox.swift in Sources */,
+				C0DE00000000000000000011 /* RequestStreamEvent.swift in Sources */,
+				C0DE00000000000000000012 /* SwiftyVKClosureDelegate.swift in Sources */,
 				D4BBFFD31F929893009615E7 /* IDGenerator.swift in Sources */,
 				D4B44EA51FA38A5100E85E31 /* ShareNavigationController_iOS.swift in Sources */,
 				D4BBFFCF1F929893009615E7 /* SessionConfig.swift in Sources */,
@@ -2070,6 +2105,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0DE00000000000000000024 /* ContinuationBox.swift in Sources */,
+				C0DE00000000000000000021 /* RequestStreamEvent.swift in Sources */,
+				C0DE00000000000000000022 /* SwiftyVKClosureDelegate.swift in Sources */,
 				D4ED8BAC1FACC7E400B3FDA5 /* Result.swift in Sources */,
 				D4BBFF0B1F929891009615E7 /* IDGenerator.swift in Sources */,
 				D4BBFF071F929891009615E7 /* SessionConfig.swift in Sources */,
@@ -2268,6 +2306,10 @@
 				D44AD0D81FB208600053AD59 /* Media+TestExtensions.swift in Sources */,
 				D46FB40E1F929DBC000CEAEB /* LongPollEventTests.swift in Sources */,
 				D46FB3F31F929DBC000CEAEB /* SessionTests.swift in Sources */,
+				C0DE00000000000000000025 /* ContinuationBoxTests.swift in Sources */,
+				C0DE00000000000000000026 /* ContinuationBoxRaceTests.swift in Sources */,
+				C0DE00000000000000000027 /* SwiftyVKClosureDelegateTests.swift in Sources */,
+				C0DE00000000000000000028 /* VKTests.swift in Sources */,
 				D41B3D011F9FB48C00177075 /* ShareControllerMock.swift in Sources */,
 				D46FB4071F929DBC000CEAEB /* OneVariationsMethodTests.swift in Sources */,
 				D46FB4491F929EE6000CEAEB /* SessionStorageMock.swift in Sources */,
@@ -2511,7 +2553,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = " -Xfrontend -debug-time-function-bodies ";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 5;
 			};
 			name = Debug;
 		};
@@ -2549,7 +2591,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_SWIFT_FLAGS = " -Xfrontend -debug-time-function-bodies ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 5;
 			};
 			name = Release;
 		};
@@ -2602,7 +2644,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -2650,7 +2692,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
@@ -2705,7 +2747,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -2754,7 +2796,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;

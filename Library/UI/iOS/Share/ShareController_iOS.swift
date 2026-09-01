@@ -43,8 +43,8 @@ final class ShareControllerIOS: UIViewController, ShareController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let nextController = segue.destination as? ShareController {
-            self.nextController = nextController
+        if let destinationController = segue.destination as? ShareController {
+            self.nextController = destinationController
         }
     }
 }

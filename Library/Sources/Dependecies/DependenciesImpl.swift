@@ -45,7 +45,7 @@ final class DependenciesImpl: Dependencies {
     
     private lazy var cookiesHolder: CookiesHolder = {
         CookiesHolderImpl(
-            vkStorage: CookiesStorageImpl(serviceKey: self.bundleName + "_Cookies"),
+            vkStorage: CookiesStorageImpl(serviceKey: bundleName + "_Cookies"),
             sharedStorage: HTTPCookieStorage.shared
         )
     }()
@@ -77,8 +77,8 @@ final class DependenciesImpl: Dependencies {
     lazy var sessionsStorage: SessionsStorage = {
         SessionsStorageImpl(
             fileManager: FileManager(),
-            bundleName: self.bundleName,
-            configName: self.customConfigPath ?? "SwiftyVKState"
+            bundleName: bundleName,
+            configName: customConfigPath ?? "SwiftyVKState"
         )
     }()
     
@@ -115,7 +115,7 @@ final class DependenciesImpl: Dependencies {
     }
     
     var authorizator: Authorizator {
-        get { return sharedAuthorizator }
+        get { sharedAuthorizator }
         set { sharedAuthorizator = newValue }
     }
     
@@ -132,24 +132,24 @@ final class DependenciesImpl: Dependencies {
             urlOpener = URLOpenerMacOS()
         #endif
         
-        let tokenStorge = TokenStorageImpl(serviceKey: self.bundleName + "_Token")
+        let tokenStorge = TokenStorageImpl(serviceKey: bundleName + "_Token")
 		
         let vkAppProxy = VKAppProxyImpl(
-            appId: self.appId,
+            appId: appId,
             urlOpener: urlOpener,
             appLifecycleProvider: appLifecycleProvider
         )
         
         let webPresenter = WebPresenterImpl(
-            uiSyncQueue: self.uiSyncQueue,
+            uiSyncQueue: uiSyncQueue,
             controllerMaker: self,
             maxFails: 3,
             timeout: 600
         )
         
         return AuthorizatorImpl(
-            appId: self.appId,
-            delegate: self.delegate,
+            appId: appId,
+            delegate: delegate,
             tokenStorage: tokenStorge,
             tokenMaker: self,
             tokenParser: TokenParserImpl(),
@@ -160,15 +160,15 @@ final class DependenciesImpl: Dependencies {
     }()
     
     func webController(onDismiss: (() -> ())?) -> WebController {
-        return viewController(name: "Web", onDismiss: onDismiss)
+        viewController(name: "Web", onDismiss: onDismiss)
     }
     
     func captchaController(onDismiss: (() -> ())?) -> CaptchaController {
-        return viewController(name: "Captcha", onDismiss: onDismiss)
+        viewController(name: "Captcha", onDismiss: onDismiss)
     }
     
     func shareController(onDismiss: (() -> ())?) -> ShareController {
-        return viewController(name: "Share", onDismiss: onDismiss)
+        viewController(name: "Share", onDismiss: onDismiss)
     }
     
     private func viewController<ControllerType>(
@@ -219,7 +219,7 @@ final class DependenciesImpl: Dependencies {
     }
     
     func task(request: Request, session: TaskSession & ApiErrorExecutor) -> Task {
-        return TaskImpl(
+        TaskImpl(
             id: idGenerator.next(),
             request: request,
             session: session,
@@ -230,7 +230,7 @@ final class DependenciesImpl: Dependencies {
     }
     
     func attempt(request: URLRequest, callbacks: AttemptCallbacks) -> Attempt {
-        return AttemptImpl(
+        AttemptImpl(
             request: request,
             session: foregroundSession,
             callbacks: callbacks
@@ -238,7 +238,7 @@ final class DependenciesImpl: Dependencies {
     }
     
     func longPollTask(session: Session?, data: LongPollTaskData) -> LongPollTask {
-        return LongPollTaskImpl(
+        LongPollTaskImpl(
             session: session,
             delayOnError: longPollTaskTimeout,
             data: data
@@ -246,7 +246,7 @@ final class DependenciesImpl: Dependencies {
     }
     
     func longPoll(session: Session) -> LongPoll {
-        return LongPollImpl(
+        LongPollImpl(
             session: session,
             operationMaker: self,
             connectionObserver: connectionObserver,
@@ -255,7 +255,7 @@ final class DependenciesImpl: Dependencies {
     }
     
     func token(token: String, expires: TimeInterval, info: [String: String]) -> InvalidatableToken {
-        return TokenImpl(
+        TokenImpl(
             token: token,
             expires: expires,
             info: info
@@ -263,7 +263,7 @@ final class DependenciesImpl: Dependencies {
     }
     
     private func urlRequestBuilder() -> UrlRequestBuilder {
-        return UrlRequestBuilderImpl(
+        UrlRequestBuilderImpl(
             queryBuilder: QueryBuilderImpl(),
             bodyBuilder: MultipartBodyBuilderImpl()
         )
@@ -271,7 +271,7 @@ final class DependenciesImpl: Dependencies {
     
     func sharePresenter() -> SharePresenter {
         
-        return SharePresenterImpl(
+        SharePresenterImpl(
             uiSyncQueue: uiSyncQueue,
             shareWorker: ShareWorkerImpl(),
             controllerMaker: self,

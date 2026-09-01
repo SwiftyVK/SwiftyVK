@@ -13,11 +13,11 @@ protocol URLOpener {
     final class URLOpenerMacOS: URLOpener {
         
         func canOpenURL(_ url: URL) -> Bool {
-            return false
+            false
         }
         
         func openURL(_ url: URL) -> Bool {
-            return NSWorkspace.shared.open(url)
+            NSWorkspace.shared.open(url)
         }
     }
 #elseif os(iOS)

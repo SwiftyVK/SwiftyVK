@@ -35,7 +35,7 @@ final class LongPollTaskImpl: Operation, LongPollTask, @unchecked Sendable {
     }
     
     private func update(ts: String) {
-        guard !isCancelled, let session = session else { return }
+        guard !isCancelled, let session else { return }
         
         currentTask = Request(type: .url("https://\(server)?act=a_check&key=\(lpKey)&ts=\(ts)&wait=25&mode=106"))
             .toMethod()

@@ -60,7 +60,6 @@
   - [CocoaPods](#cocoapods)
   - [Manually](#manually)
 * [Getting started](#getting-started)
-  - [Implement SwiftyVKDelegate](#implement-swiftyvkdelegate)
   - [Setting up VK application](#setting-up-vk-application)
   - [Authorization](#authorization)
       - [oAuth WebView](#oauth-webview)
@@ -68,18 +67,13 @@
       - [Raw token string](#raw-token-string)
 * [Interaction with VK API](#interaction-with-vk-api)
   - [Request](#request)
+  - [Request progress](#request-progress)
   - [Parameters](#parameters)
-  - [Callbacks](#callbacks)
-      - [onSuccess](#onsuccess)
-      - [onError](#onerror)
   - [Cancellation](#cancellation)
   - [Chaining](#chaining)
 * [Configuring](#configuring)
 * [Upload files](#upload-files)
-* [Interaction with LongPoll](#interaction-with-longpoll)
-    - [Start LongPoll](#start-longpoll)
-    - [Handle updates](#handle-updates)
-    - [Stop LongPoll](#stop-longpoll)
+* [Long Poll](#long-poll)
 * [Share dialog](#share-dialog)
 * [FAQ](#faq)
 * [License](#license)
@@ -88,10 +82,23 @@
 
 ----
 ## **Requirements**
-* Swift 4.0 +
+* Swift 5.10 + (Xcode 15.3 +)
 * iOS 12.0 +
 * macOS 10.13 +
-* Xcode 9.0 +
+* Xcode 15.3 +
+
+Swift Concurrency APIs require iOS 13.0+, macOS 10.15+.
+No separate integration is needed: add SwiftyVK using any dependency manager below, then use its async APIs from your structured-concurrency code.
+The GCD API remains available on the original deployment targets.
+
+`Session.validate(redirectUrl:)` remains synchronous: it validates a completed OAuth redirect immediately and does not suspend. The async surface covers authorization, API requests, token events, and Long Poll events.
+
+Run the ordinary and analyzer rules locally with:
+
+```sh
+swiftlint lint --config .swiftlint.yml
+bash scripts/swiftlint-analyze.sh
+```
 
 ## **Integration**
 
@@ -126,56 +133,47 @@ end
   2. Link **SwiftyVK.framework** with application in **Your target preferences -> General -> Embedded binaries**
 
 ## **Getting started**
-### Implement SwiftyVKDelegate
 
-To start using `SwiftyVK` you should implement `SwiftyVKDelegate` protocol in your custom `VKDelegate` class.
-It is used to notify your app about important SwiftyVK lifecycle events.
-
-For example:
+For apps targeting iOS 13.0+ or macOS 10.15+, configure SwiftyVK with closures.
+`VKTokenEventsStream` exposes token lifecycle events as an `AsyncStream`.
+If your app does not use Swift Concurrency, see the [GCD guide](README-GCD.md).
 
 ```swift
-import SwiftyVK
-```
+let tokenEvents = VKTokenEventsStream()
 
-```swift
-class VKDelegateExample: SwiftyVKDelegate {
+VK.setUp(
+    appId: "YOUR_APP_ID",
+    scopeProvider: { _ in [.offline, .friends] },
+    onViewNeedsToPresent: { viewController in
+        // Present viewController from your current UI context.
+    },
+    tokenEvents: .stream(tokenEvents)
+)
 
-    func vkNeedsScopes(for sessionId: String) -> Scopes {
-      // Called when SwiftyVK attempts to get access to user account
-      // Should return a set of permission scopes
-    }
-
-    func vkNeedToPresent(viewController: VKViewController) {
-      // Called when SwiftyVK wants to present UI (e.g. webView or captcha)
-      // Should display given view controller from current top view controller
-    }
-
-    func vkTokenCreated(for sessionId: String, info: [String : String]) {
-      // Called when user grants access and SwiftyVK gets new session token
-      // Can be used to run SwiftyVK requests and save session data
-    }
-
-    func vkTokenUpdated(for sessionId: String, info: [String : String]) {
-      // Called when existing session token has expired and successfully refreshed
-      // You don't need to do anything special here
-    }
-
-    func vkTokenRemoved(for sessionId: String) {
-      // Called when user was logged out
-      // Use this method to cancel all SwiftyVK requests and remove session data
+func observeTokenEvents(_ tokenEvents: VKTokenEventsStream) async {
+    for await event in tokenEvents.stream {
+        print(event)
     }
 }
 ```
-*See full implementation in Example project*
+
+Run `observeTokenEvents` from your app's structured-concurrency task tree. `VK.release()` finishes the stream.
+To handle token events with a callback instead, pass `tokenEvents: .callback { event in ... }`.
 
 ### Setting up VK application
 
 1. [Create new standalone application](https://vk.ru/editapp?act=create)
 2. Save `application ID` from **Preferences -> Application ID**
-3. Set up **SwiftyVK** with `application ID` and `VKDelegate` obtained in the previous steps:
+3. Set up **SwiftyVK** with your application ID:
 
 ```swift
-VK.setUp(appId: String, delegate: SwiftyVKDelegate)
+VK.setUp(
+    appId: "YOUR_APP_ID",
+    scopeProvider: { _ in [.offline, .friends] },
+    onViewNeedsToPresent: { viewController in
+        // Present viewController.
+    }
+)
 ```
 
 ### Releasing
@@ -196,15 +194,14 @@ SwiftyVK provides several ways to authorize user. Choose the one that's more sui
 This is a standard authorization method which shows web view with oAuth dialog. Suitable for most cases.
 
 ```swift
-VK.sessions.default.logIn(
-      onSuccess: { _ in
-        // Start working with SwiftyVK session here
-      },
-      onError: { _ in
-        // Handle an error if something went wrong
-      }
-  )
+func authorize() async throws {
+    let tokenInfo = try await VK.sessions.default.logIn()
+    // Start working with SwiftyVK session here.
+    print(tokenInfo)
+}
 ```
+
+Cancelling the Swift task immediately throws `CancellationError`; it does not dismiss an already presented authorization UI.
 
 ### Official VK Application
 If a user has the official VK app installed on their device, SwiftyVK can be authorized using it. To do that:
@@ -288,11 +285,12 @@ The basic request calls look like **VK.methodGroup.methodName()**.
 For example, to [get short info about current user](https://vk.ru/dev/users.get):
 
 ```swift
-VK.API.Users.get(.empty)
-    .onSuccess { /* handle and parse response */ }
-    .onError { /* handle error */ }
-    .send()
+func loadCurrentUser() async throws -> Data {
+    try await VK.API.Users.get(.empty).send()
+}
 ```
+
+Do not configure callbacks on a request that you send with `await`: the two result-handling styles are mutually exclusive.
 
 Object created with
 ```swift
@@ -312,83 +310,31 @@ VK.API.Users.get([
 
 Use `.empty` if you don't want to pass any parameters.
 
-### Callbacks
-Requests are executed asynchronously and provide some callbacks for handling execution results:
-
-#### onSuccess
-
-This callback will be called when request has succeeded and returned `Data` object.
-You can handle and parse response using any JSON parsing method
-(e.g. `JSONSerialization`, `Codable`, [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) and others)
-
-```swift
-VK.API.Users.get(.empty)
-    .onSuccess {
-        let response = try JSONSerialization.jsonObject(with: $0)
-    }
-```
-
-You can throw errors in `onSuccess` callback, which will cause `onError` to be called with your error.
-
-#### onError
-
-This callback will be called when request has failed for some reason.
-You may handle the error that was thrown in this callback.
-
-```swift
-VK.API.Users.get(.empty)
-    .onError {
-        print("Request failed with error: ($0)")
-     }
-```
-
 ### Cancellation
 
-If you no longer need to send sheduled request (e.g. screen was popped out), just cancel it:
-
 ```swift
-// `send()` function returns `Task` object which has `cancel()` function
-let request = VK.API.Users.get([
-    .userId: "1",
-    .fields: "sex,bdate,city"
-    ])
-    .onSuccess { print($0) }
-    .send()
-
-// Cancel sheduled request.
-// onSuccess callback will never be executed.
-request.cancel()
+func loadCurrentUser() async throws -> Data {
+    try await VK.API.Users.get(.empty).send()
+}
 ```
+
+Cancellation is propagated from the parent task; `send()` throws `CancellationError` when the task is cancelled.
 
 ### Chaining
 
-SwiftyVK allows you to chain requests. If your second request needs to consume a response from the first one, just chain them together:
+Compose requests with ordinary sequential `await` calls. Errors and cancellation propagate through the task naturally:
 
 ```swift
-VK.API.Users.get(.empty)
-    .chain { response in
-        // This block will be called only
-        // when `users.get` method is successfully executed.
-        // Receives result of executing `users.get` method.
-        let user = try JSONDecoder().decode(User.self, from: response)
-        return VK.API.Messages.send([
-            .userId: user.id,
-            .message: "Hello"
-        ])
-    }
-    .onSuccess { response in
-        // This block will be called only when both `users.get` and `messages.send`
-        // methods are successfully executed.
-        // `response` is a result of `messages.send` method
-    }
-    .onError { error in
-        // This block will be called when either `users.get` or `messages.send` methods is failed.
-        // Receives error of executing `users.get` or `messages.send` method.
-    }
-    .send()
-```
+func sendMessage() async throws -> Data {
+    let response = try await VK.API.Users.get(.empty).send()
+    let user = try JSONDecoder().decode(User.self, from: response)
 
-You can make very long chains with SwiftyVK!
+    return try await VK.API.Messages.send([
+        .userId: user.id,
+        .message: "Hello"
+    ]).send()
+}
+```
 
 ## **Configuring**
 In SwiftyVK each session has default configuration for its requests.
@@ -421,36 +367,53 @@ Property            | Default               | Description
 `attemptTimeout`    | `10`                  | Timeout in seconds of waiting for a response before returning an error.
 `handleErrors`      | `true`                | Allow to handle specific VK errors automatically by presenting a dialog to a user when authorization, captcha solving or validation is required.
 
+## Request progress
+
+Uploading requests can emit progress and a final response. Use `sendWithProgress()`:
+
+```swift
+func uploadPhoto(_ media: Media) async throws {
+    for try await event in VK.API.Upload.Photo.toWall(media, to: .user(id: "4680178")).sendWithProgress() {
+        switch event {
+        case let .progress(progress):
+            print(progress)
+        case let .response(response):
+            print(response)
+        }
+    }
+}
+```
+
+The GCD `onProgress`, `onSuccess` and `onError` callbacks remain available.
+
 ## Upload files
 
 SwiftyVK provides the ability to easily upload a file to VK servers. For example:
 
 ```swift
-// Get path to image file
-guard let path = Bundle.main.path(forResource: "testImage", ofType: "jpg") else { return }
+func uploadPhoto() async throws {
+    guard let path = Bundle.main.path(forResource: "testImage", ofType: "jpg") else {
+        return
+    }
 
-// Get data from image file by path
-guard let data = try Data(contentsOf: URL(fileURLWithPath: path)) else { return }
+    let data = try Data(contentsOf: URL(fileURLWithPath: path))
+    let media = Media.image(data: data, type: .jpg)
 
-// Create SwiftyVK Media representation from given data
-let media = Media.image(data: data, type: .jpg)
-
-// Upload image to server
-VK.API.Upload.Photo.toWall(media, to: .user(id: "4680178"))
-    .onSuccess { print($0) }
-    .onError { print($0) }
-    .onProgress {
-        // This callback available only for uploading requests
-        // Use it to handle uploading status and show it to user
-        
-        switch $0 {
-            case let .sent(current, of):
-                print("sent", current, "of": of)
-            case let .recieve(current, of):
-                print("recieve", current, "of": of)
+    for try await event in VK.API.Upload.Photo.toWall(media, to: .user(id: "4680178")).sendWithProgress() {
+        switch event {
+        case let .progress(progress):
+            print(progress)
+        case let .response(response):
+            print(response)
         }
-    } 
-    .send()
+    }
+}
+```
+
+If progress is not needed, upload methods also support the one-result API:
+
+```swift
+let response = try await VK.API.Upload.Photo.toWall(media, to: .user(id: "4680178")).send()
 ```
 
 **Some upload requests do not immediately download files**
@@ -459,79 +422,54 @@ VK.API.Upload.Photo.toWall(media, to: .user(id: "4680178"))
 e.g `VK.API.Upload.Photo.toMessage` will return `photoId`
 which you can use in `messages.send` method.
 See [docs](https://vk.ru/dev/upload_files) for more info.
-## **Interaction with LongPoll**
+## Long Poll
 
-## Start LongPoll
-
-With SwiftyVK you can interact with VK [LongPoll](https://vk.ru/dev/using_longpoll) server very easily.
-Just call:
+Use the throwing event stream from a structured-concurrency context:
 
 ```swift
-VK.sessions.default.longPoll.start {
-    // This callback will be executed each time
-    // long poll client receives a set of new events
-    print($0)
-}
-```
-
-## Handle updates
-
-Data format is described [here](https://vk.ru/dev/using_longpoll).
-LongPollEvent is an enum with associated value of type `Data` in each case.
-You can parse this data to JSON using your favorite parser like this:
-
-```swift
-VK.sessions.default.longPoll.start {
-    for event in $0 {
-        switch event {
+func consumeLongPoll() async throws {
+    for try await events in VK.sessions.default.longPoll.eventsStream() {
+        for event in events {
+            switch event {
             case let .type1(data):
-                let json = JSON(data)
-                print(json)
+                print(JSON(data))
             default:
                 break
+            }
         }
     }
 }
 ```
 
+There may be only one Long Poll consumer: either this stream or a callback consumer.
+Creating a second stream finishes it with `VKError.longPollAlreadyObserved` without stopping the first consumer.
+Cancellation of the parent task propagates to `consumeLongPoll()` and stops the underlying Long Poll.
+`stop()` intentionally does not stop an active async stream.
+
 LongPollEvent has two special cases:
 
-`.forcedStop` - returned when LongPoll has experienced unexpected error and stop. You can restart it again.
+`.forcedStop` is returned when Long Poll experiences an unexpected error and stops. You can restart it again.
 
-`.historyMayBeLost` - returned when LongPoll was disconnected from server for a long time
-and either `lpKey` or `timestamp` is outdated.
-You do not need to reconnect LongPoll manually, client will do it itself.
-Use this case to **refresh data that could have been updated while network was unavailable**.
-
-## Stop LongPoll
-
-If you don't need to receive LongPoll updates anymore, just call this function:
-```swift
-VK.sessions.default.longPoll.stop()
-```
+`.historyMayBeLost` is returned when Long Poll was disconnected from the server for a long time and either `lpKey` or `timestamp` is outdated. Refresh data that could have changed while the network was unavailable.
 
 ## **Share dialog**
 
 With SwiftyVK can make a post to user wall. To do this, you need:
 
-- [Implement SwiftyVKDelegate](#implement-swiftyvkdelegate)
+- [Set up SwiftyVK](#getting-started)
 - [SetUp VK application](#setting-up-vk-application)
 - Present share dialog with context:
 
 ```swift
-VK.sessions.default.share(
-    ShareContext(
-        text: "This post made with #SwiftyVK 🖖🏽",
-        images: [
-            ShareImage(data: data, type: .jpg), // JPG image representation
-        ],
-        link: ShareLink(
-            title: "Follow the white rabbit", // Link description
-            url: link // URL to site
-        )
-    ),
-    onSuccess: { /* Handle response */ },
-    onError: { /* Handle error */ }
+let context = ShareContext(
+    text: "This post made with #SwiftyVK 🖖🏽",
+    images: [ShareImage(data: data, type: .jpg)],
+    link: ShareLink(title: "Follow the white rabbit", url: link)
+)
+
+func share(_ context: ShareContext) async throws -> Data {
+    try await VK.sessions.default.share(context)
+}
 ```
 
 ***Images and link are optional, text is required***

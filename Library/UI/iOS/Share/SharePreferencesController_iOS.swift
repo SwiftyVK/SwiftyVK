@@ -30,19 +30,19 @@ UIViewController, SharePreferencesController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return preferences.count
+        preferences.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: "SharePreferencesCell", for: indexPath)
+        tableView.dequeueReusableCell(withIdentifier: "SharePreferencesCell", for: indexPath)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = cell as? SharePreferencesCellIOS else {
+        guard let preferenceCell = cell as? SharePreferencesCellIOS else {
             return
         }
         
-        cell.set(preference: preferences[indexPath.row])
+        preferenceCell.set(preference: preferences[indexPath.row])
     }
 }
 

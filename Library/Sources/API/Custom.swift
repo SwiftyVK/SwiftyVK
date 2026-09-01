@@ -3,13 +3,13 @@ extension APIScope {
     public struct Custom {
         /// Alows to execute stored on VK server procedures
         public static func remote(method: String, parameters: RawParameters = .empty) -> CustomMethod {
-            return self.method(name: "execute.\(method)", parameters: parameters)
+            self.method(name: "execute.\(method)", parameters: parameters)
         }
         
         /// Alows execute method which SwiftyVK does not support.
         /// If you use this, maybe report me about new VK API method?
         public static func method(name: String, parameters: RawParameters = .empty) -> CustomMethod {
-            return CustomMethod(method: name, parameters: parameters)
+            CustomMethod(method: name, parameters: parameters)
         }
         
         /// Allows execute https://vk.ru/dev/execute
@@ -33,6 +33,6 @@ public final class CustomMethod: Method {
     }
 
     public func toRequest() -> Request {
-        return Request(type: .api(method: method, parameters: parameters))
+        Request(type: .api(method: method, parameters: parameters))
     }
 }

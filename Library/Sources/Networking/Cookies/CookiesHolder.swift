@@ -29,7 +29,7 @@ final class CookiesHolderImpl: CookiesHolder {
     }
     
     func restore(for url: URL) {
-        guard let originalCookies = originalCookies else { return }
+        guard let originalCookies else { return }
         sharedStorage.setCookies(originalCookies, for: url, mainDocumentURL: nil)
     }
     

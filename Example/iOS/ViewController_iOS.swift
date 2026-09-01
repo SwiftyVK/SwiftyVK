@@ -7,4 +7,3 @@ final class ViewController: UIViewController {
     APIWorker.action(sender.tag)
   }
 }
-

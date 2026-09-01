@@ -46,7 +46,7 @@ final class IOSAppLifecycleProvider: AppLifecycleProvider {
     }
     
     func subscribe(_ object: AnyObject, handler: @escaping (AppState) -> ()) {
-        if let current = current {
+        if let current {
             observer.notify(with: current)
         }
         
@@ -89,7 +89,7 @@ final class IOSAppLifecycleProvider: AppLifecycleProvider {
 final class MacOSAppLifecycleProvider: AppLifecycleProvider {
     var current: AppState?
     
-    func subscribe(_ object: AnyObject, handler: @escaping (AppState) -> ()) {}
+    func subscribe(_ object: AnyObject, handler: (AppState) -> ()) {}
     func unsubscribe(_ object: AnyObject) {}
 }
 #endif

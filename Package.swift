@@ -1,4 +1,4 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.10
 import PackageDescription
 
 let localizations = ["be", "de", "en", "es", "fi", "it", "ru", "uk"]

@@ -15,7 +15,7 @@ final class AttemptShedulerImpl: AttemptSheduler {
     private let serialQueue: AttemptApiQueue
     
     private var limit: AttemptLimit {
-        get { return serialQueue.limit }
+        get { serialQueue.limit }
         set { serialQueue.limit = newValue }
     }
     

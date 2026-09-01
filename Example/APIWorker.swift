@@ -2,77 +2,75 @@ import Foundation
 import SwiftyVK
 
 
+@MainActor
 final class APIWorker {
     
     class func action(_ tag: Int) {
-        switch tag {
-        case 1:
-            authorize()
-        case 2:
-            logout()
-        case 3:
-            captcha()
-        case 4:
-            usersGet()
-        case 5:
-            friendsGet()
-        case 6:
-            uploadPhoto()
-        case 7:
-            validation()
-        case 8:
-            share()
-        default:
-            print("Unrecognized action!")
+        Swift.Task {
+            await performAction(tag)
         }
     }
-    
-    class func authorize() {
-        VK.sessions.default.logIn(
-            onSuccess: { info in
-                print("SwiftyVK: success authorize with", info)
-            },
-            onError: { error in
-                print("SwiftyVK: authorize failed with", error)
+
+    private class func performAction(_ tag: Int) async {
+        do {
+            switch tag {
+            case 1:
+                try await authorize()
+            case 2:
+                logout()
+            case 3:
+                try await captcha()
+            case 4:
+                try await usersGet()
+            case 5:
+                try await friendsGet()
+            case 6:
+                try await uploadPhoto()
+            case 7:
+                try await validation()
+            case 8:
+                try await share()
+            default:
+                print("Unrecognized action!")
             }
-        )
+        } catch {
+            print("SwiftyVK: action \(tag) failed with \n \(error)")
+        }
+    }
+
+    private class func authorize() async throws {
+        let info = try await VK.sessions.default.logIn()
+        print("SwiftyVK: success authorize with", info)
     }
     
-    class func logout() {
+    private class func logout() {
         VK.sessions.default.logOut()
         print("SwiftyVK: LogOut")
     }
     
-    class func captcha() {
-        VK.API.Custom.method(name: "captcha.force")
-            .onSuccess { print("SwiftyVK: captcha.force successed with \n \(JSON($0))") }
-            .onError { print("SwiftyVK: captcha.force failed with \n \($0)") }
-            .send()
+    private class func captcha() async throws {
+        let response = try await VK.API.Custom.method(name: "captcha.force").send()
+        print("SwiftyVK: captcha.force succeeded with \n \(JSON(response))")
     }
     
-    class func validation() {
-        VK.API.Custom.method(name: "account.testValidation")
-            .onSuccess { print("SwiftyVK: account.testValidation successed with \n \(JSON($0))") }
-            .onError { print("SwiftyVK: account.testValidation failed with \n \($0)") }
-            .send()
+    private class func validation() async throws {
+        let response = try await VK.API.Custom.method(name: "account.testValidation").send()
+        print("SwiftyVK: account.testValidation succeeded with \n \(JSON(response))")
     }
     
-    class func usersGet() {
-        VK.API.Users.get(.empty)
-            .configure(with: Config.init(httpMethod: .POST))
-            .onSuccess { print("SwiftyVK: users.get successed with \n \(JSON($0))") }
-            .onError { print("SwiftyVK: friends.get fail \n \($0)") }
+    private class func usersGet() async throws {
+        let response = try await VK.API.Users.get(.empty)
+            .configure(with: Config(httpMethod: .POST))
             .send()
+        print("SwiftyVK: users.get succeeded with \n \(JSON(response))")
     }
     
-    class func friendsGet() {
-        VK.API.Friends.get(.empty)
-            .onSuccess { print("SwiftyVK: friends.get successed with \n \(JSON($0))") }
-            .onError { print("SwiftyVK: friends.get failed with \n \($0)") }
-            .send()
+    private class func friendsGet() async throws {
+        let response = try await VK.API.Friends.get(.empty).send()
+        print("SwiftyVK: friends.get succeeded with \n \(JSON(response))")
     }
     
-    class func uploadPhoto() {
+    private class func uploadPhoto() async throws {
         guard
             let pathToImage = Bundle.main.path(forResource: "testImage", ofType: "png"),
             let data = try? Data(contentsOf: URL(fileURLWithPath: pathToImage))
@@ -83,14 +81,17 @@ final class APIWorker {
         
         let media = Media.image(data: data, type: .png)
         
-        VK.API.Upload.Photo.toWall(media, to: .user(id: "4680178"))
-            .onSuccess { print("SwiftyVK: upload successed with \n \(JSON($0))") }
-            .onError { print("SwiftyVK: upload failed with \n \($0)")}
-            .onProgress { print($0) }
-            .send()
+        for try await event in VK.API.Upload.Photo.toWall(media, to: .user(id: "4680178")).sendWithProgress() {
+            switch event {
+            case let .progress(progress):
+                print(progress)
+            case let .response(response):
+                print("SwiftyVK: upload succeeded with \n \(JSON(response))")
+            }
+        }
     }
     
-    class func share() {
+    private class func share() async throws {
         guard
             let pathToImage = Bundle.main.path(forResource: "testImage", ofType: "png"),
             let data = try? Data(contentsOf: URL(fileURLWithPath: pathToImage)),
@@ -100,8 +101,7 @@ final class APIWorker {
                 return
         }
         
-        VK.sessions.default.share(
-            ShareContext(
+        let context = ShareContext(
                 text: "This post made with #SwiftyVK 🖖🏽",
                 images: [
                     ShareImage(data: data, type: .jpg),
@@ -112,9 +112,9 @@ final class APIWorker {
                     title: "Follow the white rabbit",
                     url: link
                 )
-            ),
-            onSuccess: { print("SwiftyVK: successfully shared with \n \(JSON($0))") },
-            onError: { print("SwiftyVK: share failed with \n \($0)") }
         )
+
+        let response = try await VK.sessions.default.share(context)
+        print("SwiftyVK: successfully shared with \n \(JSON(response))")
     }
 }

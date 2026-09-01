@@ -13,7 +13,7 @@ final class CaptchaControllerIOS: UIViewController, UITextFieldDelegate, Captcha
     private var appeared = false
     
     var isDisplayed: Bool {
-        return DispatchQueue.anywayOnMain {
+        DispatchQueue.anywayOnMain {
             isViewLoaded && view.window != nil
         }
     }

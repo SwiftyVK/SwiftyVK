@@ -56,7 +56,7 @@ final class AuthorizatorImpl: Authorizator {
                 throw VKError.vkDelegateNotFound
             }
             
-            let vkAppAuthQuery = try makeAuthQuery(
+            let vkAppAuthQuery = makeAuthQuery(
                 sessionId: sessionId,
                 config: config,
                 scopes: scopes,
@@ -76,14 +76,14 @@ final class AuthorizatorImpl: Authorizator {
     }
     
     func getSavedToken(sessionId: String) -> InvalidatableToken? {
-        return queue.sync {
+        queue.sync {
             tokenStorage.getFor(sessionId: sessionId)
         }
     }
     
     func authorize(sessionId: String, rawToken: String, expires: TimeInterval) throws -> InvalidatableToken {
-        return try queue.sync {
-            guard let tokenMaker = tokenMaker else {
+        try queue.sync {
+            guard let tokenMaker else {
                 throw VKError.weakObjectWasDeallocated
             }
             
@@ -94,7 +94,7 @@ final class AuthorizatorImpl: Authorizator {
     }
     
     func validate(sessionId: String, url: URL) throws -> InvalidatableToken {
-        return try queue.sync {
+        try queue.sync {
             let validationRequest = URLRequest(
                 url: url,
                 cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
@@ -106,7 +106,7 @@ final class AuthorizatorImpl: Authorizator {
     }
     
     func reset(sessionId: String) -> InvalidatableToken? {
-        return queue.sync {
+        queue.sync {
             tokenStorage.removeFor(sessionId: sessionId)
             cookiesHolder?.remove(for: sessionId)
             return nil
@@ -116,12 +116,11 @@ final class AuthorizatorImpl: Authorizator {
     func handle(url: URL, app: String?) {
         guard
             let tokenInfo = vkAppProxy.handle(url: url, app: app),
-            let vkAppToken = try? makeToken(tokenInfo: tokenInfo) else
-        {
+            let parsedVKAppToken = try? makeToken(tokenInfo: tokenInfo) else {
             return
         }
         
-        self.vkAppToken = vkAppToken
+        self.vkAppToken = parsedVKAppToken
         webPresenter.dismiss()
     }
     
@@ -146,7 +145,7 @@ final class AuthorizatorImpl: Authorizator {
                 throw VKError.vkAppFailedToOpen
             }
 
-            guard let vkAppToken = vkAppToken else {
+            guard let vkAppToken else {
                 throw VKError.vkAppTokenNotReceived
             }
 
@@ -175,14 +174,13 @@ final class AuthorizatorImpl: Authorizator {
             return token
         }
         catch {
-            guard let vkAppToken = vkAppToken else {
+            guard let vkAppToken else {
                 cookiesHolder?.restore(for: url)
                 throw error
             }
             
             return vkAppToken
         }
-        
     }
     
     private func makeToken(tokenInfo: String) throws -> InvalidatableToken {
@@ -190,7 +188,7 @@ final class AuthorizatorImpl: Authorizator {
             throw VKError.cantParseTokenInfo(tokenInfo)
         }
         
-        guard let tokenMaker = tokenMaker else {
+        guard let tokenMaker else {
             throw VKError.weakObjectWasDeallocated
         }
         
@@ -207,7 +205,7 @@ final class AuthorizatorImpl: Authorizator {
         scopes: Int,
         revoke: Bool
         ) throws -> URLRequest {
-        let webQuery = try makeAuthQuery(
+        let webQuery = makeAuthQuery(
             sessionId: sessionId,
             config: config,
             scopes: scopes,
@@ -232,7 +230,7 @@ final class AuthorizatorImpl: Authorizator {
         scopes: Int,
         redirectUrl: String?,
         revoke: Bool
-        ) throws -> String {
+        ) -> String {
         let redirect: String
         
         if let url = redirectUrl, !url.isEmpty {

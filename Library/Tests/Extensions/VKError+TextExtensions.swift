@@ -32,6 +32,8 @@ extension VKError: Equatable {
         (.vkAppTokenNotReceived, .vkAppTokenNotReceived),
         (.cantAwaitOnMainThread, .cantAwaitOnMainThread),
         (.cantAwaitRequestWithSettedCallbacks, .cantAwaitRequestWithSettedCallbacks),
+        (.longPollAlreadyObserved, .longPollAlreadyObserved),
+        (.weakObjectWasDeallocated, .weakObjectWasDeallocated),
         (.captchaWasDismissed, .captchaWasDismissed):
             return true
         default:

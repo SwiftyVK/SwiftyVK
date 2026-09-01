@@ -39,6 +39,80 @@ public protocol Session: AnyObject {
     )
 }
 
+#if compiler(>=5.5)
+@available(iOS 13.0, macOS 10.15, *)
+extension Session {
+    public func send(method: SendableMethod) async throws -> Data {
+        try await method.send(in: self)
+    }
+
+    public func logIn() async throws -> [String: String] {
+        let continuationBox = ContinuationBox<[String: String]>()
+
+        return try await withTaskCancellationHandler(
+            operation: {
+                try Swift.Task.checkCancellation()
+
+                return try await withCheckedThrowingContinuation { continuation in
+                    guard continuationBox.begin(with: continuation) else {
+                        return
+                    }
+
+                    guard continuationBox.shouldStartOperation() else {
+                        return
+                    }
+
+                    logIn(
+                        onSuccess: { info in
+                            continuationBox.succeed(with: info)
+                        },
+                        onError: { error in
+                            continuationBox.fail(with: error)
+                        }
+                    )
+                }
+            },
+            onCancel: {
+                continuationBox.cancel()
+            }
+        )
+    }
+
+    public func share(_ context: ShareContext) async throws -> Data {
+        let continuationBox = ContinuationBox<Data>()
+
+        return try await withTaskCancellationHandler(
+            operation: {
+                try Swift.Task.checkCancellation()
+
+                return try await withCheckedThrowingContinuation { continuation in
+                    guard continuationBox.begin(with: continuation) else {
+                        return
+                    }
+
+                    guard continuationBox.shouldStartOperation() else {
+                        return
+                    }
+
+                    share(
+                        context,
+                        onSuccess: { data in
+                            continuationBox.succeed(with: data)
+                        },
+                        onError: { error in
+                            continuationBox.fail(with: error)
+                        }
+                    )
+                }
+            },
+            onCancel: {
+                continuationBox.cancel()
+            }
+        )
+    }
+}
+#endif
+
 protocol TaskSession {
     var token: InvalidatableToken? { get }
     
@@ -56,6 +130,7 @@ protocol ApiErrorExecutor {
     func captcha(rawUrlToImage: String, dismissOnFinish: Bool) throws -> String
 }
 
+// swiftlint:disable:next type_body_length
 public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErrorExecutor {
 
     public var config: SessionConfig {
@@ -90,7 +165,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     }
     
     public var accessToken: Token? {
-        return token
+        token
     }
 
     private let taskSheduler: TaskSheduler
@@ -156,15 +231,15 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         try throwIfDestroyed()
         try throwIfAuthorized()
         
-        let token = try authorizator.authorize(
+        let authorizedToken = try authorizator.authorize(
             sessionId: id,
             config: config,
             revoke: revoke
         )
         
-        self.token = token
+        self.token = authorizedToken
         
-        return token.info
+        return authorizedToken.info
     }
     
     public func logIn(rawToken: String, expires: TimeInterval) throws {
@@ -186,9 +261,9 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
             token = try authorizator.validate(sessionId: id, url: redirectUrl)
         }
     }
-    
+
     func captcha(rawUrlToImage: String) throws -> String {
-        return try gateQueue.sync {
+        try gateQueue.sync {
             try throwIfDestroyed()
             try throwIfNotAuthorized()
             return try captcha(rawUrlToImage: rawUrlToImage, dismissOnFinish: true)
@@ -236,6 +311,7 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         }
         catch let error {
             onError(error.toVK())
+            return
         }
         
         if state >= .authorized {
@@ -244,7 +320,12 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         else {
             logIn(
                 onSuccess: { [weak self] _ in
-                    self?.forceShare(context, onSuccess: onSuccess, onError: onError)
+                    guard let strongSelf = self else {
+                        onError(.weakObjectWasDeallocated)
+                        return
+                    }
+
+                    strongSelf.forceShare(context, onSuccess: onSuccess, onError: onError)
                 },
                 onError: { onError($0) }
             )
@@ -258,8 +339,14 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
         ) {
         DispatchQueue.global(qos: .utility).async { [weak self] in
             do {
-                guard let strongSelf = self else { return }
-                guard let presenter = strongSelf.sharePresenterMaker?.sharePresenter() else { return }
+                guard let strongSelf = self else {
+                    onError(.weakObjectWasDeallocated)
+                    return
+                }
+                guard let presenter = strongSelf.sharePresenterMaker?.sharePresenter() else {
+                    onError(.weakObjectWasDeallocated)
+                    return
+                }
                 let data = try presenter.share(context, in: strongSelf)
                 try onSuccess(data)
             }
@@ -268,6 +355,42 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
             }
         }
     }
+
+    #if compiler(>=5.5)
+    @available(iOS 13.0, macOS 10.15, *)
+    public func forceShare(_ context: ShareContext) async throws -> Data {
+        let continuationBox = ContinuationBox<Data>()
+
+        return try await withTaskCancellationHandler(
+            operation: {
+                try Swift.Task.checkCancellation()
+
+                return try await withCheckedThrowingContinuation { continuation in
+                    guard continuationBox.begin(with: continuation) else {
+                        return
+                    }
+
+                    guard continuationBox.shouldStartOperation() else {
+                        return
+                    }
+
+                    forceShare(
+                        context,
+                        onSuccess: { data in
+                            continuationBox.succeed(with: data)
+                        },
+                        onError: { error in
+                            continuationBox.fail(with: error)
+                        }
+                    )
+                }
+            },
+            onCancel: {
+                continuationBox.cancel()
+            }
+        )
+    }
+    #endif
     
     func shedule(task: Task) throws {
         try gateQueue.sync {
@@ -291,10 +414,10 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
     private func sendTokenChangeEvent(from oldToken: Token?, to newToken: Token?) {
     
         DispatchQueue.global().async { [id] in
-            if oldToken != nil, let newToken = newToken {
+            if oldToken != nil, let newToken {
                 self.delegate?.vkTokenUpdated(for: id, info: newToken.info)
             }
-            else if let newToken = newToken {
+            else if let newToken {
                 self.delegate?.vkTokenCreated(for: id, info: newToken.info)
             }
             else if oldToken != nil {
@@ -333,5 +456,5 @@ public final class SessionImpl: Session, TaskSession, DestroyableSession, ApiErr
 }
 
 public func == (lhs: Session, rhs: Session) -> Bool {
-    return lhs.id == rhs.id
+    lhs.id == rhs.id
 }

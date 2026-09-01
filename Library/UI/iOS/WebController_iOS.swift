@@ -46,7 +46,7 @@ final class WebControllerIOS: UIViewController, WKNavigationDelegate, WebControl
     }
     
     private func loadCurrentRequest() {
-        guard let currentRequest = currentRequest else {
+        guard let currentRequest else {
             return
         }
         

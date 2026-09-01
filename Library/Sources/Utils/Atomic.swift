@@ -41,7 +41,7 @@ final class Atomic<Value> {
     /// Unwrap wrapped value atomically
     /// - returns: wrapped value
     func unwrap() -> Value {
-        return lock.perform { value }
+        lock.perform { value }
     }
     
     /// Perform scope with wrapped value atomically
@@ -67,25 +67,25 @@ final class Atomic<Value> {
 }
 
 infix operator |<
-///atomic wrap operator
+/// atomic wrap operator
 func |< <Value>(container: Atomic<Value>, value: Value) {
     container.wrap(value)
 }
 
 postfix operator |>
-///atomic unwrap operator
+/// atomic unwrap operator
 postfix func |> <Value>(container: Atomic<Value>) -> Value {
-    return container.unwrap()
+    container.unwrap()
 }
 
 infix operator <>
-///atomic perform operator
+/// atomic perform operator
 func <> <Value>(container: Atomic<Value>, scope: (Value) throws -> ()) rethrows {
-    return try container.perform(scope: scope)
+    try container.perform(scope: scope)
 }
 
 infix operator ><
-///atomic modify operator
+/// atomic modify operator
 func >< <Value>(container: Atomic<Value>, scope: (Value) throws -> Value) rethrows {
-    return try container.modify(withScope: scope)
+    try container.modify(withScope: scope)
 }
