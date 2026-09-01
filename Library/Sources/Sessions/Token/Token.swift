@@ -18,7 +18,7 @@ final class TokenImpl: NSObject, InvalidatableToken {
     let info: [String: String]
     
     var isValid: Bool {
-       return !expires.isExpired
+        !expires.isExpired
     }
     
     init(
@@ -32,7 +32,7 @@ final class TokenImpl: NSObject, InvalidatableToken {
     }
     
     func get() -> String? {
-        return isValid ? token : nil
+        isValid ? token : nil
     }
     
     func invalidate() {
@@ -55,23 +55,23 @@ final class TokenImpl: NSObject, InvalidatableToken {
     
     required init?(coder aDecoder: NSCoder) {
         guard
-            let token = aDecoder.decodeObject(forKey: "token") as? String,
-            let info = aDecoder.decodeObject(forKey: "info") as? [String: String],
+            let decodedToken = aDecoder.decodeObject(forKey: "token") as? String,
+            let decodedInfo = aDecoder.decodeObject(forKey: "info") as? [String: String],
             let expireCase = aDecoder.decodeObject(forKey: "expireCase") as? String else {
-                return nil
+            return nil
         }
         
-        self.token = token
-        self.info = info
+        self.token = decodedToken
+        self.info = decodedInfo
         
         switch expireCase {
         case "never":
             self.expires = .never
         case "during":
-            let created = aDecoder.decodeDouble(forKey: "crated")
-            let expires = aDecoder.decodeDouble(forKey: "expires")
+            let creationTime = aDecoder.decodeDouble(forKey: "crated")
+            let expirationTime = aDecoder.decodeDouble(forKey: "expires")
             
-            self.expires = .during(created: created, expires: expires)
+            self.expires = .during(created: creationTime, expires: expirationTime)
         default:
             return nil
         }

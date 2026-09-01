@@ -9,7 +9,7 @@ public struct ShareContext: Equatable {
     var preferences = [ShareContextPreference]()
     
     var hasAttachments: Bool {
-        return images.isEmpty || link != nil
+        images.isEmpty || link != nil
     }
     
     public init(
@@ -25,7 +25,7 @@ public struct ShareContext: Equatable {
     }
     
     public static func == (lhs: ShareContext, rhs: ShareContext) -> Bool {
-        return lhs.message == rhs.message && lhs.images == rhs.images && lhs.link == rhs.link
+        lhs.message == rhs.message && lhs.images == rhs.images && lhs.link == rhs.link
     }
 }
 
@@ -43,7 +43,7 @@ public struct ShareLink: Equatable {
     }
     
     public static func == (lhs: ShareLink, rhs: ShareLink) -> Bool {
-        return lhs.title == rhs.title && lhs.url == rhs.url
+        lhs.title == rhs.title && lhs.url == rhs.url
     }
 }
 
@@ -82,7 +82,7 @@ public final class ShareImage: Equatable {
     }
     
     public static func == (lhs: ShareImage, rhs: ShareImage) -> Bool {
-        return lhs.data == rhs.data
+        lhs.data == rhs.data
     }
 }
 

@@ -27,13 +27,11 @@ public enum UploadTarget {
 public typealias PhotoCrop = (x: String?, y: String?, w: String?)
 public typealias CoverCrop = (x: String, y: String, x2: String, y2: String)
 
-// swiftlint:disable next nesting
-// swiftlint:disable next type_body_length
 extension APIScope {
     /// Metods to upload Mediafiles. More info - https://vk.ru/dev/upload_files
-    public struct Upload {
-        ///Methods to upload photo
-        public struct Photo {
+    public struct Upload { // swiftlint:disable:this type_body_length
+        /// Methods to upload photo
+        public struct Photo { // swiftlint:disable:this nesting type_body_length
             /// Upload photo to user or group avatar
             public static func toMain(
                 _ media: Media,
@@ -46,11 +44,11 @@ extension APIScope {
                     ])
                     .chain {
                         let response = try JSON(data: $0)
-                        let crop = crop.flatMap { "&_square_crop=\($0.x ?? ""),\($0.y ?? ""),\($0.w ?? "")" } ?? ""
+                        let cropQuery = crop.flatMap { "&_square_crop=\($0.x ?? ""),\($0.y ?? ""),\($0.w ?? "")" } ?? ""
                         
                         return Request(
                             type: .upload(
-                                url: response.forcedString("upload_url") + crop,
+                                url: response.forcedString("upload_url") + cropQuery,
                                 media: [media],
                                 partType: .photo
                             ),
@@ -195,8 +193,10 @@ extension APIScope {
             }
             
             /// Upload photo for using in messages.send method
-            public static func toMessage(_ media: Media, peerId: String? = nil
-                ) -> Methods.SuccessableFailableProgressableConfigurable {
+            public static func toMessage(
+                _ media: Media,
+                peerId: String? = nil
+            ) -> Methods.SuccessableFailableProgressableConfigurable {
                 
                 let method = APIScope.Photos.getMessagesUploadServer([.peerId: peerId])
                     .chain {
@@ -437,7 +437,7 @@ extension APIScope {
         /// Upload audio for using in messages.send method
         public static func toAudioMessage(_ media: Media) -> Methods.SuccessableFailableProgressableConfigurable {
             
-            let method = APIScope.Docs.getMessagesUploadServer ([
+            let method = APIScope.Docs.getMessagesUploadServer([
                 .type: "audio_message"
                 ])
                 .chain {

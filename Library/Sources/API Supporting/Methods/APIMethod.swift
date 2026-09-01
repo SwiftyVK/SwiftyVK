@@ -4,20 +4,20 @@ public protocol APIMethod: Method {}
 
 extension APIMethod {
     public func toRequest() -> Request {
-        return Request(type: .api(method: method, parameters: parameters.toRaw()))
+        Request(type: .api(method: method, parameters: parameters.toRaw()))
     }
 }
 
 extension APIMethod {
     var group: String {
-        return String(describing: type(of: self)).lowercased()
+        String(describing: type(of: self)).lowercased()
     }
     
     var method: String {
-        return "\(group).\(caseName(of: self))"
+        "\(group).\(caseName(of: self))"
     }
     
     var parameters: Parameters {
-        return associatedValue(of: self) ?? .empty
+        associatedValue(of: self) ?? .empty
     }
 }

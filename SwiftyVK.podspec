@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.version                 = "3.4.3"
+  s.version                 = "3.4.4"
   s.name                    = "SwiftyVK"
   s.summary                 = "Easy and powerful way to interact with VK API for iOS and macOS"
   s.homepage                = "https://github.com/SwiftyVK/SwiftyVK"
@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.requires_arc            = true
   s.osx.deployment_target 	= "10.13"
   s.ios.deployment_target 	= "12.0"
-  s.swift_version           = "5.0"
+  s.swift_version           = "5.10"
 
   s.source                  = { :git => "https://github.com/SwiftyVK/SwiftyVK.git" , :tag => s.version.to_s }
   s.source_files            = "Library/Sources/**/*.*"

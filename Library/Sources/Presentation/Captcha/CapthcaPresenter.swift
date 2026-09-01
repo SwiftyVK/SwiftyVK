@@ -12,7 +12,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
     private weak var currentController: CaptchaController?
     
     private var displayedController: CaptchaController? {
-        return currentController?.isDisplayed == true ? currentController : nil
+        currentController?.isDisplayed == true ? currentController : nil
     }
     
     private let timeout: TimeInterval
@@ -31,7 +31,7 @@ final class CaptchaPresenterImpl: CaptchaPresenter {
     }
     
     func present(rawCaptchaUrl: String, dismissOnFinish: Bool) throws -> String {
-        guard let controllerMaker = controllerMaker else { throw VKError.weakObjectWasDeallocated }
+        guard let controllerMaker else { throw VKError.weakObjectWasDeallocated }
         
         let semaphore = DispatchSemaphore(value: 0)
         

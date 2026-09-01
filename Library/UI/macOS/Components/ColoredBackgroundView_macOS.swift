@@ -9,7 +9,6 @@ final class ColoredBackgroundViewMacOS: NSView {
             wantsLayer = true
             layer?.backgroundColor = backgroundColor.cgColor
             needsDisplay = true
-            
         }
     }
 }

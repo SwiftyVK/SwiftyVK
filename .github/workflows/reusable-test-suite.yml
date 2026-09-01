@@ -14,7 +14,7 @@ jobs:
         include:
           - platform: iOS
             scheme: ${{ vars.PRODUCT_NAME }}_iOS
-            destination: 'platform=iOS Simulator,OS=latest,name=iPhone 16'
+            destination: 'platform=iOS Simulator,OS=latest,name=iPhone 17'
             build-settings: 'CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY='
           - platform: macOS
             scheme: ${{ vars.PRODUCT_NAME }}_macOS
@@ -31,6 +31,9 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: ${{ vars.XCODE_VERSION }}
+
+      - name: Verify Swift 5.10 toolchain
+        run: swift package dump-package > /dev/null
 
       - name: Build
         uses: sersoft-gmbh/xcodebuild-action@v3.2.0

@@ -4,13 +4,13 @@ extension Methods {
     public class Basic: SendableMethod {
         let request: Request
         
-        required public init(_ request: Request) {
+        public required init(_ request: Request) {
             self.request = request
         }
         
         /// For internal using only!
         public func toRequest() -> Request {
-            return request
+            request
         }
         
         /// Build chain of requests

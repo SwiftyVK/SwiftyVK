@@ -6,7 +6,7 @@ public typealias RawParameters = [String: String]
 extension Dictionary where Key == Parameter, Value == String? {
     /// Alias to empty parameters dictionary
     public static var empty: [Parameter: String] {
-        return [:]
+        [:]
     }
     
     func toRaw() -> RawParameters {
@@ -23,16 +23,16 @@ extension Dictionary where Key == Parameter, Value == String? {
 extension Dictionary where Key == String, Value == String {
     /// Alias to empty parameters dictionary
     public static var empty: RawParameters {
-        return [:]
+        [:]
     }
 }
 
-// swiftlint:disable type_body_length identifier_name
 /// Parameter for VK API methods
-public enum Parameter: String, Hashable {
+public enum Parameter: String, Hashable { // swiftlint:disable:this type_body_length
     case userIDs = "user_ids"
     case fields
     case nameCase = "name_case"
+    // swiftlint:disable:next identifier_name
     case q
     case sort
     case offset
@@ -155,7 +155,9 @@ public enum Parameter: String, Hashable {
     case after
     case noServiceAlbums = "no_service_albums"
     case tagId = "tag_id"
+    // swiftlint:disable:next identifier_name
     case x
+    // swiftlint:disable:next identifier_name
     case y
     case x2
     case y2
@@ -360,11 +362,11 @@ public enum Parameter: String, Hashable {
     case timestampTo = "timestamp_to"
     case statsGroups = "stats_groups"
     
-    public var hashValue: Int {
-        return self.rawValue.hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(rawValue)
     }
 }
 
 public func == (lhs: Parameter, rhs: Parameter) -> Bool {
-    return lhs.rawValue == rhs.rawValue
+    lhs.rawValue == rhs.rawValue
 }

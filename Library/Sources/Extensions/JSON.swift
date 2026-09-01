@@ -3,7 +3,7 @@ import Foundation
 final class JSON: JSONContainer, CustomStringConvertible {
     
     var description: String {
-        return "JSON: \(String(describing: value))"
+        "JSON: \(String(describing: value))"
     }
     
     let value: Any?
@@ -22,15 +22,15 @@ final class JSON: JSONContainer, CustomStringConvertible {
     }
     
     func any(_ path: String) -> Any? {
-        return value(path)
+        value(path)
     }
     
     func json(_ path: String) -> JSON {
-        return .init(value: value(path))
+        .init(value: value(path))
     }
     
     func forcedData(_ path: String) -> Data {
-        return data(path) ?? Data()
+        data(path) ?? Data()
     }
     
     func data(_ path: String) -> Data? {
@@ -44,59 +44,59 @@ final class JSON: JSONContainer, CustomStringConvertible {
     }
     
     func forcedArray<T>(_ path: String) -> [T] {
-        return array(path) ?? []
+        array(path) ?? []
     }
     
     func array<T>(_ path: String) -> [T]? {
-        return value(path)
+        value(path)
     }
     
     func forcedDictionary<T>(_ path: String) -> [String: T] {
-        return dictionary(path) ?? [:]
+        dictionary(path) ?? [:]
     }
     
     func dictionary<T>(_ path: String) -> [String: T]? {
-        return value(path)
+        value(path)
     }
     
     func forcedBool(_ path: String) -> Bool {
-        return bool(path) ?? false
+        bool(path) ?? false
     }
     
     func bool(_ path: String) -> Bool? {
-        return value(path)
+        value(path)
     }
     
     func forcedString(_ path: String) -> String {
-        return string(path) ?? ""
+        string(path) ?? ""
     }
     
     func string(_ path: String) -> String? {
-        return value(path)
+        value(path)
     }
     
     func forcedInt(_ path: String) -> Int {
-        return int(path) ?? 0
+        int(path) ?? 0
     }
     
     func int(_ path: String) -> Int? {
-        return value(path)
+        value(path)
     }
     
     func forcedDouble(_ path: String) -> Double {
-        return double(path) ?? 0
+        double(path) ?? 0
     }
     
     func double(_ path: String) -> Double? {
-        return value(path)
+        value(path)
     }
     
     func forcedFloat(_ path: String) -> Float {
-        return float(path) ?? 0
+        float(path) ?? 0
     }
     
     func float(_ path: String) -> Float? {
-        return value(path)
+        value(path)
     }
 }
 
@@ -127,11 +127,11 @@ private protocol JSONContainer {}
 extension JSONContainer {
     
     func makeComponents(path: String) -> [String] {
-        return path.components(separatedBy: ",")
+        path.components(separatedBy: ",")
     }
     
     func firstComponent(from components: [String]) -> String {
-        return components.first?.trimmingCharacters(in: .whitespaces) ?? ""
+        components.first?.trimmingCharacters(in: .whitespaces) ?? ""
     }
     
     func parsed<T>(value: Any?, components: [String], isRoot: Bool = false) -> T? {

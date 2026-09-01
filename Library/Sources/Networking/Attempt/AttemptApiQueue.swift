@@ -34,7 +34,7 @@ final class AttemptApiQueue: OperationQueue, @unchecked Sendable {
     
     private func _addOperation(_ operation: Operation) {
         
-        // swiftlint:disable empty_count next
+        // swiftlint:disable:next empty_count
         if dropCounterTimer == nil && (limit.count > 0 || !waited.isEmpty) {
             runDropCounterTimer()
         }

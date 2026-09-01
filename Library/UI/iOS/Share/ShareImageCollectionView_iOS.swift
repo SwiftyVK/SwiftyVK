@@ -28,14 +28,14 @@ final class ShareImageCollectionViewIOS: UICollectionView, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        images.count
     }
     
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
         ) -> UICollectionViewCell {
-        return dequeueReusableCell(withReuseIdentifier: "ShareImageCell", for: indexPath)
+        dequeueReusableCell(withReuseIdentifier: "ShareImageCell", for: indexPath)
     }
     
     func collectionView(
@@ -46,13 +46,13 @@ final class ShareImageCollectionViewIOS: UICollectionView, UICollectionViewDataS
         let index = indexPath.item
         
         guard
-            let cell = cell as? ShareImageCollectionCellIOS,
+            let imageCell = cell as? ShareImageCollectionCellIOS,
             let image = images.object(at: index) as? ShareImage
             else {
                 return
         }
         
-        cell.set(image: image)
+        imageCell.set(image: image)
     }
 }
 

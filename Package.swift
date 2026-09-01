@@ -1,5 +1,39 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.10
 import PackageDescription
+
+let localizations = ["be", "de", "en", "es", "fi", "it", "ru", "uk"]
+
+let iOSResources: [Resource] = [
+    .process("Asset.xcassets"),
+    .process("Base.lproj/Storyboard_iOS.storyboard")
+] + localizations.flatMap { localization in
+    [
+        .process("\(localization).lproj/Localizable.strings"),
+        .process("\(localization).lproj/Storyboard_iOS.strings")
+    ]
+}
+
+let macOSResources: [Resource] = [
+    .process("Asset.xcassets"),
+    .process("Base.lproj/Storyboard_macOS.storyboard"),
+    .process("ShareImageCollectionViewItem_macOS.xib")
+] + localizations.flatMap { localization in
+    [
+        .process("\(localization).lproj/Localizable.strings"),
+        .process("\(localization).lproj/Storyboard_macOS.strings")
+    ]
+}
+
+let iOSResourceExcludes = [
+    "BundleProviderMacOS.swift",
+    "ShareImageCollectionViewItem_macOS.xib",
+    "Base.lproj/Storyboard_macOS.storyboard"
+] + localizations.map { "\($0).lproj/Storyboard_macOS.strings" }
+
+let macOSResourceExcludes = [
+    "BundleProviderIOS.swift",
+    "Base.lproj/Storyboard_iOS.storyboard"
+] + localizations.map { "\($0).lproj/Storyboard_iOS.strings" }
 
 let package = Package(
     name: "SwiftyVK",
@@ -17,26 +51,45 @@ let package = Package(
     targets: [
         .target(
             name: "SwiftyVK",
+            dependencies: [
+                .target(name: "SwiftyVKResourcesIOS", condition: .when(platforms: [.iOS])),
+                .target(name: "SwiftyVKResourcesMacOS", condition: .when(platforms: [.macOS]))
+            ],
             path: "Library",
             exclude: [
                 "SwiftyVK.xcodeproj",
                 "Tests",
                 "Sources/SwiftyVK.h",
                 "Resources/Files",
-                "Resources/Info"
+                "Resources/Info",
+                "Resources/Bundles"
             ],
             sources: [
                 "Sources",
                 "UI"
             ],
-            resources: [
-                .copy("Resources/Bundles/SwiftyVK_resources_iOS.bundle"),
-                .copy("Resources/Bundles/SwiftyVK_resources_macOS.bundle")
-            ],
             linkerSettings: [
                 .linkedFramework("SystemConfiguration"),
                 .linkedFramework("WebKit")
             ]
+        ),
+        .target(
+            name: "SwiftyVKResourcesIOS",
+            path: "Library/Resources/Files",
+            exclude: iOSResourceExcludes,
+            sources: [
+                "BundleProviderIOS.swift"
+            ],
+            resources: iOSResources
+        ),
+        .target(
+            name: "SwiftyVKResourcesMacOS",
+            path: "Library/Resources/Files",
+            exclude: macOSResourceExcludes,
+            sources: [
+                "BundleProviderMacOS.swift"
+            ],
+            resources: macOSResources
         ),
         .testTarget(
             name: "SwiftyVKTests",

@@ -17,8 +17,10 @@ final class SessionMock: Session, TaskSession, DestroyableSession, ApiErrorExecu
         
     }
     
+    var onLogIn: ((@escaping ([String: String]) -> (), @escaping RequestCallbacks.Error) -> ())?
+
     func logIn(onSuccess: @escaping ([String : String]) -> (), onError: @escaping RequestCallbacks.Error) {
-        
+        onLogIn?(onSuccess, onError)
     }
     
     func logIn(rawToken: String, expires: TimeInterval) throws {
@@ -34,11 +36,14 @@ final class SessionMock: Session, TaskSession, DestroyableSession, ApiErrorExecu
     func logOut() {}
     
     var onSend: ((SendableMethod) -> ())?
+    var beforeReturningTask: (() -> ())?
+    var task: Task = TaskMock()
     
     @discardableResult
     func send(method: SendableMethod) -> Task {
         onSend?(method)
-        return TaskMock()
+        beforeReturningTask?()
+        return task
     }
     
     var onShedule: ((Attempt) throws -> ())?
@@ -70,7 +75,10 @@ final class SessionMock: Session, TaskSession, DestroyableSession, ApiErrorExecu
         return ""
     }
     
+    var onShare: ((ShareContext, @escaping RequestCallbacks.Success, @escaping RequestCallbacks.Error) -> ())?
+
     func share(_ context: ShareContext, onSuccess: @escaping RequestCallbacks.Success, onError: @escaping RequestCallbacks.Error) {
+        onShare?(context, onSuccess, onError)
     }
     
     func share(_ context: ShareContext, onSuccess: @escaping ([String : Any]) throws -> (), onError: @escaping RequestCallbacks.Error) {

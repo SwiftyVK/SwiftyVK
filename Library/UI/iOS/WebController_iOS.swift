@@ -19,6 +19,9 @@ final class WebControllerIOS: UIViewController, WKNavigationDelegate, WebControl
         webView?.layer.borderWidth = 1 / UIScreen.main.nativeScale
         webView?.layer.borderColor = UIColor.lightGray.cgColor
         webView?.webView.navigationDelegate = self
+        webView?.onClose = { [weak self] in
+            self?.onResult?(.error(.authorizationCancelled))
+        }
         preloader?.color = .lightGray
         preloader?.hidesWhenStopped = true
     }
@@ -43,7 +46,7 @@ final class WebControllerIOS: UIViewController, WKNavigationDelegate, WebControl
     }
     
     private func loadCurrentRequest() {
-        guard let currentRequest = currentRequest else {
+        guard let currentRequest else {
             return
         }
         

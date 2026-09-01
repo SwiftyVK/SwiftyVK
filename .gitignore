@@ -1,5 +1,6 @@
 build/
 DerivedData/
+/TODO.md
 
 ## Various settings
 *.pbxuser
