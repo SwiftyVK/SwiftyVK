@@ -22,4 +22,17 @@ final class DisclosuredButtonIOS: UIButton {
     }
 }
 
+final class ExtendedInsetsButtonIOS: UIButton {
+
+    @IBInspectable var extendedInsets: CGFloat = 0
+
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        guard extendedInsets > 0 else {
+            return super.point(inside: point, with: event)
+        }
+
+        return bounds.insetBy(dx: -extendedInsets, dy: -extendedInsets).contains(point)
+    }
+}
+
 #endif
