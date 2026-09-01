@@ -38,14 +38,14 @@ final class ShareImageCollectionViewMacOS: NSCollectionView, NSCollectionViewDel
     }
     
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        images.count
     }
     
     func collectionView(
         _ itemForRepresentedObjectAtcollectionView: NSCollectionView,
         itemForRepresentedObjectAt indexPath: IndexPath
         ) -> NSCollectionViewItem {
-        return makeItem(
+        makeItem(
             withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "ShareImageCollectionViewItem"),
             for: indexPath
         )
@@ -58,11 +58,11 @@ final class ShareImageCollectionViewMacOS: NSCollectionView, NSCollectionViewDel
         indexPath: IndexPath
         ) {
         guard
-            let item = item as? ShareImageCollectionViewItemMacOS,
+            let imageItem = item as? ShareImageCollectionViewItemMacOS,
             let image = images.object(at: indexPath.item) as? ShareImage
             else { return }
         
-        item.set(image: image)
+        imageItem.set(image: image)
     }
     
     // This dummy method fix collection view crash ¯\_(ツ)_/¯

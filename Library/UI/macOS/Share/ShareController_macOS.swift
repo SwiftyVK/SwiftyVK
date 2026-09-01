@@ -44,7 +44,7 @@ final class ShareControllerMacOS: NSViewController, ShareController, NSTextViewD
     private func setUpTextView() {
         textView = DynamicTextView()
         
-        guard let textView = textView, let textViewContainer = textViewContainer else { return }
+        guard let textView, let textViewContainer else { return }
         
         textView.isEditable = true
         textView.isSelectable = true

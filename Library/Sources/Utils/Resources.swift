@@ -32,14 +32,14 @@ struct Resources {
 
         if
             let path = Bundle.main.path(forResource: name, ofType: bundleType),
-            let bundle = Bundle(path: path) {
-            return bundle
+            let resourceBundle = Bundle(path: path) {
+            return resourceBundle
         }
 
         if
             let path = Bundle(for: ResourceTestClass.self).path(forResource: name, ofType: bundleType),
-            let bundle = Bundle(path: path) {
-            return bundle
+            let resourceBundle = Bundle(path: path) {
+            return resourceBundle
         }
 
         return Bundle.main
@@ -47,10 +47,10 @@ struct Resources {
     }()
     
     static func withSuffix(_ name: String) -> String {
-        return name + pathSuffix
+        name + pathSuffix
     }
     
     static func localizedString(for key: String) -> String {
-        return NSLocalizedString(key, bundle: bundle, comment: "")
+        NSLocalizedString(key, bundle: bundle, comment: "")
     }
 }

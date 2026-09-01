@@ -5,8 +5,8 @@ protocol VKNotificationCenter {
         forName name: NSNotification.Name?,
         object obj: Any?,
         queue: OperationQueue?,
-        using block: @escaping @Sendable (Notification) -> Swift.Void)
-        -> NSObjectProtocol
+        using block: @escaping @Sendable (Notification) -> Swift.Void
+    ) -> NSObjectProtocol
     
     func removeObserver(_ observer: Any)
 }

@@ -27,7 +27,7 @@ class KeychainProvider<EntityType> {
     func getFor(sessionId: String) -> EntityType? {
         let keychainQuery = keychainParamsFor(sessionId: sessionId)
         
-        // swiftlint:disable next force_unwrapping
+        // swiftlint:disable:next force_unwrapping
         keychainQuery.setObject(kCFBooleanTrue!, forKey: NSString(format: kSecReturnData))
         keychainQuery.setObject(kSecMatchLimitOne, forKey: NSString(format: kSecMatchLimit))
         
@@ -53,7 +53,7 @@ class KeychainProvider<EntityType> {
     }
     
     private func keychainParamsFor(sessionId: String) -> NSMutableDictionary {
-        return [
+        [
             kSecAttrAccessible: kSecAttrAccessibleAlways,
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: serviceKey,

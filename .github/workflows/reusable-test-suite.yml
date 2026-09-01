@@ -32,6 +32,9 @@ jobs:
         with:
           xcode-version: ${{ vars.XCODE_VERSION }}
 
+      - name: Verify Swift 5.10 toolchain
+        run: swift package dump-package > /dev/null
+
       - name: Build
         uses: sersoft-gmbh/xcodebuild-action@v3.2.0
         with:

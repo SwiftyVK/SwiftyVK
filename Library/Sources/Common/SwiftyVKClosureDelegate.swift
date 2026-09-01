@@ -25,9 +25,9 @@ public struct VKTokenEventsStream {
     public init(
         bufferingPolicy: AsyncStream<VKTokenEvent>.Continuation.BufferingPolicy = .unbounded
     ) {
-        let storage = VKTokenEventsStorage(bufferingPolicy: bufferingPolicy)
-        self.storage = storage
-        self.stream = storage.stream
+        let tokenEventsStorage = VKTokenEventsStorage(bufferingPolicy: bufferingPolicy)
+        self.storage = tokenEventsStorage
+        self.stream = tokenEventsStorage.stream
     }
 
     func yield(_ event: VKTokenEvent) {
@@ -45,16 +45,16 @@ private final class VKTokenEventsStorage {
     private let continuation: AsyncStream<VKTokenEvent>.Continuation
 
     init(bufferingPolicy: AsyncStream<VKTokenEvent>.Continuation.BufferingPolicy) {
-        var continuation: AsyncStream<VKTokenEvent>.Continuation?
-        let stream = AsyncStream(VKTokenEvent.self, bufferingPolicy: bufferingPolicy) {
-            continuation = $0
+        var streamContinuation: AsyncStream<VKTokenEvent>.Continuation?
+        let eventStream = AsyncStream(VKTokenEvent.self, bufferingPolicy: bufferingPolicy) {
+            streamContinuation = $0
         }
 
-        guard let unwrappedContinuation = continuation else {
+        guard let unwrappedContinuation = streamContinuation else {
             fatalError("AsyncStream must create its continuation synchronously")
         }
 
-        self.stream = stream
+        self.stream = eventStream
         self.continuation = unwrappedContinuation
     }
 

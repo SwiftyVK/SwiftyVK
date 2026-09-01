@@ -82,16 +82,23 @@
 
 ----
 ## **Requirements**
-* Swift 4.0 +
+* Swift 5.10 + (Xcode 15.3 +)
 * iOS 12.0 +
 * macOS 10.13 +
-* Xcode 9.0 +
+* Xcode 15.3 +
 
-Swift Concurrency APIs require iOS 13.0+, macOS 10.15+ and a compiler with Swift 5.5+.
+Swift Concurrency APIs require iOS 13.0+, macOS 10.15+.
 No separate integration is needed: add SwiftyVK using any dependency manager below, then use its async APIs from your structured-concurrency code.
 The GCD API remains available on the original deployment targets.
 
 `Session.validate(redirectUrl:)` remains synchronous: it validates a completed OAuth redirect immediately and does not suspend. The async surface covers authorization, API requests, token events, and Long Poll events.
+
+Run the ordinary and analyzer rules locally with:
+
+```sh
+swiftlint lint --config .swiftlint.yml
+bash scripts/swiftlint-analyze.sh
+```
 
 ## **Integration**
 

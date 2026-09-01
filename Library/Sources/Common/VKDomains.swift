@@ -7,7 +7,7 @@ enum VKDomains {
 
     // Host builder
     static func host(_ sub: String? = nil) -> String {
-        if let sub = sub, !sub.isEmpty { return "\(sub).\(root)" }
+        if let sub, !sub.isEmpty { return "\(sub).\(root)" }
         return root
     }
 

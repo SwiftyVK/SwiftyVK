@@ -27,10 +27,10 @@ public enum LongPollEvent {
     case type114(data: Data)
     
     var data: Data? {
-        return associatedValue(of: self)
+        associatedValue(of: self)
     }
     
-    // swiftlint:disable cyclomatic_complexity next
+    // swiftlint:disable:next cyclomatic_complexity
     init?(json: JSON) {
         guard
             let type = json.int("0"),

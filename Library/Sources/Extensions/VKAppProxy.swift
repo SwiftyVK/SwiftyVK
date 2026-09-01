@@ -46,7 +46,7 @@ final class VKAppProxyImpl: VKAppProxy {
     }
 
     func canSend(query: String) -> Bool {
-        return DispatchQueue.anywayOnMain {
+        DispatchQueue.anywayOnMain {
             guard let url = vkAppURL(using: query) else {
                 return false
             }
@@ -72,7 +72,7 @@ final class VKAppProxyImpl: VKAppProxy {
     }
 
     private func openVkApp(query: String) -> Bool {
-        return DispatchQueue.anywayOnMain {
+        DispatchQueue.anywayOnMain {
             guard let url = vkAppURL(using: query) else {
                 return false
             }

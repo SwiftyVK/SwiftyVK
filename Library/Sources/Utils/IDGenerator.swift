@@ -9,7 +9,7 @@ final class IDGeneratorImpl: IDGenerator {
     var id: Int64 = 0
     
     func next() -> Int64 {
-        return queue.sync {
+        queue.sync {
             id += 1
             return id
         }

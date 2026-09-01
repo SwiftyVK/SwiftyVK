@@ -65,7 +65,7 @@ public enum Language: String, Codable {
     
     /// Returns system language or .en
     public static var `default`: Language {
-        return system ?? .en
+        system ?? .en
     }
     
     static var system: Language? {
@@ -112,7 +112,7 @@ public enum AttemptLimit: Codable, ExpressibleByIntegerLiteral {
         var container = try decoder.unkeyedContainer()
         let value = try container.decodeIfPresent(Int.self)
         
-        if let value = value {
+        if let value {
             self = .limited(value)
         }
         else {

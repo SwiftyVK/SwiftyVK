@@ -4,13 +4,12 @@ import UIKit
 final class ShareNavigationControllerIOS: UINavigationController, ShareController {
     
     var onDismiss: (() -> ())? {
-        get { return nextController?.onDismiss }
+        get { nextController?.onDismiss }
         set { nextController?.onDismiss = newValue }
     }
     
     private var nextController: ShareController? {
-        get { return viewControllers.first as? ShareController }
-        set {}
+        viewControllers.first as? ShareController
     }
     
     func share(_ context: ShareContext, onPost: @escaping (ShareContext) -> ()) {

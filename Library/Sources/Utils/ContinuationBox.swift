@@ -91,8 +91,8 @@ final class ContinuationBox<Value> {
         continuation?.resume(throwing: CancellationError())
     }
 
-    private func resolve(with result: Result<Value, Error>) {
-        let continuation = lock.perform { () -> CheckedContinuation<Value, Error>? in
+    private func resolve(with resolution: Result<Value, Error>) {
+        let pendingContinuation = lock.perform { () -> CheckedContinuation<Value, Error>? in
             guard case .pending = state else {
                 return nil
             }
@@ -105,7 +105,7 @@ final class ContinuationBox<Value> {
             return self.continuation
         }
 
-        continuation?.resume(with: result)
+        pendingContinuation?.resume(with: resolution)
     }
 }
 #endif

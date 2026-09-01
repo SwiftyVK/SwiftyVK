@@ -29,7 +29,7 @@ final class AttemptImpl: Operation, Attempt, @unchecked Sendable {
     override func main() {
         let semaphore = DispatchSemaphore(value: 0)
         
-        let completion: (Data?, URLResponse?, Error?) -> () = { [weak self] data, response, error in
+        let completion: (Data?, URLResponse?, Error?) -> () = { [weak self] data, _, error in
             /// Because URLSession executes completions in their own serial queue
             DispatchQueue.global(qos: .utility).async {
                 defer {
@@ -38,10 +38,10 @@ final class AttemptImpl: Operation, Attempt, @unchecked Sendable {
                 
                 guard let strongSelf = self, !strongSelf.isCancelled else { return }
 
-                if let error = error as NSError?, error.code != NSURLErrorCancelled {
-                    strongSelf.callbacks.onFinish(.error(.urlRequestError(error)))
+                if let networkError = error as NSError?, networkError.code != NSURLErrorCancelled {
+                    strongSelf.callbacks.onFinish(.error(.urlRequestError(networkError)))
                 }
-                else if let data = data {
+                else if let data {
                     strongSelf.callbacks.onFinish(Response(data))
                 }
                 else {
@@ -64,8 +64,8 @@ final class AttemptImpl: Operation, Attempt, @unchecked Sendable {
         change: [NSKeyValueChangeKey: Any]?,
         context: UnsafeMutableRawPointer?
         ) {
-        guard let keyPath = keyPath else { return }
-        guard let task = task else { return }
+        guard let keyPath else { return }
+        guard let task else { return }
         
         switch keyPath {
         case (#keyPath(URLSessionTask.countOfBytesSent)):
@@ -106,6 +106,6 @@ struct AttemptCallbacks {
     }
     
     static var `default`: AttemptCallbacks {
-        return AttemptCallbacks()
+        AttemptCallbacks()
     }
 }

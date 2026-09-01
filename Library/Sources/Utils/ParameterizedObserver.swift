@@ -57,6 +57,6 @@ private class Weak<T>: Hashable {
     }
     
     static func == (lhs: Weak<T>, rhs: Weak<T>) -> Bool {
-        return lhs.disposable === rhs.disposable
+        lhs.disposable === rhs.disposable
     }
 }

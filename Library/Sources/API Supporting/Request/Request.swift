@@ -60,6 +60,6 @@ public final class Request {
     }
     
     func toMethod() -> Methods.SuccessableFailableProgressableConfigurable {
-        return .init(self)
+        .init(self)
     }
 }
